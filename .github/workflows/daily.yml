@@ -1,40 +1,44 @@
-name: 🌅 Daily Energy CVC Briefing
+name: Daily Energy CVC Briefing
 
 on:
   schedule:
     - cron: '0 22 * * *'
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   generate-briefing:
     runs-on: ubuntu-latest
-    
     steps:
-      - name: 📥 코드 가져오기
+      - name: Get code
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: ⚙️ Node.js 설치
+      - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: '20'
 
-      - name: 🤖 AI 브리핑 생성
+      - name: Generate briefing
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: node generate.js
 
-      - name: 💾 결과 저장
+      - name: Save result
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "Energy CVC AI Agent"
           git add index.html
-          git diff --quiet && git diff --staged --quiet || git commit -m "📡 Daily briefing — $(TZ='Asia/Seoul' date '+%Y-%m-%d %H:%M KST')"
+          git diff --quiet && git diff --staged --quiet || git commit -m "Daily briefing"
           git push
 
-      - name: 🚀 Netlify 배포
+      - name: Deploy to Netlify
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
         run: |
           npm install -g netlify-cli
-          netlify deploy --prod --dir=. --message "Daily briefing $(TZ='Asia/Seoul' date '+%Y-%m-%d')"
+          netlify deploy --prod --dir=.
