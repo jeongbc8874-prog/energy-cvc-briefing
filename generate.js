@@ -123,42 +123,88 @@ function safeJSON(text) {
 // ══════════════════════════════════════════════════════
 // ① OpenDART — 국내 에너지 기업 공시
 // ══════════════════════════════════════════════════════
+// 에너지 기업 판단 키워드
+const ENERGY_CORP_KEYWORDS = [
+  '에너지','수소','배터리','태양광','ESS','풍력','연료전지',
+  '전력','충전','솔라','그린','친환경','탄소','바이오가스',
+  '발전','저장','전기차','충전기','인버터','파워','그리드'
+];
+const ENERGY_EXCLUDE_KEYWORDS = [
+  '뉴트리','식품','화장품','패션','미디어','게임','바이오','제약',
+  '병원','의료','건설','부동산','금융','보험','증권','은행',
+  '디스플레이','반도체','통신','유통','물류','호텔','여행'
+];
+
+function isEnergyCompany(corpName, reportTitle) {
+  const text = (corpName + ' ' + reportTitle).toLowerCase();
+  // 명백히 에너지 무관 기업 제외
+  for (const ex of ENERGY_EXCLUDE_KEYWORDS) {
+    if (corpName.includes(ex)) return false;
+  }
+  // 에너지 키워드 포함 여부 확인
+  for (const kw of ENERGY_CORP_KEYWORDS) {
+    if (text.includes(kw.toLowerCase())) return true;
+  }
+  return false;
+}
+
 async function fetchDartFunding() {
   if (!DART_KEY) { console.log('  DART_API_KEY 없음, 스킵'); return []; }
   try {
-    // 최근 30일 투자유치/CB/BW 공시 검색
     const today = new Date();
-    const bgn = new Date(today - 30*24*60*60*1000).toISOString().slice(0,10).replace(/-/g,'');
+    const bgn = new Date(today - 60*24*60*60*1000).toISOString().slice(0,10).replace(/-/g,'');
     const end = today.toISOString().slice(0,10).replace(/-/g,'');
 
-    // 에너지 관련 키워드로 공시 검색
-    const keywords = ['에너지', '수소', '배터리', 'ESS', '태양광'];
+    // 에너지 특화 키워드로 공시 검색 (회사명 기반)
+    const corpKeywords = ['수소', '배터리', '태양광', 'ESS', '연료전지', '전력', '충전', '풍력'];
+    // 공시 유형: 투자유치(C001), 전환사채(B005), 신주인수권부사채(B006) 등
+    const pblntfTypes = ['C', 'B']; // C=경영사항, B=발행공시
     const results = [];
 
-    for (const kw of keywords.slice(0,3)) {
-      try {
-        const url = `https://opendart.fss.or.kr/api/list.json?crtfc_key=${DART_KEY}&bgn_de=${bgn}&end_de=${end}&pblntf_ty=A&page_count=5&corp_name=${encodeURIComponent(kw)}`;
-        const data = await httpGetJSON(url);
-        if (data.list && data.list.length > 0) {
-          for (const item of data.list.slice(0,2)) {
-            results.push({
-              corp: item.corp_name || '',
-              title: item.report_nm || '',
-              date: item.rcept_dt || '',
-              url: `https://dart.fss.or.kr/dsaf001/main.do?rcpNo=${item.rcept_no}`
-            });
+    for (const kw of corpKeywords) {
+      for (const ptype of pblntfTypes) {
+        try {
+          const url = `https://opendart.fss.or.kr/api/list.json?crtfc_key=${DART_KEY}&bgn_de=${bgn}&end_de=${end}&pblntf_ty=${ptype}&page_count=10&corp_name=${encodeURIComponent(kw)}`;
+          const data = await httpGetJSON(url);
+          if (data.list && data.list.length > 0) {
+            for (const item of data.list) {
+              const corpName = item.corp_name || '';
+              const reportTitle = item.report_nm || '';
+              // 에너지 기업 여부 2차 필터링
+              if (!isEnergyCompany(corpName, reportTitle)) {
+                console.log('  DART 제외 (비에너지):', corpName);
+                continue;
+              }
+              // 투자 관련 공시만 포함
+              const investKeywords = ['투자','유치','전환사채','신주','CB','BW','펀딩','증자','자금','조달'];
+              const isInvestRelated = investKeywords.some(k => reportTitle.includes(k));
+              results.push({
+                corp: corpName,
+                title: reportTitle,
+                date: item.rcept_dt || '',
+                url: `https://dart.fss.or.kr/dsaf001/main.do?rcpNo=${item.rcept_no}`,
+                isInvestRelated
+              });
+            }
           }
-        }
-      } catch(e) { console.log('  DART 키워드 실패 (' + kw + '):', e.message); }
+        } catch(e) { /* 개별 실패 무시 */ }
+      }
     }
 
-    // 중복 제거
+    // 투자 관련 공시 우선 정렬, 중복 제거
     const seen = new Set();
-    return results.filter(r => {
-      if (seen.has(r.corp)) return false;
-      seen.add(r.corp);
-      return true;
-    }).slice(0, 5);
+    const filtered = results
+      .sort((a,b) => (b.isInvestRelated ? 1 : 0) - (a.isInvestRelated ? 1 : 0))
+      .filter(r => {
+        const key = r.corp + r.title;
+        if (seen.has(key)) return false;
+        seen.add(key);
+        return true;
+      });
+
+    console.log('  DART 필터링 결과:', filtered.length + '건 (에너지 기업만)');
+    return filtered.slice(0, 5);
+
   } catch(e) {
     console.log('  DART 수집 실패:', e.message);
     return [];
@@ -264,15 +310,19 @@ function buildDartPrompt(dartItems) {
     `${i+1}. [${d.corp}] ${d.title} (${d.date}) URL: ${d.url}`
   ).join('\n');
 
-  return `Analyze these REAL Korean company disclosures from OpenDART (금융감독원) for energy CVC investors.
-Return JSON array of ${Math.min(dartItems.length, 4)} items.
-Schema: [{"amount":"미공개","co":"기업명","detail":"공시 유형","desc":"Korean CVC insight 1-2 sentences","url":"EXACT_URL_FROM_DATA","isReal":true}]
-CRITICAL: Use EXACT company names and URLs from the data. Keep desc under 50 chars.
+  return `You are a Korean energy CVC analyst reviewing real DART (금융감독원) disclosures.
+STRICT FILTER: Only include companies that are CLEARLY in the energy sector.
+Energy sectors: ESS, 수소, 태양광, 풍력, 연료전지, 전력, 충전인프라, 에너지저장, 그리드소프트웨어, 전력전자.
+EXCLUDE: 식품, 화장품, 게임, 바이오/제약, 디스플레이, 반도체, 유통, 미디어, 건설, 금융 companies.
 
-Disclosures:
+Return ONLY energy-related items as JSON array (can be empty [] if none qualify).
+Schema: [{"amount":"미공개","co":"기업명","detail":"공시유형 (예: 전환사채, 유상증자)","desc":"CVC 관점 한줄 시사점","url":"EXACT_URL","isReal":true}]
+Keep desc under 45 chars. Use EXACT company names and URLs.
+
+Disclosures to review:
 ${text}
 
-Return ONLY JSON array.`;
+Return ONLY JSON array. If no energy companies found, return [].`;
 }
 
 function buildNewsPrompt(articles) {
