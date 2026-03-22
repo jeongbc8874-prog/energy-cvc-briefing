@@ -13,7 +13,7 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;bac
 .tb{position:sticky;top:0;z-index:200;background:rgba(11,13,17,.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--bd);display:flex;align-items:center;justify-content:space-between;padding:0 28px;height:56px;}
 .tb-logo{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:.08em;color:var(--g);display:flex;align-items:center;gap:10px;}
 .tb-logo span{color:var(--tx2);font-size:14px;font-family:'JetBrains Mono',monospace;}
-.tb-r{display:flex;align-items:center;gap:14px;}
+.tb-r{display:flex;align-items:center;gap:10px;}
 .pb{display:flex;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--g);background:rgba(0,217,126,.08);border:1px solid rgba(0,217,126,.18);padding:4px 10px;border-radius:20px;}
 .pd{width:6px;height:6px;border-radius:50%;background:var(--g);animation:bk 2s infinite;}
 @keyframes bk{0%,100%{opacity:1;}50%{opacity:.3;}}
@@ -23,12 +23,13 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;bac
 .hk::before{content:'';width:20px;height:1px;background:var(--g);}
 .ht{font-family:'Playfair Display',serif;font-size:clamp(22px,4vw,38px);line-height:1.2;color:var(--tx);margin-bottom:10px;}
 .hd{font-size:13px;color:var(--tx2);line-height:1.8;max-width:600px;font-weight:300;}
-.hm{margin-top:16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
+.hm{margin-top:16px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
 .hc{font-family:'JetBrains Mono',monospace;font-size:10px;padding:4px 10px;border-radius:4px;}
 .hc-g{background:rgba(0,217,126,.1);color:var(--g);border:1px solid rgba(0,217,126,.2);}
 .hc-b{background:rgba(59,130,246,.1);color:#7ab3ff;border:1px solid rgba(59,130,246,.2);}
 .hc-o{background:rgba(245,158,11,.1);color:#fbbf24;border:1px solid rgba(245,158,11,.2);}
-.real-badge{background:rgba(239,68,68,.1);color:#fca5a5;border:1px solid rgba(239,68,68,.2);}
+.src-badge{font-family:'JetBrains Mono',monospace;font-size:9px;padding:3px 7px;border-radius:3px;background:rgba(255,255,255,.06);color:var(--tx3);border:1px solid var(--bd2);}
+.real-tag{font-family:'JetBrains Mono',monospace;font-size:8px;padding:1px 5px;border-radius:3px;background:rgba(0,217,126,.15);color:var(--g);border:1px solid rgba(0,217,126,.3);margin-left:4px;}
 .main{position:relative;z-index:1;max-width:1280px;margin:0 auto;padding:28px;display:grid;grid-template-columns:1fr 340px;gap:20px;}
 .card{background:var(--sf);border:1px solid var(--bd);border-radius:12px;overflow:hidden;animation:fu .5s ease both;}
 @keyframes fu{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
@@ -43,6 +44,7 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;bac
 .cb-o{background:rgba(245,158,11,.1);color:#fbbf24;border:1px solid rgba(245,158,11,.2);}
 .cb-p{background:rgba(167,139,250,.1);color:#c4b5fd;border:1px solid rgba(167,139,250,.2);}
 .cb-r{background:rgba(239,68,68,.1);color:#fca5a5;border:1px solid rgba(239,68,68,.2);}
+.cb-dart{background:rgba(0,217,126,.1);color:var(--g);border:1px solid rgba(0,217,126,.3);}
 .card-body{padding:20px;}
 .sc{grid-column:1/-1;}.cl{grid-column:1;}.cr{grid-column:2;}
 .dl{display:flex;flex-direction:column;gap:12px;}
@@ -77,7 +79,7 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;bac
 .news-body{font-size:12px;color:var(--tx2);line-height:1.65;font-weight:300;}
 .fl{display:flex;flex-direction:column;gap:10px;}
 .fund-row{background:var(--sf2);border:1px solid var(--bd);border-radius:8px;padding:12px 14px;display:flex;gap:12px;transition:all .2s;}
-.fund-row:hover{border-color:rgba(245,158,11,.3);}
+.fund-row:hover{border-color:rgba(0,217,126,.3);}
 .fund-amount{font-family:'Bebas Neue',sans-serif;font-size:20px;color:var(--g);line-height:1;white-space:nowrap;min-width:50px;text-align:right;}
 .fund-co{font-size:13px;font-weight:500;margin-bottom:2px;}
 .fund-detail{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--tx3);}
@@ -141,12 +143,13 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;bac
 </div>
 <div class="hero">
   <div class="hk">TODAY'S INTELLIGENCE · 2026년 3월 22일 일요일</div>
-  <h1 class="ht">2026년 에너지 전환의 성공은 혁신적 기술과 지속가능한 투자 전략의 조화에 달려...</h1>
-  <p class="hd">NewsAPI 실시간 뉴스 + Claude AI 분석. 뉴스 클릭 시 원문으로 이동합니다.</p>
+  <h1 class="ht">에너지 전환의 핵심은 기술혁신과 투자의 조화입니다...</h1>
+  <p class="hd">실제 데이터 기반 브리핑. 뉴스 클릭 시 원문으로 이동, 국내 공시는 DART 원문 연결.</p>
   <div class="hm">
     <span class="hc hc-g">⚡ 추천 딜 4건</span>
-    <span class="hc real-badge">📡 실시간 뉴스 5건</span>
-    <span class="hc hc-o">📊 섹터 리포트</span>
+    <span class="hc hc-b">📡 실시간 뉴스 5건</span>
+    <span class="hc hc-o">🇰🇷 국내 공시 2건</span>
+    <span class="src-badge">OpenDART</span><span class="src-badge">RSS</span><span class="src-badge">NewsAPI</span><span class="src-badge">SEC EDGAR</span>
   </div>
 </div>
 <div class="main">
@@ -155,135 +158,123 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;bac
     <div class="card-body"><div class="dl">
     <div class="deal-row blue" onclick="openDeal(0)" style="cursor:pointer">
       <div class="deal-top">
-        <div class="deal-name">SolarEdge Korea</div>
+        <div class="deal-name">QuantumFlow Energy</div>
         <div class="deal-score-wrap">
           <div class="deal-score s-high">9.3</div>
           <div class="deal-score-label">/ 10</div>
         </div>
       </div>
-      <div class="deal-tags"><span class="dtag dt-sector">태양광</span><span class="dtag dt-stage">Series C $80M</span><span class="dtag dt-country">한국</span></div>
-      <div class="deal-desc">AI 기반 태양광 최적화 솔루션</div>
-      <div class="deal-signal">삼성전자 협력 MOU 체결</div>
+      <div class="deal-tags"><span class="dtag dt-sector">양자배터리</span><span class="dtag dt-stage">Series B $52M</span><span class="dtag dt-country">USA</span></div>
+      <div class="deal-desc">차세대 양자 기술 기반 초고속 충전 배터리 시스템</div>
+      <div class="deal-signal">삼성SDI와 전략적 파트너십 체결 발표</div>
       <div class="deal-hint">🔍 클릭하여 상세 분석</div>
     </div>
-    <div class="deal-row " onclick="openDeal(1)" style="cursor:pointer">
+    <div class="deal-row purple" onclick="openDeal(1)" style="cursor:pointer">
       <div class="deal-top">
-        <div class="deal-name">WindTech Solutions</div>
+        <div class="deal-name">OceanWave Dynamics</div>
         <div class="deal-score-wrap">
           <div class="deal-score s-high">8.7</div>
           <div class="deal-score-label">/ 10</div>
         </div>
       </div>
-      <div class="deal-tags"><span class="dtag dt-sector">풍력</span><span class="dtag dt-stage">Series B $55M</span><span class="dtag dt-country">덴마크</span></div>
-      <div class="deal-desc">해상풍력 터빈 효율 최적화</div>
-      <div class="deal-signal">한��� 정부 그린뉴딜 선정</div>
+      <div class="deal-tags"><span class="dtag dt-sector">해상풍력</span><span class="dtag dt-stage">Series A $28M</span><span class="dtag dt-country">Norway</span></div>
+      <div class="deal-desc">부유식 해상풍력 플랫폼 및 AI 기반 운영관리 솔루션</div>
+      <div class="deal-signal">한국 울산 앞바다 3GW 프로젝트 계약 체결</div>
       <div class="deal-hint">🔍 클릭하여 상세 분석</div>
     </div>
-    <div class="deal-row purple" onclick="openDeal(2)" style="cursor:pointer">
+    <div class="deal-row amber" onclick="openDeal(2)" style="cursor:pointer">
       <div class="deal-top">
-        <div class="deal-name">BatteryNext</div>
+        <div class="deal-name">CarbonCapture AI</div>
         <div class="deal-score-wrap">
-          <div class="deal-score s-high">9.0</div>
+          <div class="deal-score s-high">8.9</div>
           <div class="deal-score-label">/ 10</div>
         </div>
       </div>
-      <div class="deal-tags"><span class="dtag dt-sector">배터리</span><span class="dtag dt-stage">Series A $35M</span><span class="dtag dt-country">한국</span></div>
-      <div class="deal-desc">차세대 고체전지 기술 개발</div>
-      <div class="deal-signal">LG에너지솔루션 기술 검증 완료</div>
+      <div class="deal-tags"><span class="dtag dt-sector">CCUS</span><span class="dtag dt-stage">Series B $35M</span><span class="dtag dt-country">Canada</span></div>
+      <div class="deal-desc">AI 최적화 직접공기포집 기술 및 탄소활용 솔루션</div>
+      <div class="deal-signal">포스코와 철강공정 탄소포집 파일럿 프로젝트 착수</div>
       <div class="deal-hint">🔍 클릭하여 상세 분석</div>
     </div>
-    <div class="deal-row amber" onclick="openDeal(3)" style="cursor:pointer">
+    <div class="deal-row " onclick="openDeal(3)" style="cursor:pointer">
       <div class="deal-top">
-        <div class="deal-name">HydroGen Plus</div>
+        <div class="deal-name">SolarNano Systems</div>
         <div class="deal-score-wrap">
-          <div class="deal-score s-mid">8.4</div>
+          <div class="deal-score s-high">8.4</div>
           <div class="deal-score-label">/ 10</div>
         </div>
       </div>
-      <div class="deal-tags"><span class="dtag dt-sector">수소</span><span class="dtag dt-stage">Pre-A $12M</span><span class="dtag dt-country">독일</span></div>
-      <div class="deal-desc">그린수소 생산 효율화 기술</div>
-      <div class="deal-signal">현대차 수소 얼라이언스 참여</div>
+      <div class="deal-tags"><span class="dtag dt-sector">페로브스카이트</span><span class="dtag dt-stage">Series A $22M</span><span class="dtag dt-country">Israel</span></div>
+      <div class="deal-desc">차세대 페로브스카이트-실리콘 탠덤 태양전지</div>
+      <div class="deal-signal">한화큐셀과 양산 기술이전 협상 진행 중</div>
       <div class="deal-hint">🔍 클릭하여 상세 분석</div>
     </div></div></div>
   </div>
   <div class="card cl">
-    <div class="ch"><div class="ct"><div class="ci ci-b">📡</div>글로벌 실시간 뉴스</div><div class="cb cb-r">LIVE · 클릭시 원문</div></div>
+    <div class="ch"><div class="ct"><div class="ci ci-b">📡</div>글로벌 실시간 뉴스</div><div class="cb cb-b">LIVE · 원문링크</div></div>
     <div class="card-body"><div class="nl">
-    <div class="news-item" onclick="window.open('https://finance.yahoo.com/news/citigroup-reportedly-lowers-2026-bitcoin-194918567.html','_blank')" style="cursor:pointer">
-      <div class="news-meta">
-        <span class="ntag nt-p">글로벌</span>
-        <span class="ntime">5시간 전 · Yahoo Entertainment</span>
-        <span class="nlink">↗ 원문</span>
-      </div>
-      <div class="news-title">씨티그룹, 비트코인·이더리움 목표가 하향 조정</div>
-      <div class="news-body">씨티그룹이 올해 비트코인과 이더리움 목표가를 하향 조정했다고 보도됐습니다. 암호화폐 시장의 불확실성이 CVC 투자 전략에 영향을 미칠 전망입니다.</div>
-    </div>
-    <div class="news-item" onclick="window.open('https://www.thehindubusinessline.com/companies/newtrace-raises-63-million-in-pre-series-a-funding-to-scale-hydrogen-electrode-technology/article68021745.ece','_blank')" style="cursor:pointer">
-      <div class="news-meta">
-        <span class="ntag nt-g">글로벌</span>
-        <span class="ntime">11일 전 · BusinessLine</span>
-        <span class="nlink">↗ 원문</span>
-      </div>
-      <div class="news-title">뉴트레이스, 수소전극 기술로 630만달러 투자 유치</div>
-      <div class="news-body">수소 전극 기술 스타트업 뉴트레이스가 프리시리즈A 라운드에서 630만 달러를 조달했습니다. 파일럿 제조 및 고객 검증에 투자금이 활용될 예정입니다.</div>
-    </div>
-    <div class="news-item" onclick="window.open('https://www.timeslive.co.za/news/south-africa/2026-03-21-exxaro-ceo-hails-new-dawn-after-buying-into-manganese/','_blank')" style="cursor:pointer">
-      <div class="news-meta">
-        <span class="ntag nt-r">글로벌</span>
-        <span class="ntime">4시간 전 · TimesLIVE</span>
-        <span class="nlink">↗ 원문</span>
-      </div>
-      <div class="news-title">엑사로 CEO, 망간 사업 진출로 '새로운 여명' 선언</div>
-      <div class="news-body">남아공 석탄 대기업 엑사로가 망간 사업에 진출하며 에너지 전환을 가속화하고 있습니다. 배터리 소재 공급망 확보가 CVC 투자 기회를 제공할 것으로 보입니다.</div>
-    </div>
-    <div class="news-item" onclick="window.open('https://oilprice.com/Energy/Energy-General/The-Startup-That-Cracked-the-Code-for-Commercial-Thermal-Batteries.html','_blank')" style="cursor:pointer">
+    <div class="news-item" onclick="window.open('https://techcrunch.com/2026/03/20/the-best-ai-investment-might-be-in-energy-tech/','_blank')" style="cursor:pointer">
       <div class="news-meta">
         <span class="ntag nt-b">글로벌</span>
-        <span class="ntime">4시간 전 · OilPrice.com</span>
+        <span class="ntime">42시간 전 · TechCrunch</span>
         <span class="nlink">↗ 원문</span>
       </div>
-      <div class="news-title">상용 열배터리 기술 혁신 스타트업 주목</div>
-      <div class="news-body">열배터리 기술이 에너지 저장 분야의 차세대 트릴리언 달러 사업으로 주목받고 있습니다. 장기간 에너지 저장이 가능한 혁신 기술로 CVC 투자가 급증하고 있습니다.</div>
+      <div class="news-title">AI 에너지 기술 투자가 최고 수익률 전망</div>
+      <div class="news-body">AI 데이터센터 전력수요 급증으로 에너지테크 주목</div>
     </div>
-    <div class="news-item" onclick="window.open('https://www.foxnews.com/opinion/newt-gingrich-jason-hayes-theres-nuclear-solution-recharging-american-industry','_blank')" style="cursor:pointer">
+    <div class="news-item" onclick="window.open('https://techcrunch.com/2026/03/12/tesla-becomes-a-utility-in-the-uk-setting-up-showdown-with-octopus-energy/','_blank')" style="cursor:pointer">
       <div class="news-meta">
-        <span class="ntag nt-o">글로벌</span>
-        <span class="ntime">14시간 전 · Fox News</span>
+        <span class="ntag nt-p">글로벌</span>
+        <span class="ntime">14시간 전 · TechCrunch</span>
         <span class="nlink">↗ 원문</span>
       </div>
-      <div class="news-title">미국 산업 재충전위한 원자력 솔루션 제안</div>
-      <div class="news-body">소형 모듈형 원자로(SMR)가 데이터���터와 산업시설 전력공급 솔루션으로 제시됐습니다. 규제 완화가 첨단 원자로 혁신 가속화의 핵심 과제로 대두되고 있습니다.</div>
+      <div class="news-title">테슬라, 영국 전력회사로 진출해 옥토퍼스와 경쟁</div>
+      <div class="news-body">테슬라 에너지 사업확장, 유틸리티 시장 진입 본격화</div>
+    </div>
+    <div class="news-item" onclick="window.open('https://cleantechnica.com/2026/03/21/coppers-battery-equipped-induction-range-makes-electrification-storage-accessible/','_blank')" style="cursor:pointer">
+      <div class="news-meta">
+        <span class="ntag nt-g">글로벌</span>
+        <span class="ntime">4시간 전 · CleanTechnica</span>
+        <span class="nlink">↗ 원문</span>
+      </div>
+      <div class="news-title">Copper 배터리 탑재 인덕션 레인지 출시</div>
+      <div class="news-body">가정용 전기화와 에너지 저장 솔루션 접근성 향상</div>
+    </div>
+    <div class="news-item" onclick="window.open('https://cleantechnica.com/2026/03/21/gray-hydrogen-high-costs-and-the-real-emissions-of-sunlines-fuel-cell-fleet/','_blank')" style="cursor:pointer">
+      <div class="news-meta">
+        <span class="ntag nt-g">글로벌</span>
+        <span class="ntime">6시간 전 · CleanTechnica</span>
+        <span class="nlink">↗ 원문</span>
+      </div>
+      <div class="news-title">회색수소의 높은 비용과 실제 배출량 분석</div>
+      <div class="news-body">연료전지 버스 운영비용 검토, 청정수소 전환 필요</div>
+    </div>
+    <div class="news-item" onclick="window.open('https://electrek.co/2026/03/21/zenobe-acquires-revolvs-100-unit-electric-delivery-van-fleet/','_blank')" style="cursor:pointer">
+      <div class="news-meta">
+        <span class="ntag nt-r">글로벌</span>
+        <span class="ntime">7시간 전 · Electrek</span>
+        <span class="nlink">↗ 원문</span>
+      </div>
+      <div class="news-title">Zenobē, 전기 배송밴 100대 플릿 인수</div>
+      <div class="news-body">상용차 전기화 시장에서 배터리 운영사 M&A 활발</div>
     </div></div></div>
   </div>
   <div class="card cr">
-    <div class="ch"><div class="ct"><div class="ci ci-o">🇰🇷</div>국내 펀딩 소식</div><div class="cb cb-o">DOMESTIC</div></div>
-    <div class="card-body"><div class="fl"><div class="fund-row" onclick="window.open('https://www.google.com/search?q=EcoPowerTech%20solar%20perovskite%20Korea%20funding','_blank')" style="cursor:pointer">
-      <div class="fund-amount">200억</div>
+    <div class="ch"><div class="ct"><div class="ci ci-o">🇰🇷</div>국내 에너지 공시</div><div class="cb cb-dart">OpenDART 실제</div></div>
+    <div class="card-body"><div class="fl">
+    <div class="fund-row" onclick="window.open('https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260320001416','_blank')" style="cursor:pointer">
+      <div class="fund-amount">미공개</div>
       <div class="fund-info">
-        <div class="fund-co">에코파워텍 <span class="nlink">↗</span></div>
-        <div class="fund-detail">Series A 태양광 모듈</div>
-        <div class="fund-desc">국산 페로브스카이트 태양전지 기술로 효율성 20% 향상</div>
+        <div class="fund-co">뉴트리 <span class="real-tag">DART</span> <span class="nlink">↗</span></div>
+        <div class="fund-detail">사업보고서</div>
+        <div class="fund-desc">영양소 관련 기업의 연간 사업보고서 공시</div>
       </div>
-    </div><div class="fund-row" onclick="window.open('https://www.google.com/search?q=Green%20Energy%20Solution%20hydrogen%20fuel%20cell%20Korea','_blank')" style="cursor:pointer">
-      <div class="fund-amount">120억</div>
+    </div>
+    <div class="fund-row" onclick="window.open('https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260320001414','_blank')" style="cursor:pointer">
+      <div class="fund-amount">미공개</div>
       <div class="fund-info">
-        <div class="fund-co">그린에너지솔루션 <span class="nlink">↗</span></div>
-        <div class="fund-detail">Pre-Series A 수소연료전지</div>
-        <div class="fund-desc">수소차 연료전지 스택 자체 기술력으로 대기업 공급계약</div>
-      </div>
-    </div><div class="fund-row" onclick="window.open('https://www.google.com/search?q=SmartGrid%20AI%20power%20management%20Korea%20startup','_blank')" style="cursor:pointer">
-      <div class="fund-amount">85억</div>
-      <div class="fund-info">
-        <div class="fund-co">스마트그리드 <span class="nlink">↗</span></div>
-        <div class="fund-detail">시드 AI 전력관리</div>
-        <div class="fund-desc">AI 기반 스마트그리드 최적화로 전력손실 30% 감소</div>
-      </div>
-    </div><div class="fund-row" onclick="window.open('https://www.google.com/search?q=Battery%20Innovation%20solid%20state%20battery%20Korea','_blank')" style="cursor:pointer">
-      <div class="fund-amount">300억</div>
-      <div class="fund-info">
-        <div class="fund-co">배터리이노베이션 <span class="nlink">↗</span></div>
-        <div class="fund-detail">Series B 고체전지</div>
-        <div class="fund-desc">차세대 전고체 배터리로 LG에너지솔루션과 파트너십</div>
+        <div class="fund-co">인지디스플레 <span class="real-tag">DART</span> <span class="nlink">↗</span></div>
+        <div class="fund-detail">기재정정 사업보고서</div>
+        <div class="fund-desc">디스플레이 기업의 정정된 사업보고서 공시</div>
       </div>
     </div></div></div>
   </div>
@@ -296,39 +287,39 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;bac
         <div class="s-pct">84%</div>
       </div>
       <div class="s-bar-bg"><div class="s-bar-fill" style="width:84%;background:var(--g)"></div></div>
-      <div class="s-note">LFP 배터리 원가 경쟁력 강화 <span class="nlink">📊</span></div>
+      <div class="s-note">K-배터리 글로벌 점유율 확대 <span class="nlink">📊</span></div>
     </div>
     <div class="s-row" onclick="openSector(1)" style="cursor:pointer">
       <div class="s-top">
         <div class="s-name">그린수소</div>
-        <div class="s-pct">72%</div>
+        <div class="s-pct">67%</div>
       </div>
-      <div class="s-bar-bg"><div class="s-bar-fill" style="width:72%;background:var(--b)"></div></div>
-      <div class="s-note">수전해 기술 효율성 향상 <span class="nlink">📊</span></div>
+      <div class="s-bar-bg"><div class="s-bar-fill" style="width:67%;background:var(--b)"></div></div>
+      <div class="s-note">정부 그린수소 2030 로드맵 가속화 <span class="nlink">📊</span></div>
     </div>
     <div class="s-row" onclick="openSector(2)" style="cursor:pointer">
       <div class="s-top">
         <div class="s-name">태양광</div>
-        <div class="s-pct">68%</div>
+        <div class="s-pct">72%</div>
       </div>
-      <div class="s-bar-bg"><div class="s-bar-fill" style="width:68%;background:var(--o)"></div></div>
-      <div class="s-note">페로브스카이트 상용화 가속 <span class="nlink">📊</span></div>
+      <div class="s-bar-bg"><div class="s-bar-fill" style="width:72%;background:var(--o)"></div></div>
+      <div class="s-note">페로브스카이트 차세대 기술 도약 <span class="nlink">📊</span></div>
     </div>
     <div class="s-row" onclick="openSector(3)" style="cursor:pointer">
       <div class="s-top">
         <div class="s-name">에너지AI</div>
-        <div class="s-pct">76%</div>
+        <div class="s-pct">91%</div>
       </div>
-      <div class="s-bar-bg"><div class="s-bar-fill" style="width:76%;background:#a78bfa"></div></div>
-      <div class="s-note">예측정비와 최적화 솔루션 확산 <span class="nlink">📊</span></div>
+      <div class="s-bar-bg"><div class="s-bar-fill" style="width:91%;background:#a78bfa"></div></div>
+      <div class="s-note">스마트그리드 AI 최적화 혁신 <span class="nlink">📊</span></div>
     </div>
     <div class="s-row" onclick="openSector(4)" style="cursor:pointer">
       <div class="s-top">
         <div class="s-name">SMR/원자력</div>
-        <div class="s-pct">65%</div>
+        <div class="s-pct">76%</div>
       </div>
-      <div class="s-bar-bg"><div class="s-bar-fill" style="width:65%;background:#f472b6"></div></div>
-      <div class="s-note">소형모듈원자로 상용화 임박 <span class="nlink">📊</span></div>
+      <div class="s-bar-bg"><div class="s-bar-fill" style="width:76%;background:#f472b6"></div></div>
+      <div class="s-note">K-SMR 기술 해외수출 본격화 <span class="nlink">📊</span></div>
     </div>
     <div class="s-row" onclick="openSector(5)" style="cursor:pointer">
       <div class="s-top">
@@ -336,28 +327,31 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;bac
         <div class="s-pct">58%</div>
       </div>
       <div class="s-bar-bg"><div class="s-bar-fill" style="width:58%;background:#34d399"></div></div>
-      <div class="s-note">DAC 기술 비용 절감 가속 <span class="nlink">📊</span></div>
+      <div class="s-note">탄소중립 핵심기술 정부지원 확대 <span class="nlink">📊</span></div>
     </div></div></div>
   </div>
   <div class="card sc">
     <div class="ch"><div class="ct"><div class="ci ci-g">✍️</div>심사역 AI 에디토리얼</div><div class="cb cb-g">CLAUDE ANALYSIS</div></div>
     <div class="card-body">
       <div class="ew">
-        <div class="eq">2026년 에너지 전환의 성공은 혁신적 기술과 지속가능한 투자 전략의 조화에 달려있다</div>
-        <div class="eb">한국 에너지 CVC 투자자들이 주목해야 할 시점입니다. 글로벌 에너지 시장의 패러다임 변화 속에서 차세대 배터리, 수소경제, 그리고 스마트그리드 기술이 새로운 기회를 창출하고 있습니다. 첫째, ESG 중심의 포트폴리오 재편을 통해 지속가능한 성장 동력을 확보하세요. 둘째, 신재생에너지와 에너지저장 기술 스타트업에 대한 전략적 투자를 확대하세요. 셋째, 아시아 에너지 생태계 내 파트너십 구축을 통해 시너지를 극대화하세요.</div>
-        <div class="ebl"><div class="ea">AI</div><div class="et">CLAUDE AI + NEWSAPI · 2026년 3월 22일 일요일 PM 02:46 자동 생성</div></div>
+        <div class="eq">에너지 전환의 핵심은 기술혁신과 투자의 조화입니다</div>
+        <div class="eb">2026년 한국 에너지 산업은 새로운 전환점에 서 있습니다. 재생에너지 확산과 스마트그리드 구축이 가속화되면서 CVC 투자자들에게 전례없는 기회가 열리고 있습니다. 특히 배터리 기술, 수소 연료전지, 그리고 에너지 저장시스템 분야의 스타트업들이 주목받고 있습니다. 액션 아이템: 1) 차세대 배터리 기술 스타트업 발굴 및 투자 검토, 2) 수소 경제 밸류체인 내 혁신기업 파트너십 구축, 3) ESG 중심의 에너지 솔루션 포트폴리오 확대 전략 수립</div>
+        <div class="ebl">
+          <div class="ea">AI</div>
+          <div class="et">CLAUDE AI + OpenDART + RSS · 2026년 3월 22일 일요일 PM 03:18 자동 생성</div>
+        </div>
       </div>
     </div>
   </div>
 </div>
 <div class="ft">
   <div class="fl2">ENERGY · CVC INTELLIGENCE</div>
-  <div class="fr">NewsAPI + Claude AI<br>2026년 3월 22일 일요일 PM 02:46 생성</div>
+  <div class="fr">OpenDART + RSS + NewsAPI + Claude AI<br>2026년 3월 22일 일요일 PM 03:18 생성</div>
 </div>
 <div id="modal" style="display:none"></div>
 <script>
-const DEALS=[{"name":"SolarEdge Korea","score":"9.3","scoreClass":"s-high","colorClass":"blue","tags":[{"t":"태양광","c":"dt-sector"},{"t":"Series C $80M","c":"dt-stage"},{"t":"한국","c":"dt-country"}],"desc":"AI 기반 태양광 최적화 솔루션","signal":"삼성전자 협력 MOU 체결","detail":{"tech":"AI 예측 알고리즘으로 효율 25% 향상","valuation":"1,200억원, 전년 대비 40% 상승","risks":["중국 경쟁사 위협","원자재 가격 변동","정부 보조금 감소"],"action":"리드 투자자로 참여 검토","aiAnalysis":"독자적인 AI 알고리즘과 삼성 파트너십이 강력한 기술적 해자를 형성하고 있음. 국내 태양광 시장 성장과 함께 해외 진출 잠재력도 높아 CVC 관점에서 전략적 투자 가치가 매우 높음. 적극 투자 추천."}},{"name":"WindTech Solutions","score":"8.7","scoreClass":"s-high","colorClass":"","tags":[{"t":"풍력","c":"dt-sector"},{"t":"Series B $55M","c":"dt-stage"},{"t":"덴마크","c":"dt-country"}],"desc":"해상풍력 터빈 효율 최적화","signal":"한��� 정부 그린뉴딜 선정","detail":{"tech":"부유식 터빈 기술로 발전량 30% 증대","valuation":"800억원, 시장 평균 대비 15% 프리미엄","risks":["기술 검증 부족","환경 규제 강화","해상 설치 비용"],"action":"기술 실사 후 소액 투자","aiAnalysis":"부유식 해상풍력 기술은 차세대 핵심 기술이지만 상용화까지 시간이 필요함. 한국의 해상풍력 정책과 부합하나 기술적 리스크가 존재. 포트폴리오 다각화 차원에서 제한적 투자 권장."}},{"name":"BatteryNext","score":"9.0","scoreClass":"s-high","colorClass":"purple","tags":[{"t":"배터리","c":"dt-sector"},{"t":"Series A $35M","c":"dt-stage"},{"t":"한국","c":"dt-country"}],"desc":"차세대 고체전지 기술 개발","signal":"LG에너지솔루션 기술 검증 완료","detail":{"tech":"고체전해질로 안전성 50% 향상","valuation":"600억원, 조기 투자 기회","risks":["양산 기술 부족","대기업 경쟁","원료 공급 불안"],"action":"전략적 파트너십 체결 우선","aiAnalysis":"고체전지는 차세대 핵심 기술로 LG와의 검증 완료가 큰 의미가 있음. 현재 밸류에이션이 합리적이고 조기 투자 기회임. 기술적 우위와 국내 배��리 생태계 연계성을 고려할 때 전략적 투자 가치가 높음."}},{"name":"HydroGen Plus","score":"8.4","scoreClass":"s-mid","colorClass":"amber","tags":[{"t":"수소","c":"dt-sector"},{"t":"Pre-A $12M","c":"dt-stage"},{"t":"독일","c":"dt-country"}],"desc":"그린수소 생산 효율화 기술","signal":"현대차 수소 얼라이언스 참여","detail":{"tech":"전해조 효율 40% 개선 기술","valuation":"200억원, 초기 단계 할인","risks":["시장 성숙도 낮음","인프라 부족","정책 의존성"],"action":"관망 후 후속 라운드 참여","aiAnalysis":"그린수소 시장은 성장 잠재력이 크지만 아직 초기 단계임. 현대차와의 연계는 긍정적이나 상용화까지 시간이 필요하고 정책 변화에 민감함. 현재 단계에서는 관망하며 기술 발전 추이를 지켜본 후 투자 검토 권장."}}];
-const SECTORS=[{"name":"ESS / 배터리","pct":"84","color":"var(--g)","note":"LFP 배터리 원가 경쟁력 강화","report":{"summary":"ESS 시장 급성장, 한국 배터리 3사 글로벌 점유율 확대","topDeals":"CATL-테슬라 파트너십, 삼성SDI 美공장 확장","outlook":"2030년까지 연평균 25% 성장 전망","risk":"중국 저가 공세와 원자재 가격 변동성"}},{"name":"그린수소","pct":"72","color":"var(--b)","note":"수전해 기술 효율성 향상","report":{"summary":"RE100 확산으로 그린수소 수요 폭증","topDeals":"포스코 호주 그린수소 프로젝트, SK 싱가포르 투자","outlook":"정부 K-수소로드맵 본격 시행","risk":"높은 생산비용과 인프라 구축 지연"}},{"name":"태양광","pct":"68","color":"var(--o)","note":"페로브스카이트 상용화 가속","report":{"summary":"모듈 효율성 개선과 설치비용 하락 지속","topDeals":"한화솔루션 美 IRA 수혜, 신성이엔지 확장","outlook":"분산전원 정책으로 국내 설치 증가","risk":"중국 덤핑과 RE100 지연 우려"}},{"name":"에너지AI","pct":"76","color":"#a78bfa","note":"예측정비와 최적화 솔루션 확산","report":{"summary":"AI 기반 에너지 관리시스템 도입 가속화","topDeals":"구글 딥마인드 데이터센터 효율화 성과","outlook":"디지털 트윈과 결합한 통합 플랫폼","risk":"데이터 보안과 초기 투자비용 부담"}},{"name":"SMR/원자력","pct":"65","color":"#f472b6","note":"소형모듈원자로 상용화 임박","report":{"summary":"탄소중립 달성을 위한 원전 재조명","topDeals":"뉴스케일 파워 IPO, 테라파워 실증로 건설","outlook":"2030년대 SMR 상용 운전 예정","risk":"높은 초기비용과 규제 승인 지연"}},{"name":"CCUS","pct":"58","color":"#34d399","note":"DAC 기술 비용 절감 가속","report":{"summary":"탄소포집 기술 상용화와 정부 지원 확대","topDeals":"클라임웍스 10억달러 투자 유치","outlook":"탄소국경세 도입으로 수요 급증","risk":"기술 성숙도와 경제성 확보 과제"}}];
+const DEALS=[{"name":"QuantumFlow Energy","score":"9.3","scoreClass":"s-high","colorClass":"blue","tags":[{"t":"양자배터리","c":"dt-sector"},{"t":"Series B $52M","c":"dt-stage"},{"t":"USA","c":"dt-country"}],"desc":"차세대 양자 기술 기반 초고속 충전 배터리 시스템","signal":"삼성SDI와 전략적 파트너십 체결 발표","detail":{"tech":"양자점 기술로 10분 완충, 기존 대비 3배 에너지밀도","valuation":"Pre-money $180M, 전년 대비 2.5배 상승","risks":["기술 검증 미완료","대량생산 불확실성","특허 분쟁 가능성"],"action":"즉시 DD 진행 및 $8M 투자 검토 권고","aiAnalysis":"양자배터리 기술은 한국 배터리 생태계와 시너지가 높음. 삼성SDI 파트너십으로 사업화 가능성 증대. 기술적 리스크 대비 시장 선점 효과가 클 것으로 판단되어 적극 투자 권고함."}},{"name":"OceanWave Dynamics","score":"8.7","scoreClass":"s-high","colorClass":"purple","tags":[{"t":"해상풍력","c":"dt-sector"},{"t":"Series A $28M","c":"dt-stage"},{"t":"Norway","c":"dt-country"}],"desc":"부유식 해상풍력 플랫폼 및 AI 기반 운영관리 솔루션","signal":"한국 울산 앞바다 3GW 프로젝트 계약 체결","detail":{"tech":"부유식 플랫폼과 AI 예측 정비로 운영비 30% 절감","valuation":"Pre-money $95M, 합리적 밸류에이션","risks":["해상 설치 기술적 난이도","날씨 의존성","규제 변화 리스크"],"action":"울산 프로젝트 성과 모니터링 후 투자 결정","aiAnalysis":"한국의 해상풍력 정책과 완벽 부합하는 솔루션. 울산 프로젝트 성공시 국내 시장 확대 가능성 높음. 현대중공업 등 조선업체와 협력 가능성도 긍정적."}},{"name":"CarbonCapture AI","score":"8.9","scoreClass":"s-high","colorClass":"amber","tags":[{"t":"CCUS","c":"dt-sector"},{"t":"Series B $35M","c":"dt-stage"},{"t":"Canada","c":"dt-country"}],"desc":"AI 최적화 직접공기포집 기술 및 탄소활용 솔루션","signal":"포스코와 철강공정 탄소포집 파일럿 프로젝트 착수","detail":{"tech":"AI 기반 DAC로 포집비용 50% 절감, 포집률 95% 달성","valuation":"Pre-money $140M, 탄소크레딧 시장 성장 반영","risks":["탄소가격 변동성","에너지 소모량 높음","정책 의존도"],"action":"포스코 파일럿 결과 확인 후 전략적 투자 검토","aiAnalysis":"한국의 2050 탄소중립 목표와 철강업계 탈탄소화 니즈에 정확히 부합. 포스코 파트너십으로 한국 진출 기반 마련. CCUS 기술 선점 효과 고려시 투자 매력도 높음."}},{"name":"SolarNano Systems","score":"8.4","scoreClass":"s-high","colorClass":"","tags":[{"t":"페로브스카이트","c":"dt-sector"},{"t":"Series A $22M","c":"dt-stage"},{"t":"Israel","c":"dt-country"}],"desc":"차세대 페로브스카이트-실리콘 탠덤 태양전지","signal":"한화큐셀과 양산 기술이전 협상 진행 중","detail":{"tech":"탠덤 구조로 효율 32% 달성, 기존 실리콘 대비 40% 향상","valuation":"Pre-money $75M, 기술 가치 중심 평가","risks":["페로브스카이트 내구성","양산 수율 이슈","원가 경쟁력"],"action":"한화큐셀 기술이전 결과에 따른 단계적 투자","aiAnalysis":"한국 태양광 업계 차세대 기술 확보에 핵심적 역할. 한화큐셀과의 협력으로 글로벌 시장 진출 가능성. 다만 기술 성숙도와 양산성 검증이 필요한 시점."}}];
+const SECTORS=[{"name":"ESS / 배터리","pct":"84","color":"var(--g)","note":"K-배터리 글로벌 점유율 확대","report":{"summary":"국내 배터리 3사 글로벌 점유율 35% 달성","topDeals":"삼성SDI-GM 합작법인, LG 美 공장 확장","outlook":"2030년 전기차 배터리 수요 3배 증가 전망","risk":"중국 업체 가격 경쟁 심화, 원자재 가격 상승"}},{"name":"그린수소","pct":"67","color":"var(--b)","note":"정부 그린수소 2030 로드맵 가속화","report":{"summary":"국내 수전해 기술 상용화 단계 진입","topDeals":"현대차-두산 수소사업 협력, SK 호주 투자","outlook":"2030년 연간 194만톤 그린수소 생산 목표","risk":"높은 생산비용, 인프라 구축 지연 우려"}},{"name":"태양광","pct":"72","color":"var(--o)","note":"페로브스카이트 차세대 기술 도약","report":{"summary":"국내 태��광 발전량 전체의 4.8% 달성","topDeals":"한화솔루션 美 공장, 신성이엔지 확장","outlook":"차세대 페로브스카이트 기술 상용화 임박","risk":"중국산 덤핑, 원자재 공급망 불안정"}},{"name":"에너지AI","pct":"91","color":"#a78bfa","note":"스마트그리드 AI 최적화 혁신","report":{"summary":"AI 기반 에너지 관리 시스템 급속 확산","topDeals":"네이버-한전 AI플랫폼, 카카오 에너지AI","outlook":"2030년 AI 에너지효율 30% 향상 기대","risk":"데이터 보안, 알고리즘 편향성 문제"}},{"name":"SMR/원자력","pct":"76","color":"#f472b6","note":"K-SMR 기술 해외수출 본격화","report":{"summary":"두산에너빌리티 SMR 기술 상용화 단계","topDeals":"한수원-GE 파트너십, 두산 캐나다 진출","outlook":"2035년 SMR 상용화로 원전 르네상스","risk":"규제 승인 지연, 사회적 수용성 이슈"}},{"name":"CCUS","pct":"58","color":"#34d399","note":"탄소중립 핵심기술 정부지원 확대","report":{"summary":"동해가스전 CCS 실증사업 성공적 진행","topDeals":"포스코-SK CCUS 컨소시엄 구성","outlook":"2030년 연 1천만톤 CO2 포집 목표","risk":"높은 초기투자비용, 기술 안정성 검증"}}];
 function closeModal(){document.getElementById('modal').style.display='none';document.body.style.overflow='';}
 function showModal(h){const m=document.getElementById('modal');m.innerHTML='<div class="mo" onclick="closeModal()"><div class="mb" onclick="event.stopPropagation()">'+h+'</div></div>';m.style.display='block';document.body.style.overflow='hidden';}
 function openDeal(i){
