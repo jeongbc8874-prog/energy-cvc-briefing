@@ -29,7 +29,7 @@ function callClaude(system, user) {
   return new Promise((resolve, reject) => {
     const body = JSON.stringify({
       model: 'claude-sonnet-4-20250514',
-      max_tokens: 2000,
+      max_tokens: 4000,
       system,
       messages: [{ role:'user', content: user }]
     });
@@ -104,12 +104,9 @@ All text values must be single-line strings with NO line breaks inside strings.
 Use Korean text for descriptions.`;
 
 const PROMPTS = {
-  deals: `Return a JSON array of 4 recommended energy startup deals.
-Schema for each item:
-{"name":"Company Name","score":"9.2","scoreClass":"s-high","colorClass":"","tags":[{"t":"ESS","c":"dt-sector"},{"t":"Series B $55M","c":"dt-stage"},{"t":"USA","c":"dt-country"}],"desc":"One sentence description in Korean","signal":"Korean signal text","detail":{"tech":"Korean tech validation 1-2 sentences","valuation":"Korean valuation analysis 1-2 sentences","risks":["Korean risk 1","Korean risk 2","Korean risk 3"],"action":"Korean action item"}}
-scoreClass: s-high(8+) or s-mid(6-8). colorClass: empty string or blue or amber or purple.
-Cover diverse sectors: ESS, hydrogen, solar, energy AI, SMR, CCUS.
-Return ONLY the JSON array.`,
+  deals: `Return a JSON array of 4 energy startup deals. Keep ALL string values SHORT (under 40 chars each).
+Schema: [{"name":"Co Name","score":"9.1","scoreClass":"s-high","colorClass":"","tags":[{"t":"ESS","c":"dt-sector"},{"t":"Series B $45M","c":"dt-stage"},{"t":"USA","c":"dt-country"}],"desc":"Short Korean desc under 30 chars","signal":"Short Korean signal","detail":{"tech":"Short Korean tech note","valuation":"Short Korean valuation","risks":["risk1 short","risk2 short","risk3 short"],"action":"Short Korean action"}}]
+CRITICAL: Every string value MUST be under 40 characters. No long sentences. scoreClass: s-high or s-mid. colorClass: empty or blue or amber or purple. Return ONLY JSON array.`,
 
   global: `Return a JSON array of 5 global energy investment news items.
 Schema: {"tag":"글로벌","tagC":"nt-g","time":"2시간 전","title":"Korean news title","body":"Korean 1-2 sentence insight for CVC investors","url":"https://www.google.com/search?q=energy+investment+news"}
@@ -120,11 +117,9 @@ Return ONLY the JSON array.`,
 Schema: {"amount":"150억","co":"Company name","detail":"Series B ESS","desc":"Korean 1-2 sentence insight","url":"https://www.google.com/search?q=Korean+energy+startup+funding"}
 Return ONLY the JSON array.`,
 
-  sector: `Return a JSON array of 6 energy sector investment trends.
-Schema: {"name":"ESS / 배터리","pct":"84","color":"var(--g)","note":"Korean one sentence trend","report":{"summary":"Korean 2-3 sentence sector overview","topDeals":"Korean mention of 2-3 notable deals","outlook":"Korean 2 sentence 6-month outlook","risk":"Korean 1-2 sentence risk"}}
-Use exactly these 6 sectors with these colors:
-ESS/배터리 var(--g), 그린수소 var(--b), 태양광 var(--o), 에너지AI #a78bfa, SMR/원자력 #f472b6, CCUS #34d399
-Return ONLY the JSON array.`,
+  sector: `Return a JSON array of 6 energy sector trends. Keep ALL strings SHORT (under 40 chars).
+Schema: [{"name":"ESS / 배터리","pct":"84","color":"var(--g)","note":"short Korean note","report":{"summary":"short Korean summary","topDeals":"short Korean deals","outlook":"short Korean outlook","risk":"short Korean risk"}}]
+CRITICAL: Every string under 40 chars. Use these 6 sectors+colors exactly: ESS/배터리 var(--g), 그린수소 var(--b), 태양광 var(--o), 에너지AI #a78bfa, SMR/원자력 #f472b6, CCUS #34d399. Return ONLY JSON array.`,
 
   editorial: `Return a JSON object with today's editorial for Korean energy CVC investors.
 Schema: {"quote":"Korean one sentence key insight","body":"Korean 400-500 char editorial with 3 action items for investors today"}
