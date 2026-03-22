@@ -25,6 +25,30 @@ function timeStr() {
   });
 }
 
+function safeParseJSON(text) {
+  // 코드블록 제거
+  let clean = text.replace(/```json\s*/gi,'').replace(/```\s*/g,'').trim();
+  // 앞뒤 불필요한 텍스트 제거 (JSON 배열/객체만 추출)
+  const arrMatch = clean.match(/(\[[\s\S]*\])/);
+  const objMatch = clean.match(/(\{[\s\S]*\})/);
+  if (arrMatch) clean = arrMatch[1];
+  else if (objMatch) clean = objMatch[1];
+  // 줄바꿈/탭을 공백으로 정리
+  clean = clean.replace(/[\r\n\t]/g, ' ');
+  try {
+    return JSON.parse(clean);
+  } catch(e) {
+    // 마지막 불완전한 항목 제거 후 재시도 (배열의 경우)
+    if (clean.startsWith('[')) {
+      const lastComma = clean.lastIndexOf('},{');
+      if (lastComma > 0) {
+        try { return JSON.parse(clean.substring(0, lastComma+1) + ']'); } catch(e2) {}
+      }
+    }
+    throw new Error('JSON 파싱 실패: ' + e.message + '\n원본: ' + clean.substring(0,200));
+  }
+}
+
 function callClaude(system, user) {
   return new Promise((resolve, reject) => {
     const body = JSON.stringify({
@@ -506,15 +530,15 @@ async function main() {
   console.log(`\n🚀 Energy CVC Briefing v2 생성 — ${korDate()}\n`);
   try {
     console.log('① 추천 딜 스코어링...');
-    const deals = JSON.parse((await callClaude(SYSTEM, PROMPTS.deals)).replace(/```json|```/g,'').trim());
+    const deals = safeParseJSON(await callClaude(SYSTEM, PROMPTS.deals));
     console.log('② 글로벌 뉴스...');
-    const global = JSON.parse((await callClaude(SYSTEM, PROMPTS.global)).replace(/```json|```/g,'').trim());
+    const global = safeParseJSON(await callClaude(SYSTEM, PROMPTS.global));
     console.log('③ 국내 펀딩...');
-    const domestic = JSON.parse((await callClaude(SYSTEM, PROMPTS.domestic)).replace(/```json|```/g,'').trim());
+    const domestic = safeParseJSON(await callClaude(SYSTEM, PROMPTS.domestic));
     console.log('④ 섹터 트렌드...');
-    const sector = JSON.parse((await callClaude(SYSTEM, PROMPTS.sector)).replace(/```json|```/g,'').trim());
+    const sector = safeParseJSON(await callClaude(SYSTEM, PROMPTS.sector));
     console.log('⑤ 에디토리얼...');
-    const editorial = JSON.parse((await callClaude(SYSTEM, PROMPTS.editorial)).replace(/```json|```/g,'').trim());
+    const editorial = safeParseJSON(await callClaude(SYSTEM, PROMPTS.editorial));
     console.log('⑥ HTML 생성...');
     fs.writeFileSync('index.html', buildHTML({ deals, global, domestic, sector, editorial }), 'utf8');
     console.log('\n✅ 완료!\n');
