@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Energy CVC Daily Briefing</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+KR:wght@300;400;500;700&family=JetBrains+Mono:wght@300;400;500&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0b0d11;
+  --surface: #13161e;
+  --surface2: #1a1e29;
+  --border: #222736;
+  --border2: #2a3045;
+  --g: #00d97e;       /* green accent */
+  --b: #3b82f6;       /* blue */
+  --o: #f59e0b;       /* amber */
+  --r: #ef4444;       /* red */
+  --p: #a78bfa;       /* purple */
+  --text: #e8edf5;
+  --text2: #7c8db5;
+  --text3: #404860;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Noto Sans KR', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* subtle grid */
+body::before {
+  content:'';
+  position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:
+    linear-gradient(rgba(0,217,126,.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,217,126,.025) 1px, transparent 1px);
+  background-size:48px 48px;
+}
+
+/* ── TOPBAR ── */
+.topbar {
+  position:sticky;top:0;z-index:200;
+  background:rgba(11,13,17,.92);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 28px;height:56px;
+}
+.topbar-logo {
+  font-family:'Bebas Neue',sans-serif;
+  font-size:20px;letter-spacing:.08em;
+  color:var(--g);
+  display:flex;align-items:center;gap:10px;
+}
+.topbar-logo span{color:var(--text2);font-size:14px;letter-spacing:.04em;font-family:'JetBrains Mono',monospace;}
+.topbar-right{display:flex;align-items:center;gap:14px;}
+.pulse-badge{
+  display:flex;align-items:center;gap:6px;
+  font-family:'JetBrains Mono',monospace;font-size:10px;
+  color:var(--g);letter-spacing:.08em;
+  background:rgba(0,217,126,.08);border:1px solid rgba(0,217,126,.18);
+  padding:4px 10px;border-radius:20px;
+}
+.pulse-dot{width:6px;height:6px;border-radius:50%;background:var(--g);animation:blink 2s infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:.3;}}
+.topbar-date{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text3);}
+
+/* ── HERO ── */
+.hero {
+  position:relative;z-index:1;
+  background:linear-gradient(135deg,rgba(0,217,126,.06),rgba(59,130,246,.04));
+  border-bottom:1px solid var(--border);
+  padding:36px 28px 28px;
+  overflow:hidden;
+}
+.hero::after {
+  content:'';position:absolute;right:-60px;top:-60px;
+  width:320px;height:320px;border-radius:50%;
+  background:radial-gradient(circle,rgba(0,217,126,.06),transparent 70%);
+  pointer-events:none;
+}
+.hero-kicker {
+  font-family:'JetBrains Mono',monospace;
+  font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--g);margin-bottom:10px;
+  display:flex;align-items:center;gap:8px;
+}
+.hero-kicker::before{content:'';width:20px;height:1px;background:var(--g);}
+.hero-title {
+  font-family:'Playfair Display',serif;
+  font-size:clamp(22px,4vw,38px);
+  line-height:1.2;color:var(--text);margin-bottom:10px;
+}
+.hero-desc {
+  font-size:13px;color:var(--text2);line-height:1.8;
+  max-width:600px;font-weight:300;
+}
+.hero-meta {
+  margin-top:16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+}
+.hero-chip {
+  font-family:'JetBrains Mono',monospace;font-size:10px;
+  padding:4px 10px;border-radius:4px;letter-spacing:.06em;
+}
+.hc-g{background:rgba(0,217,126,.1);color:var(--g);border:1px solid rgba(0,217,126,.2);}
+.hc-b{background:rgba(59,130,246,.1);color:#7ab3ff;border:1px solid rgba(59,130,246,.2);}
+.hc-o{background:rgba(245,158,11,.1);color:#fbbf24;border:1px solid rgba(245,158,11,.2);}
+
+/* ── LOADING ── */
+#loading-overlay {
+  position:fixed;inset:0;z-index:500;
+  background:var(--bg);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:20px;
+  transition:opacity .4s;
+}
+#loading-overlay.out{opacity:0;pointer-events:none;}
+.lo-title{font-family:'Bebas Neue',sans-serif;font-size:32px;letter-spacing:.1em;color:var(--text);}
+.lo-bar-bg{width:280px;height:2px;background:var(--border2);border-radius:1px;overflow:hidden;}
+.lo-bar-fill{height:100%;background:linear-gradient(90deg,var(--g),var(--b));width:0%;transition:width .35s ease;}
+.lo-step{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text3);letter-spacing:.06em;}
+.lo-step em{color:var(--g);font-style:normal;}
+
+/* ── MAIN GRID ── */
+.main {
+  position:relative;z-index:1;
+  max-width:1280px;margin:0 auto;
+  padding:28px;
+  display:grid;
+  grid-template-columns:1fr 340px;
+  grid-template-rows:auto;
+  gap:20px;
+}
+
+/* ── CARD ── */
+.card {
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:12px;overflow:hidden;
+  animation:fadeUp .5s ease both;
+}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+.card:nth-child(1){animation-delay:.05s;}
+.card:nth-child(2){animation-delay:.1s;}
+.card:nth-child(3){animation-delay:.15s;}
+.card:nth-child(4){animation-delay:.2s;}
+
+.card-head {
+  padding:14px 20px;border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+}
+.card-title {
+  display:flex;align-items:center;gap:8px;
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--text2);
+}
+.card-icon {
+  width:22px;height:22px;border-radius:6px;
+  display:flex;align-items:center;justify-content:center;font-size:12px;
+}
+.ci-g{background:rgba(0,217,126,.15);}
+.ci-b{background:rgba(59,130,246,.15);}
+.ci-o{background:rgba(245,158,11,.15);}
+.ci-p{background:rgba(167,139,250,.15);}
+.card-badge {
+  font-family:'JetBrains Mono',monospace;font-size:9px;
+  padding:3px 8px;border-radius:20px;letter-spacing:.06em;
+}
+.cb-g{background:rgba(0,217,126,.1);color:var(--g);border:1px solid rgba(0,217,126,.18);}
+.cb-b{background:rgba(59,130,246,.1);color:#7ab3ff;border:1px solid rgba(59,130,246,.2);}
+.cb-o{background:rgba(245,158,11,.1);color:#fbbf24;border:1px solid rgba(245,158,11,.2);}
+.cb-p{background:rgba(167,139,250,.1);color:#c4b5fd;border:1px solid rgba(167,139,250,.2);}
+.card-body{padding:20px;}
+
+/* section spans */
+.span-col{grid-column:1 / -1;}
+.col-left{grid-column:1;}
+.col-right{grid-column:2;}
+
+/* ── AI CONTENT BLOCKS ── */
+.ai-content {
+  font-size:13.5px;line-height:1.9;color:var(--text);
+  font-weight:300;white-space:pre-wrap;
+  min-height:60px;
+}
+.ai-thinking {
+  display:flex;align-items:center;gap:10px;
+  font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text3);
+}
+.dots span {
+  display:inline-block;width:5px;height:5px;border-radius:50%;
+  background:var(--g);margin:0 2px;
+  animation:dotBounce 1.2s infinite;
+}
+.dots span:nth-child(2){animation-delay:.2s;}
+.dots span:nth-child(3){animation-delay:.4s;}
+@keyframes dotBounce{0%,80%,100%{transform:translateY(0);opacity:.4;}40%{transform:translateY(-5px);opacity:1;}}
+
+/* ── DEAL CARDS ── */
+.deal-list{display:flex;flex-direction:column;gap:12px;}
+.deal-row {
+  background:var(--surface2);border:1px solid var(--border);
+  border-radius:10px;padding:16px;
+  border-left:3px solid var(--g);
+  position:relative;
+  transition:border-color .2s,transform .2s;
+  cursor:default;
+}
+.deal-row:hover{transform:translateX(3px);}
+.deal-row.blue{border-left-color:var(--b);}
+.deal-row.amber{border-left-color:var(--o);}
+.deal-row.purple{border-left-color:var(--p);}
+.deal-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;}
+.deal-name{font-family:'Playfair Display',serif;font-size:17px;line-height:1.2;}
+.deal-score-wrap{text-align:right;}
+.deal-score{font-family:'Bebas Neue',sans-serif;font-size:26px;line-height:1;}
+.deal-score.s-high{color:var(--g);}
+.deal-score.s-mid{color:var(--o);}
+.deal-score-label{font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--text3);}
+.deal-tags{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:7px;}
+.dtag{
+  font-family:'JetBrains Mono',monospace;font-size:9px;
+  padding:2px 7px;border-radius:3px;letter-spacing:.05em;
+}
+.dt-sector{background:rgba(59,130,246,.12);color:#7ab3ff;border:1px solid rgba(59,130,246,.2);}
+.dt-stage{background:rgba(255,255,255,.05);color:var(--text2);border:1px solid var(--border2);}
+.dt-country{background:rgba(0,217,126,.08);color:var(--g);border:1px solid rgba(0,217,126,.15);}
+.deal-desc{font-size:12px;color:var(--text2);line-height:1.65;font-weight:300;}
+.deal-signal{
+  margin-top:6px;
+  font-family:'JetBrains Mono',monospace;font-size:10px;
+  color:var(--g);letter-spacing:.04em;
+}
+
+/* ── SECTOR BARS ── */
+.sector-list{display:flex;flex-direction:column;gap:14px;}
+.s-row{display:flex;flex-direction:column;gap:5px;}
+.s-top{display:flex;justify-content:space-between;align-items:center;}
+.s-name{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--text2);}
+.s-pct{font-family:'Bebas Neue',sans-serif;font-size:16px;color:var(--text);}
+.s-bar-bg{height:4px;background:var(--border2);border-radius:2px;overflow:hidden;}
+.s-bar-fill{height:100%;border-radius:2px;width:0%;transition:width 1.2s cubic-bezier(.4,0,.2,1);}
+.s-note{font-size:11px;color:var(--text3);font-weight:300;}
+
+/* ── NEWS LIST ── */
+.news-list{display:flex;flex-direction:column;}
+.news-item{
+  padding:14px 0;border-bottom:1px solid var(--border);
+}
+.news-item:last-child{border-bottom:none;padding-bottom:0;}
+.news-meta{display:flex;align-items:center;gap:6px;margin-bottom:5px;}
+.ntag{
+  font-family:'JetBrains Mono',monospace;font-size:9px;
+  padding:2px 6px;border-radius:3px;letter-spacing:.05em;
+}
+.nt-g{background:rgba(0,217,126,.12);color:var(--g);}
+.nt-b{background:rgba(59,130,246,.12);color:#7ab3ff;}
+.nt-o{background:rgba(245,158,11,.12);color:#fbbf24;}
+.nt-r{background:rgba(239,68,68,.1);color:#fca5a5;}
+.nt-p{background:rgba(167,139,250,.12);color:#c4b5fd;}
+.ntime{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--text3);}
+.news-title{font-size:13px;font-weight:500;line-height:1.55;color:var(--text);margin-bottom:3px;}
+.news-body{font-size:12px;color:var(--text2);line-height:1.65;font-weight:300;}
+
+/* ── DOMESTIC FUNDING ── */
+.fund-list{display:flex;flex-direction:column;gap:10px;}
+.fund-row{
+  background:var(--surface2);border:1px solid var(--border);
+  border-radius:8px;padding:12px 14px;
+  display:flex;gap:12px;align-items:flex-start;
+}
+.fund-amount{
+  font-family:'Bebas Neue',sans-serif;font-size:20px;
+  color:var(--g);line-height:1;white-space:nowrap;
+  min-width:50px;text-align:right;
+}
+.fund-info{}
+.fund-co{font-size:13px;font-weight:500;margin-bottom:2px;}
+.fund-detail{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text3);letter-spacing:.04em;}
+.fund-desc{font-size:11.5px;color:var(--text2);margin-top:3px;font-weight:300;line-height:1.5;}
+
+/* ── EDITORIAL ── */
+.editorial-wrap {
+  position:relative;
+  background:linear-gradient(135deg,rgba(0,217,126,.04),rgba(59,130,246,.03));
+  border-radius:10px;padding:24px;
+  border:1px solid rgba(0,217,126,.1);
+}
+.editorial-quote {
+  font-family:'Playfair Display',serif;font-style:italic;
+  font-size:clamp(15px,2vw,18px);line-height:1.6;color:var(--text);
+  margin-bottom:18px;padding-bottom:18px;
+  border-bottom:1px solid var(--border);
+}
+.editorial-body-text{
+  font-size:13.5px;line-height:1.95;color:var(--text2);
+  font-weight:300;white-space:pre-wrap;
+}
+.editorial-byline{
+  margin-top:18px;display:flex;align-items:center;gap:10px;
+}
+.byline-avatar{
+  width:30px;height:30px;border-radius:50%;
+  background:var(--g);display:flex;align-items:center;justify-content:center;
+  font-family:'Bebas Neue',sans-serif;font-size:13px;color:#000;flex-shrink:0;
+}
+.byline-text{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text3);line-height:1.5;}
+
+/* ── REFRESH BTN ── */
+.fab {
+  position:fixed;bottom:24px;right:24px;z-index:300;
+  background:var(--g);color:#000;border:none;border-radius:50px;
+  padding:13px 20px;font-family:'JetBrains Mono',monospace;font-size:11px;
+  font-weight:500;letter-spacing:.06em;cursor:pointer;
+  display:flex;align-items:center;gap:7px;
+  box-shadow:0 4px 24px rgba(0,217,126,.25);
+  transition:all .2s;
+}
+.fab:hover{background:#00f090;transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,217,126,.35);}
+.fab:disabled{opacity:.5;cursor:not-allowed;transform:none;}
+.fab-dot{width:7px;height:7px;border-radius:50%;background:#000;animation:blink 2s infinite;}
+
+/* ── FOOTER ── */
+.footer {
+  position:relative;z-index:1;
+  border-top:1px solid var(--border);
+  padding:20px 28px;
+  display:flex;justify-content:space-between;align-items:center;
+  flex-wrap:wrap;gap:8px;
+}
+.footer-l{font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:.08em;color:var(--text3);}
+.footer-r{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text3);text-align:right;}
+
+/* ── RESPONSIVE ── */
+@media(max-width:960px){
+  .main{grid-template-columns:1fr;padding:16px;gap:16px;}
+  .col-left,.col-right,.span-col{grid-column:1;}
+}
+@media(max-width:480px){
+  .topbar{padding:0 16px;}
+  .topbar-date{display:none;}
+  .hero{padding:24px 16px 20px;}
+  .deal-name{font-size:15px;}
+}
+
+::-webkit-scrollbar{width:5px;}
+::-webkit-scrollbar-track{background:var(--bg);}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px;}
+</style>
+</head>
+<body>
+
+<!-- LOADING -->
+<div id="loading-overlay">
+  <div class="lo-title">BRIEFING LOADING</div>
+  <div class="lo-bar-bg"><div class="lo-bar-fill" id="lo-fill"></div></div>
+  <div class="lo-step" id="lo-step"><em>●</em> AI Agent 초기화 중...</div>
+</div>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="topbar-logo">
+    ENERGY CVC
+    <span>/ DAILY BRIEFING</span>
+  </div>
+  <div class="topbar-right">
+    <div class="topbar-date" id="topbar-date">—</div>
+    <div class="pulse-badge"><div class="pulse-dot"></div>AGENT LIVE</div>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-kicker">TODAY'S INTELLIGENCE</div>
+  <h1 class="hero-title" id="hero-title">에너지 전환 투자 시장 일간 브리핑</h1>
+  <p class="hero-desc" id="hero-desc">AI Agent가 오늘의 글로벌·국내 에너지 투자 동향을 분석해 심사역 관점의 핵심 인사이트를 정리합니다.</p>
+  <div class="hero-meta">
+    <span class="hero-chip hc-g" id="chip-deals">⚡ 신규 딜 —</span>
+    <span class="hero-chip hc-b" id="chip-invest">💰 글로벌 투자 —</span>
+    <span class="hero-chip hc-o" id="chip-hot">🔥 주목 섹터 —</span>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main" id="main-content" style="display:none">
+
+  <!-- ① 추천 딜 리스트 (full width) -->
+  <div class="card span-col">
+    <div class="card-head">
+      <div class="card-title"><div class="card-icon ci-g">🎯</div>오늘의 추천 딜</div>
+      <div class="card-badge cb-g">AI SCORED</div>
+    </div>
+    <div class="card-body">
+      <div class="deal-list" id="deal-section">
+        <div class="ai-thinking"><div class="dots"><span></span><span></span><span></span></div>딜 스코어링 중...</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ② 글로벌 뉴스 (left) -->
+  <div class="card col-left">
+    <div class="card-head">
+      <div class="card-title"><div class="card-icon ci-b">🌐</div>글로벌 에너지 투자 뉴스</div>
+      <div class="card-badge cb-b">GLOBAL</div>
+    </div>
+    <div class="card-body">
+      <div id="global-section">
+        <div class="ai-thinking"><div class="dots"><span></span><span></span><span></span></div>뉴스 수집·분석 중...</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ③ 국내 펀딩 (right) -->
+  <div class="card col-right">
+    <div class="card-head">
+      <div class="card-title"><div class="card-icon ci-o">🇰🇷</div>국내 펀딩 소식</div>
+      <div class="card-badge cb-o">DOMESTIC</div>
+    </div>
+    <div class="card-body">
+      <div id="domestic-section">
+        <div class="ai-thinking"><div class="dots"><span></span><span></span><span></span></div>국내 소식 확인 중...</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ④ 섹터 트렌드 (full width) -->
+  <div class="card span-col">
+    <div class="card-head">
+      <div class="card-title"><div class="card-icon ci-p">📊</div>섹터별 투자 트렌드</div>
+      <div class="card-badge cb-p">THIS MONTH</div>
+    </div>
+    <div class="card-body">
+      <div id="sector-section">
+        <div class="ai-thinking"><div class="dots"><span></span><span></span><span></span></div>트렌드 분석 중...</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ⑤ AI 에디토리얼 (full width) -->
+  <div class="card span-col">
+    <div class="card-head">
+      <div class="card-title"><div class="card-icon ci-g">✍️</div>심사역 AI 에디토리얼</div>
+      <div class="card-badge cb-g">CLAUDE ANALYSIS</div>
+    </div>
+    <div class="card-body">
+      <div class="editorial-wrap">
+        <div class="editorial-quote" id="editorial-quote">분석 중...</div>
+        <div class="editorial-body-text ai-content" id="editorial-body">
+          <div class="ai-thinking"><div class="dots"><span></span><span></span><span></span></div>에디토리얼 작성 중...</div>
+        </div>
+        <div class="editorial-byline">
+          <div class="byline-avatar">AI</div>
+          <div class="byline-text">
+            CLAUDE AI · ENERGY CVC INTELLIGENCE AGENT<br>
+            매일 오전 7:00 자동 업데이트 · <span id="byline-time">—</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /main -->
+
+<!-- FOOTER -->
+<div class="footer" id="footer" style="display:none">
+  <div class="footer-l">ENERGY · CVC INTELLIGENCE</div>
+  <div class="footer-r">
+    Claude AI 분석 엔진<br>
+    <span id="footer-ts">—</span>
+  </div>
+</div>
+
+<!-- FAB -->
+<button class="fab" id="fab-btn" onclick="runAll()" style="display:none">
+  <div class="fab-dot"></div>
+  새 브리핑 생성
+</button>
+
+<script>
+// ═══════════════════════════════════════════
+//  CONFIG
+// ═══════════════════════════════════════════
+const DEMO = true; // false → 실제 Claude API 호출
+
+// ═══════════════════════════════════════════
+//  UTILS
+// ═══════════════════════════════════════════
+const $ = id => document.getElementById(id);
+const delay = ms => new Promise(r => setTimeout(r, ms));
+
+function korDate() {
+  return new Date().toLocaleDateString('ko-KR',{year:'numeric',month:'long',day:'numeric',weekday:'long'});
+}
+function timeStr() {
+  return new Date().toLocaleTimeString('ko-KR',{hour:'2-digit',minute:'2-digit'}) + ' 생성';
+}
+
+async function typewrite(el, text, speed=9) {
+  el.textContent = '';
+  for (let i=0; i<text.length; i++) {
+    el.textContent += text[i];
+    await delay(speed);
+  }
+}
+
+// ═══════════════════════════════════════════
+//  CLAUDE API
+// ═══════════════════════════════════════════
+async function askClaude(system, user) {
+  if (DEMO) { await delay(800 + Math.random()*600); return DEMO_DATA[user] || '데모 응답입니다.'; }
+  const res = await fetch('https://api.anthropic.com/v1/messages', {
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body: JSON.stringify({
+      model:'claude-sonnet-4-20250514',
+      max_tokens:1000,
+      system,
+      messages:[{role:'user',content:user}]
+    })
+  });
+  const d = await res.json();
+  return d.content?.[0]?.text || '';
+}
+
+// ═══════════════════════════════════════════
+//  DEMO DATA
+// ═══════════════════════════════════════════
+const DEAL_DATA = [
+  {
+    name:'Verdagy', score:'9.2', scoreClass:'s-high', colorClass:'',
+    tags:[{t:'그린수소',c:'dt-sector'},{t:'Series B · $55M',c:'dt-stage'},{t:'미국',c:'dt-country'}],
+    desc:'차세대 AWE 전기분해 기술로 수소 생산 단가 $2/kg 목표. EU €3B 정책 발표 직접 수혜 예상. 현재 파일럿 플랜트 성과 검증 중.',
+    signal:'▲ EU 수소 정책 발표 직결 수혜'
+  },
+  {
+    name:'Noon Energy', score:'8.7', scoreClass:'s-high', colorClass:'blue',
+    tags:[{t:'장기 ESS',c:'dt-sector'},{t:'Series A · $28M',c:'dt-stage'},{t:'미국',c:'dt-country'}],
+    desc:'탄소-산소 배터리 기반 100시간 이상 장기 저장 솔루션. Form Energy 투자 모멘텀과 함께 주목도 급상승. 밸류에이션 진입 타이밍 적합.',
+    signal:'▲ ESS 사상 최대 투자 수혜 시점'
+  },
+  {
+    name:'에너테크인터내셔널', score:'7.4', scoreClass:'s-mid', colorClass:'amber',
+    tags:[{t:'국내 ESS',c:'dt-sector'},{t:'Pre-IPO',c:'dt-stage'},{t:'한국',c:'dt-country'}],
+    desc:'국내 ESS 시장 점유율 15%, 삼성SDI 공급망 연계. Pre-IPO 밸류에이션 협상 여지 있음. IPO 윈도우 6개월 내 열릴 가능성 높음.',
+    signal:'▲ 국내 IPO 윈도우 6개월 내'
+  },
+  {
+    name:'Antora Energy', score:'8.1', scoreClass:'s-high', colorClass:'purple',
+    tags:[{t:'산업열 저장',c:'dt-sector'},{t:'Series B · $150M',c:'dt-stage'},{t:'미국',c:'dt-country'}],
+    desc:'탄소 블록 기반 산업용 고온 열 저장. 제조업 탈탄소 수요와 직결. 빌 게이츠 지원으로 신뢰도 확인. 국내 제조 그룹사 시너지 검토 가치 높음.',
+    signal:'▲ 산업 탈탄소 수요 확대 수혜'
+  }
+];
+
+const GLOBAL_NEWS = [
+  {tag:'글로벌',tagC:'nt-g',time:'2시간 전',title:'Form Energy, Series F $450M 클로즈',body:'장기 배터리 스토리지 시장 대형 투자 성사. 철-공기 배터리 상용화 가속화 전망. 대안 ESS 기술 투자 심리 전반에 긍정적.'},
+  {tag:'정책',tagC:'nt-o',time:'5시간 전',title:'EU 그린수소 패키지 €3B 추가 발표',body:'전기분해 기술 기업 직접 수혜 예상. 국내 수전해 스타트업의 유럽 진출 레퍼런스로 활용 가능한 시점.'},
+  {tag:'기술',tagC:'nt-b',time:'8시간 전',title:'TerraPower SMR 착공 — 상용화 첫 삽',body:'빌 게이츠 지원 소형모듈원전 프로젝트 본격 시작. 글로벌 SMR 투자 심리 개선, 국내 관련 파이프라인 재점검 권고.'},
+  {tag:'M&A',tagC:'nt-r',time:'11시간 전',title:'Brookfield, 태양광 O&M 기업 $1.2B 인수',body:'국내 유사 기업 엑싯 멀티플 비교 지표 확보. 태양광 운영·유지보수 섹터 전략적 가치 재확인.'},
+  {tag:'시장',tagC:'nt-p',time:'14시간 전',title:'태양광 모듈 가격 YoY 30% 추가 하락',body:'LCOE 그리드 패리티 확대로 수익성 개선. 소프트웨어·O&M 기반 태양광 비즈니스 모델 투자 매력도 상승.'}
+];
+
+const DOMESTIC_FUNDS = [
+  {amount:'150억',co:'클린일렉트론',detail:'Series B · 수전해',desc:'국내 수전해 핵심 플레이어. 정부 R&D 매칭 포함. EU 수혜 연계 가능성.'},
+  {amount:'80억',co:'그리드텍',detail:'Series A · 에너지AI',desc:'AI 기반 전력 수요예측. 한전 파일럿 계약 체결. 성장성 확인 단계.'},
+  {amount:'200억',co:'에이치투',detail:'Series C · 그린수소',desc:'국내 수소 충전 인프라 1위. 정부 수소경제 로드맵 직접 수혜.'},
+  {amount:'40억',co:'솔라링크',detail:'Series A · 태양광 O&M',desc:'AI 기반 태양광 발전량 예측·유지보수. Brookfield 딜 이후 관심 급증.'}
+];
+
+const SECTOR_DATA = [
+  {name:'ESS / 배터리',pct:'84',color:'var(--g)',note:'투자 심리 최고조, Form Energy 모멘텀'},
+  {name:'그린수소',pct:'71',color:'var(--b)',note:'EU 정책 수혜, 전기분해 기술 집중'},
+  {name:'태양광',pct:'62',color:'var(--o)',note:'LCOE 하락으로 수익성 구조 개선'},
+  {name:'에너지 AI',pct:'57',color:'#a78bfa',note:'그리드 최적화·수요예측 수요 급증'},
+  {name:'SMR / 원자력',pct:'38',color:'#f472b6',note:'TerraPower 착공으로 기대감 확산'},
+  {name:'CCUS',pct:'24',color:'#34d399',note:'기술 검증 단계, 장기 포지셔닝 기회'}
+];
+
+const EDITORIAL_QUOTE = '오늘의 에너지 투자 시장은 "기술 다변화"라는 하나의 키워드로 수렴되고 있습니다. 리튬이온의 시대가 저물고, 철-공기·탄소-산소·고온 열 저장이 새로운 투자 지형을 만들고 있습니다.';
+
+const EDITORIAL_BODY = `Form Energy의 $450M은 단순한 대형 라운드가 아닙니다. 이는 "8시간 이상 장기 저장"이라는 기술 카테고리 자체에 기관 투자자들이 베팅을 시작했다는 신호입니다. 국내 ESS 심사역에게 이 딜이 던지는 질문은 하나입니다. "우리 파이프라인에 리튬이온 이외의 대안 기술 기업이 있는가?"
+
+EU의 €3B 수소 패키지는 더욱 즉각적인 기회를 만듭니다. 국내 수전해 기업들이 유럽 시장 진출을 위한 레퍼런스 확보에 나서는 지금이 전략적 투자 진입 타이밍입니다. 클린일렉트론의 Series B 클로즈는 이 맥락에서 재해석해야 합니다.
+
+오늘 심사역이 취해야 할 액션은 세 가지입니다.
+
+첫째, Verdagy IR 컨택 우선순위 최상단 배치. EU 수혜와 기술 차별성이 동시에 확인된 딜입니다.
+
+둘째, 국내 장기 저장 기술 파이프라인 긴급 스캔. 리튬이온 이외 기술을 개발 중인 초기 기업을 발굴해야 합니다.
+
+셋째, 에너테크인터내셔널 Pre-IPO 조건 협상 가속화. 6개월 내 IPO 윈도우가 열릴 가능성이 높으며, 현재 밸류에이션이 합리적인 구간에 있습니다.`;
+
+const DEMO_DATA = {
+  'deals': JSON.stringify(DEAL_DATA),
+  'global': JSON.stringify(GLOBAL_NEWS),
+  'domestic': JSON.stringify(DOMESTIC_FUNDS),
+  'sector': JSON.stringify(SECTOR_DATA),
+  'editorial': JSON.stringify({quote: EDITORIAL_QUOTE, body: EDITORIAL_BODY})
+};
+
+// ═══════════════════════════════════════════
+//  RENDERERS
+// ═══════════════════════════════════════════
+function renderDeals(data) {
+  const el = $('deal-section');
+  el.innerHTML = '';
+  const arr = typeof data === 'string' ? JSON.parse(data) : data;
+  const list = document.createElement('div');
+  list.className = 'deal-list';
+  arr.forEach(d => {
+    const row = document.createElement('div');
+    row.className = `deal-row ${d.colorClass||''}`;
+    row.innerHTML = `
+      <div class="deal-top">
+        <div class="deal-name">${d.name}</div>
+        <div class="deal-score-wrap">
+          <div class="deal-score ${d.scoreClass}">${d.score}</div>
+          <div class="deal-score-label">/ 10</div>
+        </div>
+      </div>
+      <div class="deal-tags">${d.tags.map(t=>`<span class="dtag ${t.c}">${t.t}</span>`).join('')}</div>
+      <div class="deal-desc">${d.desc}</div>
+      <div class="deal-signal">${d.signal}</div>
+    `;
+    list.appendChild(row);
+  });
+  el.appendChild(list);
+}
+
+function renderGlobal(data) {
+  const el = $('global-section');
+  el.innerHTML = '';
+  const arr = typeof data === 'string' ? JSON.parse(data) : data;
+  const list = document.createElement('div');
+  list.className = 'news-list';
+  arr.forEach(n => {
+    const item = document.createElement('div');
+    item.className = 'news-item';
+    item.innerHTML = `
+      <div class="news-meta">
+        <span class="ntag ${n.tagC}">${n.tag}</span>
+        <span class="ntime">${n.time}</span>
+      </div>
+      <div class="news-title">${n.title}</div>
+      <div class="news-body">${n.body}</div>
+    `;
+    list.appendChild(item);
+  });
+  el.appendChild(list);
+}
+
+function renderDomestic(data) {
+  const el = $('domestic-section');
+  el.innerHTML = '';
+  const arr = typeof data === 'string' ? JSON.parse(data) : data;
+  const list = document.createElement('div');
+  list.className = 'fund-list';
+  arr.forEach(f => {
+    const row = document.createElement('div');
+    row.className = 'fund-row';
+    row.innerHTML = `
+      <div class="fund-amount">${f.amount}</div>
+      <div class="fund-info">
+        <div class="fund-co">${f.co}</div>
+        <div class="fund-detail">${f.detail}</div>
+        <div class="fund-desc">${f.desc}</div>
+      </div>
+    `;
+    list.appendChild(row);
+  });
+  el.appendChild(list);
+}
+
+function renderSector(data) {
+  const el = $('sector-section');
+  el.innerHTML = '';
+  const arr = typeof data === 'string' ? JSON.parse(data) : data;
+  const grid = document.createElement('div');
+  grid.style.cssText = 'display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px;';
+  arr.forEach(s => {
+    const item = document.createElement('div');
+    item.className = 's-row';
+    item.innerHTML = `
+      <div class="s-top">
+        <div class="s-name">${s.name}</div>
+        <div class="s-pct">${s.pct}%</div>
+      </div>
+      <div class="s-bar-bg">
+        <div class="s-bar-fill" style="background:${s.color}" data-w="${s.pct}%"></div>
+      </div>
+      <div class="s-note">${s.note}</div>
+    `;
+    grid.appendChild(item);
+  });
+  el.appendChild(grid);
+  // animate bars after render
+  setTimeout(() => {
+    el.querySelectorAll('.s-bar-fill').forEach(b => { b.style.width = b.getAttribute('data-w'); });
+  }, 100);
+}
+
+async function renderEditorial(data) {
+  const obj = typeof data === 'string' ? JSON.parse(data) : data;
+  $('editorial-quote').textContent = obj.quote;
+  const bodyEl = $('editorial-body');
+  bodyEl.innerHTML = '';
+  await typewrite(bodyEl, obj.body, 8);
+}
+
+// ═══════════════════════════════════════════
+//  LOADING
+// ═══════════════════════════════════════════
+const LOAD_STEPS = [
+  '글로벌 에너지 뉴스 수집 중...',
+  '국내 펀딩 소식 확인 중...',
+  '추천 딜 AI 스코어링 중...',
+  '섹터 트렌드 분석 중...',
+  '에디토리얼 작성 중...',
+  '브리핑 완성!'
+];
+
+async function showLoading() {
+  const overlay = $('loading-overlay');
+  const fill = $('lo-fill');
+  const step = $('lo-step');
+  overlay.classList.remove('out');
+  overlay.style.display = 'flex';
+  fill.style.width = '0%';
+  for (let i=0; i<LOAD_STEPS.length; i++) {
+    step.innerHTML = `<em>●</em> ${LOAD_STEPS[i]}`;
+    fill.style.width = ((i+1)/LOAD_STEPS.length*100)+'%';
+    await delay(DEMO ? 380 + Math.random()*200 : 600 + Math.random()*400);
+  }
+}
+
+function hideLoading() {
+  const overlay = $('loading-overlay');
+  overlay.classList.add('out');
+  setTimeout(() => { overlay.style.display='none'; }, 400);
+}
+
+// ═══════════════════════════════════════════
+//  SYSTEM PROMPT
+// ═══════════════════════════════════════════
+const SYS = `당신은 에너지 분야 CVC 심사역을 위한 AI 딜소싱 에이전트입니다.
+오늘의 에너지 투자 시장을 분석하고, 투자 관점에서 핵심 인사이트를 제공합니다.
+모든 응답은 반드시 순수 JSON만 반환하세요. 마크다운, 코드블록, 설명 텍스트 없이 JSON만.`;
+
+// ═══════════════════════════════════════════
+//  MAIN
+// ═══════════════════════════════════════════
+async function runAll() {
+  const fab = $('fab-btn');
+  if (fab) fab.disabled = true;
+
+  // set dates
+  const today = korDate();
+  const now = timeStr();
+  $('topbar-date').textContent = today;
+  $('byline-time').textContent = now;
+  $('footer-ts').textContent = now;
+
+  // run loading animation + all fetches in parallel
+  const [_, deals, global, domestic, sector, editorial] = await Promise.all([
+    showLoading(),
+    DEMO ? (DEMO_DATA['deals']) : askClaude(SYS, 'deals'),
+    DEMO ? (DEMO_DATA['global']) : askClaude(SYS, 'global'),
+    DEMO ? (DEMO_DATA['domestic']) : askClaude(SYS, 'domestic'),
+    DEMO ? (DEMO_DATA['sector']) : askClaude(SYS, 'sector'),
+    DEMO ? (DEMO_DATA['editorial']) : askClaude(SYS, 'editorial'),
+  ]);
+
+  // show content
+  hideLoading();
+  $('main-content').style.display = 'grid';
+  $('footer').style.display = 'flex';
+  $('fab-btn').style.display = 'flex';
+
+  // hero chips
+  $('chip-deals').textContent = `⚡ 신규 딜 ${DEAL_DATA.length}건`;
+  $('chip-invest').textContent = `💰 글로벌 투자 $2.3B`;
+  $('chip-hot').textContent = `🔥 ESS / 수소`;
+  $('hero-title').textContent = 'ESS·수소 동시 급등 — 에너지 전환 투자 골든타임';
+  $('hero-desc').textContent = `${today} 기준 AI Agent 분석 완료. 오늘의 핵심 딜·뉴스·트렌드를 아래에서 확인하세요.`;
+
+  // render all sections
+  renderDeals(deals);
+  renderGlobal(global);
+  renderDomestic(domestic);
+  renderSector(sector);
+  await renderEditorial(editorial);
+
+  if (fab) fab.disabled = false;
+}
+
+document.addEventListener('DOMContentLoaded', runAll);
+</script>
+</body>
+</html>
