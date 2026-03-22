@@ -63,6 +63,13 @@ function callClaude(system, user) {
 
 function safeParseJSON(text) {
   let clean = text.replace(/```json/gi,'').replace(/```/g,'').trim();
+
+  // 문자열 값 안의 줄바꿈 제거 (JSON 파싱 실패 주원인)
+  // 따옴표 안의 내용에서 줄바꿈을 공백으로 치환
+  clean = clean.replace(/"([^"]*)"/g, function(match, inner) {
+    return '"' + inner.replace(/\n/g,' ').replace(/\r/g,'').replace(/[\r\n]/g,' ') + '"';
+  });
+
   // 배열 또는 객체만 추출
   const arrStart = clean.indexOf('[');
   const objStart = clean.indexOf('{');
@@ -73,10 +80,19 @@ function safeParseJSON(text) {
     const objEnd = clean.lastIndexOf('}');
     if (objEnd > objStart) clean = clean.substring(objStart, objEnd + 1);
   }
+
   try {
     return JSON.parse(clean);
   } catch(e) {
-    console.error('JSON 파싱 실패, 원본 앞부분:', clean.substring(0, 300));
+    // 마지막 불완전 항목 제거 후 재시도
+    if (clean.startsWith('[')) {
+      const lastGood = clean.lastIndexOf('},{');
+      if (lastGood > 0) {
+        try { return JSON.parse(clean.substring(0, lastGood+1) + ']'); } catch(e2) {}
+      }
+    }
+    console.error('JSON 파싱 실패:', e.message);
+    console.error('원본 앞부분:', clean.substring(0, 400));
     throw e;
   }
 }
