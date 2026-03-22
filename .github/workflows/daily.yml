@@ -1,0 +1,40 @@
+name: 🌅 Daily Energy CVC Briefing
+
+on:
+  schedule:
+    - cron: '0 22 * * *'
+  workflow_dispatch:
+
+jobs:
+  generate-briefing:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: 📥 코드 가져오기
+        uses: actions/checkout@v4
+
+      - name: ⚙️ Node.js 설치
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: 🤖 AI 브리핑 생성
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: node generate.js
+
+      - name: 💾 결과 저장
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "Energy CVC AI Agent"
+          git add index.html
+          git diff --quiet && git diff --staged --quiet || git commit -m "📡 Daily briefing — $(TZ='Asia/Seoul' date '+%Y-%m-%d %H:%M KST')"
+          git push
+
+      - name: 🚀 Netlify 배포
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        run: |
+          npm install -g netlify-cli
+          netlify deploy --prod --dir=. --message "Daily briefing $(TZ='Asia/Seoul' date '+%Y-%m-%d')"
