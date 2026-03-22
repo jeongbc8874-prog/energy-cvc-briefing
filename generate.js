@@ -99,9 +99,14 @@ function callClaude(system, user) {
 // ── JSON 파싱 ─────────────────────────────────────────
 function safeJSON(text) {
   let c = text.replace(/```json/gi,'').replace(/```/g,'').trim();
-  c = c.replace(/"([^"]*)"/g, (m, inner) =>
-    '"' + inner.replace(/[\r\n]+/g,' ').replace(/\t/g,' ') + '"'
-  );
+  // 문자열 값 안의 줄바꿈/특수문자 제거
+  c = c.replace(/"((?:[^"\\]|\\.)*)"/g, (m, inner) => {
+    const cleaned = inner
+      .replace(/\r\n|\r|\n/g, ' ')
+      .replace(/\t/g, ' ')
+      .replace(/\u[\da-fA-F]{4}/g, ' ');
+    return '"' + cleaned + '"';
+  });
   const as = c.indexOf('['), os = c.indexOf('{');
   if (as !== -1 && (os === -1 || as < os)) {
     const ae = c.lastIndexOf(']');
@@ -352,8 +357,8 @@ Schema: [{"name":"ESS / 배터리","pct":"84","color":"var(--g)","note":"Korean 
 6 sectors: ESS/배터리 var(--g), 그린수소 var(--b), 태양광 var(--o), 에너지AI #a78bfa, SMR/원자력 #f472b6, CCUS #34d399
 Return ONLY JSON array.`,
 
-  editorial: `Return JSON for today's editorial (${korDate()}). Schema: {"quote":"Korean insight sentence","body":"Korean 400char editorial with 3 action items"}
-Return ONLY JSON object.`
+  editorial: `Return JSON for today's editorial. Schema: {"quote":"Korean insight under 40chars","body":"Korean editorial under 200chars with 3 action items. NO line breaks inside strings."}
+CRITICAL: body must be under 200 chars total. Return ONLY JSON object.`
 };
 
 // ══════════════════════════════════════════════════════
@@ -679,7 +684,11 @@ async function main() {
     const sector = safeJSON(await callClaude(SYS, PROMPTS.sector));
 
     console.log('  에디토리얼...');
-    const editorial = safeJSON(await callClaude(SYS, PROMPTS.editorial));
+    const editRaw = await callClaude(
+      'Return ONLY valid JSON object. No markdown. No line breaks inside string values.',
+      `Today is ${korDate()}. Return this exact JSON: {"quote":"[Korean one sentence insight about energy investment, under 40 chars]","body":"[Korean 150 char max editorial. Include 3 short action items separated by spaces. No newlines.]"}`
+    );
+    const editorial = safeJSON(editRaw);
 
     // ④ HTML 생성
     console.log('\n③ HTML 생성...');
