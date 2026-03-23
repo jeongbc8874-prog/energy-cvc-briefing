@@ -2,73 +2,144 @@
   "date": "2026-03-23",
   "dateKr": "2026년 3월 23일 월요일",
   "weekAgo": "2026-03-16",
-  "generatedAt": "2026-03-23T13:56:46.207Z",
+  "generatedAt": "2026-03-23T14:12:58.572Z",
   "brief": "",
   "stats": {
-    "total": 0,
-    "unlisted": 0,
-    "kr": 0,
+    "total": 3,
+    "unlisted": 1,
+    "kr": 3,
     "cn": 0,
     "global": 0,
-    "high": 0,
-    "investigate": 0
+    "high": 2,
+    "investigate": 1
   },
-  "signals": [],
+  "signals": [
+    {
+      "title": "스탠다드에너지 대규모 글로벌 투자 유치 임박",
+      "company": "스탠다드에너지",
+      "companyType": "unlisted_startup",
+      "fundingStage": "Series-C",
+      "country": "KR",
+      "pubDate": "2026-03-23",
+      "source": "딜사이트",
+      "summary": "스탠다드에너지가 미국과 일본 IT 대기업들로부터 1000억원 규모의 투자 유치를 목전에 두고 있다. 현재까지 조달한 1200억원을 훌쩍 웃도는 재원을 단번에 확보할 전망이며, 데이터센터 운영사와의 합작사업도 검토 중이다.",
+      "eventType": "Financing",
+      "relevance": "High",
+      "signal_type": "Pre-funding",
+      "next_action": "Investigate",
+      "deep_insight": "바나듐 이온 배터리(VIB) 기술로 세계 최초 상용화에 성공하며 고출력 ESS 시장에서 독점적 위치 확보. 2030년 300조원 규모 고출력 ESS 시장을 겨냥한 글로벌 확장 전략이 투자자들의 관심을 끌고 있음",
+      "cvc_action": "바나듐 기반 ESS 기술의 상업성과 확장성 검토 필요. 기존 리튬이온 대비 안전성과 고출력 특성이 데이터센터 및 인프라용 ESS 시장에서 게임체인저 역할 가능",
+      "risk": "아직 초기 매출 단계로 흑자 전환까지 시간 소요 예상. 대규모 양산 체제 구축과 해외 인증 획득이 성공 관건",
+      "isRealNews": true,
+      "id": "kr_ess-0-1774275136903",
+      "topicId": "kr_ess",
+      "category": "국내 ESS 스타트업",
+      "emoji": "🇰🇷🔋",
+      "region": "KR",
+      "isKorean": true,
+      "isChina": false,
+      "generatedAt": "2026-03-23"
+    },
+    {
+      "title": "K-배터리 3사 대규모 ESS 수주로 2026년 성장 모멘텀 확보",
+      "company": "LG에너지솔루션/삼성SDI/SK온",
+      "companyType": "listed_corp",
+      "fundingStage": "N/A",
+      "country": "KR",
+      "pubDate": "2026-03-21",
+      "source": "CEOSCOREDAILY",
+      "summary": "LG에너지솔루션 테슬라와 6조원 ESS 계약, 삼성SDI 2조원 ESS 수주, SK온 플랫아이언과 2조원 규모 ESS 공급 계약 체결로 K-배터리가 미국 ESS 시장에서 중국산 배터리를 완전히 몰아내며 시장 장악",
+      "eventType": "Offtake",
+      "relevance": "High",
+      "signal_type": "Commercial traction",
+      "next_action": "Monitor",
+      "deep_insight": "트럼프 행정부의 탈중국 정책과 중국산 배터리 고율 관세로 한국 배터리 기업들의 미국 현지 생산 경쟁력이 부각. ESS가 EV 둔화를 상쇄할 새로운 성장 동력으로 부상하며 2027년부터 본격적인 공급 개시 예정",
+      "cvc_action": "ESS 배터리 시장의 공급망 재편과 기술 트렌드 분석. 특히 LFP 기술 기반 ESS 시장 확대가 기존 NCM 기술 중심 업체들에게 미치는 파급효과 검토",
+      "risk": "중국 BYD 등 경쟁사들의 압도적 가격 경쟁력과 철-공기 배터리 등 차세대 기술 개발 스타트업들의 시장 진입",
+      "isRealNews": true,
+      "id": "kr_ess-2-1774275136903",
+      "topicId": "kr_ess",
+      "category": "국내 ESS 스타트업",
+      "emoji": "🇰🇷🔋",
+      "region": "KR",
+      "isKorean": true,
+      "isChina": false,
+      "generatedAt": "2026-03-23"
+    },
+    {
+      "title": "포스코퓨처엠-CNGR ESS용 LFP 양극재 합작투자계약 체결",
+      "company": "포스코퓨처엠",
+      "companyType": "listed_corp",
+      "fundingStage": "N/A",
+      "country": "KR",
+      "pubDate": "2026-03-23",
+      "source": "인더스트리뉴스",
+      "summary": "포스코퓨처엠이 급성장하는 ESS 시장에 대응해 중저가용 배터리소재인 LFP 양극재 사업 추진을 위해 CNGR 및 피노와 합작투자계약을 체결했다. 2026년 국내 ESS 시장 반등 기대감 고조",
+      "eventType": "Partnership",
+      "relevance": "Medium",
+      "signal_type": "Commercial traction",
+      "next_action": "Monitor",
+      "deep_insight": "국내 ESS 시장의 본격적인 재성장 신호로 해석. 2025년 상반기 KPX ESS 중앙계약시장에서 563MW 규모 사업자 선정으로 대형 수주 경쟁 본격화. 정부의 2026-2029년 2.1GW 이상 ESS 보급 계획이 시장 성장 견인",
+      "cvc_action": "ESS 소재 공급망 재편 동향 모니터링. LFP 기반 중저가 ESS 시장 확대가 기존 NCM 중심 배터리 업체들에게 미치는 영향 분석 필요",
+      "risk": "중국 경쟁사들�� 가격 경쟁력 우위와 공급과잉 우려",
+      "isRealNews": true,
+      "id": "kr_ess-1-1774275136903",
+      "topicId": "kr_ess",
+      "category": "국내 ESS 스타트업",
+      "emoji": "🇰🇷🔋",
+      "region": "KR",
+      "isKorean": true,
+      "isChina": false,
+      "generatedAt": "2026-03-23"
+    }
+  ],
   "errors": [
     {
-      "topic": "kr_hydrogen_startup",
+      "topic": "kr_h2",
       "error": "This request would exceed your organization's rate limit of 30,000 input tokens per minute (org: 350695cf-c991-41f3-b6e2-60520aeb7311, model: claude-sonnet-4-20250514). For details, refer to: https://docs.claude.com/en/api/rate-limits. You can see the response headers for current usage. Please reduce the prompt length or the maximum tokens requested, or try again later. You may also contact sales at https://claude.com/contact-sales to discuss your options for a rate limit increase."
     },
     {
-      "topic": "kr_grid_startup",
+      "topic": "kr_grid",
       "error": "This request would exceed your organization's rate limit of 30,000 input tokens per minute (org: 350695cf-c991-41f3-b6e2-60520aeb7311, model: claude-sonnet-4-20250514). For details, refer to: https://docs.claude.com/en/api/rate-limits. You can see the response headers for current usage. Please reduce the prompt length or the maximum tokens requested, or try again later. You may also contact sales at https://claude.com/contact-sales to discuss your options for a rate limit increase."
     },
     {
-      "topic": "kr_marine_startup",
+      "topic": "kr_startup",
       "error": "This request would exceed your organization's rate limit of 30,000 input tokens per minute (org: 350695cf-c991-41f3-b6e2-60520aeb7311, model: claude-sonnet-4-20250514). For details, refer to: https://docs.claude.com/en/api/rate-limits. You can see the response headers for current usage. Please reduce the prompt length or the maximum tokens requested, or try again later. You may also contact sales at https://claude.com/contact-sales to discuss your options for a rate limit increase."
     },
     {
-      "topic": "global_ess",
+      "topic": "g_ess",
       "error": "This request would exceed your organization's rate limit of 30,000 input tokens per minute (org: 350695cf-c991-41f3-b6e2-60520aeb7311, model: claude-sonnet-4-20250514). For details, refer to: https://docs.claude.com/en/api/rate-limits. You can see the response headers for current usage. Please reduce the prompt length or the maximum tokens requested, or try again later. You may also contact sales at https://claude.com/contact-sales to discuss your options for a rate limit increase."
     },
     {
-      "topic": "global_hydrogen",
+      "topic": "g_h2",
       "error": "This request would exceed your organization's rate limit of 30,000 input tokens per minute (org: 350695cf-c991-41f3-b6e2-60520aeb7311, model: claude-sonnet-4-20250514). For details, refer to: https://docs.claude.com/en/api/rate-limits. You can see the response headers for current usage. Please reduce the prompt length or the maximum tokens requested, or try again later. You may also contact sales at https://claude.com/contact-sales to discuss your options for a rate limit increase."
     },
     {
-      "topic": "global_grid",
+      "topic": "g_grid",
       "error": "This request would exceed your organization's rate limit of 30,000 input tokens per minute (org: 350695cf-c991-41f3-b6e2-60520aeb7311, model: claude-sonnet-4-20250514). For details, refer to: https://docs.claude.com/en/api/rate-limits. You can see the response headers for current usage. Please reduce the prompt length or the maximum tokens requested, or try again later. You may also contact sales at https://claude.com/contact-sales to discuss your options for a rate limit increase."
     },
     {
-      "topic": "global_marine",
+      "topic": "g_marine",
       "error": "This request would exceed your organization's rate limit of 30,000 input tokens per minute (org: 350695cf-c991-41f3-b6e2-60520aeb7311, model: claude-sonnet-4-20250514). For details, refer to: https://docs.claude.com/en/api/rate-limits. You can see the response headers for current usage. Please reduce the prompt length or the maximum tokens requested, or try again later. You may also contact sales at https://claude.com/contact-sales to discuss your options for a rate limit increase."
     },
     {
-      "topic": "global_hvdc",
+      "topic": "g_hvdc",
       "error": "This request would exceed your organization's rate limit of 30,000 input tokens per minute (org: 350695cf-c991-41f3-b6e2-60520aeb7311, model: claude-sonnet-4-20250514). For details, refer to: https://docs.claude.com/en/api/rate-limits. You can see the response headers for current usage. Please reduce the prompt length or the maximum tokens requested, or try again later. You may also contact sales at https://claude.com/contact-sales to discuss your options for a rate limit increase."
     },
     {
-      "topic": "global_dcpower",
+      "topic": "g_smr",
       "error": "This request would exceed your organization's rate limit of 30,000 input tokens per minute (org: 350695cf-c991-41f3-b6e2-60520aeb7311, model: claude-sonnet-4-20250514). For details, refer to: https://docs.claude.com/en/api/rate-limits. You can see the response headers for current usage. Please reduce the prompt length or the maximum tokens requested, or try again later. You may also contact sales at https://claude.com/contact-sales to discuss your options for a rate limit increase."
     },
     {
-      "topic": "global_wte",
+      "topic": "cn_ess",
       "error": "This request would exceed your organization's rate limit of 30,000 input tokens per minute (org: 350695cf-c991-41f3-b6e2-60520aeb7311, model: claude-sonnet-4-20250514). For details, refer to: https://docs.claude.com/en/api/rate-limits. You can see the response headers for current usage. Please reduce the prompt length or the maximum tokens requested, or try again later. You may also contact sales at https://claude.com/contact-sales to discuss your options for a rate limit increase."
     },
     {
-      "topic": "global_smr",
+      "topic": "cn_h2",
       "error": "This request would exceed your organization's rate limit of 30,000 input tokens per minute (org: 350695cf-c991-41f3-b6e2-60520aeb7311, model: claude-sonnet-4-20250514). For details, refer to: https://docs.claude.com/en/api/rate-limits. You can see the response headers for current usage. Please reduce the prompt length or the maximum tokens requested, or try again later. You may also contact sales at https://claude.com/contact-sales to discuss your options for a rate limit increase."
     },
     {
-      "topic": "china_ess",
-      "error": "This request would exceed your organization's rate limit of 30,000 input tokens per minute (org: 350695cf-c991-41f3-b6e2-60520aeb7311, model: claude-sonnet-4-20250514). For details, refer to: https://docs.claude.com/en/api/rate-limits. You can see the response headers for current usage. Please reduce the prompt length or the maximum tokens requested, or try again later. You may also contact sales at https://claude.com/contact-sales to discuss your options for a rate limit increase."
-    },
-    {
-      "topic": "china_hydrogen",
-      "error": "This request would exceed your organization's rate limit of 30,000 input tokens per minute (org: 350695cf-c991-41f3-b6e2-60520aeb7311, model: claude-sonnet-4-20250514). For details, refer to: https://docs.claude.com/en/api/rate-limits. You can see the response headers for current usage. Please reduce the prompt length or the maximum tokens requested, or try again later. You may also contact sales at https://claude.com/contact-sales to discuss your options for a rate limit increase."
-    },
-    {
-      "topic": "china_grid",
+      "topic": "cn_grid",
       "error": "This request would exceed your organization's rate limit of 30,000 input tokens per minute (org: 350695cf-c991-41f3-b6e2-60520aeb7311, model: claude-sonnet-4-20250514). For details, refer to: https://docs.claude.com/en/api/rate-limits. You can see the response headers for current usage. Please reduce the prompt length or the maximum tokens requested, or try again later. You may also contact sales at https://claude.com/contact-sales to discuss your options for a rate limit increase."
     }
   ]
