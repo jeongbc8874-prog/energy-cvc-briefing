@@ -1,0 +1,75 @@
+{
+  "date": "2026-03-23",
+  "dateKr": "2026년 3월 23일 월요일",
+  "weekAgo": "2026-03-16",
+  "generatedAt": "2026-03-23T13:54:23.751Z",
+  "brief": "",
+  "stats": {
+    "total": 0,
+    "unlisted": 0,
+    "kr": 0,
+    "cn": 0,
+    "global": 0,
+    "high": 0,
+    "investigate": 0
+  },
+  "signals": [],
+  "errors": [
+    {
+      "topic": "kr_hydrogen_startup",
+      "error": "This request would exceed your organization's rate limit of 30,000 input tokens per minute (org: 350695cf-c991-41f3-b6e2-60520aeb7311, model: claude-sonnet-4-20250514). For details, refer to: https://docs.claude.com/en/api/rate-limits. You can see the response headers for current usage. Please reduce the prompt length or the maximum tokens requested, or try again later. You may also contact sales at https://claude.com/contact-sales to discuss your options for a rate limit increase."
+    },
+    {
+      "topic": "kr_grid_startup",
+      "error": "This request would exceed your organization's rate limit of 30,000 input tokens per minute (org: 350695cf-c991-41f3-b6e2-60520aeb7311, model: claude-sonnet-4-20250514). For details, refer to: https://docs.claude.com/en/api/rate-limits. You can see the response headers for current usage. Please reduce the prompt length or the maximum tokens requested, or try again later. You may also contact sales at https://claude.com/contact-sales to discuss your options for a rate limit increase."
+    },
+    {
+      "topic": "kr_marine_startup",
+      "error": "This request would exceed your organization's rate limit of 30,000 input tokens per minute (org: 350695cf-c991-41f3-b6e2-60520aeb7311, model: claude-sonnet-4-20250514). For details, refer to: https://docs.claude.com/en/api/rate-limits. You can see the response headers for current usage. Please reduce the prompt length or the maximum tokens requested, or try again later. You may also contact sales at https://claude.com/contact-sales to discuss your options for a rate limit increase."
+    },
+    {
+      "topic": "global_ess",
+      "error": "This request would exceed your organization's rate limit of 30,000 input tokens per minute (org: 350695cf-c991-41f3-b6e2-60520aeb7311, model: claude-sonnet-4-20250514). For details, refer to: https://docs.claude.com/en/api/rate-limits. You can see the response headers for current usage. Please reduce the prompt length or the maximum tokens requested, or try again later. You may also contact sales at https://claude.com/contact-sales to discuss your options for a rate limit increase."
+    },
+    {
+      "topic": "global_hydrogen",
+      "error": "This request would exceed your organization's rate limit of 30,000 input tokens per minute (org: 350695cf-c991-41f3-b6e2-60520aeb7311, model: claude-sonnet-4-20250514). For details, refer to: https://docs.claude.com/en/api/rate-limits. You can see the response headers for current usage. Please reduce the prompt length or the maximum tokens requested, or try again later. You may also contact sales at https://claude.com/contact-sales to discuss your options for a rate limit increase."
+    },
+    {
+      "topic": "global_grid",
+      "error": "This request would exceed your organization's rate limit of 30,000 input tokens per minute (org: 350695cf-c991-41f3-b6e2-60520aeb7311, model: claude-sonnet-4-20250514). For details, refer to: https://docs.claude.com/en/api/rate-limits. You can see the response headers for current usage. Please reduce the prompt length or the maximum tokens requested, or try again later. You may also contact sales at https://claude.com/contact-sales to discuss your options for a rate limit increase."
+    },
+    {
+      "topic": "global_marine",
+      "error": "This request would exceed your organization's rate limit of 30,000 input tokens per minute (org: 350695cf-c991-41f3-b6e2-60520aeb7311, model: claude-sonnet-4-20250514). For details, refer to: https://docs.claude.com/en/api/rate-limits. You can see the response headers for current usage. Please reduce the prompt length or the maximum tokens requested, or try again later. You may also contact sales at https://claude.com/contact-sales to discuss your options for a rate limit increase."
+    },
+    {
+      "topic": "global_hvdc",
+      "error": "This request would exceed your organization's rate limit of 30,000 input tokens per minute (org: 350695cf-c991-41f3-b6e2-60520aeb7311, model: claude-sonnet-4-20250514). For details, refer to: https://docs.claude.com/en/api/rate-limits. You can see the response headers for current usage. Please reduce the prompt length or the maximum tokens requested, or try again later. You may also contact sales at https://claude.com/contact-sales to discuss your options for a rate limit increase."
+    },
+    {
+      "topic": "global_dcpower",
+      "error": "This request would exceed your organization's rate limit of 30,000 input tokens per minute (org: 350695cf-c991-41f3-b6e2-60520aeb7311, model: claude-sonnet-4-20250514). For details, refer to: https://docs.claude.com/en/api/rate-limits. You can see the response headers for current usage. Please reduce the prompt length or the maximum tokens requested, or try again later. You may also contact sales at https://claude.com/contact-sales to discuss your options for a rate limit increase."
+    },
+    {
+      "topic": "global_wte",
+      "error": "This request would exceed your organization's rate limit of 30,000 input tokens per minute (org: 350695cf-c991-41f3-b6e2-60520aeb7311, model: claude-sonnet-4-20250514). For details, refer to: https://docs.claude.com/en/api/rate-limits. You can see the response headers for current usage. Please reduce the prompt length or the maximum tokens requested, or try again later. You may also contact sales at https://claude.com/contact-sales to discuss your options for a rate limit increase."
+    },
+    {
+      "topic": "global_smr",
+      "error": "This request would exceed your organization's rate limit of 30,000 input tokens per minute (org: 350695cf-c991-41f3-b6e2-60520aeb7311, model: claude-sonnet-4-20250514). For details, refer to: https://docs.claude.com/en/api/rate-limits. You can see the response headers for current usage. Please reduce the prompt length or the maximum tokens requested, or try again later. You may also contact sales at https://claude.com/contact-sales to discuss your options for a rate limit increase."
+    },
+    {
+      "topic": "china_ess",
+      "error": "This request would exceed your organization's rate limit of 30,000 input tokens per minute (org: 350695cf-c991-41f3-b6e2-60520aeb7311, model: claude-sonnet-4-20250514). For details, refer to: https://docs.claude.com/en/api/rate-limits. You can see the response headers for current usage. Please reduce the prompt length or the maximum tokens requested, or try again later. You may also contact sales at https://claude.com/contact-sales to discuss your options for a rate limit increase."
+    },
+    {
+      "topic": "china_hydrogen",
+      "error": "This request would exceed your organization's rate limit of 30,000 input tokens per minute (org: 350695cf-c991-41f3-b6e2-60520aeb7311, model: claude-sonnet-4-20250514). For details, refer to: https://docs.claude.com/en/api/rate-limits. You can see the response headers for current usage. Please reduce the prompt length or the maximum tokens requested, or try again later. You may also contact sales at https://claude.com/contact-sales to discuss your options for a rate limit increase."
+    },
+    {
+      "topic": "china_grid",
+      "error": "This request would exceed your organization's rate limit of 30,000 input tokens per minute (org: 350695cf-c991-41f3-b6e2-60520aeb7311, model: claude-sonnet-4-20250514). For details, refer to: https://docs.claude.com/en/api/rate-limits. You can see the response headers for current usage. Please reduce the prompt length or the maximum tokens requested, or try again later. You may also contact sales at https://claude.com/contact-sales to discuss your options for a rate limit increase."
+    }
+  ]
+}
