@@ -28,9 +28,16 @@
     "sector": "Global ESS",
     "region": "GLOBAL",
     "country": "US",
-    "signalCount": 1,
+    "signalCount": 2,
     "highCount": 0,
     "signals": [
+      {
+        "date": "2026-03-24",
+        "title": "When the chain becomes the product: Seven years inside a token-funded venture",
+        "relevance": "Medium",
+        "eventType": "News",
+        "signal_type": "Commercial traction"
+      },
       {
         "date": "2026-03-24",
         "title": "When the chain becomes the product: Seven years inside a token-funded venture",
@@ -41,7 +48,7 @@
     ],
     "scoreHistory": [],
     "fundingStage": "Series-B",
-    "recentActivity": 1
+    "recentActivity": 2
   },
   "Towards Packaging": {
     "name": "Towards Packaging",
@@ -72,9 +79,16 @@
     "sector": "Global ESS",
     "region": "GLOBAL",
     "country": "US",
-    "signalCount": 1,
+    "signalCount": 2,
     "highCount": 0,
     "signals": [
+      {
+        "date": "2026-03-24",
+        "title": "The French AI startup gunning for Workday, Oracle, and SAP",
+        "relevance": "Low",
+        "eventType": "News",
+        "signal_type": "Commercial traction"
+      },
       {
         "date": "2026-03-24",
         "title": "The French AI startup gunning for Workday, Oracle, and SAP",
@@ -85,7 +99,7 @@
     ],
     "scoreHistory": [],
     "fundingStage": "Series-B",
-    "recentActivity": 1
+    "recentActivity": 2
   },
   "호주 수중 3D 콘크리트 프린팅 업체": {
     "name": "호주 수중 3D 콘크리트 프린팅 업체",
@@ -261,6 +275,226 @@
       "conviction": "High",
       "timing_signal": "3-6months",
       "one_line": "차세대 원자력 기술 경쟁 초기 단계, 높은 기술 장벽과 정부 지원을 바탕으로 한 장기 성장 스토리"
+    }
+  },
+  "미확인": {
+    "name": "미확인",
+    "firstSeen": "2026-03-24",
+    "lastSeen": "2026-03-24",
+    "sector": "국내 ESS",
+    "region": "KR",
+    "country": "KR",
+    "signalCount": 1,
+    "highCount": 0,
+    "signals": [
+      {
+        "date": "2026-03-24",
+        "title": "Who Will Remember Us When The Servers Go Dark?",
+        "relevance": "Low",
+        "eventType": "News",
+        "signal_type": "Market context"
+      }
+    ],
+    "scoreHistory": [],
+    "fundingStage": "N/A",
+    "recentActivity": 1
+  },
+  "미확인 (시장 리포트)": {
+    "name": "미확인 (시장 리포트)",
+    "firstSeen": "2026-03-24",
+    "lastSeen": "2026-03-24",
+    "sector": "Global ESS",
+    "region": "GLOBAL",
+    "country": "US",
+    "signalCount": 1,
+    "highCount": 1,
+    "signals": [
+      {
+        "date": "2026-03-24",
+        "title": "Growth and Trends in the Recyclable Packaging Resin Market Key Insights, Innovations, and Industry Investments (2025-2035)",
+        "relevance": "High",
+        "eventType": "News",
+        "signal_type": "Market context"
+      }
+    ],
+    "scoreHistory": [
+      {
+        "date": "2026-03-24",
+        "scorecard": {
+          "technology": {
+            "score": 2,
+            "max": 5,
+            "reason": "재활용 가능한 포장재 수지 시장은 기존 기술의 개선에 해당하며, 혁신성보다는 환경 규제 대응에 중점을 둔 점진적 기술 발전"
+          },
+          "commercialization": {
+            "score": 4,
+            "max": 5,
+            "reason": "2025-2035년 시장 성장 전망과 환경 규제 강화로 인한 수요 증가, 기존 포장재 시장의 친환경 대체재로서 상업화 가능성 높음"
+          },
+          "team": {
+            "score": 1,
+            "max": 5,
+            "reason": "시장 리포트 기반 정보로 구체적인 팀 정보 부재, 특정 기업이나 창업팀에 대한 평가 불가능"
+          },
+          "partnership": {
+            "score": 3,
+            "max": 5,
+            "reason": "업계 투자 동향이 언급되어 산업 관심도는 높으나, 구체적인 파트너십이나 협력 관계에 대한 정보 부족"
+          },
+          "fundraising_timing": {
+            "score": 3,
+            "max": 5,
+            "reason": "시장 성장 초기 단계이며 업계 투자가 활발해지는 시점으로 보이나, 구체적인 투자 기회나 타이밍에 대한 명확한 신호 부족"
+          },
+          "total": 13,
+          "conviction": "Medium",
+          "timing_signal": "6-12months",
+          "one_line": "환경 규제 기반 시장 확장이 예상되지만 구체적 투자 타겟 식별 필요"
+        }
+      }
+    ],
+    "fundingStage": "N/A",
+    "recentActivity": 1,
+    "latestScorecard": {
+      "technology": {
+        "score": 2,
+        "max": 5,
+        "reason": "재활용 가능한 포장재 수지 시장은 기존 기술의 개선에 해당하며, 혁신성보다는 환경 규제 대응에 중점을 둔 점진적 기술 발전"
+      },
+      "commercialization": {
+        "score": 4,
+        "max": 5,
+        "reason": "2025-2035년 시장 성장 전망과 환경 규제 강화로 인한 수요 증가, 기존 포장재 시장의 친환경 대체재로서 상업화 가능성 높음"
+      },
+      "team": {
+        "score": 1,
+        "max": 5,
+        "reason": "시장 리포트 기반 정보로 구체적인 팀 정보 부재, 특정 기업이나 창업팀에 대한 평가 불가능"
+      },
+      "partnership": {
+        "score": 3,
+        "max": 5,
+        "reason": "업계 투자 동향이 언급되어 산업 관심도는 높으나, 구체적인 파트너십이나 협력 관계에 대한 정보 부족"
+      },
+      "fundraising_timing": {
+        "score": 3,
+        "max": 5,
+        "reason": "시장 성장 초기 단계이며 업계 투자가 활발해지는 시점으로 보이나, 구체적인 투자 기회나 타이밍에 대한 명확한 신호 부족"
+      },
+      "total": 13,
+      "conviction": "Medium",
+      "timing_signal": "6-12months",
+      "one_line": "환경 규제 기반 시장 확장이 예상되지만 구체적 투자 타겟 식별 필요"
+    }
+  },
+  "미확인 (호주 연구기관)": {
+    "name": "미확인 (호주 연구기관)",
+    "firstSeen": "2026-03-24",
+    "lastSeen": "2026-03-24",
+    "sector": "Global ESS",
+    "region": "GLOBAL",
+    "country": "US",
+    "signalCount": 1,
+    "highCount": 0,
+    "signals": [
+      {
+        "date": "2026-03-24",
+        "title": "Australia Achieves World-First Breakthrough In Underwater 3D Concrete Printing",
+        "relevance": "Medium",
+        "eventType": "News",
+        "signal_type": "Technical validation"
+      }
+    ],
+    "scoreHistory": [],
+    "fundingStage": "N/A",
+    "recentActivity": 1
+  },
+  "다수 마이크로리액터 개발사": {
+    "name": "다수 마이크로리액터 개발사",
+    "firstSeen": "2026-03-24",
+    "lastSeen": "2026-03-24",
+    "sector": "Global SMR",
+    "region": "GLOBAL",
+    "country": "US",
+    "signalCount": 1,
+    "highCount": 1,
+    "signals": [
+      {
+        "date": "2026-03-24",
+        "title": "The Microreactor Race Is On",
+        "relevance": "High",
+        "eventType": "Pilot",
+        "signal_type": "Pre-funding"
+      }
+    ],
+    "scoreHistory": [
+      {
+        "date": "2026-03-24",
+        "scorecard": {
+          "technology": {
+            "score": 4,
+            "max": 5,
+            "reason": "마이크로리액터는 차세대 원자력 기술로 안전성과 모듈성이 뛰어나며, 탄소중립 달성을 위한 핵심 기술. 다수 기업이 경쟁하고 있어 기술적 가능성 검증됨"
+          },
+          "commercialization": {
+            "score": 3,
+            "max": 5,
+            "reason": "아직 상용화 초기 단계이나 'Race Is On' 신호는 시장 진입이 임박했음을 시사. 규제 승인과 실증 프로젝트가 상용화의 핵심 변수"
+          },
+          "team": {
+            "score": 3,
+            "max": 5,
+            "reason": "다수 개발사가 존재하여 개별 팀 평가 어려우나, 원자력 분야 특성상 전문 인력과 기술력을 보유한 팀들로 추정"
+          },
+          "partnership": {
+            "score": 4,
+            "max": 5,
+            "reason": "원자력 산업 특성상 정부, 전력회사, 대기업과의 파트너십이 필수적이며, 경쟁 구도는 주요 플레이어들의 파트너십 확보 가능성을 시사"
+          },
+          "fundraising_timing": {
+            "score": 5,
+            "max": 5,
+            "reason": "탄소중립 정책 가속화, ESG 투자 확산, 에너지 안보 이슈로 원자력 재조명받는 최적 타이밍. 'Race' 단계는 투자 기회의 임박을 의미"
+          },
+          "total": 19,
+          "conviction": "High",
+          "timing_signal": "Immediate",
+          "one_line": "탄소중립 시대 핵심 기술인 마이크로리액터 경쟁 본격화로 선도 기업 투자 적기"
+        }
+      }
+    ],
+    "fundingStage": "Series-A",
+    "recentActivity": 1,
+    "latestScorecard": {
+      "technology": {
+        "score": 4,
+        "max": 5,
+        "reason": "마이크로리액터는 차세대 원자력 기술로 안전성과 모듈성이 뛰어나며, 탄소중립 달성을 위한 핵심 기술. 다수 기업이 경쟁하고 있어 기술적 가능성 검증됨"
+      },
+      "commercialization": {
+        "score": 3,
+        "max": 5,
+        "reason": "아직 상용화 초기 단계이나 'Race Is On' 신호는 시장 진입이 임박했음을 시사. 규제 승인과 실증 프로젝트가 상용화의 핵심 변수"
+      },
+      "team": {
+        "score": 3,
+        "max": 5,
+        "reason": "다수 개발사가 존재하여 개별 팀 평가 어려우나, 원자력 분야 특성상 전문 인력과 기술력을 보유한 팀들로 추정"
+      },
+      "partnership": {
+        "score": 4,
+        "max": 5,
+        "reason": "원자력 산업 특성상 정부, 전력회사, 대기업과의 파트너십이 필수적이며, 경쟁 구도는 주요 플레이어들의 파트너십 확보 가능성을 시사"
+      },
+      "fundraising_timing": {
+        "score": 5,
+        "max": 5,
+        "reason": "탄소중립 정책 가속화, ESG 투자 확산, 에너지 안보 이슈로 원자력 재조명받는 최적 타이밍. 'Race' 단계는 투자 기회의 임박을 의미"
+      },
+      "total": 19,
+      "conviction": "High",
+      "timing_signal": "Immediate",
+      "one_line": "탄소중립 시대 핵심 기술인 마이크로리액터 경쟁 본격화로 선도 기업 투자 적기"
     }
   }
 }

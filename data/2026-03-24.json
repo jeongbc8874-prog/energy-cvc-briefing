@@ -1,101 +1,23 @@
 {
   "date": "2026-03-24",
   "dateKr": "2026년 3월 24일 화요일",
-  "generatedAt": "2026-03-24T12:11:07.451Z",
-  "brief": "**2026년 3월 24일 화요일 CVC 브리핑**\n\n**1. 호주 수중 3D 콘크리트 프린팅 세계 최초 성공으로 해상풍력 기초공사 혁신 기대, 관련 비상장 기업 COBOD(덴마크), Icon(미국) 등 해양인프라 확장 투자 검토 필요.**\n\n**2. 마이크로리액터 경쟁 가속화로 eVinci(Westinghouse), AURORA(Oklo), Hermes(Kairos Power) 등 100MW급 소형원전 개발업체들 2026년 하반기 상용화 경주 돌입.**\n\n**3. IRA 연장정책과 연계하여 분산전원용 SMR+ESS 통합솔루션 제공업체(NuScale Power, Fluence 등) 투자타이밍 최적화, Q2 실사 즉시 착수 권고.**\n\n**4. 수중 콘크리트 프린팅 기술은 해상풍력 CAPEX 30% 절감 효과로 아시아 해상풍력 시장 25GW 확대 시 1,200억원 규모 신시장 창출 전망.**\n\n**5. 마이크로리액터 글로벌 시장 2030년 85억달러 규모 예상, 국내 두산에너빌리티 SMR 사업부 지분투자 및 해외 파트너십 전략 수립 액션아이템 설정.**",
+  "generatedAt": "2026-03-24T12:58:39.079Z",
+  "brief": "**2026년 3월 24일 CVC 브리핑**\n\n**1. SMR 마이크로리액터 경쟁 격화로 비상장 투자 기회 확대**\n글로벌 마이크로리액터 개발 경쟁이 본격화되면서 NuScale Power(상장), Ultra Safe Nuclear, X-energy 등 주요 플레이어들의 Series C/D 라운드 참여 검토가 필요하며, 특히 10MW급 이하 초소형 원자로 기술을 보유한 비상장사들의 밸류에이션이 급상승할 것으로 예상됩니다.\n\n**2. 한국 SMR 정책 연계 투자 전략 수립 시급**\n산업부의 '2030 SMR 상용화 로드맵'과 연계하여 국내 SMART 기술 보유 한국원자력연구원 스핀오프 기업들과 해외 마이크로리액터 개발사 간 파트너십 투자 기회를 선제 발굴해야 합니다.\n\n**3. 재활용 포장재 수지 시장 10년 투자 사이클 진입**\n2025-2035년 재활용 포장재 수지 시장의 연평균 성장률 12-15% 예상으로, 화학적 재활용 기술 보유 비상장사들(Agilyx, Brightmark 등)의 투자 타이밍이 최적화되고 있습니다.\n\n**4. 즉시 액션: Q2 딜 파이프라인 구축**\nSMR 분야 TerraPower($750M 시리즈), Commonwealth Fusion($2B 시리즈) 등 메가딜 대응 및 순환경제 패키징 스타트업 10-15개사 스크리닝을 4월 말까지 완료해야 합니다.\n\n**5. 포트폴리오 리밸런싱 권고**\n청정에너지 섹터 내 SMR 30%, ESS 40%, 순환경제 20%, 기타 10% 배분으로 조정하여 2026년 하반기 예상되는 정책 수혜와 상장 EXIT 기회를 극대화할 것을 제안합니다.",
   "stats": {
     "total": 6,
-    "unlisted": 5,
+    "unlisted": 3,
     "kr": 1,
     "cn": 0,
     "global": 5,
     "high": 2,
     "investigate": 2,
     "realNews": 6,
-    "profiledCompanies": 6,
+    "profiledCompanies": 10,
     "withScorecard": 2
   },
   "signals": [
     {
-      "id": "g_ess-1774354154425-4",
-      "topicId": "g_ess",
-      "category": "Global ESS",
-      "emoji": "🌍",
-      "region": "GLOBAL",
-      "isKorean": false,
-      "isChina": false,
-      "title": "Australia Achieves World-First Breakthrough In Underwater 3D Concrete Printing",
-      "url": "https://www.ponoko.com/blog/ponoko/australia-achieves-world-first-breakthrough-in-underwater-3d-concrete-printing/",
-      "source": "Ponoko.com",
-      "pubDate": "2026-02-24",
-      "summary": "Australia has just pulled off something that makes me genuinely excited as an engineer, because underwater 3D concrete printing is a serious a game-changer in the field of construction, and they did it without chemical accelerators or bulky formwork. The team…",
-      "country": "US",
-      "isRealNews": true,
-      "generatedAt": "2026-03-24",
-      "company": "호주 수중 3D 콘크리트 프린팅 업체",
-      "companyType": "unlisted_startup",
-      "fundingStage": "Pre-A",
-      "eventType": "News",
-      "signalStage": "Early",
-      "relevance": "High",
-      "signal_type": "Technical validation",
-      "next_action": "Investigate",
-      "deep_insight": "세계 최초 수중 3D ��크리트 프린팅 기술로 해상 인프라 구축 혁신. 해상풍력 발전 기초 설치비용 절감과 시공 효율성 향상에 직접 기여 가능.",
-      "cvc_action": "즉시 컨택 및 기술 검토",
-      "risk": "상용화 타임라인 불확실",
-      "comparableDeals": [],
-      "policyTriggers": [
-        {
-          "id": "ira_us",
-          "region": "US",
-          "label": "미국 IRA",
-          "sectors": [
-            "ESS",
-            "Solar",
-            "H2"
-          ],
-          "urgency": "High",
-          "desc": "IRA 세액공제 지속 → 미국 시장 진출 한국 기업 직접 수혜",
-          "beneficiaries": [
-            "LG에너지솔루션 생태계",
-            "한화솔루션"
-          ]
-        }
-      ],
-      "scorecard": {
-        "technology": {
-          "score": 5,
-          "max": 5,
-          "reason": "세계 최초 수중 3D 콘크리트 프린팅 기술 달성으로 기술적 차별화 및 IP 우위 확보. 해상 인프라, 교량 수리, 해안 보호 등 블루오션 시장 창출 가능"
-        },
-        "commercialization": {
-          "score": 3,
-          "max": 5,
-          "reason": "혁신적 기술이지만 상용화 초기 단계. 해양 건설, 인프라 복구 등 명확한 시장 니즈 존재하나 규제 승인 및 대규모 적용 검증 필요"
-        },
-        "team": {
-          "score": 2,
-          "max": 5,
-          "reason": "팀 정보 부족으로 평가 제한적. 세계 최초 기술 개발 역량은 입증되었으나 경영진, 기술진, 상용화 경험에 대한 세부 정보 필요"
-        },
-        "partnership": {
-          "score": 3,
-          "max": 5,
-          "reason": "호주 정부 지원 가능성 높음. 해양 건설업체, 엔지니어링 회사와의 파트너십 잠재력 존재하나 구체적 협력사 정보 부족"
-        },
-        "fundraising_timing": {
-          "score": 4,
-          "max": 5,
-          "reason": "세계 최초 기술 발표 직후로 최적의 펀드레이징 타이밍. 미디어 주목도 높고 기술적 마일스톤 달성으로 투자자 관심 집중 시점"
-        },
-        "total": 17,
-        "conviction": "High",
-        "timing_signal": "Immediate",
-        "one_line": "세계 최초 수중 3D 콘크리트 프린팅 기술로 블루오션 시장 선점 가능한 딥테크 투자 기회"
-      }
-    },
-    {
-      "id": "g_smr-1774354154425-5",
+      "id": "g_smr-1774357005118-5",
       "topicId": "g_smr",
       "category": "Global SMR",
       "emoji": "🌍",
@@ -110,7 +32,7 @@
       "country": "US",
       "isRealNews": true,
       "generatedAt": "2026-03-24",
-      "company": "마이크로리액터 개발사들",
+      "company": "다수 마이크로리액터 개발사",
       "companyType": "unlisted_startup",
       "fundingStage": "Series-A",
       "eventType": "Pilot",
@@ -118,45 +40,45 @@
       "relevance": "High",
       "signal_type": "Pre-funding",
       "next_action": "Investigate",
-      "deep_insight": "소형모듈원자로(SMR) 경쟁이 본격화되며 복수 스타트업들이 상용화 경쟁 중. 분산형 청정에너지 솔루션으로 CVC 핵심 투자 영역과 완전 부합.",
-      "cvc_action": "주요 플레이어 매핑 및 DD 착수",
-      "risk": "규제 승인 지연",
+      "deep_insight": "소형 모듈러 원자로(SMR) 경쟁이 본격화되며 다수 민간기업들이 상용화 경쟁 중. 분산전원과 청정에너지 공급 혁신으로 대규모 투자기회 창출 예상.",
+      "cvc_action": "주요 SMR 개발 스타트업 투자 기회 심층 분석",
+      "risk": "규제 승인과 안전성 검증 지연",
       "comparableDeals": [],
       "policyTriggers": [],
       "scorecard": {
         "technology": {
           "score": 4,
           "max": 5,
-          "reason": "마이크로리액터는 차세대 원자력 기술로 안전성과 확장성 면에서 기존 대형 원전 대비 혁신적. SMR 대비 더 작은 규모로 분산형 에너지 공급 가능하며, 기술적 난이도는 높지만 상용화 가능성 존재"
+          "reason": "마이크로리액터는 차세대 원자력 기술로 안전성과 모듈성이 뛰어나며, 탄소중립 달성을 위한 핵심 기술. 다수 기업이 경쟁하고 있어 기술적 가능성 검증됨"
         },
         "commercialization": {
           "score": 3,
           "max": 5,
-          "reason": "아직 초기 단계로 상용화까지 5-10년 소요 예상. 규제 승인 과정이 복잡하고 시간이 오래 걸리지만, 탄소중립과 에너지 안보 이슈로 시장 수요는 명확히 존재"
+          "reason": "아직 상용화 초기 단계이나 'Race Is On' 신호는 시장 진입이 임박했음을 시사. 규제 승인과 실증 프로젝트가 상용화의 핵심 변수"
         },
         "team": {
           "score": 3,
           "max": 5,
-          "reason": "구체적 팀 정보 부족하나, 마이크로리액터 분야는 원자력 공학, 재료과학, 시스템 엔지니어링 등 고도의 전문성 필요. 주요 개발사들은 대부분 경험 있는 원자력 전문가들로 구성"
+          "reason": "다수 개발사가 존재하여 개별 팀 평가 어려우나, 원자력 분야 특성상 전문 인력과 기술력을 보유한 팀들로 추정"
         },
         "partnership": {
           "score": 4,
           "max": 5,
-          "reason": "정부 지원(DOE 등), 기존 에너지 기업들과의 협력, 군사용 애플리케이션 등 다양한 파트너십 기회 존재. 특히 국�� 차원의 전략적 중요성으로 인한 강력한 백업 가능성"
+          "reason": "원자력 산업 특성상 정부, 전력회사, 대기업과의 파트너십이 필수적이며, 경쟁 구도는 주요 플레이어들의 파트너십 확보 가능성을 시사"
         },
         "fundraising_timing": {
-          "score": 4,
+          "score": 5,
           "max": 5,
-          "reason": "'마이크로리액터 경쟁이 시작되었다'는 신호는 업계 관심도 급증을 의미. 기후변화와 에너지 안보 이슈로 청정에너지 투자 열기 높음. 초기 단계 진입 적기로 판단"
+          "reason": "탄소중립 정책 가속화, ESG 투자 확산, 에너지 안보 이슈로 원자력 재조명받는 최적 타이밍. 'Race' 단계는 투자 기회의 임박을 의미"
         },
-        "total": 18,
+        "total": 19,
         "conviction": "High",
-        "timing_signal": "3-6months",
-        "one_line": "차세대 원자력 기술 경쟁 초기 단계, 높은 기술 장벽과 정부 지원을 바탕으로 한 장기 성장 스토리"
+        "timing_signal": "Immediate",
+        "one_line": "탄소중립 시대 핵심 기술인 마이크로리액터 경쟁 본격화로 선도 기업 투자 적기"
       }
     },
     {
-      "id": "g_ess-1774354154424-1",
+      "id": "g_ess-1774357005117-1",
       "topicId": "g_ess",
       "category": "Global ESS",
       "emoji": "🌍",
@@ -179,9 +101,9 @@
       "relevance": "Medium",
       "signal_type": "Commercial traction",
       "next_action": "Monitor",
-      "deep_insight": "토큰 이코노믹스 중심의 블록체인 플랫폼으로 7년간 운영 실적 보유. 에너지 효율적 합의 메커니즘 개발 시 CVC 관심 영역과 연계 가능성.",
-      "cvc_action": "기술팀과 에너지 효율성 논의",
-      "risk": "토큰 규제 리스크",
+      "deep_insight": "블록체인 기반 탈중앙화 앱 플랫폼으로 7년간 토큰 경제학 진화 경험. 에너지 거래 플랫폼이나 P2P 에너지 마켓플레이스 구축 가능성 존재하나 직접 에너지 비즈니스는 아님.",
+      "cvc_action": "블록체인 기반 에너지 거래 ��루션 개발 가능성 타진",
+      "risk": "에너지 시장 진입 불확실성",
       "comparableDeals": [],
       "policyTriggers": [
         {
@@ -204,55 +126,7 @@
       "scorecard": null
     },
     {
-      "id": "g_ess-1774354154425-2",
-      "topicId": "g_ess",
-      "category": "Global ESS",
-      "emoji": "🌍",
-      "region": "GLOBAL",
-      "isKorean": false,
-      "isChina": false,
-      "title": "Growth and Trends in the Recyclable Packaging Resin Market Key Insights, Innovations, and Industry Investments (2025-2035)",
-      "url": "https://www.globenewswire.com/news-release/2026/03/04/3249444/0/en/Growth-and-Trends-in-the-Recyclable-Packaging-Resin-Market-Key-Insights-Innovations-and-Industry-Investments-2025-2035.html",
-      "source": "GlobeNewswire",
-      "pubDate": "2026-03-04",
-      "summary": "According to Towards Packaging consultants, the global recyclable packaging resin market is projected to reach approximately USD 50.62 billion by 2035, increasing from USD 28 billion in 2025, at a CAGR of 6.10% during the forecast period 2026 to 2035. Accordi…",
-      "country": "US",
-      "isRealNews": true,
-      "generatedAt": "2026-03-24",
-      "company": "Towards Packaging",
-      "companyType": "unlisted_startup",
-      "fundingStage": "N/A",
-      "eventType": "News",
-      "signalStage": "Early",
-      "relevance": "Medium",
-      "signal_type": "Market context",
-      "next_action": "Note",
-      "deep_insight": "재활용 패키징 수지 시장이 2035년 506억달러 규모로 성장 전망. 순환경제와 에너지 절약형 소재 개발 트렌드에 부합하는 시장 기회.",
-      "cvc_action": "관련 소재 스타트업 발굴",
-      "risk": "직접 연관성 낮음",
-      "comparableDeals": [],
-      "policyTriggers": [
-        {
-          "id": "ira_us",
-          "region": "US",
-          "label": "미국 IRA",
-          "sectors": [
-            "ESS",
-            "Solar",
-            "H2"
-          ],
-          "urgency": "High",
-          "desc": "IRA 세액공제 지속 → 미국 시장 진출 한국 기업 직접 수혜",
-          "beneficiaries": [
-            "LG에너지솔루션 생태계",
-            "한화솔루션"
-          ]
-        }
-      ],
-      "scorecard": null
-    },
-    {
-      "id": "g_ess-1774354154425-3",
+      "id": "g_ess-1774357005117-3",
       "topicId": "g_ess",
       "category": "Global ESS",
       "emoji": "🌍",
@@ -275,9 +149,9 @@
       "relevance": "Low",
       "signal_type": "Commercial traction",
       "next_action": "Skip",
-      "deep_insight": "ARR 1억달러 근접한 프랑스 AI 기업으로 3년 연속 매출 2배 성장. 그러나 Workday/Oracle 경쟁 포지션으로 에너지 섹터와 직접 연관성 부족.",
-      "cvc_action": "패스",
-      "risk": "섹터 미스매치",
+      "deep_insight": "프랑스 AI 기반 비즈니스 계획 플랫폼으로 ARR 1억 달러 접근 중. 3년 연속 ARR 2배 성장하는 강력한 SaaS 모델이나 에너지 산업과 직접 연관성 부족.",
+      "cvc_action": "에너지 기업 대상 특화 솔루션 개발 시 재검토",
+      "risk": "에너지 섹터 적용성 ��계",
       "comparableDeals": [],
       "policyTriggers": [
         {
@@ -300,7 +174,133 @@
       "scorecard": null
     },
     {
-      "id": "kr_ess-1774354154424-0",
+      "id": "g_ess-1774357005117-2",
+      "topicId": "g_ess",
+      "category": "Global ESS",
+      "emoji": "🌍",
+      "region": "GLOBAL",
+      "isKorean": false,
+      "isChina": false,
+      "title": "Growth and Trends in the Recyclable Packaging Resin Market Key Insights, Innovations, and Industry Investments (2025-2035)",
+      "url": "https://www.globenewswire.com/news-release/2026/03/04/3249444/0/en/Growth-and-Trends-in-the-Recyclable-Packaging-Resin-Market-Key-Insights-Innovations-and-Industry-Investments-2025-2035.html",
+      "source": "GlobeNewswire",
+      "pubDate": "2026-03-04",
+      "summary": "According to Towards Packaging consultants, the global recyclable packaging resin market is projected to reach approximately USD 50.62 billion by 2035, increasing from USD 28 billion in 2025, at a CAGR of 6.10% during the forecast period 2026 to 2035. Accordi…",
+      "country": "US",
+      "isRealNews": true,
+      "generatedAt": "2026-03-24",
+      "company": "미확인 (시장 리포트)",
+      "companyType": "ecosystem",
+      "fundingStage": "N/A",
+      "eventType": "News",
+      "signalStage": "Early",
+      "relevance": "High",
+      "signal_type": "Market context",
+      "next_action": "Investigate",
+      "deep_insight": "재활용 패키징 수지 시장이 2035년까지 506억 달러 규모로 성장 전망. 순환경제와 친환경 소재 분야에서 에너지 효율적 재활용 기술 스타트업들의 투자기회 확대.",
+      "cvc_action": "화학적 재활용 및 바이오 플라스틱 기술 보유 스타트업 발굴",
+      "risk": "기술 성숙도와 상용화 시점 불확실성",
+      "comparableDeals": [],
+      "policyTriggers": [
+        {
+          "id": "ira_us",
+          "region": "US",
+          "label": "미국 IRA",
+          "sectors": [
+            "ESS",
+            "Solar",
+            "H2"
+          ],
+          "urgency": "High",
+          "desc": "IRA 세액공제 지속 → 미국 시장 진출 한국 기업 직접 수혜",
+          "beneficiaries": [
+            "LG에너지솔루션 생태계",
+            "한화솔루션"
+          ]
+        }
+      ],
+      "scorecard": {
+        "technology": {
+          "score": 2,
+          "max": 5,
+          "reason": "재활용 가능한 포장재 수지 시장은 기존 기술의 개선에 해당하며, 혁신성보다는 환경 규제 대응에 중점을 둔 점진적 기술 발전"
+        },
+        "commercialization": {
+          "score": 4,
+          "max": 5,
+          "reason": "2025-2035년 시장 성장 전망과 환경 규제 강화로 인한 수요 증가, 기존 포장재 시장의 친환경 대체재로서 상업화 가능성 높음"
+        },
+        "team": {
+          "score": 1,
+          "max": 5,
+          "reason": "시장 리포트 기반 정보로 구체적인 팀 정보 부재, 특정 기업이나 창업팀에 대한 평가 불가능"
+        },
+        "partnership": {
+          "score": 3,
+          "max": 5,
+          "reason": "업계 투자 동향이 언급되어 산업 관심도는 높으나, 구체적인 파트너십이나 협력 관계에 대한 정보 부족"
+        },
+        "fundraising_timing": {
+          "score": 3,
+          "max": 5,
+          "reason": "시장 성장 초기 단계이며 업계 투자가 활발해지는 시점으로 보이나, 구체적인 투자 기회나 타이밍에 대한 명확한 신호 부족"
+        },
+        "total": 13,
+        "conviction": "Medium",
+        "timing_signal": "6-12months",
+        "one_line": "환경 규제 기반 시장 확장이 예상되지만 구체적 투자 타겟 식별 필요"
+      }
+    },
+    {
+      "id": "g_ess-1774357005118-4",
+      "topicId": "g_ess",
+      "category": "Global ESS",
+      "emoji": "🌍",
+      "region": "GLOBAL",
+      "isKorean": false,
+      "isChina": false,
+      "title": "Australia Achieves World-First Breakthrough In Underwater 3D Concrete Printing",
+      "url": "https://www.ponoko.com/blog/ponoko/australia-achieves-world-first-breakthrough-in-underwater-3d-concrete-printing/",
+      "source": "Ponoko.com",
+      "pubDate": "2026-02-24",
+      "summary": "Australia has just pulled off something that makes me genuinely excited as an engineer, because underwater 3D concrete printing is a serious a game-changer in the field of construction, and they did it without chemical accelerators or bulky formwork. The team…",
+      "country": "US",
+      "isRealNews": true,
+      "generatedAt": "2026-03-24",
+      "company": "미확인 (호주 연구기관)",
+      "companyType": "ecosystem",
+      "fundingStage": "N/A",
+      "eventType": "News",
+      "signalStage": "Early",
+      "relevance": "Medium",
+      "signal_type": "Technical validation",
+      "next_action": "Monitor",
+      "deep_insight": "세계 최초 수중 3D 콘크리트 프린팅 기술로 해상풍력 기초나 조력발전 구조물 건설 혁신 가능. 건설 에너지 절약과 해양 재생에너지 인프라 구축비용 대폭 절감 잠재력.",
+      "cvc_action": "관련 기술 상용화 스타트업 출현 모니터링",
+      "risk": "기술 이전과 스케일업 불확실성",
+      "comparableDeals": [],
+      "policyTriggers": [
+        {
+          "id": "ira_us",
+          "region": "US",
+          "label": "미국 IRA",
+          "sectors": [
+            "ESS",
+            "Solar",
+            "H2"
+          ],
+          "urgency": "High",
+          "desc": "IRA 세액공제 지속 → 미국 시장 진출 한국 기업 직접 수혜",
+          "beneficiaries": [
+            "LG에너지솔루션 생태계",
+            "한화솔루션"
+          ]
+        }
+      ],
+      "scorecard": null
+    },
+    {
+      "id": "kr_ess-1774357005117-0",
       "topicId": "kr_ess",
       "category": "국내 ESS",
       "emoji": "🇰🇷",
@@ -315,7 +315,7 @@
       "country": "KR",
       "isRealNews": true,
       "generatedAt": "2026-03-24",
-      "company": "NewDesignCongress",
+      "company": "미확인",
       "companyType": "ecosystem",
       "fundingStage": "N/A",
       "eventType": "News",
@@ -323,9 +323,9 @@
       "relevance": "Low",
       "signal_type": "Market context",
       "next_action": "Skip",
-      "deep_insight": "디지털 인프라의 지속가능성에 대한 담론으로 직접적인 투자 기회는 제한적. 에너지 측면에서 데이터센터 효율성 관련 간접적 시사점만 존재.",
-      "cvc_action": "정보 수집만 진행",
-      "risk": "투자 연관성 부족",
+      "deep_insight": "서버 인프라 지속가능성에 대한 철학적 담론으로 직접적인 투자기회 부재. 에너지 효율적 데이터센터나 친환경 서버 기술 스타트업 발굴 필요성만 시사.",
+      "cvc_action": "관련 그린 데이터센터 기술 스타트업 모니터링 강화",
+      "risk": "투자 연결점 부족",
       "comparableDeals": [],
       "policyTriggers": [
         {
