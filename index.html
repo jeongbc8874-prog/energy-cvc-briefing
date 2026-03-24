@@ -429,7 +429,13 @@ function renderFeed() {
         </div>
         <div class="signal-title-row">
           ${s.company ? `<span class="signal-company" style="color:${companyColor}">${escHtml(s.company)}</span>` : ""}
-          <span class="signal-title">${escHtml(s.title||"")}</span>
+          ${s.url
+            ? `<a class="signal-title" href="${escHtml(s.url)}" target="_blank" rel="noopener noreferrer"
+                style="color:#1A1710;text-decoration:none;border-bottom:1px solid #E6E2DA;"
+                onmouseover="this.style.borderBottomColor='#1B3A5C';this.style.color='#1B3A5C'"
+                onmouseout="this.style.borderBottomColor='#E6E2DA';this.style.color='#1A1710'"
+                onclick="event.stopPropagation()">${escHtml(s.title||"")}</a>`
+            : `<span class="signal-title">${escHtml(s.title||"")}</span>`}
         </div>
         ${!isOpen ? `<div class="expand-hint">클릭하여 딥 인사이트 보기 ▼</div>` : ""}
       </div>`;
@@ -437,7 +443,13 @@ function renderFeed() {
     if (isOpen) {
       html += `<div class="signal-body">
         <div class="signal-summary">${escHtml(s.summary||"")}</div>
-        ${s.source ? `<div class="signal-source">출처: ${escHtml(s.source)}</div>` : ""}
+        ${s.source ? `<div class="signal-source">
+          ${s.isRealNews
+            ? '<span style="background:#EDF6F1;color:#1A5C36;border:1px solid #A7E3BE;padding:1px 6px;border-radius:3px;font-size:10px;font-weight:600;margin-right:5px;">✓ 실제뉴스</span>'
+            : '<span style="background:#FDF4E8;color:#6B3600;border:1px solid #F0D8A8;padding:1px 6px;border-radius:3px;font-size:10px;font-weight:600;margin-right:5px;">AI생성</span>'}
+          ${escHtml(s.source)} · ${escHtml(s.pubDate||"")}
+          ${s.url ? `· <a href="${escHtml(s.url)}" target="_blank" rel="noopener" style="color:#1B3A5C;font-size:10px;" onclick="event.stopPropagation()">원문 보기 →</a>` : ""}
+        </div>` : ""}
         <div class="insight-box">
           <div class="insight-label">✦ 에너지 심사역 딥 인사이트</div>
           <div class="insight-text">${escHtml(s.deep_insight||s.why_it_matters||"")}</div>
