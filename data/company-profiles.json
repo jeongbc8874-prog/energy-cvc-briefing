@@ -504,9 +504,17 @@
     "sector": "국내 ESS",
     "region": "KR",
     "country": "KR",
-    "signalCount": 1,
+    "signalCount": 2,
     "highCount": 0,
     "signals": [
+      {
+        "date": "2026-03-24",
+        "title": "Who Will Remember Us When The Servers Go Dark?",
+        "relevance": "Medium",
+        "eventType": "News",
+        "signal_type": "Market context",
+        "url": "https://newdesigncongress.org/en/pub/who-will-remember-us-when-the-servers-go-dark/"
+      },
       {
         "date": "2026-03-24",
         "title": "Who Will Remember Us When The Servers Go Dark?",
@@ -518,7 +526,7 @@
     ],
     "scoreHistory": [],
     "fundingStage": "N/A",
-    "recentActivity": 1
+    "recentActivity": 2
   },
   "When": {
     "name": "When",
@@ -527,9 +535,17 @@
     "sector": "Global ESS",
     "region": "GLOBAL",
     "country": "US",
-    "signalCount": 1,
+    "signalCount": 2,
     "highCount": 0,
     "signals": [
+      {
+        "date": "2026-03-24",
+        "title": "When the chain becomes the product: Seven years inside a token-funded venture",
+        "relevance": "Medium",
+        "eventType": "News",
+        "signal_type": "Market context",
+        "url": "https://markmhendrickson.com/posts/when-the-chain-becomes-the-product"
+      },
       {
         "date": "2026-03-24",
         "title": "When the chain becomes the product: Seven years inside a token-funded venture",
@@ -541,7 +557,7 @@
     ],
     "scoreHistory": [],
     "fundingStage": "N/A",
-    "recentActivity": 1
+    "recentActivity": 2
   },
   "Growth": {
     "name": "Growth",
@@ -550,9 +566,17 @@
     "sector": "Global ESS",
     "region": "GLOBAL",
     "country": "US",
-    "signalCount": 1,
+    "signalCount": 2,
     "highCount": 0,
     "signals": [
+      {
+        "date": "2026-03-24",
+        "title": "Growth and Trends in the Recyclable Packaging Resin Market Key Insights, Innovations, and Industry Investments (2025-2035)",
+        "relevance": "Medium",
+        "eventType": "News",
+        "signal_type": "Market context",
+        "url": "https://www.globenewswire.com/news-release/2026/03/04/3249444/0/en/Growth-and-Trends-in-the-Recyclable-Packaging-Resin-Market-Key-Insights-Innovations-and-Industry-Investments-2025-2035.html"
+      },
       {
         "date": "2026-03-24",
         "title": "Growth and Trends in the Recyclable Packaging Resin Market Key Insights, Innovations, and Industry Investments (2025-2035)",
@@ -564,7 +588,7 @@
     ],
     "scoreHistory": [],
     "fundingStage": "N/A",
-    "recentActivity": 1
+    "recentActivity": 2
   },
   "The French": {
     "name": "The French",
@@ -573,9 +597,17 @@
     "sector": "Global ESS",
     "region": "GLOBAL",
     "country": "US",
-    "signalCount": 1,
+    "signalCount": 2,
     "highCount": 0,
     "signals": [
+      {
+        "date": "2026-03-24",
+        "title": "The French AI startup gunning for Workday, Oracle, and SAP",
+        "relevance": "Medium",
+        "eventType": "News",
+        "signal_type": "Market context",
+        "url": "https://fortune.com/2026/03/04/french-ai-startup-workday-oracle-sap-pigment/"
+      },
       {
         "date": "2026-03-24",
         "title": "The French AI startup gunning for Workday, Oracle, and SAP",
@@ -587,7 +619,7 @@
     ],
     "scoreHistory": [],
     "fundingStage": "N/A",
-    "recentActivity": 1
+    "recentActivity": 2
   },
   "Australia Achieves": {
     "name": "Australia Achieves",
@@ -596,9 +628,17 @@
     "sector": "Global ESS",
     "region": "GLOBAL",
     "country": "US",
-    "signalCount": 1,
+    "signalCount": 2,
     "highCount": 0,
     "signals": [
+      {
+        "date": "2026-03-24",
+        "title": "Australia Achieves World-First Breakthrough In Underwater 3D Concrete Printing",
+        "relevance": "Medium",
+        "eventType": "News",
+        "signal_type": "Market context",
+        "url": "https://www.ponoko.com/blog/ponoko/australia-achieves-world-first-breakthrough-in-underwater-3d-concrete-printing/"
+      },
       {
         "date": "2026-03-24",
         "title": "Australia Achieves World-First Breakthrough In Underwater 3D Concrete Printing",
@@ -610,7 +650,7 @@
     ],
     "scoreHistory": [],
     "fundingStage": "N/A",
-    "recentActivity": 1
+    "recentActivity": 2
   },
   "The Microreactor": {
     "name": "The Microreactor",
@@ -619,9 +659,17 @@
     "sector": "Global SMR",
     "region": "GLOBAL",
     "country": "US",
-    "signalCount": 1,
+    "signalCount": 2,
     "highCount": 0,
     "signals": [
+      {
+        "date": "2026-03-24",
+        "title": "The Microreactor Race Is On",
+        "relevance": "Medium",
+        "eventType": "Pilot",
+        "signal_type": "Market context",
+        "url": "https://wattsupwiththat.com/2026/02/28/the-microreactor-race-is-on/"
+      },
       {
         "date": "2026-03-24",
         "title": "The Microreactor Race Is On",
@@ -633,7 +681,7 @@
     ],
     "scoreHistory": [],
     "fundingStage": "N/A",
-    "recentActivity": 1
+    "recentActivity": 2
   },
   "Global Energy": {
     "name": "Global Energy",
@@ -642,9 +690,17 @@
     "sector": "China ESS",
     "region": "CN",
     "country": "CN",
-    "signalCount": 1,
+    "signalCount": 2,
     "highCount": 0,
     "signals": [
+      {
+        "date": "2026-03-24",
+        "title": "Global Energy Infrastructure Strain Accelerates Shift to Electric Vehicles and Off-Grid Power Storage",
+        "relevance": "Medium",
+        "eventType": "News",
+        "signal_type": "Market context",
+        "url": "https://www.naturalnews.com/2026-03-10-global-energy-infrastructure-strain-accelerates-shift.html"
+      },
       {
         "date": "2026-03-24",
         "title": "Global Energy Infrastructure Strain Accelerates Shift to Electric Vehicles and Off-Grid Power Storage",
@@ -656,7 +712,7 @@
     ],
     "scoreHistory": [],
     "fundingStage": "N/A",
-    "recentActivity": 1
+    "recentActivity": 2
   },
   "Canada": {
     "name": "Canada",
@@ -665,9 +721,17 @@
     "sector": "China ESS",
     "region": "CN",
     "country": "CN",
-    "signalCount": 1,
+    "signalCount": 2,
     "highCount": 0,
     "signals": [
+      {
+        "date": "2026-03-24",
+        "title": "Canada must remember that the future is electricity, not fossil fuels",
+        "relevance": "Medium",
+        "eventType": "News",
+        "signal_type": "Market context",
+        "url": "https://www.theglobeandmail.com/business/commentary/article-canada-must-remember-that-the-future-is-electricity-not-fossil-fuels/"
+      },
       {
         "date": "2026-03-24",
         "title": "Canada must remember that the future is electricity, not fossil fuels",
@@ -679,7 +743,7 @@
     ],
     "scoreHistory": [],
     "fundingStage": "N/A",
-    "recentActivity": 1
+    "recentActivity": 2
   },
   "Hinkley Point C Nuclear Project": {
     "name": "Hinkley Point C Nuclear Project",
@@ -816,9 +880,17 @@
     "sector": "China ESS",
     "region": "CN",
     "country": "CN",
-    "signalCount": 1,
+    "signalCount": 2,
     "highCount": 0,
     "signals": [
+      {
+        "date": "2026-03-24",
+        "title": "You Don't Have To",
+        "relevance": "Low",
+        "eventType": "News",
+        "signal_type": "Market context",
+        "url": "https://www.scottsmitelli.com/articles/you-dont-have-to/"
+      },
       {
         "date": "2026-03-24",
         "title": "You Don't Have To",
@@ -830,6 +902,134 @@
     ],
     "scoreHistory": [],
     "fundingStage": "N/A",
+    "recentActivity": 2
+  },
+  "Hinkley Point C Nuclear Plant": {
+    "name": "Hinkley Point C Nuclear Plant",
+    "firstSeen": "2026-03-24",
+    "lastSeen": "2026-03-24",
+    "sector": "China ESS",
+    "region": "CN",
+    "country": "CN",
+    "signalCount": 1,
+    "highCount": 0,
+    "signals": [
+      {
+        "date": "2026-03-24",
+        "title": "While Hinkley Nuclear Was Being Built, The UK Grid Decarbonized",
+        "relevance": "Medium",
+        "eventType": "News",
+        "signal_type": "Market context",
+        "url": "https://cleantechnica.com/2026/03/06/while-hinkley-nuclear-was-being-built-the-uk-grid-decarbonized/"
+      }
+    ],
+    "scoreHistory": [],
+    "fundingStage": "N/A",
     "recentActivity": 1
+  },
+  "Pentagon Maritime Tech VC Fund": {
+    "name": "Pentagon Maritime Tech VC Fund",
+    "firstSeen": "2026-03-24",
+    "lastSeen": "2026-03-24",
+    "sector": "China ESS",
+    "region": "CN",
+    "country": "CN",
+    "signalCount": 1,
+    "highCount": 1,
+    "signals": [
+      {
+        "date": "2026-03-24",
+        "title": "Exclusive: The Pentagon is committing $150M to a maritime tech VC fund and appears to be ramping up venture deals",
+        "relevance": "High",
+        "eventType": "Financing",
+        "signal_type": "Pre-funding",
+        "url": "https://fortune.com/2026/03/05/pentagon-venture-committments-mare-liberum/"
+      }
+    ],
+    "scoreHistory": [
+      {
+        "date": "2026-03-24",
+        "scorecard": {
+          "technology": {
+            "score": 4,
+            "max": 5,
+            "reason": "Pentagon이 maritime tech에 특화된 VC 펀드에 $150M 투자하여 해양 기술 분야의 혁신 잠재력을 인정",
+            "evidence": "The Pentagon is committing $150M to a maritime tech VC fund"
+          },
+          "commercialization": {
+            "score": 3,
+            "max": 5,
+            "reason": "Pentagon의 대규모 투자는 해양 기술의 상업화 가능성을 시사하나 구체적 상업화 성과는 미확인",
+            "evidence": "The Pentagon is committing $150M to a maritime tech VC fund"
+          },
+          "team": {
+            "score": 2,
+            "max": 5,
+            "reason": "펀드 운영팀이나 투자 전문성에 대한 구체적 정보가 제한적",
+            "evidence": "Pentagon is committing $150M to a maritime tech VC fund"
+          },
+          "partnership": {
+            "score": 5,
+            "max": 5,
+            "reason": "Pentagon과의 전략적 파트너십으로 최고 수준의 정부 지원 및 국방 분야 접근성 확보",
+            "evidence": "The Pentagon is committing $150M to a maritime tech VC fund and appears to be ramping up venture deals"
+          },
+          "fundraising_timing": {
+            "score": 5,
+            "max": 5,
+            "reason": "Pentagon의 $150M 투자 약정으로 자금조달이 완료된 상황",
+            "evidence": "The Pentagon is committing $150M to a maritime tech VC fund"
+          },
+          "total": 19,
+          "conviction": "High",
+          "timing_signal": "Immediate",
+          "timing_reason": "Pentagon의 대규모 투자 약정으로 즉시 투자 검토 가능한 상황이며, 정부 지원을 받는 해양 기술 분야의 성장 모멘텀이 형성됨",
+          "one_line": "Pentagon $150M 투자로 해양 기술 분야 국방-민간 협력 생태계 구축하는 전략적 VC 펀드",
+          "trust": "AI_ANALYSIS",
+          "trust_note": "스코어카드는 AI 추정값입니다. 실제 투자 결정 전 독립적 검증 필요."
+        }
+      }
+    ],
+    "fundingStage": "N/A",
+    "recentActivity": 1,
+    "latestScorecard": {
+      "technology": {
+        "score": 4,
+        "max": 5,
+        "reason": "Pentagon이 maritime tech에 특화된 VC 펀드에 $150M 투자하여 해양 기술 분야의 혁신 잠재력을 인정",
+        "evidence": "The Pentagon is committing $150M to a maritime tech VC fund"
+      },
+      "commercialization": {
+        "score": 3,
+        "max": 5,
+        "reason": "Pentagon의 대규모 투자는 해양 기술의 상업화 가능성을 시사하나 구체적 상업화 성과는 미확인",
+        "evidence": "The Pentagon is committing $150M to a maritime tech VC fund"
+      },
+      "team": {
+        "score": 2,
+        "max": 5,
+        "reason": "펀드 운영팀이나 투자 전문성에 대한 구체적 정보가 제한적",
+        "evidence": "Pentagon is committing $150M to a maritime tech VC fund"
+      },
+      "partnership": {
+        "score": 5,
+        "max": 5,
+        "reason": "Pentagon과의 전략적 파트너십으로 최고 수준의 정부 지원 및 국방 분야 접근성 확보",
+        "evidence": "The Pentagon is committing $150M to a maritime tech VC fund and appears to be ramping up venture deals"
+      },
+      "fundraising_timing": {
+        "score": 5,
+        "max": 5,
+        "reason": "Pentagon의 $150M 투자 약정으로 자금조달이 완료된 상황",
+        "evidence": "The Pentagon is committing $150M to a maritime tech VC fund"
+      },
+      "total": 19,
+      "conviction": "High",
+      "timing_signal": "Immediate",
+      "timing_reason": "Pentagon의 대규모 투자 약정으로 즉시 투자 검토 가능한 상황이며, 정부 지원을 받는 해양 기술 분야의 성장 모멘텀이 형성됨",
+      "one_line": "Pentagon $150M 투자로 해양 기술 분야 국방-민간 협력 생태계 구축하는 전략적 VC 펀드",
+      "trust": "AI_ANALYSIS",
+      "trust_note": "스코어카드는 AI 추정값입니다. 실제 투자 결정 전 독립적 검증 필요."
+    }
   }
 }

@@ -1,8 +1,8 @@
 {
   "date": "2026-03-24",
-  "dateKr": "2026년 3월 24일 화요일",
-  "generatedAt": "2026-03-24T14:15:07.078Z",
-  "brief": "**2026.3.24 CVC 브리핑**\n\n미 국방부가 해양기술 VC펀드에 $150M 투자를 확정하면서, 군사-상업 dual-use 기술의 투자 열기가 가속화되고 있습니다. 특히 **자율항해, 수중드론, 해양감시** 분야 비상장 스타트업들이 주요 타겟으로 부상하며, Series A-B 단계 기업들의 밸류에이션이 급등할 전망입니다. \n\n중국의 ESS(에너지저장) 시장 확대 정책과 맞물려, **CATL, BYD** 등 배터리 대기업들의 CVC 부문이 해외 해양에너지 저장 기술 스타트업 투자를 늘리고 있어 경쟁이 치열해질 것으로 예상됩니다. \n\n**즉시 액션**: 해양 자율화/AI 기술 보유 비상장 기업들(특히 한국의 HD현대, 삼성중공업 파트너사들) 실사 착수 및 Pre-Series A 라운드 선점 필요합니다. \n\nQ2 내 국방-해양기술 컨퍼런스 참석을 통한 딜 파이프라인 구축이 critical window가 될 것입니다.",
+  "dateKr": "2026년 3월 25일 수요일",
+  "generatedAt": "2026-03-24T15:48:58.392Z",
+  "brief": "**2026.3.25 CVC 브리핑**\n\n1. **미 국방부, 해양기술 VC 펀드에 $150M 투자 확정** - Pentagon Maritime Tech VC Fund 신설로 군사-민간 기술 융합 가속화, 자율선박·해저드론·해양감시 기술 중심 투자예상.\n\n2. **중국 ESS 시장 급성장 신호** - 미군의 해양기술 투자가 중국 견제용 전략자산 확보 목적, 한국 K-배터리(CATL, BYD 대항) 및 해상풍력 ESS 연계 투자기회 포착 필요.\n\n3. **비상장 해양테크 선점 타이밍** - 군수업체 Huntington Ingalls($HII), General Dynamics($GD) 벤처팀과 협력중인 국내 조선 계열사(현대중공업홀딩스, 삼성중공업) 스핀오프 발굴 즉시 착수.\n\n4. **국내 정책연계 액션포인트** - 해수부 K-조선 재도약 정책($2.1조 투입)과 Pentagon 펀드 연계, 자율운항선박 플랫폼 개발사 및 해양로봇 스타트업 조기 접촉 개시.\n\n5. **즉시 타겟팅** - 한화시스템 해양사업부 분사 가능성, 네이버랩스 자율주행 기술의 해상 확장, 카카오벤처스 포트폴리오 내 IoT/센서 업체 중 해양특화 피벗 후보 3개사 스크리닝 완료 요망.",
   "stats": {
     "total": 11,
     "unlisted": 0,
@@ -13,14 +13,14 @@
     "investigate": 1,
     "realNews": 11,
     "dartCount": 0,
-    "profiledCompanies": 21,
+    "profiledCompanies": 23,
     "withScorecard": 1,
     "factCount": 11,
     "aiCount": 0
   },
   "signals": [
     {
-      "id": "cn_ess-1774361610920-11",
+      "id": "cn_ess-1774367246068-11",
       "topicId": "cn_ess",
       "category": "China ESS",
       "emoji": "🇨🇳",
@@ -37,56 +37,56 @@
       "generatedAt": "2026-03-24",
       "trust": "FACT",
       "trustSource": "Fortune (원문 링크 포함)",
-      "company": "Pentagon-backed Maritime Tech VC Fund",
+      "company": "Pentagon Maritime Tech VC Fund",
       "companyType": "ecosystem",
       "fundingStage": "N/A",
       "eventType": "Financing",
       "signalStage": "Early",
       "relevance": "High",
-      "relevance_reason": "국방부가 $150M을 해상 기술 VC 펀드에 투자하며 벤처 딜 확대 중",
+      "relevance_reason": "미 국방부가 1.5억 달러 해상기술 VC 펀드에 투자 - 23개 펀드 백킹 후 1년만의 신규 투자",
       "signal_type": "Pre-funding",
       "next_action": "Investigate",
-      "next_action_reason": "국방 관련 해상 기술 분야 투자 트렌드 및 co-investment 기회 탐색",
-      "deep_insight": "국방부의 23개 펀드 지원 후 1년 만의 신규 투자는 해상 안보 기술의 전략적 중요성을 시사. 자율 항해, 해상 드론, 수중 감시 기술 등 듀얼 유즈 기술 스타트업들이 주요 투자 타겟일 것. CVC 관점에서 국방 기술의 민간 활용 가능성 높은 분야.",
+      "next_action_reason": "국방부 백킹 해상기술 분야 투자 기회 및 co-investment 가능성 탐색",
+      "deep_insight": "미 국방부가 1년 만에 신규 VC 펀드 투자를 재개하며 해상기술에 1.5억 달러 커밋. 이는 중국 견제 및 해상 우위 확보를 위한 전략적 투자로, 자율항해, 해상드론, 해양센서 등 듀얼유즈 기술에 대한 정부 수요 증가 신호.",
       "deep_insight_trust": "AI_ANALYSIS",
-      "cvc_action": "해상 기술 스타트업 포트폴리오 검토 및 국방 연계 사업화 방안 모색",
-      "risk": "국방 규제 및 보안 요구사항으로 인한 상용화 제약",
+      "cvc_action": "해상기술 스타트업 deal flow 확보 및 국방부 연계 투자기회 발굴",
+      "risk": "지정학적 긴장 완화시 국방 수요 감소 가능성",
       "scorecard": {
         "technology": {
           "score": 4,
           "max": 5,
-          "reason": "Pentagon이 $150M 규모로 maritime tech에 특화된 VC 펀드에 투자한다는 것은 해당 분야의 기술적 중요성과 국가 안보적 가치를 인정받았음을 의미. 국방부의 venture deals 확대는 첨단 해양 기술의 전략적 중요성을 시사",
-          "evidence": "The Pentagon is committing $150M to a maritime tech VC fund and appears to be ramping up venture deals"
+          "reason": "Pentagon이 maritime tech에 특화된 VC 펀드에 $150M 투자하여 해양 기술 분야의 혁신 잠재력을 인정",
+          "evidence": "The Pentagon is committing $150M to a maritime tech VC fund"
         },
         "commercialization": {
-          "score": 4,
+          "score": 3,
           "max": 5,
-          "reason": "Pentagon의 대규모 투자 커밋먼트는 maritime tech 분야의 상용화 가능성이 높다는 판단을 반영. 국방부가 VC를 통해 투자한다는 것은 민간 시장 진출 가능성도 고려했음을 의미",
+          "reason": "Pentagon의 대규모 투자는 해양 기술의 상업화 가능성을 시사하나 구체적 상업화 성과는 미확인",
           "evidence": "The Pentagon is committing $150M to a maritime tech VC fund"
         },
         "team": {
-          "score": 3,
+          "score": 2,
           "max": 5,
-          "reason": "Pentagon-backed이라는 점에서 검증된 파트너십을 확보했으나, 펀드 운용팀이나 경영진에 대한 구체적 정보가 제한적",
-          "evidence": "Pentagon-backed Maritime Tech VC Fund"
+          "reason": "펀드 운영팀이나 투자 전문성에 대한 구체적 정보가 제한적",
+          "evidence": "Pentagon is committing $150M to a maritime tech VC fund"
         },
         "partnership": {
           "score": 5,
           "max": 5,
-          "reason": "미국 국방부(Pentagon)라는 최고 수준의 전략적 파트너십을 확보. $150M 규모의 커밋먼트는 매우 강력한 정부 지원을 의미하며, 국방 분야 진출의 강력한 기반 제공",
-          "evidence": "The Pentagon is committing $150M to a maritime tech VC fund"
+          "reason": "Pentagon과의 전략적 파트너십으로 최고 수준의 정부 지원 및 국방 분야 접근성 확보",
+          "evidence": "The Pentagon is committing $150M to a maritime tech VC fund and appears to be ramping up venture deals"
         },
         "fundraising_timing": {
           "score": 5,
           "max": 5,
-          "reason": "Pentagon이 venture deals를 확대하고 있는 시점에서 $150M이라는 대규모 투자가 확정된 것은 최적의 펀드레이징 타이밍. 정부의 maritime tech 투자 확대 트렌드와 완벽히 부합",
-          "evidence": "appears to be ramping up venture deals"
+          "reason": "Pentagon의 $150M 투자 약정으로 자금조달이 완료된 상황",
+          "evidence": "The Pentagon is committing $150M to a maritime tech VC fund"
         },
-        "total": 21,
+        "total": 19,
         "conviction": "High",
         "timing_signal": "Immediate",
-        "timing_reason": "Pentagon의 $150M 커밋먼트가 확정된 상황에서 maritime tech 분야에 대한 정부 투자가 확대되고 있어 즉시 투자 검토가 필요한 시점",
-        "one_line": "Pentagon $150M 커밋먼트로 검증받은 maritime tech 특화 VC펀드, 국방-민간 시너지 극대화 기회",
+        "timing_reason": "Pentagon의 대규모 투자 약정으로 즉시 투자 검토 가능한 상황이며, 정부 지원을 받는 해양 기술 분야의 성장 모멘텀이 형성됨",
+        "one_line": "Pentagon $150M 투자로 해양 기술 분야 국방-민간 협력 생태계 구축하는 전략적 VC 펀드",
         "trust": "AI_ANALYSIS",
         "trust_note": "스코어카드는 AI 추정값입니다. 실제 투자 결정 전 독립적 검증 필요."
       },
@@ -113,7 +113,7 @@
       ]
     },
     {
-      "id": "kr_ess-1774361557942-0",
+      "id": "kr_ess-1774367194770-0",
       "topicId": "kr_ess",
       "category": "국내 ESS",
       "emoji": "🇰🇷",
@@ -145,7 +145,7 @@
       "policyTriggers": []
     },
     {
-      "id": "g_ess-1774361557942-1",
+      "id": "g_ess-1774367194771-1",
       "topicId": "g_ess",
       "category": "Global ESS",
       "emoji": "🌍",
@@ -177,7 +177,7 @@
       "policyTriggers": []
     },
     {
-      "id": "g_ess-1774361557943-2",
+      "id": "g_ess-1774367194771-2",
       "topicId": "g_ess",
       "category": "Global ESS",
       "emoji": "🌍",
@@ -209,7 +209,7 @@
       "policyTriggers": []
     },
     {
-      "id": "g_ess-1774361557943-3",
+      "id": "g_ess-1774367194771-3",
       "topicId": "g_ess",
       "category": "Global ESS",
       "emoji": "🌍",
@@ -241,7 +241,7 @@
       "policyTriggers": []
     },
     {
-      "id": "g_ess-1774361557943-4",
+      "id": "g_ess-1774367194771-4",
       "topicId": "g_ess",
       "category": "Global ESS",
       "emoji": "🌍",
@@ -273,7 +273,7 @@
       "policyTriggers": []
     },
     {
-      "id": "g_smr-1774361557943-5",
+      "id": "g_smr-1774367194771-5",
       "topicId": "g_smr",
       "category": "Global SMR",
       "emoji": "🌍",
@@ -305,7 +305,7 @@
       "policyTriggers": []
     },
     {
-      "id": "cn_ess-1774361557943-6",
+      "id": "cn_ess-1774367194772-6",
       "topicId": "cn_ess",
       "category": "China ESS",
       "emoji": "🇨🇳",
@@ -337,7 +337,7 @@
       "policyTriggers": []
     },
     {
-      "id": "cn_ess-1774361557943-7",
+      "id": "cn_ess-1774367194772-7",
       "topicId": "cn_ess",
       "category": "China ESS",
       "emoji": "🇨🇳",
@@ -369,7 +369,7 @@
       "policyTriggers": []
     },
     {
-      "id": "cn_ess-1774361610920-10",
+      "id": "cn_ess-1774367246068-10",
       "topicId": "cn_ess",
       "category": "China ESS",
       "emoji": "🇨🇳",
@@ -386,20 +386,20 @@
       "generatedAt": "2026-03-24",
       "trust": "FACT",
       "trustSource": "CleanTechnica (원문 링크 포함)",
-      "company": "Hinkley Point C Nuclear Project",
+      "company": "Hinkley Point C Nuclear Plant",
       "companyType": "ecosystem",
       "fundingStage": "N/A",
       "eventType": "News",
       "signalStage": "Early",
       "relevance": "Medium",
-      "relevance_reason": "영국 그리드 탈탄소화 진행 중 원자력 발전소 건설 지연으로 에너지 전환 시장 동향 파악 가능",
+      "relevance_reason": "영국 그리드 탈탄소화 진행 중 원자력 발전소 건설 지연 - 에너지 전환 시장 맥락 제공",
       "signal_type": "Market context",
-      "next_action": "Monitor",
-      "next_action_reason": "원자력 지연이 재생에너지 및 ESS 시장 확대 기회로 작용할 수 있음",
-      "deep_insight": "Hinkley Point C 지연은 영국의 에너지 안보 공백을 의미하며, 이는 배터리 ESS와 재생에너지 스타트업들에게 시장 기회를 확대시킬 것. 원자력 대체재로서 그리드 안정화 솔루션 수요 급증 예상.",
+      "next_action": "Note",
+      "next_action_reason": "원자력 지연으로 인한 재생에너지 기회 확대 트렌드 파악 필요",
+      "deep_insight": "Hinkley Point C 1호기 가동이 2026년으로 지연되는 동안 영국 그리드는 이미 탈탄소화가 진행되고 있음. 이는 대규모 원자력 프로젝트의 지연이 재생에너지 및 에너지저장 솔루션의 시장 기회를 확대시키고 있음을 시사함.",
       "deep_insight_trust": "AI_ANALYSIS",
-      "cvc_action": "영국 그리드 안정화 및 ESS 관련 스타트업 발굴 강화",
-      "risk": "원자력 정책 변화에 따른 에너지 시장 불확실성",
+      "cvc_action": "재생에너지/ESS 포트폴리오 기업의 영국 시장 진출 기회 검토",
+      "risk": "원자력 정책 변화에 따른 에너지 믹스 불확실성",
       "scorecard": null,
       "comparableDeals": [],
       "policyTriggers": [
@@ -424,7 +424,7 @@
       ]
     },
     {
-      "id": "cn_ess-1774361610920-12",
+      "id": "cn_ess-1774367246068-12",
       "topicId": "cn_ess",
       "category": "China ESS",
       "emoji": "🇨🇳",
@@ -447,13 +447,13 @@
       "eventType": "News",
       "signalStage": "Early",
       "relevance": "Low",
-      "relevance_reason": "Zager and Evans 가사 인용으로 미래 기술에 대한 ���학적 담론, 구체적 투자 정보 없음",
+      "relevance_reason": "5555년 미래 전망과 자동화에 대한 철학적 내용 - 투자 관련성 불명확",
       "signal_type": "Market context",
       "next_action": "Skip",
-      "next_action_reason": "투자 관련 구체적 정보나 기업 언급 없이 기술 철학적 내용만 포함",
-      "deep_insight": "자동화 기술의 미래에 대한 사회적 담론은 있으나 CVC 투자 관점에서 실행 가능한 정보 부재. 다만 자동화 기술에 대한 사회적 수용성 이슈는 로보틱스 스타트업 투자 시 고려 요소.",
+      "next_action_reason": "구체적 투자 정보나 기업 분석 내용 없음",
+      "deep_insight": "Zager and Evans 노래 가사를 인용한 자동화 사회에 대한 철학적 고찰. 투자 관점에서 구체적 액션 아이템이나 시장 신호 없음.",
       "deep_insight_trust": "AI_ANALYSIS",
-      "cvc_action": "정보 수집 불충분으로 액션 없음",
+      "cvc_action": "액션 불요",
       "risk": "정보 부족으로 리스크 평가 불가",
       "scorecard": null,
       "comparableDeals": [],
