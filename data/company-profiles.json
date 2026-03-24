@@ -496,5 +496,340 @@
       "timing_signal": "Immediate",
       "one_line": "탄소중립 시대 핵심 기술인 마이크로리액터 경쟁 본격화로 선도 기업 투자 적기"
     }
+  },
+  "Who Will": {
+    "name": "Who Will",
+    "firstSeen": "2026-03-24",
+    "lastSeen": "2026-03-24",
+    "sector": "국내 ESS",
+    "region": "KR",
+    "country": "KR",
+    "signalCount": 1,
+    "highCount": 0,
+    "signals": [
+      {
+        "date": "2026-03-24",
+        "title": "Who Will Remember Us When The Servers Go Dark?",
+        "relevance": "Medium",
+        "eventType": "News",
+        "signal_type": "Market context",
+        "url": "https://newdesigncongress.org/en/pub/who-will-remember-us-when-the-servers-go-dark/"
+      }
+    ],
+    "scoreHistory": [],
+    "fundingStage": "N/A",
+    "recentActivity": 1
+  },
+  "When": {
+    "name": "When",
+    "firstSeen": "2026-03-24",
+    "lastSeen": "2026-03-24",
+    "sector": "Global ESS",
+    "region": "GLOBAL",
+    "country": "US",
+    "signalCount": 1,
+    "highCount": 0,
+    "signals": [
+      {
+        "date": "2026-03-24",
+        "title": "When the chain becomes the product: Seven years inside a token-funded venture",
+        "relevance": "Medium",
+        "eventType": "News",
+        "signal_type": "Market context",
+        "url": "https://markmhendrickson.com/posts/when-the-chain-becomes-the-product"
+      }
+    ],
+    "scoreHistory": [],
+    "fundingStage": "N/A",
+    "recentActivity": 1
+  },
+  "Growth": {
+    "name": "Growth",
+    "firstSeen": "2026-03-24",
+    "lastSeen": "2026-03-24",
+    "sector": "Global ESS",
+    "region": "GLOBAL",
+    "country": "US",
+    "signalCount": 1,
+    "highCount": 0,
+    "signals": [
+      {
+        "date": "2026-03-24",
+        "title": "Growth and Trends in the Recyclable Packaging Resin Market Key Insights, Innovations, and Industry Investments (2025-2035)",
+        "relevance": "Medium",
+        "eventType": "News",
+        "signal_type": "Market context",
+        "url": "https://www.globenewswire.com/news-release/2026/03/04/3249444/0/en/Growth-and-Trends-in-the-Recyclable-Packaging-Resin-Market-Key-Insights-Innovations-and-Industry-Investments-2025-2035.html"
+      }
+    ],
+    "scoreHistory": [],
+    "fundingStage": "N/A",
+    "recentActivity": 1
+  },
+  "The French": {
+    "name": "The French",
+    "firstSeen": "2026-03-24",
+    "lastSeen": "2026-03-24",
+    "sector": "Global ESS",
+    "region": "GLOBAL",
+    "country": "US",
+    "signalCount": 1,
+    "highCount": 0,
+    "signals": [
+      {
+        "date": "2026-03-24",
+        "title": "The French AI startup gunning for Workday, Oracle, and SAP",
+        "relevance": "Medium",
+        "eventType": "News",
+        "signal_type": "Market context",
+        "url": "https://fortune.com/2026/03/04/french-ai-startup-workday-oracle-sap-pigment/"
+      }
+    ],
+    "scoreHistory": [],
+    "fundingStage": "N/A",
+    "recentActivity": 1
+  },
+  "Australia Achieves": {
+    "name": "Australia Achieves",
+    "firstSeen": "2026-03-24",
+    "lastSeen": "2026-03-24",
+    "sector": "Global ESS",
+    "region": "GLOBAL",
+    "country": "US",
+    "signalCount": 1,
+    "highCount": 0,
+    "signals": [
+      {
+        "date": "2026-03-24",
+        "title": "Australia Achieves World-First Breakthrough In Underwater 3D Concrete Printing",
+        "relevance": "Medium",
+        "eventType": "News",
+        "signal_type": "Market context",
+        "url": "https://www.ponoko.com/blog/ponoko/australia-achieves-world-first-breakthrough-in-underwater-3d-concrete-printing/"
+      }
+    ],
+    "scoreHistory": [],
+    "fundingStage": "N/A",
+    "recentActivity": 1
+  },
+  "The Microreactor": {
+    "name": "The Microreactor",
+    "firstSeen": "2026-03-24",
+    "lastSeen": "2026-03-24",
+    "sector": "Global SMR",
+    "region": "GLOBAL",
+    "country": "US",
+    "signalCount": 1,
+    "highCount": 0,
+    "signals": [
+      {
+        "date": "2026-03-24",
+        "title": "The Microreactor Race Is On",
+        "relevance": "Medium",
+        "eventType": "Pilot",
+        "signal_type": "Market context",
+        "url": "https://wattsupwiththat.com/2026/02/28/the-microreactor-race-is-on/"
+      }
+    ],
+    "scoreHistory": [],
+    "fundingStage": "N/A",
+    "recentActivity": 1
+  },
+  "Global Energy": {
+    "name": "Global Energy",
+    "firstSeen": "2026-03-24",
+    "lastSeen": "2026-03-24",
+    "sector": "China ESS",
+    "region": "CN",
+    "country": "CN",
+    "signalCount": 1,
+    "highCount": 0,
+    "signals": [
+      {
+        "date": "2026-03-24",
+        "title": "Global Energy Infrastructure Strain Accelerates Shift to Electric Vehicles and Off-Grid Power Storage",
+        "relevance": "Medium",
+        "eventType": "News",
+        "signal_type": "Market context",
+        "url": "https://www.naturalnews.com/2026-03-10-global-energy-infrastructure-strain-accelerates-shift.html"
+      }
+    ],
+    "scoreHistory": [],
+    "fundingStage": "N/A",
+    "recentActivity": 1
+  },
+  "Canada": {
+    "name": "Canada",
+    "firstSeen": "2026-03-24",
+    "lastSeen": "2026-03-24",
+    "sector": "China ESS",
+    "region": "CN",
+    "country": "CN",
+    "signalCount": 1,
+    "highCount": 0,
+    "signals": [
+      {
+        "date": "2026-03-24",
+        "title": "Canada must remember that the future is electricity, not fossil fuels",
+        "relevance": "Medium",
+        "eventType": "News",
+        "signal_type": "Market context",
+        "url": "https://www.theglobeandmail.com/business/commentary/article-canada-must-remember-that-the-future-is-electricity-not-fossil-fuels/"
+      }
+    ],
+    "scoreHistory": [],
+    "fundingStage": "N/A",
+    "recentActivity": 1
+  },
+  "Hinkley Point C Nuclear Project": {
+    "name": "Hinkley Point C Nuclear Project",
+    "firstSeen": "2026-03-24",
+    "lastSeen": "2026-03-24",
+    "sector": "China ESS",
+    "region": "CN",
+    "country": "CN",
+    "signalCount": 1,
+    "highCount": 0,
+    "signals": [
+      {
+        "date": "2026-03-24",
+        "title": "While Hinkley Nuclear Was Being Built, The UK Grid Decarbonized",
+        "relevance": "Medium",
+        "eventType": "News",
+        "signal_type": "Market context",
+        "url": "https://cleantechnica.com/2026/03/06/while-hinkley-nuclear-was-being-built-the-uk-grid-decarbonized/"
+      }
+    ],
+    "scoreHistory": [],
+    "fundingStage": "N/A",
+    "recentActivity": 1
+  },
+  "Pentagon-backed Maritime Tech VC Fund": {
+    "name": "Pentagon-backed Maritime Tech VC Fund",
+    "firstSeen": "2026-03-24",
+    "lastSeen": "2026-03-24",
+    "sector": "China ESS",
+    "region": "CN",
+    "country": "CN",
+    "signalCount": 1,
+    "highCount": 1,
+    "signals": [
+      {
+        "date": "2026-03-24",
+        "title": "Exclusive: The Pentagon is committing $150M to a maritime tech VC fund and appears to be ramping up venture deals",
+        "relevance": "High",
+        "eventType": "Financing",
+        "signal_type": "Pre-funding",
+        "url": "https://fortune.com/2026/03/05/pentagon-venture-committments-mare-liberum/"
+      }
+    ],
+    "scoreHistory": [
+      {
+        "date": "2026-03-24",
+        "scorecard": {
+          "technology": {
+            "score": 4,
+            "max": 5,
+            "reason": "Pentagon이 $150M 규모로 maritime tech에 특화된 VC 펀드에 투자한다는 것은 해당 분야의 기술적 중요성과 국가 안보적 가치를 인정받았음을 의미. 국방부의 venture deals 확대는 첨단 해양 기술의 전략적 중요성을 시사",
+            "evidence": "The Pentagon is committing $150M to a maritime tech VC fund and appears to be ramping up venture deals"
+          },
+          "commercialization": {
+            "score": 4,
+            "max": 5,
+            "reason": "Pentagon의 대규모 투자 커밋먼트는 maritime tech 분야의 상용화 가능성이 높다는 판단을 반영. 국방부가 VC를 통해 투자한다는 것은 민간 시장 진출 가능성도 고려했음을 의미",
+            "evidence": "The Pentagon is committing $150M to a maritime tech VC fund"
+          },
+          "team": {
+            "score": 3,
+            "max": 5,
+            "reason": "Pentagon-backed이라는 점에서 검증된 파트너십을 확보했으나, 펀드 운용팀이나 경영진에 대한 구체적 정보가 제한적",
+            "evidence": "Pentagon-backed Maritime Tech VC Fund"
+          },
+          "partnership": {
+            "score": 5,
+            "max": 5,
+            "reason": "미국 국방부(Pentagon)라는 최고 수준의 전략적 파트너십을 확보. $150M 규모의 커밋먼트는 매우 강력한 정부 지원을 의미하며, 국방 분야 진출의 강력한 기반 제공",
+            "evidence": "The Pentagon is committing $150M to a maritime tech VC fund"
+          },
+          "fundraising_timing": {
+            "score": 5,
+            "max": 5,
+            "reason": "Pentagon이 venture deals를 확대하고 있는 시점에서 $150M이라는 대규모 투자가 확정된 것은 최적의 펀드레이징 타이밍. 정부의 maritime tech 투자 확대 트렌드와 완벽히 부합",
+            "evidence": "appears to be ramping up venture deals"
+          },
+          "total": 21,
+          "conviction": "High",
+          "timing_signal": "Immediate",
+          "timing_reason": "Pentagon의 $150M 커밋먼트가 확정된 상황에서 maritime tech 분야에 대한 정부 투자가 확대되고 있어 즉시 투자 검토가 필요한 시점",
+          "one_line": "Pentagon $150M 커밋먼트로 검증받은 maritime tech 특화 VC펀드, 국방-민간 시너지 극대화 기회",
+          "trust": "AI_ANALYSIS",
+          "trust_note": "스코어카드는 AI 추정값입니다. 실제 투자 결정 전 독립적 검증 필요."
+        }
+      }
+    ],
+    "fundingStage": "N/A",
+    "recentActivity": 1,
+    "latestScorecard": {
+      "technology": {
+        "score": 4,
+        "max": 5,
+        "reason": "Pentagon이 $150M 규모로 maritime tech에 특화된 VC 펀드에 투자한다는 것은 해당 분야의 기술적 중요성과 국가 안보적 가치를 인정받았음을 의미. 국방부의 venture deals 확대는 첨단 해양 기술의 전략적 중요성을 시사",
+        "evidence": "The Pentagon is committing $150M to a maritime tech VC fund and appears to be ramping up venture deals"
+      },
+      "commercialization": {
+        "score": 4,
+        "max": 5,
+        "reason": "Pentagon의 대규모 투자 커밋먼트는 maritime tech 분야의 상용화 가능성이 높다는 판단을 반영. 국방부가 VC를 통해 투자한다는 것은 민간 시장 진출 가능성도 고려했음을 의미",
+        "evidence": "The Pentagon is committing $150M to a maritime tech VC fund"
+      },
+      "team": {
+        "score": 3,
+        "max": 5,
+        "reason": "Pentagon-backed이라는 점에서 검증된 파트너십을 확보했으나, 펀드 운용팀이나 경영진에 대한 구체적 정보가 제한적",
+        "evidence": "Pentagon-backed Maritime Tech VC Fund"
+      },
+      "partnership": {
+        "score": 5,
+        "max": 5,
+        "reason": "미국 국방부(Pentagon)라는 최고 수준의 전략적 파트너십을 확보. $150M 규모의 커밋먼트는 매우 강력한 정부 지원을 의미하며, 국방 분야 진출의 강력한 기반 제공",
+        "evidence": "The Pentagon is committing $150M to a maritime tech VC fund"
+      },
+      "fundraising_timing": {
+        "score": 5,
+        "max": 5,
+        "reason": "Pentagon이 venture deals를 확대하고 있는 시점에서 $150M이라는 대규모 투자가 확정된 것은 최적의 펀드레이징 타이밍. 정부의 maritime tech 투자 확대 트렌드와 완벽히 부합",
+        "evidence": "appears to be ramping up venture deals"
+      },
+      "total": 21,
+      "conviction": "High",
+      "timing_signal": "Immediate",
+      "timing_reason": "Pentagon의 $150M 커밋먼트가 확정된 상황에서 maritime tech 분야에 대한 정부 투자가 확대되고 있어 즉시 투자 검토가 필요한 시점",
+      "one_line": "Pentagon $150M 커밋먼트로 검증받은 maritime tech 특화 VC펀드, 국방-민간 시너지 극대화 기회",
+      "trust": "AI_ANALYSIS",
+      "trust_note": "스코어카드는 AI 추정값입니다. 실제 투자 결정 전 독립적 검증 필요."
+    }
+  },
+  "N/A": {
+    "name": "N/A",
+    "firstSeen": "2026-03-24",
+    "lastSeen": "2026-03-24",
+    "sector": "China ESS",
+    "region": "CN",
+    "country": "CN",
+    "signalCount": 1,
+    "highCount": 0,
+    "signals": [
+      {
+        "date": "2026-03-24",
+        "title": "You Don't Have To",
+        "relevance": "Low",
+        "eventType": "News",
+        "signal_type": "Market context",
+        "url": "https://www.scottsmitelli.com/articles/you-dont-have-to/"
+      }
+    ],
+    "scoreHistory": [],
+    "fundingStage": "N/A",
+    "recentActivity": 1
   }
 }
