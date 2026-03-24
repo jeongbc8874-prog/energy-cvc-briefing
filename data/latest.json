@@ -1,105 +1,23 @@
 {
   "date": "2026-03-24",
   "dateKr": "2026년 3월 24일 화요일",
-  "generatedAt": "2026-03-24T11:52:56.181Z",
-  "brief": "**CVC 딥 브리핑 (2026.3.24 화)**\n\n**1) 비상장 투자기회**: SMR 마이크로리액터 경쟁 가속화로 국내 원자력 부품·소재 스타트업 투자 검토 필요. NuScale(上), TerraPower 등 글로벌 선두업체 대비 국내 SMART 기술 보유 기업들의 밸류에이션 갭 확대 중.\n\n**2) 국내정책**: 호르무즈 해협 긴장과 카타르 LNG 공급 중단으로 에너지 안보 리스크 부각. 정부 SMR 상용화 로드맵(2030년 목표) 가속화 및 관련 R&D 예산 확대 예상.\n\n**3) 중국시사점**: 아시아 LNG 바이어들의 공급처 다변화 움직임으로 중국 LNG 허브 구축 전략 영향받을 전망. 국내 LNG 터미널·저장 인프라 기업 경쟁력 재평가 기회.\n\n**4) 즉시액션**: 국내 SMR 핵심부품(증기발생기, 제어봉) 제조 비상장사 스크리닝 및 DD 착수. ESS 재활용 소재 관련 국내 스타트업 포트폴리오 검토.\n\n**5) 모니터링**: 카타르 LNG 공급 정상화 일정, 국내 원자력 정책 변화, 중국 마이크로리액터 개발 동향.",
+  "generatedAt": "2026-03-24T12:11:07.451Z",
+  "brief": "**2026년 3월 24일 화요일 CVC 브리핑**\n\n**1. 호주 수중 3D 콘크리트 프린팅 세계 최초 성공으로 해상풍력 기초공사 혁신 기대, 관련 비상장 기업 COBOD(덴마크), Icon(미국) 등 해양인프라 확장 투자 검토 필요.**\n\n**2. 마이크로리액터 경쟁 가속화로 eVinci(Westinghouse), AURORA(Oklo), Hermes(Kairos Power) 등 100MW급 소형원전 개발업체들 2026년 하반기 상용화 경주 돌입.**\n\n**3. IRA 연장정책과 연계하여 분산전원용 SMR+ESS 통합솔루션 제공업체(NuScale Power, Fluence 등) 투자타이밍 최적화, Q2 실사 즉시 착수 권고.**\n\n**4. 수중 콘크리트 프린팅 기술은 해상풍력 CAPEX 30% 절감 효과로 아시아 해상풍력 시장 25GW 확대 시 1,200억원 규모 신시장 창출 전망.**\n\n**5. 마이크로리액터 글로벌 시장 2030년 85억달러 규모 예상, 국내 두산에너빌리티 SMR 사업부 지분투자 및 해외 파트너십 전략 수립 액션아이템 설정.**",
   "stats": {
-    "total": 11,
-    "unlisted": 7,
-    "kr": 6,
+    "total": 6,
+    "unlisted": 5,
+    "kr": 1,
     "cn": 0,
     "global": 5,
-    "high": 4,
+    "high": 2,
     "investigate": 2,
-    "realNews": 11
+    "realNews": 6,
+    "profiledCompanies": 6,
+    "withScorecard": 2
   },
   "signals": [
     {
-      "id": "g_smr-1774353135763-12",
-      "topicId": "g_smr",
-      "category": "Global SMR/Nuclear",
-      "emoji": "🌍",
-      "region": "GLOBAL",
-      "isKorean": false,
-      "isChina": false,
-      "title": "The Microreactor Race Is On",
-      "url": "https://wattsupwiththat.com/2026/02/28/the-microreactor-race-is-on/",
-      "source": "Wattsupwiththat.com",
-      "pubDate": "2026-03-01",
-      "summary": "Nine months later, multiple private companies are racing to become the first to bring their advanced design reactors to market, and several are already moving toward pilot plants in conjunction with governmental or academic institutions and funding.",
-      "country": "US",
-      "isRealNews": true,
-      "generatedAt": "2026-03-24",
-      "company": "다수 SMR 개발사",
-      "companyType": "unlisted_startup",
-      "fundingStage": "Series-B",
-      "eventType": "Pilot",
-      "signalStage": "Early",
-      "relevance": "High",
-      "signal_type": "Market context",
-      "next_action": "Investigate",
-      "deep_insight": "SMR 시장 경쟁 가속화로 TRL 7-8단계 실증 중인 유력 플레이어들의 상업화 임박. 차세대 원자력 발전의 핵심 기술로 대규모 자본 투입과 장기 투자 관점에서 포트폴리오 우선순위 검토 필요.",
-      "cvc_action": "주요 SMR 개발사 대상 전략적 투자 및 기술 파트너십 검토",
-      "risk": "장기간 인허가 프로세스 및 막대한 자본 소요"
-    },
-    {
-      "id": "kr_startup-1774353091579-3",
-      "topicId": "kr_startup",
-      "category": "국내 에너지 스타트업",
-      "emoji": "🇰🇷",
-      "region": "KR",
-      "isKorean": true,
-      "isChina": false,
-      "title": "AMD-backed Upstage targets 10,000 GPUs in Korea AI expansion",
-      "url": "https://www.digitimes.com/news/a20260320VL209/expansion-amd-infrastructure-partnership-ceo.html",
-      "source": "Digitimes",
-      "pubDate": "2026-03-21",
-      "summary": "Advanced Micro Devices is expanding its presence in South Korea's artificial intelligence market through a deepened partnership with local startup Upstage, as plans for large-scale GPU deployment and surging compute demand underscore the country's growing imp…",
-      "country": "KR",
-      "isRealNews": true,
-      "generatedAt": "2026-03-24",
-      "company": "Upstage",
-      "companyType": "unlisted_startup",
-      "fundingStage": "Series-B",
-      "eventType": "Pilot",
-      "signalStage": "Early",
-      "relevance": "Medium",
-      "signal_type": "Commercial traction",
-      "next_action": "Monitor",
-      "deep_insight": "AMD 백킹으로 10,000 GPU 확장은 상당한 전력 소비 증가를 의미하며 데이터센터 에너지 효율성 기술 수요 창출. AI 인프라의 에너지 최적화 솔루션 투자 기회 시사",
-      "cvc_action": "AI 데이터센터 에너지 효율성 기술 스타트업 딜 소싱",
-      "risk": "GPU 집약적 사업모델의 전력비용 부담"
-    },
-    {
-      "id": "g_ess-1774353091579-6",
-      "topicId": "g_ess",
-      "category": "Global ESS",
-      "emoji": "🌍",
-      "region": "GLOBAL",
-      "isKorean": false,
-      "isChina": false,
-      "title": "When the chain becomes the product: Seven years inside a token-funded venture",
-      "url": "https://markmhendrickson.com/posts/when-the-chain-becomes-the-product",
-      "source": "Markmhendrickson.com",
-      "pubDate": "2026-03-08",
-      "summary": "I joined Blockstack in 2018 for the off-chain developer tools. Over seven years I watched token economics reshape the product direction, push the perceived mome",
-      "country": "US",
-      "isRealNews": true,
-      "generatedAt": "2026-03-24",
-      "company": "Blockstack",
-      "companyType": "unlisted_startup",
-      "fundingStage": "Series-C",
-      "eventType": "News",
-      "signalStage": "Early",
-      "relevance": "Medium",
-      "signal_type": "Market context",
-      "next_action": "Note",
-      "deep_insight": "7년간 토큰 이코노믹스가 제품 방향성을 좌우한 사례는 블록체인 기반 에너지 거래 플랫폼 투자 시 중요한 참고점. 토큰 의존도가 높은 에너지 스타트업의 지속가능성 리스크 시사",
-      "cvc_action": "블록체인 에너지 스타트업 실사 시 토큰 의존성 평가 강화",
-      "risk": "토큰 이코노믹스 중심 비즈니스 모델의 불안정성"
-    },
-    {
-      "id": "g_ess-1774353135763-11",
+      "id": "g_ess-1774354154425-4",
       "topicId": "g_ess",
       "category": "Global ESS",
       "emoji": "🌍",
@@ -114,76 +32,227 @@
       "country": "US",
       "isRealNews": true,
       "generatedAt": "2026-03-24",
-      "company": "호주 수중 3D 콘크리트 프린팅 기업",
+      "company": "호주 수중 3D 콘크리트 프린팅 업체",
+      "companyType": "unlisted_startup",
+      "fundingStage": "Pre-A",
+      "eventType": "News",
+      "signalStage": "Early",
+      "relevance": "High",
+      "signal_type": "Technical validation",
+      "next_action": "Investigate",
+      "deep_insight": "세계 최초 수중 3D ��크리트 프린팅 기술로 해상 인프라 구축 혁신. 해상풍력 발전 기초 설치비용 절감과 시공 효율성 향상에 직접 기여 가능.",
+      "cvc_action": "즉시 컨택 및 기술 검토",
+      "risk": "상용화 타임라인 불확실",
+      "comparableDeals": [],
+      "policyTriggers": [
+        {
+          "id": "ira_us",
+          "region": "US",
+          "label": "미국 IRA",
+          "sectors": [
+            "ESS",
+            "Solar",
+            "H2"
+          ],
+          "urgency": "High",
+          "desc": "IRA 세액공제 지속 → 미국 시장 진출 한국 기업 직접 수혜",
+          "beneficiaries": [
+            "LG에너지솔루션 생태계",
+            "한화솔루션"
+          ]
+        }
+      ],
+      "scorecard": {
+        "technology": {
+          "score": 5,
+          "max": 5,
+          "reason": "세계 최초 수중 3D 콘크리트 프린팅 기술 달성으로 기술적 차별화 및 IP 우위 확보. 해상 인프라, 교량 수리, 해안 보호 등 블루오션 시장 창출 가능"
+        },
+        "commercialization": {
+          "score": 3,
+          "max": 5,
+          "reason": "혁신적 기술이지만 상용화 초기 단계. 해양 건설, 인프라 복구 등 명확한 시장 니즈 존재하나 규제 승인 및 대규모 적용 검증 필요"
+        },
+        "team": {
+          "score": 2,
+          "max": 5,
+          "reason": "팀 정보 부족으로 평가 제한적. 세계 최초 기술 개발 역량은 입증되었으나 경영진, 기술진, 상용화 경험에 대한 세부 정보 필요"
+        },
+        "partnership": {
+          "score": 3,
+          "max": 5,
+          "reason": "호주 정부 지원 가능성 높음. 해양 건설업체, 엔지니어링 회사와의 파트너십 잠재력 존재하나 구체적 협력사 정보 부족"
+        },
+        "fundraising_timing": {
+          "score": 4,
+          "max": 5,
+          "reason": "세계 최초 기술 발표 직후로 최적의 펀드레이징 타이밍. 미디어 주목도 높고 기술적 마일스톤 달성으로 투자자 관심 집중 시점"
+        },
+        "total": 17,
+        "conviction": "High",
+        "timing_signal": "Immediate",
+        "one_line": "세계 최초 수중 3D 콘크리트 프린팅 기술로 블루오션 시장 선점 가능한 딥테크 투자 기회"
+      }
+    },
+    {
+      "id": "g_smr-1774354154425-5",
+      "topicId": "g_smr",
+      "category": "Global SMR",
+      "emoji": "🌍",
+      "region": "GLOBAL",
+      "isKorean": false,
+      "isChina": false,
+      "title": "The Microreactor Race Is On",
+      "url": "https://wattsupwiththat.com/2026/02/28/the-microreactor-race-is-on/",
+      "source": "Wattsupwiththat.com",
+      "pubDate": "2026-03-01",
+      "summary": "Nine months later, multiple private companies are racing to become the first to bring their advanced design reactors to market, and several are already moving toward pilot plants in conjunction with governmental or academic institutions and funding.",
+      "country": "US",
+      "isRealNews": true,
+      "generatedAt": "2026-03-24",
+      "company": "마이크로리액터 개발사들",
+      "companyType": "unlisted_startup",
+      "fundingStage": "Series-A",
+      "eventType": "Pilot",
+      "signalStage": "Early",
+      "relevance": "High",
+      "signal_type": "Pre-funding",
+      "next_action": "Investigate",
+      "deep_insight": "소형모듈원자로(SMR) 경쟁이 본격화되며 복수 스타트업들이 상용화 경쟁 중. 분산형 청정에너지 솔루션으로 CVC 핵심 투자 영역과 완전 부합.",
+      "cvc_action": "주요 플레이어 매핑 및 DD 착수",
+      "risk": "규제 승인 지연",
+      "comparableDeals": [],
+      "policyTriggers": [],
+      "scorecard": {
+        "technology": {
+          "score": 4,
+          "max": 5,
+          "reason": "마이크로리액터는 차세대 원자력 기술로 안전성과 확장성 면에서 기존 대형 원전 대비 혁신적. SMR 대비 더 작은 규모로 분산형 에너지 공급 가능하며, 기술적 난이도는 높지만 상용화 가능성 존재"
+        },
+        "commercialization": {
+          "score": 3,
+          "max": 5,
+          "reason": "아직 초기 단계로 상용화까지 5-10년 소요 예상. 규제 승인 과정이 복잡하고 시간이 오래 걸리지만, 탄소중립과 에너지 안보 이슈로 시장 수요는 명확히 존재"
+        },
+        "team": {
+          "score": 3,
+          "max": 5,
+          "reason": "구체적 팀 정보 부족하나, 마이크로리액터 분야는 원자력 공학, 재료과학, 시스템 엔지니어링 등 고도의 전문성 필요. 주요 개발사들은 대부분 경험 있는 원자력 전문가들로 구성"
+        },
+        "partnership": {
+          "score": 4,
+          "max": 5,
+          "reason": "정부 지원(DOE 등), 기존 에너지 기업들과의 협력, 군사용 애플리케이션 등 다양한 파트너십 기회 존재. 특히 국�� 차원의 전략적 중요성으로 인한 강력한 백업 가능성"
+        },
+        "fundraising_timing": {
+          "score": 4,
+          "max": 5,
+          "reason": "'마이크로리액터 경쟁이 시작되었다'는 신호는 업계 관심도 급증을 의미. 기후변화와 에너지 안보 이슈로 청정에너지 투자 열기 높음. 초기 단계 진입 적기로 판단"
+        },
+        "total": 18,
+        "conviction": "High",
+        "timing_signal": "3-6months",
+        "one_line": "차세대 원자력 기술 경쟁 초기 단계, 높은 기술 장벽과 정부 지원을 바탕으로 한 장기 성장 스토리"
+      }
+    },
+    {
+      "id": "g_ess-1774354154424-1",
+      "topicId": "g_ess",
+      "category": "Global ESS",
+      "emoji": "🌍",
+      "region": "GLOBAL",
+      "isKorean": false,
+      "isChina": false,
+      "title": "When the chain becomes the product: Seven years inside a token-funded venture",
+      "url": "https://markmhendrickson.com/posts/when-the-chain-becomes-the-product",
+      "source": "Markmhendrickson.com",
+      "pubDate": "2026-03-08",
+      "summary": "I joined Blockstack in 2018 for the off-chain developer tools. Over seven years I watched token economics reshape the product direction, push the perceived mome",
+      "country": "US",
+      "isRealNews": true,
+      "generatedAt": "2026-03-24",
+      "company": "Blockstack/Stacks",
+      "companyType": "unlisted_startup",
+      "fundingStage": "Series-B",
+      "eventType": "News",
+      "signalStage": "Early",
+      "relevance": "Medium",
+      "signal_type": "Commercial traction",
+      "next_action": "Monitor",
+      "deep_insight": "토큰 이코노믹스 중심의 블록체인 플랫폼으로 7년간 운영 실적 보유. 에너지 효율적 합의 메커니즘 개발 시 CVC 관심 영역과 연계 가능성.",
+      "cvc_action": "기술팀과 에너지 효율성 논의",
+      "risk": "토큰 규제 리스크",
+      "comparableDeals": [],
+      "policyTriggers": [
+        {
+          "id": "ira_us",
+          "region": "US",
+          "label": "미국 IRA",
+          "sectors": [
+            "ESS",
+            "Solar",
+            "H2"
+          ],
+          "urgency": "High",
+          "desc": "IRA 세액공제 지속 → 미국 시장 진출 한국 기업 직접 수혜",
+          "beneficiaries": [
+            "LG에너지솔루션 생태계",
+            "한화솔루션"
+          ]
+        }
+      ],
+      "scorecard": null
+    },
+    {
+      "id": "g_ess-1774354154425-2",
+      "topicId": "g_ess",
+      "category": "Global ESS",
+      "emoji": "🌍",
+      "region": "GLOBAL",
+      "isKorean": false,
+      "isChina": false,
+      "title": "Growth and Trends in the Recyclable Packaging Resin Market Key Insights, Innovations, and Industry Investments (2025-2035)",
+      "url": "https://www.globenewswire.com/news-release/2026/03/04/3249444/0/en/Growth-and-Trends-in-the-Recyclable-Packaging-Resin-Market-Key-Insights-Innovations-and-Industry-Investments-2025-2035.html",
+      "source": "GlobeNewswire",
+      "pubDate": "2026-03-04",
+      "summary": "According to Towards Packaging consultants, the global recyclable packaging resin market is projected to reach approximately USD 50.62 billion by 2035, increasing from USD 28 billion in 2025, at a CAGR of 6.10% during the forecast period 2026 to 2035. Accordi…",
+      "country": "US",
+      "isRealNews": true,
+      "generatedAt": "2026-03-24",
+      "company": "Towards Packaging",
       "companyType": "unlisted_startup",
       "fundingStage": "N/A",
       "eventType": "News",
       "signalStage": "Early",
       "relevance": "Medium",
-      "signal_type": "Technical validation",
-      "next_action": "Monitor",
-      "deep_insight": "해상풍력 기초 구조물 및 해상 인프라 건설에 활용 가능한 TRL 6-7단계 기술. 에너지 인프라 구축비용 절감과 친환경 건설 솔루션으로 상업화 경로 명확하나 초기 단계.",
-      "cvc_action": "해상풍력 파트너사와 연계한 파일럿 프로젝트 기회 탐색",
-      "risk": "기술 성숙도 불확실성 및 규제 승인 이슈"
+      "signal_type": "Market context",
+      "next_action": "Note",
+      "deep_insight": "재활용 패키징 수지 시장이 2035년 506억달러 규모로 성장 전망. 순환경제와 에너지 절약형 소재 개발 트렌드에 부합하는 시장 기회.",
+      "cvc_action": "관련 소재 스타트업 발굴",
+      "risk": "직접 연관성 낮음",
+      "comparableDeals": [],
+      "policyTriggers": [
+        {
+          "id": "ira_us",
+          "region": "US",
+          "label": "미국 IRA",
+          "sectors": [
+            "ESS",
+            "Solar",
+            "H2"
+          ],
+          "urgency": "High",
+          "desc": "IRA 세액공제 지속 → 미국 시장 진출 한국 기업 직접 수혜",
+          "beneficiaries": [
+            "LG에너지솔루션 생태계",
+            "한화솔루션"
+          ]
+        }
+      ],
+      "scorecard": null
     },
     {
-      "id": "kr_startup-1774353091579-2",
-      "topicId": "kr_startup",
-      "category": "국내 에너지 스타트업",
-      "emoji": "🇰🇷",
-      "region": "KR",
-      "isKorean": true,
-      "isChina": false,
-      "title": "Korean Cartoonist Association Hosts Webtoon Forum on AI, Copyright, Creative Tools",
-      "url": "https://www.animenewsnetwork.com/news/2026-03-21/korean-cartoonist-association-hosts-webtoon-forum-on-ai-copyright-creative-tools/.235386",
-      "source": "Anime News Network",
-      "pubDate": "2026-03-21",
-      "summary": "Creator Jin-kyu Choi introduces webtoon-focused AI production tool he developed using Google's \"Vibe Coding\"",
-      "country": "KR",
-      "isRealNews": true,
-      "generatedAt": "2026-03-24",
-      "company": "N/A (Jin-kyu Choi)",
-      "companyType": "unlisted_startup",
-      "fundingStage": "Seed",
-      "eventType": "Expansion",
-      "signalStage": "Early",
-      "relevance": "Low",
-      "signal_type": "Technical validation",
-      "next_action": "Skip",
-      "deep_insight": "웹툰 AI 제작 도구는 콘텐츠 산업 특화 솔루션으로 에너지 섹터와 연관성 부족. Google의 Vibe Coding 활용은 흥미롭지만 B2C 크리에이터 도구 성격으로 CVC 투자 대상 아님",
-      "cvc_action": "투자 검토 불필요",
-      "risk": "에너지 비즈니스 모델과 무관"
-    },
-    {
-      "id": "kr_startup-1774353091579-5",
-      "topicId": "kr_startup",
-      "category": "국내 에너지 스타트업",
-      "emoji": "🇰🇷",
-      "region": "KR",
-      "isKorean": true,
-      "isChina": false,
-      "title": "Pune Startup CureMeAbroad targets Western patients, hits $2.5 million run rate in two quarters",
-      "url": "https://www.thehindubusinessline.com/news/pune-startup-curemeabroad-targets-western-patients-hits-25-million-run-rate-in-two-quarters/article70761699.ece",
-      "source": "BusinessLine",
-      "pubDate": "2026-03-19",
-      "summary": "Pune-based CureMeAbroad targets Western patients, achieving $2.5M run rate by offering high-value medical tourism with AI-driven coordination.",
-      "country": "KR",
-      "isRealNews": true,
-      "generatedAt": "2026-03-24",
-      "company": "CureMeAbroad",
-      "companyType": "unlisted_startup",
-      "fundingStage": "Pre-A",
-      "eventType": "News",
-      "signalStage": "Early",
-      "relevance": "Low",
-      "signal_type": "Commercial traction",
-      "next_action": "Skip",
-      "deep_insight": "$2.5M 런레이트 달성한 메디컬 투어리즘 AI 플랫폼이지만 헬스케어 서비스업으로 에너지 기술과 무관. TRL 7-8 수준의 상업화 단계이나 CVC 투자 영역 외",
-      "cvc_action": "투자 검토 불필요",
-      "risk": "에너지 사업 포트폴리오와 시너지 부재"
-    },
-    {
-      "id": "g_ess-1774353135763-10",
+      "id": "g_ess-1774354154425-3",
       "topicId": "g_ess",
       "category": "Global ESS",
       "emoji": "🌍",
@@ -200,104 +269,40 @@
       "generatedAt": "2026-03-24",
       "company": "Pigment",
       "companyType": "unlisted_startup",
-      "fundingStage": "Series-C",
+      "fundingStage": "Series-B",
       "eventType": "News",
       "signalStage": "Early",
       "relevance": "Low",
       "signal_type": "Commercial traction",
       "next_action": "Skip",
-      "deep_insight": "ARR $100M 달성한 성숙 SaaS 기업으로 TRL 9단계 상업화 완료. 에너지 섹터와 직접적 연관성 없는 기업 소프트웨어 영역이며, 이미 고평가된 후기 단계로 CVC 투자 매력도 제한적.",
-      "cvc_action": "에너지 특화 ERP/Planning 솔루션 개발 파트너십 검토",
-      "risk": "에너지 산업 도메인 지식 부족 및 높은 밸류에이션"
+      "deep_insight": "ARR 1억달러 근접한 프랑스 AI 기업으로 3년 연속 매출 2배 성장. 그러나 Workday/Oracle 경쟁 포지션으로 에너지 섹터와 직접 연관성 부족.",
+      "cvc_action": "패스",
+      "risk": "섹터 미스매치",
+      "comparableDeals": [],
+      "policyTriggers": [
+        {
+          "id": "ira_us",
+          "region": "US",
+          "label": "미국 IRA",
+          "sectors": [
+            "ESS",
+            "Solar",
+            "H2"
+          ],
+          "urgency": "High",
+          "desc": "IRA 세액공제 지속 → 미국 시장 진출 한국 기업 직접 수혜",
+          "beneficiaries": [
+            "LG에너지솔루션 생태계",
+            "한화솔루션"
+          ]
+        }
+      ],
+      "scorecard": null
     },
     {
-      "id": "kr_startup-1774353091579-1",
-      "topicId": "kr_startup",
-      "category": "국내 에너지 스타트업",
-      "emoji": "🇰🇷",
-      "region": "KR",
-      "isKorean": true,
-      "isChina": false,
-      "title": "Opening Hormuz Militarily and the Economic Time Pressure",
-      "url": "https://www.nextbigfuture.com/2026/03/opening-hormuz-militarily-and-the-economic-time-pressure.html",
-      "source": "Next Big Future",
-      "pubDate": "2026-03-21",
-      "summary": "Iranian retaliation has caused an effective closure of the Strait of Hormuz since ~March 2–4. Traffic has dropped from 150+ vessels/day to near-zero on many days, with 21+ confirmed attacks on merchant ships. This matches the scenario’s description of disrupt…",
-      "country": "KR",
-      "isRealNews": true,
-      "generatedAt": "2026-03-24",
-      "company": "N/A",
-      "companyType": "ecosystem",
-      "fundingStage": "N/A",
-      "eventType": "News",
-      "signalStage": "Early",
-      "relevance": "High",
-      "signal_type": "Market context",
-      "next_action": "Monitor",
-      "deep_insight": "호르무즈 해협 봉쇄는 글로벌 에너지 공급망 리스크 증대를 의미하며 대체 에너지원 및 에너지 안보 기술에 대한 투자 기회 확대. 물류 기술, 에너지 저장 솔루션 관심 증대 예상",
-      "cvc_action": "에너지 안보 관련 스타트업 포트폴리오 점검 및 신규 딜 소싱 강화",
-      "risk": "지정학적 ���안정성으로 인한 투자 환경 변화"
-    },
-    {
-      "id": "kr_startup-1774353091579-4",
-      "topicId": "kr_startup",
-      "category": "국내 에너지 스타트업",
-      "emoji": "🇰🇷",
-      "region": "KR",
-      "isKorean": true,
-      "isChina": false,
-      "title": "Asian LNG Buyers Monitor Tense Market on Lengthy Qatar Outage",
-      "url": "https://financialpost.com/pmn/business-pmn/asian-lng-buyers-monitor-tense-market-on-lengthy-qatar-outage",
-      "source": "Financial Post",
-      "pubDate": "2026-03-20",
-      "summary": "Asian buyers were closely monitoring a fraught liquefied natural gas market after Qatar announced that two trains at the world’s largest export hub could stay offline for as long as five years, tightening global supplies.",
-      "country": "KR",
-      "isRealNews": true,
-      "generatedAt": "2026-03-24",
-      "company": "N/A",
-      "companyType": "ecosystem",
-      "fundingStage": "N/A",
-      "eventType": "News",
-      "signalStage": "Early",
-      "relevance": "High",
-      "signal_type": "Market context",
-      "next_action": "Monitor",
-      "deep_insight": "카타르 LNG 수출 허브 운영 중단은 아시아 LNG 시장 긴장 고조를 의미하며 LNG 대체 기술, 소규모 LNG 솔루션, 에너지 다변화 기술에 대한 투자 수요 증가 전망",
-      "cvc_action": "LNG 대체/최적화 기술 스타트업 및 분산형 에너지 솔루션 포트폴리오 검토",
-      "risk": "글로벌 에너지 공급망 불안정성"
-    },
-    {
-      "id": "g_ess-1774353091579-7",
-      "topicId": "g_ess",
-      "category": "Global ESS",
-      "emoji": "🌍",
-      "region": "GLOBAL",
-      "isKorean": false,
-      "isChina": false,
-      "title": "Growth and Trends in the Recyclable Packaging Resin Market Key Insights, Innovations, and Industry Investments (2025-2035)",
-      "url": "https://www.globenewswire.com/news-release/2026/03/04/3249444/0/en/Growth-and-Trends-in-the-Recyclable-Packaging-Resin-Market-Key-Insights-Innovations-and-Industry-Investments-2025-2035.html",
-      "source": "GlobeNewswire",
-      "pubDate": "2026-03-04",
-      "summary": "According to Towards Packaging consultants, the global recyclable packaging resin market is projected to reach approximately USD 50.62 billion by 2035, increasing from USD 28 billion in 2025, at a CAGR of 6.10% during the forecast period 2026 to 2035. Accordi…",
-      "country": "US",
-      "isRealNews": true,
-      "generatedAt": "2026-03-24",
-      "company": "N/A",
-      "companyType": "ecosystem",
-      "fundingStage": "N/A",
-      "eventType": "News",
-      "signalStage": "Early",
-      "relevance": "High",
-      "signal_type": "Market context",
-      "next_action": "Investigate",
-      "deep_insight": "2035년 $50.62B 규모 예상되는 재활용 포장재 수지 시장은 순환경제 기반 에너지 회수 기술과 연계 가능. 폐플라스틱 에너지화 기술, 바이오매스 전환 기술 등 관련 스타트업 투자 기회 확대",
-      "cvc_action": "폐기물 에너지화 및 순환경제 기술 스타트업 적극 딜 소싱",
-      "risk": "규제 변화에 따른 시장 성장률 변동성"
-    },
-    {
-      "id": "kr_ess-1774353091579-0",
+      "id": "kr_ess-1774354154424-0",
       "topicId": "kr_ess",
-      "category": "국내 ESS 스타트업",
+      "category": "국내 ESS",
       "emoji": "🇰🇷",
       "region": "KR",
       "isKorean": true,
@@ -310,7 +315,7 @@
       "country": "KR",
       "isRealNews": true,
       "generatedAt": "2026-03-24",
-      "company": "N/A",
+      "company": "NewDesignCongress",
       "companyType": "ecosystem",
       "fundingStage": "N/A",
       "eventType": "News",
@@ -318,9 +323,188 @@
       "relevance": "Low",
       "signal_type": "Market context",
       "next_action": "Skip",
-      "deep_insight": "서버 인프라 지속성에 대한 추상적 논의로 에너지 투자와 직접 연관성 없음. 데이터센터 에너지 효율성 관점에서도 구체적 기술이나 비즈니스 모델 부재",
-      "cvc_action": "추적 불필요",
-      "risk": "투자 기회 식별 불가"
+      "deep_insight": "디지털 인프라의 지속가능성에 대한 담론으로 직접적인 투자 기회는 제한적. 에너지 측면에서 데이터센터 효율성 관련 간접적 시사점만 존재.",
+      "cvc_action": "정보 수집만 진행",
+      "risk": "투자 연관성 부족",
+      "comparableDeals": [],
+      "policyTriggers": [
+        {
+          "id": "re100_kr",
+          "region": "KR",
+          "label": "국내 RE100",
+          "sectors": [
+            "ESS",
+            "Grid",
+            "Solar"
+          ],
+          "urgency": "High",
+          "desc": "국내 RE100 이행 기업 증가 → 기업용 ESS·PPA·VPP 수요 급증",
+          "beneficiaries": [
+            "그리드위즈",
+            "식스티헤르츠",
+            "에너지에이아이"
+          ]
+        },
+        {
+          "id": "ess_subsidy",
+          "region": "KR",
+          "label": "ESS 보조금 확대",
+          "sectors": [
+            "ESS"
+          ],
+          "urgency": "Medium",
+          "desc": "산업용·가정용 ESS 보조금 재설계 → 설치 수요 급증 예상",
+          "beneficiaries": [
+            "씨에스에너지",
+            "하나기술",
+            "스탠다드에너지"
+          ]
+        }
+      ],
+      "scorecard": null
+    }
+  ],
+  "policyTriggers": [
+    {
+      "id": "re100_kr",
+      "region": "KR",
+      "label": "국내 RE100",
+      "sectors": [
+        "ESS",
+        "Grid",
+        "Solar"
+      ],
+      "urgency": "High",
+      "desc": "국내 RE100 이행 기업 증가 → 기업용 ESS·PPA·VPP 수요 급증",
+      "beneficiaries": [
+        "그리드위즈",
+        "식스티헤르츠",
+        "에너지에이아이"
+      ]
+    },
+    {
+      "id": "h2_roadmap",
+      "region": "KR",
+      "label": "수소경제 로드맵 2.0",
+      "sectors": [
+        "Hydrogen",
+        "Marine"
+      ],
+      "urgency": "High",
+      "desc": "2030년 청정수소 발전 비중 목표 → 수전해·연료전지 스타트업 직접 수혜",
+      "beneficiaries": [
+        "하이리움산업",
+        "에스퓨얼셀",
+        "범한퓨얼셀"
+      ]
+    },
+    {
+      "id": "motie_vpp",
+      "region": "KR",
+      "label": "MOTIE VPP 실증",
+      "sectors": [
+        "Grid",
+        "Software"
+      ],
+      "urgency": "Medium",
+      "desc": "산업부 VPP 실증사업 확대 → DR·VPP 플랫폼 스타트업 공공계약 기회",
+      "beneficiaries": [
+        "그리드위즈",
+        "식스티헤르츠"
+      ]
+    },
+    {
+      "id": "ess_subsidy",
+      "region": "KR",
+      "label": "ESS 보조금 확대",
+      "sectors": [
+        "ESS"
+      ],
+      "urgency": "Medium",
+      "desc": "산업용·가정용 ESS 보조금 재설계 → 설치 수요 급증 예상",
+      "beneficiaries": [
+        "씨에스에너지",
+        "하나기술",
+        "스탠다드에너지"
+      ]
+    },
+    {
+      "id": "ira_us",
+      "region": "US",
+      "label": "미국 IRA",
+      "sectors": [
+        "ESS",
+        "Solar",
+        "H2"
+      ],
+      "urgency": "High",
+      "desc": "IRA 세액공제 지속 → 미국 시장 진출 한국 기업 직접 수혜",
+      "beneficiaries": [
+        "LG에너지솔루션 생태계",
+        "한화솔루션"
+      ]
+    },
+    {
+      "id": "imo2030",
+      "region": "GLOBAL",
+      "label": "IMO 2030",
+      "sectors": [
+        "Marine"
+      ],
+      "urgency": "High",
+      "desc": "선박 탄소집약도 40% 감축 의무 → 대체연료·연료전지 스타트업 수요 급증",
+      "beneficiaries": [
+        "빈센",
+        "범한퓨얼셀",
+        "CMB.TECH"
+      ]
+    },
+    {
+      "id": "eu_cbam",
+      "region": "EU",
+      "label": "EU CBAM",
+      "sectors": [
+        "H2",
+        "ESS",
+        "Grid"
+      ],
+      "urgency": "Medium",
+      "desc": "탄소국경세 2026년 전면시행 → 청정에너지 제조 스타트업 수출 경쟁력 강화",
+      "beneficiaries": [
+        "스탠다드에너지",
+        "하이리움산업"
+      ]
+    },
+    {
+      "id": "ferc2222",
+      "region": "US",
+      "label": "FERC Order 2222",
+      "sectors": [
+        "Grid",
+        "VPP"
+      ],
+      "urgency": "Medium",
+      "desc": "미국 분산자원 도매시장 참여 허용 → VPP·DR 스타트업 TAM 대폭 확대",
+      "beneficiaries": [
+        "AutoGrid",
+        "Voltus",
+        "Leap Energy"
+      ]
+    },
+    {
+      "id": "china_ess",
+      "region": "CN",
+      "label": "중국 ESS 의무화",
+      "sectors": [
+        "ESS"
+      ],
+      "urgency": "High",
+      "desc": "중국 신재생 발전소 ESS 의무 설치 → 중국 ESS 스타트업 급성장, 국내 경쟁 심화",
+      "beneficiaries": [
+        "Pylontech",
+        "REPT",
+        "EVE Energy"
+      ]
     }
   ],
   "errors": []

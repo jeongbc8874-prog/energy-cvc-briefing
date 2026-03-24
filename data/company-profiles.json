@@ -1,0 +1,266 @@
+{
+  "NewDesignCongress": {
+    "name": "NewDesignCongress",
+    "firstSeen": "2026-03-24",
+    "lastSeen": "2026-03-24",
+    "sector": "국내 ESS",
+    "region": "KR",
+    "country": "KR",
+    "signalCount": 1,
+    "highCount": 0,
+    "signals": [
+      {
+        "date": "2026-03-24",
+        "title": "Who Will Remember Us When The Servers Go Dark?",
+        "relevance": "Low",
+        "eventType": "News",
+        "signal_type": "Market context"
+      }
+    ],
+    "scoreHistory": [],
+    "fundingStage": "N/A",
+    "recentActivity": 1
+  },
+  "Blockstack/Stacks": {
+    "name": "Blockstack/Stacks",
+    "firstSeen": "2026-03-24",
+    "lastSeen": "2026-03-24",
+    "sector": "Global ESS",
+    "region": "GLOBAL",
+    "country": "US",
+    "signalCount": 1,
+    "highCount": 0,
+    "signals": [
+      {
+        "date": "2026-03-24",
+        "title": "When the chain becomes the product: Seven years inside a token-funded venture",
+        "relevance": "Medium",
+        "eventType": "News",
+        "signal_type": "Commercial traction"
+      }
+    ],
+    "scoreHistory": [],
+    "fundingStage": "Series-B",
+    "recentActivity": 1
+  },
+  "Towards Packaging": {
+    "name": "Towards Packaging",
+    "firstSeen": "2026-03-24",
+    "lastSeen": "2026-03-24",
+    "sector": "Global ESS",
+    "region": "GLOBAL",
+    "country": "US",
+    "signalCount": 1,
+    "highCount": 0,
+    "signals": [
+      {
+        "date": "2026-03-24",
+        "title": "Growth and Trends in the Recyclable Packaging Resin Market Key Insights, Innovations, and Industry Investments (2025-2035)",
+        "relevance": "Medium",
+        "eventType": "News",
+        "signal_type": "Market context"
+      }
+    ],
+    "scoreHistory": [],
+    "fundingStage": "N/A",
+    "recentActivity": 1
+  },
+  "Pigment": {
+    "name": "Pigment",
+    "firstSeen": "2026-03-24",
+    "lastSeen": "2026-03-24",
+    "sector": "Global ESS",
+    "region": "GLOBAL",
+    "country": "US",
+    "signalCount": 1,
+    "highCount": 0,
+    "signals": [
+      {
+        "date": "2026-03-24",
+        "title": "The French AI startup gunning for Workday, Oracle, and SAP",
+        "relevance": "Low",
+        "eventType": "News",
+        "signal_type": "Commercial traction"
+      }
+    ],
+    "scoreHistory": [],
+    "fundingStage": "Series-B",
+    "recentActivity": 1
+  },
+  "호주 수중 3D 콘크리트 프린팅 업체": {
+    "name": "호주 수중 3D 콘크리트 프린팅 업체",
+    "firstSeen": "2026-03-24",
+    "lastSeen": "2026-03-24",
+    "sector": "Global ESS",
+    "region": "GLOBAL",
+    "country": "US",
+    "signalCount": 1,
+    "highCount": 1,
+    "signals": [
+      {
+        "date": "2026-03-24",
+        "title": "Australia Achieves World-First Breakthrough In Underwater 3D Concrete Printing",
+        "relevance": "High",
+        "eventType": "News",
+        "signal_type": "Technical validation"
+      }
+    ],
+    "scoreHistory": [
+      {
+        "date": "2026-03-24",
+        "scorecard": {
+          "technology": {
+            "score": 5,
+            "max": 5,
+            "reason": "세계 최초 수중 3D 콘크리트 프린팅 기술 달성으로 기술적 차별화 및 IP 우위 확보. 해상 인프라, 교량 수리, 해안 보호 등 블루오션 시장 창출 가능"
+          },
+          "commercialization": {
+            "score": 3,
+            "max": 5,
+            "reason": "혁신적 기술이지만 상용화 초기 단계. 해양 건설, 인프라 복구 등 명확한 시장 니즈 존재하나 규제 승인 및 대규모 적용 검증 필요"
+          },
+          "team": {
+            "score": 2,
+            "max": 5,
+            "reason": "팀 정보 부족으로 평가 제한적. 세계 최초 기술 개발 역량은 입증되었으나 경영진, 기술진, 상용화 경험에 대한 세부 정보 필요"
+          },
+          "partnership": {
+            "score": 3,
+            "max": 5,
+            "reason": "호주 정부 지원 가능성 높음. 해양 건설업체, 엔지니어링 회사와의 파트너십 잠재력 존재하나 구체적 협력사 정보 부족"
+          },
+          "fundraising_timing": {
+            "score": 4,
+            "max": 5,
+            "reason": "세계 최초 기술 발표 직후로 최적의 펀드레이징 타이밍. 미디어 주목도 높고 기술적 마일스톤 달성으로 투자자 관심 집중 시점"
+          },
+          "total": 17,
+          "conviction": "High",
+          "timing_signal": "Immediate",
+          "one_line": "세계 최초 수중 3D 콘크리트 프린팅 기술로 블루오션 시장 선점 가능한 딥테크 투자 기회"
+        }
+      }
+    ],
+    "fundingStage": "Pre-A",
+    "recentActivity": 1,
+    "latestScorecard": {
+      "technology": {
+        "score": 5,
+        "max": 5,
+        "reason": "세계 최초 수중 3D 콘크리트 프린팅 기술 달성으로 기술적 차별화 및 IP 우위 확보. 해상 인프라, 교량 수리, 해안 보호 등 블루오션 시장 창출 가능"
+      },
+      "commercialization": {
+        "score": 3,
+        "max": 5,
+        "reason": "혁신적 기술이지만 상용화 초기 단계. 해양 건설, 인프라 복구 등 명확한 시장 니즈 존재하나 규제 승인 및 대규모 적용 검증 필요"
+      },
+      "team": {
+        "score": 2,
+        "max": 5,
+        "reason": "팀 정보 부족으로 평가 제한적. 세계 최초 기술 개발 역량은 입증되었으나 경영진, 기술진, 상용화 경험에 대한 세부 정보 필요"
+      },
+      "partnership": {
+        "score": 3,
+        "max": 5,
+        "reason": "호주 정부 지원 가능성 높음. 해양 건설업체, 엔지니어링 회사와의 파트너십 잠재력 존재하나 구체적 협력사 정보 부족"
+      },
+      "fundraising_timing": {
+        "score": 4,
+        "max": 5,
+        "reason": "세계 최초 기술 발표 직후로 최적의 펀드레이징 타이밍. 미디어 주목도 높고 기술적 마일스톤 달성으로 투자자 관심 집중 시점"
+      },
+      "total": 17,
+      "conviction": "High",
+      "timing_signal": "Immediate",
+      "one_line": "세계 최초 수중 3D 콘크리트 프린팅 기술로 블루오션 시장 선점 가능한 딥테크 투자 기회"
+    }
+  },
+  "마이크로리액터 개발사들": {
+    "name": "마이크로리액터 개발사들",
+    "firstSeen": "2026-03-24",
+    "lastSeen": "2026-03-24",
+    "sector": "Global SMR",
+    "region": "GLOBAL",
+    "country": "US",
+    "signalCount": 1,
+    "highCount": 1,
+    "signals": [
+      {
+        "date": "2026-03-24",
+        "title": "The Microreactor Race Is On",
+        "relevance": "High",
+        "eventType": "Pilot",
+        "signal_type": "Pre-funding"
+      }
+    ],
+    "scoreHistory": [
+      {
+        "date": "2026-03-24",
+        "scorecard": {
+          "technology": {
+            "score": 4,
+            "max": 5,
+            "reason": "마이크로리액터는 차세대 원자력 기술로 안전성과 확장성 면에서 기존 대형 원전 대비 혁신적. SMR 대비 더 작은 규모로 분산형 에너지 공급 가능하며, 기술적 난이도는 높지만 상용화 가능성 존재"
+          },
+          "commercialization": {
+            "score": 3,
+            "max": 5,
+            "reason": "아직 초기 단계로 상용화까지 5-10년 소요 예상. 규제 승인 과정이 복잡하고 시간이 오래 걸리지만, 탄소중립과 에너지 안보 이슈로 시장 수요는 명확히 존재"
+          },
+          "team": {
+            "score": 3,
+            "max": 5,
+            "reason": "구체적 팀 정보 부족하나, 마이크로리액터 분야는 원자력 공학, 재료과학, 시스템 엔지니어링 등 고도의 전문성 필요. 주요 개발사들은 대부분 경험 있는 원자력 전문가들로 구성"
+          },
+          "partnership": {
+            "score": 4,
+            "max": 5,
+            "reason": "정부 지원(DOE 등), 기존 에너지 기업들과의 협력, 군사용 애플리케이션 등 다양한 파트너십 기회 존재. 특히 국�� 차원의 전략적 중요성으로 인한 강력한 백업 가능성"
+          },
+          "fundraising_timing": {
+            "score": 4,
+            "max": 5,
+            "reason": "'마이크로리액터 경쟁이 시작되었다'는 신호는 업계 관심도 급증을 의미. 기후변화와 에너지 안보 이슈로 청정에너지 투자 열기 높음. 초기 단계 진입 적기로 판단"
+          },
+          "total": 18,
+          "conviction": "High",
+          "timing_signal": "3-6months",
+          "one_line": "차세대 원자력 기술 경쟁 초기 단계, 높은 기술 장벽과 정부 지원을 바탕으로 한 장기 성장 스토리"
+        }
+      }
+    ],
+    "fundingStage": "Series-A",
+    "recentActivity": 1,
+    "latestScorecard": {
+      "technology": {
+        "score": 4,
+        "max": 5,
+        "reason": "마이크로리액터는 차세대 원자력 기술로 안전성과 확장성 면에서 기존 대형 원전 대비 혁신적. SMR 대비 더 작은 규모로 분산형 에너지 공급 가능하며, 기술적 난이도는 높지만 상용화 가능성 존재"
+      },
+      "commercialization": {
+        "score": 3,
+        "max": 5,
+        "reason": "아직 초기 단계로 상용화까지 5-10년 소요 예상. 규제 승인 과정이 복잡하고 시간이 오래 걸리지만, 탄소중립과 에너지 안보 이슈로 시장 수요는 명확히 존재"
+      },
+      "team": {
+        "score": 3,
+        "max": 5,
+        "reason": "구체적 팀 정보 부족하나, 마이크로리액터 분야는 원자력 공학, 재료과학, 시스템 엔지니어링 등 고도의 전문성 필요. 주요 개발사들은 대부분 경험 있는 원자력 전문가들로 구성"
+      },
+      "partnership": {
+        "score": 4,
+        "max": 5,
+        "reason": "정부 지원(DOE 등), 기존 에너지 기업들과의 협력, 군사용 애플리케이션 등 다양한 파트너십 기회 존재. 특히 국�� 차원의 전략적 중요성으로 인한 강력한 백업 가능성"
+      },
+      "fundraising_timing": {
+        "score": 4,
+        "max": 5,
+        "reason": "'마이크로리액터 경쟁이 시작되었다'는 신호는 업계 관심도 급증을 의미. 기후변화와 에너지 안보 이슈로 청정에너지 투자 열기 높음. 초기 단계 진입 적기로 판단"
+      },
+      "total": 18,
+      "conviction": "High",
+      "timing_signal": "3-6months",
+      "one_line": "차세대 원자력 기술 경쟁 초기 단계, 높은 기술 장벽과 정부 지원을 바탕으로 한 장기 성장 스토리"
+    }
+  }
+}
