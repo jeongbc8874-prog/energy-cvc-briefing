@@ -261,7 +261,91 @@ a{color:inherit;text-decoration:none;}
 
 <script>
 // ── 데이터 ────────────────────────────────────────────────
-let DATA=null, SIG=[], IDX=[], PROF={}, POL=[];
+let DATA=null, SIG=[], IDX=[], PROF={};
+
+// 정책 트리거 — HTML 내장 데이터 (latest.json 없어도 작동)
+let POL = [
+  {
+    id:"re100_kr", region:"KR", label:"국내 RE100 이행 가이드라인",
+    urgency:"High", sectors:["ESS","Grid"],
+    desc:"산업부 RE100 이행 기업 증가 → 기업용 ESS·PPA·VPP 수요 급증. 2030년까지 RE100 참여 기업 대폭 확대 예상.",
+    url:"https://www.motie.go.kr/motie/ne/presse/press2/bbs/bbsView.do?bbs_seq_n=165753",
+    urlLabel:"산업통상자원부 공식 발표",
+    beneficiaries:["그리드위즈","식스티헤르츠","에너지에이아이","씨에스에너지"]
+  },
+  {
+    id:"h2_roadmap", region:"KR", label:"수소경제 로드맵 2.0",
+    urgency:"High", sectors:["Hydrogen","Marine"],
+    desc:"2030년 청정수소 발전 비중 목표 → 수전해·연료전지 스타트업 직접 수혜. 정부 수소 인프라 투자 확대.",
+    url:"https://www.motie.go.kr/motie/ne/presse/press2/bbs/bbsView.do?bbs_seq_n=164649",
+    urlLabel:"수소경제 로드맵 원문 (산업부)",
+    beneficiaries:["하이리움산업","에스퓨얼셀","범한퓨얼셀","그린수소시스템"]
+  },
+  {
+    id:"kpx_ancillary", region:"KR", label:"KPX 보조서비스 시장 확대",
+    urgency:"High", sectors:["Grid","ESS"],
+    desc:"한국전력거래소 주파수 조정 보조서비스 ESS 참여 확대 → VPP·ESS 스타트업 수익 모델 강화.",
+    url:"https://www.kpx.or.kr/www/contents.do?key=223",
+    urlLabel:"한국전력거래소 보조서비스 안내",
+    beneficiaries:["그리드위즈","씨에스에너지","스탠다드에너지"]
+  },
+  {
+    id:"motie_vpp", region:"KR", label:"산업부 VPP 실증사업",
+    urgency:"Medium", sectors:["Grid","Software"],
+    desc:"산업부 VPP 실증사업 확대 → DR·VPP 플랫폼 스타트업 공공계약 기회. KEPCO와 공동 실증 포함.",
+    url:"https://www.energy.go.kr/",
+    urlLabel:"한국에너지공단 VPP 사업 공고",
+    beneficiaries:["그리드위즈","식스티헤르츠","에너지에이아이"]
+  },
+  {
+    id:"imo2030", region:"GLOBAL", label:"IMO 2030 탄소규제",
+    urgency:"High", sectors:["Marine"],
+    desc:"선박 탄소집약도 40% 감축 의무화 → 대체연료·연료전지 스타트업 수요 급증. 2026년부터 본격 시행.",
+    url:"https://www.imo.org/en/MediaCentre/PressBriefings/pages/CII-and-EEXI-in-force.aspx",
+    urlLabel:"IMO 공식 발표 (영문)",
+    beneficiaries:["빈센","범한퓨얼셀","파나시아","CMB.TECH"]
+  },
+  {
+    id:"ira_us", region:"US", label:"미국 IRA (인플레이션 감축법)",
+    urgency:"High", sectors:["ESS","Solar","H2"],
+    desc:"IRA 세액공제로 미국 ESS·수소 시장 급성장 → 한국 기업 미국 시장 진출 직접 수혜.",
+    url:"https://www.energy.gov/lpo/inflation-reduction-act",
+    urlLabel:"미 에너지부 IRA 공식 안내 (영문)",
+    beneficiaries:["LG에너지솔루션 생태계","한화솔루션","스탠다드에너지"]
+  },
+  {
+    id:"eu_cbam", region:"EU", label:"EU CBAM (탄소국경세)",
+    urgency:"Medium", sectors:["H2","ESS","Grid"],
+    desc:"탄소국경세 2026년 전면시행 → 청정에너지 기술 수출 경쟁력 강화. 국내 스타트업 EU 수출 기회.",
+    url:"https://taxation-customs.ec.europa.eu/carbon-border-adjustment-mechanism_en",
+    urlLabel:"EU 집행위원회 CBAM 공식 페이지 (영문)",
+    beneficiaries:["스탠다드에너지","하이리움산업","씨에스에너지"]
+  },
+  {
+    id:"ferc2222", region:"US", label:"FERC Order 2222 (미국 분산자원)",
+    urgency:"Medium", sectors:["Grid","VPP"],
+    desc:"미국 분산자원 도매시장 참여 허용 → VPP·DR 스타트업 TAM 대폭 확대. 글로벌 레퍼런스.",
+    url:"https://www.ferc.gov/media/ferc-order-no-2222-fact-sheet",
+    urlLabel:"FERC Order 2222 팩트시트 (영문)",
+    beneficiaries:["AutoGrid","Voltus","Leap Energy","그리드위즈"]
+  },
+  {
+    id:"dart_ess", region:"KR", label:"국내 에너지 기업 DART 공시",
+    urgency:"Medium", sectors:["ESS","Grid","H2"],
+    desc:"에너지 관련 기업 DART 공시 실시간 확인 가능 — 유상증자, 전환사채, 계약체결 등 팩트 데이터.",
+    url:"https://dart.fss.or.kr/dsab007/main.do",
+    urlLabel:"DART 전자공시시스템 (금융감독원)",
+    beneficiaries:["스탠다드에너지","씨에스에너지","그리드위즈","하이리움산업"]
+  },
+  {
+    id:"china_ess", region:"CN", label:"중국 ESS 의무설치 정책",
+    urgency:"High", sectors:["ESS"],
+    desc:"중국 신재생 발전소 ESS 의무 설치 → 중국 ESS 스타트업 급성장. 국내 기업 경쟁 심화 vs 기술 수출 기회.",
+    url:"https://www.ndrc.gov.cn/",
+    urlLabel:"중국 국가발전개혁위원회 NDRC (중문)",
+    beneficiaries:["Pylontech","REPT","EVE Energy"]
+  }
+];
 let curF="all", curTab="today", EXP=new Set();
 
 // ── 시장 지도 데이터 ──────────────────────────────────────
@@ -376,7 +460,7 @@ async function loadLatest() {
   try {
     const r=await fetch("data/latest.json?"+Date.now());
     if(!r.ok)throw new Error();
-    DATA=await r.json(); SIG=DATA.signals||[]; POL=DATA.policyTriggers||[];
+    DATA=await r.json(); SIG=DATA.signals||[]; if(DATA.policyTriggers&&DATA.policyTriggers.length) POL=DATA.policyTriggers;
     document.getElementById("liveBadge").textContent="● "+(DATA.dateKr||DATA.date);
     document.getElementById("copyBtn").style.display="flex";
     renderSidebar(); renderFeed(); renderPolicyMini();
