@@ -9,484 +9,655 @@
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:'DM Sans',sans-serif;background:#F6F4F0;color:#1A1710;min-height:100vh;}
 ::-webkit-scrollbar{width:5px;}::-webkit-scrollbar-thumb{background:#E6E2DA;border-radius:99px;}
+a{color:inherit;text-decoration:none;}
 
-.header{background:#0F2744;padding:13px 24px;position:sticky;top:0;z-index:100;border-bottom:1px solid #0A1E38;}
-.header-inner{max-width:1280px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;}
-.header h1{font-family:'Spectral',serif;font-size:18px;font-weight:700;color:#F0EDE6;letter-spacing:-0.2px;}
-.header-sub{font-size:11px;color:#6B7F96;margin-top:2px;}
-.header-right{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+/* ── 헤더 ── */
+.hdr{background:#0F2744;padding:12px 24px;position:sticky;top:0;z-index:100;border-bottom:1px solid #0A1E38;}
+.hdr-in{max-width:1380px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;}
+.hdr h1{font-family:'Spectral',serif;font-size:17px;font-weight:700;color:#F0EDE6;letter-spacing:-0.2px;}
+.hdr-sub{font-size:10px;color:#6B7F96;margin-top:2px;}
 .badge-live{font-family:'DM Mono',monospace;font-size:10px;color:#4ADE80;padding:3px 10px;border-radius:20px;background:#0F3020;border:1px solid #1A5030;}
 
-.tab-bar{background:#162336;border-bottom:1px solid #1E2E38;padding:0 24px;}
-.tab-bar-inner{max-width:1280px;margin:0 auto;display:flex;}
-.tab{font-size:12px;font-weight:500;color:#6B7F96;padding:11px 16px;border:none;background:none;cursor:pointer;border-bottom:2px solid transparent;transition:all 0.15s;white-space:nowrap;}
-.tab.active{color:#C8DFF0;border-bottom-color:#4A9EFF;font-weight:600;}
+/* ── 탭 ── */
+.tabs{background:#162336;border-bottom:1px solid #1E2E38;padding:0 24px;overflow-x:auto;}
+.tabs-in{max-width:1380px;margin:0 auto;display:flex;min-width:max-content;}
+.tab{font-size:11px;font-weight:500;color:#6B7F96;padding:11px 14px;border:none;background:none;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;}
+.tab.on{color:#C8DFF0;border-bottom-color:#4A9EFF;font-weight:600;}
 
-.filter-bar{background:#F6F4F0;padding:10px 24px;border-bottom:1px solid #E6E2DA;position:sticky;top:50px;z-index:90;}
-.filter-bar-inner{max-width:1280px;margin:0 auto;display:flex;gap:7px;flex-wrap:wrap;align-items:center;}
-.chip{font-size:11px;font-weight:500;padding:4px 11px;border-radius:20px;border:1px solid #E6E2DA;background:#fff;color:#4A4538;cursor:pointer;transition:all 0.15s;}
-.chip.active{background:#1B3A5C;color:#fff;border-color:#1B3A5C;font-weight:600;}
-.chip.kr.active{background:#2A1E00;color:#FCD34D;border-color:#FFD700;}
-.chip.cn.active{background:#7A0000;color:#fff;border-color:#CC0000;}
-.chip.green.active{background:#0F3020;color:#4ADE80;border-color:#1A5030;}
-.search-box{flex:1;min-width:160px;max-width:260px;padding:5px 12px;border:1px solid #E6E2DA;border-radius:20px;font-size:12px;font-family:'DM Sans',sans-serif;outline:none;}
-.search-box:focus{border-color:#1B3A5C;}
+/* ── 필터바 ── */
+.fbar{background:#F6F4F0;padding:9px 24px;border-bottom:1px solid #E6E2DA;position:sticky;top:49px;z-index:90;}
+.fbar-in{max-width:1380px;margin:0 auto;display:flex;gap:6px;flex-wrap:wrap;align-items:center;}
+.chip{font-size:11px;font-weight:500;padding:4px 11px;border-radius:20px;border:1px solid #E6E2DA;background:#fff;color:#4A4538;cursor:pointer;}
+.chip.on{background:#1B3A5C;color:#fff;border-color:#1B3A5C;font-weight:600;}
+.chip.kr.on{background:#2A1E00;color:#FCD34D;border-color:#FFD700;}
+.chip.cn.on{background:#7A0000;color:#fff;border-color:#CC0000;}
+.chip.g.on{background:#0F3020;color:#4ADE80;border-color:#1A5030;}
+.srch{flex:1;min-width:150px;max-width:250px;padding:5px 12px;border:1px solid #E6E2DA;border-radius:20px;font-size:12px;outline:none;}
+.srch:focus{border-color:#1B3A5C;}
 
-.main{max-width:1280px;margin:0 auto;padding:18px 24px;display:grid;grid-template-columns:210px 1fr;gap:18px;}
-@media(max-width:768px){.main{grid-template-columns:1fr;padding:12px 14px;}}
-
-/* 사이드바 */
-.sidebar{display:flex;flex-direction:column;gap:11px;}
+/* ── 레이아웃 ── */
+.wrap{max-width:1380px;margin:0 auto;padding:16px 24px;display:grid;grid-template-columns:200px 1fr;gap:16px;}
+@media(max-width:768px){.wrap{grid-template-columns:1fr;padding:10px 12px;}}
+.sidebar{display:flex;flex-direction:column;gap:10px;}
 .card{background:#fff;border:1px solid #E6E2DA;border-radius:7px;overflow:hidden;}
-.card-hd{padding:10px 14px;border-bottom:1px solid #F0EDE8;font-size:10px;font-weight:700;color:#8A8070;text-transform:uppercase;letter-spacing:0.5px;}
-.card-bd{padding:13px 14px;}
-.stat-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:7px;}
-.stat-row:last-child{margin-bottom:0;}
-.sn{font-family:'DM Mono',monospace;font-size:15px;font-weight:700;}
-.sl{font-size:12px;color:#4A4538;}
+.chd{padding:9px 13px;border-bottom:1px solid #F0EDE8;font-size:10px;font-weight:700;color:#8A8070;text-transform:uppercase;letter-spacing:0.5px;}
+.cbd{padding:12px 13px;}
 
-/* 정책 트리거 */
-.policy-item{padding:9px 11px;border-radius:5px;margin-bottom:6px;cursor:pointer;transition:all 0.15s;}
-.policy-item:hover{transform:translateY(-1px);}
-.policy-label{font-size:12px;font-weight:600;margin-bottom:3px;}
-.policy-desc{font-size:11px;line-height:1.5;color:#4A4538;}
-.policy-cos{display:flex;gap:4px;margin-top:5px;flex-wrap:wrap;}
-.policy-co{font-size:10px;padding:1px 6px;border-radius:10px;background:rgba(255,255,255,0.6);}
-
-/* 피드 */
-.feed-wrap{background:#fff;border:1px solid #E6E2DA;border-radius:7px;overflow:hidden;}
+/* ── 신호 피드 ── */
+.feed{background:#fff;border:1px solid #E6E2DA;border-radius:7px;overflow:hidden;}
 .feed-hd{padding:10px 18px;border-bottom:1px solid #E6E2DA;display:flex;justify-content:space-between;align-items:center;}
-.feed-title{font-size:11px;font-weight:700;color:#8A8070;text-transform:uppercase;letter-spacing:0.5px;}
-.feed-count{font-family:'DM Mono',monospace;font-size:10px;color:#B8B0A0;}
+.sig{border-bottom:1px solid #F0EDE8;cursor:pointer;}
+.sig:last-child{border-bottom:none;}
+.sig:hover{background:#FAF9F6;}
+.sig-hd{padding:11px 18px;}
+.sig-bd{padding:0 18px 13px;animation:fadeIn 0.2s;}
+.bx{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:5px;}
+.b{display:inline-flex;align-items:center;gap:2px;padding:2px 7px;border-radius:3px;font-size:11px;font-weight:600;white-space:nowrap;}
+.b-u{background:#EDF6F1;color:#1A5C36;border:1px solid #A7E3BE;}
+.b-e{background:#EDF2F8;color:#1B3A5C;border:1px solid #C0D4EC;}
+.b-l{background:#F4F2EE;color:#8A8070;border:1px solid #D8D0C4;}
+.b-H{background:#FDF0F0;color:#7A2020;border:1px solid #F0C0C0;}
+.b-M{background:#FDF4E8;color:#6B3600;border:1px solid #F0D8A8;}
+.b-Lo{background:#F4F2EE;color:#8A8070;border:1px solid #D8D0C4;}
+.b-act{background:#FDF0F0;color:#7A2020;border:1px solid #F0C0C0;font-weight:700;}
+.b-stg{background:#F0EDE8;color:#5A4A30;border:1px solid #D8C8A0;}
+.b-kr{background:#FFF8E0;color:#92400E;border:1px solid #EAD640;}
+.b-cn{background:#FFF0F0;color:#CC0000;border:1px solid #FFB0B0;}
+.b-gl{background:#EDF2F8;color:#1B3A5C;border:1px solid #C0D4EC;}
+.b-rt{background:#EDF6F1;color:#1A5C36;border:1px solid #A7E3BE;font-size:10px;}
+.tr{display:flex;align-items:baseline;gap:7px;flex-wrap:wrap;}
+.co{font-size:13px;font-weight:700;flex-shrink:0;}
+.tt{font-size:13px;font-weight:600;color:#1A1710;line-height:1.4;}
+.tt:hover{color:#1B3A5C;text-decoration:underline;}
+.hint{font-size:10px;color:#B8B0A0;margin-top:3px;}
+.ins{background:#FFFBEE;border:1px solid #EAD640;border-radius:5px;padding:10px 12px;margin-bottom:7px;}
+.ins-l{font-size:10px;font-weight:700;color:#92400E;text-transform:uppercase;letter-spacing:0.4px;margin-bottom:4px;}
+.ins-t{font-size:12px;color:#4A3500;line-height:1.75;}
+.act-b{background:#FFF8DC;border-radius:4px;padding:5px 8px;margin-top:5px;font-size:12px;color:#4A3500;}
+.rsk{background:#FEF2F2;border:1px solid #FCA5A5;border-radius:4px;padding:5px 8px;margin-top:4px;font-size:11px;color:#7A2020;}
+.src-r{font-size:10px;color:#B8B0A0;margin-bottom:8px;display:flex;align-items:center;gap:5px;flex-wrap:wrap;}
 
-/* 신호 카드 */
-.signal{border-bottom:1px solid #F0EDE8;transition:background 0.1s;cursor:pointer;}
-.signal:last-child{border-bottom:none;}
-.signal:hover{background:#FAF9F6;}
-.signal-hd{padding:12px 18px;}
-.signal-bd{padding:0 18px 14px;animation:fadeIn 0.2s;}
-.badges{display:flex;align-items:center;gap:4px;margin-bottom:5px;flex-wrap:wrap;}
-.b{display:inline-flex;align-items:center;gap:3px;padding:2px 7px;border-radius:3px;font-size:11px;font-weight:600;white-space:nowrap;}
-.b-unlisted{background:#EDF6F1;color:#1A5C36;border:1px solid #A7E3BE;}
-.b-listed{background:#F4F2EE;color:#8A8070;border:1px solid #D8D0C4;}
-.b-eco{background:#EDF2F8;color:#1B3A5C;border:1px solid #C0D4EC;}
-.b-high{background:#FDF0F0;color:#7A2020;border:1px solid #F0C0C0;}
-.b-med{background:#FDF4E8;color:#6B3600;border:1px solid #F0D8A8;}
-.b-low{background:#F4F2EE;color:#8A8070;border:1px solid #D8D0C4;}
-.b-real{background:#EDF6F1;color:#1A5C36;border:1px solid #A7E3BE;}
-.b-action{background:#FDF0F0;color:#7A2020;border:1px solid #F0C0C0;font-weight:700;}
-.b-stage{background:#F0EDE8;color:#5A4A30;border:1px solid #D8C8A0;}
-.b-cat-kr{background:#FFF8E0;color:#92400E;border:1px solid #EAD640;}
-.b-cat-cn{background:#FFF0F0;color:#CC0000;border:1px solid #FFB0B0;}
-.b-cat-gl{background:#EDF2F8;color:#1B3A5C;border:1px solid #C0D4EC;}
-.title-row{display:flex;align-items:baseline;gap:7px;flex-wrap:wrap;}
-.co-name{font-size:13px;font-weight:700;flex-shrink:0;}
-.sig-title{font-size:13px;font-weight:600;color:#1A1710;line-height:1.4;text-decoration:none;}
-.sig-title:hover{text-decoration:underline;color:#1B3A5C;}
-.expand-hint{font-size:10px;color:#B8B0A0;margin-top:3px;}
+/* ── 스코어카드 ── */
+.sc{background:#F0F7FF;border:1px solid #BFDBFE;border-radius:5px;padding:10px 12px;margin-bottom:7px;}
+.sc-hd{font-size:10px;font-weight:700;color:#1E40AF;text-transform:uppercase;letter-spacing:0.4px;margin-bottom:7px;display:flex;justify-content:space-between;}
+.sc-g{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-bottom:6px;}
+.sc-i{background:rgba(255,255,255,0.7);border-radius:3px;padding:5px 7px;}
+.sc-il{font-size:10px;color:#4A5568;margin-bottom:2px;}
+.sc-bw{display:flex;align-items:center;gap:4px;}
+.sc-bb{flex:1;height:4px;background:#DBEAFE;border-radius:99px;overflow:hidden;}
+.sc-bf{height:100%;background:#3B82F6;border-radius:99px;}
+.sc-n{font-family:'DM Mono',monospace;font-size:10px;color:#1E40AF;font-weight:600;}
+.sc-ol{font-size:11px;color:#1E3A8A;font-style:italic;padding-top:5px;border-top:1px solid #BFDBFE;margin-top:4px;}
 
-/* 딥 인사이트 */
-.insight-box{background:#FFFBEE;border:1px solid #EAD640;border-radius:5px;padding:11px 13px;margin-bottom:8px;}
-.insight-lbl{font-size:10px;font-weight:700;color:#92400E;text-transform:uppercase;letter-spacing:0.4px;margin-bottom:4px;}
-.insight-txt{font-size:12px;color:#4A3500;line-height:1.75;}
-.action-box{background:#FFF8DC;border-radius:4px;padding:5px 9px;margin-top:6px;font-size:12px;color:#4A3500;}
-.risk-box{background:#FEF2F2;border:1px solid #FCA5A5;border-radius:4px;padding:5px 9px;margin-top:5px;font-size:11px;color:#7A2020;}
+/* ── 유사딜 ── */
+.cd{background:#F5F3FF;border:1px solid #DDD6FE;border-radius:5px;padding:10px 12px;margin-bottom:7px;}
+.cd-hd{font-size:10px;font-weight:700;color:#5B21B6;text-transform:uppercase;letter-spacing:0.4px;margin-bottom:7px;}
+.di{background:rgba(255,255,255,0.7);border-radius:4px;padding:6px 8px;margin-bottom:4px;}
+.di:last-child{margin-bottom:0;}
+.di-t{display:flex;justify-content:space-between;margin-bottom:2px;}
+.di-co{font-size:12px;font-weight:700;color:#5B21B6;}
+.di-am{font-family:'DM Mono',monospace;font-size:11px;font-weight:600;color:#7C3AED;}
+.di-m{font-size:10px;color:#6D28D9;}
 
-/* 스코어카드 */
-.scorecard{background:#F0F7FF;border:1px solid #BFDBFE;border-radius:6px;padding:11px 13px;margin-bottom:8px;}
-.sc-title{font-size:10px;font-weight:700;color:#1E40AF;text-transform:uppercase;letter-spacing:0.4px;margin-bottom:8px;display:flex;align-items:center;justify-content:space-between;}
-.sc-conviction{font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;}
-.sc-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:8px;}
-.sc-item{background:rgba(255,255,255,0.7);border-radius:4px;padding:6px 8px;}
-.sc-item-label{font-size:10px;color:#4A5568;margin-bottom:3px;}
-.sc-bar-wrap{display:flex;align-items:center;gap:5px;}
-.sc-bar-bg{flex:1;height:4px;background:#DBEAFE;border-radius:99px;overflow:hidden;}
-.sc-bar-fill{height:100%;border-radius:99px;}
-.sc-score{font-family:'DM Mono',monospace;font-size:10px;color:#1E40AF;font-weight:600;}
-.sc-timing{font-size:11px;color:#1E40AF;font-weight:600;margin-top:5px;}
-.sc-oneline{font-size:12px;color:#1E3A8A;font-style:italic;margin-top:4px;padding-top:5px;border-top:1px solid #BFDBFE;}
+/* ── 정책 ── */
+.pt{background:#FEF9E7;border:1px solid #FCD34D;border-radius:5px;padding:10px 12px;margin-bottom:7px;}
+.pt-hd{font-size:10px;font-weight:700;color:#92400E;text-transform:uppercase;letter-spacing:0.4px;margin-bottom:5px;}
 
-/* 유사 딜 */
-.comp-deals{background:#F5F3FF;border:1px solid #DDD6FE;border-radius:6px;padding:11px 13px;margin-bottom:8px;}
-.comp-title{font-size:10px;font-weight:700;color:#5B21B6;text-transform:uppercase;letter-spacing:0.4px;margin-bottom:8px;}
-.deal-item{background:rgba(255,255,255,0.7);border-radius:4px;padding:7px 9px;margin-bottom:5px;}
-.deal-item:last-child{margin-bottom:0;}
-.deal-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:3px;}
-.deal-co{font-size:12px;font-weight:700;color:#5B21B6;}
-.deal-amt{font-family:'DM Mono',monospace;font-size:11px;font-weight:600;color:#7C3AED;}
-.deal-meta{font-size:10px;color:#6D28D9;}
-.deal-inv{font-size:10px;color:#7C3AED;margin-top:2px;}
+/* ── 통계 그리드 ── */
+.sg{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:13px;}
+@media(max-width:600px){.sg{grid-template-columns:repeat(2,1fr);}}
+.sc2{background:#fff;border:1px solid #E6E2DA;border-radius:7px;padding:10px 12px;}
+.sc2-n{font-family:'DM Mono',monospace;font-size:20px;font-weight:700;}
+.sc2-l{font-size:11px;color:#8A8070;margin-top:2px;}
+.brief{background:#0F2744;border-radius:7px;padding:15px 19px;margin-bottom:13px;}
+.brief-t{font-family:'Spectral',serif;font-size:13px;font-weight:700;color:#EDE9E0;margin-bottom:6px;}
+.brief-b{font-size:12px;color:#9AB0C0;line-height:1.9;white-space:pre-wrap;}
 
-/* 정책 트리거 (신호 내) */
-.policy-tags{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:8px;}
-.ptag{font-size:10px;padding:2px 8px;border-radius:10px;font-weight:600;}
-
-/* 출처 */
-.source-row{font-size:10px;color:#B8B0A0;margin-bottom:10px;display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
-.real-badge{background:#EDF6F1;color:#1A5C36;border:1px solid #A7E3BE;padding:1px 6px;border-radius:3px;font-size:10px;font-weight:600;}
-.ai-badge{background:#FDF4E8;color:#6B3600;border:1px solid #F0D8A8;padding:1px 6px;border-radius:3px;font-size:10px;font-weight:600;}
-
-/* 기업 프로파일 탭 */
-.profile-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;}
-.profile-card{background:#fff;border:1px solid #E6E2DA;border-radius:7px;padding:15px;cursor:pointer;transition:all 0.15s;}
-.profile-card:hover{border-color:#1B3A5C;box-shadow:0 2px 8px rgba(27,58,92,0.1);}
-.profile-name{font-size:14px;font-weight:700;color:#1A1710;margin-bottom:4px;}
-.profile-meta{font-size:11px;color:#8A8070;margin-bottom:8px;}
-.profile-stats{display:flex;gap:10px;margin-bottom:8px;}
-.profile-stat{text-align:center;}
-.profile-stat-n{font-family:'DM Mono',monospace;font-size:16px;font-weight:700;color:#1A1710;}
-.profile-stat-l{font-size:10px;color:#8A8070;}
-.profile-history{display:flex;gap:3px;align-items:flex-end;height:30px;}
-.history-bar{flex:1;border-radius:2px 2px 0 0;min-width:4px;}
-
-/* 브리핑 */
-.brief-card{background:#0F2744;border-radius:7px;padding:16px 20px;margin-bottom:14px;}
-.brief-title{font-family:'Spectral',serif;font-size:13px;font-weight:700;color:#EDE9E0;margin-bottom:7px;display:flex;align-items:center;gap:8px;}
-.brief-text{font-size:12px;color:#9AB0C0;line-height:1.9;white-space:pre-wrap;}
-
-/* 통계 카드 */
-.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px;}
-@media(max-width:600px){.stats-grid{grid-template-columns:repeat(2,1fr);}}
-.stat-card{background:#fff;border:1px solid #E6E2DA;border-radius:7px;padding:11px 13px;}
-.stat-card-n{font-family:'DM Mono',monospace;font-size:20px;font-weight:700;}
-.stat-card-l{font-size:11px;color:#8A8070;margin-top:2px;}
-
-/* 히스토리 */
-.history-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;}
-.history-card{background:#fff;border:1px solid #E6E2DA;border-radius:7px;padding:13px;cursor:pointer;transition:all 0.15s;}
-.history-card:hover{border-color:#1B3A5C;}
-.history-date{font-family:'DM Mono',monospace;font-size:12px;color:#1B3A5C;font-weight:600;margin-bottom:4px;}
-
-.empty{text-align:center;padding:48px 24px;}
-.loading{text-align:center;padding:40px;}
-@keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
 @keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
-.spinner{font-size:26px;animation:spin 1.5s linear infinite;display:inline-block;margin-bottom:10px;}
+@keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+.spin{animation:spin 1.5s linear infinite;display:inline-block;}
+
+/* ═══════════════════════════════════════
+   새 탭들 스타일
+═══════════════════════════════════════ */
+
+/* ── 시장 지도 ── */
+.map-wrap{padding:0;}
+.map-legend{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px;}
+.map-leg-item{display:flex;align-items:center;gap:5px;font-size:11px;color:#4A4538;}
+.map-leg-dot{width:10px;height:10px;border-radius:50%;}
+.sector-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:14px;}
+.sector-box{background:#fff;border:1px solid #E6E2DA;border-radius:8px;overflow:hidden;}
+.sector-hd{padding:11px 15px;font-size:12px;font-weight:700;display:flex;justify-content:space-between;align-items:center;}
+.sector-companies{padding:10px 12px;display:flex;flex-wrap:wrap;gap:7px;}
+.bubble{padding:7px 10px;border-radius:6px;cursor:pointer;transition:all 0.15s;position:relative;}
+.bubble:hover{transform:translateY(-2px);box-shadow:0 3px 10px rgba(0,0,0,0.1);}
+.bubble-name{font-size:12px;font-weight:600;}
+.bubble-stage{font-size:10px;opacity:0.8;margin-top:1px;}
+.bubble-score{font-family:'DM Mono',monospace;font-size:10px;font-weight:700;position:absolute;top:4px;right:6px;}
+
+/* ── 경쟁사 비교 ── */
+.cmp-wrap{overflow-x:auto;}
+.cmp-table{width:100%;border-collapse:collapse;font-size:12px;}
+.cmp-table th{padding:10px 14px;text-align:left;font-size:10px;font-weight:700;color:#8A8070;text-transform:uppercase;letter-spacing:0.5px;border-bottom:2px solid #E6E2DA;white-space:nowrap;background:#FAF9F6;}
+.cmp-table td{padding:10px 14px;border-bottom:1px solid #F0EDE8;vertical-align:top;}
+.cmp-table tr:hover td{background:#FAF9F6;}
+.cmp-sector-row td{background:#F6F4F0;font-weight:600;color:#1B3A5C;padding:6px 14px;font-size:11px;}
+.score-bar{display:flex;align-items:center;gap:5px;}
+.score-bg{width:50px;height:5px;background:#F0EDE8;border-radius:99px;overflow:hidden;}
+.score-fill{height:100%;border-radius:99px;}
+
+/* ── 펀딩 타임라인 ── */
+.timeline-wrap{padding:4px;}
+.tl-company{margin-bottom:20px;}
+.tl-name{font-size:13px;font-weight:700;color:#1A1710;margin-bottom:8px;display:flex;align-items:center;gap:8px;}
+.tl-track{position:relative;padding:8px 0;}
+.tl-line{position:absolute;top:50%;left:0;right:0;height:2px;background:#E6E2DA;transform:translateY(-50%);}
+.tl-events{display:flex;gap:0;position:relative;z-index:1;justify-content:space-between;align-items:center;padding:0 10px;}
+.tl-event{display:flex;flex-direction:column;align-items:center;gap:3px;}
+.tl-dot{width:14px;height:14px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 2px currentColor;}
+.tl-label{font-size:10px;font-weight:600;white-space:nowrap;}
+.tl-date{font-family:'DM Mono',monospace;font-size:9px;color:#B8B0A0;}
+.tl-pred{border:2px dashed currentColor!important;background:#fff!important;}
+
+/* ── 대기업 생태계 ── */
+.eco-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:14px;}
+.eco-card{background:#fff;border:1px solid #E6E2DA;border-radius:8px;overflow:hidden;}
+.eco-hd{padding:12px 16px;display:flex;align-items:center;gap:10px;}
+.eco-logo{width:36px;height:36px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;flex-shrink:0;}
+.eco-name{font-size:14px;font-weight:700;color:#1A1710;}
+.eco-sub{font-size:11px;color:#8A8070;}
+.eco-strategy{padding:10px 16px;font-size:12px;color:#4A4538;line-height:1.65;border-bottom:1px solid #F0EDE8;}
+.eco-startups{padding:10px 16px;}
+.eco-startup-item{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid #F6F4F0;}
+.eco-startup-item:last-child{border-bottom:none;}
+.eco-startup-name{font-size:12px;font-weight:600;color:#1A1710;}
+.eco-startup-rel{font-size:11px;color:#8A8070;}
+.eco-startup-badge{font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;}
+
+/* ── 주간 리포트 ── */
+.weekly-wrap{max-width:700px;}
+.weekly-preview{background:#fff;border:1px solid #E6E2DA;border-radius:8px;overflow:hidden;margin-bottom:14px;}
+.weekly-preview-hd{background:#0F2744;padding:14px 18px;}
+.weekly-settings{padding:16px;}
+
+/* ── 프로파일 ── */
+.prof-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px;}
+.prof-card{background:#fff;border:1px solid #E6E2DA;border-radius:7px;padding:14px;cursor:pointer;transition:all 0.15s;}
+.prof-card:hover{border-color:#1B3A5C;box-shadow:0 2px 8px rgba(27,58,92,0.1);}
+.hist-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:9px;}
+.hist-card{background:#fff;border:1px solid #E6E2DA;border-radius:7px;padding:12px;cursor:pointer;transition:all 0.15s;}
+.hist-card:hover{border-color:#1B3A5C;}
 </style>
 </head>
 <body>
 
-<div class="header">
-  <div class="header-inner">
+<!-- HEADER -->
+<div class="hdr">
+  <div class="hdr-in">
     <div>
       <h1>⚡ Energy CVC Intelligence</h1>
-      <div class="header-sub">국내 + 글로벌 + 중국 · 기업 프로파일 · 스코어카드 · 정책 트리거 · 유사 딜</div>
+      <div class="hdr-sub">국내 + 글로벌 + 중국 · 시장지도 · 경쟁사 비교 · 펀딩 타임라인 · 생태계 레이더</div>
     </div>
-    <div class="header-right">
+    <div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap;">
       <div class="badge-live" id="liveBadge">● 로딩 중</div>
-      <button onclick="copyReport()" id="copyBtn" style="display:none;font-size:11px;font-weight:600;padding:5px 12px;border-radius:5px;background:#1A5C36;color:#fff;border:none;cursor:pointer;">📋 복사</button>
-      <button onclick="switchTab('settings')" style="font-size:11px;color:#C8DFF0;background:none;border:1px solid #2A3F58;border-radius:5px;padding:5px 11px;cursor:pointer;">⚙ 설정</button>
+      <button id="copyBtn" onclick="copyReport()" style="display:none;font-size:11px;font-weight:600;padding:5px 11px;border-radius:5px;background:#1A5C36;color:#fff;border:none;cursor:pointer;">📋 복사</button>
     </div>
   </div>
 </div>
 
-<div class="tab-bar">
-  <div class="tab-bar-inner">
-    <button class="tab active" onclick="switchTab('today')">📡 오늘 신호</button>
+<!-- TABS -->
+<div class="tabs">
+  <div class="tabs-in">
+    <button class="tab on" onclick="switchTab('today')">📡 오늘 신호</button>
+    <button class="tab" onclick="switchTab('map')">🗺 시장 지도</button>
+    <button class="tab" onclick="switchTab('compare')">📊 경쟁사 비교</button>
+    <button class="tab" onclick="switchTab('timeline')">⏱ 펀딩 타임라인</button>
+    <button class="tab" onclick="switchTab('ecosystem')">🏭 대기업 생태계</button>
     <button class="tab" onclick="switchTab('profiles')">🏢 기업 프로파일</button>
-    <button class="tab" onclick="switchTab('policy')">📋 정책 트리거</button>
-    <button class="tab" onclick="switchTab('history')">🗂 과거 검색</button>
-    <button class="tab" onclick="switchTab('settings')">⚙ 설정</button>
+    <button class="tab" onclick="switchTab('weekly')">📧 주간 리포트</button>
+    <button class="tab" onclick="switchTab('history')">🗂 과거</button>
   </div>
 </div>
 
-<div class="filter-bar" id="filterBar">
-  <div class="filter-bar-inner">
-    <input class="search-box" id="searchInput" placeholder="🔍 기업명, 키워드…" oninput="renderFeed()">
-    <button class="chip active" onclick="setFilter('all',this)">전체</button>
-    <button class="chip kr" onclick="setFilter('kr',this)">🇰🇷 국내</button>
-    <button class="chip" onclick="setFilter('global',this)">🌍 글로벌</button>
-    <button class="chip cn" onclick="setFilter('cn',this)">🇨🇳 중국</button>
-    <button class="chip green" onclick="setFilter('unlisted',this)">🟢 비상장</button>
-    <button class="chip" onclick="setFilter('high',this)">🔴 High</button>
-    <button class="chip" onclick="setFilter('investigate',this)">⚡ 즉시검토</button>
-    <button class="chip" onclick="setFilter('scorecard',this)">📊 스코어카드</button>
+<!-- FILTER BAR -->
+<div class="fbar" id="filterBar">
+  <div class="fbar-in">
+    <input class="srch" id="srch" placeholder="🔍 기업명, 키워드…" oninput="renderFeed()">
+    <button class="chip on"  onclick="setF('all',this)">전체</button>
+    <button class="chip kr"  onclick="setF('kr',this)">🇰🇷 국내</button>
+    <button class="chip"     onclick="setF('gl',this)">🌍 글로벌</button>
+    <button class="chip cn"  onclick="setF('cn',this)">🇨🇳 중국</button>
+    <button class="chip g"   onclick="setF('un',this)">🟢 비상장</button>
+    <button class="chip"     onclick="setF('hi',this)">🔴 High</button>
+    <button class="chip"     onclick="setF('iv',this)">⚡ 즉시검토</button>
+    <button class="chip"     onclick="setF('sc',this)">📊 스코어카드</button>
   </div>
 </div>
 
-<div class="main" id="mainGrid">
+<!-- MAIN -->
+<div class="wrap" id="mainWrap">
   <div class="sidebar">
-    <div class="card"><div class="card-hd">결과 요약</div><div class="card-bd" id="statsBox"><div style="font-size:11px;color:#B8B0A0">로딩 중…</div></div></div>
-    <div class="card"><div class="card-hd">🗂 날짜별</div><div class="card-bd" style="padding:7px 7px" id="dateList"><div style="font-size:11px;color:#B8B0A0">로딩 중…</div></div></div>
-    <div class="card" id="policyCard"><div class="card-hd">📋 정책 트리거</div><div class="card-bd" id="policyMini"></div></div>
+    <div class="card"><div class="chd">요약</div><div class="cbd" id="statsBox"><div style="font-size:11px;color:#B8B0A0">로딩 중…</div></div></div>
+    <div class="card"><div class="chd">🗂 날짜별</div><div class="cbd" style="padding:6px 6px" id="dateList"></div></div>
+    <div class="card"><div class="chd">📋 정책 트리거</div><div class="cbd" id="policyMini"></div></div>
   </div>
-  <div id="feedArea"><div class="loading"><div class="spinner">⟳</div><div style="font-size:13px;color:#8A8070">데이터 로딩 중…</div></div></div>
+  <div id="feedArea"><div style="text-align:center;padding:40px;"><div class="spin" style="font-size:26px">⟳</div><div style="font-size:13px;color:#8A8070;margin-top:10px">로딩 중…</div></div></div>
 </div>
 
 <!-- 설정 패널 -->
 <div id="settingsPanel" style="display:none;padding:24px;max-width:560px;margin:0 auto;">
-  <div class="card"><div class="card-hd">API 설정</div><div class="card-bd">
-    <div style="font-size:12px;color:#8A8070;margin-bottom:12px;line-height:1.6">데이터는 GitHub Actions가 매일 오전 7시(KST) 자동 수집합니다.</div>
-    <div style="padding:12px;background:#F0FDF4;border-radius:5px;border:1px solid #A7E3BE;font-size:11px;color:#1A5C36;line-height:1.7">
-      ✓ 매일 오전 7시 KST 자동 실행<br>
-      ✓ NewsAPI 실제 뉴스 수집<br>
-      ✓ Claude AI 투자 분석<br>
-      ✓ 기업 프로파일 누적 저장<br>
-      ✓ 스코어카드 자동 생성
+  <div class="card"><div class="chd">API 설정</div><div class="cbd">
+    <div style="padding:12px;background:#F0FDF4;border-radius:5px;border:1px solid #A7E3BE;font-size:11px;color:#1A5C36;line-height:1.8">
+      ✓ 매일 오전 7시 KST 자동 실행<br>✓ NewsAPI 실제 뉴스 수집<br>✓ Claude AI 투자 분석<br>✓ 기업 프로파일 누적 저장<br>✓ 스코어카드 자동 생성
     </div>
   </div></div>
 </div>
 
 <script>
-let DATA=null, SIGNALS=[], DATE_INDEX=[], PROFILES={}, POLICY=[];
-let currentFilter="all", currentView="all", expandedIds=new Set(), currentTab="today";
+// ── 데이터 ────────────────────────────────────────────────
+let DATA=null, SIG=[], IDX=[], PROF={}, POL=[];
+let curF="all", curTab="today", EXP=new Set();
 
-// ── 데이터 로드 ────────────────────────────────────────────
-async function loadData() {
+// ── 시장 지도 데이터 ──────────────────────────────────────
+const MARKET_MAP = [
+  { sector:"ESS — Long Duration", color:"#1B3A5C", bg:"#EDF2F8",
+    kr:[{name:"스탠다드에너지",stage:"Series-B",score:82,tag:"바나듐 플로우"},{name:"씨에스에너지",stage:"Series-A",score:64,tag:"리튬 ESS"},{name:"하나기술",stage:"Series-A",score:58,tag:"산업용 ESS"},{name:"에이치에너지",stage:"Pre-A",score:45,tag:"장주기"}],
+    global:[{name:"Form Energy",stage:"Series-E",score:92,tag:"철-공기"},{name:"Ambri",stage:"Series-E",score:88,tag:"액체금속"},{name:"Hydrostor",stage:"Series-C",score:79,tag:"압축공기"},{name:"CMBlu",stage:"Series-B",score:71,tag:"유기 플로우"}] },
+  { sector:"수소 / 연료전지", color:"#0F4A3A", bg:"#E8F5F1",
+    kr:[{name:"하이리움산업",stage:"Series-B",score:76,tag:"액화수소"},{name:"에스퓨얼셀",stage:"Series-A",score:68,tag:"건물용 PAFC"},{name:"범한퓨얼셀",stage:"Series-A",score:65,tag:"선박 SOFC"},{name:"그린수소시스템",stage:"Seed",score:41,tag:"PEM 수전해"}],
+    global:[{name:"Sunfire",stage:"Series-E",score:91,tag:"SOEC"},{name:"Hysata",stage:"Series-B",score:78,tag:"모세관 전해"},{name:"Electric H2",stage:"Series-B",score:85,tag:"PEM 대형"},{name:"H2Pro",stage:"Series-B",score:72,tag:"E-TAC"}] },
+  { sector:"그리드 소프트웨어 / VPP", color:"#2D5A1B", bg:"#EEF6E8",
+    kr:[{name:"그리드위즈",stage:"Series-B",score:79,tag:"VPP·DR"},{name:"식스티헤르츠",stage:"Series-A",score:72,tag:"재생에너지 예측"},{name:"에너지에이아이",stage:"Pre-A",score:55,tag:"전력 AI"},{name:"이노원",stage:"Series-A",score:49,tag:"스마트그리드"}],
+    global:[{name:"AutoGrid",stage:"Series-D",score:88,tag:"VPP 플랫폼"},{name:"Voltus",stage:"Acquired",score:82,tag:"DR"},{name:"Upside Energy",stage:"Series-B",score:75,tag:"영국 VPP"},{name:"Sympower",stage:"Series-B",score:69,tag:"유럽 DR"}] },
+  { sector:"선박 탈탄소", color:"#0F4F5E", bg:"#EAF4F6",
+    kr:[{name:"빈센",stage:"Series-A",score:71,tag:"수소 FC"},{name:"범한퓨얼셀",stage:"Series-A",score:65,tag:"SOFC"},{name:"파나시아",stage:"Series-B",score:58,tag:"탈황·스크러버"}],
+    global:[{name:"Ceres Power",stage:"Listed",score:84,tag:"SOFC"},{name:"CMB.TECH",stage:"Private",score:89,tag:"암모니아"},{name:"WE Tech",stage:"Series-B",score:67,tag:"에너지 관리"},{name:"Freudenberg",stage:"Corp",score:78,tag:"FC 시스템"}] },
+  { sector:"SMR / 차세대 원전", color:"#5A1B4A", bg:"#F6EAF4",
+    kr:[],
+    global:[{name:"Oklo",stage:"Listed",score:81,tag:"마이크로 원자로"},{name:"Kairos Power",stage:"Series-C",score:77,tag:"불화염 냉각"},{name:"Commonwealth Fusion",stage:"Series-B",score:93,tag:"핵융합"},{name:"TAE Technologies",stage:"Series-G",score:86,tag:"핵융합"}] },
+  { sector:"중국 에너지 스타트업", color:"#7A1010", bg:"#FFF0F0",
+    kr:[],
+    global:[{name:"Pylontech",stage:"Listed",score:88,tag:"리튬 ESS"},{name:"REPT",stage:"Listed",score:82,tag:"원통형 셀"},{name:"SINOHY",stage:"Series-C",score:74,tag:"수전해"},{name:"Sungrow (생태계)",stage:"Listed",score:91,tag:"인버터·ESS"}] },
+];
+
+// ── 대기업 생태계 데이터 ──────────────────────────────────
+const ECOSYSTEM = [
+  { name:"HD한국조선해양", logo:"🚢", color:"#1B3A5C", bg:"#EDF2F8",
+    strategy:"암모니아·수소·LNG 이중연료 선박으로 전환. 2030년까지 친환경 선박 비중 50% 목표. 연료전지·탄소포집 스타트업 전략적 투자 확대 중.",
+    startups:[{name:"빈센",rel:"선박용 수소연료전지",type:"투자검토",badge:"🟢",bc:"#EDF6F1",tc:"#1A5C36"},{name:"범한퓨얼셀",rel:"SOFC 파트너십",type:"파트너",badge:"🤝",bc:"#EDF2F8",tc:"#1B3A5C"},{name:"파나시아",rel:"배기가스 저감",type:"파트너",badge:"🤝",bc:"#EDF2F8",tc:"#1B3A5C"}] },
+  { name:"LS일렉트릭", logo:"⚡", color:"#2D5A1B", bg:"#EEF6E8",
+    strategy:"VPP·스마트그리드 플랫폼 내재화 전략. 그리드 소프트웨어 스타트업 인수 또는 전략적 투자를 통해 SaaS 전환 도모. KEPCO·한전과 공동 실증 중.",
+    startups:[{name:"그리드위즈",rel:"VPP 플랫폼 통합",type:"전략투자유력",badge:"⭐",bc:"#FFF8E0",tc:"#92400E"},{name:"식스티헤르츠",rel:"재생에너지 예측 API",type:"파트너",badge:"🤝",bc:"#EDF2F8",tc:"#1B3A5C"},{name:"에너지에이아이",rel:"AI 전력 예측",type:"검토중",badge:"🔍",bc:"#F4F2EE",tc:"#8A8070"}] },
+  { name:"한화오션", logo:"🌊", color:"#0F4F5E", bg:"#EAF4F6",
+    strategy:"암모니아·메탄올 이중연료 선박 수주 확대. 연료전지 내재화 vs 아웃소싱 전략 결정 단계. 탄소포집 장치 스타트업 레이더에 올림.",
+    startups:[{name:"범한퓨얼셀",rel:"선박 SOFC 공급망",type:"파트너",badge:"🤝",bc:"#EDF2F8",tc:"#1B3A5C"},{name:"에이치라인해운",rel:"LNG 벙커링",type:"계열사협력",badge:"🔗",bc:"#EDF6F1",tc:"#1A5C36"}] },
+  { name:"SK에코플랜트", logo:"♻️", color:"#0F4A3A", bg:"#E8F5F1",
+    strategy:"폐기물 에너지화·수소 생산 연계. 바이오가스→수소 전환 스타트업 M&A 검토 중. 연료전지 발전소 EPC 역량 보유.",
+    startups:[{name:"하이리움산업",rel:"액화수소 공급망",type:"검토중",badge:"🔍",bc:"#F4F2EE",tc:"#8A8070"},{name:"에스퓨얼셀",rel:"건물용 연료전지",type:"파트너",badge:"🤝",bc:"#EDF2F8",tc:"#1B3A5C"},{name:"그린수소시스템",rel:"PEM 수전해",type:"투자검토",badge:"🟢",bc:"#EDF6F1",tc:"#1A5C36"}] },
+  { name:"효성중공업", logo:"🔌", color:"#5A3A0F", bg:"#F6F0E8",
+    strategy:"HVDC·ESS·수소 압축기 3대 축 성장 전략. ESS 시스템 통합 스타트업 파트너십으로 소프트웨어 역량 강화 추진.",
+    startups:[{name:"씨에스에너지",rel:"ESS 시스템 통합",type:"파트너",badge:"🤝",bc:"#EDF2F8",tc:"#1B3A5C"},{name:"하이리움산업",rel:"수소 압축기",type:"검토중",badge:"🔍",bc:"#F4F2EE",tc:"#8A8070"}] },
+  { name:"두산에너빌리티", logo:"🏭", color:"#1A1B5C", bg:"#EEEDF8",
+    strategy:"SMR·수소터빈·연료전지 3대 미래 기술 투자. 두산퓨얼셀 분사 이후 연료전지 스타트업 생태계 재편 중. SMR 기술 파트너십 국내외 탐색.",
+    startups:[{name:"두산퓨얼셀",rel:"연료전지 계열사",type:"계열사",badge:"🔗",bc:"#EDF6F1",tc:"#1A5C36"},{name:"범한퓨얼셀",rel:"선박 FC 협업",type:"파트너",badge:"🤝",bc:"#EDF2F8",tc:"#1B3A5C"}] },
+];
+
+// ── 펀딩 타임라인 데이터 ──────────────────────────────────
+const FUNDING_TIMELINE = [
+  { name:"그리드위즈", country:"🇰🇷", sector:"VPP·DR",
+    events:[
+      {date:"2019",label:"Seed",amount:"₩3B",color:"#8A8070",pred:false},
+      {date:"2021",label:"Series-A",amount:"₩15B",color:"#1B3A5C",pred:false},
+      {date:"2023",label:"Series-B",amount:"₩45B",color:"#1A5C36",pred:false},
+      {date:"2025~",label:"Series-C 예상",amount:"₩100B+",color:"#B83232",pred:true},
+    ]},
+  { name:"식스티헤르츠", country:"🇰🇷", sector:"재생에너지 예측",
+    events:[
+      {date:"2020",label:"Seed",amount:"₩2B",color:"#8A8070",pred:false},
+      {date:"2022",label:"Series-A",amount:"₩12B",color:"#1B3A5C",pred:false},
+      {date:"2024~",label:"Series-B 준비",amount:"₩40B~",color:"#B83232",pred:true},
+    ]},
+  { name:"하이리움산업", country:"🇰🇷", sector:"액화수소",
+    events:[
+      {date:"2018",label:"Seed",amount:"₩5B",color:"#8A8070",pred:false},
+      {date:"2021",label:"Series-A",amount:"₩20B",color:"#1B3A5C",pred:false},
+      {date:"2023",label:"Series-B",amount:"₩60B",color:"#1A5C36",pred:false},
+      {date:"2026~",label:"Pre-IPO 예상",amount:"₩150B+",color:"#5B21B6",pred:true},
+    ]},
+  { name:"빈센", country:"🇰🇷", sector:"선박 연료전지",
+    events:[
+      {date:"2020",label:"Seed",amount:"₩3B",color:"#8A8070",pred:false},
+      {date:"2022",label:"Series-A",amount:"₩18B",color:"#1B3A5C",pred:false},
+      {date:"2025~",label:"Series-B 예상",amount:"₩60B~",color:"#B83232",pred:true},
+    ]},
+  { name:"Form Energy", country:"🇺🇸", sector:"장주기 ESS",
+    events:[
+      {date:"2019",label:"Series-A",amount:"$9M",color:"#8A8070",pred:false},
+      {date:"2021",label:"Series-D",amount:"$200M",color:"#1B3A5C",pred:false},
+      {date:"2023",label:"Series-E",amount:"$450M",color:"#1A5C36",pred:false},
+      {date:"2026~",label:"IPO 검토",amount:"TBD",color:"#5B21B6",pred:true},
+    ]},
+  { name:"Sunfire", country:"🇩🇪", sector:"수소 전해조",
+    events:[
+      {date:"2018",label:"Series-C",amount:"€26M",color:"#8A8070",pred:false},
+      {date:"2022",label:"Series-D",amount:"€150M",color:"#1B3A5C",pred:false},
+      {date:"2023",label:"Series-E",amount:"€215M",color:"#1A5C36",pred:false},
+      {date:"2025~",label:"IPO / 전략투자",amount:"TBD",color:"#5B21B6",pred:true},
+    ]},
+];
+
+// ── 경쟁사 비교 테이블 데이터 ─────────────────────────────
+const COMPARE_SECTORS = [
+  { sector:"국내 VPP / 그리드 소프트웨어", companies:[
+    {name:"그리드위즈",country:"🇰🇷",stage:"Series-B",trl:7,commercial:8,team:8,partner:9,timing:9,founded:2016,revenue:"비공개",investors:"KDB·신한·현대",note:"KPX 인증 완료, LS일렉트릭 파트너십"},
+    {name:"식스티헤르츠",country:"🇰🇷",stage:"Series-A",trl:8,commercial:6,team:7,partner:6,timing:7,founded:2019,revenue:"비공개",investors:"카카오벤처스·블루포인트",note:"AI 예측 정확도 업계 최고 수준"},
+    {name:"에너지에이아이",country:"🇰🇷",stage:"Pre-A",trl:5,commercial:3,team:6,partner:4,timing:5,founded:2021,revenue:"비공개",investors:"미공개",note:"초기 단계, 기술력 검증 필요"},
+    {name:"AutoGrid",country:"🇺🇸",stage:"Series-D",trl:9,commercial:9,team:9,partner:10,timing:6,founded:2011,revenue:"$50M+",investors:"E.ON·Engie·Shell",note:"글로벌 레퍼런스 비교 기준"},
+  ]},
+  { sector:"국내 수소 스타트업", companies:[
+    {name:"하이리움산업",country:"🇰🇷",stage:"Series-B",trl:7,commercial:7,team:8,partner:7,timing:8,founded:2015,revenue:"비공개",investors:"한화·현대",note:"액화수소 핵심기술 보유"},
+    {name:"에스퓨얼셀",country:"🇰🇷",stage:"Series-A",trl:8,commercial:6,team:7,partner:6,timing:7,founded:2014,revenue:"비공개",investors:"두산·SK",note:"건물용 PAFC 상용화 단계"},
+    {name:"범한퓨얼셀",country:"🇰🇷",stage:"Series-A",trl:7,commercial:5,team:6,partner:7,timing:6,founded:2018,revenue:"비공개",investors:"범한판토스",note:"선박용 SOFC 특화"},
+    {name:"Sunfire",country:"🇩🇪",stage:"Series-E",trl:9,commercial:8,team:9,partner:9,timing:5,founded:2010,revenue:"€30M+",investors:"Carbon Direct·Planet First",note:"글로벌 레퍼런스"},
+  ]},
+];
+
+// ── 주간 리포트 설정 ──────────────────────────────────────
+let weeklySettings = { email: localStorage.getItem("weekly_email")||"", enabled: localStorage.getItem("weekly_enabled")==="true" };
+
+// ── 데이터 로드 ───────────────────────────────────────────
+async function loadLatest() {
   try {
-    const res=await fetch("data/latest.json?"+Date.now());
-    if(!res.ok)throw new Error("없음");
-    DATA=await res.json();
-    SIGNALS=DATA.signals||[];
-    POLICY=DATA.policyTriggers||[];
-    document.getElementById("liveBadge").textContent="● "+( DATA.dateKr||DATA.date);
+    const r=await fetch("data/latest.json?"+Date.now());
+    if(!r.ok)throw new Error();
+    DATA=await r.json(); SIG=DATA.signals||[]; POL=DATA.policyTriggers||[];
+    document.getElementById("liveBadge").textContent="● "+(DATA.dateKr||DATA.date);
     document.getElementById("copyBtn").style.display="flex";
-    renderSidebar();renderFeed();renderPolicyMini();
-  } catch(e) {
+    renderSidebar(); renderFeed(); renderPolicyMini();
+  } catch {
     document.getElementById("liveBadge").textContent="● 데이터 없음";
-    document.getElementById("feedArea").innerHTML=`<div class="empty"><div style="font-size:36px;margin-bottom:12px">📭</div><div style="font-family:'Spectral',serif;font-size:18px;margin-bottom:8px">데이터 없음</div><div style="font-size:13px;color:#8A8070">Actions → Run workflow 실행 후 새로고침</div></div>`;
+    document.getElementById("feedArea").innerHTML=`<div style="text-align:center;padding:48px"><div style="font-size:36px;margin-bottom:12px">📭</div><div style="font-size:14px;color:#8A8070">Actions → Run workflow 실행 후 새로고침</div></div>`;
   }
 }
-async function loadIndex() {
-  try{const r=await fetch("data/index.json?"+Date.now());if(!r.ok)return;DATE_INDEX=await r.json();renderDateList();}catch{}
-}
-async function loadProfiles() {
-  try{const r=await fetch("data/company-profiles.json?"+Date.now());if(!r.ok)return;PROFILES=await r.json();}catch{}
-}
+async function loadIndex(){try{const r=await fetch("data/index.json?"+Date.now());if(!r.ok)return;IDX=await r.json();renderDateList();}catch{}}
+async function loadProfiles(){try{const r=await fetch("data/company-profiles.json?"+Date.now());if(!r.ok)return;PROF=await r.json();}catch{}}
 
-// ── 사이드바 ───────────────────────────────────────────────
-function renderSidebar() {
+// ── 사이드바 ──────────────────────────────────────────────
+function renderSidebar(){
   if(!DATA)return;
   const s=DATA.stats;
-  document.getElementById("statsBox").innerHTML=`
-    ${[{n:s.total,l:"총 신호",c:"#1A1710"},{n:s.unlisted||0,l:"🟢 비상장",c:"#1A5C36"},{n:s.kr,l:"🇰🇷 국내",c:"#B8860B"},{n:s.global,l:"🌍 글로벌",c:"#1B3A5C"},{n:s.cn,l:"🇨🇳 중국",c:"#CC0000"},{n:s.high,l:"High",c:"#B83232"},{n:s.investigate,l:"즉시 검토",c:"#A85400"},{n:s.withScorecard||0,l:"📊 스코어카드",c:"#1E40AF"},{n:s.profiledCompanies||0,l:"🏢 프로파일",c:"#5B21B6"}]
-    .map(x=>`<div class="stat-row"><span class="sl">${x.l}</span><span class="sn" style="color:${x.c}">${x.n||0}</span></div>`).join("")}`;
+  document.getElementById("statsBox").innerHTML=[
+    {n:s.total,l:"총 신호",c:"#1A1710"},{n:s.unlisted||0,l:"🟢 비상장",c:"#1A5C36"},
+    {n:s.kr,l:"🇰🇷 국내",c:"#B8860B"},{n:s.global,l:"🌍 글로벌",c:"#1B3A5C"},
+    {n:s.cn,l:"🇨🇳 중국",c:"#CC0000"},{n:s.high,l:"High",c:"#B83232"},
+    {n:s.investigate||0,l:"즉시 검토",c:"#A85400"},{n:s.withScorecard||0,l:"📊 스코어카드",c:"#1E40AF"},
+  ].map(x=>`<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px"><span style="font-size:12px;color:#4A4538">${x.l}</span><span style="font-family:'DM Mono',monospace;font-size:14px;font-weight:700;color:${x.c}">${x.n||0}</span></div>`).join("");
 }
-function renderDateList() {
+function renderDateList(){
   const el=document.getElementById("dateList");
-  if(!DATE_INDEX.length){el.innerHTML=`<div style="font-size:11px;color:#B8B0A0">없음</div>`;return;}
-  el.innerHTML=DATE_INDEX.slice(0,20).map(d=>`
-    <div onclick="loadDate('${d.date}')" style="padding:6px 8px;border-radius:4px;cursor:pointer;margin-bottom:2px;transition:background 0.1s" onmouseover="this.style.background='#F0EDE8'" onmouseout="this.style.background='transparent'">
-      <div style="font-size:11px;color:#1A1710;font-weight:500">${d.dateKr||d.date}</div>
-      <div style="font-family:'DM Mono',monospace;font-size:10px;color:#B8B0A0">${d.stats?.total||0}건 · High ${d.stats?.high||0}</div>
-    </div>`).join("");
+  if(!IDX.length){el.innerHTML=`<div style="font-size:11px;color:#B8B0A0">없음</div>`;return;}
+  el.innerHTML=IDX.slice(0,20).map(d=>`<div onclick="loadDate('${d.date}')" style="padding:5px 7px;border-radius:4px;cursor:pointer;margin-bottom:2px" onmouseover="this.style.background='#F0EDE8'" onmouseout="this.style.background='transparent'"><div style="font-size:11px;color:#1A1710;font-weight:500">${d.dateKr||d.date}</div><div style="font-family:'DM Mono',monospace;font-size:10px;color:#B8B0A0">${d.stats?.total||0}건 · High ${d.stats?.high||0}</div></div>`).join("");
 }
-function renderPolicyMini() {
+function renderPolicyMini(){
   const el=document.getElementById("policyMini");
-  if(!POLICY.length){el.innerHTML=`<div style="font-size:11px;color:#B8B0A0">없음</div>`;return;}
-  const urgencyStyle={High:"background:#FDF0F0;border:1px solid #F0C0C0;",Medium:"background:#FDF4E8;border:1px solid #F0D8A8;",Low:"background:#F4F2EE;border:1px solid #D8D0C4;"};
-  const urgencyColor={High:"#7A2020",Medium:"#6B3600",Low:"#8A8070"};
-  el.innerHTML=POLICY.slice(0,5).map(p=>`
-    <div class="policy-item" style="${urgencyStyle[p.urgency]||''}" onclick="switchTab('policy')">
-      <div class="policy-label" style="color:${urgencyColor[p.urgency]||'#1A1710'}">${p.label} <span style="font-size:10px;font-weight:400;opacity:0.7">[${p.region}]</span></div>
-      <div class="policy-desc">${p.desc.slice(0,70)}…</div>
-      <div class="policy-cos">${(p.beneficiaries||[]).slice(0,3).map(c=>`<span class="policy-co" style="color:${urgencyColor[p.urgency]}">${c.split("(")[0].trim()}</span>`).join("")}</div>
-    </div>`).join("");
+  if(!POL.length){el.innerHTML=`<div style="font-size:11px;color:#B8B0A0">없음</div>`;return;}
+  const uc={High:"#7A2020",Medium:"#6B3600",Low:"#8A8070"};
+  const ub={High:"background:#FDF0F0;border:1px solid #F0C0C0;",Medium:"background:#FDF4E8;border:1px solid #F0D8A8;",Low:"background:#F4F2EE;border:1px solid #D8D0C4;"};
+  el.innerHTML=POL.slice(0,4).map(p=>`<div style="${ub[p.urgency]||''}border-radius:5px;padding:8px 10px;margin-bottom:6px;cursor:pointer" onclick="switchTab('policy')" title="${p.desc}"><div style="font-size:11px;font-weight:600;color:${uc[p.urgency]}">${p.label}</div><div style="font-size:10px;color:#4A4538;margin-top:2px">${p.desc.slice(0,55)}…</div></div>`).join("");
 }
 
-// ── 피드 렌더링 ────────────────────────────────────────────
-function getFiltered() {
-  const q=(document.getElementById("searchInput")?.value||"").toLowerCase();
-  return SIGNALS.filter(s=>{
-    if(currentFilter==="kr")        return s.isKorean;
-    if(currentFilter==="global")    return !s.isKorean&&!s.isChina;
-    if(currentFilter==="cn")        return s.isChina;
-    if(currentFilter==="unlisted")  return s.companyType==="unlisted_startup";
-    if(currentFilter==="high")      return s.relevance==="High";
-    if(currentFilter==="investigate")return s.next_action==="Investigate";
-    if(currentFilter==="scorecard") return !!s.scorecard;
-    return true;
-  }).filter(s=>!q||(s.company||"").toLowerCase().includes(q)||(s.title||"").toLowerCase().includes(q)||(s.category||"").toLowerCase().includes(q)||(s.deep_insight||"").toLowerCase().includes(q))
-  .sort((a,b)=>{
-    const sa=(a.companyType==="unlisted_startup"?10:0)+({High:3,Medium:1,Low:0}[a.relevance]||0);
-    const sb=(b.companyType==="unlisted_startup"?10:0)+({High:3,Medium:1,Low:0}[b.relevance]||0);
-    return sb-sa;
-  });
+// ── 오늘 신호 피드 ────────────────────────────────────────
+function getFiltered(){
+  const q=(document.getElementById("srch")?.value||"").toLowerCase();
+  return SIG.filter(s=>{
+    if(curF==="kr")return s.isKorean; if(curF==="gl")return !s.isKorean&&!s.isChina;
+    if(curF==="cn")return s.isChina; if(curF==="un")return s.companyType==="unlisted_startup";
+    if(curF==="hi")return s.relevance==="High"; if(curF==="iv")return s.next_action==="Investigate";
+    if(curF==="sc")return !!s.scorecard; return true;
+  }).filter(s=>!q||(s.company||"").toLowerCase().includes(q)||(s.title||"").toLowerCase().includes(q)||(s.category||"").toLowerCase().includes(q))
+  .sort((a,b)=>((b.companyType==="unlisted_startup"?10:0)+({High:3,Medium:1,Low:0}[b.relevance]||0))-((a.companyType==="unlisted_startup"?10:0)+({High:3,Medium:1,Low:0}[a.relevance]||0)));
 }
 
-function renderFeed() {
-  const signals=getFiltered();
-  const area=document.getElementById("feedArea");
-  let html="";
-
-  // 통계
-  if(DATA?.stats){
-    const s=DATA.stats;
-    html+=`<div class="stats-grid">${[{n:s.total,l:"총 신호",c:"#1A1710"},{n:s.unlisted||0,l:"🟢 비상장",c:"#1A5C36"},{n:s.high,l:"High",c:"#B83232"},{n:s.investigate||0,l:"즉시 검토",c:"#A85400"}].map(x=>`<div class="stat-card"><div class="stat-card-n" style="color:${x.c}">${x.n||0}</div><div class="stat-card-l">${x.l}</div></div>`).join("")}</div>`;
-  }
-
-  // 브리핑
-  if(DATA?.brief){
-    html+=`<div class="brief-card"><div class="brief-title">✦ 오늘의 CVC 딥 브리핑 <span style="font-family:'DM Mono',monospace;font-size:9px;color:#4ADE80;background:#0F3020;padding:2px 7px;border-radius:3px;border:1px solid #1A5030">실제뉴스 기반</span></div><div class="brief-text">${esc(DATA.brief)}</div></div>`;
-  }
-
-  if(!signals.length){html+=`<div class="card empty"><div style="font-size:30px;margin-bottom:10px">🔍</div><div style="font-size:14px;color:#8A8070">해당 조건의 신호 없음</div></div>`;area.innerHTML=html;return;}
-
-  html+=`<div class="feed-wrap"><div class="feed-hd"><span class="feed-title">투자 신호 · 비상장 우선</span><span class="feed-count">${signals.length}건</span></div>`;
-
-  signals.forEach(s=>{
-    const open=expandedIds.has(s.id);
-    const isU=s.companyType==="unlisted_startup", isKr=s.isKorean, isCn=s.isChina;
-    const borderColor=isKr?"#B8860B":isCn?"#EE1C25":isU?"#1A5C36":s.relevance==="High"?"#B83232":"transparent";
-    const catBadgeCls=isKr?"b-cat-kr":isCn?"b-cat-cn":"b-cat-gl";
-    const typeBadge=isU?`<span class="b b-unlisted">🟢 비상장</span>`:s.companyType==="ecosystem"?`<span class="b b-eco">생태계</span>`:`<span class="b b-listed">상장</span>`;
-    const relBadge=`<span class="b b-${(s.relevance||"low").toLowerCase()}">${s.relevance}</span>`;
-    const stageBadge=s.fundingStage&&s.fundingStage!=="N/A"?`<span class="b b-stage">${s.fundingStage}</span>`:"";
-    const rtBadge=s.isRealNews?`<span class="b b-real">✓실시간</span>`:"";
-    const actBadge=s.next_action&&s.next_action!=="Skip"?`<span class="b b-action">→${s.next_action}</span>`:"";
-    const coColor=isU?"#1A5C36":isKr?"#92400E":isCn?"#CC0000":"#1B3A5C";
-    const hasSc=!!s.scorecard, hasDeals=(s.comparableDeals||[]).length>0, hasPolicy=(s.policyTriggers||[]).length>0;
-
-    html+=`<div class="signal" style="border-left:3px solid ${borderColor}" onclick="toggleExpand('${s.id}')">
-      <div class="signal-hd">
-        <div class="badges">
-          ${typeBadge}${stageBadge}<span class="b ${catBadgeCls}">${s.emoji||""} ${s.category}</span>
-          <span class="b" style="background:#F4F2EE;color:#8A8070;border:1px solid #D8D0C4;font-size:10px">${s.country}</span>
-          ${rtBadge}${relBadge}${actBadge}
-          ${hasSc?`<span class="b" style="background:#DBEAFE;color:#1E40AF;border:1px solid #BFDBFE">📊</span>`:""}
-          ${hasDeals?`<span class="b" style="background:#EDE9FE;color:#5B21B6;border:1px solid #DDD6FE">🔗</span>`:""}
-          ${hasPolicy?`<span class="b" style="background:#FEF3C7;color:#92400E;border:1px solid #FCD34D">📋</span>`:""}
-          <span style="margin-left:auto;font-family:'DM Mono',monospace;font-size:9px;color:#B8B0A0">${s.pubDate||""}</span>
-        </div>
-        <div class="title-row">
-          ${s.company&&s.company!=="Unknown"?`<span class="co-name" style="color:${coColor}">${esc(s.company)}</span>`:""}
-          ${s.url?`<a class="sig-title" href="${esc(s.url)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">${esc(s.title||"")}</a>`:`<span class="sig-title" style="cursor:default">${esc(s.title||"")}</span>`}
-        </div>
-        ${!open?`<div class="expand-hint">▼ 딥 인사이트${hasSc?" · 스코어카드":""}${hasDeals?" · 유사딜":""}${hasPolicy?" · 정책":""}  클릭</div>`:""}
+function renderFeed(){
+  const sigs=getFiltered(), el=document.getElementById("feedArea");
+  let h="";
+  if(DATA?.stats){const s=DATA.stats;h+=`<div class="sg">${[{n:s.total,l:"총 신호",c:"#1A1710"},{n:s.unlisted||0,l:"🟢 비상장",c:"#1A5C36"},{n:s.high,l:"High",c:"#B83232"},{n:s.investigate||0,l:"즉시 검토",c:"#A85400"}].map(x=>`<div class="sc2"><div class="sc2-n" style="color:${x.c}">${x.n||0}</div><div class="sc2-l">${x.l}</div></div>`).join("")}</div>`;}
+  if(DATA?.brief)h+=`<div class="brief"><div class="brief-t">✦ 오늘의 CVC 딥 브리핑</div><div class="brief-b">${e(DATA.brief)}</div></div>`;
+  if(!sigs.length){h+=`<div style="text-align:center;padding:32px;background:#fff;border:1px solid #E6E2DA;border-radius:7px"><div style="color:#8A8070">해당 조건 없음</div></div>`;el.innerHTML=h;return;}
+  h+=`<div class="feed"><div class="feed-hd"><span style="font-size:11px;font-weight:700;color:#8A8070;text-transform:uppercase;letter-spacing:0.5px">투자 신호</span><span style="font-family:'DM Mono',monospace;font-size:10px;color:#B8B0A0">${sigs.length}건</span></div>`;
+  sigs.forEach(s=>{
+    const op=EXP.has(s.id),isU=s.companyType==="unlisted_startup",isKr=s.isKorean,isCn=s.isChina;
+    const bc=isKr?"#B8860B":isCn?"#EE1C25":isU?"#1A5C36":s.relevance==="High"?"#B83232":"transparent";
+    const tb=isU?`<span class="b b-u">🟢 비상장</span>`:s.companyType==="ecosystem"?`<span class="b b-e">생태계</span>`:`<span class="b b-l">상장</span>`;
+    const rb=`<span class="b b-${s.relevance||"Lo"}" style="border:1px solid">${s.relevance}</span>`;
+    const catc=isKr?"b-kr":isCn?"b-cn":"b-gl";
+    const cc=isU?"#1A5C36":isKr?"#92400E":isCn?"#CC0000":"#1B3A5C";
+    h+=`<div class="sig" style="border-left:3px solid ${bc}" onclick="toggleExp('${s.id}')">
+      <div class="sig-hd">
+        <div class="bx">${tb}${s.fundingStage&&s.fundingStage!=="N/A"?`<span class="b b-stg">${s.fundingStage}</span>`:""}<span class="b ${catc}">${s.emoji||""} ${s.category}</span><span class="b b-l" style="font-size:10px">${s.country}</span>${s.isRealNews?`<span class="b b-rt">✓실시간</span>`:""}<span class="b b-${s.relevance||"Lo"}">${s.relevance}</span>${s.next_action&&s.next_action!=="Skip"?`<span class="b b-act">→${s.next_action}</span>`:""}<span style="margin-left:auto;font-family:'DM Mono',monospace;font-size:9px;color:#B8B0A0">${s.pubDate||""}</span></div>
+        <div class="tr">${s.company&&s.company!=="Unknown"?`<span class="co" style="color:${cc}">${e(s.company)}</span>`:""}${s.url?`<a class="tt" href="${e(s.url)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">${e(s.title||"")}</a>`:`<span class="tt" style="cursor:default">${e(s.title||"")}</span>`}</div>
+        ${!op?`<div class="hint">▼ 딥 인사이트${s.scorecard?" · 스코어카드":""}${(s.comparableDeals||[]).length?" · 유사딜":""}  클릭</div>`:""}
       </div>`;
-
-    if(open){
-      html+=`<div class="signal-bd">
-        <div class="source-row">
-          ${s.isRealNews?`<span class="real-badge">✓ 실제뉴스</span>`:`<span class="ai-badge">AI생성</span>`}
-          <span>${esc(s.source||"")}</span><span>·</span><span>${esc(s.pubDate||"")}</span>
-          ${s.url?`<a href="${esc(s.url)}" target="_blank" rel="noopener" style="color:#1B3A5C;font-size:10px;" onclick="event.stopPropagation()">원문 보기 →</a>`:""}
-        </div>
-        <div style="font-size:12px;color:#4A4538;line-height:1.7;margin-bottom:10px">${esc(s.summary||"")}</div>`;
-
-      // 딥 인사이트
-      if(s.deep_insight){
-        html+=`<div class="insight-box"><div class="insight-lbl">✦ 에너지 심사역 딥 인사이트</div><div class="insight-txt">${esc(s.deep_insight)}</div>
-          ${s.cvc_action?`<div class="action-box">📋 CVC 액션: ${esc(s.cvc_action)}</div>`:""}
-          ${s.risk?`<div class="risk-box">⚠ 리스크: ${esc(s.risk)}</div>`:""}
-        </div>`;
-      }
-
-      // 스코어카드
-      if(s.scorecard){
-        const sc=s.scorecard;
-        const items=[{k:"technology",l:"기술 검증"},{k:"commercialization",l:"상업화"},{k:"team",l:"팀 신호"},{k:"partnership",l:"파트너십"},{k:"fundraising_timing",l:"자금조달 임박"}];
-        const convColor={High:"#1A5C36",Medium:"#A85400",Low:"#B83232"}[sc.conviction]||"#8A8070";
-        const convBg={High:"#EDF6F1",Medium:"#FDF4E8",Low:"#FDF0F0"}[sc.conviction]||"#F4F2EE";
-        const timingColor={Immediate:"#B83232","3-6months":"#A85400","6-12months":"#1B3A5C",Watch:"#8A8070"}[sc.timing_signal]||"#8A8070";
-        html+=`<div class="scorecard">
-          <div class="sc-title">📊 투자 스코어카드 <span class="sc-conviction" style="background:${convBg};color:${convColor}">${sc.conviction}</span></div>
-          <div class="sc-grid">${items.map(item=>{const v=sc[item.k];if(!v)return"";const pct=(v.score/v.max)*100;return`<div class="sc-item"><div class="sc-item-label">${item.l}</div><div class="sc-bar-wrap"><div class="sc-bar-bg"><div class="sc-bar-fill" style="width:${pct}%;background:#3B82F6"></div></div><span class="sc-score">${v.score}/${v.max}</span></div>${v.reason?`<div style="font-size:10px;color:#4A5568;margin-top:2px">${esc(v.reason)}</div>`:""}</div>`;}).join("")}</div>
-          <div class="sc-timing" style="color:${timingColor}">⏱ 타이밍: ${sc.timing_signal}</div>
-          ${sc.one_line?`<div class="sc-oneline">${esc(sc.one_line)}</div>`:""}
-        </div>`;
-      }
-
-      // 유사 딜 레퍼런스
-      if((s.comparableDeals||[]).length>0){
-        html+=`<div class="comp-deals"><div class="comp-title">🔗 유사 딜 레퍼런스 (해외 비교)</div>
-          ${s.comparableDeals.map(d=>`<div class="deal-item">
-            <div class="deal-top"><span class="deal-co">${esc(d.company)}</span><span class="deal-amt">${esc(d.amount)}</span></div>
-            <div class="deal-meta">${esc(d.country)} · ${esc(d.sector)} · ${esc(d.stage)} · ${esc(d.year)}</div>
-            ${d.valuation?`<div class="deal-meta">밸류에이션: ${esc(d.valuation)}</div>`:""}
-            ${(d.investors||[]).length?`<div class="deal-inv">투자자: ${d.investors.slice(0,3).map(esc).join(", ")}</div>`:""}
-          </div>`).join("")}
-        </div>`;
-      }
-
-      // 정책 트리거
-      if((s.policyTriggers||[]).length>0){
-        html+=`<div style="background:#FEF9E7;border:1px solid #FCD34D;border-radius:5px;padding:10px 12px;margin-bottom:8px">
-          <div style="font-size:10px;font-weight:700;color:#92400E;text-transform:uppercase;letter-spacing:0.4px;margin-bottom:6px">📋 정책/규제 트리거</div>
-          ${s.policyTriggers.map(p=>`<div style="margin-bottom:5px"><span style="font-size:11px;font-weight:600;color:${p.urgency==="High"?"#7A2020":p.urgency==="Medium"?"#6B3600":"#8A8070"}">${p.label} [${p.region}]</span><div style="font-size:11px;color:#4A3500;margin-top:2px">${esc(p.desc)}</div></div>`).join("")}
-        </div>`;
-      }
-
-      html+=`</div>`;
+    if(op){
+      h+=`<div class="sig-bd">
+        <div class="src-r">${s.isRealNews?`<span style="background:#EDF6F1;color:#1A5C36;border:1px solid #A7E3BE;padding:1px 6px;border-radius:3px;font-size:10px;font-weight:600">✓실제뉴스</span>`:`<span style="background:#FDF4E8;color:#6B3600;border:1px solid #F0D8A8;padding:1px 6px;border-radius:3px;font-size:10px;font-weight:600">AI생성</span>`}<span>${e(s.source||"")}</span><span>·</span><span>${e(s.pubDate||"")}</span>${s.url?`<a href="${e(s.url)}" target="_blank" style="color:#1B3A5C;font-size:10px" onclick="event.stopPropagation()">원문 →</a>`:""}</div>
+        <div style="font-size:12px;color:#4A4538;line-height:1.7;margin-bottom:8px">${e(s.summary||"")}</div>`;
+      if(s.deep_insight)h+=`<div class="ins"><div class="ins-l">✦ 에너지 심사역 딥 인사이트</div><div class="ins-t">${e(s.deep_insight)}</div>${s.cvc_action?`<div class="act-b">📋 ${e(s.cvc_action)}</div>`:""}${s.risk?`<div class="rsk">⚠ ${e(s.risk)}</div>`:""}</div>`;
+      if(s.scorecard){const sc=s.scorecard;const items=[{k:"technology",l:"기술검증"},{k:"commercialization",l:"상업화"},{k:"team",l:"팀신호"},{k:"partnership",l:"파트너십"},{k:"fundraising_timing",l:"자금조달임박"}];const cc2={High:"#1A5C36",Medium:"#A85400",Low:"#B83232"}[sc.conviction]||"#8A8070";h+=`<div class="sc"><div class="sc-hd">📊 투자 스코어카드 <span style="background:${cc2}22;color:${cc2};padding:2px 8px;border-radius:10px;font-size:10px">${sc.conviction}</span></div><div class="sc-g">${items.map(it=>{const v=sc[it.k];if(!v)return"";return`<div class="sc-i"><div class="sc-il">${it.l}</div><div class="sc-bw"><div class="sc-bb"><div class="sc-bf" style="width:${(v.score/v.max)*100}%"></div></div><span class="sc-n">${v.score}/${v.max}</span></div>${v.reason?`<div style="font-size:10px;color:#4A5568;margin-top:2px">${e(v.reason)}</div>`:""}</div>`;}).join("")}</div>${sc.one_line?`<div class="sc-ol">${e(sc.one_line)}</div>`:""}</div>`;}
+      if((s.comparableDeals||[]).length)h+=`<div class="cd"><div class="cd-hd">🔗 유사 딜 레퍼런스</div>${s.comparableDeals.map(d=>`<div class="di"><div class="di-t"><span class="di-co">${e(d.company)}</span><span class="di-am">${e(d.amount)}</span></div><div class="di-m">${e(d.country)} · ${e(d.sector)} · ${e(d.stage)} · ${e(d.year)}${d.valuation?` · ${e(d.valuation)}`:""}</div></div>`).join("")}</div>`;
+      if((s.policyTriggers||[]).length)h+=`<div class="pt"><div class="pt-hd">📋 정책 트리거</div>${s.policyTriggers.map(p=>`<div style="margin-bottom:4px"><span style="font-size:11px;font-weight:600;color:#92400E">${e(p.label)}</span><div style="font-size:11px;color:#4A3500;margin-top:1px">${e(p.desc)}</div></div>`).join("")}</div>`;
+      h+=`</div>`;
     }
-    html+=`</div>`;
+    h+=`</div>`;
   });
-  html+=`</div>`;
-  area.innerHTML=html;
+  h+=`</div>`;el.innerHTML=h;
 }
 
-// ── 기업 프로파일 탭 ──────────────────────────────────────
-function renderProfiles() {
-  const area=document.getElementById("feedArea");
-  const cos=Object.values(PROFILES);
-  if(!cos.length){area.innerHTML=`<div class="empty"><div style="font-size:36px;margin-bottom:12px">🏢</div><div style="font-size:14px;color:#8A8070">누적 프로파일 없음<br><small>매일 자동 실행되면 쌓입니다</small></div></div>`;return;}
+// ── 시장 지도 ─────────────────────────────────────────────
+function renderMarketMap(){
+  const el=document.getElementById("feedArea");
+  let h=`<div class="map-legend"><span style="font-size:12px;font-weight:600;color:#4A4538">버블 크기 = 투자 우선순위 점수</span>`;
+  [{c:"#1A5C36",l:"비상장 스타트업"},{c:"#1B3A5C",l:"글로벌"},{c:"#8A8070",l:"상장/대기업"}].forEach(x=>h+=`<div class="map-leg-item"><div class="map-leg-dot" style="background:${x.c}"></div>${x.l}</div>`);
+  h+=`</div><div class="sector-grid">`;
+  MARKET_MAP.forEach(sec=>{
+    h+=`<div class="sector-box"><div class="sector-hd" style="background:${sec.bg};color:${sec.color}">${sec.sector}<span style="font-size:10px;font-weight:400;color:${sec.color}88">${sec.kr.length+sec.global.length}개 기업</span></div>`;
+    if(sec.kr.length){
+      h+=`<div style="padding:8px 12px 0;font-size:10px;font-weight:600;color:#B8860B;text-transform:uppercase;letter-spacing:0.4px">🇰🇷 국내</div><div class="sector-companies">`;
+      sec.kr.forEach(c=>{
+        const sz=Math.max(80,c.score*1.1);
+        h+=`<div class="bubble" style="background:${sec.bg};border:1.5px solid ${sec.color}44;min-width:${sz}px" title="${c.name} · ${c.stage} · 점수:${c.score}">
+          <div class="bubble-score" style="color:${sec.color}">${c.score}</div>
+          <div class="bubble-name" style="color:${sec.color}">${c.name}</div>
+          <div class="bubble-stage" style="color:${sec.color}">${c.stage} · ${c.tag}</div>
+        </div>`;
+      });
+      h+=`</div>`;
+    }
+    if(sec.global.length){
+      h+=`<div style="padding:8px 12px 0;font-size:10px;font-weight:600;color:#1B3A5C;text-transform:uppercase;letter-spacing:0.4px">🌍 글로벌 비교</div><div class="sector-companies">`;
+      sec.global.forEach(c=>{
+        h+=`<div class="bubble" style="background:#F4F2EE;border:1.5px solid #C0C0C0" title="${c.name} · ${c.stage} · 점수:${c.score}">
+          <div class="bubble-score" style="color:#6B6060">${c.score}</div>
+          <div class="bubble-name" style="color:#4A4538">${c.name}</div>
+          <div class="bubble-stage" style="color:#8A8070">${c.stage} · ${c.tag}</div>
+        </div>`;
+      });
+      h+=`</div>`;
+    }
+    h+=`</div>`;
+  });
+  h+=`</div>`;el.innerHTML=h;
+}
+
+// ── 경쟁사 비교 ───────────────────────────────────────────
+function renderCompare(){
+  const el=document.getElementById("feedArea");
+  let h=`<div style="display:flex;flex-direction:column;gap:20px;">`;
+  COMPARE_SECTORS.forEach(sec=>{
+    h+=`<div class="feed"><div class="feed-hd"><span style="font-size:12px;font-weight:700;color:#1A1710">${sec.sector}</span></div>
+    <div class="cmp-wrap"><table class="cmp-table">
+      <thead><tr><th>기업명</th><th>단계</th><th>기술검증</th><th>상업화</th><th>팀신호</th><th>파트너십</th><th>자금임박</th><th>창업</th><th>주요투자자</th><th>메모</th></tr></thead>
+      <tbody>`;
+    sec.companies.forEach((c,i)=>{
+      const isRef=i===sec.companies.length-1;
+      const bg=isRef?"#F6F4F0":"#fff";
+      const bar=(v,color)=>`<div class="score-bar"><div class="score-bg"><div class="score-fill" style="width:${v*10}%;background:${color}"></div></div><span style="font-family:'DM Mono',monospace;font-size:10px;color:${color};font-weight:600">${v}</span></div>`;
+      h+=`<tr style="background:${bg}${isRef?";opacity:0.7":""}">
+        <td><span style="font-weight:700;color:#1A1710">${c.country} ${c.name}</span>${isRef?` <span style="font-size:10px;color:#8A8070">(레퍼런스)</span>`:""}</td>
+        <td><span class="b b-stg">${c.stage}</span></td>
+        <td>${bar(c.trl,"#3B82F6")}</td>
+        <td>${bar(c.commercial,"#1A5C36")}</td>
+        <td>${bar(c.team,"#A85400")}</td>
+        <td>${bar(c.partner,"#5B21B6")}</td>
+        <td>${bar(c.timing,"#B83232")}</td>
+        <td style="font-family:'DM Mono',monospace;font-size:11px">${c.founded}</td>
+        <td style="font-size:11px;color:#4A4538">${c.investors}</td>
+        <td style="font-size:11px;color:#6B6060">${c.note}</td>
+      </tr>`;
+    });
+    h+=`</tbody></table></div></div>`;
+  });
+  h+=`</div>`;el.innerHTML=h;
+}
+
+// ── 펀딩 타임라인 ─────────────────────────────────────────
+function renderTimeline(){
+  const el=document.getElementById("feedArea");
+  let h=`<div style="background:#fff;border:1px solid #E6E2DA;border-radius:7px;padding:20px;"><div style="font-size:11px;color:#8A8070;margin-bottom:20px">점선 = AI 예측 · 실선 = 실제 라운드</div>`;
+  FUNDING_TIMELINE.forEach(co=>{
+    h+=`<div class="tl-company">
+      <div class="tl-name"><span style="font-size:16px">${co.country}</span>${co.name}<span style="font-size:11px;color:#8A8070;font-weight:400">${co.sector}</span></div>
+      <div class="tl-track">
+        <div class="tl-line"></div>
+        <div class="tl-events">`;
+    co.events.forEach(ev=>{
+      const c=ev.color;
+      h+=`<div class="tl-event">
+        <div class="tl-dot ${ev.pred?"tl-pred":""}" style="background:${ev.pred?"#fff":c};border-color:${c};color:${c}"></div>
+        <div class="tl-label" style="color:${c}">${ev.label}</div>
+        <div style="font-family:'DM Mono',monospace;font-size:10px;font-weight:600;color:${c}">${ev.amount}</div>
+        <div class="tl-date">${ev.date}</div>
+      </div>`;
+    });
+    h+=`</div></div></div>`;
+  });
+  h+=`</div>`;el.innerHTML=h;
+}
+
+// ── 대기업 생태계 ─────────────────────────────────────────
+function renderEcosystem(){
+  const el=document.getElementById("feedArea");
+  let h=`<div class="eco-grid">`;
+  ECOSYSTEM.forEach(corp=>{
+    h+=`<div class="eco-card">
+      <div class="eco-hd" style="background:${corp.bg}">
+        <div class="eco-logo" style="background:${corp.color};color:#fff">${corp.logo}</div>
+        <div><div class="eco-name">${corp.name}</div><div class="eco-sub">에너지 전략 · 스타트업 레이더</div></div>
+      </div>
+      <div class="eco-strategy">${corp.strategy}</div>
+      <div class="eco-startups">
+        <div style="font-size:10px;font-weight:700;color:#8A8070;text-transform:uppercase;letter-spacing:0.4px;margin-bottom:6px">연관 스타트업</div>`;
+    corp.startups.forEach(s=>{
+      h+=`<div class="eco-startup-item">
+        <div><div class="eco-startup-name">${s.name}</div><div class="eco-startup-rel">${s.rel}</div></div>
+        <span class="eco-startup-badge" style="background:${s.bc};color:${s.tc}">${s.badge} ${s.type}</span>
+      </div>`;
+    });
+    h+=`</div></div>`;
+  });
+  h+=`</div>`;el.innerHTML=h;
+}
+
+// ── 기업 프로파일 ─────────────────────────────────────────
+function renderProfiles(){
+  const el=document.getElementById("feedArea");
+  const cos=Object.values(PROF);
+  if(!cos.length){el.innerHTML=`<div style="text-align:center;padding:48px"><div style="font-size:36px;margin-bottom:12px">🏢</div><div style="font-size:14px;color:#8A8070">아직 누적 데이터 없음<br><small>매일 자동 실행되면 쌓입니다</small></div></div>`;return;}
   cos.sort((a,b)=>(b.highCount||0)-(a.highCount||0));
-  area.innerHTML=`<div class="profile-grid">${cos.map(p=>{
-    const sc=p.latestScorecard;
-    const convColor={High:"#1A5C36",Medium:"#A85400",Low:"#B83232"}[sc?.conviction]||"#8A8070";
-    return`<div class="profile-card">
-      <div class="profile-name">${esc(p.name)}</div>
-      <div class="profile-meta">${esc(p.sector)} · 최초: ${p.firstSeen||"?"} · 최근: ${p.lastSeen||"?"}</div>
-      <div class="profile-stats">
-        <div class="profile-stat"><div class="profile-stat-n">${p.signalCount||0}</div><div class="profile-stat-l">총 신호</div></div>
-        <div class="profile-stat"><div class="profile-stat-n" style="color:#B83232">${p.highCount||0}</div><div class="profile-stat-l">High</div></div>
-        <div class="profile-stat"><div class="profile-stat-n" style="color:#A85400">${p.recentActivity||0}</div><div class="profile-stat-l">30일</div></div>
-      </div>
-      ${sc?`<div style="font-size:11px;font-weight:600;color:${convColor};margin-top:5px">📊 ${sc.conviction} · ${sc.timing_signal||""}</div><div style="font-size:11px;color:#4A4538;font-style:italic;margin-top:3px">${esc(sc.one_line||"")}</div>`:""}
-      ${p.fundingStage&&p.fundingStage!=="N/A"?`<div style="margin-top:6px"><span style="background:#F0EDE8;color:#5A4A30;border:1px solid #D8C8A0;padding:2px 7px;border-radius:3px;font-size:10px;font-weight:600">${p.fundingStage}</span></div>`:""}
-    </div>`;}).join("")}</div>`;
+  el.innerHTML=`<div class="prof-grid">${cos.map(p=>{const sc=p.latestScorecard;const cc={High:"#1A5C36",Medium:"#A85400",Low:"#B83232"}[sc?.conviction]||"#8A8070";return`<div class="prof-card"><div style="font-size:14px;font-weight:700;margin-bottom:3px">${e(p.name)}</div><div style="font-size:11px;color:#8A8070;margin-bottom:8px">${e(p.sector)} · ${p.firstSeen||"?"}~</div><div style="display:flex;gap:12px;margin-bottom:8px">${[{n:p.signalCount||0,l:"총신호",c:"#1A1710"},{n:p.highCount||0,l:"High",c:"#B83232"},{n:p.recentActivity||0,l:"30일",c:"#A85400"}].map(x=>`<div style="text-align:center"><div style="font-family:'DM Mono',monospace;font-size:16px;font-weight:700;color:${x.c}">${x.n}</div><div style="font-size:10px;color:#8A8070">${x.l}</div></div>`).join("")}</div>${sc?`<div style="font-size:11px;font-weight:600;color:${cc};margin-bottom:3px">📊 ${sc.conviction} · ${sc.timing_signal||""}</div><div style="font-size:11px;color:#4A4538;font-style:italic">${e(sc.one_line||"")}</div>`:""}${p.fundingStage&&p.fundingStage!=="N/A"?`<div style="margin-top:6px"><span class="b b-stg">${p.fundingStage}</span></div>`:""}</div>`;}).join("")}</div>`;
 }
 
-// ── 정책 트리거 탭 ─────────────────────────────────────────
-function renderPolicyTab() {
-  const area=document.getElementById("feedArea");
-  if(!POLICY.length){area.innerHTML=`<div class="empty"><div style="font-size:14px;color:#8A8070">정책 트리거 없음</div></div>`;return;}
-  const urgencyStyle={High:"background:#FDF0F0;border:1px solid #F0C0C0;",Medium:"background:#FDF4E8;border:1px solid #F0D8A8;",Low:"background:#F4F2EE;border:1px solid #D8D0C4;"};
-  const urgencyColor={High:"#7A2020",Medium:"#6B3600",Low:"#8A8070"};
-  area.innerHTML=`<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px">
-    ${POLICY.map(p=>`<div style="${urgencyStyle[p.urgency]||''}border-radius:8px;padding:16px;">
-      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px">
-        <div style="font-size:14px;font-weight:700;color:${urgencyColor[p.urgency]}">${esc(p.label)}</div>
-        <span style="font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;background:${urgencyStyle[p.urgency].split(";")[0].replace("background:","")};color:${urgencyColor[p.urgency]}">${p.urgency} · ${p.region}</span>
+// ── 주간 리포트 ───────────────────────────────────────────
+function renderWeekly(){
+  const el=document.getElementById("feedArea");
+  el.innerHTML=`<div class="weekly-wrap">
+    <div class="weekly-preview">
+      <div class="weekly-preview-hd">
+        <div style="font-family:'Spectral',serif;font-size:16px;font-weight:700;color:#EDE9E0;margin-bottom:4px">⚡ Energy CVC 주간 브리핑</div>
+        <div style="font-size:11px;color:#6B7F96">매주 월요일 오전 7시 자동 발송 · CVC 심사역 전용</div>
       </div>
-      <div style="font-size:12px;color:#4A4538;line-height:1.7;margin-bottom:10px">${esc(p.desc)}</div>
-      <div style="font-size:10px;font-weight:600;color:${urgencyColor[p.urgency]};margin-bottom:5px">수혜 기업</div>
-      <div style="display:flex;flex-wrap:wrap;gap:4px">${(p.beneficiaries||[]).map(c=>`<span style="font-size:11px;padding:2px 8px;border-radius:10px;background:rgba(255,255,255,0.7);color:${urgencyColor[p.urgency]};font-weight:500">${esc(c.split("(")[0].trim())}</span>`).join("")}</div>
-      <div style="margin-top:8px;display:flex;flex-wrap:wrap;gap:4px">${(p.sectors||[]).map(s=>`<span style="font-size:10px;padding:1px 6px;border-radius:3px;background:rgba(255,255,255,0.5);color:#4A4538">${esc(s)}</span>`).join("")}</div>
-    </div>`).join("")}
+      <div style="padding:16px 18px">
+        <div style="font-size:12px;color:#4A4538;line-height:1.7;margin-bottom:14px">
+          주간 리포트에 포함되는 내용:
+        </div>
+        <div style="display:flex;flex-direction:column;gap:7px">
+          ${["📊 이번 주 High Relevance 신호 TOP 10","🟢 비상장 스타트업 주간 동향 요약","🇰🇷 국내 정책/규제 변화 정리","📋 투자 스코어카드 업데이트 기업","⏱ 다음 주 예상 펀딩 타이밍 알람","🔗 유사 해외 딜 레퍼런스 업데이트"].map(item=>`<div style="display:flex;align-items:center;gap:8px;font-size:12px;color:#1A1710"><span style="color:#1A5C36">✓</span>${item}</div>`).join("")}
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="chd">📧 주간 리포트 설정</div>
+      <div class="cbd">
+        <div style="margin-bottom:14px">
+          <label style="font-size:12px;color:#4A4538;display:block;margin-bottom:5px;font-weight:500">수신 이메일 주소</label>
+          <input id="weeklyEmail" type="email" value="${weeklySettings.email}" placeholder="yourname@company.com"
+            style="width:100%;padding:8px 12px;border:1px solid #E6E2DA;border-radius:5px;font-size:12px;outline:none"
+            oninput="weeklySettings.email=this.value;localStorage.setItem('weekly_email',this.value)">
+        </div>
+        <div style="padding:12px;background:#FEF9E7;border-radius:5px;border:1px solid #FCD34D;margin-bottom:14px">
+          <div style="font-size:11px;font-weight:600;color:#92400E;margin-bottom:5px">⚙ 자동 발송 설정 방법</div>
+          <div style="font-size:11px;color:#4A3500;line-height:1.75">
+            1. GitHub → energy-cvc-briefing → Settings → Secrets<br>
+            2. <code style="background:#FFF8DC;padding:1px 5px;border-radius:3px">EMAIL_USER</code> = 발송 Gmail 주소<br>
+            3. <code style="background:#FFF8DC;padding:1px 5px;border-radius:3px">EMAIL_PASS</code> = Gmail 앱 비밀번호 (16자리)<br>
+            4. <code style="background:#FFF8DC;padding:1px 5px;border-radius:3px">EMAIL_TO</code> = 수신 이메일 주소<br>
+            5. .github/workflows/weekly.yml 파일 추가
+          </div>
+        </div>
+        <div style="background:#F0F7FF;border:1px solid #BFDBFE;border-radius:5px;padding:12px;font-family:'DM Mono',monospace;font-size:10px;color:#1E40AF;line-height:1.8">
+# weekly.yml 스케줄<br>
+on:<br>
+&nbsp;&nbsp;schedule:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;- cron: '0 22 * * 0'  # 매주 월요일 7시 KST<br>
+&nbsp;&nbsp;workflow_dispatch:
+        </div>
+      </div>
+    </div>
   </div>`;
 }
 
-// ── 히스토리 탭 ───────────────────────────────────────────
-function renderHistory() {
-  const area=document.getElementById("feedArea");
-  if(!DATE_INDEX.length){area.innerHTML=`<div class="empty"><div style="font-size:14px;color:#8A8070">히스토리 없음</div></div>`;return;}
-  area.innerHTML=`<div class="history-grid">${DATE_INDEX.map(d=>`<div class="history-card" onclick="loadDate('${d.date}')">
-    <div class="history-date">${d.date}</div>
-    <div style="font-size:12px;color:#4A4538;margin-bottom:6px">${d.dateKr||""}</div>
-    <div style="display:flex;gap:8px;flex-wrap:wrap">${[{n:d.stats?.total||0,l:"총",c:"#1A1710"},{n:d.stats?.high||0,l:"High",c:"#B83232"},{n:d.stats?.kr||0,l:"국내",c:"#B8860B"},{n:d.stats?.cn||0,l:"중국",c:"#CC0000"}].map(x=>`<span style="font-size:11px;color:${x.c}">${x.l} ${x.n}</span>`).join("")}</div>
-  </div>`).join("")}</div>`;
+// ── 히스토리 ──────────────────────────────────────────────
+function renderHistory(){
+  const el=document.getElementById("feedArea");
+  if(!IDX.length){el.innerHTML=`<div style="text-align:center;padding:48px"><div style="font-size:14px;color:#8A8070">히스토리 없음</div></div>`;return;}
+  el.innerHTML=`<div class="hist-grid">${IDX.map(d=>`<div class="hist-card" onclick="loadDate('${d.date}')"><div style="font-family:'DM Mono',monospace;font-size:12px;color:#1B3A5C;font-weight:600;margin-bottom:4px">${d.date}</div><div style="font-size:12px;color:#4A4538;margin-bottom:6px">${d.dateKr||""}</div><div style="display:flex;gap:8px;flex-wrap:wrap">${[{n:d.stats?.total||0,l:"총",c:"#1A1710"},{n:d.stats?.high||0,l:"High",c:"#B83232"},{n:d.stats?.kr||0,l:"국내",c:"#B8860B"},{n:d.stats?.cn||0,l:"중국",c:"#CC0000"}].map(x=>`<span style="font-size:11px;color:${x.c}">${x.l} ${x.n}</span>`).join("")}</div></div>`).join("")}</div>`;
 }
 
-// ── UI 이벤트 ─────────────────────────────────────────────
-function switchTab(tab) {
-  currentTab=tab;
-  document.querySelectorAll(".tab").forEach((t,i)=>{t.classList.toggle("active",["today","profiles","policy","history","settings"][i]===tab);});
+// ── UI ────────────────────────────────────────────────────
+function switchTab(tab){
+  curTab=tab;
+  document.querySelectorAll(".tab").forEach((t,i)=>{t.classList.toggle("on",["today","map","compare","timeline","ecosystem","profiles","weekly","history","settings"][i]===tab);});
   document.getElementById("filterBar").style.display=tab==="today"?"block":"none";
   document.getElementById("settingsPanel").style.display=tab==="settings"?"block":"none";
-  document.getElementById("mainGrid").style.display=tab==="settings"?"none":"grid";
+  document.getElementById("mainWrap").style.display=tab==="settings"?"none":"grid";
   if(tab==="today")renderFeed();
+  else if(tab==="map")renderMarketMap();
+  else if(tab==="compare")renderCompare();
+  else if(tab==="timeline")renderTimeline();
+  else if(tab==="ecosystem")renderEcosystem();
   else if(tab==="profiles")renderProfiles();
-  else if(tab==="policy")renderPolicyTab();
+  else if(tab==="weekly")renderWeekly();
   else if(tab==="history")renderHistory();
 }
 
-function setFilter(f,btn){currentFilter=f;document.querySelectorAll(".chip").forEach(c=>c.classList.remove("active"));btn.classList.add("active");renderFeed();}
-function toggleExpand(id){if(expandedIds.has(id))expandedIds.delete(id);else expandedIds.add(id);renderFeed();}
-function esc(str){return(str||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
+function setF(f,btn){curF=f;document.querySelectorAll(".chip").forEach(c=>c.classList.remove("on"));btn.classList.add("on");renderFeed();}
+function toggleExp(id){if(EXP.has(id))EXP.delete(id);else EXP.add(id);renderFeed();}
+function e(s){return(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
 
-async function loadDate(date) {
-  try{const r=await fetch(`data/${date}.json?`+Date.now());if(!r.ok)throw new Error();DATA=await r.json();SIGNALS=DATA.signals||[];POLICY=DATA.policyTriggers||[];switchTab("today");}
+async function loadDate(date){
+  try{const r=await fetch(`data/${date}.json?`+Date.now());if(!r.ok)throw new Error();DATA=await r.json();SIG=DATA.signals||[];POL=DATA.policyTriggers||[];switchTab("today");}
   catch{alert(`${date} 데이터를 불러올 수 없습니다.`);}
 }
 
@@ -496,7 +667,8 @@ function copyReport(){
   let t=`ENERGY CVC INTELLIGENCE — ${DATA.dateKr||DATA.date}\n총 ${s.total}건 · 비상장 ${s.unlisted||0} · High ${s.high}\n${"=".repeat(60)}\n\n`;
   if(DATA.brief)t+=`【CVC 딥 브리핑】\n${DATA.brief}\n\n${"=".repeat(60)}\n\n`;
   getFiltered().forEach((sig,i)=>{
-    t+=`${i+1}. [${sig.relevance}] ${sig.company||""} (${sig.fundingStage||sig.companyType})\n   ${sig.title}\n   출처: ${sig.source||""} · ${sig.pubDate||""}\n   ${sig.summary||""}\n   ▶ ${sig.deep_insight||""}\n`;
+    t+=`${i+1}. [${sig.relevance}] ${sig.company||""} (${sig.fundingStage||sig.companyType})\n   ${sig.title}\n   ${sig.source||""} · ${sig.pubDate||""}\n   ${sig.summary||""}\n`;
+    if(sig.deep_insight)t+=`   ▶ ${sig.deep_insight}\n`;
     if(sig.cvc_action)t+=`   📋 ${sig.cvc_action}\n`;
     if(sig.risk)t+=`   ⚠ ${sig.risk}\n`;
     if(sig.scorecard)t+=`   📊 ${sig.scorecard.conviction} · ${sig.scorecard.timing_signal} · ${sig.scorecard.one_line||""}\n`;
@@ -507,7 +679,7 @@ function copyReport(){
 }
 
 document.addEventListener("DOMContentLoaded",async()=>{
-  await Promise.all([loadData(),loadIndex(),loadProfiles()]);
+  await Promise.all([loadLatest(),loadIndex(),loadProfiles()]);
 });
 </script>
 </body>
