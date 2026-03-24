@@ -114,15 +114,10 @@ a{color:inherit;text-decoration:none;}
 .brief-b{font-size:12px;color:#9AB0C0;line-height:1.9;white-space:pre-wrap;}
 
 
-/* ── 신뢰도 뱃지 ── */
 .trust-fact{background:#EDF6F1;color:#1A5C36;border:1px solid #A7E3BE;padding:2px 7px;border-radius:3px;font-size:10px;font-weight:700;}
 .trust-ai{background:#EDF2F8;color:#1B3A5C;border:1px solid #C0D4EC;padding:2px 7px;border-radius:3px;font-size:10px;font-weight:700;}
 .trust-est{background:#FDF4E8;color:#A85400;border:1px solid #F0D8A8;padding:2px 7px;border-radius:3px;font-size:10px;font-weight:700;}
-.trust-banner{background:#F0FDF4;border:1px solid #A7E3BE;border-radius:6px;padding:10px 14px;margin-bottom:12px;font-size:11px;color:#1A5C36;line-height:1.7;}
-.trust-banner-warn{background:#FEF9E7;border:1px solid #FCD34D;border-radius:6px;padding:10px 14px;margin-bottom:12px;font-size:11px;color:#92400E;line-height:1.7;}
-.policy-link{display:inline-flex;align-items:center;gap:4px;font-size:11px;color:#1B3A5C;font-weight:600;padding:4px 10px;border:1px solid #C0D4EC;border-radius:4px;background:#EDF2F8;text-decoration:none;margin-top:6px;}
-.policy-link:hover{background:#DBEAFE;border-color:#93C5FD;}
-
+.trust-banner{background:#F0FDF4;border:1px solid #A7E3BE;border-radius:6px;padding:9px 14px;margin-bottom:12px;font-size:11px;color:#1A5C36;line-height:1.7;}
 @keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
 @keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
 .spin{animation:spin 1.5s linear infinite;display:inline-block;}
@@ -233,7 +228,7 @@ a{color:inherit;text-decoration:none;}
 <!-- FILTER BAR -->
 <div class="fbar" id="filterBar">
   <div class="fbar-in">
-    <input class="srch" id="srch" placeholder="🔍 기업명, 키워드…" oninput="renderFeed()">
+    <input class="srch" id="srch" placeholder="🔍 기업명, 키워드… (예: 수소, High, ESS)" oninput="renderFeed()">
     <button class="chip on"  onclick="setF('all',this)">전체</button>
     <button class="chip kr"  onclick="setF('kr',this)">🇰🇷 국내</button>
     <button class="chip"     onclick="setF('gl',this)">🌍 글로벌</button>
@@ -411,43 +406,68 @@ function renderDateList(){
 }
 function renderPolicyMini(){
   const el=document.getElementById("policyMini");
-  if(!POL.length){el.innerHTML=`<div style="font-size:11px;color:#B8B0A0">없음</div>`;return;}
+  if(!POL.length){el.innerHTML='<div style="font-size:11px;color:#B8B0A0">없음</div>';return;}
   const uc={High:"#7A2020",Medium:"#6B3600",Low:"#8A8070"};
   const ub={High:"background:#FDF0F0;border:1px solid #F0C0C0;",Medium:"background:#FDF4E8;border:1px solid #F0D8A8;",Low:"background:#F4F2EE;border:1px solid #D8D0C4;"};
-  el.innerHTML=POL.slice(0,4).map(p=>`<div style="${ub[p.urgency]||''}border-radius:5px;padding:8px 10px;margin-bottom:6px;cursor:pointer" onclick="p.url?window.open(p.url,'_blank'):switchTab('policy')" title="${p.url?'클릭하여 공식 문서 열기':p.desc}"><div style="font-size:11px;font-weight:600;color:${uc[p.urgency]}">${p.label}</div><div style="font-size:10px;color:#4A4538;margin-top:2px">${p.desc.slice(0,55)}…</div></div>`).join("");
+  el.innerHTML="";
+  POL.slice(0,5).forEach(function(p){
+    const div=document.createElement("div");
+    div.style.cssText=(ub[p.urgency]||"background:#F4F2EE;")+"border-radius:5px;padding:8px 10px;margin-bottom:6px;cursor:pointer;";
+    div.title=p.url?"클릭 → 공식 문서 열기":p.desc;
+    div.innerHTML='<div style="font-size:11px;font-weight:600;color:'+uc[p.urgency]+'">'+p.label+' ['+p.region+']'+(p.url?' 🔗':'')+'</div>'
+      +'<div style="font-size:10px;color:#4A4538;margin-top:2px">'+p.desc.slice(0,60)+'...</div>';
+    div.addEventListener("click",function(){p.url?window.open(p.url,"_blank","noopener"):switchTab("policy");});
+    el.appendChild(div);
+  });
 }
-
-// ── 오늘 신호 피드 ────────────────────────────────────────
 function getFiltered(){
-  const q=(document.getElementById("srch")?.value||"").toLowerCase();
-  return SIG.filter(s=>{
-    if(curF==="kr")return s.isKorean; if(curF==="gl")return !s.isKorean&&!s.isChina;
-    if(curF==="cn")return s.isChina; if(curF==="un")return s.companyType==="unlisted_startup";
-    if(curF==="hi")return s.relevance==="High"; if(curF==="iv")return s.next_action==="Investigate";
-    if(curF==="sc")return !!s.scorecard; return true;
-  }).filter(s=>!q||(s.company||"").toLowerCase().includes(q)||(s.title||"").toLowerCase().includes(q)||(s.category||"").toLowerCase().includes(q))
-  .sort((a,b)=>((b.companyType==="unlisted_startup"?10:0)+({High:3,Medium:1,Low:0}[b.relevance]||0))-((a.companyType==="unlisted_startup"?10:0)+({High:3,Medium:1,Low:0}[a.relevance]||0)));
+  const raw=(document.getElementById("srch")||{value:""}).value.trim();
+  const qs=raw.toLowerCase().split(/\s+/).filter(Boolean);
+  return SIG.filter(function(s){
+    if(curF==="kr")return s.isKorean;
+    if(curF==="gl")return !s.isKorean&&!s.isChina;
+    if(curF==="cn")return s.isChina;
+    if(curF==="un")return s.companyType==="unlisted_startup";
+    if(curF==="hi")return s.relevance==="High";
+    if(curF==="iv")return s.next_action==="Investigate";
+    if(curF==="sc")return !!s.scorecard;
+    return true;
+  }).filter(function(s){
+    if(!qs.length)return true;
+    var hay=[
+      s.company||"", s.title||"", s.category||"", s.deep_insight||"",
+      s.summary||"", s.source||"", s.country||"", s.region||"",
+      s.fundingStage||"", s.eventType||"", s.relevance||"",
+      s.signal_type||"", s.next_action||"", s.cvc_action||"", s.risk||"",
+      (s.policyTriggers||[]).map(function(p){return p.label||"";}).join(" "),
+      (s.comparableDeals||[]).map(function(d){return d.company||"";}).join(" ")
+    ].join(" ").toLowerCase();
+    return qs.every(function(k){return hay.indexOf(k)>=0;});
+  }).sort(function(a,b){
+    var sa=(a.companyType==="unlisted_startup"?10:0)+({High:3,Medium:1,Low:0}[a.relevance]||0);
+    var sb=(b.companyType==="unlisted_startup"?10:0)+({High:3,Medium:1,Low:0}[b.relevance]||0);
+    return sb-sa;
+  });
 }
-
 function renderFeed(){
   const sigs=getFiltered(), el=document.getElementById("feedArea");
   let h="";
   if(DATA?.stats){const s=DATA.stats;h+=`<div class="sg">${[{n:s.total,l:"총 신호",c:"#1A1710"},{n:s.unlisted||0,l:"🟢 비상장",c:"#1A5C36"},{n:s.high,l:"High",c:"#B83232"},{n:s.investigate||0,l:"즉시 검토",c:"#A85400"}].map(x=>`<div class="sc2"><div class="sc2-n" style="color:${x.c}">${x.n||0}</div><div class="sc2-l">${x.l}</div></div>`).join("")}</div>`;}
   if(DATA?.brief)h+=`<div class="brief"><div class="brief-t">✦ 오늘의 CVC 딥 브리핑</div><div class="brief-b">${e(DATA.brief)}</div></div>`;
-  // 신뢰도 배너
+  const factCount=(DATA?.stats?.factCount)||SIG.filter(s=>s.trust==="FACT").length;
+  const aiCount=(DATA?.stats?.aiCount)||0;
+  const dartCount=(DATA?.stats?.dartCount)||0;
   h+=`<div class="trust-banner">
-    <strong>데이터 신뢰도 안내</strong><br>
-    <span class="trust-fact">✓ 팩트</span> 원본 언론사 링크 확인 가능 &nbsp;|&nbsp;
-    <span class="trust-ai">⚙ AI 분석</span> 실제 기사 기반 AI 해석 &nbsp;|&nbsp;
-    <span class="trust-est">~ AI 추정</span> 투자 결정 전 독립 검증 필요
-    ${DATA?.stats?.dartCount?`&nbsp;|&nbsp; 📋 DART 공시 ${DATA.stats.dartCount}건 (100% 팩트)`:""}
+    <strong>데이터 신뢰도 안내</strong> &nbsp;
+    <span class="trust-fact">✓ 팩트</span> 원본 링크 확인 가능 (${factCount}건)&nbsp;|&nbsp;
+    <span class="trust-ai">⚙ AI 분석</span> 실제 기사 기반 해석${dartCount?` &nbsp;|&nbsp; 📋 DART 공시 ${dartCount}건 (100% 팩트)`:""}
+    &nbsp;|&nbsp; <span class="trust-est">~ AI 추정</span> 스코어카드는 투자 전 독립 검증 필요
   </div>`;
   if(!sigs.length){h+=`<div style="text-align:center;padding:32px;background:#fff;border:1px solid #E6E2DA;border-radius:7px"><div style="color:#8A8070">해당 조건 없음</div></div>`;el.innerHTML=h;return;}
   h+=`<div class="feed"><div class="feed-hd"><span style="font-size:11px;font-weight:700;color:#8A8070;text-transform:uppercase;letter-spacing:0.5px">투자 신호</span><span style="font-family:'DM Mono',monospace;font-size:10px;color:#B8B0A0">${sigs.length}건</span></div>`;
   sigs.forEach(s=>{
     const op=EXP.has(s.id),isU=s.companyType==="unlisted_startup",isKr=s.isKorean,isCn=s.isChina;
     const bc=isKr?"#B8860B":isCn?"#EE1C25":isU?"#1A5C36":s.relevance==="High"?"#B83232":"transparent";
-    const trustBadge=s.trust==="FACT"?`<span class="trust-fact">✓ 팩트</span>`:s.trust==="AI_ANALYSIS"?`<span class="trust-ai">⚙ AI분석</span>`:`<span class="trust-est">~ AI추정</span>`;
     const tb=isU?`<span class="b b-u">🟢 비상장</span>`:s.companyType==="ecosystem"?`<span class="b b-e">생태계</span>`:`<span class="b b-l">상장</span>`;
     const rb=`<span class="b b-${s.relevance||"Lo"}" style="border:1px solid">${s.relevance}</span>`;
     const catc=isKr?"b-kr":isCn?"b-cn":"b-gl";
@@ -462,13 +482,9 @@ function renderFeed(){
       h+=`<div class="sig-bd">
         <div class="src-r">${s.isRealNews?`<span style="background:#EDF6F1;color:#1A5C36;border:1px solid #A7E3BE;padding:1px 6px;border-radius:3px;font-size:10px;font-weight:600">✓실제뉴스</span>`:`<span style="background:#FDF4E8;color:#6B3600;border:1px solid #F0D8A8;padding:1px 6px;border-radius:3px;font-size:10px;font-weight:600">AI생성</span>`}<span>${e(s.source||"")}</span><span>·</span><span>${e(s.pubDate||"")}</span>${s.url?`<a href="${e(s.url)}" target="_blank" style="color:#1B3A5C;font-size:10px" onclick="event.stopPropagation()">원문 →</a>`:""}</div>
         <div style="font-size:12px;color:#4A4538;line-height:1.7;margin-bottom:8px">${e(s.summary||"")}</div>`;
-      if(s.relevance_reason)h+=`<div style="background:#F6F4F0;border-radius:4px;padding:6px 10px;margin-bottom:7px;font-size:11px;color:#4A4538"><span style="font-weight:600;color:#1B3A5C">판단 근거:</span> ${e(s.relevance_reason)}</div>`;
-      if(s.deep_insight)h+=`<div class="ins"><div class="ins-l">✦ 에너지 심사역 딥 인사이트 <span class="trust-ai" style="font-size:9px;vertical-align:middle">⚙ AI분석</span></div><div class="ins-t">${e(s.deep_insight)}</div>${s.cvc_action?`<div class="act-b">📋 ${e(s.cvc_action)}</div>`:""}${s.risk?`<div class="rsk">⚠ ${e(s.risk)}</div>`:""}</div>`;
-      if(s.scorecard){const sc=s.scorecard;const items=[{k:"technology",l:"기술검증"},{k:"commercialization",l:"상업화"},{k:"team",l:"팀신호"},{k:"partnership",l:"파트너십"},{k:"fundraising_timing",l:"자금조달임박"}];const cc2={High:"#1A5C36",Medium:"#A85400",Low:"#B83232"}[sc.conviction]||"#8A8070";h+=`<div class="sc"><div class="sc-hd">📊 투자 스코어카드 <span class="trust-est" style="font-size:9px">~ AI추정</span> <span style="background:${cc2}22;color:${cc2};padding:2px 8px;border-radius:10px;font-size:10px">${sc.conviction}</span></div>`;
-      if(sc.trust_note)h+=`<div style="font-size:10px;color:#A85400;margin-bottom:6px">⚠ ${e(sc.trust_note)}</div>`;
-      h+=`<div class="sc-hd" style="margin-top:0"><div class="sc-g">${items.map(it=>{const v=sc[it.k];if(!v)return"";return`<div class="sc-i"><div class="sc-il">${it.l}</div><div class="sc-bw"><div class="sc-bb"><div class="sc-bf" style="width:${(v.score/v.max)*100}%"></div></div><span class="sc-n">${v.score}/${v.max}</span></div>${v.reason?`<div style="font-size:10px;color:#4A5568;margin-top:2px">${e(v.reason)}</div>`:""}</div>`;}).join("")}</div>${sc.timing_reason?`<div style="font-size:10px;color:#1E40AF;margin-top:2px">근거: ${e(sc.timing_reason)}</div>`:""}
-          ${sc.one_line?`<div class="sc-ol">${e(sc.one_line)}</div>`:""}</div>`;}
-      if((s.comparableDeals||[]).length)h+=`<div class="cd"><div class="cd-hd">🔗 유사 딜 레퍼런스</div>${s.comparableDeals.map(d=>`<div class="di"><div class="di-t"><span class="di-co">${e(d.company)}</span><span class="di-am">${e(d.amount)}</span></div><div class="di-m">${e(d.country)} · ${e(d.sector)} · ${e(d.stage)} · ${e(d.year)}${d.valuation?` · ${e(d.valuation)}`:""}</div>${d.source?`<div style="font-size:10px;color:#6D28D9;margin-top:2px"><span class="trust-fact" style="font-size:9px">✓ 팩트</span> 출처: ${e(d.source)}</div>`:""}</div>`).join("")}</div>`;
+      if(s.deep_insight)h+=`<div class="ins"><div class="ins-l">✦ 에너지 심사역 딥 인사이트</div><div class="ins-t">${e(s.deep_insight)}</div>${s.cvc_action?`<div class="act-b">📋 ${e(s.cvc_action)}</div>`:""}${s.risk?`<div class="rsk">⚠ ${e(s.risk)}</div>`:""}</div>`;
+      if(s.scorecard){const sc=s.scorecard;const items=[{k:"technology",l:"기술검증"},{k:"commercialization",l:"상업화"},{k:"team",l:"팀신호"},{k:"partnership",l:"파트너십"},{k:"fundraising_timing",l:"자금조달임박"}];const cc2={High:"#1A5C36",Medium:"#A85400",Low:"#B83232"}[sc.conviction]||"#8A8070";h+=`<div class="sc"><div class="sc-hd">📊 투자 스코어카드 <span style="background:${cc2}22;color:${cc2};padding:2px 8px;border-radius:10px;font-size:10px">${sc.conviction}</span></div><div class="sc-g">${items.map(it=>{const v=sc[it.k];if(!v)return"";return`<div class="sc-i"><div class="sc-il">${it.l}</div><div class="sc-bw"><div class="sc-bb"><div class="sc-bf" style="width:${(v.score/v.max)*100}%"></div></div><span class="sc-n">${v.score}/${v.max}</span></div>${v.reason?`<div style="font-size:10px;color:#4A5568;margin-top:2px">${e(v.reason)}</div>`:""}</div>`;}).join("")}</div>${sc.one_line?`<div class="sc-ol">${e(sc.one_line)}</div>`:""}</div>`;}
+      if((s.comparableDeals||[]).length)h+=`<div class="cd"><div class="cd-hd">🔗 유사 딜 레퍼런스</div>${s.comparableDeals.map(d=>`<div class="di"><div class="di-t"><span class="di-co">${e(d.company)}</span><span class="di-am">${e(d.amount)}</span></div><div class="di-m">${e(d.country)} · ${e(d.sector)} · ${e(d.stage)} · ${e(d.year)}${d.valuation?` · ${e(d.valuation)}`:""}</div></div>`).join("")}</div>`;
       if((s.policyTriggers||[]).length)h+=`<div class="pt"><div class="pt-hd">📋 정책 트리거</div>${s.policyTriggers.map(p=>`<div style="margin-bottom:4px"><span style="font-size:11px;font-weight:600;color:#92400E">${e(p.label)}</span><div style="font-size:11px;color:#4A3500;margin-top:1px">${e(p.desc)}</div></div>`).join("")}</div>`;
       h+=`</div>`;
     }
@@ -652,6 +668,58 @@ on:<br>
 }
 
 // ── 히스토리 ──────────────────────────────────────────────
+
+function renderPolicyTab(){
+  const el=document.getElementById("feedArea");
+  if(!POL.length){el.innerHTML='<div style="text-align:center;padding:48px"><div style="font-size:14px;color:#8A8070">정책 데이터 없음</div></div>';return;}
+  const grid=document.createElement("div");
+  grid.style.cssText="display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px;";
+  POL.forEach(function(p){
+    const uc={High:"#7A2020",Medium:"#6B3600",Low:"#8A8070"}[p.urgency]||"#1A1710";
+    const ubg={High:"#FDF0F0",Medium:"#FDF4E8",Low:"#F4F2EE"}[p.urgency]||"#F4F2EE";
+    const ubd={High:"#F0C0C0",Medium:"#F0D8A8",Low:"#D8D0C4"}[p.urgency]||"#D8D0C4";
+    const card=document.createElement("div");
+    card.style.cssText="background:"+ubg+";border:1px solid "+ubd+";border-radius:8px;padding:16px;";
+    const hdr=document.createElement("div");
+    hdr.style.cssText="display:flex;justify-content:space-between;margin-bottom:8px;";
+    hdr.innerHTML='<div style="font-size:14px;font-weight:700;color:'+uc+'">'+p.label+'</div>'
+      +'<span style="font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;background:rgba(255,255,255,0.7);color:'+uc+'">'+p.urgency+' · '+p.region+'</span>';
+    card.appendChild(hdr);
+    const dsc=document.createElement("div");
+    dsc.style.cssText="font-size:12px;color:#4A4538;line-height:1.7;margin-bottom:10px;";
+    dsc.textContent=p.desc;
+    card.appendChild(dsc);
+    const lbl=document.createElement("div");
+    lbl.style.cssText="font-size:10px;font-weight:600;color:"+uc+";margin-bottom:5px;";
+    lbl.textContent="수혜 기업";
+    card.appendChild(lbl);
+    const cw=document.createElement("div");
+    cw.style.cssText="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:10px;";
+    (p.beneficiaries||[]).forEach(function(c){
+      const sp=document.createElement("span");
+      sp.style.cssText="font-size:11px;padding:2px 8px;border-radius:10px;background:rgba(255,255,255,0.7);color:"+uc+";font-weight:500;";
+      sp.textContent=c.split("(")[0].trim();
+      cw.appendChild(sp);
+    });
+    card.appendChild(cw);
+    if(p.url){
+      const btn=document.createElement("a");
+      btn.href=p.url; btn.target="_blank"; btn.rel="noopener noreferrer";
+      btn.style.cssText="display:inline-flex;align-items:center;gap:4px;font-size:11px;color:#1B3A5C;font-weight:600;padding:5px 12px;border:1px solid #C0D4EC;border-radius:4px;background:#EDF2F8;text-decoration:none;margin-bottom:6px;";
+      btn.textContent="🔗 "+(p.urlLabel||"공식 문서")+" →";
+      btn.onmouseover=function(){this.style.background="#DBEAFE";};
+      btn.onmouseout =function(){this.style.background="#EDF2F8";};
+      card.appendChild(btn);
+      const note=document.createElement("div");
+      note.style.cssText="font-size:10px;color:#1A5C36;";
+      note.textContent="✓ 팩트 — 실제 정부/기관 공식 출처";
+      card.appendChild(note);
+    }
+    grid.appendChild(card);
+  });
+  el.innerHTML="";
+  el.appendChild(grid);
+}
 function renderHistory(){
   const el=document.getElementById("feedArea");
   if(!IDX.length){el.innerHTML=`<div style="text-align:center;padding:48px"><div style="font-size:14px;color:#8A8070">히스토리 없음</div></div>`;return;}
