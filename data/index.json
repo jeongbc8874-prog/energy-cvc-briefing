@@ -1,5 +1,24 @@
 [
   {
+    "date": "2026-03-25",
+    "dateKr": "2026년 3월 26일 목요일",
+    "stats": {
+      "total": 10,
+      "unlisted": 0,
+      "kr": 1,
+      "cn": 5,
+      "global": 4,
+      "high": 1,
+      "investigate": 1,
+      "realNews": 10,
+      "dartCount": 0,
+      "profiledCompanies": 24,
+      "withScorecard": 1,
+      "factCount": 10,
+      "aiCount": 0
+    }
+  },
+  {
     "date": "2026-03-24",
     "dateKr": "2026년 3월 24일 화요일",
     "stats": {
