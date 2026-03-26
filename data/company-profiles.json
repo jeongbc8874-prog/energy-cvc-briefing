@@ -53,13 +53,21 @@
   "Towards Packaging": {
     "name": "Towards Packaging",
     "firstSeen": "2026-03-24",
-    "lastSeen": "2026-03-24",
+    "lastSeen": "2026-03-26",
     "sector": "Global ESS",
     "region": "GLOBAL",
     "country": "US",
-    "signalCount": 1,
+    "signalCount": 2,
     "highCount": 0,
     "signals": [
+      {
+        "date": "2026-03-26",
+        "title": "Growth and Trends in the Recyclable Packaging Resin Market Key Insights, Innovations, and Industry Investments (2025-2035)",
+        "relevance": "Medium",
+        "eventType": "News",
+        "signal_type": "Market context",
+        "url": "https://www.globenewswire.com/news-release/2026/03/04/3249444/0/en/Growth-and-Trends-in-the-Recyclable-Packaging-Resin-Market-Key-Insights-Innovations-and-Industry-Investments-2025-2035.html"
+      },
       {
         "date": "2026-03-24",
         "title": "Growth and Trends in the Recyclable Packaging Resin Market Key Insights, Innovations, and Industry Investments (2025-2035)",
@@ -70,18 +78,26 @@
     ],
     "scoreHistory": [],
     "fundingStage": "N/A",
-    "recentActivity": 1
+    "recentActivity": 2
   },
   "Pigment": {
     "name": "Pigment",
     "firstSeen": "2026-03-24",
-    "lastSeen": "2026-03-24",
+    "lastSeen": "2026-03-26",
     "sector": "Global ESS",
     "region": "GLOBAL",
     "country": "US",
-    "signalCount": 2,
-    "highCount": 0,
+    "signalCount": 3,
+    "highCount": 1,
     "signals": [
+      {
+        "date": "2026-03-26",
+        "title": "The French AI startup gunning for Workday, Oracle, and SAP",
+        "relevance": "High",
+        "eventType": "News",
+        "signal_type": "Commercial traction",
+        "url": "https://fortune.com/2026/03/04/french-ai-startup-workday-oracle-sap-pigment/"
+      },
       {
         "date": "2026-03-24",
         "title": "The French AI startup gunning for Workday, Oracle, and SAP",
@@ -97,9 +113,91 @@
         "signal_type": "Commercial traction"
       }
     ],
-    "scoreHistory": [],
+    "scoreHistory": [
+      {
+        "date": "2026-03-26",
+        "scorecard": {
+          "technology": {
+            "score": 4,
+            "max": 5,
+            "reason": "Workday, Oracle, SAP 등 기존 거대 기업 대상으로 경쟁하는 AI 기반 솔루션으로 차별화된 기술력 보유",
+            "evidence": "The French AI startup gunning for Workday, Oracle, and SAP"
+          },
+          "commercialization": {
+            "score": 3,
+            "max": 5,
+            "reason": "거대 기업들과 직접 경쟁할 수 있는 수준의 제품력을 보유하고 있으나 구체적 매출 정보 부족",
+            "evidence": "The French AI startup gunning for Workday, Oracle, and SAP"
+          },
+          "team": {
+            "score": 2,
+            "max": 5,
+            "reason": "팀 정보가 제한적으로 제공되어 평가 어려움",
+            "evidence": "The French AI startup gunning for Workday, Oracle, and SAP"
+          },
+          "partnership": {
+            "score": 2,
+            "max": 5,
+            "reason": "파트너십 관련 구체적 정보 부족",
+            "evidence": "The French AI startup gunning for Workday, Oracle, and SAP"
+          },
+          "fundraising_timing": {
+            "score": 4,
+            "max": 5,
+            "reason": "Fortune 등 주요 매체에서 주목받는 시점으로 펀드레이징��� 유리한 타이밍",
+            "evidence": "The French AI startup gunning for Workday, Oracle, and SAP"
+          },
+          "total": 15,
+          "conviction": "Medium",
+          "timing_signal": "3-6months",
+          "timing_reason": "주요 매체 노출로 시장 관심도 증가, 기술력 검증된 상황에서 펀드레이징 적기",
+          "one_line": "엔터프라이즈 AI 솔루션으로 기존 거대 기업들과 경쟁하는 유망한 프랑스 스타트업",
+          "trust": "AI_ANALYSIS",
+          "trust_note": "스코어카드는 AI 추정값입니다. 실제 투자 결정 전 독립적 검증 필요."
+        }
+      }
+    ],
     "fundingStage": "Series-B",
-    "recentActivity": 2
+    "recentActivity": 3,
+    "latestScorecard": {
+      "technology": {
+        "score": 4,
+        "max": 5,
+        "reason": "Workday, Oracle, SAP 등 기존 거대 기업 대상으로 경쟁하는 AI 기반 솔루션으로 차별화된 기술력 보유",
+        "evidence": "The French AI startup gunning for Workday, Oracle, and SAP"
+      },
+      "commercialization": {
+        "score": 3,
+        "max": 5,
+        "reason": "거대 기업들과 직접 경쟁할 수 있는 수준의 제품력을 보유하고 있으나 구체적 매출 정보 부족",
+        "evidence": "The French AI startup gunning for Workday, Oracle, and SAP"
+      },
+      "team": {
+        "score": 2,
+        "max": 5,
+        "reason": "팀 정보가 제한적으로 제공되어 평가 어려움",
+        "evidence": "The French AI startup gunning for Workday, Oracle, and SAP"
+      },
+      "partnership": {
+        "score": 2,
+        "max": 5,
+        "reason": "파트너십 관련 구체적 정보 부족",
+        "evidence": "The French AI startup gunning for Workday, Oracle, and SAP"
+      },
+      "fundraising_timing": {
+        "score": 4,
+        "max": 5,
+        "reason": "Fortune 등 주요 매체에서 주목받는 시점으로 펀드레이징��� 유리한 타이밍",
+        "evidence": "The French AI startup gunning for Workday, Oracle, and SAP"
+      },
+      "total": 15,
+      "conviction": "Medium",
+      "timing_signal": "3-6months",
+      "timing_reason": "주요 매체 노출로 시장 관심도 증가, 기술력 검증된 상황에서 펀드레이징 적기",
+      "one_line": "엔터프라이즈 AI 솔루션으로 기존 거대 기업들과 경쟁하는 유망한 프랑스 스타트업",
+      "trust": "AI_ANALYSIS",
+      "trust_note": "스코어카드는 AI 추정값입니다. 실제 투자 결정 전 독립적 검증 필요."
+    }
   },
   "호주 수중 3D 콘크리트 프린팅 업체": {
     "name": "호주 수중 3D 콘크리트 프린팅 업체",
@@ -1076,13 +1174,45 @@
   "N/A": {
     "name": "N/A",
     "firstSeen": "2026-03-24",
-    "lastSeen": "2026-03-25",
+    "lastSeen": "2026-03-26",
     "sector": "China ESS",
     "region": "CN",
     "country": "CN",
-    "signalCount": 5,
+    "signalCount": 9,
     "highCount": 0,
     "signals": [
+      {
+        "date": "2026-03-26",
+        "title": "You Don't Have To",
+        "relevance": "Low",
+        "eventType": "News",
+        "signal_type": "Market context",
+        "url": "https://www.scottsmitelli.com/articles/you-dont-have-to/"
+      },
+      {
+        "date": "2026-03-26",
+        "title": "While Hinkley Nuclear Was Being Built, The UK Grid Decarbonized",
+        "relevance": "Low",
+        "eventType": "News",
+        "signal_type": "Market context",
+        "url": "https://cleantechnica.com/2026/03/06/while-hinkley-nuclear-was-being-built-the-uk-grid-decarbonized/"
+      },
+      {
+        "date": "2026-03-26",
+        "title": "Canada must remember that the future is electricity, not fossil fuels",
+        "relevance": "Low",
+        "eventType": "News",
+        "signal_type": "Market context",
+        "url": "https://www.theglobeandmail.com/business/commentary/article-canada-must-remember-that-the-future-is-electricity-not-fossil-fuels/"
+      },
+      {
+        "date": "2026-03-26",
+        "title": "Global Energy Infrastructure Strain Accelerates Shift to Electric Vehicles and Off-Grid Power Storage",
+        "relevance": "Low",
+        "eventType": "News",
+        "signal_type": "Market context",
+        "url": "https://www.naturalnews.com/2026-03-10-global-energy-infrastructure-strain-accelerates-shift.html"
+      },
       {
         "date": "2026-03-25",
         "title": "You Don't Have To",
@@ -1126,7 +1256,7 @@
     ],
     "scoreHistory": [],
     "fundingStage": "N/A",
-    "recentActivity": 5
+    "recentActivity": 9
   },
   "Hinkley Point C Nuclear Plant": {
     "name": "Hinkley Point C Nuclear Plant",
@@ -1428,5 +1558,179 @@
     "scoreHistory": [],
     "fundingStage": "N/A",
     "recentActivity": 1
+  },
+  "Newdesigncongress.org": {
+    "name": "Newdesigncongress.org",
+    "firstSeen": "2026-03-26",
+    "lastSeen": "2026-03-26",
+    "sector": "국내 ESS",
+    "region": "KR",
+    "country": "KR",
+    "signalCount": 1,
+    "highCount": 0,
+    "signals": [
+      {
+        "date": "2026-03-26",
+        "title": "Who Will Remember Us When The Servers Go Dark?",
+        "relevance": "Low",
+        "eventType": "News",
+        "signal_type": "Market context",
+        "url": "https://newdesigncongress.org/en/pub/who-will-remember-us-when-the-servers-go-dark/"
+      }
+    ],
+    "scoreHistory": [],
+    "fundingStage": "N/A",
+    "recentActivity": 1
+  },
+  "Blockstack": {
+    "name": "Blockstack",
+    "firstSeen": "2026-03-26",
+    "lastSeen": "2026-03-26",
+    "sector": "Global ESS",
+    "region": "GLOBAL",
+    "country": "US",
+    "signalCount": 1,
+    "highCount": 0,
+    "signals": [
+      {
+        "date": "2026-03-26",
+        "title": "When the chain becomes the product: Seven years inside a token-funded venture",
+        "relevance": "Medium",
+        "eventType": "News",
+        "signal_type": "Technical validation",
+        "url": "https://markmhendrickson.com/posts/when-the-chain-becomes-the-product"
+      }
+    ],
+    "scoreHistory": [],
+    "fundingStage": "N/A",
+    "recentActivity": 1
+  },
+  "Multiple Private Companies": {
+    "name": "Multiple Private Companies",
+    "firstSeen": "2026-03-26",
+    "lastSeen": "2026-03-26",
+    "sector": "Global SMR",
+    "region": "GLOBAL",
+    "country": "US",
+    "signalCount": 1,
+    "highCount": 0,
+    "signals": [
+      {
+        "date": "2026-03-26",
+        "title": "The Microreactor Race Is On",
+        "relevance": "Medium",
+        "eventType": "Pilot",
+        "signal_type": "Market context",
+        "url": "https://wattsupwiththat.com/2026/02/28/the-microreactor-race-is-on/"
+      }
+    ],
+    "scoreHistory": [],
+    "fundingStage": "N/A",
+    "recentActivity": 1
+  },
+  "Pentagon/DoD Maritime Tech VC Fund": {
+    "name": "Pentagon/DoD Maritime Tech VC Fund",
+    "firstSeen": "2026-03-26",
+    "lastSeen": "2026-03-26",
+    "sector": "China ESS",
+    "region": "CN",
+    "country": "CN",
+    "signalCount": 1,
+    "highCount": 1,
+    "signals": [
+      {
+        "date": "2026-03-26",
+        "title": "Exclusive: The Pentagon is committing $150M to a maritime tech VC fund and appears to be ramping up venture deals",
+        "relevance": "High",
+        "eventType": "Financing",
+        "signal_type": "Market context",
+        "url": "https://fortune.com/2026/03/05/pentagon-venture-committments-mare-liberum/"
+      }
+    ],
+    "scoreHistory": [
+      {
+        "date": "2026-03-26",
+        "scorecard": {
+          "technology": {
+            "score": 4,
+            "max": 5,
+            "reason": "Pentagon이 $150M을 투자한다는 것은 해당 펀드가 고도화된 해양 기술에 집중한다는 강력한 신호. DoD의 투자는 기술적 잠재력과 전략적 가치를 인정받은 것",
+            "evidence": "The Pentagon is committing $150M to a maritime tech VC fund"
+          },
+          "commercialization": {
+            "score": 3,
+            "max": 5,
+            "reason": "Pentagon의 대규모 투자는 상업화 가능성을 시사하지만, 국방 특화 펀드의 특성상 민간 상업화까지의 경로는 불확실",
+            "evidence": "Pentagon is committing $150M to a maritime tech VC fund and appears to be ramping up venture deals"
+          },
+          "team": {
+            "score": 2,
+            "max": 5,
+            "reason": "제공된 신호에서 펀드 운영진이나 팀에 대한 구체적 정보가 없어 평가 어려움",
+            "evidence": "The Pentagon is committing $150M to a maritime tech VC fund"
+          },
+          "partnership": {
+            "score": 5,
+            "max": 5,
+            "reason": "Pentagon/DoD와의 직접적 파트너십은 최고 수준의 전략적 제휴. 국방부 벤처 거래 확대 움직임의 일환으로 강력한 파트너십",
+            "evidence": "Pentagon is committing $150M to a maritime tech VC fund and appears to be ramping up venture deals"
+          },
+          "fundraising_timing": {
+            "score": 5,
+            "max": 5,
+            "reason": "Pentagon의 $150M 투자 확정은 펀드레이징이 성공적으로 완료되었음을 의미. 최고 수준의 타이밍",
+            "evidence": "The Pentagon is committing $150M to a maritime tech VC fund"
+          },
+          "total": 19,
+          "conviction": "High",
+          "timing_signal": "Immediate",
+          "timing_reason": "Pentagon의 $150M 투자 확정은 immediate action이 필요한 강력한 신호. DoD 벤처 딜 확대 트렌드의 선두주자",
+          "one_line": "Pentagon $150M 투자로 검증된 해양기술 전문 VC펀드, 국방-민간 기술 브릿지 역할 기대",
+          "trust": "AI_ANALYSIS",
+          "trust_note": "스코어카드는 AI 추정값입니다. 실제 투자 결정 전 독립적 검증 필요."
+        }
+      }
+    ],
+    "fundingStage": "N/A",
+    "recentActivity": 1,
+    "latestScorecard": {
+      "technology": {
+        "score": 4,
+        "max": 5,
+        "reason": "Pentagon이 $150M을 투자한다는 것은 해당 펀드가 고도화된 해양 기술에 집중한다는 강력한 신호. DoD의 투자는 기술적 잠재력과 전략적 가치를 인정받은 것",
+        "evidence": "The Pentagon is committing $150M to a maritime tech VC fund"
+      },
+      "commercialization": {
+        "score": 3,
+        "max": 5,
+        "reason": "Pentagon의 대규모 투자는 상업화 가능성을 시사하지만, 국방 특화 펀드의 특성상 민간 상업화까지의 경로는 불확실",
+        "evidence": "Pentagon is committing $150M to a maritime tech VC fund and appears to be ramping up venture deals"
+      },
+      "team": {
+        "score": 2,
+        "max": 5,
+        "reason": "제공된 신호에서 펀드 운영진이나 팀에 대한 구체적 정보가 없어 평가 어려움",
+        "evidence": "The Pentagon is committing $150M to a maritime tech VC fund"
+      },
+      "partnership": {
+        "score": 5,
+        "max": 5,
+        "reason": "Pentagon/DoD와의 직접적 파트너십은 최고 수준의 전략적 제휴. 국방부 벤처 거래 확대 움직임의 일환으로 강력한 파트너십",
+        "evidence": "Pentagon is committing $150M to a maritime tech VC fund and appears to be ramping up venture deals"
+      },
+      "fundraising_timing": {
+        "score": 5,
+        "max": 5,
+        "reason": "Pentagon의 $150M 투자 확정은 펀드레이징이 성공적으로 완료되었음을 의미. 최고 수준의 타이밍",
+        "evidence": "The Pentagon is committing $150M to a maritime tech VC fund"
+      },
+      "total": 19,
+      "conviction": "High",
+      "timing_signal": "Immediate",
+      "timing_reason": "Pentagon의 $150M 투자 확정은 immediate action이 필요한 강력한 신호. DoD 벤처 딜 확대 트렌드의 선두주자",
+      "one_line": "Pentagon $150M 투자로 검증된 해양기술 전문 VC펀드, 국방-민간 기술 브릿지 역할 기대",
+      "trust": "AI_ANALYSIS",
+      "trust_note": "스코어카드는 AI 추정값입니다. 실제 투자 결정 전 독립적 검증 필요."
+    }
   }
 }
