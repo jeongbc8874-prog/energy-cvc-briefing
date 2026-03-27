@@ -598,13 +598,21 @@
   "Who Will": {
     "name": "Who Will",
     "firstSeen": "2026-03-24",
-    "lastSeen": "2026-03-25",
+    "lastSeen": "2026-03-27",
     "sector": "국내 ESS",
     "region": "KR",
     "country": "KR",
-    "signalCount": 5,
+    "signalCount": 6,
     "highCount": 0,
     "signals": [
+      {
+        "date": "2026-03-27",
+        "title": "Who Will Remember Us When The Servers Go Dark?",
+        "relevance": "Medium",
+        "eventType": "News",
+        "signal_type": "Market context",
+        "url": "https://newdesigncongress.org/en/pub/who-will-remember-us-when-the-servers-go-dark/"
+      },
       {
         "date": "2026-03-25",
         "title": "Who Will Remember Us When The Servers Go Dark?",
@@ -648,18 +656,26 @@
     ],
     "scoreHistory": [],
     "fundingStage": "N/A",
-    "recentActivity": 5
+    "recentActivity": 6
   },
   "When": {
     "name": "When",
     "firstSeen": "2026-03-24",
-    "lastSeen": "2026-03-25",
+    "lastSeen": "2026-03-27",
     "sector": "Global ESS",
     "region": "GLOBAL",
     "country": "US",
-    "signalCount": 5,
+    "signalCount": 6,
     "highCount": 0,
     "signals": [
+      {
+        "date": "2026-03-27",
+        "title": "When the chain becomes the product: Seven years inside a token-funded venture",
+        "relevance": "Medium",
+        "eventType": "News",
+        "signal_type": "Market context",
+        "url": "https://markmhendrickson.com/posts/when-the-chain-becomes-the-product"
+      },
       {
         "date": "2026-03-25",
         "title": "When the chain becomes the product: Seven years inside a token-funded venture",
@@ -703,18 +719,26 @@
     ],
     "scoreHistory": [],
     "fundingStage": "N/A",
-    "recentActivity": 5
+    "recentActivity": 6
   },
   "Growth": {
     "name": "Growth",
     "firstSeen": "2026-03-24",
-    "lastSeen": "2026-03-25",
+    "lastSeen": "2026-03-27",
     "sector": "Global ESS",
     "region": "GLOBAL",
     "country": "US",
-    "signalCount": 5,
+    "signalCount": 6,
     "highCount": 0,
     "signals": [
+      {
+        "date": "2026-03-27",
+        "title": "Growth and Trends in the Recyclable Packaging Resin Market Key Insights, Innovations, and Industry Investments (2025-2035)",
+        "relevance": "Medium",
+        "eventType": "News",
+        "signal_type": "Market context",
+        "url": "https://www.globenewswire.com/news-release/2026/03/04/3249444/0/en/Growth-and-Trends-in-the-Recyclable-Packaging-Resin-Market-Key-Insights-Innovations-and-Industry-Investments-2025-2035.html"
+      },
       {
         "date": "2026-03-25",
         "title": "Growth and Trends in the Recyclable Packaging Resin Market Key Insights, Innovations, and Industry Investments (2025-2035)",
@@ -758,18 +782,26 @@
     ],
     "scoreHistory": [],
     "fundingStage": "N/A",
-    "recentActivity": 5
+    "recentActivity": 6
   },
   "The French": {
     "name": "The French",
     "firstSeen": "2026-03-24",
-    "lastSeen": "2026-03-25",
+    "lastSeen": "2026-03-27",
     "sector": "Global ESS",
     "region": "GLOBAL",
     "country": "US",
-    "signalCount": 5,
+    "signalCount": 6,
     "highCount": 0,
     "signals": [
+      {
+        "date": "2026-03-27",
+        "title": "The French AI startup gunning for Workday, Oracle, and SAP",
+        "relevance": "Medium",
+        "eventType": "News",
+        "signal_type": "Market context",
+        "url": "https://fortune.com/2026/03/04/french-ai-startup-workday-oracle-sap-pigment/"
+      },
       {
         "date": "2026-03-25",
         "title": "The French AI startup gunning for Workday, Oracle, and SAP",
@@ -813,7 +845,7 @@
     ],
     "scoreHistory": [],
     "fundingStage": "N/A",
-    "recentActivity": 5
+    "recentActivity": 6
   },
   "Australia Achieves": {
     "name": "Australia Achieves",
@@ -865,13 +897,21 @@
   "The Microreactor": {
     "name": "The Microreactor",
     "firstSeen": "2026-03-24",
-    "lastSeen": "2026-03-25",
+    "lastSeen": "2026-03-27",
     "sector": "Global SMR",
     "region": "GLOBAL",
     "country": "US",
-    "signalCount": 5,
+    "signalCount": 6,
     "highCount": 0,
     "signals": [
+      {
+        "date": "2026-03-27",
+        "title": "The Microreactor Race Is On",
+        "relevance": "Medium",
+        "eventType": "Pilot",
+        "signal_type": "Market context",
+        "url": "https://wattsupwiththat.com/2026/02/28/the-microreactor-race-is-on/"
+      },
       {
         "date": "2026-03-25",
         "title": "The Microreactor Race Is On",
@@ -915,18 +955,26 @@
     ],
     "scoreHistory": [],
     "fundingStage": "N/A",
-    "recentActivity": 5
+    "recentActivity": 6
   },
   "Global Energy": {
     "name": "Global Energy",
     "firstSeen": "2026-03-24",
-    "lastSeen": "2026-03-25",
+    "lastSeen": "2026-03-27",
     "sector": "China ESS",
     "region": "CN",
     "country": "CN",
-    "signalCount": 5,
+    "signalCount": 6,
     "highCount": 0,
     "signals": [
+      {
+        "date": "2026-03-27",
+        "title": "Global Energy Infrastructure Strain Accelerates Shift to Electric Vehicles and Off-Grid Power Storage",
+        "relevance": "Medium",
+        "eventType": "News",
+        "signal_type": "Market context",
+        "url": "https://www.naturalnews.com/2026-03-10-global-energy-infrastructure-strain-accelerates-shift.html"
+      },
       {
         "date": "2026-03-25",
         "title": "Global Energy Infrastructure Strain Accelerates Shift to Electric Vehicles and Off-Grid Power Storage",
@@ -970,18 +1018,26 @@
     ],
     "scoreHistory": [],
     "fundingStage": "N/A",
-    "recentActivity": 5
+    "recentActivity": 6
   },
   "Canada": {
     "name": "Canada",
     "firstSeen": "2026-03-24",
-    "lastSeen": "2026-03-25",
+    "lastSeen": "2026-03-27",
     "sector": "China ESS",
     "region": "CN",
     "country": "CN",
-    "signalCount": 5,
+    "signalCount": 6,
     "highCount": 0,
     "signals": [
+      {
+        "date": "2026-03-27",
+        "title": "Canada must remember that the future is electricity, not fossil fuels",
+        "relevance": "Medium",
+        "eventType": "News",
+        "signal_type": "Market context",
+        "url": "https://www.theglobeandmail.com/business/commentary/article-canada-must-remember-that-the-future-is-electricity-not-fossil-fuels/"
+      },
       {
         "date": "2026-03-25",
         "title": "Canada must remember that the future is electricity, not fossil fuels",
@@ -1025,7 +1081,7 @@
     ],
     "scoreHistory": [],
     "fundingStage": "N/A",
-    "recentActivity": 5
+    "recentActivity": 6
   },
   "Hinkley Point C Nuclear Project": {
     "name": "Hinkley Point C Nuclear Project",
@@ -1174,13 +1230,21 @@
   "N/A": {
     "name": "N/A",
     "firstSeen": "2026-03-24",
-    "lastSeen": "2026-03-26",
+    "lastSeen": "2026-03-27",
     "sector": "China ESS",
     "region": "CN",
     "country": "CN",
-    "signalCount": 9,
+    "signalCount": 10,
     "highCount": 0,
     "signals": [
+      {
+        "date": "2026-03-27",
+        "title": "You Don't Have To",
+        "relevance": "Low",
+        "eventType": "News",
+        "signal_type": "Market context",
+        "url": "https://www.scottsmitelli.com/articles/you-dont-have-to/"
+      },
       {
         "date": "2026-03-26",
         "title": "You Don't Have To",
@@ -1256,7 +1320,7 @@
     ],
     "scoreHistory": [],
     "fundingStage": "N/A",
-    "recentActivity": 9
+    "recentActivity": 10
   },
   "Hinkley Point C Nuclear Plant": {
     "name": "Hinkley Point C Nuclear Plant",
@@ -1284,13 +1348,21 @@
   "Pentagon Maritime Tech VC Fund": {
     "name": "Pentagon Maritime Tech VC Fund",
     "firstSeen": "2026-03-24",
-    "lastSeen": "2026-03-25",
+    "lastSeen": "2026-03-27",
     "sector": "China ESS",
     "region": "CN",
     "country": "CN",
-    "signalCount": 4,
+    "signalCount": 5,
     "highCount": 4,
     "signals": [
+      {
+        "date": "2026-03-27",
+        "title": "Exclusive: The Pentagon is committing $150M to a maritime tech VC fund and appears to be ramping up venture deals",
+        "relevance": "Medium",
+        "eventType": "Financing",
+        "signal_type": "Market context",
+        "url": "https://fortune.com/2026/03/05/pentagon-venture-committments-mare-liberum/"
+      },
       {
         "date": "2026-03-25",
         "title": "Exclusive: The Pentagon is committing $150M to a maritime tech VC fund and appears to be ramping up venture deals",
@@ -1495,7 +1567,7 @@
       }
     ],
     "fundingStage": "N/A",
-    "recentActivity": 4,
+    "recentActivity": 5,
     "latestScorecard": {
       "technology": {
         "score": 4,
@@ -1539,13 +1611,21 @@
   "While Hinkley": {
     "name": "While Hinkley",
     "firstSeen": "2026-03-25",
-    "lastSeen": "2026-03-25",
+    "lastSeen": "2026-03-27",
     "sector": "China ESS",
     "region": "CN",
     "country": "CN",
-    "signalCount": 1,
+    "signalCount": 2,
     "highCount": 0,
     "signals": [
+      {
+        "date": "2026-03-27",
+        "title": "While Hinkley Nuclear Was Being Built, The UK Grid Decarbonized",
+        "relevance": "Medium",
+        "eventType": "News",
+        "signal_type": "Market context",
+        "url": "https://cleantechnica.com/2026/03/06/while-hinkley-nuclear-was-being-built-the-uk-grid-decarbonized/"
+      },
       {
         "date": "2026-03-25",
         "title": "While Hinkley Nuclear Was Being Built, The UK Grid Decarbonized",
@@ -1557,7 +1637,7 @@
     ],
     "scoreHistory": [],
     "fundingStage": "N/A",
-    "recentActivity": 1
+    "recentActivity": 2
   },
   "Newdesigncongress.org": {
     "name": "Newdesigncongress.org",
