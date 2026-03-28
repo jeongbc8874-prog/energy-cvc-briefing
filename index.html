@@ -4,857 +4,1174 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Energy CVC Intelligence</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&family=Spectral:wght@600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+KR:wght@300;400;500;600&family=IBM+Plex+Serif:wght@400;600&display=swap" rel="stylesheet">
 <style>
-*{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:'DM Sans',sans-serif;background:#F6F4F0;color:#1A1710;min-height:100vh;}
-::-webkit-scrollbar{width:5px;}::-webkit-scrollbar-thumb{background:#E6E2DA;border-radius:99px;}
-a{color:inherit;text-decoration:none;}
+:root {
+  --ink:     #0A0A0A;
+  --ink-2:   #3A3A3A;
+  --ink-3:   #707070;
+  --ink-4:   #A8A8A8;
+  --rule:    #E2E2E2;
+  --rule-2:  #F0F0F0;
+  --paper:   #FAFAF8;
+  --white:   #FFFFFF;
+  --accent:  #D4380D;   /* 파이낸셜 타임스 느낌의 레드 */
+  --accent-2:#0050B3;   /* 딥 블루 */
+  --green:   #135200;
+  --amber:   #874D00;
+  --mono:    'IBM Plex Mono', monospace;
+  --sans:    'IBM Plex Sans KR', sans-serif;
+  --serif:   'IBM Plex Serif', serif;
+}
+* { box-sizing:border-box; margin:0; padding:0; }
+html { font-size:14px; }
+body { font-family:var(--sans); background:var(--paper); color:var(--ink); line-height:1.5; }
+a { color:inherit; text-decoration:none; }
+::-webkit-scrollbar { width:4px; }
+::-webkit-scrollbar-thumb { background:var(--rule); }
 
-/* ── 헤더 ── */
-.hdr{background:#0F2744;padding:12px 24px;position:sticky;top:0;z-index:100;border-bottom:1px solid #0A1E38;}
-.hdr-in{max-width:1380px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;}
-.hdr h1{font-family:'Spectral',serif;font-size:17px;font-weight:700;color:#F0EDE6;letter-spacing:-0.2px;}
-.hdr-sub{font-size:10px;color:#6B7F96;margin-top:2px;}
-.badge-live{font-family:'DM Mono',monospace;font-size:10px;color:#4ADE80;padding:3px 10px;border-radius:20px;background:#0F3020;border:1px solid #1A5030;}
+/* ── 최상단 티커 바 ── */
+.ticker {
+  background:var(--ink);
+  color:#888;
+  font-family:var(--mono);
+  font-size:10px;
+  padding:5px 20px;
+  display:flex;
+  align-items:center;
+  gap:20px;
+  overflow:hidden;
+  white-space:nowrap;
+  letter-spacing:0.03em;
+}
+.ticker-label { color:#555; text-transform:uppercase; letter-spacing:0.08em; }
+.ticker-value { color:#C8C8C8; }
+.ticker-sep { color:#333; }
 
-/* ── 탭 ── */
-.tabs{background:#162336;border-bottom:1px solid #1E2E38;padding:0 24px;overflow-x:auto;}
-.tabs-in{max-width:1380px;margin:0 auto;display:flex;min-width:max-content;}
-.tab{font-size:11px;font-weight:500;color:#6B7F96;padding:11px 14px;border:none;background:none;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;}
-.tab.on{color:#C8DFF0;border-bottom-color:#4A9EFF;font-weight:600;}
+/* ── 마스트헤드 ── */
+.mast {
+  background:var(--white);
+  border-bottom:3px solid var(--ink);
+  padding:0 20px;
+}
+.mast-in {
+  max-width:1280px;
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  align-items:center;
+  padding:14px 0 10px;
+  gap:16px;
+}
+.mast-left { display:flex; align-items:center; gap:12px; }
+.mast-center { text-align:center; }
+.mast-title {
+  font-family:var(--serif);
+  font-size:22px;
+  font-weight:600;
+  color:var(--ink);
+  letter-spacing:-0.3px;
+  line-height:1;
+}
+.mast-sub {
+  font-family:var(--mono);
+  font-size:9px;
+  color:var(--ink-3);
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+  margin-top:4px;
+}
+.mast-right { display:flex; align-items:center; justify-content:flex-end; gap:8px; }
+.live-dot {
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+  font-family:var(--mono);
+  font-size:10px;
+  color:var(--ink-3);
+}
+.live-dot::before {
+  content:'';
+  width:6px;
+  height:6px;
+  background:#22C55E;
+  border-radius:50%;
+  animation:pulse 2s infinite;
+}
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
 
-/* ── 필터바 ── */
-.fbar{background:#F6F4F0;padding:9px 24px;border-bottom:1px solid #E6E2DA;position:sticky;top:49px;z-index:90;}
-.fbar-in{max-width:1380px;margin:0 auto;display:flex;gap:6px;flex-wrap:wrap;align-items:center;}
-.chip{font-size:11px;font-weight:500;padding:4px 11px;border-radius:20px;border:1px solid #E6E2DA;background:#fff;color:#4A4538;cursor:pointer;}
-.chip.on{background:#1B3A5C;color:#fff;border-color:#1B3A5C;font-weight:600;}
-.chip.kr.on{background:#2A1E00;color:#FCD34D;border-color:#FFD700;}
-.chip.cn.on{background:#7A0000;color:#fff;border-color:#CC0000;}
-.chip.g.on{background:#0F3020;color:#4ADE80;border-color:#1A5030;}
-.srch{flex:1;min-width:150px;max-width:250px;padding:5px 12px;border:1px solid #E6E2DA;border-radius:20px;font-size:12px;outline:none;}
-.srch:focus{border-color:#1B3A5C;}
+/* ── 날짜 바 ── */
+.datebar {
+  border-bottom:1px solid var(--rule);
+  background:var(--white);
+  padding:0 20px;
+}
+.datebar-in {
+  max-width:1280px;
+  margin:0 auto;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:6px 0;
+  flex-wrap:wrap;
+}
+.datebar-date {
+  font-family:var(--mono);
+  font-size:10px;
+  color:var(--ink-3);
+  letter-spacing:0.05em;
+}
+.datebar-actions { display:flex; align-items:center; gap:8px; }
+.btn-sm {
+  font-family:var(--mono);
+  font-size:10px;
+  font-weight:500;
+  padding:4px 10px;
+  border:1px solid var(--rule);
+  background:var(--white);
+  color:var(--ink-2);
+  cursor:pointer;
+  letter-spacing:0.03em;
+  transition:all 0.1s;
+}
+.btn-sm:hover { background:var(--ink); color:var(--white); border-color:var(--ink); }
+.btn-primary { background:var(--accent); color:var(--white); border-color:var(--accent); }
+.btn-primary:hover { background:#A8290A; }
 
-/* ── 레이아웃 ── */
-.wrap{max-width:1380px;margin:0 auto;padding:16px 24px;display:grid;grid-template-columns:200px 1fr;gap:16px;}
-@media(max-width:768px){.wrap{grid-template-columns:1fr;padding:10px 12px;}}
-.sidebar{display:flex;flex-direction:column;gap:10px;}
-.card{background:#fff;border:1px solid #E6E2DA;border-radius:7px;overflow:hidden;}
-.chd{padding:9px 13px;border-bottom:1px solid #F0EDE8;font-size:10px;font-weight:700;color:#8A8070;text-transform:uppercase;letter-spacing:0.5px;}
-.cbd{padding:12px 13px;}
+/* ── 탭 네비 ── */
+.nav {
+  background:var(--white);
+  border-bottom:1px solid var(--ink);
+  padding:0 20px;
+  position:sticky;
+  top:0;
+  z-index:100;
+}
+.nav-in {
+  max-width:1280px;
+  margin:0 auto;
+  display:flex;
+  align-items:flex-end;
+  gap:0;
+}
+.nav-tab {
+  font-family:var(--mono);
+  font-size:11px;
+  font-weight:500;
+  letter-spacing:0.05em;
+  text-transform:uppercase;
+  color:var(--ink-3);
+  padding:11px 18px 9px;
+  border:none;
+  background:none;
+  cursor:pointer;
+  border-bottom:2px solid transparent;
+  transition:color 0.1s;
+  white-space:nowrap;
+}
+.nav-tab:hover { color:var(--ink); }
+.nav-tab.on {
+  color:var(--ink);
+  border-bottom-color:var(--accent);
+  font-weight:600;
+}
 
-/* ── 신호 피드 ── */
-.feed{background:#fff;border:1px solid #E6E2DA;border-radius:7px;overflow:hidden;}
-.feed-hd{padding:10px 18px;border-bottom:1px solid #E6E2DA;display:flex;justify-content:space-between;align-items:center;}
-.sig{border-bottom:1px solid #F0EDE8;cursor:pointer;}
-.sig:last-child{border-bottom:none;}
-.sig:hover{background:#FAF9F6;}
-.sig-hd{padding:11px 18px;}
-.sig-bd{padding:0 18px 13px;animation:fadeIn 0.2s;}
-.bx{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:5px;}
-.b{display:inline-flex;align-items:center;gap:2px;padding:2px 7px;border-radius:3px;font-size:11px;font-weight:600;white-space:nowrap;}
-.b-u{background:#EDF6F1;color:#1A5C36;border:1px solid #A7E3BE;}
-.b-e{background:#EDF2F8;color:#1B3A5C;border:1px solid #C0D4EC;}
-.b-l{background:#F4F2EE;color:#8A8070;border:1px solid #D8D0C4;}
-.b-H{background:#FDF0F0;color:#7A2020;border:1px solid #F0C0C0;}
-.b-M{background:#FDF4E8;color:#6B3600;border:1px solid #F0D8A8;}
-.b-Lo{background:#F4F2EE;color:#8A8070;border:1px solid #D8D0C4;}
-.b-act{background:#FDF0F0;color:#7A2020;border:1px solid #F0C0C0;font-weight:700;}
-.b-stg{background:#F0EDE8;color:#5A4A30;border:1px solid #D8C8A0;}
-.b-kr{background:#FFF8E0;color:#92400E;border:1px solid #EAD640;}
-.b-cn{background:#FFF0F0;color:#CC0000;border:1px solid #FFB0B0;}
-.b-gl{background:#EDF2F8;color:#1B3A5C;border:1px solid #C0D4EC;}
-.b-rt{background:#EDF6F1;color:#1A5C36;border:1px solid #A7E3BE;font-size:10px;}
-.tr{display:flex;align-items:baseline;gap:7px;flex-wrap:wrap;}
-.co{font-size:13px;font-weight:700;flex-shrink:0;}
-.tt{font-size:13px;font-weight:600;color:#1A1710;line-height:1.4;}
-.tt:hover{color:#1B3A5C;text-decoration:underline;}
-.hint{font-size:10px;color:#B8B0A0;margin-top:3px;}
-.ins{background:#FFFBEE;border:1px solid #EAD640;border-radius:5px;padding:10px 12px;margin-bottom:7px;}
-.ins-l{font-size:10px;font-weight:700;color:#92400E;text-transform:uppercase;letter-spacing:0.4px;margin-bottom:4px;}
-.ins-t{font-size:12px;color:#4A3500;line-height:1.75;}
-.act-b{background:#FFF8DC;border-radius:4px;padding:5px 8px;margin-top:5px;font-size:12px;color:#4A3500;}
-.rsk{background:#FEF2F2;border:1px solid #FCA5A5;border-radius:4px;padding:5px 8px;margin-top:4px;font-size:11px;color:#7A2020;}
-.src-r{font-size:10px;color:#B8B0A0;margin-bottom:8px;display:flex;align-items:center;gap:5px;flex-wrap:wrap;}
+/* ── 필터 바 ── */
+.filter-bar {
+  background:var(--paper);
+  border-bottom:1px solid var(--rule);
+  padding:8px 20px;
+  position:sticky;
+  top:42px;
+  z-index:90;
+}
+.filter-in {
+  max-width:1280px;
+  margin:0 auto;
+  display:flex;
+  align-items:center;
+  gap:6px;
+  flex-wrap:wrap;
+}
+.srch {
+  font-family:var(--mono);
+  font-size:11px;
+  padding:5px 10px;
+  border:1px solid var(--rule);
+  background:var(--white);
+  color:var(--ink);
+  outline:none;
+  flex:1;
+  min-width:160px;
+  max-width:260px;
+}
+.srch:focus { border-color:var(--ink); }
+.pill {
+  font-family:var(--mono);
+  font-size:10px;
+  font-weight:500;
+  letter-spacing:0.04em;
+  padding:4px 10px;
+  border:1px solid var(--rule);
+  background:var(--white);
+  color:var(--ink-3);
+  cursor:pointer;
+  transition:all 0.1s;
+}
+.pill:hover { border-color:var(--ink-2); color:var(--ink-2); }
+.pill.on { background:var(--ink); color:var(--white); border-color:var(--ink); }
+.pill.red.on { background:var(--accent); border-color:var(--accent); }
+.pill.blue.on { background:var(--accent-2); border-color:var(--accent-2); }
 
-/* ── 스코어카드 ── */
-.sc{background:#F0F7FF;border:1px solid #BFDBFE;border-radius:5px;padding:10px 12px;margin-bottom:7px;}
-.sc-hd{font-size:10px;font-weight:700;color:#1E40AF;text-transform:uppercase;letter-spacing:0.4px;margin-bottom:7px;display:flex;justify-content:space-between;}
-.sc-g{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-bottom:6px;}
-.sc-i{background:rgba(255,255,255,0.7);border-radius:3px;padding:5px 7px;}
-.sc-il{font-size:10px;color:#4A5568;margin-bottom:2px;}
-.sc-bw{display:flex;align-items:center;gap:4px;}
-.sc-bb{flex:1;height:4px;background:#DBEAFE;border-radius:99px;overflow:hidden;}
-.sc-bf{height:100%;background:#3B82F6;border-radius:99px;}
-.sc-n{font-family:'DM Mono',monospace;font-size:10px;color:#1E40AF;font-weight:600;}
-.sc-ol{font-size:11px;color:#1E3A8A;font-style:italic;padding-top:5px;border-top:1px solid #BFDBFE;margin-top:4px;}
+/* ── 메인 레이아웃 ── */
+.body {
+  max-width:1280px;
+  margin:0 auto;
+  padding:0 20px;
+  display:grid;
+  grid-template-columns:1fr 280px;
+  gap:0;
+  min-height:calc(100vh - 160px);
+}
+@media(max-width:900px) {
+  .body { grid-template-columns:1fr; }
+  .sidebar { display:none; }
+}
 
-/* ── 유사딜 ── */
-.cd{background:#F5F3FF;border:1px solid #DDD6FE;border-radius:5px;padding:10px 12px;margin-bottom:7px;}
-.cd-hd{font-size:10px;font-weight:700;color:#5B21B6;text-transform:uppercase;letter-spacing:0.4px;margin-bottom:7px;}
-.di{background:rgba(255,255,255,0.7);border-radius:4px;padding:6px 8px;margin-bottom:4px;}
-.di:last-child{margin-bottom:0;}
-.di-t{display:flex;justify-content:space-between;margin-bottom:2px;}
-.di-co{font-size:12px;font-weight:700;color:#5B21B6;}
-.di-am{font-family:'DM Mono',monospace;font-size:11px;font-weight:600;color:#7C3AED;}
-.di-m{font-size:10px;color:#6D28D9;}
+/* ── 메인 피드 ── */
+.feed { border-right:1px solid var(--rule); padding:0; }
+.feed-hd {
+  padding:16px 20px 12px;
+  border-bottom:1px solid var(--rule-2);
+  display:flex;
+  align-items:baseline;
+  gap:10px;
+}
+.feed-title {
+  font-family:var(--mono);
+  font-size:10px;
+  font-weight:600;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  color:var(--ink-3);
+}
+.feed-count {
+  font-family:var(--mono);
+  font-size:10px;
+  color:var(--ink-4);
+}
 
-/* ── 정책 ── */
-.pt{background:#FEF9E7;border:1px solid #FCD34D;border-radius:5px;padding:10px 12px;margin-bottom:7px;}
-.pt-hd{font-size:10px;font-weight:700;color:#92400E;text-transform:uppercase;letter-spacing:0.4px;margin-bottom:5px;}
+/* ── 신호 카드 ── */
+.sig {
+  border-bottom:1px solid var(--rule-2);
+  padding:16px 20px;
+  cursor:pointer;
+  transition:background 0.08s;
+  position:relative;
+}
+.sig:hover { background:var(--white); }
+.sig.expanded { background:var(--white); }
+.sig-meta {
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin-bottom:6px;
+  flex-wrap:wrap;
+}
+.tag {
+  font-family:var(--mono);
+  font-size:9px;
+  font-weight:600;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  padding:2px 6px;
+}
+.tag-kr  { background:#FFF7E6; color:#874D00; }
+.tag-cn  { background:#FFF1F0; color:#A8071A; }
+.tag-gl  { background:#F0F5FF; color:#0050B3; }
+.tag-dart{ background:#F6FFED; color:#135200; }
+.tag-H   { background:#FFF1F0; color:var(--accent); }
+.tag-M   { background:#FFFBE6; color:var(--amber); }
+.tag-ev  { color:var(--ink-3); border:1px solid var(--rule); background:transparent; }
+.tag-cv  { color:#0050B3; border:1px solid #BAE0FF; background:#F0F5FF; }
+.sig-time {
+  font-family:var(--mono);
+  font-size:10px;
+  color:var(--ink-4);
+  margin-left:auto;
+}
+.sig-co {
+  font-family:var(--mono);
+  font-size:11px;
+  font-weight:600;
+  letter-spacing:0.03em;
+  margin-bottom:4px;
+}
+.sig-title {
+  font-size:14px;
+  font-weight:500;
+  color:var(--ink);
+  line-height:1.45;
+  margin-bottom:4px;
+}
+.sig-title a {
+  color:var(--ink);
+  border-bottom:1px solid transparent;
+  transition:border-color 0.1s;
+}
+.sig-title a:hover { border-bottom-color:var(--accent); color:var(--accent); }
+.sig-src {
+  font-family:var(--mono);
+  font-size:10px;
+  color:var(--ink-4);
+}
+.expand-hint {
+  font-family:var(--mono);
+  font-size:10px;
+  color:var(--ink-4);
+  margin-top:4px;
+}
 
-/* ── 통계 그리드 ── */
-.sg{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:13px;}
-@media(max-width:600px){.sg{grid-template-columns:repeat(2,1fr);}}
-.sc2{background:#fff;border:1px solid #E6E2DA;border-radius:7px;padding:10px 12px;}
-.sc2-n{font-family:'DM Mono',monospace;font-size:20px;font-weight:700;}
-.sc2-l{font-size:11px;color:#8A8070;margin-top:2px;}
-.brief{background:#0F2744;border-radius:7px;padding:15px 19px;margin-bottom:13px;}
-.brief-t{font-family:'Spectral',serif;font-size:13px;font-weight:700;color:#EDE9E0;margin-bottom:6px;}
-.brief-b{font-size:12px;color:#9AB0C0;line-height:1.9;white-space:pre-wrap;}
+/* ── 펼침 영역 ── */
+.sig-body {
+  margin-top:12px;
+  padding-top:12px;
+  border-top:1px solid var(--rule-2);
+  animation:slideDown 0.15s ease;
+}
+@keyframes slideDown { from{opacity:0;transform:translateY(-4px)} to{opacity:1;transform:translateY(0)} }
 
+.smr {
+  font-size:13px;
+  color:var(--ink-2);
+  line-height:1.7;
+  margin-bottom:10px;
+}
 
-.trust-fact{background:#EDF6F1;color:#1A5C36;border:1px solid #A7E3BE;padding:2px 7px;border-radius:3px;font-size:10px;font-weight:700;}
-.trust-ai{background:#EDF2F8;color:#1B3A5C;border:1px solid #C0D4EC;padding:2px 7px;border-radius:3px;font-size:10px;font-weight:700;}
-.trust-est{background:#FDF4E8;color:#A85400;border:1px solid #F0D8A8;padding:2px 7px;border-radius:3px;font-size:10px;font-weight:700;}
-.trust-banner{background:#F0FDF4;border:1px solid #A7E3BE;border-radius:6px;padding:9px 14px;margin-bottom:12px;font-size:11px;color:#1A5C36;line-height:1.7;}
-@keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
-@keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
-.spin{animation:spin 1.5s linear infinite;display:inline-block;}
+/* 수치 추출 박스 */
+.facts-row {
+  display:flex;
+  gap:16px;
+  flex-wrap:wrap;
+  margin-bottom:10px;
+  padding:8px 12px;
+  background:var(--paper);
+  border-left:3px solid var(--ink);
+}
+.fact-item { display:flex; flex-direction:column; gap:2px; }
+.fact-label {
+  font-family:var(--mono);
+  font-size:9px;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  color:var(--ink-4);
+}
+.fact-value {
+  font-family:var(--mono);
+  font-size:12px;
+  font-weight:600;
+  color:var(--ink);
+}
 
-/* ═══════════════════════════════════════
-   새 탭들 스타일
-═══════════════════════════════════════ */
+/* 도메인 인사이트 */
+.insight {
+  border-left:3px solid var(--accent);
+  padding:10px 12px;
+  margin-bottom:8px;
+  background:var(--white);
+}
+.insight-label {
+  font-family:var(--mono);
+  font-size:9px;
+  font-weight:600;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  color:var(--accent);
+  margin-bottom:5px;
+}
+.insight-text {
+  font-size:13px;
+  color:var(--ink-2);
+  line-height:1.7;
+}
+.why-now {
+  font-family:var(--mono);
+  font-size:11px;
+  color:var(--ink-3);
+  margin-top:6px;
+  padding-top:6px;
+  border-top:1px solid var(--rule-2);
+}
 
-/* ── 시장 지도 ── */
-.map-wrap{padding:0;}
-.map-legend{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px;}
-.map-leg-item{display:flex;align-items:center;gap:5px;font-size:11px;color:#4A4538;}
-.map-leg-dot{width:10px;height:10px;border-radius:50%;}
-.sector-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:14px;}
-.sector-box{background:#fff;border:1px solid #E6E2DA;border-radius:8px;overflow:hidden;}
-.sector-hd{padding:11px 15px;font-size:12px;font-weight:700;display:flex;justify-content:space-between;align-items:center;}
-.sector-companies{padding:10px 12px;display:flex;flex-wrap:wrap;gap:7px;}
-.bubble{padding:7px 10px;border-radius:6px;cursor:pointer;transition:all 0.15s;position:relative;}
-.bubble:hover{transform:translateY(-2px);box-shadow:0 3px 10px rgba(0,0,0,0.1);}
-.bubble-name{font-size:12px;font-weight:600;}
-.bubble-stage{font-size:10px;opacity:0.8;margin-top:1px;}
-.bubble-score{font-family:'DM Mono',monospace;font-size:10px;font-weight:700;position:absolute;top:4px;right:6px;}
+/* 교차검증 */
+.cv-row {
+  display:flex;
+  align-items:center;
+  gap:6px;
+  margin-bottom:8px;
+}
+.cv-badge {
+  font-family:var(--mono);
+  font-size:9px;
+  font-weight:600;
+  letter-spacing:0.06em;
+  padding:2px 7px;
+  text-transform:uppercase;
+}
+.cv-1 { background:#F5F5F5; color:var(--ink-3); }
+.cv-2 { background:#E6F4FF; color:#0050B3; }
+.cv-3 { background:#F6FFED; color:#135200; }
 
-/* ── 경쟁사 비교 ── */
-.cmp-wrap{overflow-x:auto;}
-.cmp-table{width:100%;border-collapse:collapse;font-size:12px;}
-.cmp-table th{padding:10px 14px;text-align:left;font-size:10px;font-weight:700;color:#8A8070;text-transform:uppercase;letter-spacing:0.5px;border-bottom:2px solid #E6E2DA;white-space:nowrap;background:#FAF9F6;}
-.cmp-table td{padding:10px 14px;border-bottom:1px solid #F0EDE8;vertical-align:top;}
-.cmp-table tr:hover td{background:#FAF9F6;}
-.cmp-sector-row td{background:#F6F4F0;font-weight:600;color:#1B3A5C;padding:6px 14px;font-size:11px;}
-.score-bar{display:flex;align-items:center;gap:5px;}
-.score-bg{width:50px;height:5px;background:#F0EDE8;border-radius:99px;overflow:hidden;}
-.score-fill{height:100%;border-radius:99px;}
+/* 원문 링크 */
+.orig-link {
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+  font-family:var(--mono);
+  font-size:10px;
+  font-weight:500;
+  color:var(--accent-2);
+  padding:4px 10px;
+  border:1px solid #BAE0FF;
+  background:#F0F5FF;
+  letter-spacing:0.03em;
+  transition:all 0.1s;
+}
+.orig-link:hover { background:var(--accent-2); color:var(--white); border-color:var(--accent-2); }
 
-/* ── 펀딩 타임라인 ── */
-.timeline-wrap{padding:4px;}
-.tl-company{margin-bottom:20px;}
-.tl-name{font-size:13px;font-weight:700;color:#1A1710;margin-bottom:8px;display:flex;align-items:center;gap:8px;}
-.tl-track{position:relative;padding:8px 0;}
-.tl-line{position:absolute;top:50%;left:0;right:0;height:2px;background:#E6E2DA;transform:translateY(-50%);}
-.tl-events{display:flex;gap:0;position:relative;z-index:1;justify-content:space-between;align-items:center;padding:0 10px;}
-.tl-event{display:flex;flex-direction:column;align-items:center;gap:3px;}
-.tl-dot{width:14px;height:14px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 2px currentColor;}
-.tl-label{font-size:10px;font-weight:600;white-space:nowrap;}
-.tl-date{font-family:'DM Mono',monospace;font-size:9px;color:#B8B0A0;}
-.tl-pred{border:2px dashed currentColor!important;background:#fff!important;}
+/* 리스크 */
+.risk-row {
+  font-family:var(--mono);
+  font-size:10px;
+  color:var(--amber);
+  margin-top:6px;
+  padding:4px 8px;
+  border:1px solid #FFD591;
+  background:#FFFBE6;
+}
 
-/* ── 대기업 생태계 ── */
-.eco-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:14px;}
-.eco-card{background:#fff;border:1px solid #E6E2DA;border-radius:8px;overflow:hidden;}
-.eco-hd{padding:12px 16px;display:flex;align-items:center;gap:10px;}
-.eco-logo{width:36px;height:36px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;flex-shrink:0;}
-.eco-name{font-size:14px;font-weight:700;color:#1A1710;}
-.eco-sub{font-size:11px;color:#8A8070;}
-.eco-strategy{padding:10px 16px;font-size:12px;color:#4A4538;line-height:1.65;border-bottom:1px solid #F0EDE8;}
-.eco-startups{padding:10px 16px;}
-.eco-startup-item{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid #F6F4F0;}
-.eco-startup-item:last-child{border-bottom:none;}
-.eco-startup-name{font-size:12px;font-weight:600;color:#1A1710;}
-.eco-startup-rel{font-size:11px;color:#8A8070;}
-.eco-startup-badge{font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;}
+/* ── 사이드바 ── */
+.sidebar {
+  padding:20px 0 20px 20px;
+  display:flex;
+  flex-direction:column;
+  gap:24px;
+}
+.sb-section {}
+.sb-hd {
+  font-family:var(--mono);
+  font-size:9px;
+  font-weight:600;
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+  color:var(--ink-4);
+  padding-bottom:8px;
+  border-bottom:1px solid var(--rule);
+  margin-bottom:10px;
+}
+.sb-stat {
+  display:flex;
+  justify-content:space-between;
+  align-items:baseline;
+  padding:5px 0;
+  border-bottom:1px solid var(--rule-2);
+}
+.sb-stat-l { font-size:12px; color:var(--ink-2); }
+.sb-stat-n { font-family:var(--mono); font-size:15px; font-weight:600; }
 
-/* ── 주간 리포트 ── */
-.weekly-wrap{max-width:700px;}
-.weekly-preview{background:#fff;border:1px solid #E6E2DA;border-radius:8px;overflow:hidden;margin-bottom:14px;}
-.weekly-preview-hd{background:#0F2744;padding:14px 18px;}
-.weekly-settings{padding:16px;}
+/* 정책 미니 카드 */
+.pol-mini {
+  padding:8px 10px;
+  margin-bottom:6px;
+  border-left:2px solid var(--rule);
+  cursor:pointer;
+  transition:all 0.1s;
+}
+.pol-mini:hover { border-left-color:var(--accent); background:var(--white); }
+.pol-mini-label { font-size:11px; font-weight:500; color:var(--ink); margin-bottom:2px; }
+.pol-mini-sub { font-family:var(--mono); font-size:10px; color:var(--ink-4); }
+.pol-mini-H { border-left-color:var(--accent); }
+.pol-mini-M { border-left-color:var(--amber); }
 
-/* ── 프로파일 ── */
-.prof-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px;}
-.prof-card{background:#fff;border:1px solid #E6E2DA;border-radius:7px;padding:14px;cursor:pointer;transition:all 0.15s;}
-.prof-card:hover{border-color:#1B3A5C;box-shadow:0 2px 8px rgba(27,58,92,0.1);}
-.hist-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:9px;}
-.hist-card{background:#fff;border:1px solid #E6E2DA;border-radius:7px;padding:12px;cursor:pointer;transition:all 0.15s;}
-.hist-card:hover{border-color:#1B3A5C;}
+/* 브리핑 */
+.brief-box {
+  background:var(--ink);
+  padding:16px 20px;
+  margin:0;
+}
+.brief-label {
+  font-family:var(--mono);
+  font-size:9px;
+  font-weight:600;
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+  color:#666;
+  margin-bottom:8px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+.brief-label::after {
+  content:'';
+  flex:1;
+  height:1px;
+  background:#333;
+}
+.brief-text {
+  font-size:12px;
+  color:#C0C0C0;
+  line-height:1.85;
+  white-space:pre-wrap;
+}
+
+/* ── 정책 탭 ── */
+.pol-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(340px,1fr));
+  gap:1px;
+  background:var(--rule);
+}
+.pol-card {
+  background:var(--white);
+  padding:20px;
+}
+.pol-card-hd {
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  margin-bottom:10px;
+}
+.pol-card-title { font-size:14px; font-weight:600; color:var(--ink); }
+.pol-urg {
+  font-family:var(--mono);
+  font-size:9px;
+  font-weight:600;
+  letter-spacing:0.06em;
+  padding:2px 7px;
+  text-transform:uppercase;
+}
+.pol-H { background:#FFF1F0; color:var(--accent); }
+.pol-M { background:#FFFBE6; color:var(--amber); }
+.pol-L { background:#F5F5F5; color:var(--ink-3); }
+.pol-desc { font-size:12px; color:var(--ink-2); line-height:1.65; margin-bottom:12px; }
+.pol-cos {
+  display:flex;
+  flex-wrap:wrap;
+  gap:4px;
+  margin-bottom:12px;
+}
+.pol-co {
+  font-family:var(--mono);
+  font-size:10px;
+  padding:2px 8px;
+  border:1px solid var(--rule);
+  color:var(--ink-3);
+}
+.pol-link-btn {
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+  font-family:var(--mono);
+  font-size:10px;
+  font-weight:600;
+  letter-spacing:0.04em;
+  color:var(--accent-2);
+  padding:5px 12px;
+  border:1px solid #BAE0FF;
+  background:#F0F5FF;
+  text-decoration:none;
+  transition:all 0.1s;
+}
+.pol-link-btn:hover { background:var(--accent-2); color:var(--white); border-color:var(--accent-2); }
+
+/* ── 히스토리 (심플) ── */
+.hist-wrap { padding:0; }
+.hist-srch {
+  padding:16px 20px;
+  border-bottom:1px solid var(--rule);
+  display:flex;
+  gap:8px;
+  align-items:center;
+}
+.hist-list {}
+.hist-row {
+  display:flex;
+  align-items:center;
+  gap:16px;
+  padding:12px 20px;
+  border-bottom:1px solid var(--rule-2);
+  cursor:pointer;
+  transition:background 0.08s;
+}
+.hist-row:hover { background:var(--white); }
+.hist-date {
+  font-family:var(--mono);
+  font-size:11px;
+  font-weight:600;
+  color:var(--ink);
+  min-width:90px;
+}
+.hist-datek { font-size:12px; color:var(--ink-3); flex:1; }
+.hist-stats { display:flex; gap:12px; }
+.hist-stat { font-family:var(--mono); font-size:10px; color:var(--ink-4); }
+
+/* ── DART 탭 ── */
+.dart-empty {
+  padding:48px 20px;
+  text-align:center;
+}
+.dart-row {
+  padding:14px 20px;
+  border-bottom:1px solid var(--rule-2);
+  display:flex;
+  align-items:flex-start;
+  gap:14px;
+}
+.dart-row:hover { background:var(--white); }
+.dart-co {
+  font-family:var(--mono);
+  font-size:10px;
+  font-weight:600;
+  color:var(--green);
+  min-width:100px;
+}
+.dart-title-col { flex:1; }
+.dart-title-link {
+  font-size:13px;
+  font-weight:500;
+  color:var(--ink);
+  border-bottom:1px solid transparent;
+  transition:border-color 0.1s;
+}
+.dart-title-link:hover { border-bottom-color:var(--accent); color:var(--accent); }
+.dart-date { font-family:var(--mono); font-size:10px; color:var(--ink-4); margin-top:3px; }
+
+/* ── 팩트 배너 ── */
+.fact-notice {
+  font-family:var(--mono);
+  font-size:10px;
+  color:var(--ink-4);
+  letter-spacing:0.04em;
+  padding:8px 20px;
+  border-bottom:1px solid var(--rule-2);
+  background:var(--white);
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.fact-dot { color:#22C55E; font-size:12px; }
+
+/* ── 로딩 ── */
+.loading {
+  padding:60px 20px;
+  text-align:center;
+  font-family:var(--mono);
+  font-size:11px;
+  color:var(--ink-4);
+  letter-spacing:0.08em;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
+.blink { animation:blink 1.2s infinite; }
+
+/* ── 빈 상태 ── */
+.empty {
+  padding:60px 20px;
+  text-align:center;
+  font-family:var(--mono);
+  font-size:11px;
+  color:var(--ink-4);
+  letter-spacing:0.06em;
+}
 </style>
 </head>
 <body>
 
-<!-- HEADER -->
-<div class="hdr">
-  <div class="hdr-in">
-    <div>
-      <h1>⚡ Energy CVC Intelligence</h1>
-      <div class="hdr-sub">국내 + 글로벌 + 중국 · 시장지도 · 경쟁사 비교 · 펀딩 타임라인 · 생태계 레이더</div>
+<!-- 티커 -->
+<div class="ticker">
+  <span class="ticker-label">Energy CVC</span>
+  <span class="ticker-sep">|</span>
+  <span id="tickerDate" class="ticker-value">—</span>
+  <span class="ticker-sep">|</span>
+  <span id="tickerStats" class="ticker-value">로딩 중...</span>
+  <span class="ticker-sep">|</span>
+  <span class="ticker-label">팩트 전용</span>
+  <span class="ticker-sep">|</span>
+  <span class="ticker-value">NewsAPI + DART + 에너지 도메인 분석</span>
+</div>
+
+<!-- 마스트헤드 -->
+<div class="mast">
+  <div class="mast-in">
+    <div class="mast-left">
+      <div class="live-dot" id="liveLabel">LIVE</div>
     </div>
-    <div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap;">
-      <div class="badge-live" id="liveBadge">● 로딩 중</div>
-      <button id="copyBtn" onclick="copyReport()" style="display:none;font-size:11px;font-weight:600;padding:5px 11px;border-radius:5px;background:#1A5C36;color:#fff;border:none;cursor:pointer;">📋 복사</button>
+    <div class="mast-center">
+      <div class="mast-title">Energy CVC Intelligence</div>
+      <div class="mast-sub">에너지 투자 신호 · 팩트 기반 · 도메인 분석</div>
+    </div>
+    <div class="mast-right">
+      <button class="btn-sm" id="copyBtn" style="display:none" onclick="copyReport()">복사</button>
     </div>
   </div>
 </div>
 
-<!-- TABS -->
-<div class="tabs">
-  <div class="tabs-in">
-    <button class="tab on" onclick="switchTab('today')">📡 오늘 신호</button>
-    <button class="tab" onclick="switchTab('map')">🗺 시장 지도</button>
-    <button class="tab" onclick="switchTab('compare')">📊 경쟁사 비교</button>
-    <button class="tab" onclick="switchTab('timeline')">⏱ 펀딩 타임라인</button>
-    <button class="tab" onclick="switchTab('ecosystem')">🏭 대기업 생태계</button>
-    <button class="tab" onclick="switchTab('profiles')">🏢 기업 프로파일</button>
-    <button class="tab" onclick="switchTab('weekly')">📧 주간 리포트</button>
-    <button class="tab" onclick="switchTab('history')">🗂 과거</button>
-  </div>
-</div>
-
-<!-- FILTER BAR -->
-<div class="fbar" id="filterBar">
-  <div class="fbar-in">
-    <input class="srch" id="srch" placeholder="🔍 기업명, 키워드… (예: 수소, High, ESS)" oninput="renderFeed()">
-    <button class="chip on"  onclick="setF('all',this)">전체</button>
-    <button class="chip kr"  onclick="setF('kr',this)">🇰🇷 국내</button>
-    <button class="chip"     onclick="setF('gl',this)">🌍 글로벌</button>
-    <button class="chip cn"  onclick="setF('cn',this)">🇨🇳 중국</button>
-    <button class="chip g"   onclick="setF('un',this)">🟢 비상장</button>
-    <button class="chip"     onclick="setF('hi',this)">🔴 High</button>
-    <button class="chip"     onclick="setF('iv',this)">⚡ 즉시검토</button>
-    <button class="chip"     onclick="setF('sc',this)">📊 스코어카드</button>
-  </div>
-</div>
-
-<!-- MAIN -->
-<div class="wrap" id="mainWrap">
-  <div class="sidebar">
-    <div class="card"><div class="chd">요약</div><div class="cbd" id="statsBox"><div style="font-size:11px;color:#B8B0A0">로딩 중…</div></div></div>
-    <div class="card"><div class="chd">🗂 날짜별</div><div class="cbd" style="padding:6px 6px" id="dateList"></div></div>
-    <div class="card"><div class="chd">📋 정책 트리거</div><div class="cbd" id="policyMini"></div></div>
-  </div>
-  <div id="feedArea"><div style="text-align:center;padding:40px;"><div class="spin" style="font-size:26px">⟳</div><div style="font-size:13px;color:#8A8070;margin-top:10px">로딩 중…</div></div></div>
-</div>
-
-<!-- 설정 패널 -->
-<div id="settingsPanel" style="display:none;padding:24px;max-width:560px;margin:0 auto;">
-  <div class="card"><div class="chd">API 설정</div><div class="cbd">
-    <div style="padding:12px;background:#F0FDF4;border-radius:5px;border:1px solid #A7E3BE;font-size:11px;color:#1A5C36;line-height:1.8">
-      ✓ 매일 오전 7시 KST 자동 실행<br>✓ NewsAPI 실제 뉴스 수집<br>✓ Claude AI 투자 분석<br>✓ 기업 프로파일 누적 저장<br>✓ 스코어카드 자동 생성
+<!-- 날짜 바 -->
+<div class="datebar">
+  <div class="datebar-in">
+    <div class="datebar-date" id="dateLabel">—</div>
+    <div class="datebar-actions">
+      <span style="font-family:var(--mono);font-size:10px;color:var(--ink-4)" id="cvLabel"></span>
     </div>
-  </div></div>
+  </div>
+</div>
+
+<!-- 탭 네비 -->
+<div class="nav">
+  <div class="nav-in">
+    <button class="nav-tab on" onclick="switchTab('today')">Today's Signals</button>
+    <button class="nav-tab" onclick="switchTab('dart')">DART 공시</button>
+    <button class="nav-tab" onclick="switchTab('policy')">Policy Triggers</button>
+    <button class="nav-tab" onclick="switchTab('history')">Archive</button>
+  </div>
+</div>
+
+<!-- 필터 바 -->
+<div class="filter-bar" id="filterBar">
+  <div class="filter-in">
+    <input class="srch" id="srch" placeholder="Search signals…" oninput="renderFeed()">
+    <button class="pill on"       onclick="setF('all',this)">All</button>
+    <button class="pill kr"       onclick="setF('kr',this)">🇰🇷 KR</button>
+    <button class="pill"          onclick="setF('gl',this)">🌍 Global</button>
+    <button class="pill cn"       onclick="setF('cn',this)">🇨🇳 CN</button>
+    <button class="pill red"      onclick="setF('hi',this)">High</button>
+    <button class="pill blue"     onclick="setF('iv',this)">Investigate</button>
+    <button class="pill"          onclick="setF('cv',this)">교차검증</button>
+  </div>
+</div>
+
+<!-- BODY -->
+<div class="body" id="mainBody">
+  <!-- 피드 -->
+  <div class="feed" id="feedCol">
+    <div class="loading"><span class="blink">■</span> LOADING...</div>
+  </div>
+  <!-- 사이드바 -->
+  <div class="sidebar" id="sidebarCol">
+    <div class="sb-section">
+      <div class="sb-hd">Summary</div>
+      <div id="statsBox"></div>
+    </div>
+    <div class="sb-section">
+      <div class="sb-hd">Policy Triggers</div>
+      <div id="policyMini"></div>
+    </div>
+  </div>
 </div>
 
 <script>
-// ── 데이터 ────────────────────────────────────────────────
-let DATA=null, SIG=[], IDX=[], PROF={};
+var DATA=null, SIG=[], IDX=[];
+var curF="all", curTab="today", EXP=new Set();
 
-// 정책 트리거 — HTML 내장 데이터 (latest.json 없어도 작동)
-let POL = [
-  {
-    id:"re100_kr", region:"KR", label:"국내 RE100 이행 가이드라인",
-    urgency:"High", sectors:["ESS","Grid"],
-    desc:"산업부 RE100 이행 기업 증가 → 기업용 ESS·PPA·VPP 수요 급증. 2030년까지 RE100 참여 기업 대폭 확대 예상.",
+// ── 정책 데이터 (HTML 내장) ───────────────────────────────
+var POL = [
+  { id:"re100_kr", region:"KR", label:"국내 RE100 이행 가이드라인", urgency:"High",
+    desc:"산업부 RE100 이행 기업 증가 → 기업용 ESS·PPA·VPP 수요 급증.",
     url:"https://www.motie.go.kr/motie/ne/presse/press2/bbs/bbsView.do?bbs_seq_n=165753",
-    urlLabel:"산업통상자원부 공식 발표",
-    beneficiaries:["그리드위즈","식스티헤르츠","에너지에이아이","씨에스에너지"]
-  },
-  {
-    id:"h2_roadmap", region:"KR", label:"수소경제 로드맵 2.0",
-    urgency:"High", sectors:["Hydrogen","Marine"],
-    desc:"2030년 청정수소 발전 비중 목표 → 수전해·연료전지 스타트업 직접 수혜. 정부 수소 인프라 투자 확대.",
+    urlLabel:"산업통상자원부",
+    beneficiaries:["그리드위즈","식스티헤르츠","에너지에이아이"] },
+  { id:"h2_roadmap", region:"KR", label:"수소경제 로드맵 2.0", urgency:"High",
+    desc:"2030년 청정수소 목표 → 수전해·연료전지 스타트업 직접 수혜.",
     url:"https://www.motie.go.kr/motie/ne/presse/press2/bbs/bbsView.do?bbs_seq_n=164649",
-    urlLabel:"수소경제 로드맵 원문 (산업부)",
-    beneficiaries:["하이리움산업","에스퓨얼셀","범한퓨얼셀","그린수소시스템"]
-  },
-  {
-    id:"kpx_ancillary", region:"KR", label:"KPX 보조서비스 시장 확대",
-    urgency:"High", sectors:["Grid","ESS"],
-    desc:"한국전력거래소 주파수 조정 보조서비스 ESS 참여 확대 → VPP·ESS 스타트업 수익 모델 강화.",
+    urlLabel:"산업통상자원부",
+    beneficiaries:["하이리움산업","에스퓨얼셀","범한퓨얼셀"] },
+  { id:"kpx", region:"KR", label:"KPX 보조서비스 시장", urgency:"High",
+    desc:"전력거래소 ESS 보조서비스 참여 확대 → VPP·ESS 수익 모델 강화.",
     url:"https://www.kpx.or.kr/www/contents.do?key=223",
-    urlLabel:"한국전력거래소 보조서비스 안내",
-    beneficiaries:["그리드위즈","씨에스에너지","스탠다드에너지"]
-  },
-  {
-    id:"motie_vpp", region:"KR", label:"산업부 VPP 실증사업",
-    urgency:"Medium", sectors:["Grid","Software"],
-    desc:"산업부 VPP 실증사업 확대 → DR·VPP 플랫폼 스타트업 공공계약 기회. KEPCO와 공동 실증 포함.",
-    url:"https://www.energy.go.kr/",
-    urlLabel:"한국에너지공단 VPP 사업 공고",
-    beneficiaries:["그리드위즈","식스티헤르츠","에너지에이아이"]
-  },
-  {
-    id:"imo2030", region:"GLOBAL", label:"IMO 2030 탄소규제",
-    urgency:"High", sectors:["Marine"],
-    desc:"선박 탄소집약도 40% 감축 의무화 → 대체연료·연료전지 스타트업 수요 급증. 2026년부터 본격 시행.",
-    url:"https://www.imo.org/en/MediaCentre/PressBriefings/pages/CII-and-EEXI-in-force.aspx",
-    urlLabel:"IMO 공식 발표 (영문)",
-    beneficiaries:["빈센","범한퓨얼셀","파나시아","CMB.TECH"]
-  },
-  {
-    id:"ira_us", region:"US", label:"미국 IRA (인플레이션 감축법)",
-    urgency:"High", sectors:["ESS","Solar","H2"],
-    desc:"IRA 세액공제로 미국 ESS·수소 시장 급성장 → 한국 기업 미국 시장 진출 직접 수혜.",
-    url:"https://www.energy.gov/lpo/inflation-reduction-act",
-    urlLabel:"미 에너지부 IRA 공식 안내 (영문)",
-    beneficiaries:["LG에너지솔루션 생태계","한화솔루션","스탠다드에너지"]
-  },
-  {
-    id:"eu_cbam", region:"EU", label:"EU CBAM (탄소국경세)",
-    urgency:"Medium", sectors:["H2","ESS","Grid"],
-    desc:"탄소국경세 2026년 전면시행 → 청정에너지 기술 수출 경쟁력 강화. 국내 스타트업 EU 수출 기회.",
-    url:"https://taxation-customs.ec.europa.eu/carbon-border-adjustment-mechanism_en",
-    urlLabel:"EU 집행위원회 CBAM 공식 페이지 (영문)",
-    beneficiaries:["스탠다드에너지","하이리움산업","씨에스에너지"]
-  },
-  {
-    id:"ferc2222", region:"US", label:"FERC Order 2222 (미국 분산자원)",
-    urgency:"Medium", sectors:["Grid","VPP"],
-    desc:"미국 분산자원 도매시장 참여 허용 → VPP·DR 스타트업 TAM 대폭 확대. 글로벌 레퍼런스.",
-    url:"https://www.ferc.gov/media/ferc-order-no-2222-fact-sheet",
-    urlLabel:"FERC Order 2222 팩트시트 (영문)",
-    beneficiaries:["AutoGrid","Voltus","Leap Energy","그리드위즈"]
-  },
-  {
-    id:"dart_ess", region:"KR", label:"국내 에너지 기업 DART 공시",
-    urgency:"Medium", sectors:["ESS","Grid","H2"],
-    desc:"에너지 관련 기업 DART 공시 실시간 확인 가능 — 유상증자, 전환사채, 계약체결 등 팩트 데이터.",
+    urlLabel:"한국전력거래소",
+    beneficiaries:["그리드위즈","씨에스에너지"] },
+  { id:"dart_main", region:"KR", label:"DART 전자공시", urgency:"Medium",
+    desc:"에너지 기업 실제 공시 — 유상증자·계약체결·전환사채 팩트 확인.",
     url:"https://dart.fss.or.kr/dsab007/main.do",
-    urlLabel:"DART 전자공시시스템 (금융감독원)",
-    beneficiaries:["스탠다드에너지","씨에스에너지","그리드위즈","하이리움산업"]
-  },
-  {
-    id:"china_ess", region:"CN", label:"중국 ESS 의무설치 정책",
-    urgency:"High", sectors:["ESS"],
-    desc:"중국 신재생 발전소 ESS 의무 설치 → 중국 ESS 스타트업 급성장. 국내 기업 경쟁 심화 vs 기술 수출 기회.",
+    urlLabel:"금융감독원 DART",
+    beneficiaries:["전체 국내 에너지 기업"] },
+  { id:"imo2030", region:"GLOBAL", label:"IMO 2030 탄소규제", urgency:"High",
+    desc:"선박 탄소집약도 40% 감축 → 대체연료·연료전지 수요 급증.",
+    url:"https://www.imo.org/en/MediaCentre/PressBriefings/pages/CII-and-EEXI-in-force.aspx",
+    urlLabel:"IMO",
+    beneficiaries:["빈센","범한퓨얼셀","CMB.TECH"] },
+  { id:"ira", region:"US", label:"미국 IRA", urgency:"High",
+    desc:"IRA 세액공제 → 미국 ESS·수소 시장 급성장. 한국 기업 수혜.",
+    url:"https://www.energy.gov/lpo/inflation-reduction-act",
+    urlLabel:"U.S. Dept. of Energy",
+    beneficiaries:["LG에너지솔루션 생태계","한화솔루션"] },
+  { id:"eu_cbam", region:"EU", label:"EU CBAM 탄소국경세", urgency:"Medium",
+    desc:"2026년 전면시행 → 청정에너지 기술 수출 경쟁력 강화.",
+    url:"https://taxation-customs.ec.europa.eu/carbon-border-adjustment-mechanism_en",
+    urlLabel:"EU Commission",
+    beneficiaries:["스탠다드에너지","하이리움산업"] },
+  { id:"ferc2222", region:"US", label:"FERC Order 2222", urgency:"Medium",
+    desc:"미국 분산자원 도매시장 참여 허용 → VPP·DR TAM 확대.",
+    url:"https://www.ferc.gov/media/ferc-order-no-2222-fact-sheet",
+    urlLabel:"FERC",
+    beneficiaries:["AutoGrid","Voltus","그리드위즈"] },
+  { id:"cn_ess", region:"CN", label:"중국 ESS 의무설치", urgency:"High",
+    desc:"신재생 ESS 의무 설치 → 중국 시장 급성장, 경쟁 심화.",
     url:"https://www.ndrc.gov.cn/",
-    urlLabel:"중국 국가발전개혁위원회 NDRC (중문)",
-    beneficiaries:["Pylontech","REPT","EVE Energy"]
-  }
+    urlLabel:"NDRC 중국",
+    beneficiaries:["Pylontech","REPT","EVE Energy"] },
 ];
-let curF="all", curTab="today", EXP=new Set();
-
-// ── 시장 지도 데이터 ──────────────────────────────────────
-const MARKET_MAP = [
-  { sector:"ESS — Long Duration", color:"#1B3A5C", bg:"#EDF2F8",
-    kr:[{name:"스탠다드에너지",stage:"Series-B",score:82,tag:"바나듐 플로우"},{name:"씨에스에너지",stage:"Series-A",score:64,tag:"리튬 ESS"},{name:"하나기술",stage:"Series-A",score:58,tag:"산업용 ESS"},{name:"에이치에너지",stage:"Pre-A",score:45,tag:"장주기"}],
-    global:[{name:"Form Energy",stage:"Series-E",score:92,tag:"철-공기"},{name:"Ambri",stage:"Series-E",score:88,tag:"액체금속"},{name:"Hydrostor",stage:"Series-C",score:79,tag:"압축공기"},{name:"CMBlu",stage:"Series-B",score:71,tag:"유기 플로우"}] },
-  { sector:"수소 / 연료전지", color:"#0F4A3A", bg:"#E8F5F1",
-    kr:[{name:"하이리움산업",stage:"Series-B",score:76,tag:"액화수소"},{name:"에스퓨얼셀",stage:"Series-A",score:68,tag:"건물용 PAFC"},{name:"범한퓨얼셀",stage:"Series-A",score:65,tag:"선박 SOFC"},{name:"그린수소시스템",stage:"Seed",score:41,tag:"PEM 수전해"}],
-    global:[{name:"Sunfire",stage:"Series-E",score:91,tag:"SOEC"},{name:"Hysata",stage:"Series-B",score:78,tag:"모세관 전해"},{name:"Electric H2",stage:"Series-B",score:85,tag:"PEM 대형"},{name:"H2Pro",stage:"Series-B",score:72,tag:"E-TAC"}] },
-  { sector:"그리드 소프트웨어 / VPP", color:"#2D5A1B", bg:"#EEF6E8",
-    kr:[{name:"그리드위즈",stage:"Series-B",score:79,tag:"VPP·DR"},{name:"식스티헤르츠",stage:"Series-A",score:72,tag:"재생에너지 예측"},{name:"에너지에이아이",stage:"Pre-A",score:55,tag:"전력 AI"},{name:"이노원",stage:"Series-A",score:49,tag:"스마트그리드"}],
-    global:[{name:"AutoGrid",stage:"Series-D",score:88,tag:"VPP 플랫폼"},{name:"Voltus",stage:"Acquired",score:82,tag:"DR"},{name:"Upside Energy",stage:"Series-B",score:75,tag:"영국 VPP"},{name:"Sympower",stage:"Series-B",score:69,tag:"유럽 DR"}] },
-  { sector:"선박 탈탄소", color:"#0F4F5E", bg:"#EAF4F6",
-    kr:[{name:"빈센",stage:"Series-A",score:71,tag:"수소 FC"},{name:"범한퓨얼셀",stage:"Series-A",score:65,tag:"SOFC"},{name:"파나시아",stage:"Series-B",score:58,tag:"탈황·스크러버"}],
-    global:[{name:"Ceres Power",stage:"Listed",score:84,tag:"SOFC"},{name:"CMB.TECH",stage:"Private",score:89,tag:"암모니아"},{name:"WE Tech",stage:"Series-B",score:67,tag:"에너지 관리"},{name:"Freudenberg",stage:"Corp",score:78,tag:"FC 시스템"}] },
-  { sector:"SMR / 차세대 원전", color:"#5A1B4A", bg:"#F6EAF4",
-    kr:[],
-    global:[{name:"Oklo",stage:"Listed",score:81,tag:"마이크로 원자로"},{name:"Kairos Power",stage:"Series-C",score:77,tag:"불화염 냉각"},{name:"Commonwealth Fusion",stage:"Series-B",score:93,tag:"핵융합"},{name:"TAE Technologies",stage:"Series-G",score:86,tag:"핵융합"}] },
-  { sector:"중국 에너지 스타트업", color:"#7A1010", bg:"#FFF0F0",
-    kr:[],
-    global:[{name:"Pylontech",stage:"Listed",score:88,tag:"리튬 ESS"},{name:"REPT",stage:"Listed",score:82,tag:"원통형 셀"},{name:"SINOHY",stage:"Series-C",score:74,tag:"수전해"},{name:"Sungrow (생태계)",stage:"Listed",score:91,tag:"인버터·ESS"}] },
-];
-
-// ── 대기업 생태계 데이터 ──────────────────────────────────
-const ECOSYSTEM = [
-  { name:"HD한국조선해양", logo:"🚢", color:"#1B3A5C", bg:"#EDF2F8",
-    strategy:"암모니아·수소·LNG 이중연료 선박으로 전환. 2030년까지 친환경 선박 비중 50% 목표. 연료전지·탄소포집 스타트업 전략적 투자 확대 중.",
-    startups:[{name:"빈센",rel:"선박용 수소연료전지",type:"투자검토",badge:"🟢",bc:"#EDF6F1",tc:"#1A5C36"},{name:"범한퓨얼셀",rel:"SOFC 파트너십",type:"파트너",badge:"🤝",bc:"#EDF2F8",tc:"#1B3A5C"},{name:"파나시아",rel:"배기가스 저감",type:"파트너",badge:"🤝",bc:"#EDF2F8",tc:"#1B3A5C"}] },
-  { name:"LS일렉트릭", logo:"⚡", color:"#2D5A1B", bg:"#EEF6E8",
-    strategy:"VPP·스마트그리드 플랫폼 내재화 전략. 그리드 소프트웨어 스타트업 인수 또는 전략적 투자를 통해 SaaS 전환 도모. KEPCO·한전과 공동 실증 중.",
-    startups:[{name:"그리드위즈",rel:"VPP 플랫폼 통합",type:"전략투자유력",badge:"⭐",bc:"#FFF8E0",tc:"#92400E"},{name:"식스티헤르츠",rel:"재생에너지 예측 API",type:"파트너",badge:"🤝",bc:"#EDF2F8",tc:"#1B3A5C"},{name:"에너지에이아이",rel:"AI 전력 예측",type:"검토중",badge:"🔍",bc:"#F4F2EE",tc:"#8A8070"}] },
-  { name:"한화오션", logo:"🌊", color:"#0F4F5E", bg:"#EAF4F6",
-    strategy:"암모니아·메탄올 이중연료 선박 수주 확대. 연료전지 내재화 vs 아웃소싱 전략 결정 단계. 탄소포집 장치 스타트업 레이더에 올림.",
-    startups:[{name:"범한퓨얼셀",rel:"선박 SOFC 공급망",type:"파트너",badge:"🤝",bc:"#EDF2F8",tc:"#1B3A5C"},{name:"에이치라인해운",rel:"LNG 벙커링",type:"계열사협력",badge:"🔗",bc:"#EDF6F1",tc:"#1A5C36"}] },
-  { name:"SK에코플랜트", logo:"♻️", color:"#0F4A3A", bg:"#E8F5F1",
-    strategy:"폐기물 에너지화·수소 생산 연계. 바이오가스→수소 전환 스타트업 M&A 검토 중. 연료전지 발전소 EPC 역량 보유.",
-    startups:[{name:"하이리움산업",rel:"액화수소 공급망",type:"검토중",badge:"🔍",bc:"#F4F2EE",tc:"#8A8070"},{name:"에스퓨얼셀",rel:"건물용 연료전지",type:"파트너",badge:"🤝",bc:"#EDF2F8",tc:"#1B3A5C"},{name:"그린수소시스템",rel:"PEM 수전해",type:"투자검토",badge:"🟢",bc:"#EDF6F1",tc:"#1A5C36"}] },
-  { name:"효성중공업", logo:"🔌", color:"#5A3A0F", bg:"#F6F0E8",
-    strategy:"HVDC·ESS·수소 압축기 3대 축 성장 전략. ESS 시스템 통합 스타트업 파트너십으로 소프트웨어 역량 강화 추진.",
-    startups:[{name:"씨에스에너지",rel:"ESS 시스템 통합",type:"파트너",badge:"🤝",bc:"#EDF2F8",tc:"#1B3A5C"},{name:"하이리움산업",rel:"수소 압축기",type:"검토중",badge:"🔍",bc:"#F4F2EE",tc:"#8A8070"}] },
-  { name:"두산에너빌리티", logo:"🏭", color:"#1A1B5C", bg:"#EEEDF8",
-    strategy:"SMR·수소터빈·연료전지 3대 미래 기술 투자. 두산퓨얼셀 분사 이후 연료전지 스타트업 생태계 재편 중. SMR 기술 파트너십 국내외 탐색.",
-    startups:[{name:"두산퓨얼셀",rel:"연료전지 계열사",type:"계열사",badge:"🔗",bc:"#EDF6F1",tc:"#1A5C36"},{name:"범한퓨얼셀",rel:"선박 FC 협업",type:"파트너",badge:"🤝",bc:"#EDF2F8",tc:"#1B3A5C"}] },
-];
-
-// ── 펀딩 타임라인 데이터 ──────────────────────────────────
-const FUNDING_TIMELINE = [
-  { name:"그리드위즈", country:"🇰🇷", sector:"VPP·DR",
-    events:[
-      {date:"2019",label:"Seed",amount:"₩3B",color:"#8A8070",pred:false},
-      {date:"2021",label:"Series-A",amount:"₩15B",color:"#1B3A5C",pred:false},
-      {date:"2023",label:"Series-B",amount:"₩45B",color:"#1A5C36",pred:false},
-      {date:"2025~",label:"Series-C 예상",amount:"₩100B+",color:"#B83232",pred:true},
-    ]},
-  { name:"식스티헤르츠", country:"🇰🇷", sector:"재생에너지 예측",
-    events:[
-      {date:"2020",label:"Seed",amount:"₩2B",color:"#8A8070",pred:false},
-      {date:"2022",label:"Series-A",amount:"₩12B",color:"#1B3A5C",pred:false},
-      {date:"2024~",label:"Series-B 준비",amount:"₩40B~",color:"#B83232",pred:true},
-    ]},
-  { name:"하이리움산업", country:"🇰🇷", sector:"액화수소",
-    events:[
-      {date:"2018",label:"Seed",amount:"₩5B",color:"#8A8070",pred:false},
-      {date:"2021",label:"Series-A",amount:"₩20B",color:"#1B3A5C",pred:false},
-      {date:"2023",label:"Series-B",amount:"₩60B",color:"#1A5C36",pred:false},
-      {date:"2026~",label:"Pre-IPO 예상",amount:"₩150B+",color:"#5B21B6",pred:true},
-    ]},
-  { name:"빈센", country:"🇰🇷", sector:"선박 연료전지",
-    events:[
-      {date:"2020",label:"Seed",amount:"₩3B",color:"#8A8070",pred:false},
-      {date:"2022",label:"Series-A",amount:"₩18B",color:"#1B3A5C",pred:false},
-      {date:"2025~",label:"Series-B 예상",amount:"₩60B~",color:"#B83232",pred:true},
-    ]},
-  { name:"Form Energy", country:"🇺🇸", sector:"장주기 ESS",
-    events:[
-      {date:"2019",label:"Series-A",amount:"$9M",color:"#8A8070",pred:false},
-      {date:"2021",label:"Series-D",amount:"$200M",color:"#1B3A5C",pred:false},
-      {date:"2023",label:"Series-E",amount:"$450M",color:"#1A5C36",pred:false},
-      {date:"2026~",label:"IPO 검토",amount:"TBD",color:"#5B21B6",pred:true},
-    ]},
-  { name:"Sunfire", country:"🇩🇪", sector:"수소 전해조",
-    events:[
-      {date:"2018",label:"Series-C",amount:"€26M",color:"#8A8070",pred:false},
-      {date:"2022",label:"Series-D",amount:"€150M",color:"#1B3A5C",pred:false},
-      {date:"2023",label:"Series-E",amount:"€215M",color:"#1A5C36",pred:false},
-      {date:"2025~",label:"IPO / 전략투자",amount:"TBD",color:"#5B21B6",pred:true},
-    ]},
-];
-
-// ── 경쟁사 비교 테이블 데이터 ─────────────────────────────
-const COMPARE_SECTORS = [
-  { sector:"국내 VPP / 그리드 소프트웨어", companies:[
-    {name:"그리드위즈",country:"🇰🇷",stage:"Series-B",trl:7,commercial:8,team:8,partner:9,timing:9,founded:2016,revenue:"비공개",investors:"KDB·신한·현대",note:"KPX 인증 완료, LS일렉트릭 파트너십"},
-    {name:"식스티헤르츠",country:"🇰🇷",stage:"Series-A",trl:8,commercial:6,team:7,partner:6,timing:7,founded:2019,revenue:"비공개",investors:"카카오벤처스·블루포인트",note:"AI 예측 정확도 업계 최고 수준"},
-    {name:"에너지에이아이",country:"🇰🇷",stage:"Pre-A",trl:5,commercial:3,team:6,partner:4,timing:5,founded:2021,revenue:"비공개",investors:"미공개",note:"초기 단계, 기술력 검증 필요"},
-    {name:"AutoGrid",country:"🇺🇸",stage:"Series-D",trl:9,commercial:9,team:9,partner:10,timing:6,founded:2011,revenue:"$50M+",investors:"E.ON·Engie·Shell",note:"글로벌 레퍼런스 비교 기준"},
-  ]},
-  { sector:"국내 수소 스타트업", companies:[
-    {name:"하이리움산업",country:"🇰🇷",stage:"Series-B",trl:7,commercial:7,team:8,partner:7,timing:8,founded:2015,revenue:"비공개",investors:"한화·현대",note:"액화수소 핵심기술 보유"},
-    {name:"에스퓨얼셀",country:"🇰🇷",stage:"Series-A",trl:8,commercial:6,team:7,partner:6,timing:7,founded:2014,revenue:"비공개",investors:"두산·SK",note:"건물용 PAFC 상용화 단계"},
-    {name:"범한퓨얼셀",country:"🇰🇷",stage:"Series-A",trl:7,commercial:5,team:6,partner:7,timing:6,founded:2018,revenue:"비공개",investors:"범한판토스",note:"선박용 SOFC 특화"},
-    {name:"Sunfire",country:"🇩🇪",stage:"Series-E",trl:9,commercial:8,team:9,partner:9,timing:5,founded:2010,revenue:"€30M+",investors:"Carbon Direct·Planet First",note:"글로벌 레퍼런스"},
-  ]},
-];
-
-// ── 주간 리포트 설정 ──────────────────────────────────────
-let weeklySettings = { email: localStorage.getItem("weekly_email")||"", enabled: localStorage.getItem("weekly_enabled")==="true" };
 
 // ── 데이터 로드 ───────────────────────────────────────────
-async function loadLatest() {
-  try {
-    const r=await fetch("data/latest.json?"+Date.now());
-    if(!r.ok)throw new Error();
-    DATA=await r.json(); SIG=DATA.signals||[]; if(DATA.policyTriggers&&DATA.policyTriggers.length) POL=DATA.policyTriggers;
-    document.getElementById("liveBadge").textContent="● "+(DATA.dateKr||DATA.date);
-    document.getElementById("copyBtn").style.display="flex";
+async function loadData(){
+  try{
+    var r=await fetch("data/latest.json?"+Date.now());
+    if(!r.ok) throw new Error();
+    DATA=await r.json(); SIG=DATA.signals||[];
+    var s=DATA.stats||{};
+    document.getElementById("dateLabel").textContent=(DATA.dateKr||DATA.date||"—");
+    document.getElementById("tickerDate").textContent=(DATA.date||"—");
+    document.getElementById("tickerStats").textContent=
+      "총 "+(s.total||0)+"건  |  High "+(s.high||0)+"  |  교차검증 "+(s.multiSource||0)+"건";
+    document.getElementById("cvLabel").textContent=
+      "교차검증 "+(s.multiSource||0)+"건";
+    document.getElementById("liveLabel").textContent=(DATA.dateKr||"LIVE");
+    document.getElementById("copyBtn").style.display="inline-flex";
     renderSidebar(); renderFeed(); renderPolicyMini();
-  } catch {
-    document.getElementById("liveBadge").textContent="● 데이터 없음";
-    document.getElementById("feedArea").innerHTML=`<div style="text-align:center;padding:48px"><div style="font-size:36px;margin-bottom:12px">📭</div><div style="font-size:14px;color:#8A8070">Actions → Run workflow 실행 후 새로고침</div></div>`;
+  }catch(e){
+    document.getElementById("feedCol").innerHTML=
+      '<div class="empty">데이터 없음 — GitHub Actions → Run workflow 실행 필요</div>';
   }
 }
-async function loadIndex(){try{const r=await fetch("data/index.json?"+Date.now());if(!r.ok)return;IDX=await r.json();renderDateList();}catch{}}
-async function loadProfiles(){try{const r=await fetch("data/company-profiles.json?"+Date.now());if(!r.ok)return;PROF=await r.json();}catch{}}
+async function loadIndex(){
+  try{var r=await fetch("data/index.json?"+Date.now());if(!r.ok)return;IDX=await r.json();}catch{}
+}
 
 // ── 사이드바 ──────────────────────────────────────────────
 function renderSidebar(){
   if(!DATA)return;
-  const s=DATA.stats;
-  document.getElementById("statsBox").innerHTML=[
-    {n:s.total,l:"총 신호",c:"#1A1710"},{n:s.unlisted||0,l:"🟢 비상장",c:"#1A5C36"},
-    {n:s.kr,l:"🇰🇷 국내",c:"#B8860B"},{n:s.global,l:"🌍 글로벌",c:"#1B3A5C"},
-    {n:s.cn,l:"🇨🇳 중국",c:"#CC0000"},{n:s.high,l:"High",c:"#B83232"},
-    {n:s.investigate||0,l:"즉시 검토",c:"#A85400"},{n:s.withScorecard||0,l:"📊 스코어카드",c:"#1E40AF"},
-  ].map(x=>`<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px"><span style="font-size:12px;color:#4A4538">${x.l}</span><span style="font-family:'DM Mono',monospace;font-size:14px;font-weight:700;color:${x.c}">${x.n||0}</span></div>`).join("");
+  var s=DATA.stats||{};
+  var rows=[
+    {n:s.total||0,       l:"Total",     c:"var(--ink)"},
+    {n:s.newsCount||0,   l:"News",      c:"var(--accent-2)"},
+    {n:s.dartCount||0,   l:"DART",      c:"var(--green)"},
+    {n:s.kr||0,          l:"KR",        c:"var(--amber)"},
+    {n:s.global||0,      l:"Global",    c:"var(--accent-2)"},
+    {n:s.cn||0,          l:"CN",        c:"#A8071A"},
+    {n:s.high||0,        l:"High",      c:"var(--accent)"},
+    {n:s.investigate||0, l:"Investigate",c:"var(--amber)"},
+    {n:s.multiSource||0, l:"교차검증",  c:"var(--accent-2)"},
+  ];
+  document.getElementById("statsBox").innerHTML=rows.map(function(x){
+    return '<div class="sb-stat"><span class="sb-stat-l">'+x.l+'</span>'
+      +'<span class="sb-stat-n" style="color:'+x.c+'">'+x.n+'</span></div>';
+  }).join("");
 }
-function renderDateList(){
-  const el=document.getElementById("dateList");
-  if(!IDX.length){el.innerHTML=`<div style="font-size:11px;color:#B8B0A0">없음</div>`;return;}
-  el.innerHTML=IDX.slice(0,20).map(d=>`<div onclick="loadDate('${d.date}')" style="padding:5px 7px;border-radius:4px;cursor:pointer;margin-bottom:2px" onmouseover="this.style.background='#F0EDE8'" onmouseout="this.style.background='transparent'"><div style="font-size:11px;color:#1A1710;font-weight:500">${d.dateKr||d.date}</div><div style="font-family:'DM Mono',monospace;font-size:10px;color:#B8B0A0">${d.stats?.total||0}건 · High ${d.stats?.high||0}</div></div>`).join("");
-}
+
 function renderPolicyMini(){
-  const el=document.getElementById("policyMini");
-  if(!POL.length){el.innerHTML='<div style="font-size:11px;color:#B8B0A0">없음</div>';return;}
-  const uc={High:"#7A2020",Medium:"#6B3600",Low:"#8A8070"};
-  const ub={High:"background:#FDF0F0;border:1px solid #F0C0C0;",Medium:"background:#FDF4E8;border:1px solid #F0D8A8;",Low:"background:#F4F2EE;border:1px solid #D8D0C4;"};
+  var el=document.getElementById("policyMini");
   el.innerHTML="";
   POL.slice(0,5).forEach(function(p){
-    const div=document.createElement("div");
-    div.style.cssText=(ub[p.urgency]||"background:#F4F2EE;")+"border-radius:5px;padding:8px 10px;margin-bottom:6px;cursor:pointer;";
-    div.title=p.url?"클릭 → 공식 문서 열기":p.desc;
-    div.innerHTML='<div style="font-size:11px;font-weight:600;color:'+uc[p.urgency]+'">'+p.label+' ['+p.region+']'+(p.url?' 🔗':'')+'</div>'
-      +'<div style="font-size:10px;color:#4A4538;margin-top:2px">'+p.desc.slice(0,60)+'...</div>';
-    div.addEventListener("click",function(){p.url?window.open(p.url,"_blank","noopener"):switchTab("policy");});
-    el.appendChild(div);
+    var d=document.createElement("div");
+    d.className="pol-mini pol-mini-"+(p.urgency||"L");
+    d.title=p.url?"공식 문서 열기":p.desc;
+    d.innerHTML='<div class="pol-mini-label">'+p.label+'</div>'
+      +'<div class="pol-mini-sub">'+p.region+(p.url?' · 🔗 클릭':' · ')+'</div>';
+    d.addEventListener("click",function(){
+      if(p.url) window.open(p.url,"_blank","noopener");
+      else switchTab("policy");
+    });
+    el.appendChild(d);
   });
 }
+
+// ── 검색 필터 ─────────────────────────────────────────────
 function getFiltered(){
-  const raw=(document.getElementById("srch")||{value:""}).value.trim();
-  const qs=raw.toLowerCase().split(/\s+/).filter(Boolean);
+  var raw=(document.getElementById("srch")||{value:""}).value.trim();
+  var qs=raw.toLowerCase().split(/\s+/).filter(Boolean);
   return SIG.filter(function(s){
-    if(curF==="kr")return s.isKorean;
-    if(curF==="gl")return !s.isKorean&&!s.isChina;
-    if(curF==="cn")return s.isChina;
-    if(curF==="un")return s.companyType==="unlisted_startup";
-    if(curF==="hi")return s.relevance==="High";
-    if(curF==="iv")return s.next_action==="Investigate";
-    if(curF==="sc")return !!s.scorecard;
+    if(curF==="kr")  return s.isKorean;
+    if(curF==="gl")  return !s.isKorean&&!s.isChina;
+    if(curF==="cn")  return s.isChina;
+    if(curF==="hi")  return s.signal_quality==="High"||s.relevance==="High";
+    if(curF==="iv")  return s.next_action==="Investigate";
+    if(curF==="cv")  return s.cross_validation&&s.cross_validation.sourceCount>=2;
     return true;
   }).filter(function(s){
     if(!qs.length)return true;
     var hay=[
-      s.company||"", s.title||"", s.category||"", s.deep_insight||"",
-      s.summary||"", s.source||"", s.country||"", s.region||"",
-      s.fundingStage||"", s.eventType||"", s.relevance||"",
-      s.signal_type||"", s.next_action||"", s.cvc_action||"", s.risk||"",
-      (s.policyTriggers||[]).map(function(p){return p.label||"";}).join(" "),
-      (s.comparableDeals||[]).map(function(d){return d.company||"";}).join(" ")
+      s.company||"", s.title||"", s.label||"", s.summary||"",
+      s.source||"", s.domain_insight||"", s.why_now||"",
+      s.signal_quality||"", s.next_action||"", s.eventType||"",
+      s.region||"", s.tag||""
     ].join(" ").toLowerCase();
     return qs.every(function(k){return hay.indexOf(k)>=0;});
   }).sort(function(a,b){
-    var sa=(a.companyType==="unlisted_startup"?10:0)+({High:3,Medium:1,Low:0}[a.relevance]||0);
-    var sb=(b.companyType==="unlisted_startup"?10:0)+({High:3,Medium:1,Low:0}[b.relevance]||0);
+    var cv=function(s){return s.cross_validation?s.cross_validation.sourceCount:1;};
+    var sq={High:3,Medium:1,Low:0};
+    var sa=cv(a)*2+(sq[a.signal_quality||a.relevance]||0);
+    var sb=cv(b)*2+(sq[b.signal_quality||b.relevance]||0);
     return sb-sa;
   });
 }
+
+// ── 피드 렌더링 ───────────────────────────────────────────
 function renderFeed(){
-  const sigs=getFiltered(), el=document.getElementById("feedArea");
-  let h="";
-  if(DATA?.stats){const s=DATA.stats;h+=`<div class="sg">${[{n:s.total,l:"총 신호",c:"#1A1710"},{n:s.unlisted||0,l:"🟢 비상장",c:"#1A5C36"},{n:s.high,l:"High",c:"#B83232"},{n:s.investigate||0,l:"즉시 검토",c:"#A85400"}].map(x=>`<div class="sc2"><div class="sc2-n" style="color:${x.c}">${x.n||0}</div><div class="sc2-l">${x.l}</div></div>`).join("")}</div>`;}
-  if(DATA?.brief)h+=`<div class="brief"><div class="brief-t">✦ 오늘의 CVC 딥 브리핑</div><div class="brief-b">${e(DATA.brief)}</div></div>`;
-  const factCount=(DATA?.stats?.factCount)||SIG.filter(s=>s.trust==="FACT").length;
-  const aiCount=(DATA?.stats?.aiCount)||0;
-  const dartCount=(DATA?.stats?.dartCount)||0;
-  h+=`<div class="trust-banner">
-    <strong>데이터 신뢰도 안내</strong> &nbsp;
-    <span class="trust-fact">✓ 팩트</span> 원본 링크 확인 가능 (${factCount}건)&nbsp;|&nbsp;
-    <span class="trust-ai">⚙ AI 분석</span> 실제 기사 기반 해석${dartCount?` &nbsp;|&nbsp; 📋 DART 공시 ${dartCount}건 (100% 팩트)`:""}
-    &nbsp;|&nbsp; <span class="trust-est">~ AI 추정</span> 스코어카드는 투자 전 독립 검증 필요
-  </div>`;
-  if(!sigs.length){h+=`<div style="text-align:center;padding:32px;background:#fff;border:1px solid #E6E2DA;border-radius:7px"><div style="color:#8A8070">해당 조건 없음</div></div>`;el.innerHTML=h;return;}
-  h+=`<div class="feed"><div class="feed-hd"><span style="font-size:11px;font-weight:700;color:#8A8070;text-transform:uppercase;letter-spacing:0.5px">투자 신호</span><span style="font-family:'DM Mono',monospace;font-size:10px;color:#B8B0A0">${sigs.length}건</span></div>`;
-  sigs.forEach(s=>{
-    const op=EXP.has(s.id),isU=s.companyType==="unlisted_startup",isKr=s.isKorean,isCn=s.isChina;
-    const bc=isKr?"#B8860B":isCn?"#EE1C25":isU?"#1A5C36":s.relevance==="High"?"#B83232":"transparent";
-    const tb=isU?`<span class="b b-u">🟢 비상장</span>`:s.companyType==="ecosystem"?`<span class="b b-e">생태계</span>`:`<span class="b b-l">상장</span>`;
-    const rb=`<span class="b b-${s.relevance||"Lo"}" style="border:1px solid">${s.relevance}</span>`;
-    const catc=isKr?"b-kr":isCn?"b-cn":"b-gl";
-    const cc=isU?"#1A5C36":isKr?"#92400E":isCn?"#CC0000":"#1B3A5C";
-    h+=`<div class="sig" style="border-left:3px solid ${bc}" onclick="toggleExp('${s.id}')">
-      <div class="sig-hd">
-        <div class="bx">${tb}${s.fundingStage&&s.fundingStage!=="N/A"?`<span class="b b-stg">${s.fundingStage}</span>`:""}<span class="b ${catc}">${s.emoji||""} ${s.category}</span><span class="b b-l" style="font-size:10px">${s.country}</span>${s.isRealNews?`<span class="b b-rt">✓실시간</span>`:""}<span class="b b-${s.relevance||"Lo"}">${s.relevance}</span>${s.next_action&&s.next_action!=="Skip"?`<span class="b b-act">→${s.next_action}</span>`:""}<span style="margin-left:auto;font-family:'DM Mono',monospace;font-size:9px;color:#B8B0A0">${s.pubDate||""}</span></div>
-        <div class="tr">${s.company&&s.company!=="Unknown"?`<span class="co" style="color:${cc}">${e(s.company)}</span>`:""}${s.url?`<a class="tt" href="${e(s.url)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">${e(s.title||"")}</a>`:`<span class="tt" style="cursor:default">${e(s.title||"")}</span>`}</div>
-        ${!op?`<div class="hint">▼ 딥 인사이트${s.scorecard?" · 스코어카드":""}${(s.comparableDeals||[]).length?" · 유사딜":""}  클릭</div>`:""}
-      </div>`;
+  var sigs=getFiltered(), el=document.getElementById("feedCol");
+  var h="";
+
+  // 팩트 공지
+  h+='<div class="fact-notice">'
+    +'<span class="fact-dot">●</span>'
+    +'<span>모든 신호는 실제 언론사 기사 또는 DART 공시 원문 링크 포함 &nbsp;·&nbsp; '
+    +'AI는 에너지 도메인 해석만 제공 &nbsp;·&nbsp; 수치는 기사 원문에서만 추출</span>'
+    +'</div>';
+
+  // 브리핑
+  if(DATA&&DATA.brief){
+    h+='<div class="brief-box">'
+      +'<div class="brief-label">CVC Intelligence Brief</div>'
+      +'<div class="brief-text">'+e(DATA.brief)+'</div>'
+      +'</div>';
+  }
+
+  if(!sigs.length){
+    var raw2=(document.getElementById("srch")||{value:""}).value.trim();
+    h+='<div class="empty">'
+      +(raw2?'"'+e(raw2)+'" — No results':"No signals found")
+      +(raw2?'<br><br><a href="#" onclick="document.getElementById(\'srch\').value=\'\';renderFeed();return false;" style="color:var(--accent-2);font-size:10px">Clear search</a>':"")
+      +'</div>';
+    el.innerHTML=h; return;
+  }
+
+  h+='<div class="feed-hd"><span class="feed-title">Investment Signals</span>'
+    +'<span class="feed-count">'+sigs.length+' results</span></div>';
+
+  sigs.forEach(function(s){
+    var op=EXP.has(s.id);
+    var isKr=s.isKorean, isCn=s.isChina, isDart=s.isDart||s.tag==="kr_dart";
+    var cv=s.cross_validation||{};
+    var sq=s.signal_quality||s.relevance||"Low";
+    var facts=s.extracted_facts||{};
+    var hasFactNums=facts.amount||facts.round||facts.partner;
+
+    // 교차검증 뱃지
+    var cvClass=cv.sourceCount>=3?"cv-3":cv.sourceCount>=2?"cv-2":"cv-1";
+    var cvLabel=cv.sourceCount>=3?"3+ 소스":cv.sourceCount>=2?"2 소스":"단일 소스";
+
+    h+='<div class="sig'+(op?" expanded":"")+(isDart?" dart-sig":"")+'" onclick="toggleExp(\''+s.id+'\')">'
+      +'<div class="sig-meta">'
+      +(isKr?'<span class="tag tag-kr">KR</span>':isCn?'<span class="tag tag-cn">CN</span>':'<span class="tag tag-gl">GL</span>')
+      +(isDart?'<span class="tag tag-dart">DART</span>':"")
+      +(s.eventType?'<span class="tag tag-ev">'+e(s.eventType)+'</span>':"")
+      +(sq==="High"?'<span class="tag tag-H">HIGH</span>':sq==="Medium"?'<span class="tag tag-M">MED</span>':"")
+      +(cv.sourceCount>=2?'<span class="tag tag-cv cv-'+(cv.sourceCount>=3?"3":"2")+'">'+cvLabel+'</span>':"")
+      +'<span class="sig-time">'+e(s.pubDate||"")+'</span>'
+      +'</div>'
+      +(s.company?'<div class="sig-co">'+e(s.company)+'</div>':"")
+      +'<div class="sig-title">'
+      +(s.url?'<a href="'+e(s.url)+'" target="_blank" rel="noopener" onclick="event.stopPropagation()">'+e(s.title||"")+'</a>'
+             :'<span>'+e(s.title||"")+'</span>')
+      +'</div>'
+      +'<div class="sig-src">'+e(s.source||"")+(s.next_action&&s.next_action!=="Monitor"&&s.next_action!=="Skip"?' &nbsp;·&nbsp; <strong style="color:var(--accent)">→ '+e(s.next_action)+'</strong>':"")+'</div>'
+      +(!op?'<div class="expand-hint">▾ '+(s.domain_insight?"도메인 분석 보기":"요약 보기")+'</div>':"");
+
     if(op){
-      h+=`<div class="sig-bd">
-        <div class="src-r">${s.isRealNews?`<span style="background:#EDF6F1;color:#1A5C36;border:1px solid #A7E3BE;padding:1px 6px;border-radius:3px;font-size:10px;font-weight:600">✓실제뉴스</span>`:`<span style="background:#FDF4E8;color:#6B3600;border:1px solid #F0D8A8;padding:1px 6px;border-radius:3px;font-size:10px;font-weight:600">AI생성</span>`}<span>${e(s.source||"")}</span><span>·</span><span>${e(s.pubDate||"")}</span>${s.url?`<a href="${e(s.url)}" target="_blank" style="color:#1B3A5C;font-size:10px" onclick="event.stopPropagation()">원문 →</a>`:""}</div>
-        <div style="font-size:12px;color:#4A4538;line-height:1.7;margin-bottom:8px">${e(s.summary||"")}</div>`;
-      if(s.deep_insight)h+=`<div class="ins"><div class="ins-l">✦ 에너지 심사역 딥 인사이트</div><div class="ins-t">${e(s.deep_insight)}</div>${s.cvc_action?`<div class="act-b">📋 ${e(s.cvc_action)}</div>`:""}${s.risk?`<div class="rsk">⚠ ${e(s.risk)}</div>`:""}</div>`;
-      if(s.scorecard){const sc=s.scorecard;const items=[{k:"technology",l:"기술검증"},{k:"commercialization",l:"상업화"},{k:"team",l:"팀신호"},{k:"partnership",l:"파트너십"},{k:"fundraising_timing",l:"자금조달임박"}];const cc2={High:"#1A5C36",Medium:"#A85400",Low:"#B83232"}[sc.conviction]||"#8A8070";h+=`<div class="sc"><div class="sc-hd">📊 투자 스코어카드 <span style="background:${cc2}22;color:${cc2};padding:2px 8px;border-radius:10px;font-size:10px">${sc.conviction}</span></div><div class="sc-g">${items.map(it=>{const v=sc[it.k];if(!v)return"";return`<div class="sc-i"><div class="sc-il">${it.l}</div><div class="sc-bw"><div class="sc-bb"><div class="sc-bf" style="width:${(v.score/v.max)*100}%"></div></div><span class="sc-n">${v.score}/${v.max}</span></div>${v.reason?`<div style="font-size:10px;color:#4A5568;margin-top:2px">${e(v.reason)}</div>`:""}</div>`;}).join("")}</div>${sc.one_line?`<div class="sc-ol">${e(sc.one_line)}</div>`:""}</div>`;}
-      if((s.comparableDeals||[]).length)h+=`<div class="cd"><div class="cd-hd">🔗 유사 딜 레퍼런스</div>${s.comparableDeals.map(d=>`<div class="di"><div class="di-t"><span class="di-co">${e(d.company)}</span><span class="di-am">${e(d.amount)}</span></div><div class="di-m">${e(d.country)} · ${e(d.sector)} · ${e(d.stage)} · ${e(d.year)}${d.valuation?` · ${e(d.valuation)}`:""}</div></div>`).join("")}</div>`;
-      if((s.policyTriggers||[]).length)h+=`<div class="pt"><div class="pt-hd">📋 정책 트리거</div>${s.policyTriggers.map(p=>`<div style="margin-bottom:4px"><span style="font-size:11px;font-weight:600;color:#92400E">${e(p.label)}</span><div style="font-size:11px;color:#4A3500;margin-top:1px">${e(p.desc)}</div></div>`).join("")}</div>`;
-      h+=`</div>`;
+      h+='<div class="sig-body">';
+
+      // 수치 추출 (기사에서 추출, 생성 아님)
+      if(hasFactNums){
+        h+='<div class="facts-row">';
+        if(facts.amount) h+='<div class="fact-item"><span class="fact-label">Amount</span><span class="fact-value">'+e(facts.amount)+'</span></div>';
+        if(facts.round)  h+='<div class="fact-item"><span class="fact-label">Round</span><span class="fact-value">'+e(facts.round)+'</span></div>';
+        if(facts.partner)h+='<div class="fact-item"><span class="fact-label">Partner</span><span class="fact-value">'+e(facts.partner)+'</span></div>';
+        if(facts.date)   h+='<div class="fact-item"><span class="fact-label">Date</span><span class="fact-value">'+e(facts.date)+'</span></div>';
+        h+='<div class="fact-item"><span class="fact-label">Source</span><span class="fact-value" style="font-size:10px;color:var(--ink-4)">기사 원문 추출</span></div>';
+        h+='</div>';
+      }
+
+      // 요약
+      if(s.summary) h+='<div class="smr">'+e(s.summary)+'</div>';
+
+      // 도메인 인사이트
+      if(s.domain_insight){
+        h+='<div class="insight">'
+          +'<div class="insight-label">Energy Domain Analysis</div>'
+          +'<div class="insight-text">'+e(s.domain_insight)+'</div>'
+          +(s.why_now?'<div class="why-now">Why now: '+e(s.why_now)+'</div>':"")
+          +'</div>';
+      }
+
+      // 교차검증 + 원문 링크
+      h+='<div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px">'
+        +'<span class="cv-badge '+cvClass+'">'+cvLabel+' 교차검증</span>'
+        +(s.url?'<a class="orig-link" href="'+e(s.url)+'" target="_blank" rel="noopener" onclick="event.stopPropagation()">원문 보기 →</a>':"")
+        +'</div>';
+
+      // 리스크
+      if(s.risk) h+='<div class="risk-row">⚠ Risk: '+e(s.risk)+'</div>';
+
+      h+='</div>';
     }
-    h+=`</div>`;
+    h+='</div>';
   });
-  h+=`</div>`;el.innerHTML=h;
+
+  el.innerHTML=h;
 }
 
-// ── 시장 지도 ─────────────────────────────────────────────
-function renderMarketMap(){
-  const el=document.getElementById("feedArea");
-  let h=`<div class="map-legend"><span style="font-size:12px;font-weight:600;color:#4A4538">버블 크기 = 투자 우선순위 점수</span>`;
-  [{c:"#1A5C36",l:"비상장 스타트업"},{c:"#1B3A5C",l:"글로벌"},{c:"#8A8070",l:"상장/대기업"}].forEach(x=>h+=`<div class="map-leg-item"><div class="map-leg-dot" style="background:${x.c}"></div>${x.l}</div>`);
-  h+=`</div><div class="sector-grid">`;
-  MARKET_MAP.forEach(sec=>{
-    h+=`<div class="sector-box"><div class="sector-hd" style="background:${sec.bg};color:${sec.color}">${sec.sector}<span style="font-size:10px;font-weight:400;color:${sec.color}88">${sec.kr.length+sec.global.length}개 기업</span></div>`;
-    if(sec.kr.length){
-      h+=`<div style="padding:8px 12px 0;font-size:10px;font-weight:600;color:#B8860B;text-transform:uppercase;letter-spacing:0.4px">🇰🇷 국내</div><div class="sector-companies">`;
-      sec.kr.forEach(c=>{
-        const sz=Math.max(80,c.score*1.1);
-        h+=`<div class="bubble" style="background:${sec.bg};border:1.5px solid ${sec.color}44;min-width:${sz}px" title="${c.name} · ${c.stage} · 점수:${c.score}">
-          <div class="bubble-score" style="color:${sec.color}">${c.score}</div>
-          <div class="bubble-name" style="color:${sec.color}">${c.name}</div>
-          <div class="bubble-stage" style="color:${sec.color}">${c.stage} · ${c.tag}</div>
-        </div>`;
-      });
-      h+=`</div>`;
-    }
-    if(sec.global.length){
-      h+=`<div style="padding:8px 12px 0;font-size:10px;font-weight:600;color:#1B3A5C;text-transform:uppercase;letter-spacing:0.4px">🌍 글로벌 비교</div><div class="sector-companies">`;
-      sec.global.forEach(c=>{
-        h+=`<div class="bubble" style="background:#F4F2EE;border:1.5px solid #C0C0C0" title="${c.name} · ${c.stage} · 점수:${c.score}">
-          <div class="bubble-score" style="color:#6B6060">${c.score}</div>
-          <div class="bubble-name" style="color:#4A4538">${c.name}</div>
-          <div class="bubble-stage" style="color:#8A8070">${c.stage} · ${c.tag}</div>
-        </div>`;
-      });
-      h+=`</div>`;
-    }
-    h+=`</div>`;
+// ── DART 탭 ───────────────────────────────────────────────
+function renderDart(){
+  var el=document.getElementById("feedCol");
+  var dartSigs=SIG.filter(function(s){return s.isDart||s.tag==="kr_dart";});
+  if(!dartSigs.length){
+    el.innerHTML='<div class="dart-empty">'
+      +'<div style="font-family:var(--mono);font-size:11px;color:var(--ink-4);letter-spacing:0.08em;margin-bottom:12px">DART 공시 없음</div>'
+      +'<div style="font-size:12px;color:var(--ink-3);margin-bottom:16px">DART_API_KEY 등록 후 자동 수집됩니다</div>'
+      +'<a href="https://dart.fss.or.kr" target="_blank" rel="noopener" class="pol-link-btn" style="display:inline-flex;margin:0 auto">→ DART 직접 방문</a>'
+      +'</div>';
+    return;
+  }
+  var h='<div class="feed-hd"><span class="feed-title">DART 전자공시</span>'
+    +'<span class="feed-count">'+dartSigs.length+'건 · 금융감독원 원문</span></div>';
+  dartSigs.forEach(function(s){
+    var sq=s.signal_quality||s.relevance||"";
+    h+='<div class="dart-row">'
+      +'<div class="dart-co">'+e(s.company||"")+'</div>'
+      +'<div class="dart-title-col">'
+      +(s.url?'<a class="dart-title-link" href="'+e(s.url)+'" target="_blank" rel="noopener">'+e(s.title||"")+'</a>'
+             :'<span class="dart-title-link">'+e(s.title||"")+'</span>')
+      +'<div class="dart-date">'+e(s.pubDate||"")+(sq?" &nbsp;·&nbsp; <strong style='color:var(--accent)'>"+e(sq)+"</strong>":"")+'</div>'
+      +'</div>'
+      +'</div>';
   });
-  h+=`</div>`;el.innerHTML=h;
+  el.innerHTML=h;
 }
 
-// ── 경쟁사 비교 ───────────────────────────────────────────
-function renderCompare(){
-  const el=document.getElementById("feedArea");
-  let h=`<div style="display:flex;flex-direction:column;gap:20px;">`;
-  COMPARE_SECTORS.forEach(sec=>{
-    h+=`<div class="feed"><div class="feed-hd"><span style="font-size:12px;font-weight:700;color:#1A1710">${sec.sector}</span></div>
-    <div class="cmp-wrap"><table class="cmp-table">
-      <thead><tr><th>기업명</th><th>단계</th><th>기술검증</th><th>상업화</th><th>팀신호</th><th>파트너십</th><th>자금임박</th><th>창업</th><th>주요투자자</th><th>메모</th></tr></thead>
-      <tbody>`;
-    sec.companies.forEach((c,i)=>{
-      const isRef=i===sec.companies.length-1;
-      const bg=isRef?"#F6F4F0":"#fff";
-      const bar=(v,color)=>`<div class="score-bar"><div class="score-bg"><div class="score-fill" style="width:${v*10}%;background:${color}"></div></div><span style="font-family:'DM Mono',monospace;font-size:10px;color:${color};font-weight:600">${v}</span></div>`;
-      h+=`<tr style="background:${bg}${isRef?";opacity:0.7":""}">
-        <td><span style="font-weight:700;color:#1A1710">${c.country} ${c.name}</span>${isRef?` <span style="font-size:10px;color:#8A8070">(레퍼런스)</span>`:""}</td>
-        <td><span class="b b-stg">${c.stage}</span></td>
-        <td>${bar(c.trl,"#3B82F6")}</td>
-        <td>${bar(c.commercial,"#1A5C36")}</td>
-        <td>${bar(c.team,"#A85400")}</td>
-        <td>${bar(c.partner,"#5B21B6")}</td>
-        <td>${bar(c.timing,"#B83232")}</td>
-        <td style="font-family:'DM Mono',monospace;font-size:11px">${c.founded}</td>
-        <td style="font-size:11px;color:#4A4538">${c.investors}</td>
-        <td style="font-size:11px;color:#6B6060">${c.note}</td>
-      </tr>`;
-    });
-    h+=`</tbody></table></div></div>`;
-  });
-  h+=`</div>`;el.innerHTML=h;
-}
-
-// ── 펀딩 타임라인 ─────────────────────────────────────────
-function renderTimeline(){
-  const el=document.getElementById("feedArea");
-  let h=`<div style="background:#fff;border:1px solid #E6E2DA;border-radius:7px;padding:20px;"><div style="font-size:11px;color:#8A8070;margin-bottom:20px">점선 = AI 예측 · 실선 = 실제 라운드</div>`;
-  FUNDING_TIMELINE.forEach(co=>{
-    h+=`<div class="tl-company">
-      <div class="tl-name"><span style="font-size:16px">${co.country}</span>${co.name}<span style="font-size:11px;color:#8A8070;font-weight:400">${co.sector}</span></div>
-      <div class="tl-track">
-        <div class="tl-line"></div>
-        <div class="tl-events">`;
-    co.events.forEach(ev=>{
-      const c=ev.color;
-      h+=`<div class="tl-event">
-        <div class="tl-dot ${ev.pred?"tl-pred":""}" style="background:${ev.pred?"#fff":c};border-color:${c};color:${c}"></div>
-        <div class="tl-label" style="color:${c}">${ev.label}</div>
-        <div style="font-family:'DM Mono',monospace;font-size:10px;font-weight:600;color:${c}">${ev.amount}</div>
-        <div class="tl-date">${ev.date}</div>
-      </div>`;
-    });
-    h+=`</div></div></div>`;
-  });
-  h+=`</div>`;el.innerHTML=h;
-}
-
-// ── 대기업 생태계 ─────────────────────────────────────────
-function renderEcosystem(){
-  const el=document.getElementById("feedArea");
-  let h=`<div class="eco-grid">`;
-  ECOSYSTEM.forEach(corp=>{
-    h+=`<div class="eco-card">
-      <div class="eco-hd" style="background:${corp.bg}">
-        <div class="eco-logo" style="background:${corp.color};color:#fff">${corp.logo}</div>
-        <div><div class="eco-name">${corp.name}</div><div class="eco-sub">에너지 전략 · 스타트업 레이더</div></div>
-      </div>
-      <div class="eco-strategy">${corp.strategy}</div>
-      <div class="eco-startups">
-        <div style="font-size:10px;font-weight:700;color:#8A8070;text-transform:uppercase;letter-spacing:0.4px;margin-bottom:6px">연관 스타트업</div>`;
-    corp.startups.forEach(s=>{
-      h+=`<div class="eco-startup-item">
-        <div><div class="eco-startup-name">${s.name}</div><div class="eco-startup-rel">${s.rel}</div></div>
-        <span class="eco-startup-badge" style="background:${s.bc};color:${s.tc}">${s.badge} ${s.type}</span>
-      </div>`;
-    });
-    h+=`</div></div>`;
-  });
-  h+=`</div>`;el.innerHTML=h;
-}
-
-// ── 기업 프로파일 ─────────────────────────────────────────
-function renderProfiles(){
-  const el=document.getElementById("feedArea");
-  const cos=Object.values(PROF);
-  if(!cos.length){el.innerHTML=`<div style="text-align:center;padding:48px"><div style="font-size:36px;margin-bottom:12px">🏢</div><div style="font-size:14px;color:#8A8070">아직 누적 데이터 없음<br><small>매일 자동 실행되면 쌓입니다</small></div></div>`;return;}
-  cos.sort((a,b)=>(b.highCount||0)-(a.highCount||0));
-  el.innerHTML=`<div class="prof-grid">${cos.map(p=>{const sc=p.latestScorecard;const cc={High:"#1A5C36",Medium:"#A85400",Low:"#B83232"}[sc?.conviction]||"#8A8070";return`<div class="prof-card"><div style="font-size:14px;font-weight:700;margin-bottom:3px">${e(p.name)}</div><div style="font-size:11px;color:#8A8070;margin-bottom:8px">${e(p.sector)} · ${p.firstSeen||"?"}~</div><div style="display:flex;gap:12px;margin-bottom:8px">${[{n:p.signalCount||0,l:"총신호",c:"#1A1710"},{n:p.highCount||0,l:"High",c:"#B83232"},{n:p.recentActivity||0,l:"30일",c:"#A85400"}].map(x=>`<div style="text-align:center"><div style="font-family:'DM Mono',monospace;font-size:16px;font-weight:700;color:${x.c}">${x.n}</div><div style="font-size:10px;color:#8A8070">${x.l}</div></div>`).join("")}</div>${sc?`<div style="font-size:11px;font-weight:600;color:${cc};margin-bottom:3px">📊 ${sc.conviction} · ${sc.timing_signal||""}</div><div style="font-size:11px;color:#4A4538;font-style:italic">${e(sc.one_line||"")}</div>`:""}${p.fundingStage&&p.fundingStage!=="N/A"?`<div style="margin-top:6px"><span class="b b-stg">${p.fundingStage}</span></div>`:""}</div>`;}).join("")}</div>`;
-}
-
-// ── 주간 리포트 ───────────────────────────────────────────
-function renderWeekly(){
-  const el=document.getElementById("feedArea");
-  el.innerHTML=`<div class="weekly-wrap">
-    <div class="weekly-preview">
-      <div class="weekly-preview-hd">
-        <div style="font-family:'Spectral',serif;font-size:16px;font-weight:700;color:#EDE9E0;margin-bottom:4px">⚡ Energy CVC 주간 브리핑</div>
-        <div style="font-size:11px;color:#6B7F96">매주 월요일 오전 7시 자동 발송 · CVC 심사역 전용</div>
-      </div>
-      <div style="padding:16px 18px">
-        <div style="font-size:12px;color:#4A4538;line-height:1.7;margin-bottom:14px">
-          주간 리포트에 포함되는 내용:
-        </div>
-        <div style="display:flex;flex-direction:column;gap:7px">
-          ${["📊 이번 주 High Relevance 신호 TOP 10","🟢 비상장 스타트업 주간 동향 요약","🇰🇷 국내 정책/규제 변화 정리","📋 투자 스코어카드 업데이트 기업","⏱ 다음 주 예상 펀딩 타이밍 알람","🔗 유사 해외 딜 레퍼런스 업데이트"].map(item=>`<div style="display:flex;align-items:center;gap:8px;font-size:12px;color:#1A1710"><span style="color:#1A5C36">✓</span>${item}</div>`).join("")}
-        </div>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="chd">📧 주간 리포트 설정</div>
-      <div class="cbd">
-        <div style="margin-bottom:14px">
-          <label style="font-size:12px;color:#4A4538;display:block;margin-bottom:5px;font-weight:500">수신 이메일 주소</label>
-          <input id="weeklyEmail" type="email" value="${weeklySettings.email}" placeholder="yourname@company.com"
-            style="width:100%;padding:8px 12px;border:1px solid #E6E2DA;border-radius:5px;font-size:12px;outline:none"
-            oninput="weeklySettings.email=this.value;localStorage.setItem('weekly_email',this.value)">
-        </div>
-        <div style="padding:12px;background:#FEF9E7;border-radius:5px;border:1px solid #FCD34D;margin-bottom:14px">
-          <div style="font-size:11px;font-weight:600;color:#92400E;margin-bottom:5px">⚙ 자동 발송 설정 방법</div>
-          <div style="font-size:11px;color:#4A3500;line-height:1.75">
-            1. GitHub → energy-cvc-briefing → Settings → Secrets<br>
-            2. <code style="background:#FFF8DC;padding:1px 5px;border-radius:3px">EMAIL_USER</code> = 발송 Gmail 주소<br>
-            3. <code style="background:#FFF8DC;padding:1px 5px;border-radius:3px">EMAIL_PASS</code> = Gmail 앱 비밀번호 (16자리)<br>
-            4. <code style="background:#FFF8DC;padding:1px 5px;border-radius:3px">EMAIL_TO</code> = 수신 이메일 주소<br>
-            5. .github/workflows/weekly.yml 파일 추가
-          </div>
-        </div>
-        <div style="background:#F0F7FF;border:1px solid #BFDBFE;border-radius:5px;padding:12px;font-family:'DM Mono',monospace;font-size:10px;color:#1E40AF;line-height:1.8">
-# weekly.yml 스케줄<br>
-on:<br>
-&nbsp;&nbsp;schedule:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;- cron: '0 22 * * 0'  # 매주 월요일 7시 KST<br>
-&nbsp;&nbsp;workflow_dispatch:
-        </div>
-      </div>
-    </div>
-  </div>`;
-}
-
-// ── 히스토리 ──────────────────────────────────────────────
-
-function renderPolicyTab(){
-  const el=document.getElementById("feedArea");
-  if(!POL.length){el.innerHTML='<div style="text-align:center;padding:48px"><div style="font-size:14px;color:#8A8070">정책 데이터 없음</div></div>';return;}
-  const grid=document.createElement("div");
-  grid.style.cssText="display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px;";
+// ── 정책 탭 ───────────────────────────────────────────────
+function renderPolicy(){
+  var el=document.getElementById("feedCol");
+  var grid=document.createElement("div");
+  grid.className="pol-grid";
   POL.forEach(function(p){
-    const uc={High:"#7A2020",Medium:"#6B3600",Low:"#8A8070"}[p.urgency]||"#1A1710";
-    const ubg={High:"#FDF0F0",Medium:"#FDF4E8",Low:"#F4F2EE"}[p.urgency]||"#F4F2EE";
-    const ubd={High:"#F0C0C0",Medium:"#F0D8A8",Low:"#D8D0C4"}[p.urgency]||"#D8D0C4";
-    const card=document.createElement("div");
-    card.style.cssText="background:"+ubg+";border:1px solid "+ubd+";border-radius:8px;padding:16px;";
-    const hdr=document.createElement("div");
-    hdr.style.cssText="display:flex;justify-content:space-between;margin-bottom:8px;";
-    hdr.innerHTML='<div style="font-size:14px;font-weight:700;color:'+uc+'">'+p.label+'</div>'
-      +'<span style="font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;background:rgba(255,255,255,0.7);color:'+uc+'">'+p.urgency+' · '+p.region+'</span>';
-    card.appendChild(hdr);
-    const dsc=document.createElement("div");
-    dsc.style.cssText="font-size:12px;color:#4A4538;line-height:1.7;margin-bottom:10px;";
-    dsc.textContent=p.desc;
-    card.appendChild(dsc);
-    const lbl=document.createElement("div");
-    lbl.style.cssText="font-size:10px;font-weight:600;color:"+uc+";margin-bottom:5px;";
-    lbl.textContent="수혜 기업";
-    card.appendChild(lbl);
-    const cw=document.createElement("div");
-    cw.style.cssText="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:10px;";
-    (p.beneficiaries||[]).forEach(function(c){
-      const sp=document.createElement("span");
-      sp.style.cssText="font-size:11px;padding:2px 8px;border-radius:10px;background:rgba(255,255,255,0.7);color:"+uc+";font-weight:500;";
-      sp.textContent=c.split("(")[0].trim();
-      cw.appendChild(sp);
-    });
-    card.appendChild(cw);
+    var card=document.createElement("div");
+    card.className="pol-card";
+    var urgCls="pol-"+(p.urgency==="High"?"H":p.urgency==="Medium"?"M":"L");
+    card.innerHTML='<div class="pol-card-hd">'
+      +'<div class="pol-card-title">'+p.label+'</div>'
+      +'<span class="pol-urg '+urgCls+'">'+p.urgency+' · '+p.region+'</span>'
+      +'</div>'
+      +'<div class="pol-desc">'+p.desc+'</div>'
+      +'<div class="pol-cos">'+( p.beneficiaries||[]).map(function(c){
+        return '<span class="pol-co">'+c.split("(")[0].trim()+'</span>';
+      }).join("")+'</div>';
     if(p.url){
-      const btn=document.createElement("a");
+      var btn=document.createElement("a");
       btn.href=p.url; btn.target="_blank"; btn.rel="noopener noreferrer";
-      btn.style.cssText="display:inline-flex;align-items:center;gap:4px;font-size:11px;color:#1B3A5C;font-weight:600;padding:5px 12px;border:1px solid #C0D4EC;border-radius:4px;background:#EDF2F8;text-decoration:none;margin-bottom:6px;";
-      btn.textContent="🔗 "+(p.urlLabel||"공식 문서")+" →";
-      btn.onmouseover=function(){this.style.background="#DBEAFE";};
-      btn.onmouseout =function(){this.style.background="#EDF2F8";};
+      btn.className="pol-link-btn";
+      btn.textContent="→ "+(p.urlLabel||"공식 문서");
       card.appendChild(btn);
-      const note=document.createElement("div");
-      note.style.cssText="font-size:10px;color:#1A5C36;";
-      note.textContent="✓ 팩트 — 실제 정부/기관 공식 출처";
-      card.appendChild(note);
     }
     grid.appendChild(card);
   });
-  el.innerHTML="";
+  el.innerHTML='<div class="feed-hd"><span class="feed-title">Policy Triggers</span>'
+    +'<span class="feed-count">실제 정부/기관 링크</span></div>';
   el.appendChild(grid);
 }
+
+// ── 히스토리 탭 (심플) ────────────────────────────────────
 function renderHistory(){
-  const el=document.getElementById("feedArea");
-  if(!IDX.length){el.innerHTML=`<div style="text-align:center;padding:48px"><div style="font-size:14px;color:#8A8070">히스토리 없음</div></div>`;return;}
-  el.innerHTML=`<div class="hist-grid">${IDX.map(d=>`<div class="hist-card" onclick="loadDate('${d.date}')"><div style="font-family:'DM Mono',monospace;font-size:12px;color:#1B3A5C;font-weight:600;margin-bottom:4px">${d.date}</div><div style="font-size:12px;color:#4A4538;margin-bottom:6px">${d.dateKr||""}</div><div style="display:flex;gap:8px;flex-wrap:wrap">${[{n:d.stats?.total||0,l:"총",c:"#1A1710"},{n:d.stats?.high||0,l:"High",c:"#B83232"},{n:d.stats?.kr||0,l:"국내",c:"#B8860B"},{n:d.stats?.cn||0,l:"중국",c:"#CC0000"}].map(x=>`<span style="font-size:11px;color:${x.c}">${x.l} ${x.n}</span>`).join("")}</div></div>`).join("")}</div>`;
+  var el=document.getElementById("feedCol");
+  if(!IDX.length){
+    el.innerHTML='<div class="empty">No archive yet</div>';
+    return;
+  }
+  var h='<div class="hist-srch">'
+    +'<input class="srch" id="histSrch" placeholder="날짜 검색… (예: 2026-03)" oninput="filterHistory()">'
+    +'</div>'
+    +'<div id="histList">';
+  IDX.forEach(function(d){
+    h+='<div class="hist-row" onclick="loadDate(\''+d.date+'\')">'+
+      '<div class="hist-date">'+d.date+'</div>'+
+      '<div class="hist-datek">'+(d.dateKr||"")+'</div>'+
+      '<div class="hist-stats">'+
+        '<span class="hist-stat">'+( d.stats&&d.stats.total||0)+' signals</span>'+
+        '<span class="hist-stat">High '+(d.stats&&d.stats.high||0)+'</span>'+
+        '<span class="hist-stat">DART '+(d.stats&&d.stats.dartCount||0)+'</span>'+
+      '</div>'+
+    '</div>';
+  });
+  h+='</div>';
+  el.innerHTML=h;
 }
 
-// ── UI ────────────────────────────────────────────────────
+function filterHistory(){
+  var q=(document.getElementById("histSrch")||{value:""}).value.trim().toLowerCase();
+  var rows=document.querySelectorAll(".hist-row");
+  rows.forEach(function(r){ r.style.display=(!q||r.textContent.toLowerCase().indexOf(q)>=0)?"flex":"none"; });
+}
+
+// ── UI 이벤트 ─────────────────────────────────────────────
 function switchTab(tab){
   curTab=tab;
-  document.querySelectorAll(".tab").forEach((t,i)=>{t.classList.toggle("on",["today","map","compare","timeline","ecosystem","profiles","weekly","history","settings"][i]===tab);});
+  document.querySelectorAll(".nav-tab").forEach(function(t,i){
+    t.classList.toggle("on",["today","dart","policy","history"][i]===tab);
+  });
   document.getElementById("filterBar").style.display=tab==="today"?"block":"none";
-  document.getElementById("settingsPanel").style.display=tab==="settings"?"block":"none";
-  document.getElementById("mainWrap").style.display=tab==="settings"?"none":"grid";
-  if(tab==="today")renderFeed();
-  else if(tab==="map")renderMarketMap();
-  else if(tab==="compare")renderCompare();
-  else if(tab==="timeline")renderTimeline();
-  else if(tab==="ecosystem")renderEcosystem();
-  else if(tab==="profiles")renderProfiles();
-  else if(tab==="weekly")renderWeekly();
+  if(tab==="today")  renderFeed();
+  else if(tab==="dart")   renderDart();
+  else if(tab==="policy") renderPolicy();
   else if(tab==="history")renderHistory();
 }
 
-function setF(f,btn){curF=f;document.querySelectorAll(".chip").forEach(c=>c.classList.remove("on"));btn.classList.add("on");renderFeed();}
-function toggleExp(id){if(EXP.has(id))EXP.delete(id);else EXP.add(id);renderFeed();}
-function e(s){return(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
+function setF(f,btn){
+  curF=f;
+  document.querySelectorAll(".pill").forEach(function(c){c.classList.remove("on");});
+  btn.classList.add("on");
+  renderFeed();
+}
+
+function toggleExp(id){
+  if(EXP.has(id)) EXP.delete(id); else EXP.add(id);
+  renderFeed();
+}
+
+function e(s){
+  return(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+}
 
 async function loadDate(date){
-  try{const r=await fetch(`data/${date}.json?`+Date.now());if(!r.ok)throw new Error();DATA=await r.json();SIG=DATA.signals||[];POL=DATA.policyTriggers||[];switchTab("today");}
-  catch{alert(`${date} 데이터를 불러올 수 없습니다.`);}
+  try{
+    var r=await fetch("data/"+date+".json?"+Date.now());
+    if(!r.ok)throw new Error();
+    DATA=await r.json(); SIG=DATA.signals||[];
+    renderSidebar(); switchTab("today");
+  }catch{ alert(date+" 데이터를 불러올 수 없습니다."); }
 }
 
 function copyReport(){
   if(!DATA)return;
-  const s=DATA.stats;
-  let t=`ENERGY CVC INTELLIGENCE — ${DATA.dateKr||DATA.date}\n총 ${s.total}건 · 비상장 ${s.unlisted||0} · High ${s.high}\n${"=".repeat(60)}\n\n`;
-  if(DATA.brief)t+=`【CVC 딥 브리핑】\n${DATA.brief}\n\n${"=".repeat(60)}\n\n`;
-  getFiltered().forEach((sig,i)=>{
-    t+=`${i+1}. [${sig.relevance}] ${sig.company||""} (${sig.fundingStage||sig.companyType})\n   ${sig.title}\n   ${sig.source||""} · ${sig.pubDate||""}\n   ${sig.summary||""}\n`;
-    if(sig.deep_insight)t+=`   ▶ ${sig.deep_insight}\n`;
-    if(sig.cvc_action)t+=`   📋 ${sig.cvc_action}\n`;
-    if(sig.risk)t+=`   ⚠ ${sig.risk}\n`;
-    if(sig.scorecard)t+=`   📊 ${sig.scorecard.conviction} · ${sig.scorecard.timing_signal} · ${sig.scorecard.one_line||""}\n`;
-    if(sig.url)t+=`   🔗 ${sig.url}\n`;
+  var s=DATA.stats||{};
+  var t="ENERGY CVC INTELLIGENCE — "+(DATA.dateKr||DATA.date)+"\n"
+    +"총 "+(s.total||0)+"건 · High "+(s.high||0)+" · 교차검증 "+(s.multiSource||0)+"건\n"
+    +"━".repeat(50)+"\n\n";
+  if(DATA.brief) t+="[CVC BRIEF]\n"+DATA.brief+"\n\n"+"━".repeat(50)+"\n\n";
+  getFiltered().forEach(function(sig,i){
+    var f=sig.extracted_facts||{};
+    t+=(i+1)+". "+(sig.company||"")+" — "+sig.title+"\n";
+    t+="   "+( sig.source||"")+" · "+(sig.pubDate||"")+"\n";
+    if(f.amount||f.round) t+="   ["+[f.amount,f.round,f.partner].filter(Boolean).join(" · ")+"]\n";
+    if(sig.domain_insight) t+="   ▶ "+sig.domain_insight+"\n";
+    if(sig.why_now) t+="   Why now: "+sig.why_now+"\n";
+    if(sig.url) t+="   "+sig.url+"\n";
     t+="\n";
   });
-  navigator.clipboard.writeText(t).then(()=>alert("✅ 복사 완료!")).catch(()=>alert("복사 실패"));
+  navigator.clipboard.writeText(t)
+    .then(function(){alert("Copied to clipboard");})
+    .catch(function(){alert("Copy failed");});
 }
 
-document.addEventListener("DOMContentLoaded",async()=>{
-  await Promise.all([loadLatest(),loadIndex(),loadProfiles()]);
+document.addEventListener("DOMContentLoaded",function(){
+  Promise.all([loadData(),loadIndex()]);
 });
 </script>
 </body>
