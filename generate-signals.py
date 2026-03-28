@@ -105,32 +105,137 @@ EVENT_RULES = [
 ]
 
 SEGMENT_KWS = {
-    "ess":         ["battery","energy storage","ess","vanadium","iron-air","flow battery"],
-    "marine_fc":   ["marine","vessel","ship","fuel cell","dnv","amogy"],
-    "grid_sw":     ["vpp","virtual power","demand response","grid software","kepco"],
-    "hvdc":        ["hvdc","transmission","cable","offshore wind"],
-    "hydrogen":    ["hydrogen","electrolyzer","h2","liquid hydrogen","green hydrogen"],
-    "dc_power":    ["data center","hyperscaler","azure","aws","power electronics"],
-    "forecasting": ["forecast","prediction","renewable forecast"],
+    "ess":         ["battery","energy storage","ess","vanadium","iron-air","flow battery","long duration","long-duration"],
+    "marine_fc":   ["marine","vessel","ship","fuel cell","dnv","amogy","shipping","seafarer"],
+    "grid_sw":     ["vpp","virtual power","demand response","grid software","kepco","ancillary service","frequency regulation"],
+    "hvdc":        ["hvdc","transmission","cable","offshore wind","interconnect","subsea cable"],
+    "hydrogen":    ["hydrogen","electrolyzer","h2","liquid hydrogen","green hydrogen","electrolysis","fuel cell","pem","soec"],
+    "dc_power":    ["data center","hyperscaler","azure","aws","google cloud","power electronics","ups","cooling"],
+    "forecasting": ["forecast","prediction","renewable forecast","grid forecast","ai grid"],
 }
 
 # ══════════════════════════════════════════════════════════
-# 4. 시그널 스코어 수정자
+# 4. SIGNAL SCORING RULEBOOK
+# ══════════════════════════════════════════════════════════
+# Design principle: every point is explained.
+# Each rule has: id, pattern, delta, reason, group (boost/noise/veto)
+#
+# Score bands:
+#   >= 60  → HIGH   (shown by default)
+#   35-59  → MEDIUM (shown when filter is "medium")
+#   < 35   → LOW    (kept in DB, hidden from main feed)
+#   < 20   → NOISE  (dropped entirely, logged in filteredOut)
+#
+# Negative signals are ALWAYS kept regardless of score.
 # ══════════════════════════════════════════════════════════
 
-SCORE_MODS = [
-    # 가산
-    {"pattern": r"kepco|microsoft|google|amazon|engie|e\.on|hyundai|samsung|hanwha|shell", "delta":+15, "reason":"Named strategic buyer"},
-    {"pattern": r"\$[\d,]+[mb]|€[\d,]+[mb]|£[\d,]+[mb]|[\d,]+mwh|[\d,]+gw\b",           "delta":+12, "reason":"Concrete figure"},
-    {"pattern": r"q[1-4] 20[2-9]\d|by 202\d|within \d+ month",                           "delta":+8,  "reason":"Concrete timeframe"},
-    {"pattern": r"south korea|germany|singapore|rotterdam|busan|incheon",                  "delta":+5,  "reason":"Specific geography"},
-    # 감산 (노이즈)
-    {"pattern": r"proud to announce|excited to share|pleased to announce",                 "delta":-40, "reason":"Generic PR"},
-    {"pattern": r"exploring|in discussions|looking to partner|potential.*partner",         "delta":-45, "reason":"Vague language"},
-    {"pattern": r"wins award|recognized as|named.*leader|gartner|frost.*sullivan",         "delta":-35, "reason":"Vanity award"},
-    {"pattern": r"keynote|speaks at|panel discussion|webinar|attends.*conference",         "delta":-30, "reason":"Conference only"},
-    {"pattern": r"publishes report|whitepaper|new study|research finds",                   "delta":-25, "reason":"Report only"},
-    {"pattern": r"rebrands|new logo|launches website|new website",                         "delta":-50, "reason":"Rebranding"},
+SCORE_THRESHOLD_HIGH   = 60   # shown in default feed view
+SCORE_THRESHOLD_MEDIUM = 35   # shown when user selects "Medium"
+SCORE_THRESHOLD_KEEP   = 20   # kept in DB (not shown in feed)
+# Below KEEP → dropped to filteredOut log
+
+SCORE_RULES = [
+    # ── BOOST: Named buyers (+points) ────────────────────────────────
+    # Principle: a named strategic buyer materially de-risks commercial assumptions
+    {"id":"buyer_top",    "pattern": r"\bkepco\b|\bmicrosoft\b|\bgoogle\b|\bamazon\b|\bengie\b|\be\.on\b",
+     "delta":+18, "group":"boost", "reason":"Tier-1 strategic buyer named (utility/hyperscaler)"},
+    {"id":"buyer_mid",    "pattern": r"\bhyundai\b|\bsamsung\b|\bhanwha\b|\bshell\b|\bbp\b|\bvattenfal\b|\bsiemens\b|\babb\b",
+     "delta":+12, "group":"boost", "reason":"Major industrial/OEM buyer named"},
+    {"id":"buyer_kr",     "pattern": r"\bls electric\b|\bls일렉트릭\b|\bsk e&s\b|\bsk에코\b|\bposco\b|\bhyundai\b",
+     "delta":+10, "group":"boost", "reason":"Korean strategic buyer named"},
+
+    # ── BOOST: Concrete evidence ──────────────────────────────────────
+    {"id":"figure_money", "pattern": r"\$[\d,]+\s*[mb]|\$[\d,]+\s*million|\$[\d,]+\s*billion|€[\d,]+\s*[mb]|£[\d,]+\s*[mb]",
+     "delta":+15, "group":"boost", "reason":"Specific funding amount in text"},
+    {"id":"figure_mw",    "pattern": r"[\d,]+\s*mwh|[\d,]+\s*gwh|[\d,]+\s*mw\b|[\d,]+\s*gw\b",
+     "delta":+10, "group":"boost", "reason":"Specific capacity figure in text"},
+    {"id":"timeframe",    "pattern": r"q[1-4]\s*20[2-9]\d|by 20[2-9]\d|within \d+ month|by end of 20[2-9]",
+     "delta":+8,  "group":"boost", "reason":"Concrete timeframe stated"},
+    {"id":"geography",    "pattern": r"\bbusan\b|\bincheon\b|\bulsan\b|\broterdam\b|\bsingapore\b|\bhamburg\b|\baberdeen\b",
+     "delta":+5,  "group":"boost", "reason":"Specific project location named"},
+    {"id":"company_match","pattern": None,  # applied programmatically when company is matched
+     "delta":+10, "group":"boost", "reason":"Event matched to tracked company"},
+
+    # ── NOISE: Vague language ─────────────────────────────────────────
+    # These phrases signal intent without commitment — actionability is near zero
+    {"id":"n_vague_explore","pattern": r"\bexploring\b.*\bpartner|\blooking to\b.*\bpartner|\bin (early )?discussions\b|\bpotential (partner|collaborat|agreement)\b",
+     "delta":-35, "group":"noise", "reason":"Vague exploratory language — no binding commitment"},
+    {"id":"n_vague_aims",   "pattern": r"\baims to\b|\bseeks to\b|\bplans to\b|\bhopes to\b|\bexpects to\b|\bintends to\b",
+     "delta":-20, "group":"noise", "reason":"Forward-looking intent without confirmed action"},
+    {"id":"n_could_may",    "pattern": r"\bcould (become|reach|achieve|unlock)\b|\bmay (become|reach|achieve)\b|\bhas the potential\b",
+     "delta":-25, "group":"noise", "reason":"Speculative language — unconfirmed outcome"},
+
+    # ── NOISE: Generic PR / Marketing ────────────────────────────────
+    # These phrases appear in press releases, not operational updates
+    {"id":"n_proud",        "pattern": r"\bproud to (announce|partner|share|present)\b|\bexcited to (announce|share|partner)\b|\bpleased to announce\b|\bthrilled to\b",
+     "delta":-40, "group":"noise", "reason":"Generic PR announcement language"},
+    {"id":"n_vision",       "pattern": r"\bunveils? (vision|strategy|roadmap|plan)\b|\bsets? out (vision|strategy)\b|\bstrategic vision\b",
+     "delta":-30, "group":"noise", "reason":"Vision/strategy announcement without concrete action"},
+    {"id":"n_rebrand",      "pattern": r"\brebrands?\b|\bnew (logo|brand|name|website|identity)\b|\blaunch(es|ing)? (website|platform)\b",
+     "delta":-55, "group":"noise", "reason":"Rebranding/marketing — zero commercial signal"},
+
+    # ── NOISE: Vanity recognition ─────────────────────────────────────
+    {"id":"n_award",        "pattern": r"\bwins? (award|prize)\b|\brecognized as\b|\bnamed (a )?(top|leading|best)\b|\bgartner\b|\bfrost.*sullivan\b|\bbloomberg nef award\b",
+     "delta":-35, "group":"noise", "reason":"Industry award/recognition — not a commercial signal"},
+
+    # ── NOISE: Conference / Event appearances ─────────────────────────
+    # Being at a conference ≠ commercial progress
+    {"id":"n_conference",   "pattern": r"\bkeynote\b|\bspeaks? at\b|\bpanel (discussion|session)\b|\bwebinar\b|\battends? (conference|summit|forum)\b|\bpresents? at\b",
+     "delta":-30, "group":"noise", "reason":"Conference appearance — not a commercial event"},
+
+    # ── NOISE: Reports / Research ────────────────────────────────────
+    {"id":"n_report",       "pattern": r"\bpublishes? (report|study|whitepaper|analysis)\b|\bnew (report|research|analysis|study)\b|\baccording to (a |the )?(report|study|research)\b",
+     "delta":-25, "group":"noise", "reason":"Report/research publication — informational only"},
+
+    # ── VETO: Hard drop regardless of base score ──────────────────────
+    # If any of these match, signal is dropped even if event_type is high
+    {"id":"v_opinion",      "pattern": r"\bopinion:\b|\bcommentary:\b|\bop-ed\b|\banalysis:\b|\bviewpoint:\b",
+     "delta":-60, "group":"veto",  "reason":"Opinion/commentary — not a news event"},
+    {"id":"v_market_wrap",  "pattern": r"\bmarket (wrap|roundup|update|summary)\b|\bweekly (round-?up|digest)\b|\bmonthly (round-?up|digest)\b",
+     "delta":-60, "group":"veto",  "reason":"Market wrap/digest — not a single actionable signal"},
+    {"id":"v_job_generic",  "pattern": r"\bwe('re| are) hiring\b|\bjoin our team\b|\bopen (position|role)\b|\bcareer opportunit\b",
+     "delta":-50, "group":"veto",  "reason":"Generic hiring post — not a finance/BD hire signal"},
+]
+
+# Readable rulebook for UI transparency panel
+SCORE_RULEBOOK_DISPLAY = [
+    {"group":"KEPT (always)",     "color":"#16A34A", "items":[
+        "Negative signals → always surfaced regardless of score",
+        "Certification, Contract, Deployment → base score 85-90",
+        "Strategic pilot (utility/hyperscaler/shipyard) → base score 78",
+        "CFO / Head of Finance hire → base score 75",
+        "Financing round (Series A-E) → base score 80",
+    ]},
+    {"group":"BOOST (+points)",   "color":"#1A56DB", "items":[
+        "Tier-1 strategic buyer named (KEPCO, Microsoft, Google): +18",
+        "Major industrial/OEM named (Hyundai, Samsung, Shell): +12",
+        "Specific funding amount ($45M, €200M): +15",
+        "Specific capacity figure (500MWh, 2GW): +10",
+        "Concrete timeframe (Q3 2026, by end of 2026): +8",
+        "Event matched to tracked company: +10",
+    ]},
+    {"group":"NOISE (-points)",   "color":"#D97706", "items":[
+        "Vague exploratory language (exploring, in discussions, potential): -35",
+        "Forward-looking intent without confirmed action (aims to, plans to): -20",
+        "Generic PR language (proud to announce, excited to share): -40",
+        "Vision/strategy announcement (unveils strategy, roadmap): -30",
+        "Industry award/recognition (Gartner, wins award): -35",
+        "Conference/webinar appearance only: -30",
+        "Report/research publication: -25",
+    ]},
+    {"group":"VETO (always drop)","color":"#DC2626", "items":[
+        "Opinion/commentary article: -60",
+        "Market wrap / weekly digest: -60",
+        "Generic job posting (not finance/BD): -50",
+        "Rebranding / new logo / new website: -55",
+    ]},
+    {"group":"THRESHOLDS",        "color":"#6E6E6E", "items":[
+        "Score >= 60 → HIGH (shown in default feed)",
+        "Score 35-59 → MEDIUM (shown when Medium filter selected)",
+        "Score 20-34 → LOW (in DB, not shown in feed)",
+        "Score < 20  → DROPPED (logged in filteredOut, not in DB)",
+        "Negative signals exempt from threshold — always shown",
+    ]},
 ]
 
 # ══════════════════════════════════════════════════════════
@@ -325,18 +430,60 @@ def infer_segment(raw_text, source_segments):
     return source_segments[0] if source_segments else "unknown"
 
 def score(raw_text, base, is_matched):
-    s = base + (10 if is_matched else 0)
-    applied = []
-    for mod in SCORE_MODS:
-        if re.search(mod["pattern"], raw_text, re.I):
-            s += mod["delta"]
-            applied.append({"delta": mod["delta"], "reason": mod["reason"]})
+    """
+    Additive signal scoring engine.
+    Every point delta is explained and logged in score_breakdown.
+
+    Returns dict with:
+      signal_strength  : 0-100 final score
+      signal_tier      : high / medium / low / noise
+      score_breakdown  : list of {id, delta, reason} — full audit trail
+      is_noise         : True if score < SCORE_THRESHOLD_KEEP
+      drop_reason      : reason string if noise, else None
+    """
+    s        = base + (SCORE_RULES[8]["delta"] if is_matched else 0)  # company_match boost
+    breakdown = []
+
+    if is_matched:
+        breakdown.append({
+            "id":     "company_match",
+            "delta":  SCORE_RULES[8]["delta"],
+            "reason": SCORE_RULES[8]["reason"],
+            "group":  "boost",
+        })
+
+    for rule in SCORE_RULES:
+        if rule["id"] == "company_match":
+            continue  # already handled above
+        if rule["pattern"] is None:
+            continue
+        if re.search(rule["pattern"], raw_text, re.I):
+            s += rule["delta"]
+            breakdown.append({
+                "id":     rule["id"],
+                "delta":  rule["delta"],
+                "reason": rule["reason"],
+                "group":  rule["group"],
+            })
+
     final = max(0, min(100, round(s)))
+
+    if   final >= SCORE_THRESHOLD_HIGH:   tier = "high"
+    elif final >= SCORE_THRESHOLD_MEDIUM: tier = "medium"
+    elif final >= SCORE_THRESHOLD_KEEP:   tier = "low"
+    else:                                 tier = "noise"
+
+    # Drop reason = highest-magnitude penalty applied
+    penalties = [b for b in breakdown if b["delta"] < 0]
+    penalties.sort(key=lambda x: x["delta"])
+    drop_reason = penalties[0]["reason"] if penalties and tier == "noise" else None
+
     return {
-        "signal_strength": final,
-        "signal_tier": "high" if final >= 60 else "medium" if final >= 35 else "low",
-        "score_breakdown": applied,
-        "is_noise": final < 30,
+        "signal_strength":  final,
+        "signal_tier":      tier,
+        "score_breakdown":  breakdown,
+        "is_noise":         tier == "noise",
+        "drop_reason":      drop_reason,
     }
 
 def match_company(raw_text):
@@ -438,8 +585,7 @@ def normalize(raw_items):
         if not strength["is_noise"] or is_negative:
             kept.append(event)
         else:
-            penalty = next((m["reason"] for m in strength["score_breakdown"] if m["delta"] < 0), "score < 30")
-            filtered.append({**event, "drop_reason": penalty})
+            filtered.append({**event, "drop_reason": strength["drop_reason"] or "score below threshold"})
 
     kept.sort(key=lambda e: (-(e["signal_strength"]), e["event_date"]))
     print(f"  유지: {len(kept)}건 | 필터: {len(filtered)}건\n")
@@ -842,6 +988,7 @@ def main():
         "sources":      [s["name"] for s in RSS_SOURCES],
         "source_log":   source_log,
         "panels":       panels,
+        "score_rulebook": SCORE_RULEBOOK_DISPLAY,
         "reliability": {
             "sources_total":   len(source_log),
             "sources_ok":      sum(1 for s in source_log if s["status"]=="success"),
