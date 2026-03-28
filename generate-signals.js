@@ -1,599 +1,524 @@
-/**
- * Energy CVC Signal Generator v10 — Phase 1
- *
- * 핵심 개선:
- * 1. 에너지 섹터 전문 컨텍스트 50개 내장
- *    → AI가 에너지 도메인 지식을 가지고 분석
- * 2. 다중 소스 교차검증
- *    → 같은 회사가 여러 소스에서 등장 = 신뢰도 상승
- * 3. 기사 내 수치만 추출 (생성 절대 금지)
- *    → 추정값 제로
- * 4. 신뢰도 근거 명시
- *    → 왜 이 판단인지 출처 기반으로 설명
- */
+"""
+Energy CVC Signal Generator
+GitHub Actions에서 매일 실행 → data/latest.json 저장
 
-const https = require("https");
-const fs    = require("fs");
-const path  = require("path");
+필요한 패키지: feedparser (pip install feedparser)
+stdlib만 사용 (requests 불필요)
+"""
 
-const CLAUDE_KEY = process.env.ANTHROPIC_API_KEY;
-const NEWS_KEY   = process.env.NEWS_API_KEY;
-const DART_KEY   = process.env.DART_API_KEY;
+import re
+import json
+import hashlib
+import urllib.request
+import urllib.error
+from datetime import datetime, timezone
+from pathlib import Path
 
-if (!CLAUDE_KEY) { console.error("ANTHROPIC_API_KEY 없음"); process.exit(1); }
-if (!NEWS_KEY)   { console.error("NEWS_API_KEY 없음"); process.exit(1); }
+try:
+    import feedparser
+    HAS_FEEDPARSER = True
+except ImportError:
+    HAS_FEEDPARSER = False
+    print("⚠ feedparser 없음 — 시뮬레이션 모드로 실행")
 
-const TODAY    = new Date().toISOString().slice(0, 10);
-const TODAY_KR = new Date().toLocaleDateString("ko-KR", {
-  timeZone:"Asia/Seoul", year:"numeric", month:"long", day:"numeric", weekday:"long"
-});
-const MONTH_AGO = new Date(Date.now() - 28*86400000).toISOString().slice(0,10);
+import os
+ANTHROPIC_KEY = os.environ.get("ANTHROPIC_API_KEY", "")
 
-function delay(ms) { return new Promise(r => setTimeout(r, ms)); }
+TODAY    = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+TODAY_KR = datetime.now(timezone.utc).strftime("%Y년 %m월 %d일")
 
-// ══════════════════════════════════════════════════════════
-// 에너지 섹터 전문 컨텍스트 (핵심)
-// 이것이 일반 AI와 차별화되는 부분
-// 에너지 CVC 심사역 수년 경험에서 나온 패턴
-// ══════════════════════════════════════════════════════════
-const ENERGY_CONTEXT = `
-=== 에너지 CVC 도메인 전문 지식 (분석 시 반드시 적용) ===
+# ══════════════════════════════════════════════════════════
+# 1. RSS 소스 목록
+# ══════════════════════════════════════════════════════════
 
-【인증/규제 맥락】
-- DNV GL 클래스 승인 (선박 FC): 선박 연료전지의 가장 큰 기술 허들 제거. 이후 조선사 계약 가능. 시리즈B 가능성 높음
-- TÜV 형식 승인 (HVDC 부품): OEM 공급망 진입 자격. Prysmian·Nexans 같은 Tier-1과 계약 선행 조건
-- ATEX Zone 1 인증 (수소): 항만·플랜트 설치 허가 전제 조건. 인증 취득 = 파일럿 계약 임박 신호
-- KPX 인터페이스 인증 (VPP): 한국 전력시장 DR·보조서비스 수익 창출 자격. 매출 가시화의 핵심
-- ADEME 인증 (프랑스): 프랑스 공공조달·보조금 접근 자격. 유럽 시장 진출의 첫 관문
-- ISO 9001 (제조): 대기업 공급망 진입 요건. 취득 후 OEM 계약 속도 빨라짐
+RSS_SOURCES = [
+    {"id":"utilitydive",      "name":"Utility Dive",       "url":"https://www.utilitydive.com/feeds/news/",        "segments":["grid_sw","ess","dc_power"]},
+    {"id":"pvmagazine",       "name":"PV Magazine",         "url":"https://www.pv-magazine.com/feed/",              "segments":["ess","hydrogen","forecasting"]},
+    {"id":"rechargenews",     "name":"Recharge News",       "url":"https://www.rechargenews.com/feed",              "segments":["ess","marine_fc","hvdc"]},
+    {"id":"hydrogeninsight",  "name":"Hydrogen Insight",    "url":"https://www.hydrogeninsight.com/feed",           "segments":["hydrogen","marine_fc"]},
+    {"id":"energystoragenews","name":"Energy Storage News", "url":"https://www.energy-storage.news/feed/",          "segments":["ess"]},
+    {"id":"offshorewind",     "name":"Offshore Wind Biz",   "url":"https://www.offshorewind.biz/feed/",             "segments":["hvdc","ess"]},
+]
 
-【파트너십 맥락】
-- Tier-1 조선사(HD한국조선해양·삼성중공업·한화오션) + 스타트업: 기술 검증 + 향후 M&A 또는 전략투자 신호
-- KEPCO/한전 계약: 한국 ESS·VPP 시장에서 사실상 '레퍼런스 고객'. 이후 민간 계약 가속
-- 하이퍼스케일러(MS Azure·Google·AWS) 파일럿: DC전력 스타트업의 가장 강력한 상업화 신호. Series B 직전 패턴
-- 유럽 유틸리티(E.ON·Engie·Vattenfall) MOU: 유럽 VPP 시장 진입 관문. 계약 전환율 높음
-- 포트 오브 로테르담 LOI: 수소 벙커링 스타트업의 최고 레퍼런스. EU 자금 연계 가능성
+# ══════════════════════════════════════════════════════════
+# 2. 추적 기업 목록 (alias = 키워드 매칭)
+# ══════════════════════════════════════════════════════════
 
-【팀/채용 맥락】
-- CFO 채용 (시리즈B 이상 경험): 투자 라운드 준비의 가장 강력한 선행 신호. 공고 후 3-6개월 패턴
-- Head of Business Development 채용: 파트너십/계약 파이프라인 구축 단계. 상업화 가속 신호
-- VP Sales (특정 지역) 채용: 해당 시장 진출 결정 완료를 의미. 기존 계약이 있을 가능성
-- 연속 다수 채용 (3개월 내 5명+): 최근 라운드 클로즈 또는 대형 계약 체결 후 패턴
+COMPANIES = [
+    {"id":"c_gridwiz",    "name":"그리드위즈",     "aliases":["gridwiz","grid wiz"],          "sector":"grid_sw",  "country":"KR","stage":"commercial","type":"Strategic/CVC"},
+    {"id":"c_sixtyhertz", "name":"식스티헤르츠",   "aliases":["sixty hertz","60hz","sixtyhertz"],"sector":"grid_sw","country":"KR","stage":"commercial","type":"VC"},
+    {"id":"c_vincen",     "name":"빈센",           "aliases":["vincen","vinsen"],             "sector":"marine_fc","country":"KR","stage":"pilot",     "type":"Strategic/CVC"},
+    {"id":"c_standard_e", "name":"스탠다드에너지", "aliases":["standard energy"],             "sector":"ess",      "country":"KR","stage":"pilot",     "type":"Strategic/CVC"},
+    {"id":"c_hylium",     "name":"하이리움산업",   "aliases":["hylium","하이리움"],           "sector":"hydrogen", "country":"KR","stage":"demo",      "type":"Strategic/CVC"},
+    {"id":"c_cs_energy",  "name":"씨에스에너지",   "aliases":["cs energy","씨에스에너지"],    "sector":"ess",      "country":"KR","stage":"commercial","type":"Strategic/CVC"},
+    {"id":"c_form_energy","name":"Form Energy",    "aliases":["form energy","formenergy"],    "sector":"ess",      "country":"US","stage":"commercial","type":"Infrastructure/PF"},
+    {"id":"c_autogrid",   "name":"AutoGrid",       "aliases":["autogrid","auto grid"],        "sector":"grid_sw",  "country":"US","stage":"scaling",   "type":"Growth"},
+    {"id":"c_sunfire",    "name":"Sunfire",         "aliases":["sunfire"],                    "sector":"hydrogen", "country":"DE","stage":"commercial","type":"Infrastructure/PF"},
+    {"id":"c_amogy",      "name":"Amogy",           "aliases":["amogy"],                      "sector":"marine_fc","country":"US","stage":"pilot",     "type":"Strategic/CVC"},
+    {"id":"c_hysata",     "name":"Hysata",          "aliases":["hysata"],                     "sector":"hydrogen", "country":"AU","stage":"pilot",     "type":"Strategic/CVC"},
+    {"id":"c_ceres",      "name":"Ceres Power",     "aliases":["ceres power","ceres"],        "sector":"marine_fc","country":"UK","stage":"commercial","type":"Strategic/CVC"},
+    {"id":"c_invinity",   "name":"Invinity Energy", "aliases":["invinity"],                   "sector":"ess",      "country":"UK","stage":"commercial","type":"Growth"},
+]
 
-【자금조달 맥락】
-- EU Horizon/Backbone 그랜트: 비희석성 자금 + EU 공식 검증. 향후 유럽 민간 투자 유치에 유리
-- DOE 클린에너지 그랜트: 미국 시장 진출의 신뢰도 도장. Series B 동반 유치 패턴
-- MOTIE/한국에너지공단 실증: 국내 정부 검증 + 한전·KEPCO 계약 경로. 보조금 이후 민간 투자 패턴
-- 전환사채(CB) 발행: 에쿼티 라운드 전 브릿지. 6-18개월 내 정식 라운드 패턴
-- 유상증자: 기존 투자자 참여 여부가 핵심. 기존 참여 = 내부 검증 완료 신호
+# ══════════════════════════════════════════════════════════
+# 3. 이벤트 분류 규칙 (Tier 1~4, 룰 기반)
+# ══════════════════════════════════════════════════════════
 
-【기술 성숙도(TRL) 판단 기준】
-- TRL 4-5: 실험실 검증. 파일럿 자금 단계. Series A 이전
-- TRL 6-7: 실제 환경 파일럿. 첫 상업 계약 가능. Series A~B
-- TRL 8:   상업 규모 시연. 인증 취득. Series B~C
-- TRL 9:   상업 배포. 레퍼런스 고객 보유. Series C 이후
+EVENT_RULES = [
+    # Tier 1 — 구체적 상업/기술 액션
+    {"kws":["class approval","dnv gl","dnv certified","kpx certified","atex certified"],    "type":"Certification","impact":"Commercial",    "score":85,"tier":1},
+    {"kws":["commercial contract","offtake agreement","supply agreement","signed contract"],"type":"Contract",     "impact":"Commercial",    "score":90,"tier":1},
+    {"kws":["commissioned","operational","goes live","first delivery","deployed at"],      "type":"Deployment",   "impact":"Commercial",    "score":85,"tier":1},
+    # Tier 2 — 검증된 진전
+    {"kws":["utility pilot","hyperscaler pilot","shipyard pilot","kepco pilot"],           "type":"Pilot",        "impact":"Technical",     "score":78,"tier":2},
+    {"kws":["pilot project","pilot program","field trial","demonstration project"],        "type":"Pilot",        "impact":"Technical",     "score":60,"tier":2},
+    {"kws":["series a","series b","series c","series d","raised $","raised €","funding round"],"type":"Financing","impact":"Financing",   "score":80,"tier":2},
+    {"kws":["cfo","chief financial officer","vp finance","head of finance"],               "type":"Hiring",       "impact":"Funding Signal","score":75,"tier":2},
+    {"kws":["vp sales","vp business development","head of business development"],          "type":"Hiring",       "impact":"Commercial",    "score":65,"tier":2},
+    # Tier 3 — 방향성 신호
+    {"kws":["strategic partnership","mou signed","joint development","framework agreement"],"type":"Partnership", "impact":"Commercial",    "score":55,"tier":3},
+    {"kws":["partnership","mou","collaboration","memorandum"],                             "type":"Partnership",  "impact":"Commercial",    "score":35,"tier":3},
+    {"kws":["doe grant","eu grant","government grant","awarded grant","horizon grant"],    "type":"Grant",        "impact":"Policy",        "score":45,"tier":3},
+    {"kws":["gigafactory","manufacturing plant","scale-up","opens facility"],              "type":"Expansion",    "impact":"Commercial",    "score":70,"tier":3},
+    # Tier 4 — 네거티브 (항상 포함)
+    {"kws":["delay","postponed","behind schedule","timeline slips"],                       "type":"Negative",     "impact":"Risk",          "score":0, "tier":4},
+    {"kws":["funding shortfall","cost overrun","supply chain issue","struggles to raise"], "type":"Negative",     "impact":"Risk",          "score":0, "tier":4},
+]
 
-【섹터별 핵심 투자 기준】
-- 장주기 ESS: LCOS(균등화 저장비용) $/kWh 목표 달성 여부. 그리드 계약 or 유틸리티 계약 필수
-- 선박 연료전지: DNV 인증 + 조선사 파트너십 + 첫 수주. 규제 타임라인(IMO 2030)이 TAM 결정
-- VPP/그리드SW: 유틸리티 상업 계약 건수. 규제 시장(KPX, FERC, Ofgem) 인증이 수익 모델 핵심
-- 수소 전해조: 스택 효율(kWh/kg) + 수명(시간). Tier-1 EPC 또는 에너지 메이저 파트너십
-- HVDC 부품: TÜV 인증 + OEM 공급망 진입. 유럽 해상풍력 프로젝트 파이프라인 연동
-
-【중국 시장 맥락】
-- 중국 ESS 의무설치 → 글로벌 공급과잉 리스크. 국내 스타트업 차별화 포인트 필수 확인
-- 중국 전해조 가격 급락 → 수소 스타트업 비용 경쟁력 압박. 기술 차별화가 생존 조건
-- 중국 VPP 정책 확대 → 국내 그리드 SW 수출 기회. 현지화 역량이 관건
-`;
-
-// ══════════════════════════════════════════════════════════
-// 뉴스 수집
-// ══════════════════════════════════════════════════════════
-const NEWS_QUERIES = [
-  { q:"Korea energy storage ESS battery startup investment funding",  tag:"kr_ess",   label:"국내 ESS" },
-  { q:"Korea hydrogen fuel cell startup partnership funding",          tag:"kr_h2",    label:"국내 수소" },
-  { q:"Korea VPP virtual power plant grid Gridwiz startup",           tag:"kr_grid",  label:"국내 그리드" },
-  { q:"Korea marine fuel cell ship decarbonization startup",          tag:"kr_ship",  label:"국내 선박" },
-  { q:"energy storage long duration startup funding Series 2025",     tag:"g_ess",    label:"글로벌 ESS" },
-  { q:"green hydrogen electrolyzer startup funding deal 2025",        tag:"g_h2",     label:"글로벌 수소" },
-  { q:"virtual power plant VPP grid software startup contract",       tag:"g_grid",   label:"글로벌 그리드" },
-  { q:"marine shipping decarbonization fuel cell ammonia startup",    tag:"g_marine", label:"글로벌 선박" },
-  { q:"HVDC offshore wind cable transmission startup investment",     tag:"g_hvdc",   label:"글로벌 HVDC" },
-  { q:"small modular reactor SMR nuclear startup investment 2025",    tag:"g_smr",    label:"글로벌 SMR" },
-  { q:"data center power electronics startup hyperscaler 2025",       tag:"g_dc",     label:"글로벌 DC전력" },
-  { q:"China energy storage startup investment CATL ecosystem 2025",  tag:"cn_ess",   label:"중국 ESS" },
-  { q:"China hydrogen electrolyzer green hydrogen startup 2025",      tag:"cn_h2",    label:"중국 수소" },
-];
-
-function fetchNews(query, pageSize=8) {
-  return new Promise((resolve, reject) => {
-    const params = new URLSearchParams({
-      q:query, language:"en", sortBy:"publishedAt",
-      pageSize:String(pageSize), from:MONTH_AGO, apiKey:NEWS_KEY,
-    });
-    const req = https.request({
-      hostname:"newsapi.org", path:`/v2/everything?${params}`,
-      method:"GET", headers:{"User-Agent":"EnergyCVC/1.0"},
-    }, res=>{
-      let d=""; res.on("data",c=>d+=c);
-      res.on("end",()=>{
-        try{const p=JSON.parse(d);if(p.status!=="ok"){reject(new Error(p.message));return;}resolve(p.articles||[]);}
-        catch(e){reject(e);}
-      });
-    });
-    req.on("error",reject);
-    req.setTimeout(15000,()=>{req.destroy();reject(new Error("Timeout"));});
-    req.end();
-  });
+SEGMENT_KWS = {
+    "ess":         ["battery","energy storage","ess","vanadium","iron-air","flow battery"],
+    "marine_fc":   ["marine","vessel","ship","fuel cell","dnv","amogy"],
+    "grid_sw":     ["vpp","virtual power","demand response","grid software","kepco"],
+    "hvdc":        ["hvdc","transmission","cable","offshore wind"],
+    "hydrogen":    ["hydrogen","electrolyzer","h2","liquid hydrogen","green hydrogen"],
+    "dc_power":    ["data center","hyperscaler","azure","aws","power electronics"],
+    "forecasting": ["forecast","prediction","renewable forecast"],
 }
 
-async function collectNews() {
-  console.log("① NewsAPI 수집...");
-  const all=[];
-  for(const q of NEWS_QUERIES){
-    try{
-      const arts=await fetchNews(q.q,6);
-      const valid=arts.filter(a=>a.title&&a.title!=="[Removed]"&&a.url&&a.description);
-      all.push(...valid.map(a=>({...a, tag:q.tag, label:q.label})));
-      console.log(`  [${q.label}] ${valid.length}건`);
-    }catch(e){console.error(`  [${q.label}] 실패: ${e.message}`);}
-    await delay(120);
-  }
-  const seen=new Set();
-  return all.filter(a=>{if(seen.has(a.url))return false;seen.add(a.url);return true;});
-}
+# ══════════════════════════════════════════════════════════
+# 4. 시그널 스코어 수정자
+# ══════════════════════════════════════════════════════════
 
-// ══════════════════════════════════════════════════════════
-// DART 수집
-// ══════════════════════════════════════════════════════════
-async function collectDART() {
-  if(!DART_KEY){console.log("  DART 없음");return[];}
-  console.log("② DART 수집...");
-  const keywords=["수소","배터리","ESS","연료전지","태양광","풍력","에너지저장","VPP","스마트그리드"];
-  const bgn=new Date(Date.now()-30*86400000).toISOString().slice(0,10).replace(/-/g,"");
-  const end=TODAY.replace(/-/g,"");
-  const all=[];
-  for(const kw of keywords){
-    await new Promise((res)=>{
-      const params=new URLSearchParams({crtfc_key:DART_KEY,corp_name:kw,bgn_de:bgn,end_de:end,pblntf_ty:"A",page_count:"5"});
-      const req=https.request({hostname:"opendart.fss.or.kr",path:`/api/list.json?${params}`,method:"GET"},r=>{
-        let d="";r.on("data",c=>d+=c);r.on("end",()=>{
-          try{const p=JSON.parse(d);if(p.status==="000"&&p.list)all.push(...p.list.slice(0,3).map(item=>({
-            id:`dart-${item.rcept_no}`, tag:"kr_dart", label:"DART 공시",
-            title:item.report_nm, company:item.corp_name,
-            source:"DART 전자공시",
-            publishedAt:`${item.rcept_dt.slice(0,4)}-${item.rcept_dt.slice(4,6)}-${item.rcept_dt.slice(6,8)}`,
-            url:`https://dart.fss.or.kr/dsaf001/main.do?rcpNo=${item.rcept_no}`,
-            description:`${item.corp_name} — ${item.report_nm}. 제출: ${item.flr_nm}`,
-            isDart:true,
-          })));}catch{}res();
-        });
-      });
-      req.on("error",res);req.setTimeout(8000,()=>{req.destroy();res();});req.end();
-    });
-    await delay(200);
-  }
-  const seen=new Set();
-  const result=all.filter(a=>{if(seen.has(a.id))return false;seen.add(a.id);return true;});
-  console.log(`  DART: ${result.length}건`);
-  return result;
-}
+SCORE_MODS = [
+    # 가산
+    {"pattern": r"kepco|microsoft|google|amazon|engie|e\.on|hyundai|samsung|hanwha|shell", "delta":+15, "reason":"Named strategic buyer"},
+    {"pattern": r"\$[\d,]+[mb]|€[\d,]+[mb]|£[\d,]+[mb]|[\d,]+mwh|[\d,]+gw\b",           "delta":+12, "reason":"Concrete figure"},
+    {"pattern": r"q[1-4] 20[2-9]\d|by 202\d|within \d+ month",                           "delta":+8,  "reason":"Concrete timeframe"},
+    {"pattern": r"south korea|germany|singapore|rotterdam|busan|incheon",                  "delta":+5,  "reason":"Specific geography"},
+    # 감산 (노이즈)
+    {"pattern": r"proud to announce|excited to share|pleased to announce",                 "delta":-40, "reason":"Generic PR"},
+    {"pattern": r"exploring|in discussions|looking to partner|potential.*partner",         "delta":-45, "reason":"Vague language"},
+    {"pattern": r"wins award|recognized as|named.*leader|gartner|frost.*sullivan",         "delta":-35, "reason":"Vanity award"},
+    {"pattern": r"keynote|speaks at|panel discussion|webinar|attends.*conference",         "delta":-30, "reason":"Conference only"},
+    {"pattern": r"publishes report|whitepaper|new study|research finds",                   "delta":-25, "reason":"Report only"},
+    {"pattern": r"rebrands|new logo|launches website|new website",                         "delta":-50, "reason":"Rebranding"},
+]
 
-// ══════════════════════════════════════════════════════════
-// 다중 소스 교차검증
-// ══════════════════════════════════════════════════════════
-function crossValidate(newsArticles, dartItems) {
-  // 회사명 기준으로 소스 개수 계산
-  const companySourceMap = {};
+# ══════════════════════════════════════════════════════════
+# STEP 1: RSS 수집
+# ══════════════════════════════════════════════════════════
 
-  const extractCompanyNames = (text) => {
-    // 주요 에너지 스타트업 키워드 매칭
-    const KR_COMPANIES = [
-      "그리드위즈","GridWiz","식스티헤르츠","60Hz","에너지에이아이",
-      "하이리움","Hylium","에스퓨얼셀","S-Fuelcell","범한퓨얼셀",
-      "스탠다드에너지","Standard Energy","씨에스에너지","하나기술",
-      "빈센","Vincen","파나시아","Panasia","두산퓨얼셀","Doosan Fuel Cell",
-      "LS일렉트릭","LS Electric","효성중공업","HD한국조선해양","한화오션",
-    ];
-    const GLOBAL_COMPANIES = [
-      "Form Energy","Ambri","Hydrostor","ESS Inc","Invinity",
-      "Sunfire","Hysata","Electric Hydrogen","H2Pro","Nel ",
-      "AutoGrid","Voltus","Upside Energy","Sympower","Leap Energy",
-      "Ceres Power","CMB.TECH","Ballard","Freudenberg",
-      "Oklo","Kairos Power","Commonwealth Fusion",
-    ];
-    const all = [...KR_COMPANIES, ...GLOBAL_COMPANIES];
-    const found = [];
-    const t = text.toLowerCase();
-    all.forEach(c => { if(t.includes(c.toLowerCase())) found.push(c); });
-    return found;
-  };
+def fetch_sources():
+    print("① RSS 수집 중...")
+    raw = []
 
-  // 뉴스에서 회사 등장 횟수 집계
-  newsArticles.forEach(a => {
-    const companies = extractCompanyNames((a.title||"")+" "+(a.description||""));
-    companies.forEach(c => {
-      if(!companySourceMap[c]) companySourceMap[c] = { news:0, dart:0, tags:new Set() };
-      companySourceMap[c].news++;
-      companySourceMap[c].tags.add(a.tag);
-    });
-  });
+    if not HAS_FEEDPARSER:
+        print("  feedparser 없음 — 빈 결과 반환")
+        return raw
 
-  // DART 공시에서 회사 등장 횟수 집계
-  dartItems.forEach(d => {
-    if(!companySourceMap[d.company]) companySourceMap[d.company] = { news:0, dart:0, tags:new Set() };
-    companySourceMap[d.company].dart++;
-    companySourceMap[d.company].tags.add("kr_dart");
-  });
+    for src in RSS_SOURCES:
+        try:
+            feed = feedparser.parse(src["url"])
+            count = 0
+            for entry in feed.entries[:20]:
+                title   = getattr(entry, "title", "")
+                summary = getattr(entry, "summary", "")[:500]
+                link    = getattr(entry, "link", "")
+                date    = _parse_date(entry)
 
-  return companySourceMap;
-}
+                if not title or title == "[Removed]":
+                    continue
 
-// ══════════════════════════════════════════════════════════
-// Claude API
-// ══════════════════════════════════════════════════════════
-function callClaude(system, user) {
-  return new Promise((resolve, reject) => {
-    const body = JSON.stringify({
-      model:"claude-sonnet-4-20250514",
-      max_tokens:3000,
-      system, messages:[{role:"user",content:user}],
-    });
-    const req = https.request({
-      hostname:"api.anthropic.com", path:"/v1/messages", method:"POST",
-      headers:{
-        "Content-Type":"application/json","x-api-key":CLAUDE_KEY,
-        "anthropic-version":"2023-06-01","Content-Length":Buffer.byteLength(body),
-      },
-    }, res=>{
-      let d="";res.on("data",c=>d+=c);
-      res.on("end",()=>{
-        try{const p=JSON.parse(d);if(p.error){reject(new Error(p.error.message));return;}
-        resolve((p.content||[]).filter(b=>b.type==="text").map(b=>b.text).join("\n"));}
-        catch(e){reject(e);}
-      });
-    });
-    req.on("error",reject);
-    req.setTimeout(90000,()=>{req.destroy();reject(new Error("Timeout"));});
-    req.write(body);req.end();
-  });
-}
+                raw.append({
+                    "source_id":       src["id"],
+                    "source_name":     src["name"],
+                    "source_url":      link,
+                    "source_segments": src["segments"],
+                    "title":           title,
+                    "summary":         summary,
+                    "published_date":  date,
+                    "raw_text":        (title + " " + summary).lower(),
+                })
+                count += 1
+            print(f"  ✓ {src['name']}: {count}건")
+        except Exception as e:
+            print(f"  ✗ {src['name']}: {e}")
 
-function safeJSON(text) {
-  const clean=text.replace(/```json|```/g,"").trim();
-  let d=0,s=-1,e=-1;
-  for(let i=0;i<clean.length;i++){
-    if(clean[i]==="["&&d===0){s=i;d++;}
-    else if(clean[i]==="[")d++;
-    else if(clean[i]==="]"){d--;if(d===0&&s!==-1){e=i;break;}}
-  }
-  if(s!==-1&&e!==-1){
-    const sl=clean.slice(s,e+1);
-    try{return JSON.parse(sl);}catch{}
-    try{return JSON.parse(sl.replace(/,(\s*[}\]])/g,"$1"));}catch{}
-    const objs=[];let od=0,os=-1;
-    for(let i=0;i<sl.length;i++){
-      if(sl[i]==="{"){if(od===0)os=i;od++;}
-      else if(sl[i]==="}"){ od--;if(od===0&&os!==-1){try{objs.push(JSON.parse(sl.slice(os,i+1)));}catch{}os=-1;}}
-    }
-    if(objs.length>0)return objs;
-  }
-  throw new Error("JSON 없음");
-}
+    print(f"  총 {len(raw)}건 수집\n")
+    return raw
 
-// ══════════════════════════════════════════════════════════
-// 핵심: 에너지 전문 컨텍스트 기반 분석
-// 수치 생성 금지 / 기사 내 수치만 추출
-// ══════════════════════════════════════════════════════════
-async function analyzeWithContext(articles, crossValidationMap) {
-  const list = articles.map((a,i) => {
-    // 교차검증 정보 추가
-    const coNames = Object.keys(crossValidationMap).filter(c =>
-      (a.title+" "+a.description||"").toLowerCase().includes(c.toLowerCase())
-    );
-    const cvInfo = coNames.length > 0
-      ? coNames.map(c => {
-          const cv = crossValidationMap[c];
-          return `${c}: 뉴스${cv.news}건+DART${cv.dart}건 (${[...cv.tags].join(",")})`;
-        }).join("; ")
-      : "단일소스";
+def _parse_date(entry):
+    try:
+        t = entry.get("published_parsed") or entry.get("updated_parsed")
+        if t:
+            return f"{t.tm_year:04d}-{t.tm_mon:02d}-{t.tm_mday:02d}"
+    except Exception:
+        pass
+    return TODAY
 
-    return [
-      `${i+1}. [${a.label}] ${a.source?.name||a.source||"Unknown"} (${(a.publishedAt||"").slice(0,10)})`,
-      `제목: ${a.title}`,
-      `내용: ${(a.description||"").slice(0,250)}`,
-      `교차검증: ${cvInfo}`,
-    ].join("\n");
-  }).join("\n\n");
+# ══════════════════════════════════════════════════════════
+# STEP 2: 분류 + 스코어링
+# ══════════════════════════════════════════════════════════
 
-  const system = `당신은 에너지 인프라 전문 CVC 펀드의 시니어 심사역입니다.
-아래 에너지 도메인 전문 지식을 분석에 반드시 적용하세요:
+def classify(raw_text):
+    for rule in EVENT_RULES:
+        for kw in rule["kws"]:
+            if kw in raw_text:
+                return {"type": rule["type"], "impact": rule["impact"],
+                        "base_score": rule["score"], "tier": rule["tier"], "matched": kw}
+    return {"type":"News", "impact":"Informational", "base_score":15, "tier":5, "matched":None}
 
-${ENERGY_CONTEXT}
+def infer_segment(raw_text, source_segments):
+    for seg, kws in SEGMENT_KWS.items():
+        if any(kw in raw_text for kw in kws):
+            return seg
+    return source_segments[0] if source_segments else "unknown"
 
-절대 규칙:
-1. 기사에 명시되지 않은 수치(밸류에이션, 투자금액, 점수)를 절대 생성하지 마세요
-2. 기사 본문에 있는 수치는 반드시 출처와 함께 인용하세요 (예: "Reuters 보도에 따르면 $45M")
-3. 불확실하면 "기사 원문 확인 필요"라고 명시하세요
-4. 위 도메인 지식을 적용해 왜 이 신호가 중요한지 에너지 맥락에서 설명하세요
-5. JSON 배열만 반환하세요`;
-
-  const user = `아래 ${articles.length}건의 실제 에너지 뉴스를 에너지 CVC 전문가 관점에서 분석하세요.
-교차검증 정보가 포함되어 있습니다 (여러 소스에서 등장할수록 신뢰도 높음).
-
-${list}
-
-JSON 배열 ${articles.length}개:
-[{
-  "idx": 1,
-  "company": "기사에서 언급된 실제 회사명 (없으면 null)",
-  "companyType": "unlisted_startup|listed_corp|ecosystem|unknown",
-  "eventType": "Financing|Partnership|Certification|Pilot|Expansion|Grant|Hiring|News",
-
-  "extracted_facts": {
-    "amount": "기사에 명시된 금액 (없으면 null, 절대 추정하지 말 것)",
-    "round": "기사에 명시된 라운드 (없으면 null)",
-    "partner": "기사에 명시된 파트너사 (없으면 null)",
-    "date": "기사에 명시된 날짜 (없으면 null)"
-  },
-
-  "domain_insight": "에너지 도메인 전문 지식 적용한 2-3문장 인사이트 (위 도메인 지식 활용)",
-  "why_now": "왜 지금 이 시점에 중요한지 (규제·시장 타이밍 맥락)",
-  "signal_quality": "High|Medium|Low",
-  "signal_quality_reason": "왜 이 quality인지 — 교차검증 결과와 도메인 지식 기반으로",
-  "next_action": "Investigate|Monitor|Note|Skip",
-  "next_action_reason": "왜 이 액션인지",
-  "risk": "에너지 도메인 관점의 핵심 리스크",
-  "cross_validation_score": "single|double|triple_plus (소스 수 기반)"
-}]
-
-JSON만 반환.`;
-
-  const text = await callClaude(system, user);
-  return safeJSON(text);
-}
-
-// ══════════════════════════════════════════════════════════
-// 신호 조합 (팩트 + 도메인 분석)
-// ══════════════════════════════════════════════════════════
-function buildSignal(article, analysis, crossValidationMap) {
-  const a = analysis || {};
-
-  // 교차검증 점수 계산
-  const coNames = Object.keys(crossValidationMap).filter(c =>
-    ((article.title||"")+" "+(article.description||"")).toLowerCase().includes(c.toLowerCase())
-  );
-  const cvData = coNames.length > 0 ? crossValidationMap[coNames[0]] : null;
-  const sourceCount = cvData ? cvData.news + cvData.dart : 1;
-  const cvScore = sourceCount >= 3 ? "triple_plus" : sourceCount === 2 ? "double" : "single";
-  const cvTrust = sourceCount >= 3 ? "High" : sourceCount === 2 ? "Medium" : "Low";
-
-  return {
-    id:        `${article.tag}-${Date.now()}-${Math.random().toString(36).slice(2,6)}`,
-    tag:       article.tag,
-    label:     article.label,
-    region:    article.tag.startsWith("kr_")?"KR":article.tag.startsWith("cn_")?"CN":"GLOBAL",
-    isKorean:  article.tag.startsWith("kr_"),
-    isChina:   article.tag.startsWith("cn_"),
-    isDart:    !!article.isDart,
-
-    // ── 100% 팩트 필드 ────────────────────────────────
-    title:     article.title,
-    url:       article.url,
-    source:    article.source?.name || article.source || "Unknown",
-    pubDate:   (article.publishedAt||"").slice(0,10),
-    summary:   (article.description||"").slice(0,350),
-
-    // ── 기사에서 추출한 수치 (생성값 아님) ──────────────
-    extracted_facts: a.extracted_facts || { amount:null, round:null, partner:null, date:null },
-
-    // ── 에너지 도메인 분석 ─────────────────────────────
-    company:           a.company || null,
-    companyType:       a.companyType || "unknown",
-    eventType:         a.eventType || "News",
-    domain_insight:    a.domain_insight || "",
-    why_now:           a.why_now || "",
-    signal_quality:    a.signal_quality || "Low",
-    signal_quality_reason: a.signal_quality_reason || "",
-    next_action:       a.next_action || "Monitor",
-    next_action_reason:a.next_action_reason || "",
-    risk:              a.risk || null,
-
-    // ── 교차검증 결과 ──────────────────────────────────
-    cross_validation: {
-      score:       a.cross_validation_score || cvScore,
-      sourceCount: sourceCount,
-      trustLevel:  cvTrust,
-      sources:     cvData ? [...cvData.tags] : [article.tag],
-    },
-
-    // ── 신뢰도 메타 ────────────────────────────────────
-    trust:       "FACT",
-    analysisTrust: sourceCount >= 2 ? "HIGH_CONFIDENCE" : "STANDARD",
-    generatedAt: TODAY,
-  };
-}
-
-// ══════════════════════════════════════════════════════════
-// 브리핑 (도메인 지식 + 팩트 기반)
-// ══════════════════════════════════════════════════════════
-async function generateBrief(signals) {
-  const highItems = signals
-    .filter(s => s.signal_quality==="High")
-    .slice(0,8)
-    .map(s => {
-      const cv = s.cross_validation;
-      const facts = s.extracted_facts;
-      const factStr = [
-        facts.amount ? `금액:${facts.amount}` : null,
-        facts.round  ? `라운드:${facts.round}` : null,
-        facts.partner? `파트너:${facts.partner}` : null,
-      ].filter(Boolean).join(", ");
-      return `- [${s.label}][${cv.score}소스] "${s.title}" (${s.source}, ${s.pubDate})${factStr?` [${factStr}]`:""}`;
-    }).join("\n");
-
-  const system = `에너지 CVC 시니어 심사역. 아래 도메인 지식 활용:
-${ENERGY_CONTEXT}
-
-규칙: 기사에 없는 수치 생성 금지. 인용 시 출처 명시. 도메인 지식으로 맥락 설명.`;
-
-  const user = `오늘(${TODAY_KR}) CVC 투자 브리핑 5문장.
-
-실제 기사 목록 (교차검증 포함):
-${highItems}
-
-작성 기준:
-- 교차검증된 신호(double/triple) 우선 언급
-- 에너지 도메인 맥락 적용 (단순 요약 금지)
-- 기사에 있는 수치만 인용, 출처 명시
-- 규제/타이밍 맥락 포함
-- "왜 지금인가" 관점 포함`;
-
-  return callClaude(system, user);
-}
-
-// ══════════════════════════════════════════════════════════
-// 메인
-// ══════════════════════════════════════════════════════════
-async function main() {
-  console.log(`\n🚀 Energy CVC Signal Generator v10 — Phase 1`);
-  console.log(`날짜: ${TODAY_KR}`);
-  console.log(`개선: 에너지 전문 컨텍스트 + 다중소스 교차검증 + 수치 추출만\n`);
-
-  const dataDir = path.join(__dirname,"data");
-  if(!fs.existsSync(dataDir))fs.mkdirSync(dataDir,{recursive:true});
-
-  // ① 뉴스 + DART 수집
-  const articles = await collectNews();
-  const dartItems = await collectDART();
-  console.log(`\n수집 완료: 뉴스 ${articles.length}건, DART ${dartItems.length}건`);
-
-  // ② 교차검증 맵 생성
-  const cvMap = crossValidate(articles, dartItems);
-  const multiSourceCompanies = Object.entries(cvMap)
-    .filter(([,v])=>v.news+v.dart>=2)
-    .map(([k])=>k);
-  console.log(`\n교차검증: ${multiSourceCompanies.length}개 기업이 2개+ 소스 등장`);
-  if(multiSourceCompanies.length>0) console.log("  →", multiSourceCompanies.join(", "));
-
-  // ③ Claude 분석 (배치, 에너지 컨텍스트 포함)
-  console.log(`\n③ 에너지 전문 분석 (${articles.length}건)...`);
-  const signals = [];
-  const BATCH = 6; // 컨텍스트가 길어서 배치 크기 줄임
-
-  for(let i=0;i<articles.length;i+=BATCH){
-    const batch=articles.slice(i,i+BATCH);
-    console.log(`  배치 ${Math.floor(i/BATCH)+1}/${Math.ceil(articles.length/BATCH)}...`);
-    try{
-      const analyses=await analyzeWithContext(batch,cvMap);
-      batch.forEach((article,j)=>{
-        const a=analyses.find(x=>x.idx===j+1)||analyses[j]||{};
-        signals.push(buildSignal(article,a,cvMap));
-      });
-      console.log(`  ✓ ${batch.length}건`);
-    }catch(e){
-      console.error(`  ✗ ${e.message}`);
-      // 분석 실패 → 팩트만 저장
-      batch.forEach(article=>{
-        signals.push(buildSignal(article,null,cvMap));
-      });
-    }
-    if(i+BATCH<articles.length){
-      console.log("  ⏱ 30초...");
-      await delay(30000);
-    }
-  }
-
-  // DART 신호 추가
-  const dartSignals = dartItems.map(d=>{
-    const cvData = cvMap[d.company];
+def score(raw_text, base, is_matched):
+    s = base + (10 if is_matched else 0)
+    applied = []
+    for mod in SCORE_MODS:
+        if re.search(mod["pattern"], raw_text, re.I):
+            s += mod["delta"]
+            applied.append({"delta": mod["delta"], "reason": mod["reason"]})
+    final = max(0, min(100, round(s)))
     return {
-      id:d.id, tag:d.tag, label:d.label,
-      region:"KR", isKorean:true, isChina:false, isDart:true,
-      title:d.title, url:d.url, source:d.source, pubDate:d.publishedAt,
-      summary:d.description,
-      extracted_facts:{amount:null,round:null,partner:null,date:null},
-      company:d.company, companyType:"listed_corp",
-      eventType:d.title.includes("증자")||d.title.includes("사채")?"Financing":"News",
-      domain_insight:`${d.company}의 실제 공시. 원문에서 구체적 조건 확인 필요.`,
-      why_now:"DART 공시는 법적 공시 의무 사항 — 100% 팩트. 원문 링크에서 세부 조건 직접 확인.",
-      signal_quality:d.title.includes("증자")||d.title.includes("계약")?"High":"Medium",
-      signal_quality_reason:"DART 공시 = 법적 팩트 데이터",
-      next_action:d.title.includes("증자")||d.title.includes("계약")?"Investigate":"Monitor",
-      next_action_reason:"공시 원문에서 조건 확인 후 판단",
-      risk:null,
-      cross_validation:{
-        score: cvData&&cvData.news>0?"double":"single",
-        sourceCount: cvData?(cvData.news+cvData.dart):1,
-        trustLevel: cvData&&cvData.news>0?"High":"Medium",
-        sources: cvData?[...cvData.tags]:["kr_dart"],
-      },
-      trust:"FACT", analysisTrust:"HIGH_CONFIDENCE", generatedAt:TODAY,
-    };
-  });
+        "signal_strength": final,
+        "signal_tier": "high" if final >= 60 else "medium" if final >= 35 else "low",
+        "score_breakdown": applied,
+        "is_noise": final < 30,
+    }
 
-  const allSignals=[...signals,...dartSignals].sort((a,b)=>{
-    // 교차검증 소스 수 + 신호 품질로 정렬
-    const scoreA=(a.cross_validation.sourceCount*2)+({High:3,Medium:1,Low:0}[a.signal_quality]||0);
-    const scoreB=(b.cross_validation.sourceCount*2)+({High:3,Medium:1,Low:0}[b.signal_quality]||0);
-    return scoreB-scoreA;
-  });
+def match_company(raw_text):
+    for co in COMPANIES:
+        for alias in co["aliases"]:
+            if alias.lower() in raw_text:
+                return co["id"], co["name"]
+    return None, None
 
-  // ④ 브리핑
-  console.log("\n④ 브리핑...");
-  await delay(30000);
-  let brief="";
-  try{
-    brief=await generateBrief(allSignals);
-    console.log("  ✓");
-  }catch(e){console.error(`  ✗ ${e.message}`);}
+def make_id(source_id, title, date):
+    key = f"{source_id}:{title}:{date}"
+    return hashlib.sha256(key.encode()).hexdigest()[:12]
 
-  const stats = {
-    total:allSignals.length,
-    newsCount:signals.length,
-    dartCount:dartSignals.length,
-    kr:allSignals.filter(s=>s.isKorean).length,
-    cn:allSignals.filter(s=>s.isChina).length,
-    global:allSignals.filter(s=>!s.isKorean&&!s.isChina).length,
-    high:allSignals.filter(s=>s.signal_quality==="High").length,
-    investigate:allSignals.filter(s=>s.next_action==="Investigate").length,
-    multiSource:allSignals.filter(s=>s.cross_validation.sourceCount>=2).length,
-    tripleSource:allSignals.filter(s=>s.cross_validation.sourceCount>=3).length,
-  };
+# ══════════════════════════════════════════════════════════
+# STEP 3: 정규화 + 필터
+# ══════════════════════════════════════════════════════════
 
-  const output={
-    date:TODAY, dateKr:TODAY_KR,
-    generatedAt:new Date().toISOString(),
-    dataPolicy:"팩트 전용 + 에너지 도메인 전문 분석 + 교차검증",
-    brief, stats, signals:allSignals, errors:[],
-    // Phase 2를 위한 패턴 데이터 누적
-    phase2_seeds:{
-      multiSourceCompanies,
-      signalPatterns:allSignals.filter(s=>s.cross_validation.sourceCount>=2).map(s=>({
-        company:s.company, eventType:s.eventType, date:s.pubDate,
-        signalQuality:s.signal_quality, sourceCount:s.cross_validation.sourceCount,
-      })),
-    },
-  };
+def normalize(raw_items):
+    print("② 분류 + 필터링 중...")
+    kept, filtered = [], []
 
-  fs.writeFileSync(path.join(dataDir,`${TODAY}.json`),JSON.stringify(output,null,2),"utf8");
-  fs.writeFileSync(path.join(dataDir,"latest.json"),JSON.stringify(output,null,2),"utf8");
+    for item in raw_items:
+        clf         = classify(item["raw_text"])
+        segment     = infer_segment(item["raw_text"], item["source_segments"])
+        co_id, co_nm= match_company(item["raw_text"])
+        strength    = score(item["raw_text"], clf["base_score"], co_id is not None)
+        is_negative = clf["type"] == "Negative"
 
-  // index.json 업데이트
-  const idxPath=path.join(dataDir,"index.json");
-  let idx=[];
-  if(fs.existsSync(idxPath)){try{idx=JSON.parse(fs.readFileSync(idxPath,"utf8"));}catch{}}
-  if(!idx.find(d=>d.date===TODAY)){
-    idx.unshift({date:TODAY,dateKr:TODAY_KR,stats});
-    fs.writeFileSync(idxPath,JSON.stringify(idx.slice(0,90),null,2),"utf8");
-  }
+        event = {
+            "id":             make_id(item["source_id"], item["title"], item["published_date"]),
+            "title":          item["title"],
+            "summary":        item["summary"],
+            "event_date":     item["published_date"],
+            "source_name":    item["source_name"],
+            "source_url":     item["source_url"],
+            "event_type":     clf["type"],
+            "impact_type":    clf["impact"],
+            "matched_rule":   clf["matched"],
+            "signal_stage":   "commercial" if clf["type"] in ("Contract","Certification","Deployment") else
+                              "early"      if clf["type"] in ("Pilot","Milestone") else "strategic",
+            "signal_strength":strength["signal_strength"],
+            "signal_tier":    strength["signal_tier"],
+            "score_breakdown":strength["score_breakdown"],
+            "segment":        segment,
+            "company_id":     co_id,
+            "company_name":   co_nm or "Unassigned",
+            "is_negative":    is_negative,
+            "is_noise":       strength["is_noise"] and not is_negative,
+        }
 
-  console.log(`\n✅ 완료!`);
-  console.log(`총 ${stats.total}건 | 뉴스 ${stats.newsCount} | DART ${stats.dartCount}`);
-  console.log(`교차검증 2소스+ : ${stats.multiSource}건 (신뢰도 상승)`);
-  console.log(`교차검증 3소스+: ${stats.tripleSource}건 (최고 신뢰도)`);
-  console.log(`High : ${stats.high}건 | Investigate: ${stats.investigate}건`);
-  console.log(`\n⏳ Phase 2 시작까지: 데이터 누적 중 (phase2_seeds 저장됨)\n`);
-}
+        if not strength["is_noise"] or is_negative:
+            kept.append(event)
+        else:
+            penalty = next((m["reason"] for m in strength["score_breakdown"] if m["delta"] < 0), "score < 30")
+            filtered.append({**event, "drop_reason": penalty})
 
-main().catch(e=>{console.error("❌",e.message);process.exit(1);});
+    kept.sort(key=lambda e: (-(e["signal_strength"]), e["event_date"]))
+    print(f"  유지: {len(kept)}건 | 필터: {len(filtered)}건\n")
+    return kept, filtered
+
+# ══════════════════════════════════════════════════════════
+# STEP 4: 인사이트 생성 (이벤트만 사용, 수치 생성 금지)
+# ══════════════════════════════════════════════════════════
+
+def build_insight(co, events):
+    if not events:
+        return {
+            "observed_facts":  [],
+            "matched_pattern": "Insufficient signal. Primary research required.",
+            "may_indicate":    ["No pattern without events"],
+            "missing":         ["No public events ingested"],
+            "confidence":      "Low",
+            "next_check":      "Direct outreach recommended.",
+        }
+
+    types    = [e["event_type"] for e in events]
+    has_cert = "Certification" in types
+    has_ctr  = "Contract" in types or "Deployment" in types
+    has_hire = "Hiring" in types
+    has_plt  = "Pilot" in types
+    has_fin  = "Financing" in types
+    has_neg  = any(e["is_negative"] for e in events)
+    has_grnt = "Grant" in types
+    high_ct  = sum(1 for e in events if e["signal_tier"] == "high")
+
+    # 사실만 추출 (이벤트에서)
+    facts = [
+        f"[{e['event_type']}] {e['title']} — {e['source_name']} ({e['event_date']})"
+        for e in events if e["signal_strength"] >= 40
+    ][:5]
+
+    # 패턴 매칭
+    if has_cert and has_ctr and has_hire:
+        pattern  = f"{co['name']}는 규제 인증 + 유틸리티 계약 + 재무 담당자 채용이 동시에 관찰됩니다. 국내 그리드SW/ESS 사례에서 이 조합은 통상 6-12개월 내 시리즈C 라운드 준비의 선행 신호입니다."
+        indicate = ["6-12개월 내 Series C 프로세스 가능성","전략투자자(유틸리티/OEM) 앵커 포지션 가능성","해외 BD 채용 공고 모니터링 필요"]
+        pid, confidence = "series_c_prep", "Medium-High"
+    elif has_cert and has_ctr:
+        pattern  = f"{co['name']}는 제3자 인증과 첫 상업 계약을 동시에 확보했습니다. 공급망 진입의 가장 어려운 허들을 넘은 상태입니다. 수익 가시성이 생기기 시작했으나 규모와 독점 여부는 미확인입니다."
+        indicate = ["2번째 OEM 고객 확보 병행 가능성","EPC/OEM의 M&A 관심 가능성","계약 램프업 지연 시 브릿지 가능성"]
+        pid, confidence = "supply_entry", "Medium"
+    elif has_plt and (has_fin or has_ctr):
+        pattern  = f"{co['name']}는 파일럿 완료와 전략적 파트너십/파이낸싱이 확인됩니다. 다만 인증 허들 미통과 상태로 모든 상업 신호는 조건부입니다."
+        indicate = ["인증 신청 진행 중 가능성","파트너십이 LOI→계약 전환 임박 가능성","인증 완료 전까지 펀딩 브릿지 의존 가능성"]
+        pid, confidence = "cert_gate", "Medium-Low"
+    elif has_grnt and not has_ctr:
+        pattern  = f"{co['name']}의 가장 강한 공개 신호는 정부 그랜트입니다. 그랜트는 기술 방향성을 검증하지만 시장 수요를 확인하지 않습니다. 오프테이커나 전략 구매자 없이는 투자 논거 진전이 어렵습니다."
+        indicate = ["TRL 4-6 단계: 정부 검증 단계","상업 파이프라인 미공개 또는 초기 단계"]
+        pid, confidence = "grant_only", "Low"
+    elif has_fin and has_ctr:
+        pattern  = f"{co['name']}는 전략 투자 유치와 상업 계약이 동시 확인됩니다. 외부 자본 검증과 초기 매출 가시성이 함께 나타나는 가장 강한 신호 조합입니다."
+        indicate = ["12-18개월 내 매출 램프업 예상","전략투자자의 우선협상권 또는 M&A 옵션 가능성","계약 KPI 달성 시 높은 밸류에이션 후속 라운드 가능"]
+        pid, confidence = "strategic_capital", "High"
+    elif has_neg:
+        pattern  = f"{co['name']}의 최근 신호에서 부정적 이벤트가 감지됩니다. 긍정 신호는 이 리스크 맥락에서 재평가가 필요합니다."
+        indicate = ["타임라인 연장 가능성","브릿지 파이낸싱 또는 다운라운드 가능성"]
+        pid, confidence = "negative", "Low"
+    else:
+        pattern  = f"{co['name']}는 현재 {len(events)}건의 이벤트가 집계됩니다. 패턴 확인에 충분한 신호 밀도가 아닙니다. 1차 리서치를 권장합니다."
+        indicate = ["초기 단계 또는 공개 정보 제한적","주요 활동이 공개 소스에 아직 미반영 가능성"]
+        pid, confidence = "low_density", "Low"
+
+    # 미싱 에비던스
+    missing = []
+    sector  = co.get("sector","")
+    if not has_ctr:
+        missing.append("상업 계약 없음 — 모든 수익 가설은 미검증 상태")
+    if not has_cert and sector in ("marine_fc","ess","hvdc"):
+        missing.append("제3자 인증 없음 — 대부분의 규제 에너지 섹터에서 조달 전제 조건")
+    if high_ct == 0:
+        missing.append("High 신호 없음 — 현재 이벤트는 방향성만 제공, 확증 아님")
+    if co.get("country") == "KR" and not any(
+        re.search(r"us|eu|europe|japan|singapore|global|overseas", (e["title"]+" "+e["summary"]).lower())
+        for e in events
+    ):
+        missing.append("해외 레퍼런스 없음 — 글로벌 확장 논거 미검증")
+    if has_grnt and not has_ctr:
+        missing.append("그랜트 있음 + 오프테이커 없음 — 그랜트 단독 신호는 약함")
+
+    next_map = {
+        "series_c_prep":    "해외 VP Sales 채용 공고 또는 2번째 KEPCO급 계약 ACV 모니터링",
+        "supply_entry":     "계약 범위(단건 vs. 프레임워크) 확인 및 2번째 OEM RFP 진행 여부",
+        "cert_gate":        "인증 신청 공식 제출 여부 확인. 제출됐다면 예상 일정",
+        "grant_only":       "그랜트가 상업 공동자금 파트너를 요구하는지 확인 → 구매자 표면화",
+        "strategic_capital":"전략투자자의 섹터 포지션 파악. 동 섹터 M&A 이력 확인",
+        "negative":         "부정 신호가 프로젝트 레벨(격리) vs. 구조적(시장/기술) 여부 판단",
+        "low_density":      "직접 접촉 또는 채널 체크 권장",
+    }
+
+    return {
+        "observed_facts":  facts,
+        "matched_pattern": pattern,
+        "pattern_id":      pid,
+        "may_indicate":    indicate,
+        "missing":         missing,
+        "confidence":      confidence,
+        "next_check":      next_map.get(pid, "최근 이벤트 검토 후 1차 소스 교차 확인"),
+        "event_count":     len(events),
+        "high_signal":     high_ct,
+        "note":            "기존 이벤트에서만 생성됨. 수치/사실 생성 없음.",
+    }
+
+# ══════════════════════════════════════════════════════════
+# STEP 5: 브리핑 (Claude API — 없으면 룰 기반 대체)
+# ══════════════════════════════════════════════════════════
+
+def call_claude(prompt):
+    if not ANTHROPIC_KEY:
+        return None
+    import json as _json
+    body = _json.dumps({
+        "model":      "claude-sonnet-4-20250514",
+        "max_tokens": 800,
+        "messages":   [{"role":"user","content":prompt}],
+    }).encode()
+    req = urllib.request.Request(
+        "https://api.anthropic.com/v1/messages",
+        data=body,
+        headers={
+            "Content-Type":      "application/json",
+            "x-api-key":         ANTHROPIC_KEY,
+            "anthropic-version": "2023-06-01",
+        },
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=30) as r:
+            data = _json.loads(r.read())
+            return data["content"][0]["text"]
+    except Exception as e:
+        print(f"  Claude API 실패: {e}")
+        return None
+
+def generate_brief(events):
+    print("③ 브리핑 생성 중...")
+    high = [e for e in events if e["signal_tier"] == "high"][:8]
+
+    if ANTHROPIC_KEY and high:
+        lines = "\n".join(
+            f"- [{e['event_type']}] {e['company_name']} ({e['source_name']}): {e['title']}"
+            for e in high
+        )
+        prompt = f"""오늘({TODAY_KR}) 에너지 CVC 투자 브리핑을 4-5문장으로 작성해주세요.
+
+실제 수집된 High 신호:
+{lines}
+
+원칙:
+- 기사에 없는 수치 생성 금지
+- 투자 심사역 내부 메모 톤
+- 왜 지금인지, 어떤 패턴인지 중심으로
+- 구체적 회사명·언론사 인용"""
+        result = call_claude(prompt)
+        if result:
+            print("  ✓ Claude 브리핑 완료")
+            return result.strip()
+
+    # 대체: 룰 기반 브리핑
+    if not high:
+        return f"{TODAY_KR} 기준 High 신호 없음. 데이터 수집 확인 필요."
+
+    lines = [f"[{e['event_type']}] {e['company_name']}: {e['title']} ({e['source_name']})" for e in high[:3]]
+    return (
+        f"{TODAY_KR} 주요 신호 {len(high)}건 수집됨. "
+        f"상위 신호: {'; '.join(lines[:2])}. "
+        f"High 신호 기업: {', '.join(set(e['company_name'] for e in high if e['company_id']))}. "
+        f"전체 {len(events)}건 중 노이즈 필터 후 유지."
+    )
+
+# ══════════════════════════════════════════════════════════
+# MAIN
+# ══════════════════════════════════════════════════════════
+
+def main():
+    print(f"\n{'═'*50}")
+    print(f"Energy CVC Signal Generator")
+    print(f"날짜: {TODAY_KR}")
+    print(f"{'═'*50}\n")
+
+    Path("data").mkdir(exist_ok=True)
+
+    # 1. 수집
+    raw = fetch_sources()
+
+    # 2. 분류 + 필터
+    kept, filtered = normalize(raw)
+
+    # 3. 기업별 인사이트
+    print("③ 기업별 인사이트 생성 중...")
+    company_events = {}
+    for e in kept:
+        if e["company_id"]:
+            company_events.setdefault(e["company_id"], []).append(e)
+
+    company_insights = {}
+    for co in COMPANIES:
+        evs = company_events.get(co["id"], [])
+        if evs:
+            company_insights[co["id"]] = {
+                **co,
+                "events": evs,
+                "insight": build_insight(co, evs),
+                "signal_count": len(evs),
+                "high_count": sum(1 for e in evs if e["signal_tier"] == "high"),
+            }
+    print(f"  인사이트 생성: {len(company_insights)}개 기업\n")
+
+    # 4. 브리핑
+    brief = generate_brief(kept)
+
+    # 5. 통계
+    stats = {
+        "total":       len(kept),
+        "high":        sum(1 for e in kept if e["signal_tier"] == "high"),
+        "medium":      sum(1 for e in kept if e["signal_tier"] == "medium"),
+        "negative":    sum(1 for e in kept if e["is_negative"]),
+        "matched":     sum(1 for e in kept if e["company_id"]),
+        "filtered_out":len(filtered),
+        "companies_with_signals": len(company_insights),
+        "by_segment":  {},
+        "by_type":     {},
+    }
+    for e in kept:
+        stats["by_segment"][e["segment"]] = stats["by_segment"].get(e["segment"], 0) + 1
+        stats["by_type"][e["event_type"]]  = stats["by_type"].get(e["event_type"], 0)  + 1
+
+    # 6. 저장
+    output = {
+        "date":         TODAY,
+        "dateKr":       TODAY_KR,
+        "generatedAt":  datetime.now(timezone.utc).isoformat(),
+        "brief":        brief,
+        "stats":        stats,
+        "signals":      kept,
+        "filteredOut":  filtered[:20],  # 최근 20개만
+        "companies":    company_insights,
+        "sources":      [s["name"] for s in RSS_SOURCES],
+    }
+
+    # latest.json (웹사이트 홈)
+    with open("data/latest.json", "w", encoding="utf-8") as f:
+        json.dump(output, f, ensure_ascii=False, indent=2)
+
+    # 날짜별 아카이브
+    with open(f"data/{TODAY}.json", "w", encoding="utf-8") as f:
+        json.dump(output, f, ensure_ascii=False, indent=2)
+
+    # index.json (날짜 목록)
+    index_path = Path("data/index.json")
+    index = []
+    if index_path.exists():
+        try:
+            index = json.loads(index_path.read_text())
+        except Exception:
+            pass
+    if not any(d["date"] == TODAY for d in index):
+        index.insert(0, {"date": TODAY, "dateKr": TODAY_KR, "stats": stats})
+        index = index[:90]
+        index_path.write_text(json.dumps(index, ensure_ascii=False, indent=2))
+
+    print("✅ 완료!")
+    print(f"  신호: {stats['total']}건 | High: {stats['high']} | 필터: {stats['filtered_out']}")
+    print(f"  기업 인사이트: {stats['companies_with_signals']}개")
+    print(f"  저장: data/latest.json, data/{TODAY}.json\n")
+
+if __name__ == "__main__":
+    main()
