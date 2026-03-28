@@ -115,6 +115,87 @@ SCORE_MODS = [
 ]
 
 # ══════════════════════════════════════════════════════════
+# EVIDENCE CARD LIBRARIES
+# Each event type gets a sector-aware "why it matters" explanation
+# and a list of what is structurally missing.
+# No speculative language. Internal memo tone.
+# ══════════════════════════════════════════════════════════
+
+# Why it matters — keyed by (event_type, segment)
+# Fallback: (event_type, "default")
+WHY_IT_MATTERS = {
+    ("Certification", "marine_fc"):   "Class approval (DNV GL / ClassNK) is the single most important commercialization gate for marine fuel cells. Without it, shipyards cannot specify the technology in newbuild contracts. This event, if confirmed, removes the primary procurement barrier.",
+    ("Certification", "ess"):         "Third-party certification (UL / IEC / KS) is required for grid interconnection and utility procurement in most regulated markets. Certification de-risks the buyer's liability and accelerates RFP inclusion.",
+    ("Certification", "grid_sw"):     "KPX interface certification is the legal prerequisite for participating in Korea's ancillary services market (frequency regulation, DR). This directly unlocks a recurring revenue stream.",
+    ("Certification", "hvdc"):        "TÜV / DNV component qualification is required for entry into OEM supply chains (Siemens Energy, ABB, Hitachi Energy). Without it, no grid-scale project procurement is possible.",
+    ("Certification", "default"):     "Third-party certification reduces buyer-side risk and is a standard prerequisite for regulated-market procurement. Signal quality depends on which body issued it and for what specific application.",
+
+    ("Contract",      "grid_sw"):     "A named utility contract moves this company from 'pilot-stage' to 'commercial-stage' in the investment framework. Key unknowns: ACV (annual contract value), contract duration, and whether it is a framework or project-specific agreement.",
+    ("Contract",      "ess"):         "An offtake or supply agreement with a named buyer is the clearest signal of commercial-stage transition. LCOS (levelized cost of storage) competitiveness is implied but not confirmed without contract terms.",
+    ("Contract",      "marine_fc"):   "A named shipyard or shipping company contract following certification is the standard commercialization sequence for marine fuel cells. This represents the first revenue-generating event.",
+    ("Contract",      "hydrogen"):    "An offtake agreement is the critical missing link in most hydrogen project theses. Green hydrogen without a named buyer at contracted price remains unviable as an investment.",
+    ("Contract",      "default"):     "A commercial contract is the clearest signal of product-market fit and revenue visibility. Terms (ACV, duration, exclusivity) determine whether this is a reference sale or scalable revenue.",
+
+    ("Deployment",    "default"):     "Actual deployment (commissioning, go-live) confirms TRL-9 status and real-world operational performance. This is stronger than a pilot — it represents committed capex from the buyer.",
+
+    ("Pilot",         "grid_sw"):     "A utility-sponsored pilot is significantly stronger than an internal demo. It implies the buyer has allocated opex budget and is evaluating procurement. Conversion rate to commercial contract is the key metric to track.",
+    ("Pilot",         "marine_fc"):   "A shipyard-hosted pilot validates that the technology can be integrated into a real vessel architecture. DNV involvement in the pilot substantially increases the probability of subsequent class approval.",
+    ("Pilot",         "ess"):         "A grid-connected pilot (vs. behind-the-meter) signals that the company is targeting utility-scale deployment. Grid pilots require NERC/KPX interface compliance, which itself is a commercialization gate.",
+    ("Pilot",         "dc_power"):    "A hyperscaler-hosted pilot is the strongest possible commercial signal for data center power technology. Hyperscalers move slowly on procurement decisions but are high-ACV, low-churn customers once contracted.",
+    ("Pilot",         "default"):     "A pilot project indicates field-level technical validation. Signal strength depends heavily on who is sponsoring it (utility/OEM vs. government/academic) and whether it is a paid engagement.",
+
+    ("Financing",     "default"):     "An equity financing round confirms external capital validation. Key variables: investor identity (strategic vs. financial), round size relative to capex requirements, and implied valuation relative to revenue run-rate.",
+
+    ("Hiring",        "default"):     "A CFO hire with prior Series B+ experience is empirically correlated with fundraising within 3–6 months. A BD/VP Sales hire signals active contract pipeline building. Neither is confirmatory on its own.",
+
+    ("Partnership",   "default"):     "A named strategic partnership with an industrial buyer is a directional signal. An MOU alone does not confirm commercial intent — the critical variable is whether binding terms (exclusivity, minimum volume, payment) are included.",
+
+    ("Grant",         "default"):     "Government grant funding validates the technology's policy relevance but does not confirm market demand. Non-dilutive capital is positive for the balance sheet, but grant-dependent revenue is not investable without a commercial anchor.",
+
+    ("Negative",      "default"):     "A delay, cost overrun, or competitive displacement event requires reassessment of the investment timeline. The critical distinction is whether the negative signal is project-level (isolated) or structural (market/technology).",
+
+    ("News",          "default"):     "This event did not match a specific investment signal pattern. It is retained for context but should not be weighted in investment assessment without additional corroboration.",
+}
+
+# Missing evidence — what is structurally absent for each event type + sector
+# Used to populate the "What is missing" field in Evidence Cards
+MISSING_BY_TYPE = {
+    ("Certification", "marine_fc"):   ["No named shipyard contract confirmed post-certification", "Hydrogen fuel supply chain partner not identified", "Commercial vessel delivery schedule not disclosed"],
+    ("Certification", "ess"):         ["No utility offtake agreement accompanying certification", "LCOS ($/kWh) target achievement not confirmed", "Manufacturing scale-up plan not disclosed"],
+    ("Certification", "grid_sw"):     ["Certification scope (specific product/service) not confirmed", "Commercial contract with KEPCO or utility not yet disclosed", "Revenue from certified service not quantified"],
+    ("Certification", "default"):     ["Commercial application of certification not specified", "Customer or procurement pipeline not disclosed", "Revenue timing from certification unclear"],
+
+    ("Contract",      "default"):     ["Contract ACV (annual contract value) not disclosed", "Contract duration and renewal terms not public", "Exclusivity and geographic scope unknown"],
+    ("Deployment",    "default"):     ["Operational performance data (uptime, efficiency) not yet available", "Customer satisfaction and renewal intent not disclosed", "Unit economics at deployment scale not confirmed"],
+    ("Pilot",         "default"):     ["Pilot success criteria not publicly defined", "Conversion probability to commercial contract not disclosed", "Pilot sponsor's procurement timeline unknown"],
+    ("Financing",     "default"):     ["Post-money valuation not confirmed", "Use of proceeds not specified", "Revenue run-rate at time of raise not public"],
+    ("Hiring",        "default"):     ["Fundraising timeline not confirmed", "Whether hire reflects inbound investor interest or proactive preparation unknown", "Compensation structure (equity vs. cash) not disclosed"],
+    ("Partnership",   "default"):     ["Binding terms (exclusivity, minimum volume) not confirmed", "MOU-to-contract conversion rate for this partner unknown", "Joint development scope and IP ownership unclear"],
+    ("Grant",         "default"):     ["Commercial co-funding partner not identified", "Grant milestones and disbursement schedule not public", "Path from grant to commercial revenue not articulated"],
+    ("Negative",      "default"):     ["Root cause of negative event not confirmed", "Management mitigation plan not public", "Impact on existing contracts or investor commitments not disclosed"],
+    ("News",          "default"):     ["No investment-relevant pattern matched", "Signal quality insufficient for investment assessment", "Primary research required before forming a view"],
+}
+
+# Confidence logic — based on tier, score, and whether company is matched
+def compute_confidence(clf_tier, signal_strength, is_matched, is_negative):
+    """
+    Returns (label, rationale) — no speculation, strictly rule-based.
+    """
+    if is_negative:
+        return "Low", "Negative signals require primary-source verification before forming a view."
+    if clf_tier == 1 and signal_strength >= 75 and is_matched:
+        return "Medium-High", "Tier-1 event (certification/contract/deployment) with named company match and high score. Awaiting source corroboration."
+    if clf_tier == 1 and signal_strength >= 60:
+        return "Medium", "Tier-1 event type, but either company unmatched or score modifiers are mixed. Source verification needed."
+    if clf_tier == 2 and signal_strength >= 65 and is_matched:
+        return "Medium", "Tier-2 event (pilot/hire/financing) with company match. Commercial confirmation absent."
+    if clf_tier == 2 and signal_strength >= 50:
+        return "Medium-Low", "Tier-2 event without strong score modifiers. Directional signal, not confirmatory."
+    if clf_tier <= 3 and signal_strength >= 40:
+        return "Low", "Tier-3 event (MOU/grant/partnership) or score below threshold. Not actionable without additional evidence."
+    return "Low", "Score below signal threshold or event type is generic. Context only."
+
+# ══════════════════════════════════════════════════════════
 # STEP 1: RSS 수집
 # ══════════════════════════════════════════════════════════
 
@@ -259,26 +340,73 @@ def normalize(raw_items):
         strength    = score(item["raw_text"], clf["base_score"], co_id is not None)
         is_negative = clf["type"] == "Negative"
 
+        # ── Evidence Card fields ──────────────────────────────
+        # why_it_matters: sector-specific, no speculation
+        why_key     = (clf["type"], segment) if (clf["type"], segment) in WHY_IT_MATTERS else (clf["type"], "default")
+        why_text    = WHY_IT_MATTERS.get(why_key, WHY_IT_MATTERS.get((clf["type"],"default"), "No sector-specific rationale available."))
+
+        # missing_evidence: structural gaps for this event type
+        miss_key    = (clf["type"], segment) if (clf["type"], segment) in MISSING_BY_TYPE else (clf["type"], "default")
+        missing     = MISSING_BY_TYPE.get(miss_key, MISSING_BY_TYPE.get((clf["type"],"default"), ["No structured gap analysis available for this event type."]))
+
+        # confidence: rule-based, no guessing
+        conf_label, conf_rationale = compute_confidence(clf["tier"], strength["signal_strength"], co_id is not None, is_negative)
+
+        # observed_facts: strictly from source (title + summary excerpt)
+        # No inference. No addition. Exactly what the source says.
+        obs_fact = item["title"].strip()
+        if item["summary"] and len(item["summary"].strip()) > 20:
+            # First sentence of summary only — avoid hallucination by trimming
+            first_sent = item["summary"].strip().split(".")[0].strip()
+            if first_sent and first_sent.lower() != obs_fact.lower() and len(first_sent) > 20:
+                obs_fact_detail = first_sent + "."
+            else:
+                obs_fact_detail = None
+        else:
+            obs_fact_detail = None
+
         event = {
             "id":             make_id(item["source_id"], item["title"], item["published_date"]),
+
+            # ── Raw source data (100% fact) ──────────────────
             "title":          item["title"],
             "summary":        item["summary"],
             "event_date":     item["published_date"],
             "source_name":    item["source_name"],
             "source_url":     item["source_url"],
+
+            # ── Classification ────────────────────────────────
             "event_type":     clf["type"],
             "impact_type":    clf["impact"],
             "matched_rule":   clf["matched"],
+            "tier":           clf["tier"],
             "signal_stage":   "commercial" if clf["type"] in ("Contract","Certification","Deployment") else
                               "early"      if clf["type"] in ("Pilot","Milestone") else "strategic",
+
+            # ── Scoring ───────────────────────────────────────
             "signal_strength":strength["signal_strength"],
             "signal_tier":    strength["signal_tier"],
             "score_breakdown":strength["score_breakdown"],
+
+            # ── Entity matching ───────────────────────────────
             "segment":        segment,
             "company_id":     co_id,
             "company_name":   co_nm or "Unassigned",
             "is_negative":    is_negative,
             "is_noise":       strength["is_noise"] and not is_negative,
+
+            # ── Evidence Card fields (mandatory) ─────────────
+            "evidence": {
+                "observed_fact":       obs_fact,
+                "observed_fact_detail":obs_fact_detail,
+                "source_label":        f"{item['source_name']} · {item['published_date']}",
+                "matched_rule_name":   clf["matched"] or "no rule matched",
+                "matched_rule_tier":   f"Tier {clf['tier']} — {clf['type']}",
+                "why_it_matters":      why_text,
+                "missing_evidence":    missing,
+                "confidence":          conf_label,
+                "confidence_rationale":conf_rationale,
+            },
         }
 
         if not strength["is_noise"] or is_negative:
