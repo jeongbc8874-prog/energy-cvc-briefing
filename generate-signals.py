@@ -119,43 +119,77 @@ SCORE_MODS = [
 # ══════════════════════════════════════════════════════════
 
 def fetch_sources():
+    """
+    Fetch RSS feeds. Returns (raw_items, source_log).
+    source_log records per-source status for the reliability layer.
+    """
     print("① RSS 수집 중...")
-    raw = []
+    raw        = []
+    source_log = []   # per-source status — written to JSON for UI transparency
 
     if not HAS_FEEDPARSER:
         print("  feedparser 없음 — 빈 결과 반환")
-        return raw
+        for s in RSS_SOURCES:
+            source_log.append({"id":s["id"],"name":s["name"],"url":s["url"],
+                "status":"failed","error":"feedparser not installed",
+                "items":0,"fetched_at":datetime.now(timezone.utc).isoformat()})
+        return raw, source_log
 
-    for src in RSS_SOURCES:
+    for s in RSS_SOURCES:
+        fetched_at = datetime.now(timezone.utc).isoformat()
         try:
-            feed = feedparser.parse(src["url"])
-            count = 0
+            import socket
+            socket.setdefaulttimeout(15)
+            feed   = feedparser.parse(s["url"])
+            count  = 0
+            errors = []
+
+            # feedparser returns status if HTTP was involved
+            http_status = getattr(feed, "status", None)
+            if http_status and http_status >= 400:
+                raise Exception(f"HTTP {http_status}")
+
             for entry in feed.entries[:20]:
                 title   = getattr(entry, "title", "")
                 summary = getattr(entry, "summary", "")[:500]
                 link    = getattr(entry, "link", "")
                 date    = _parse_date(entry)
-
                 if not title or title == "[Removed]":
                     continue
-
                 raw.append({
-                    "source_id":       src["id"],
-                    "source_name":     src["name"],
+                    "source_id":       s["id"],
+                    "source_name":     s["name"],
                     "source_url":      link,
-                    "source_segments": src["segments"],
+                    "source_segments": s["segments"],
                     "title":           title,
                     "summary":         summary,
                     "published_date":  date,
                     "raw_text":        (title + " " + summary).lower(),
                 })
                 count += 1
-            print(f"  ✓ {src['name']}: {count}건")
-        except Exception as e:
-            print(f"  ✗ {src['name']}: {e}")
 
-    print(f"  총 {len(raw)}건 수집\n")
-    return raw
+            status = "success" if count > 0 else "partial"
+            if count == 0:
+                errors.append("Feed returned 0 usable items")
+            print(f"  ✓ {s['name']}: {count}건")
+            source_log.append({
+                "id":s["id"],"name":s["name"],"url":s["url"],
+                "status":status,"error":errors[0] if errors else None,
+                "items":count,"fetched_at":fetched_at,
+            })
+        except Exception as ex:
+            print(f"  ✗ {s['name']}: {ex}")
+            source_log.append({
+                "id":s["id"],"name":s["name"],"url":s["url"],
+                "status":"failed","error":str(ex),
+                "items":0,"fetched_at":fetched_at,
+            })
+
+    ok      = sum(1 for s in source_log if s["status"]=="success")
+    partial = sum(1 for s in source_log if s["status"]=="partial")
+    failed  = sum(1 for s in source_log if s["status"]=="failed")
+    print(f"  총 {len(raw)}건 수집 | 소스: {ok}성공 / {partial}부분 / {failed}실패\n")
+    return raw, source_log
 
 def _parse_date(entry):
     try:
@@ -437,7 +471,7 @@ def main():
     Path("data").mkdir(exist_ok=True)
 
     # 1. 수집
-    raw = fetch_sources()
+    raw, source_log = fetch_sources()
 
     # 2. 분류 + 필터
     kept, filtered = normalize(raw)
@@ -492,6 +526,15 @@ def main():
         "filteredOut":  filtered[:20],  # 최근 20개만
         "companies":    company_insights,
         "sources":      [s["name"] for s in RSS_SOURCES],
+        "source_log":   source_log,
+        "reliability": {
+            "sources_total":   len(source_log),
+            "sources_ok":      sum(1 for s in source_log if s["status"]=="success"),
+            "sources_partial": sum(1 for s in source_log if s["status"]=="partial"),
+            "sources_failed":  sum(1 for s in source_log if s["status"]=="failed"),
+            "new_events":      len(kept),
+            "filtered_out":    len(filtered),
+        },
     }
 
     # latest.json (웹사이트 홈)
