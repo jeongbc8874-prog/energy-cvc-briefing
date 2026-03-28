@@ -1,8 +1,8 @@
 {
   "date": "2026-03-28",
   "dateKr": "2026년 03월 28일",
-  "generatedAt": "2026-03-28T13:15:33.093072+00:00",
-  "brief": "**에너지 CVC 투자 브리핑 (2026.03.28)**\n\nAI 데이터센터 전력 수요 급증이 에너지 저장 시장의 새로운 성장 동력으로 부상하고 있다. Form Energy가 미국 AI 데이터센터 대상 12GWh 규모 철-공기 배터리 공급 계약을 체결한 것은 장기간 저장이 가능한 차세대 기술에 대한 실질적 수요 증명이다. 동시에 American Battery Factory의 애리조나 LFP 기가팩토리 4.5GWh 인수 계약과 영국 AR7 라운드 차액계약 체결 등 대규모 프로젝트들이 연이어 가시화되고 있어, 에너지 저장 밸류체인 전반의 투자 기회가 확대되고 있다. Gore Street Capital이 BESS 사전 건설 단계 데이터 관리의 중요성을 강조한 점도 운영 효율성에 집중하는 시장 성숙도를 보여준다.",
+  "generatedAt": "2026-03-28T13:46:13.161036+00:00",
+  "brief": "**에너지 CVC 투자 브리핑 (3월 28일)**\n\nAI 데이터센터 전력 수요 급증이 에너지 저장 시장의 새로운 성장 동력으로 부상하고 있다. Form Energy가 12GWh 규모의 multi-day iron-air 배터리 공급 계약을 체결한 것은 기존 리튬이온 대비 장주기 저장이 필요한 AI 인프라의 특성을 반영하며, American Battery Factory 역시 Arizona LFP 기가팩토리에 4.5GWh 오프테이크 계약을 확보했다(Energy Storage News). \n\n영국의 AR7 CfD 계약 체결과 수소 부문 거래 활발화는 정책 지원 하에 재생에너지 생태계 전반의 투자 모멘텀이 지속되고 있음을 시사한다. BESS 자산관리 관점에서 pre-construction 단계 데이터 중요성이 강조되는 것은 해당 섹터의 성숙도가 높아지며 운영 효율성에 대한 관심이 증가하고 있다는 신호로 해석된다.",
   "stats": {
     "total": 7,
     "high": 5,
@@ -657,5 +657,69 @@
     "Hydrogen Insight",
     "Energy Storage News",
     "Offshore Wind Biz"
-  ]
+  ],
+  "source_log": [
+    {
+      "id": "utilitydive",
+      "name": "Utility Dive",
+      "url": "https://www.utilitydive.com/feeds/news/",
+      "status": "success",
+      "error": null,
+      "items": 10,
+      "fetched_at": "2026-03-28T13:46:02.902906+00:00"
+    },
+    {
+      "id": "pvmagazine",
+      "name": "PV Magazine",
+      "url": "https://www.pv-magazine.com/feed/",
+      "status": "success",
+      "error": null,
+      "items": 20,
+      "fetched_at": "2026-03-28T13:46:03.009735+00:00"
+    },
+    {
+      "id": "rechargenews",
+      "name": "Recharge News",
+      "url": "https://www.rechargenews.com/feed",
+      "status": "failed",
+      "error": "HTTP 404",
+      "items": 0,
+      "fetched_at": "2026-03-28T13:46:03.391603+00:00"
+    },
+    {
+      "id": "hydrogeninsight",
+      "name": "Hydrogen Insight",
+      "url": "https://www.hydrogeninsight.com/feed",
+      "status": "failed",
+      "error": "HTTP 404",
+      "items": 0,
+      "fetched_at": "2026-03-28T13:46:03.737528+00:00"
+    },
+    {
+      "id": "energystoragenews",
+      "name": "Energy Storage News",
+      "url": "https://www.energy-storage.news/feed/",
+      "status": "success",
+      "error": null,
+      "items": 20,
+      "fetched_at": "2026-03-28T13:46:04.090242+00:00"
+    },
+    {
+      "id": "offshorewind",
+      "name": "Offshore Wind Biz",
+      "url": "https://www.offshorewind.biz/feed/",
+      "status": "success",
+      "error": null,
+      "items": 10,
+      "fetched_at": "2026-03-28T13:46:04.374004+00:00"
+    }
+  ],
+  "reliability": {
+    "sources_total": 6,
+    "sources_ok": 4,
+    "sources_partial": 0,
+    "sources_failed": 2,
+    "new_events": 7,
+    "filtered_out": 53
+  }
 }
