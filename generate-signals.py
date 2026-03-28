@@ -85,9 +85,23 @@ EVENT_RULES = [
     {"kws":["partnership","mou","collaboration","memorandum"],                             "type":"Partnership",  "impact":"Commercial",    "score":35,"tier":3},
     {"kws":["doe grant","eu grant","government grant","awarded grant","horizon grant"],    "type":"Grant",        "impact":"Policy",        "score":45,"tier":3},
     {"kws":["gigafactory","manufacturing plant","scale-up","opens facility"],              "type":"Expansion",    "impact":"Commercial",    "score":70,"tier":3},
-    # Tier 4 — 네거티브 (항상 포함)
-    {"kws":["delay","postponed","behind schedule","timeline slips"],                       "type":"Negative",     "impact":"Risk",          "score":0, "tier":4},
-    {"kws":["funding shortfall","cost overrun","supply chain issue","struggles to raise"], "type":"Negative",     "impact":"Risk",          "score":0, "tier":4},
+    # Tier 4 — 네거티브 (항상 포함, 노이즈 필터 면제)
+    {"kws":["delay","postponed","behind schedule","timeline slips","pushed back"],
+     "type":"Negative","neg_subtype":"delay",        "impact":"Risk","score":0,"tier":4},
+    {"kws":["funding shortfall","struggles to raise","runway concerns","bridge financing"],
+     "type":"Negative","neg_subtype":"funding_risk",  "impact":"Risk","score":0,"tier":4},
+    {"kws":["cost overrun","over budget","capex increase","higher than expected cost"],
+     "type":"Negative","neg_subtype":"cost_overrun",  "impact":"Risk","score":0,"tier":4},
+    {"kws":["supply chain issue","component shortage","material shortage","delivery delay"],
+     "type":"Negative","neg_subtype":"supply_chain",  "impact":"Risk","score":0,"tier":4},
+    {"kws":["hiring freeze","layoffs","redundancies","headcount reduction","staff cuts"],
+     "type":"Negative","neg_subtype":"hiring_freeze", "impact":"Risk","score":0,"tier":4},
+    {"kws":["project cancelled","contract cancelled","terminated","deal collapsed"],
+     "type":"Negative","neg_subtype":"cancellation",  "impact":"Risk","score":0,"tier":4},
+    {"kws":["competitor wins","competitor awarded","rival secures","loses contract to"],
+     "type":"Negative","neg_subtype":"competitor_win","impact":"Risk","score":0,"tier":4},
+    {"kws":["subsidy ends","grant expires","government support withdrawn","policy reversal"],
+     "type":"Negative","neg_subtype":"subsidy_risk",  "impact":"Risk","score":0,"tier":4},
 ]
 
 SEGMENT_KWS = {
@@ -294,9 +308,15 @@ def classify(raw_text):
     for rule in EVENT_RULES:
         for kw in rule["kws"]:
             if kw in raw_text:
-                return {"type": rule["type"], "impact": rule["impact"],
-                        "base_score": rule["score"], "tier": rule["tier"], "matched": kw}
-    return {"type":"News", "impact":"Informational", "base_score":15, "tier":5, "matched":None}
+                return {
+                    "type":        rule["type"],
+                    "impact":      rule["impact"],
+                    "base_score":  rule["score"],
+                    "tier":        rule["tier"],
+                    "matched":     kw,
+                    "neg_subtype": rule.get("neg_subtype"),
+                }
+    return {"type":"News","impact":"Informational","base_score":15,"tier":5,"matched":None,"neg_subtype":None}
 
 def infer_segment(raw_text, source_segments):
     for seg, kws in SEGMENT_KWS.items():
@@ -398,6 +418,7 @@ def normalize(raw_items):
             "company_id":     co_id,
             "company_name":   co_nm or "Unassigned",
             "is_negative":    is_negative,
+            "neg_subtype":    clf["neg_subtype"],
             "is_noise":       strength["is_noise"] and not is_negative,
 
             # ── Evidence Card fields (mandatory) ─────────────
@@ -592,6 +613,161 @@ def generate_brief(events):
     )
 
 # ══════════════════════════════════════════════════════════
+# PANEL BUILDERS
+# ══════════════════════════════════════════════════════════
+
+NEG_SUBTYPE_META = {
+    "delay":         {"label":"Project / Certification Delay",   "icon":"⏱","severity":"high",    "memo":"Timeline extension increases capital-at-risk. Determine if delay is project-level (isolated) or structural (technology/market)."},
+    "funding_risk":  {"label":"Funding / Runway Risk",           "icon":"⚠","severity":"critical","memo":"Capital-constrained signal. Bridge or down-round possible. Monitor existing investor behavior."},
+    "cost_overrun":  {"label":"Cost Overrun",                    "icon":"📈","severity":"high",   "memo":"Capex overshoot compresses returns and signals execution risk. Reassess unit economics assumptions."},
+    "supply_chain":  {"label":"Supply Chain Issue",              "icon":"🔗","severity":"medium", "memo":"Component shortage can delay deployment timelines. Check if issue is systemic (sector-wide) or isolated (single vendor)."},
+    "hiring_freeze": {"label":"Hiring Freeze / Layoffs",         "icon":"👥","severity":"high",   "memo":"Headcount reduction signals cost pressure or strategic pivot. If post-funding, indicates burn rate concern."},
+    "cancellation":  {"label":"Project / Contract Cancellation", "icon":"✗", "severity":"critical","memo":"Cancellation removes projected revenue. Determine if demand-side (customer) or supply-side (execution)."},
+    "competitor_win":{"label":"Competitor Win",                  "icon":"🏆","severity":"medium", "memo":"Named competitor secured contract in same addressable market. Assess technology and cost differentiation."},
+    "subsidy_risk":  {"label":"Subsidy / Policy Risk",           "icon":"🏛","severity":"high",   "memo":"Subsidy-dependent revenue is not investable without commercial anchor. Policy reversal impacts TAM directly."},
+}
+
+MISSING_RULES = [
+    {
+        "id":"no_commercial_contract",
+        "label":"No Commercial Contract",
+        "check": lambda evs: not any(e["event_type"] in ("Contract","Deployment") for e in evs),
+        "severity":"critical",
+        "memo":"No binding commercial agreement with a named buyer on record. All revenue is hypothetical until an offtake or supply contract is confirmed.",
+        "sectors":"all",
+    },
+    {
+        "id":"no_certification",
+        "label":"No Third-Party Certification",
+        "check": lambda evs: not any(e["event_type"] == "Certification" for e in evs),
+        "severity":"high",
+        "memo":"No independent certification (DNV GL, TUV, KPX, UL) confirmed. In regulated energy markets this is a legal prerequisite for procurement.",
+        "sectors":["marine_fc","ess","hvdc","grid_sw"],
+    },
+    {
+        "id":"no_named_customer",
+        "label":"No Named Strategic Buyer",
+        "check": lambda evs: not any(
+            re.search(r"kepco|utility|shipyard|hyperscaler|microsoft|google|amazon|engie|hanwha|hyundai|samsung",
+                      (e.get("title","")+" "+e.get("summary","")).lower())
+            for e in evs
+        ),
+        "severity":"high",
+        "memo":"No named strategic buyer (utility, shipyard, hyperscaler, EPC) in any collected signal. Demand-side validation is absent.",
+        "sectors":"all",
+    },
+    {
+        "id":"no_deployment",
+        "label":"No Deployment / Go-Live",
+        "check": lambda evs: not any(e["event_type"] == "Deployment" for e in evs),
+        "severity":"medium",
+        "memo":"No operational deployment or commissioning confirmed. TRL-9 status in a commercial setting is unverified.",
+        "sectors":"all",
+    },
+    {
+        "id":"pilot_no_contract",
+        "label":"Pilot Present — No Commercial Follow-On",
+        "check": lambda evs: (
+            any(e["event_type"] == "Pilot" for e in evs) and
+            not any(e["event_type"] in ("Contract","Deployment") for e in evs)
+        ),
+        "severity":"high",
+        "memo":"Pilot exists but has not converted to a commercial contract. This is the most common failure point in energy hardware commercialization.",
+        "sectors":"all",
+    },
+    {
+        "id":"grant_no_commercial",
+        "label":"Grant Only — No Commercial Anchor",
+        "check": lambda evs: (
+            any(e["event_type"] == "Grant" for e in evs) and
+            not any(e["event_type"] in ("Contract","Pilot","Deployment") for e in evs)
+        ),
+        "severity":"high",
+        "memo":"Grant funding present but no commercial customer, pilot, or strategic partner. Grant-only signal is not sufficient for commercial-stage investment thesis.",
+        "sectors":"all",
+    },
+]
+
+
+def build_panels(all_signals, company_insights):
+    sev_order = {"critical":0,"high":1,"medium":2,"low":3}
+
+    # Panel 1: Negative Signals
+    negative_signals = []
+    for ev in all_signals:
+        if not ev["is_negative"]:
+            continue
+        subtype = ev.get("neg_subtype") or "delay"
+        meta = NEG_SUBTYPE_META.get(subtype, {
+            "label":"Negative Signal","icon":"⚠","severity":"high",
+            "memo":"Negative signal detected. Primary-source verification required."
+        })
+        negative_signals.append({
+            "event_id":    ev["id"],
+            "title":       ev["title"],
+            "source_name": ev["source_name"],
+            "source_url":  ev["source_url"],
+            "event_date":  ev["event_date"],
+            "company_id":  ev.get("company_id"),
+            "company_name":ev.get("company_name","Unassigned"),
+            "segment":     ev.get("segment","unknown"),
+            "neg_subtype": subtype,
+            "label":       meta["label"],
+            "icon":        meta["icon"],
+            "severity":    meta["severity"],
+            "memo":        meta["memo"],
+        })
+    negative_signals.sort(key=lambda x: sev_order.get(x["severity"], 9))
+
+    # Panel 2: Missing Evidence (per-company)
+    missing_evidence = []
+    for co_id, co_data in company_insights.items():
+        co_evs  = co_data.get("events", [])
+        sector  = co_data.get("sector","unknown")
+        co_name = co_data.get("name","Unknown")
+        co_gaps = []
+        for rule in MISSING_RULES:
+            sectors = rule["sectors"]
+            if sectors != "all" and sector not in sectors:
+                continue
+            try:
+                is_gap = rule["check"](co_evs)
+            except Exception:
+                is_gap = False
+            if is_gap:
+                co_gaps.append({
+                    "rule_id":  rule["id"],
+                    "label":    rule["label"],
+                    "severity": rule["severity"],
+                    "memo":     rule["memo"],
+                })
+        if co_gaps:
+            co_gaps.sort(key=lambda x: sev_order.get(x["severity"], 9))
+            missing_evidence.append({
+                "company_id":    co_id,
+                "company_name":  co_name,
+                "sector":        sector,
+                "stage":         co_data.get("stage","unknown"),
+                "gaps":          co_gaps,
+                "gap_count":     len(co_gaps),
+                "critical_gaps": sum(1 for g in co_gaps if g["severity"]=="critical"),
+                "high_gaps":     sum(1 for g in co_gaps if g["severity"]=="high"),
+            })
+    missing_evidence.sort(key=lambda x: (-(x["critical_gaps"]*10+x["high_gaps"]), x["company_name"]))
+
+    return {
+        "negative_signals": negative_signals,
+        "missing_evidence": missing_evidence,
+        "panel_stats": {
+            "negative_count":      len(negative_signals),
+            "critical_neg":        sum(1 for n in negative_signals if n["severity"]=="critical"),
+            "companies_with_gaps": len(missing_evidence),
+            "total_critical_gaps": sum(c["critical_gaps"] for c in missing_evidence),
+        },
+    }
+
+
+# ══════════════════════════════════════════════════════════
 # MAIN
 # ══════════════════════════════════════════════════════════
 
@@ -629,7 +805,12 @@ def main():
             }
     print(f"  인사이트 생성: {len(company_insights)}개 기업\n")
 
-    # 4. 브리핑
+    # 4. 패널 생성 (Missing Evidence + Negative Signals)
+    print("④ 패널 생성 중...")
+    panels = build_panels(kept, company_insights)
+    print(f"  Negative: {panels['panel_stats']['negative_count']}건 | Missing gaps: {panels['panel_stats']['companies_with_gaps']}개 기업\n")
+
+    # 5. 브리핑
     brief = generate_brief(kept)
 
     # 5. 통계
@@ -660,6 +841,7 @@ def main():
         "companies":    company_insights,
         "sources":      [s["name"] for s in RSS_SOURCES],
         "source_log":   source_log,
+        "panels":       panels,
         "reliability": {
             "sources_total":   len(source_log),
             "sources_ok":      sum(1 for s in source_log if s["status"]=="success"),
