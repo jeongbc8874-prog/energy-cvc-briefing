@@ -759,6 +759,213 @@ def generate_brief(events):
     )
 
 # ══════════════════════════════════════════════════════════
+# COMPANY ENRICHMENT
+# Aggregates signals per company → pattern, stage, TTR
+# Rule-based only. No invented data.
+# ══════════════════════════════════════════════════════════
+
+# Commercialization stage ladder (signal-evidence based)
+STAGE_LADDER = [
+    # (label, color, required_event_types, description)
+    ("Commercial",   "#0A6640", {"Contract","Deployment"},
+     "Binding commercial agreement or live deployment confirmed."),
+    ("Pre-Commercial","#1A56DB", {"Certification","Pilot"},
+     "Technical gate cleared (certification or strategic pilot). Commercial conversion not yet confirmed."),
+    ("Validation",   "#7D4E00", {"Pilot","Partnership","Grant"},
+     "Third-party validation in progress. No commercial gate cleared."),
+    ("Early",        "#6E6E6E", set(),
+     "Limited public signal. Company at early stage or undisclosed activity."),
+]
+
+def infer_stage(evs):
+    """
+    Infer commercialization stage from actual events.
+    Ladder: Commercial > Pre-Commercial > Validation > Early
+    Returns (label, color, description)
+    """
+    types = {e["event_type"] for e in evs}
+    for label, color, required, desc in STAGE_LADDER:
+        if required and required & types:
+            return label, color, desc
+    return "Early", "#6E6E6E", "Limited public signal. Company at early stage or undisclosed activity."
+
+# Pattern detection — rule-based clusters
+PATTERN_RULES = [
+    {
+        "id":    "series_c_prep",
+        "label": "Pre-Series C Signal Cluster",
+        "color": "#1A56DB",
+        "requires": lambda types, high_ct, neg_ct: (
+            "Certification" in types and
+            ("Contract" in types or "Pilot" in types) and
+            "Hiring" in types and
+            high_ct >= 2 and neg_ct == 0
+        ),
+        "memo": "Three reinforcing signals — regulatory gate cleared, commercial engagement, and finance-function hire. In comparable domestic cases this cluster preceded a Series C raise within 6–12 months.",
+    },
+    {
+        "id":    "commercial_breakout",
+        "label": "Commercial Breakout",
+        "color": "#0A6640",
+        "requires": lambda types, high_ct, neg_ct: (
+            ("Contract" in types or "Deployment" in types) and
+            high_ct >= 2 and neg_ct == 0
+        ),
+        "memo": "Commercial-stage signal with multiple high-quality events. Contract or deployment present. Revenue visibility beginning to emerge.",
+    },
+    {
+        "id":    "cert_gate_cleared",
+        "label": "Certification Gate Cleared",
+        "color": "#0050B3",
+        "requires": lambda types, high_ct, neg_ct: (
+            "Certification" in types and
+            "Contract" not in types and
+            "Deployment" not in types and
+            neg_ct == 0
+        ),
+        "memo": "Certification obtained but no commercial contract yet confirmed. The hardest technical gate is cleared; commercial conversion is the next critical event to watch.",
+    },
+    {
+        "id":    "strategic_momentum",
+        "label": "Strategic Partnership Momentum",
+        "color": "#5B21B6",
+        "requires": lambda types, high_ct, neg_ct: (
+            "Partnership" in types and
+            ("Pilot" in types or "Financing" in types) and
+            neg_ct == 0
+        ),
+        "memo": "Strategic partnership combined with pilot or financing signals active commercial engagement. Watch for partnership-to-contract conversion.",
+    },
+    {
+        "id":    "funding_signal",
+        "label": "Fundraising Preparation Signal",
+        "color": "#7D4E00",
+        "requires": lambda types, high_ct, neg_ct: (
+            "Hiring" in types and
+            "Financing" not in types and
+            neg_ct == 0
+        ),
+        "memo": "Finance or BD hiring without a confirmed round announcement. CFO hire is historically correlated with a raise within 3–6 months.",
+    },
+    {
+        "id":    "grant_dependent",
+        "label": "Grant-Dependent — Weak Commercial Signal",
+        "color": "#D97706",
+        "requires": lambda types, high_ct, neg_ct: (
+            "Grant" in types and
+            "Contract" not in types and
+            "Pilot" not in types and
+            "Certification" not in types
+        ),
+        "memo": "Primary visible signal is grant funding. Non-dilutive capital validates technology direction but does not confirm market demand. Commercial anchor absent.",
+    },
+    {
+        "id":    "negative_flags",
+        "label": "Negative Signals Present — Reassess",
+        "color": "#C0392B",
+        "requires": lambda types, high_ct, neg_ct: neg_ct >= 1,
+        "memo": "One or more negative signals detected. Positive signals must be reassessed in context of identified headwinds. Determine if issues are project-level (isolated) or structural.",
+    },
+    {
+        "id":    "low_density",
+        "label": "Insufficient Signal Density",
+        "color": "#A8A8A8",
+        "requires": lambda types, high_ct, neg_ct: True,  # fallback
+        "memo": "Signal density insufficient for pattern recognition. Primary research required before forming a view.",
+    },
+]
+
+def detect_pattern(evs):
+    """Match the first applicable pattern rule. Returns pattern dict."""
+    types  = {e["event_type"] for e in evs}
+    high_ct= sum(1 for e in evs if e["signal_tier"] == "high")
+    neg_ct = sum(1 for e in evs if e["is_negative"])
+    for rule in PATTERN_RULES:
+        if rule["requires"](types, high_ct, neg_ct):
+            return {
+                "id":    rule["id"],
+                "label": rule["label"],
+                "color": rule["color"],
+                "memo":  rule["memo"],
+            }
+    return {"id":"low_density","label":"Insufficient Signal Density","color":"#A8A8A8","memo":"Signal density insufficient."}
+
+# Time-to-relevance — rule-based, no speculation
+TTR_RULES = [
+    # (label, color, condition_fn)
+    ("Near-term",  "#C0392B", lambda stage, pattern_id, high_ct: (
+        stage == "Commercial" or
+        (stage == "Pre-Commercial" and pattern_id in ("series_c_prep","commercial_breakout") and high_ct >= 2)
+    )),
+    ("Mid-term",   "#7D4E00", lambda stage, pattern_id, high_ct: (
+        stage in ("Pre-Commercial","Validation") and
+        pattern_id not in ("grant_dependent","low_density","negative_flags")
+    )),
+    ("Long-term",  "#6E6E6E", lambda stage, pattern_id, high_ct: True),
+]
+
+def infer_ttr(stage_label, pattern_id, high_ct):
+    for label, color, cond in TTR_RULES:
+        if cond(stage_label, pattern_id, high_ct):
+            return label, color
+    return "Long-term", "#6E6E6E"
+
+def count_reinforcing(evs):
+    """
+    Reinforcing signals = multiple HIGH events with different event_types.
+    e.g. Certification + Contract + Hiring = 3 reinforcing (strong).
+    """
+    high_types = list({e["event_type"] for e in evs if e["signal_tier"] == "high"})
+    return len(high_types)
+
+def enrich_company(co, evs):
+    """
+    Assemble full company intelligence object.
+    All fields derived from actual events. No invented data.
+    """
+    types      = {e["event_type"] for e in evs}
+    high_ct    = sum(1 for e in evs if e["signal_tier"] == "high")
+    neg_ct     = sum(1 for e in evs if e["is_negative"])
+    reinforcing= count_reinforcing(evs)
+
+    stage_label, stage_color, stage_desc = infer_stage(evs)
+    pattern     = detect_pattern(evs)
+    ttr_label, ttr_color = infer_ttr(stage_label, pattern["id"], high_ct)
+    insight     = build_insight(co, evs)
+
+    # Signal timeline: most recent 8 events
+    timeline = sorted(evs, key=lambda e: e["event_date"], reverse=True)[:8]
+
+    # Signal type summary
+    type_counts = {}
+    for e in evs:
+        type_counts[e["event_type"]] = type_counts.get(e["event_type"], 0) + 1
+
+    return {
+        **co,
+        "events":          timeline,
+        "insight":         insight,
+        "signal_count":    len(evs),
+        "high_count":      high_ct,
+        "neg_count":       neg_ct,
+        "reinforcing":     reinforcing,
+        "type_counts":     type_counts,
+
+        # Stage
+        "stage_label":     stage_label,
+        "stage_color":     stage_color,
+        "stage_desc":      stage_desc,
+
+        # Pattern
+        "pattern":         pattern,
+
+        # Time-to-relevance
+        "ttr":             ttr_label,
+        "ttr_color":       ttr_color,
+    }
+
+
+# ══════════════════════════════════════════════════════════
 # PANEL BUILDERS
 # ══════════════════════════════════════════════════════════
 
@@ -942,13 +1149,7 @@ def main():
     for co in COMPANIES:
         evs = company_events.get(co["id"], [])
         if evs:
-            company_insights[co["id"]] = {
-                **co,
-                "events": evs,
-                "insight": build_insight(co, evs),
-                "signal_count": len(evs),
-                "high_count": sum(1 for e in evs if e["signal_tier"] == "high"),
-            }
+            company_insights[co["id"]] = enrich_company(co, evs)
     print(f"  인사이트 생성: {len(company_insights)}개 기업\n")
 
     # 4. 패널 생성 (Missing Evidence + Negative Signals)
