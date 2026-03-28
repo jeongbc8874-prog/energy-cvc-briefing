@@ -18,26 +18,74 @@ a{color:inherit;text-decoration:none;}
 ::-webkit-scrollbar{width:4px;}::-webkit-scrollbar-thumb{background:#D0CEC8;}
 @keyframes fadeIn{from{opacity:0;transform:translateY(3px)}to{opacity:1;transform:translateY(0)}}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+@keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
 .blink{animation:blink 1.2s infinite;}
+.spin{animation:spin 1s linear infinite;display:inline-block;}
+
+/* ══════════════════════════════════════════════════════
+   RELIABILITY STATUS BAR — always visible, never hidden
+══════════════════════════════════════════════════════ */
+#rel-bar{font-family:var(--mono);font-size:10px;padding:0 20px;border-bottom:1px solid transparent;transition:background .2s,border-color .2s;}
+#rel-bar.s-ok      {background:#071A07;border-color:#0F3A0F;color:#4ADE80;}
+#rel-bar.s-partial {background:#1A1200;border-color:#3A2800;color:#FCD34D;}
+#rel-bar.s-error   {background:#1A0707;border-color:#3A0F0F;color:#FCA5A5;}
+#rel-bar.s-loading {background:#111111;border-color:#1E1E1E;color:#555;}
+#rel-bar.s-nodata  {background:#111111;border-color:#1E1E1E;color:#666;}
+
+#rel-inner{max-width:1300px;margin:0 auto;display:flex;align-items:center;min-height:36px;flex-wrap:wrap;gap:0;}
+
+/* Status dot */
+.rdot{width:7px;height:7px;border-radius:50%;flex-shrink:0;margin-right:10px;}
+.rdot.ok     {background:#4ADE80;}
+.rdot.partial{background:#FCD34D;animation:blink 2s infinite;}
+.rdot.error  {background:#FCA5A5;animation:blink .8s infinite;}
+.rdot.loading{background:#444;animation:blink 1.5s infinite;}
+.rdot.nodata {background:#444;}
+
+/* Segments */
+.rseg{display:flex;align-items:center;gap:5px;padding:9px 14px 9px 0;border-right:1px solid rgba(255,255,255,.06);margin-right:14px;}
+.rseg:last-of-type{border-right:none;}
+.rl{opacity:.45;font-size:9px;letter-spacing:.06em;}
+.rv{font-weight:600;font-size:11px;}
+.rv-ok  {color:#4ADE80;}
+.rv-warn{color:#FCD34D;}
+.rv-fail{color:#FCA5A5;}
+.rv-neu {color:#C0C0C0;}
+
+/* Source pills */
+#src-pills{max-width:1300px;margin:0 auto;display:flex;gap:4px;flex-wrap:wrap;padding-bottom:8px;}
+.sp{font-family:var(--mono);font-size:9px;font-weight:600;letter-spacing:.04em;padding:2px 8px;border-radius:2px;display:inline-flex;align-items:center;gap:4px;cursor:help;}
+.sp.ok     {background:#0A1F0A;color:#4ADE80;border:1px solid #1A3A1A;}
+.sp.partial{background:#241A00;color:#FCD34D;border:1px solid #4A3A00;}
+.sp.failed {background:#1F0A0A;color:#FCA5A5;border:1px solid #4A1A1A;}
+.sp.unknown{background:#1A1A1A;color:#777;border:1px solid #333;}
+
+/* Source detail table */
+#src-detail{max-width:1300px;margin:0 auto;padding-bottom:10px;display:none;animation:fadeIn .15s;}
+#src-detail.open{display:block;}
+.stbl{width:100%;border-collapse:collapse;font-family:var(--mono);font-size:10px;}
+.stbl th{color:#444;font-weight:500;padding:4px 10px;text-align:left;border-bottom:1px solid #1E1E1E;}
+.stbl td{padding:5px 10px;border-bottom:1px solid #181818;vertical-align:middle;}
+.stbl tr:last-child td{border-bottom:none;}
 
 /* ── Ticker ── */
-#ticker{background:var(--ink);color:#666;font-family:var(--mono);font-size:10px;padding:5px 20px;display:flex;gap:16px;flex-wrap:wrap;align-items:center;}
-.t-live{color:#4ADE80;}.t-sep{color:#333;}.t-val{color:#C0C0C0;}
+#ticker{background:var(--ink);color:#555;font-family:var(--mono);font-size:10px;padding:5px 20px;display:flex;gap:14px;flex-wrap:wrap;align-items:center;}
+.sep{color:#222;}
 
 /* ── Header ── */
 #hdr{background:var(--surface);border-bottom:3px solid var(--ink);padding:12px 20px;}
 #hdr-in{max-width:1300px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;}
-#hdr h1{font-family:'IBM Plex Serif',Georgia,serif;font-size:18px;font-weight:600;color:var(--ink);}
+#hdr h1{font-family:'IBM Plex Serif',Georgia,serif;font-size:18px;font-weight:600;}
 #hdr-sub{font-family:var(--mono);font-size:9px;color:var(--ink4);letter-spacing:.1em;text-transform:uppercase;margin-top:3px;}
 
-/* ── Tabs ── */
+/* ── Nav ── */
 #nav{background:var(--surface);border-bottom:1px solid var(--ink);padding:0 20px;}
 #nav-in{max-width:1300px;margin:0 auto;display:flex;overflow-x:auto;}
 .tab{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.05em;text-transform:uppercase;color:var(--ink3);padding:10px 16px 8px;border:none;background:none;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;}
 .tab:hover{color:var(--ink);}
 .tab.on{color:var(--ink);border-bottom-color:var(--red);font-weight:600;}
 
-/* ── Filter ── */
+/* ── Filter bar ── */
 #fbar{background:var(--bg);border-bottom:1px solid var(--b);padding:8px 20px;position:sticky;top:0;z-index:90;}
 #fbar-in{max-width:1300px;margin:0 auto;display:flex;gap:6px;flex-wrap:wrap;align-items:center;}
 #srch{font-family:var(--mono);font-size:11px;padding:5px 10px;border:1px solid var(--b);background:var(--surface);color:var(--ink);outline:none;flex:1;min-width:140px;max-width:250px;}
@@ -47,7 +95,7 @@ a{color:inherit;text-decoration:none;}
 .pill.on{background:var(--ink);color:#FFF;border-color:var(--ink);}
 .pill.red.on{background:var(--red);border-color:var(--red);}
 
-/* ── Layout ── */
+/* ── Main layout ── */
 #main{max-width:1300px;margin:0 auto;padding:16px 20px;display:grid;grid-template-columns:1fr 280px;gap:16px;}
 @media(max-width:900px){#main{grid-template-columns:1fr;}#sidebar{display:none;}}
 
@@ -56,19 +104,28 @@ a{color:inherit;text-decoration:none;}
 .chd{padding:9px 14px;border-bottom:1px solid var(--b2);font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink4);}
 .cbd{padding:12px 14px;}
 
-/* ── Signal row ── */
+/* ── UI state boxes ── */
+.box-loading{padding:48px 20px;text-align:center;font-family:var(--mono);font-size:11px;color:var(--ink4);letter-spacing:.08em;}
+.box-nodata{padding:48px 20px;text-align:center;}
+.box-nodata h3{font-size:15px;font-weight:600;margin-bottom:8px;}
+.box-nodata p{font-size:12px;color:var(--ink3);line-height:1.75;margin-bottom:16px;}
+.box-nodata code{background:var(--b2);padding:1px 5px;font-family:var(--mono);font-size:11px;}
+.box-error{padding:20px;background:#FFF5F5;border:1px solid #FCA5A5;border-left:4px solid var(--red);}
+.box-error h3{font-family:var(--mono);font-size:11px;font-weight:700;color:var(--red);letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px;}
+.partial-banner{background:#1A1200;border:1px solid #4A3A00;border-left:4px solid #FCD34D;padding:9px 14px;margin-bottom:12px;font-family:var(--mono);font-size:10px;color:#FCD34D;display:flex;gap:10px;align-items:flex-start;animation:fadeIn .2s;}
+.partial-banner b{font-weight:700;}
+
+/* ── Signal rows ── */
 .sig{border-bottom:1px solid var(--b2);padding:12px 18px;cursor:pointer;transition:background .08s;}
 .sig:last-child{border-bottom:none;}
 .sig:hover{background:#F7F5F0;}
 .sig-meta{display:flex;align-items:center;gap:5px;margin-bottom:5px;flex-wrap:wrap;}
 .sig-co{font-family:var(--mono);font-size:11px;font-weight:600;color:var(--blue);margin-bottom:3px;}
-.sig-title{font-size:13px;font-weight:500;color:var(--ink);line-height:1.4;margin-bottom:3px;}
-.sig-title a:hover{color:var(--red);border-bottom:1px solid var(--red);}
+.sig-title{font-size:13px;font-weight:500;line-height:1.4;margin-bottom:3px;}
+.sig-title a:hover{color:var(--red);}
 .sig-src{font-family:var(--mono);font-size:10px;color:var(--ink4);display:flex;align-items:center;gap:8px;}
-.sig-body{padding:10px 0 2px;border-top:1px solid var(--b2);margin-top:8px;animation:fadeIn .15s ease;}
+.sig-body{padding:10px 0 2px;border-top:1px solid var(--b2);margin-top:8px;animation:fadeIn .15s;}
 .hint{font-family:var(--mono);font-size:10px;color:var(--ink4);margin-top:3px;}
-
-/* Score bar */
 .sbar{display:inline-flex;align-items:center;gap:5px;}
 .sbar-bg{width:50px;height:4px;background:var(--b2);overflow:hidden;}
 .sbar-fill{height:100%;}
@@ -76,32 +133,32 @@ a{color:inherit;text-decoration:none;}
 
 /* ── Tags ── */
 .tag{display:inline-flex;align-items:center;padding:1px 6px;font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.03em;white-space:nowrap;border:1px solid var(--b);}
-.t-H{background:#FEE2E2;color:var(--red);border-color:#FCA5A5;}
-.t-M{background:#FEF9C3;color:var(--amber);border-color:#FDE68A;}
-.t-neg{background:#FFF1F0;color:var(--red);border-color:#FFCCC7;}
-.t-cert{background:#F0FDF4;color:var(--green);border-color:#A7F3D0;}
-.t-ctr{background:#EFF6FF;color:var(--blue);border-color:#BFDBFE;}
-.t-pilot{background:#F5F3FF;color:#5B21B6;border-color:#DDD6FE;}
-.t-hire{background:#FFFBEB;color:var(--amber);border-color:#FDE68A;}
-.t-fin{background:#F0FDF4;color:var(--green);border-color:#A7F3D0;}
-.t-news{background:var(--bg);color:var(--ink4);}
+.tH{background:#FEE2E2;color:var(--red);border-color:#FCA5A5;}
+.tM{background:#FEF9C3;color:var(--amber);border-color:#FDE68A;}
+.tN{background:#FFF1F0;color:var(--red);border-color:#FFCCC7;}
+.tC{background:#F0FDF4;color:var(--green);border-color:#A7F3D0;}
+.tB{background:#EFF6FF;color:var(--blue);border-color:#BFDBFE;}
+.tP{background:#F5F3FF;color:#5B21B6;border-color:#DDD6FE;}
+.tR{background:#FFFBEB;color:var(--amber);border-color:#FDE68A;}
+.tF{background:#F0FDF4;color:var(--green);border-color:#A7F3D0;}
+.t0{background:var(--bg);color:var(--ink4);}
 
-/* ── Memo ── */
+/* ── Investment memo ── */
 .memo{border:2px solid var(--ink);margin-top:12px;}
-.memo-hd{background:var(--ink);padding:9px 14px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;}
+.memo-hd{background:var(--ink);padding:9px 14px;display:flex;justify-content:space-between;align-items:center;}
 .memo-hd-l{font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.12em;color:#777;text-transform:uppercase;}
 .memo-bd{padding:14px;}
-.msec{margin-bottom:14px;}
-.mlbl{font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink4);margin-bottom:6px;}
-.mfact{display:flex;gap:7px;font-size:12px;color:var(--ink2);padding:4px 8px;background:var(--bg);border-left:2px solid var(--green);margin-bottom:4px;line-height:1.5;}
-.mind{display:flex;gap:7px;font-size:12px;color:var(--ink2);padding:4px 8px;border-left:2px solid var(--blue);margin-bottom:4px;line-height:1.5;}
-.mmiss{display:flex;gap:7px;font-size:12px;color:#7F1D1D;padding:4px 8px;background:#FFF5F5;border-left:2px solid var(--red);margin-bottom:4px;line-height:1.5;}
-.mpat{padding:10px 13px;background:#F0F5FF;border-left:3px solid var(--blue);font-size:13px;color:var(--ink);line-height:1.7;}
-.mnxt{padding:10px 13px;background:#FFFBEB;border-left:3px solid var(--amber);font-size:13px;color:var(--ink2);line-height:1.65;}
+.ms{margin-bottom:13px;}
+.ml{font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink4);margin-bottom:6px;}
+.mF{display:flex;gap:7px;font-size:12px;color:var(--ink2);padding:4px 8px;background:var(--bg);border-left:2px solid var(--green);margin-bottom:4px;line-height:1.5;}
+.mI{display:flex;gap:7px;font-size:12px;color:var(--ink2);padding:4px 8px;border-left:2px solid var(--blue);margin-bottom:4px;line-height:1.5;}
+.mX{display:flex;gap:7px;font-size:12px;color:#7F1D1D;padding:4px 8px;background:#FFF5F5;border-left:2px solid var(--red);margin-bottom:4px;line-height:1.5;}
+.mP{padding:10px 13px;background:#F0F5FF;border-left:3px solid var(--blue);font-size:13px;color:var(--ink);line-height:1.7;}
+.mN{padding:10px 13px;background:#FFFBEB;border-left:3px solid var(--amber);font-size:13px;color:var(--ink2);line-height:1.65;}
 
 /* ── Brief ── */
 #brief-box{background:var(--ink);padding:16px 20px;margin-bottom:14px;}
-#brief-lbl{font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.12em;color:#666;margin-bottom:8px;}
+#brief-lbl{font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.12em;color:#555;margin-bottom:8px;}
 #brief-txt{font-size:12px;color:#C0C0C0;line-height:1.85;white-space:pre-wrap;}
 
 /* ── Sidebar ── */
@@ -113,17 +170,22 @@ a{color:inherit;text-decoration:none;}
 .segbg{flex:1;height:4px;background:var(--b2);overflow:hidden;}
 .segfl{height:100%;background:var(--blue);}
 .segct{font-family:var(--mono);font-size:10px;color:var(--ink4);min-width:18px;text-align:right;}
+.src-row{display:flex;align-items:flex-start;gap:7px;padding:5px 0;border-bottom:1px solid var(--b2);}
+.src-row:last-child{border-bottom:none;}
+.src-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;margin-top:3px;}
+.src-info{flex:1;min-width:0;}
+.src-name{font-size:11px;color:var(--ink2);margin-bottom:1px;}
+.src-meta{font-family:var(--mono);font-size:9px;color:var(--ink4);}
+.src-err{font-size:10px;color:var(--red);margin-top:2px;}
 
 /* ── History ── */
 .hist-row{display:flex;align-items:center;gap:14px;padding:10px 18px;border-bottom:1px solid var(--b2);cursor:pointer;}
 .hist-row:hover{background:var(--bg);}
-.hist-date{font-family:var(--mono);font-size:11px;font-weight:600;color:var(--ink);min-width:88px;}
+.hist-date{font-family:var(--mono);font-size:11px;font-weight:600;min-width:88px;}
 .hist-datek{font-size:12px;color:var(--ink3);flex:1;}
 .hist-stats{display:flex;gap:10px;}
 .hist-stat{font-family:var(--mono);font-size:10px;color:var(--ink4);}
 
-/* ── Empty / Loading ── */
-.loading{text-align:center;padding:40px;font-family:var(--mono);font-size:11px;color:var(--ink4);letter-spacing:.08em;}
 .empty{text-align:center;padding:40px;font-size:13px;color:var(--ink3);}
 .btn{font-family:var(--mono);font-size:10px;font-weight:600;padding:5px 12px;border:1px solid var(--b);background:var(--surface);color:var(--ink2);cursor:pointer;}
 .btn:hover{background:var(--ink);color:#FFF;border-color:var(--ink);}
@@ -131,20 +193,73 @@ a{color:inherit;text-decoration:none;}
 </head>
 <body>
 
-<div id="ticker">
-  <span class="t-live">● LIVE</span>
-  <span class="t-sep">|</span>
-  <span class="t-val" id="t-date">—</span>
-  <span class="t-sep">|</span>
-  <span>Signals: <span class="t-val" id="t-total">—</span></span>
-  <span class="t-sep">|</span>
-  <span style="color:#FCD34D;font-weight:600">High: <span id="t-high">—</span></span>
-  <span class="t-sep">|</span>
-  <span style="color:#FCA5A5">Negative: <span id="t-neg">—</span></span>
-  <span class="t-sep">|</span>
-  <span class="t-val">RSS + AI Analysis · 팩트 전용</span>
+<!-- ══════════════════════════════════════════════════════
+     RELIABILITY STATUS BAR — pipeline health, always visible
+     State classes: s-loading / s-ok / s-partial / s-error / s-nodata
+════════════════════════════════════════════════════════ -->
+<div id="rel-bar" class="s-loading">
+  <div id="rel-inner">
+    <span class="rdot loading" id="rdot"></span>
+
+    <div class="rseg">
+      <span class="rl">STATUS</span>
+      <span class="rv" id="r-status">초기화 중…</span>
+    </div>
+    <div class="rseg">
+      <span class="rl">Updated</span>
+      <span class="rv rv-neu" id="r-updated">—</span>
+    </div>
+    <div class="rseg">
+      <span class="rl">Sources</span>
+      <span class="rv rv-ok"   id="r-ok">—</span><span class="rv rv-neu"> / </span>
+      <span class="rv rv-warn" id="r-partial" style="display:none"></span>
+      <span class="rv rv-neu"  id="r-psep"    style="display:none"> / </span>
+      <span class="rv rv-fail" id="r-fail"    style="display:none"></span>
+      <span class="rv rv-neu"  id="r-total">—</span>
+    </div>
+    <div class="rseg">
+      <span class="rl">Events</span>
+      <span class="rv rv-neu" id="r-events">—</span>
+    </div>
+    <div class="rseg">
+      <span class="rl">Filtered</span>
+      <span class="rv" style="color:#444" id="r-filtered">—</span>
+    </div>
+
+    <button id="r-toggle" onclick="toggleSrcDetail()"
+      style="margin-left:auto;font-family:var(--mono);font-size:9px;font-weight:600;letter-spacing:.06em;padding:3px 10px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.35);cursor:pointer;">
+      SOURCE DETAIL ▾
+    </button>
+  </div>
+
+  <!-- per-source pill strip -->
+  <div id="src-pills"></div>
+
+  <!-- expandable source table -->
+  <div id="src-detail">
+    <table class="stbl">
+      <thead><tr>
+        <th>Source</th><th>Status</th><th>Items</th><th>Last Fetch</th><th>Error</th>
+      </tr></thead>
+      <tbody id="stbl-body"></tbody>
+    </table>
+  </div>
 </div>
 
+<!-- ── Ticker ── -->
+<div id="ticker">
+  <span style="color:#C0C0C0" id="t-date">—</span>
+  <span class="sep">|</span>
+  Signals: <span style="color:#C0C0C0" id="t-total">—</span>
+  <span class="sep">|</span>
+  <span style="color:#FCD34D;font-weight:600">High: <span id="t-high">—</span></span>
+  <span class="sep">|</span>
+  <span style="color:#FCA5A5">Neg: <span id="t-neg">—</span></span>
+  <span class="sep">|</span>
+  <span style="color:#444">RSS · Rule-based · Fact-only</span>
+</div>
+
+<!-- ── Header ── -->
 <div id="hdr">
   <div id="hdr-in">
     <div>
@@ -155,15 +270,18 @@ a{color:inherit;text-decoration:none;}
   </div>
 </div>
 
+<!-- ── Tabs ── -->
 <div id="nav">
   <div id="nav-in">
-    <button class="tab on" onclick="switchTab('signals',this)">Signal Feed</button>
-    <button class="tab" onclick="switchTab('companies',this)">Companies</button>
-    <button class="tab" onclick="switchTab('negative',this)">Negative</button>
-    <button class="tab" onclick="switchTab('history',this)">Archive</button>
+    <button class="tab on"  onclick="switchTab('signals',this)">Signal Feed</button>
+    <button class="tab"     onclick="switchTab('companies',this)">Companies</button>
+    <button class="tab"     onclick="switchTab('negative',this)">Negative</button>
+    <button class="tab"     onclick="switchTab('sources',this)">Sources</button>
+    <button class="tab"     onclick="switchTab('history',this)">Archive</button>
   </div>
 </div>
 
+<!-- ── Filter bar ── -->
 <div id="fbar">
   <div id="fbar-in">
     <input id="srch" placeholder="Search signals…" oninput="renderFeed()">
@@ -174,333 +292,513 @@ a{color:inherit;text-decoration:none;}
   </div>
 </div>
 
+<!-- ── Main ── -->
 <div id="main">
   <div id="feed-col">
-    <div class="loading"><span class="blink">■</span> LOADING...</div>
+    <div class="box-loading"><span class="spin" style="font-size:20px;margin-bottom:10px">⟳</span><br>로딩 중…</div>
   </div>
   <div id="sidebar">
     <div class="card" style="margin-bottom:12px">
       <div class="chd">Summary</div>
-      <div class="cbd" id="stats-box"></div>
+      <div class="cbd" id="stats-box"><div style="font-size:11px;color:var(--ink4)">로딩 중…</div></div>
     </div>
     <div class="card" style="margin-bottom:12px">
       <div class="chd">Segments</div>
       <div class="cbd" id="seg-box"></div>
     </div>
+    <div class="card" style="margin-bottom:12px">
+      <div class="chd">Sources</div>
+      <div class="cbd" id="src-sidebar"><div style="font-size:11px;color:var(--ink4)">로딩 중…</div></div>
+    </div>
     <div class="card">
       <div class="chd">Signal Rules</div>
       <div class="cbd" style="font-size:11px;color:var(--ink3);line-height:1.8">
         <div style="padding:3px 7px;border-left:2px solid var(--green);margin-bottom:4px">Cert + Contract + CFO → Series C 준비</div>
-        <div style="padding:3px 7px;border-left:2px solid var(--blue);margin-bottom:4px">유틸리티/하이퍼스케일러 파일럿 → 강한 상업 신호</div>
-        <div style="padding:3px 7px;border-left:2px solid var(--amber);margin-bottom:4px">그랜트 단독 → 오프테이커 없이 약한 신호</div>
-        <div style="padding:3px 7px;border-left:2px solid var(--red)">PR 홍보성 문구 → -40pts (필터)</div>
+        <div style="padding:3px 7px;border-left:2px solid var(--blue);margin-bottom:4px">유틸리티 파일럿 → 강한 상업 신호</div>
+        <div style="padding:3px 7px;border-left:2px solid var(--amber);margin-bottom:4px">그랜트 단독 → 약한 신호</div>
+        <div style="padding:3px 7px;border-left:2px solid var(--red)">홍보성 PR → -40pts 필터</div>
       </div>
     </div>
   </div>
 </div>
 
 <script>
-// ── State ─────────────────────────────────────────────────
-var DATA = null, SIGNALS = [], IDX = [];
-var curTier = "all", curTab = "signals", EXP = new Set();
+// ════════════════════════════
+// STATE
+// ════════════════════════════
+var DATA=null,SIGNALS=[],IDX=[],SRCLOG=[];
+var curTier="all",curTab="signals",EXP=new Set(),srcOpen=false;
 
-// ── Load data ─────────────────────────────────────────────
-async function loadData(url) {
-  url = url || ("data/latest.json?" + Date.now());
-  try {
-    var r = await fetch(url);
-    if (!r.ok) throw new Error("not found");
-    DATA = await r.json();
-    SIGNALS = DATA.signals || [];
-    updateTicker();
+// ════════════════════════════
+// LOAD DATA
+// ════════════════════════════
+async function loadData(url){
+  setRelState("loading");
+  url=url||("data/latest.json?"+Date.now());
+  try{
+    var r=await fetch(url);
+    if(r.status===404){setRelState("nodata");renderNoData();return false;}
+    if(!r.ok)throw new Error("HTTP "+r.status);
+    DATA=await r.json();
+    SIGNALS=DATA.signals||[];
+    SRCLOG =DATA.source_log||[];
+    updateRelBar();
     renderSidebar();
-    document.getElementById("btn-copy").style.display = "inline-flex";
+    document.getElementById("btn-copy").style.display="inline-flex";
     return true;
-  } catch(e) {
-    document.getElementById("feed-col").innerHTML =
-      '<div class="empty">데이터 없음 — GitHub Actions → Run workflow 실행 필요</div>';
+  }catch(err){
+    setRelState("error",err.message);
+    renderError(err.message);
     return false;
   }
 }
-
-async function loadIndex() {
-  try {
-    var r = await fetch("data/index.json?" + Date.now());
-    if (!r.ok) return;
-    IDX = await r.json();
-  } catch(e) {}
+async function loadIndex(){
+  try{var r=await fetch("data/index.json?"+Date.now());if(!r.ok)return;IDX=await r.json();}catch(e){}
 }
 
-function updateTicker() {
-  var s = DATA.stats || {};
-  document.getElementById("t-date").textContent  = DATA.dateKr || DATA.date || "—";
-  document.getElementById("t-total").textContent = s.total || 0;
-  document.getElementById("t-high").textContent  = s.high  || 0;
-  document.getElementById("t-neg").textContent   = s.negative || 0;
+// ════════════════════════════
+// RELIABILITY BAR
+// ════════════════════════════
+function setRelState(state,msg){
+  var bar=document.getElementById("rel-bar");
+  var dot=document.getElementById("rdot");
+  var st =document.getElementById("r-status");
+  bar.className="s-"+state;
+  dot.className="rdot "+state;
+  var txt={loading:"초기화 중…",ok:"ALL SYSTEMS OK",partial:"PARTIAL — 일부 소스 실패",
+            error:"ERROR — 데이터 없음",nodata:"NO DATA — 파이프라인 실행 필요"}[state]||state;
+  if(msg&&state==="error")txt="ERROR: "+msg;
+  st.textContent=txt;
 }
 
-// ── Sidebar ───────────────────────────────────────────────
-function renderSidebar() {
-  if (!DATA) return;
-  var s = DATA.stats || {};
-  var rows = [
-    {n:s.total||0,     l:"Total",        c:"var(--ink)"},
-    {n:s.high||0,      l:"High signal",  c:"var(--red)"},
-    {n:s.medium||0,    l:"Medium",       c:"var(--amber)"},
-    {n:s.matched||0,   l:"Company match",c:"var(--blue)"},
-    {n:s.negative||0,  l:"Negative",     c:"var(--red)"},
-    {n:s.filtered_out||0,l:"Filtered",   c:"var(--ink4)"},
-  ];
-  document.getElementById("stats-box").innerHTML =
-    rows.map(function(x){return '<div class="sr"><span class="sl">'+x.l+'</span><span class="sn" style="color:'+x.c+'">'+x.n+'</span></div>';}).join("");
+function updateRelBar(){
+  if(!DATA)return;
+  var rel=DATA.reliability||{};
+  var log=SRCLOG;
+  var s  =DATA.stats||{};
+  var ok =rel.sources_ok      || log.filter(function(x){return x.status==="success";}).length;
+  var par=rel.sources_partial || log.filter(function(x){return x.status==="partial";}).length;
+  var fai=rel.sources_failed  || log.filter(function(x){return x.status==="failed"; }).length;
+  var tot=rel.sources_total   || log.length||(DATA.sources||[]).length;
 
-  var segs = s.by_segment || {};
-  var maxSeg = Math.max.apply(null, Object.values(segs).concat([1]));
-  document.getElementById("seg-box").innerHTML =
+  var state=fai>0&&ok===0?"error":fai>0||par>0?"partial":ok>0?"ok":"nodata";
+  setRelState(state);
+
+  // Updated time
+  if(DATA.generatedAt){
+    try{
+      var d=new Date(DATA.generatedAt);
+      document.getElementById("r-updated").textContent=
+        d.toLocaleString("ko-KR",{month:"numeric",day:"numeric",hour:"2-digit",minute:"2-digit"});
+    }catch(e){document.getElementById("r-updated").textContent=DATA.generatedAt.slice(0,16);}
+  }
+
+  // Source counts
+  document.getElementById("r-ok").textContent=ok+"✓";
+  document.getElementById("r-total").textContent=" / "+tot;
+  if(par>0){
+    document.getElementById("r-partial").textContent=par+"~";
+    document.getElementById("r-partial").style.display="inline";
+    document.getElementById("r-psep").style.display="inline";
+  }
+  if(fai>0){
+    document.getElementById("r-fail").textContent=fai+"✗";
+    document.getElementById("r-fail").style.display="inline";
+  }
+
+  // Event counts
+  var evN=rel.new_events!==undefined?rel.new_events:s.total||"—";
+  var evF=rel.filtered_out!==undefined?rel.filtered_out:s.filtered_out||"—";
+  document.getElementById("r-events").textContent=evN+" kept";
+  document.getElementById("r-filtered").textContent=evF+" dropped";
+
+  // Ticker
+  document.getElementById("t-date").textContent =DATA.dateKr||DATA.date||"—";
+  document.getElementById("t-total").textContent=s.total||0;
+  document.getElementById("t-high").textContent =s.high||0;
+  document.getElementById("t-neg").textContent  =s.negative||0;
+
+  // Source pills + table + sidebar
+  buildPills(log,DATA.sources||[]);
+  buildTable(log);
+  buildSrcSidebar(log,DATA.sources||[]);
+}
+
+function buildPills(log,names){
+  var el=document.getElementById("src-pills");
+  if(!log.length&&!names.length){el.innerHTML="";return;}
+  if(log.length){
+    el.innerHTML=log.map(function(s){
+      var cls=s.status==="success"?"ok":s.status==="partial"?"partial":s.status==="failed"?"failed":"unknown";
+      var icon=s.status==="success"?"●":s.status==="partial"?"◐":"✗";
+      var tip=s.status==="failed"?s.name+": "+s.error:s.name+": "+s.items+"건";
+      return'<span class="sp '+cls+'" title="'+esc(tip)+'">'+icon+" "+esc(s.name)+'</span>';
+    }).join("");
+  }else{
+    el.innerHTML=names.map(function(n){return'<span class="sp unknown" title="'+esc(n)+'">● '+esc(n)+'</span>';}).join("");
+  }
+}
+
+function buildTable(log){
+  var tbody=document.getElementById("stbl-body");
+  if(!log.length){tbody.innerHTML="";return;}
+  tbody.innerHTML=log.map(function(s){
+    var dc=s.status==="success"?"#4ADE80":s.status==="partial"?"#FCD34D":"#FCA5A5";
+    var ts="";
+    if(s.fetched_at){try{ts=new Date(s.fetched_at).toLocaleTimeString("ko-KR",{hour:"2-digit",minute:"2-digit"});}catch(e){ts=s.fetched_at.slice(11,16);}}
+    return'<tr>'
+      +'<td style="color:#C0C0C0">'+esc(s.name)+'</td>'
+      +'<td><span style="color:'+dc+';font-weight:700">'+s.status.toUpperCase()+'</span></td>'
+      +'<td style="color:#888">'+s.items+'</td>'
+      +'<td style="color:#666">'+ts+'</td>'
+      +'<td style="color:#FCA5A5;font-size:9px">'+(s.error?esc(s.error.slice(0,60)):"—")+'</td>'
+      +'</tr>';
+  }).join("");
+}
+
+function buildSrcSidebar(log,names){
+  var el=document.getElementById("src-sidebar");
+  if(!log.length&&!names.length){el.innerHTML='<div style="font-size:11px;color:var(--ink4)">파이프라인 실행 후 표시됩니다</div>';return;}
+  if(log.length){
+    el.innerHTML=log.map(function(s){
+      var dc=s.status==="success"?"var(--green)":s.status==="partial"?"var(--amber)":"var(--red)";
+      var ct=s.status==="failed"?"실패":s.items+"건";
+      var ts="";
+      if(s.fetched_at){try{ts=new Date(s.fetched_at).toLocaleTimeString("ko-KR",{hour:"2-digit",minute:"2-digit"});}catch(e){}}
+      return'<div class="src-row">'
+        +'<span class="src-dot" style="background:'+dc+'"></span>'
+        +'<div class="src-info">'
+        +'<div class="src-name">'+esc(s.name)+'</div>'
+        +'<div class="src-meta">'+ct+(ts?" · "+ts:"")+'</div>'
+        +(s.error?'<div class="src-err">'+esc(s.error.slice(0,50))+'</div>':"")
+        +'</div></div>';
+    }).join("");
+  }else{
+    el.innerHTML=names.map(function(n){return'<div class="src-row"><span class="src-dot" style="background:var(--ink4)"></span><div class="src-info"><div class="src-name">'+esc(n)+'</div><div class="src-meta">이전 실행</div></div></div>';}).join("");
+  }
+}
+
+function toggleSrcDetail(){
+  srcOpen=!srcOpen;
+  document.getElementById("src-detail").className=srcOpen?"open":"";
+  document.getElementById("r-toggle").textContent=srcOpen?"SOURCE DETAIL ▴":"SOURCE DETAIL ▾";
+}
+
+// ════════════════════════════
+// UI STATES (feed area)
+// ════════════════════════════
+function renderNoData(){
+  document.getElementById("feed-col").innerHTML=
+    '<div class="box-nodata">'
+    +'<div style="font-size:32px;margin-bottom:12px">📭</div>'
+    +'<h3>데이터 없음</h3>'
+    +'<p><code>data/latest.json</code>이 없습니다.<br>'
+    +'GitHub Actions → <strong>Daily Energy CVC Signals</strong><br>→ <strong>Run workflow</strong></p>'
+    +'<div style="font-family:var(--mono);font-size:10px;color:var(--ink4);background:var(--b2);padding:8px 12px;display:inline-block">'
+    +'Actions → Daily Energy CVC Signals → Run workflow</div>'
+    +'</div>';
+}
+function renderError(msg){
+  document.getElementById("feed-col").innerHTML=
+    '<div class="box-error"><h3>⚠ 데이터 로드 실패</h3>'
+    +'<div style="font-size:12px;margin-bottom:6px">'+esc(msg)+'</div>'
+    +'<div style="font-size:10px;color:#888">F12 → Console에서 상세 확인 가능</div></div>';
+}
+function renderLoading(){
+  document.getElementById("feed-col").innerHTML=
+    '<div class="box-loading"><span class="spin" style="font-size:20px;margin-bottom:10px">⟳</span><br>로딩 중…</div>';
+}
+
+// ════════════════════════════
+// SIDEBAR
+// ════════════════════════════
+function renderSidebar(){
+  if(!DATA)return;
+  var s=DATA.stats||{};
+  document.getElementById("stats-box").innerHTML=
+    [{n:s.total||0,l:"Total",c:"var(--ink)"},{n:s.high||0,l:"High signal",c:"var(--red)"},
+     {n:s.medium||0,l:"Medium",c:"var(--amber)"},{n:s.matched||0,l:"Company match",c:"var(--blue)"},
+     {n:s.negative||0,l:"Negative",c:"var(--red)"},{n:s.filtered_out||0,l:"Filtered out",c:"var(--ink4)"}]
+    .map(function(x){return'<div class="sr"><span class="sl">'+x.l+'</span><span class="sn" style="color:'+x.c+'">'+x.n+'</span></div>';}).join("");
+
+  var segs=s.by_segment||{};
+  var mx=Math.max.apply(null,Object.values(segs).concat([1]));
+  document.getElementById("seg-box").innerHTML=
     Object.entries(segs).sort(function(a,b){return b[1]-a[1];}).slice(0,8)
-    .map(function(kv){return '<div class="segrow"><span class="segnm">'+kv[0]+'</span><div class="segbg"><div class="segfl" style="width:'+Math.round(kv[1]/maxSeg*100)+'%"></div></div><span class="segct">'+kv[1]+'</span></div>';}).join("");
+    .map(function(kv){return'<div class="segrow"><span class="segnm">'+kv[0]+'</span><div class="segbg"><div class="segfl" style="width:'+Math.round(kv[1]/mx*100)+'%"></div></div><span class="segct">'+kv[1]+'</span></div>';}).join("");
 }
 
-// ── Feed ──────────────────────────────────────────────────
-function getFiltered() {
-  var q = (document.getElementById("srch")||{value:""}).value.trim().toLowerCase();
-  return SIGNALS.filter(function(e) {
-    if (curTier === "high")   return e.signal_tier === "high";
-    if (curTier === "medium") return e.signal_tier === "medium";
-    if (curTier === "neg")    return e.is_negative;
+// ════════════════════════════
+// FEED
+// ════════════════════════════
+function getFiltered(){
+  var q=(document.getElementById("srch")||{value:""}).value.trim().toLowerCase();
+  return SIGNALS.filter(function(ev){
+    if(curTier==="high")  return ev.signal_tier==="high";
+    if(curTier==="medium")return ev.signal_tier==="medium";
+    if(curTier==="neg")   return ev.is_negative;
     return true;
-  }).filter(function(e) {
-    if (!q) return true;
-    var hay = [e.title, e.company_name, e.segment, e.event_type, e.source_name].join(" ").toLowerCase();
-    return q.split(/\s+/).every(function(k){ return hay.indexOf(k) >= 0; });
+  }).filter(function(ev){
+    if(!q)return true;
+    return[ev.title,ev.company_name,ev.segment,ev.event_type,ev.source_name].join(" ").toLowerCase()
+      .indexOf&&q.split(/\s+/).every(function(k){return[ev.title,ev.company_name,ev.segment,ev.event_type,ev.source_name].join(" ").toLowerCase().indexOf(k)>=0;});
   });
 }
 
-function renderFeed() {
-  var sigs = getFiltered();
-  var el   = document.getElementById("feed-col");
-  var h    = "";
+function renderFeed(){
+  var sigs=getFiltered(),el=document.getElementById("feed-col"),h="";
 
-  // Brief
-  if (DATA && DATA.brief && curTier === "all") {
-    h += '<div id="brief-box"><div id="brief-lbl">CVC INTELLIGENCE BRIEF</div><div id="brief-txt">'+e(DATA.brief)+'</div></div>';
+  // Partial data warning — never hidden
+  if(DATA&&DATA.reliability&&DATA.reliability.sources_failed>0){
+    var fails=SRCLOG.filter(function(s){return s.status==="failed";}).map(function(s){return s.name;});
+    h+='<div class="partial-banner">'
+      +'<span style="font-size:14px;flex-shrink:0">⚠</span>'
+      +'<div><b>PARTIAL DATA</b> — '+DATA.reliability.sources_failed+'개 소스 실패: '+esc(fails.join(", "))
+      +'<br><span style="color:#A89000;font-weight:400">실패 소스의 신호는 포함되지 않습니다. 오늘 데이터가 불완전할 수 있습니다.</span></div>'
+      +'</div>';
   }
 
-  if (!sigs.length) {
-    h += '<div class="card"><div class="empty">신호 없음</div></div>';
-    el.innerHTML = h; return;
+  if(DATA&&DATA.brief&&curTier==="all"){
+    h+='<div id="brief-box"><div id="brief-lbl">CVC INTELLIGENCE BRIEF</div>'
+      +'<div id="brief-txt">'+e(DATA.brief)+'</div></div>';
   }
 
-  h += '<div class="card"><div class="chd">'+curTier.toUpperCase()+' SIGNALS <span style="font-weight:400;color:var(--ink4)">'+sigs.length+'</span></div>';
+  if(!sigs.length){
+    var q2=(document.getElementById("srch")||{value:""}).value.trim();
+    h+='<div class="card"><div class="empty">'+(q2?'"'+e(q2)+'" — 결과 없음':'신호 없음')+'</div></div>';
+    el.innerHTML=h;return;
+  }
 
-  sigs.forEach(function(ev) {
-    var op    = EXP.has(ev.id);
-    var tc    = ev.signal_tier==="high"?"var(--green)":ev.signal_tier==="medium"?"var(--amber)":"var(--ink4)";
-    var bc    = ev.is_negative?"var(--red)":ev.signal_tier==="high"?"var(--green)":"transparent";
-    var typeTag = tagFor(ev.event_type, ev.is_negative);
+  h+='<div class="card"><div class="chd">'+curTier.toUpperCase()
+    +' SIGNALS <span style="font-weight:400;color:var(--ink4)">'+sigs.length+'</span></div>';
 
-    h += '<div class="sig" style="border-left:3px solid '+bc+'" onclick="toggle(\''+ev.id+'\')">';
-    h += '<div class="sig-meta">'+typeTag;
-    h += '<span class="tag t-news">'+e(ev.segment||"—")+'</span>';
-    if (ev.signal_tier==="high")   h += '<span class="tag t-H">HIGH</span>';
-    if (ev.signal_tier==="medium") h += '<span class="tag t-M">MED</span>';
-    if (ev.is_negative)            h += '<span class="tag t-neg">⚠ NEG</span>';
-    h += '<span style="margin-left:auto;font-family:var(--mono);font-size:9px;color:var(--ink4)">'+e(ev.event_date||"")+'</span>';
-    h += '</div>';
-
-    if (ev.company_id) h += '<div class="sig-co">'+e(ev.company_name||"")+'</div>';
-
-    h += '<div class="sig-title">';
-    if (ev.source_url) h += '<a href="'+e(ev.source_url)+'" target="_blank" rel="noopener" onclick="event.stopPropagation()">'+e(ev.title||"")+'</a>';
-    else               h += e(ev.title||"");
-    h += '</div>';
-
-    h += '<div class="sig-src">'+e(ev.source_name||"");
-    h += ' <span class="sbar"><div class="sbar-bg"><div class="sbar-fill" style="width:'+( ev.signal_strength||0)+'%;background:'+tc+'"></div></div><span class="sbar-n" style="color:'+tc+'">'+(ev.signal_strength||0)+'</span></span>';
-    h += '</div>';
-
-    if (!op) h += '<div class="hint">▾ '+(ev.company_id?"인사이트 보기":"요약 보기")+'</div>';
-
-    if (op) {
-      h += '<div class="sig-body">';
-      h += '<div style="font-size:12px;color:var(--ink2);line-height:1.65;margin-bottom:10px">'+e((ev.summary||"").slice(0,300))+'…</div>';
-      h += '<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px">';
-      if (ev.source_url) h += '<a href="'+e(ev.source_url)+'" target="_blank" rel="noopener" style="font-family:var(--mono);font-size:10px;color:var(--blue)" onclick="event.stopPropagation()">→ Source</a>';
-      if (ev.matched_rule) h += '<span style="font-family:var(--mono);font-size:10px;color:var(--ink4)">rule: "'+e(ev.matched_rule)+'"</span>';
-      h += '</div>';
-      if (ev.company_id) {
-        h += '<button class="btn" onclick="event.stopPropagation();showMemo(\''+ev.company_id+'\',\''+ev.id+'\')">View Investment Memo →</button>';
-        h += '<div id="memo-'+ev.id+'"></div>';
+  sigs.forEach(function(ev){
+    var op=EXP.has(ev.id);
+    var tc=ev.signal_tier==="high"?"var(--green)":ev.signal_tier==="medium"?"var(--amber)":"var(--ink4)";
+    var bc=ev.is_negative?"var(--red)":ev.signal_tier==="high"?"var(--green)":"transparent";
+    h+='<div class="sig" style="border-left:3px solid '+bc+'" onclick="toggle(\''+ev.id+'\')">';
+    h+='<div class="sig-meta">'+tagFor(ev.event_type,ev.is_negative);
+    h+='<span class="tag t0">'+e(ev.segment||"—")+'</span>';
+    if(ev.signal_tier==="high")  h+='<span class="tag tH">HIGH</span>';
+    if(ev.signal_tier==="medium")h+='<span class="tag tM">MED</span>';
+    if(ev.is_negative)           h+='<span class="tag tN">⚠ NEG</span>';
+    h+='<span style="margin-left:auto;font-family:var(--mono);font-size:9px;color:var(--ink4)">'+e(ev.event_date||"")+'</span></div>';
+    if(ev.company_id)h+='<div class="sig-co">'+e(ev.company_name||"")+'</div>';
+    h+='<div class="sig-title">'+(ev.source_url?'<a href="'+e(ev.source_url)+'" target="_blank" rel="noopener" onclick="event.stopPropagation()">'+e(ev.title||"")+'</a>':e(ev.title||""))+'</div>';
+    h+='<div class="sig-src">'+e(ev.source_name||"")
+      +' <span class="sbar"><div class="sbar-bg"><div class="sbar-fill" style="width:'+(ev.signal_strength||0)+'%;background:'+tc+'"></div></div>'
+      +'<span class="sbar-n" style="color:'+tc+'">'+(ev.signal_strength||0)+'</span></span></div>';
+    if(!op)h+='<div class="hint">▾ '+(ev.company_id?"인사이트 보기":"요약 보기")+'</div>';
+    if(op){
+      h+='<div class="sig-body">';
+      h+='<div style="font-size:12px;color:var(--ink2);line-height:1.65;margin-bottom:10px">'+e((ev.summary||"").slice(0,300))+'…</div>';
+      h+='<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px">';
+      if(ev.source_url)h+='<a href="'+e(ev.source_url)+'" target="_blank" rel="noopener" style="font-family:var(--mono);font-size:10px;color:var(--blue)" onclick="event.stopPropagation()">→ Source</a>';
+      if(ev.matched_rule)h+='<span style="font-family:var(--mono);font-size:10px;color:var(--ink4)">rule: "'+e(ev.matched_rule)+'"</span>';
+      h+='</div>';
+      if(ev.company_id){
+        h+='<button class="btn" onclick="event.stopPropagation();showMemo(\''+ev.company_id+'\',\''+ev.id+'\')">View Investment Memo →</button>';
+        h+='<div id="memo-'+ev.id+'"></div>';
       }
-      h += '</div>';
+      h+='</div>';
     }
-    h += '</div>';
+    h+='</div>';
   });
-  h += '</div>';
-  el.innerHTML = h;
+  h+='</div>';
+  el.innerHTML=h;
 }
 
-// ── Insight memo ──────────────────────────────────────────
-function showMemo(coId, sigId) {
-  var container = document.getElementById("memo-"+sigId);
-  if (!container) return;
-
-  var co = DATA.companies && DATA.companies[coId];
-  if (!co || !co.insight) {
-    container.innerHTML = '<div style="padding:8px;font-size:12px;color:var(--ink4)">인사이트 데이터 없음</div>';
+// ════════════════════════════
+// SOURCES TAB — full health view
+// ════════════════════════════
+function renderSourcesTab(){
+  var el=document.getElementById("feed-col"),log=SRCLOG,rel=DATA&&DATA.reliability||{};
+  if(!log.length){
+    el.innerHTML='<div class="box-nodata"><h3>소스 상태 정보 없음</h3>'
+      +'<p>파이프라인 실행 후 각 소스의 수집 상태가 표시됩니다.<br>'
+      +'generate-signals.py v2+ (source_log 포함) 필요.</p></div>';
     return;
   }
+  var ok =log.filter(function(s){return s.status==="success";}).length;
+  var par=log.filter(function(s){return s.status==="partial";}).length;
+  var fai=log.filter(function(s){return s.status==="failed"; }).length;
+  var sc =fai>0&&ok===0?"var(--red)":fai>0||par>0?"var(--amber)":"var(--green)";
+  var si =fai>0&&ok===0?"⚠ 전체 실패":fai>0?"⚠ 일부 실패":"✓ 전체 정상";
 
-  container.innerHTML = renderMemo(co.insight, co.name);
-}
+  var h='<div class="card"><div class="chd">Data Source Health</div>';
+  h+='<div style="padding:14px;border-bottom:1px solid var(--b2);display:flex;gap:20px;flex-wrap:wrap;align-items:center">';
+  [{n:ok,l:"Success",c:"var(--green)"},{n:par,l:"Partial",c:"var(--amber)"},{n:fai,l:"Failed",c:"var(--red)"},{n:log.length,l:"Total",c:"var(--ink)"}]
+    .forEach(function(x){h+='<div><div style="font-family:var(--mono);font-size:20px;font-weight:700;color:'+x.c+'">'+x.n+'</div><div style="font-size:11px;color:var(--ink3)">'+x.l+'</div></div>';});
+  h+='<div style="margin-left:auto"><span style="font-family:var(--mono);font-size:12px;font-weight:700;color:'+sc+'">'+si+'</span></div>';
+  h+='</div>';
 
-function renderMemo(ins, name) {
-  var confColors = {"High":"#16A34A","Medium-High":"#65A30D","Medium":"#CA8A04","Medium-Low":"#EA580C","Low":"#DC2626"};
-  var cc = confColors[ins.confidence] || "var(--ink4)";
-  var h = '<div class="memo">';
-  h += '<div class="memo-hd"><span class="memo-hd-l">Investment Triage Memo · '+e(name||"")+'</span>';
-  h += '<span style="font-family:var(--mono);font-size:10px;font-weight:700;color:'+cc+'">'+ins.confidence+'</span></div>';
-  h += '<div class="memo-bd">';
-  h += '<div style="font-family:var(--mono);font-size:9px;color:#888;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--b2)">';
-  h += ins.event_count+'건 이벤트 기반 · ⚠ 팩트만 — 수치 생성 없음</div>';
-
-  h += '<div class="msec"><div class="mlbl">1. Observed Facts <span style="font-weight:400">(이벤트만)</span></div>';
-  if (ins.observed_facts && ins.observed_facts.length) {
-    ins.observed_facts.forEach(function(f){ h += '<div class="mfact"><span style="color:var(--green);font-weight:700;flex-shrink:0">✓</span>'+e(f)+'</div>'; });
-  } else {
-    h += '<div style="font-size:12px;color:var(--ink4);font-style:italic">현재 창에 qualifying 이벤트 없음</div>';
-  }
-  h += '</div>';
-
-  h += '<div class="msec"><div class="mlbl">2. Matched Pattern</div><div class="mpat">'+e(ins.matched_pattern||"")+'</div></div>';
-
-  h += '<div class="msec"><div class="mlbl">3. What This May Indicate <span style="font-weight:400">(추론, 팩트 아님)</span></div>';
-  (ins.may_indicate||[]).forEach(function(m){ h += '<div class="mind"><span style="color:var(--blue);font-weight:700;flex-shrink:0">›</span>'+e(m)+'</div>'; });
-  h += '</div>';
-
-  h += '<div class="msec"><div class="mlbl">4. What Is Missing</div>';
-  if (ins.missing && ins.missing.length) {
-    ins.missing.forEach(function(m){ h += '<div class="mmiss"><span style="font-weight:700;flex-shrink:0">✗</span>'+e(m)+'</div>'; });
-  } else {
-    h += '<div style="font-size:12px;color:var(--ink4);font-style:italic">현재 신호 세트에서 critical gap 미감지</div>';
-  }
-  h += '</div>';
-
-  h += '<div class="msec"><div class="mlbl">5. Confidence</div>';
-  h += '<div style="display:inline-flex;align-items:center;gap:6px;padding:5px 11px;border:1px solid '+cc+'40;background:'+cc+'12">';
-  h += '<span style="width:8px;height:8px;border-radius:50%;background:'+cc+';display:inline-block"></span>';
-  h += '<span style="font-family:var(--mono);font-size:12px;font-weight:700;color:'+cc+'">'+ins.confidence+'</span></div></div>';
-
-  h += '<div class="msec"><div class="mlbl">6. Suggested Next Check</div><div class="mnxt">'+e(ins.next_check||"")+'</div></div>';
-  h += '</div></div>';
-  return h;
-}
-
-// ── Companies tab ─────────────────────────────────────────
-function renderCompanies() {
-  var el = document.getElementById("feed-col");
-  var cos = DATA && DATA.companies ? Object.values(DATA.companies) : [];
-  if (!cos.length) { el.innerHTML = '<div class="empty">기업 데이터 없음 — 파이프라인 실행 후 기업 매칭 신호 생성됩니다</div>'; return; }
-  cos.sort(function(a,b){ return (b.high_count||0)-(a.high_count||0); });
-  var h = '<div class="card"><div class="chd">Companies <span style="font-weight:400;color:var(--ink4)">'+cos.length+'</span></div>';
-  cos.forEach(function(co) {
-    var ins = co.insight || {};
-    var confColors = {"High":"#16A34A","Medium-High":"#65A30D","Medium":"#CA8A04","Medium-Low":"#EA580C","Low":"#DC2626"};
-    var cc = confColors[ins.confidence] || "var(--ink4)";
-    h += '<div style="padding:13px 16px;border-bottom:1px solid var(--b2)">';
-    h += '<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px">';
-    h += '<span style="font-size:13px;font-weight:600">'+e(co.name||"")+'</span>';
-    h += '<span class="tag">'+e(co.stage||"")+'</span></div>';
-    h += '<div style="font-size:11px;color:var(--ink3);margin-bottom:7px">'+e(co.sector||"")+" · "+e(co.country||"")+'</div>';
-    h += '<div style="display:flex;gap:10px;font-size:11px;margin-bottom:7px">';
-    h += '<span style="color:var(--red)">High: '+(co.high_count||0)+'</span>';
-    h += '<span style="color:var(--ink3)">Total: '+(co.signal_count||0)+'</span>';
-    if (ins.confidence) h += '<span style="font-family:var(--mono);font-size:10px;font-weight:700;color:'+cc+'">'+ins.confidence+'</span>';
-    h += '</div>';
-    if (ins.matched_pattern) {
-      h += '<details><summary style="font-family:var(--mono);font-size:10px;color:var(--blue);cursor:pointer">→ Investment Memo</summary>';
-      h += renderMemo(ins, co.name);
-      h += '</details>';
+  log.forEach(function(s){
+    var dc=s.status==="success"?"var(--green)":s.status==="partial"?"var(--amber)":"var(--red)";
+    var ic=s.status==="success"?"✓":s.status==="partial"?"◐":"✗";
+    var bg=s.status==="failed"?"background:#FFF8F8;":s.status==="partial"?"background:#FFFDF0;":"";
+    var ts="";
+    if(s.fetched_at){try{ts=new Date(s.fetched_at).toLocaleString("ko-KR",{month:"numeric",day:"numeric",hour:"2-digit",minute:"2-digit"});}catch(e){ts=s.fetched_at.slice(0,16);}}
+    h+='<div style="padding:14px 18px;border-bottom:1px solid var(--b2);'+bg+'">';
+    h+='<div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:6px">';
+    h+='<div style="display:flex;align-items:center;gap:10px">';
+    h+='<span style="font-family:var(--mono);font-size:14px;font-weight:700;color:'+dc+'">'+ic+'</span>';
+    h+='<span style="font-size:13px;font-weight:600">'+e(s.name)+'</span></div>';
+    h+='<span style="font-family:var(--mono);font-size:10px;font-weight:700;color:'+dc+'">'+s.status.toUpperCase()+'</span></div>';
+    h+='<div style="display:flex;gap:16px;flex-wrap:wrap;font-family:var(--mono);font-size:10px;color:var(--ink4);margin-bottom:'+(s.error?"6":"0")+'px">';
+    h+='<span>Items: <b style="color:var(--ink2)">'+s.items+'</b></span>';
+    h+='<span>Fetched: <b style="color:var(--ink2)">'+ts+'</b></span>';
+    if(s.url)h+='<a href="'+e(s.url)+'" target="_blank" rel="noopener" style="color:var(--blue)">→ Feed URL</a>';
+    h+='</div>';
+    if(s.error){
+      h+='<div style="font-family:var(--mono);font-size:10px;color:var(--red);background:#FFF5F5;padding:5px 9px;border-left:2px solid var(--red)">';
+      h+='⚠ '+e(s.error)+'</div>';
     }
-    h += '</div>';
+    h+='</div>';
   });
-  h += '</div>';
-  el.innerHTML = h;
+  h+='<div style="padding:12px 18px;background:var(--bg);font-size:11px;color:var(--ink3);line-height:1.7">'
+    +'⚠ 실패한 소스의 신호는 오늘 결과에 포함되지 않습니다. 데이터 완전성에 영향을 줄 수 있습니다.</div>';
+  h+='</div>';
+  el.innerHTML=h;
 }
 
-// ── History tab ───────────────────────────────────────────
-function renderHistory() {
-  var el = document.getElementById("feed-col");
-  if (!IDX.length) { el.innerHTML = '<div class="empty">아카이브 없음</div>'; return; }
-  var h = '<div class="card"><div class="chd">Archive <span style="font-weight:400;color:var(--ink4)">'+IDX.length+'일</span></div>';
-  IDX.forEach(function(d) {
-    h += '<div class="hist-row" onclick="loadArchive(\''+d.date+'\')">';
-    h += '<span class="hist-date">'+d.date+'</span>';
-    h += '<span class="hist-datek">'+(d.dateKr||"")+'</span>';
-    h += '<div class="hist-stats">';
-    h += '<span class="hist-stat">'+(d.stats&&d.stats.total||0)+' signals</span>';
-    h += '<span class="hist-stat">High '+(d.stats&&d.stats.high||0)+'</span>';
-    h += '</div></div>';
+// ════════════════════════════
+// INVESTMENT MEMO
+// ════════════════════════════
+function showMemo(coId,sigId){
+  var c=document.getElementById("memo-"+sigId);if(!c)return;
+  var co=DATA&&DATA.companies&&DATA.companies[coId];
+  if(!co||!co.insight){c.innerHTML='<div style="padding:8px;font-size:12px;color:var(--ink4)">인사이트 없음</div>';return;}
+  c.innerHTML=renderMemo(co.insight,co.name);
+}
+function renderMemo(ins,name){
+  var cc={"High":"#16A34A","Medium-High":"#65A30D","Medium":"#CA8A04","Medium-Low":"#EA580C","Low":"#DC2626"}[ins.confidence]||"var(--ink4)";
+  var h='<div class="memo">';
+  h+='<div class="memo-hd"><span class="memo-hd-l">Investment Triage Memo · '+e(name||"")+'</span>';
+  h+='<span style="font-family:var(--mono);font-size:10px;font-weight:700;color:'+cc+'">'+ins.confidence+'</span></div>';
+  h+='<div class="memo-bd">';
+  h+='<div style="font-family:var(--mono);font-size:9px;color:#888;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--b2)">';
+  h+=(ins.event_count||0)+'건 이벤트 기반 · ⚠ 팩트만 — 수치 생성 없음</div>';
+  h+='<div class="ms"><div class="ml">1. Observed Facts <span style="font-weight:400">(이벤트만)</span></div>';
+  (ins.observed_facts||[]).length?(ins.observed_facts||[]).forEach(function(f){h+='<div class="mF"><span style="color:var(--green);font-weight:700;flex-shrink:0">✓</span>'+e(f)+'</div>';}):h+='<div style="font-size:12px;color:var(--ink4);font-style:italic">qualifying 이벤트 없음</div>';
+  h+='</div>';
+  h+='<div class="ms"><div class="ml">2. Matched Pattern</div><div class="mP">'+e(ins.matched_pattern||"")+'</div></div>';
+  h+='<div class="ms"><div class="ml">3. What This May Indicate <span style="font-weight:400">(추론)</span></div>';
+  (ins.may_indicate||[]).forEach(function(m){h+='<div class="mI"><span style="color:var(--blue);font-weight:700;flex-shrink:0">›</span>'+e(m)+'</div>';});
+  h+='</div>';
+  h+='<div class="ms"><div class="ml">4. What Is Missing</div>';
+  (ins.missing||[]).length?(ins.missing||[]).forEach(function(m){h+='<div class="mX"><span style="font-weight:700;flex-shrink:0">✗</span>'+e(m)+'</div>';}):h+='<div style="font-size:12px;color:var(--ink4);font-style:italic">Critical gap 없음</div>';
+  h+='</div>';
+  h+='<div class="ms"><div class="ml">5. Confidence</div>';
+  h+='<div style="display:inline-flex;align-items:center;gap:6px;padding:5px 11px;border:1px solid '+cc+'40;background:'+cc+'12">';
+  h+='<span style="width:8px;height:8px;border-radius:50%;background:'+cc+';display:inline-block"></span>';
+  h+='<span style="font-family:var(--mono);font-size:12px;font-weight:700;color:'+cc+'">'+ins.confidence+'</span></div></div>';
+  h+='<div class="ms"><div class="ml">6. Suggested Next Check</div><div class="mN">'+e(ins.next_check||"")+'</div></div>';
+  h+='</div></div>';return h;
+}
+
+// ════════════════════════════
+// OTHER TABS
+// ════════════════════════════
+function renderCompanies(){
+  var el=document.getElementById("feed-col");
+  var cos=DATA&&DATA.companies?Object.values(DATA.companies):[];
+  if(!cos.length){el.innerHTML='<div class="empty">기업 데이터 없음</div>';return;}
+  cos.sort(function(a,b){return(b.high_count||0)-(a.high_count||0);});
+  var h='<div class="card"><div class="chd">Companies <span style="font-weight:400;color:var(--ink4)">'+cos.length+'</span></div>';
+  cos.forEach(function(co){
+    var ins=co.insight||{};
+    var cc={"High":"#16A34A","Medium-High":"#65A30D","Medium":"#CA8A04","Medium-Low":"#EA580C","Low":"#DC2626"}[ins.confidence]||"var(--ink4)";
+    h+='<div style="padding:13px 16px;border-bottom:1px solid var(--b2)">';
+    h+='<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px">';
+    h+='<span style="font-size:13px;font-weight:600">'+e(co.name||"")+'</span><span class="tag">'+e(co.stage||"")+'</span></div>';
+    h+='<div style="font-size:11px;color:var(--ink3);margin-bottom:7px">'+e(co.sector||"")+" · "+e(co.country||"")+'</div>';
+    h+='<div style="display:flex;gap:10px;font-size:11px;margin-bottom:7px">';
+    h+='<span style="color:var(--red)">High: '+(co.high_count||0)+'</span>';
+    h+='<span style="color:var(--ink3)">Total: '+(co.signal_count||0)+'</span>';
+    if(ins.confidence)h+='<span style="font-family:var(--mono);font-size:10px;font-weight:700;color:'+cc+'">'+ins.confidence+'</span>';
+    h+='</div>';
+    if(ins.matched_pattern){
+      h+='<details><summary style="font-family:var(--mono);font-size:10px;color:var(--blue);cursor:pointer">→ Investment Memo</summary>';
+      h+=renderMemo(ins,co.name);h+='</details>';
+    }
+    h+='</div>';
   });
-  h += '</div>';
-  el.innerHTML = h;
+  h+='</div>';el.innerHTML=h;
 }
 
-async function loadArchive(date) {
-  var ok = await loadData("data/"+date+".json?"+Date.now());
-  if (ok) switchTabByName("signals");
+function renderHistory(){
+  var el=document.getElementById("feed-col");
+  if(!IDX.length){el.innerHTML='<div class="empty">아카이브 없음</div>';return;}
+  var h='<div class="card"><div class="chd">Archive <span style="font-weight:400;color:var(--ink4)">'+IDX.length+'일</span></div>';
+  IDX.forEach(function(d){
+    h+='<div class="hist-row" onclick="loadArchive(\''+d.date+'\')">';
+    h+='<span class="hist-date">'+d.date+'</span>';
+    h+='<span class="hist-datek">'+(d.dateKr||"")+'</span>';
+    h+='<div class="hist-stats"><span class="hist-stat">'+(d.stats&&d.stats.total||0)+' signals</span>';
+    h+='<span class="hist-stat">High '+(d.stats&&d.stats.high||0)+'</span></div></div>';
+  });
+  h+='</div>';el.innerHTML=h;
 }
 
-// ── Copy report ───────────────────────────────────────────
-function copyReport() {
-  if (!DATA) return;
-  var s = DATA.stats || {};
-  var t = "ENERGY CVC INTELLIGENCE — "+(DATA.dateKr||DATA.date)+"\n";
-  t += "Total "+s.total+" · High "+s.high+" · Negative "+s.negative+"\n";
-  t += "=".repeat(50)+"\n\n";
-  if (DATA.brief) t += "[BRIEF]\n"+DATA.brief+"\n\n"+"=".repeat(50)+"\n\n";
-  getFiltered().forEach(function(ev,i) {
-    t += (i+1)+". ["+ev.event_type+"] "+(ev.company_name||"Unassigned")+" — "+ev.title+"\n";
-    t += "   "+ev.source_name+" · "+ev.event_date+" · score: "+ev.signal_strength+"\n";
-    if (ev.source_url) t += "   "+ev.source_url+"\n";
-    t += "\n";
+async function loadArchive(date){renderLoading();var ok=await loadData("data/"+date+".json?"+Date.now());if(ok)switchTabByName("signals");}
+
+// ════════════════════════════
+// COPY
+// ════════════════════════════
+function copyReport(){
+  if(!DATA)return;
+  var s=DATA.stats||{},rel=DATA.reliability||{};
+  var t="ENERGY CVC INTELLIGENCE — "+(DATA.dateKr||DATA.date)+"\n";
+  t+="Total "+s.total+" · High "+s.high+" · Neg "+s.negative+"\n";
+  t+="Sources ok:"+rel.sources_ok+"/partial:"+rel.sources_partial+"/failed:"+rel.sources_failed+"\n";
+  t+="=".repeat(50)+"\n\n";
+  if(DATA.brief)t+="[BRIEF]\n"+DATA.brief+"\n\n"+"=".repeat(50)+"\n\n";
+  getFiltered().forEach(function(ev,i){
+    t+=(i+1)+". ["+ev.event_type+"] "+(ev.company_name||"Unassigned")+" — "+ev.title+"\n";
+    t+="   "+ev.source_name+" · "+ev.event_date+" · score: "+ev.signal_strength+"\n";
+    if(ev.source_url)t+="   "+ev.source_url+"\n";
+    t+="\n";
   });
   navigator.clipboard.writeText(t).then(function(){alert("✅ 복사 완료!");}).catch(function(){alert("복사 실패");});
 }
 
-// ── UI helpers ────────────────────────────────────────────
-function tagFor(type, isNeg) {
-  if (isNeg) return '<span class="tag t-neg">⚠ Neg</span>';
-  var m = {Certification:"t-cert",Contract:"t-ctr",Deployment:"t-ctr",Pilot:"t-pilot",Hiring:"t-hire",Financing:"t-fin"};
-  return '<span class="tag '+(m[type]||"t-news")+'">'+(type||"News")+'</span>';
+// ════════════════════════════
+// HELPERS
+// ════════════════════════════
+function tagFor(type,isNeg){
+  if(isNeg)return'<span class="tag tN">⚠ Neg</span>';
+  var m={Certification:"tC",Contract:"tB",Deployment:"tB",Pilot:"tP",Hiring:"tR",Financing:"tF"};
+  return'<span class="tag '+(m[type]||"t0")+'">'+(type||"News")+'</span>';
 }
 function e(s){return(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
+function esc(s){return e(s);}
 function toggle(id){EXP.has(id)?EXP.delete(id):EXP.add(id);renderFeed();}
 function setTier(t,btn){curTier=t;document.querySelectorAll(".pill").forEach(function(p){p.classList.remove("on");});btn.classList.add("on");renderFeed();}
-
-function switchTab(tab, btn) {
-  curTab = tab;
-  document.querySelectorAll(".tab").forEach(function(t){t.classList.remove("on");});
-  btn.classList.add("on");
-  document.getElementById("fbar").style.display = (tab==="signals"||tab==="negative")?"block":"none";
+function switchTab(tab,btn){
+  curTab=tab;
+  document.querySelectorAll(".tab").forEach(function(t){t.classList.remove("on");});btn.classList.add("on");
+  document.getElementById("fbar").style.display=(tab==="signals"||tab==="negative")?"block":"none";
   EXP.clear();
-  if (tab==="signals")  { curTier="all"; renderFeed(); }
-  if (tab==="negative") { curTier="neg"; renderFeed(); }
-  if (tab==="companies")  renderCompanies();
-  if (tab==="history")    renderHistory();
+  if(tab==="signals") {curTier="all";renderFeed();}
+  if(tab==="negative"){curTier="neg";renderFeed();}
+  if(tab==="companies") renderCompanies();
+  if(tab==="sources")   renderSourcesTab();
+  if(tab==="history")   renderHistory();
 }
-function switchTabByName(name) {
-  var tabs = document.querySelectorAll(".tab");
-  var names = ["signals","companies","negative","history"];
-  var idx   = names.indexOf(name);
-  if (idx >= 0 && tabs[idx]) switchTab(name, tabs[idx]);
+function switchTabByName(name){
+  var tabs=document.querySelectorAll(".tab");
+  var names=["signals","companies","negative","sources","history"];
+  var idx=names.indexOf(name);
+  if(idx>=0&&tabs[idx])switchTab(name,tabs[idx]);
 }
 
-// ── Init ──────────────────────────────────────────────────
-(async function() {
+// ════════════════════════════
+// INIT
+// ════════════════════════════
+(async function(){
   await loadIndex();
-  var ok = await loadData();
-  if (ok) renderFeed();
+  var ok=await loadData();
+  if(ok)renderFeed();
 })();
 </script>
 </body>
