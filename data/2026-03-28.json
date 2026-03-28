@@ -1,18 +1,18 @@
 {
   "date": "2026-03-28",
   "dateKr": "2026년 03월 28일",
-  "generatedAt": "2026-03-28T16:37:12.794803+00:00",
-  "brief": "**에너지 CVC 투자 브리핑 (2026.03.28)**\n\nAI 데이터센터 전력 수요 증가가 에너지 저장 시장의 새로운 성장 동력으로 부상하고 있다. Form Energy가 미국 AI 데이터센터 대상 12GWh 규모 다일간 철-공기 배터리 공급계약을 체결한 것은 단순한 그리드 안정화를 넘어 AI 인프라의 지속적 전력 공급이라는 새로운 니즈를 반영한다. \n\n한편 American Battery Factory의 애리조나 LFP 기가팩토리 4.5GWh 인수계약 확보와 영국 LCCC의 AR7 차액결제계약 체결은 배터리 제조-재생에너지 발전 간 수직적 밸류체인이 본격 가동되고 있음을 시사한다. Gore Street Capital의 BESS 사전 건설단계 데이터 중요성 언급(Energy Storage News)은 운영 최적화가 투자 수익률 결정 요인으로 부각되고 있어, 데이터 분석 역량을 보유한 에너지테크 스타트업들의 투자 매력도가 높아질 전망이다.",
+  "generatedAt": "2026-03-28T23:00:57.598722+00:00",
+  "brief": "**에너지 CVC 투자 브리핑 (2026.03.28)**\n\nAI 데이터센터 전력 수요가 에너지 스토리지 시장의 새로운 성장 동력으로 부상하고 있다. Form Energy가 미국 AI 데이터센터 대상 12GWh 규모의 multi-day iron-air 배터리 공급계약을 체결한 것은 장기간 전력 저장이 필요한 AI 인프라 특성을 반영한다고 봐야 한다. \n\n동시에 American Battery Factory의 Arizona LFP 기가팩토리 4.5GWh 오프테이크 계약 확보와 UK LCCC의 AR7 차액결제계약 체결은 배터리 제조-재생에너지 개발 전반의 프로젝트 파이낸싱이 본격화되고 있음을 시사한다. Gore Street Capital이 강조한 BESS 사전 건설 단계 데이터 관리 중요성은 운영 리스크 최소화를 통한 수익성 확보가 투자 핵심 요소로 자리잡았다는 방증이다.",
   "stats": {
-    "total": 31,
+    "total": 30,
     "high": 5,
     "medium": 6,
     "negative": 1,
     "matched": 1,
-    "filtered_out": 49,
+    "filtered_out": 50,
     "companies_with_signals": 1,
     "by_segment": {
-      "ess": 24,
+      "ess": 23,
       "hvdc": 3,
       "hydrogen": 1,
       "grid_sw": 1,
@@ -21,7 +21,7 @@
     "by_type": {
       "Contract": 4,
       "Deployment": 1,
-      "News": 24,
+      "News": 23,
       "Partnership": 1,
       "Negative": 1
     }
@@ -1287,50 +1287,6 @@
       }
     },
     {
-      "id": "78d42ed0beeb",
-      "title": "Tesla (TSLA) publishes Q1 2026 delivery consensus: 365,645 vehicles expected",
-      "summary": "<div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2023/03/Tesla-extended-warranty-hero.jpg?quality=82&#038;strip=all&#038;w=1600\" /></div><p>Tesla published its company-compiled Wall Street consensus for first-quarter 2026 deliveries on Thursday, and the number — 365,645 vehicles — paints a picture of a company still struggling to return to meaningful growth after two straight years of declining sales.</p>\n\n\n\n<p>The consensus, drawn from 23 sell-side analysts, impl",
-      "event_date": "2026-03-26",
-      "source_name": "Electrek",
-      "source_url": "https://electrek.co/2026/03/26/tesla-tsla-q1-2026-delivery-consensus-365000-analyst-estimates/",
-      "event_type": "News",
-      "impact_type": "Informational",
-      "matched_rule": null,
-      "tier": 5,
-      "signal_stage": "strategic",
-      "signal_strength": 23,
-      "signal_tier": "low",
-      "score_breakdown": [
-        {
-          "id": "timeframe",
-          "delta": 8,
-          "reason": "Concrete timeframe stated",
-          "group": "boost"
-        }
-      ],
-      "segment": "ess",
-      "company_id": null,
-      "company_name": "Unassigned",
-      "is_negative": false,
-      "neg_subtype": null,
-      "is_noise": false,
-      "evidence": {
-        "observed_fact": "Tesla (TSLA) publishes Q1 2026 delivery consensus: 365,645 vehicles expected",
-        "observed_fact_detail": "<div class=\"feat-image\"><img src=\"https://electrek.",
-        "source_label": "Electrek · 2026-03-26",
-        "matched_rule_name": "no rule matched",
-        "matched_rule_tier": "Tier 5 — News",
-        "why_it_matters": "This event did not match a specific investment signal pattern. It is retained for context but should not be weighted in investment assessment without additional corroboration.",
-        "missing_evidence": [
-          "No investment-relevant pattern matched",
-          "Signal quality insufficient for investment assessment",
-          "Primary research required before forming a view"
-        ],
-        "confidence": "Low",
-        "confidence_rationale": "Score below signal threshold or event type is generic. Context only."
-      }
-    },
-    {
       "id": "b4a65bc9ee8a",
       "title": "New EV sales drop 28% in Q1 2026, but used EVs surge 12% to near-record levels",
       "summary": "<div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2026/01/GM-Electrify-America-EV-Charging.jpeg?quality=82&#038;strip=all&#038;w=1400\" /></div><p>The US electric vehicle market has split into two diverging realities. New EV sales cratered 28% year-over-year in Q1 2026 to just 212,600 units, according to new data from Cox Automotive — but used EV sales surged 12% to 93,500 units, with prices now within $1,300 of equivalent gas cars.</p>\n\n\n\n<p>The data, presented in ",
@@ -2300,7 +2256,7 @@
       "status": "success",
       "error": null,
       "items": 10,
-      "fetched_at": "2026-03-28T16:37:01.622376+00:00"
+      "fetched_at": "2026-03-28T23:00:48.300129+00:00"
     },
     {
       "id": "pvmagazine",
@@ -2309,7 +2265,7 @@
       "status": "success",
       "error": null,
       "items": 20,
-      "fetched_at": "2026-03-28T16:37:01.767381+00:00"
+      "fetched_at": "2026-03-28T23:00:48.575632+00:00"
     },
     {
       "id": "energystoragenews",
@@ -2318,7 +2274,7 @@
       "status": "success",
       "error": null,
       "items": 20,
-      "fetched_at": "2026-03-28T16:37:02.139456+00:00"
+      "fetched_at": "2026-03-28T23:00:48.894088+00:00"
     },
     {
       "id": "offshorewind",
@@ -2327,7 +2283,7 @@
       "status": "success",
       "error": null,
       "items": 10,
-      "fetched_at": "2026-03-28T16:37:02.442604+00:00"
+      "fetched_at": "2026-03-28T23:00:49.029815+00:00"
     },
     {
       "id": "electrek",
@@ -2336,7 +2292,7 @@
       "status": "success",
       "error": null,
       "items": 20,
-      "fetched_at": "2026-03-28T16:37:02.933990+00:00"
+      "fetched_at": "2026-03-28T23:00:49.229164+00:00"
     },
     {
       "id": "h2view",
@@ -2345,7 +2301,7 @@
       "status": "partial",
       "error": "Feed returned 0 usable items",
       "items": 0,
-      "fetched_at": "2026-03-28T16:37:03.127010+00:00"
+      "fetched_at": "2026-03-28T23:00:49.429955+00:00"
     }
   ],
   "panels": {
@@ -2468,7 +2424,7 @@
     "sources_ok": 5,
     "sources_partial": 1,
     "sources_failed": 0,
-    "new_events": 31,
-    "filtered_out": 49
+    "new_events": 30,
+    "filtered_out": 50
   }
 }
