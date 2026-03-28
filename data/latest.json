@@ -1,23 +1,24 @@
 {
   "date": "2026-03-28",
   "dateKr": "2026년 03월 28일",
-  "generatedAt": "2026-03-28T16:12:36.129004+00:00",
-  "brief": "**에너지 CVC 투자 브리핑 (2026.03.28)**\n\nForm Energy가 미국 AI 데이터센터 대상 12GWh 규모 철-공기 배터리 공급 계약을 체결했다고 Energy Storage News가 보도했으며, 이는 AI 인프라의 전력 안정성 요구가 장기 저장 기술로 확산되는 명확한 신호다. 동시에 American Battery Factory의 애리조나 LFP 기가팩토리 4.5GWh 오프테이크 확보 소식과 함께, 중국 의존도 탈피를 위한 미국 내 배터리 밸류체인 구축 모멘텀이 가속화되고 있다. \n\nGore Street Capital의 BESS 자산관리 헤드가 사전 건설 단계 데이터 관리의 중요성을 강조한 점은 배터리 저장 시장이 대규모 상업 운영 단계로 진입하면서 운영 최적화가 새로운 경쟁 요소로 부상했음을 시사한다. 수소 부문 거래 동향 변화와 함께 종합하면, 에너지 저장 생태계 전반에서 기술 성숙도 기반 대형 상업 계약이 본격화되는 변곡점으로 판단된다.",
+  "generatedAt": "2026-03-28T16:24:01.971520+00:00",
+  "brief": "**에너지 CVC 투자 브리핑 (2026.03.28)**\n\nAI 데이터센터 전력 수요 급증이 에너지 저장 시장의 새로운 성장 동력으로 부상하고 있음. Form Energy가 미국 AI 데이터센터 대상 12GWh 규모 철-공기 배터리 공급 계약을 체결한 것은 장기 저장 솔루션에 대한 기업 수요가 본격화되고 있음을 시사함(Energy Storage News). 동시에 American Battery Factory의 4.5GWh LFP 공장 인수 계약과 영국 LCCC의 AR7 차액결제계약 체결은 전방위적 배터리 밸류체인 확장세를 보여줌. Gore Street Capital이 BESS 사전 건설 단계 데이터 관리의 중요성을 강조한 점은 운영 최적화 기술에 대한 투자 기회가 확대되고 있음을 의미함. 특히 다양한 배터리 기술(철-공기, LFP)과 적용 분야가 동시 확장되는 현 시점에서 차별화된 기술력을 보유한 스타트업들의 밸류에이션 재평가가 필요한 시점임.",
   "stats": {
-    "total": 10,
-    "high": 4,
+    "total": 11,
+    "high": 5,
     "medium": 1,
     "negative": 1,
     "matched": 1,
-    "filtered_out": 60,
+    "filtered_out": 69,
     "companies_with_signals": 1,
     "by_segment": {
       "ess": 8,
+      "hvdc": 1,
       "hydrogen": 1,
       "dc_power": 1
     },
     "by_type": {
-      "Contract": 3,
+      "Contract": 4,
       "Deployment": 1,
       "Partnership": 1,
       "News": 4,
@@ -44,6 +45,7 @@
       "company_id": "c_form_energy",
       "company_name": "Form Energy",
       "is_negative": false,
+      "neg_subtype": null,
       "is_noise": false,
       "evidence": {
         "observed_fact": "Form Energy signs 12GWh agreement to supply multi-day iron-air batteries to new US AI data centres",
@@ -80,6 +82,7 @@
       "company_id": null,
       "company_name": "Unassigned",
       "is_negative": false,
+      "neg_subtype": null,
       "is_noise": false,
       "evidence": {
         "observed_fact": "American Battery Factory secures 4.5GWh offtake agreements for Arizona LFP gigafactory",
@@ -88,6 +91,43 @@
         "matched_rule_name": "offtake agreement",
         "matched_rule_tier": "Tier 1 — Contract",
         "why_it_matters": "An offtake or supply agreement with a named buyer is the clearest signal of commercial-stage transition. LCOS (levelized cost of storage) competitiveness is implied but not confirmed without contract terms.",
+        "missing_evidence": [
+          "Contract ACV (annual contract value) not disclosed",
+          "Contract duration and renewal terms not public",
+          "Exclusivity and geographic scope unknown"
+        ],
+        "confidence": "Medium",
+        "confidence_rationale": "Tier-1 event type, but either company unmatched or score modifiers are mixed. Source verification needed."
+      }
+    },
+    {
+      "id": "1993a3cdbebd",
+      "title": "UK’s LCCC Signs Contracts for Difference with AR7 Winners",
+      "summary": "The UK Low Carbon Contracts Company (LCCC) has signed Contracts for Difference (CfD) with [&#8230;]",
+      "event_date": "2026-03-26",
+      "source_name": "Offshore Wind Biz",
+      "source_url": "https://www.offshorewind.biz/2026/03/26/uks-lccc-signs-contracts-for-difference-with-ar7-winners/",
+      "event_type": "Contract",
+      "impact_type": "Commercial",
+      "matched_rule": "signed contract",
+      "tier": 1,
+      "signal_stage": "commercial",
+      "signal_strength": 90,
+      "signal_tier": "high",
+      "score_breakdown": [],
+      "segment": "hvdc",
+      "company_id": null,
+      "company_name": "Unassigned",
+      "is_negative": false,
+      "neg_subtype": null,
+      "is_noise": false,
+      "evidence": {
+        "observed_fact": "UK’s LCCC Signs Contracts for Difference with AR7 Winners",
+        "observed_fact_detail": "The UK Low Carbon Contracts Company (LCCC) has signed Contracts for Difference (CfD) with [&#8230;].",
+        "source_label": "Offshore Wind Biz · 2026-03-26",
+        "matched_rule_name": "signed contract",
+        "matched_rule_tier": "Tier 1 — Contract",
+        "why_it_matters": "A commercial contract is the clearest signal of product-market fit and revenue visibility. Terms (ACV, duration, exclusivity) determine whether this is a reference sale or scalable revenue.",
         "missing_evidence": [
           "Contract ACV (annual contract value) not disclosed",
           "Contract duration and renewal terms not public",
@@ -116,6 +156,7 @@
       "company_id": null,
       "company_name": "Unassigned",
       "is_negative": false,
+      "neg_subtype": null,
       "is_noise": false,
       "evidence": {
         "observed_fact": "The Hydrogen Stream: Capacity outlook grows, deals shift",
@@ -152,6 +193,7 @@
       "company_id": null,
       "company_name": "Unassigned",
       "is_negative": false,
+      "neg_subtype": null,
       "is_noise": false,
       "evidence": {
         "observed_fact": "‘Do not overlook it at pre-construction’: Gore Street Capital’s head of asset management on BESS data",
@@ -188,6 +230,7 @@
       "company_id": null,
       "company_name": "Unassigned",
       "is_negative": false,
+      "neg_subtype": null,
       "is_noise": false,
       "evidence": {
         "observed_fact": "‘Be kind to yourself and patient with your journey’",
@@ -229,6 +272,7 @@
       "company_id": null,
       "company_name": "Unassigned",
       "is_negative": false,
+      "neg_subtype": null,
       "is_noise": false,
       "evidence": {
         "observed_fact": "These 5 EVs are $10,000 off right now",
@@ -270,6 +314,7 @@
       "company_id": null,
       "company_name": "Unassigned",
       "is_negative": false,
+      "neg_subtype": null,
       "is_noise": false,
       "evidence": {
         "observed_fact": "Day 3 Spring Sale Green Deals – Anker eufy smart security devices 50% off, Bluetti increases power station savings, Segway, more",
@@ -311,6 +356,7 @@
       "company_id": null,
       "company_name": "Unassigned",
       "is_negative": false,
+      "neg_subtype": null,
       "is_noise": false,
       "evidence": {
         "observed_fact": "Hyundai’s new electric SUV looks like a twin to the Kia EV2 [Video]",
@@ -352,6 +398,7 @@
       "company_id": null,
       "company_name": "Unassigned",
       "is_negative": false,
+      "neg_subtype": null,
       "is_noise": false,
       "evidence": {
         "observed_fact": "Big Spring Sale Green Deals hub – e-bikes, e-scooters, power stations, tools, more",
@@ -388,6 +435,7 @@
       "company_id": null,
       "company_name": "Unassigned",
       "is_negative": true,
+      "neg_subtype": "delay",
       "is_noise": false,
       "evidence": {
         "observed_fact": "Data center buildouts slowed late last year",
@@ -426,6 +474,7 @@
       "company_id": null,
       "company_name": "Unassigned",
       "is_negative": false,
+      "neg_subtype": null,
       "is_noise": true,
       "evidence": {
         "observed_fact": "Fleet electrification is running into the grid. Planning and operations need to catch up.",
@@ -463,6 +512,7 @@
       "company_id": null,
       "company_name": "Unassigned",
       "is_negative": false,
+      "neg_subtype": null,
       "is_noise": true,
       "evidence": {
         "observed_fact": "PJM data center colocation plan takes fire from Vistra, data center group, others",
@@ -500,6 +550,7 @@
       "company_id": null,
       "company_name": "Unassigned",
       "is_negative": false,
+      "neg_subtype": null,
       "is_noise": true,
       "evidence": {
         "observed_fact": "Winter Storm Fern highlighted need for expanded interregional transmission, Senate hears",
@@ -537,6 +588,7 @@
       "company_id": null,
       "company_name": "Unassigned",
       "is_negative": false,
+      "neg_subtype": null,
       "is_noise": true,
       "evidence": {
         "observed_fact": "Coastal Virginia Offshore Wind begins delivering power",
@@ -574,6 +626,7 @@
       "company_id": null,
       "company_name": "Unassigned",
       "is_negative": false,
+      "neg_subtype": null,
       "is_noise": true,
       "evidence": {
         "observed_fact": "Southeast, lower-cost PJM states offer model for affordable grid expansion",
@@ -611,6 +664,7 @@
       "company_id": null,
       "company_name": "Unassigned",
       "is_negative": false,
+      "neg_subtype": null,
       "is_noise": true,
       "evidence": {
         "observed_fact": "50 GW of data centers online at end of 2025, with MISO seeing strongest growth: FERC",
@@ -653,6 +707,7 @@
       "company_id": null,
       "company_name": "Unassigned",
       "is_negative": false,
+      "neg_subtype": null,
       "is_noise": true,
       "evidence": {
         "observed_fact": "DOE offers $50M for tribal energy projects",
@@ -690,6 +745,7 @@
       "company_id": null,
       "company_name": "Unassigned",
       "is_negative": false,
+      "neg_subtype": null,
       "is_noise": true,
       "evidence": {
         "observed_fact": "Michigan, New York lawmakers consider virtual power plant bills",
@@ -727,6 +783,7 @@
       "company_id": null,
       "company_name": "Unassigned",
       "is_negative": false,
+      "neg_subtype": null,
       "is_noise": true,
       "evidence": {
         "observed_fact": "Utility-scale solar and wind hit a record 17% of US generation in 2025: EIA",
@@ -764,6 +821,7 @@
       "company_id": null,
       "company_name": "Unassigned",
       "is_negative": false,
+      "neg_subtype": null,
       "is_noise": true,
       "evidence": {
         "observed_fact": "China PV Industry Brief: China adds 32.48 GW solar as polysilicon prices fall",
@@ -801,6 +859,7 @@
       "company_id": null,
       "company_name": "Unassigned",
       "is_negative": false,
+      "neg_subtype": null,
       "is_noise": true,
       "evidence": {
         "observed_fact": "Agrivoltaics with trackers, vertical systems offer economic upside",
@@ -838,6 +897,7 @@
       "company_id": null,
       "company_name": "Unassigned",
       "is_negative": false,
+      "neg_subtype": null,
       "is_noise": true,
       "evidence": {
         "observed_fact": "Bluetti targets home backup with fridge-focused battery system",
@@ -875,6 +935,7 @@
       "company_id": null,
       "company_name": "Unassigned",
       "is_negative": false,
+      "neg_subtype": null,
       "is_noise": true,
       "evidence": {
         "observed_fact": "European prosecutor investigates suspected solar tender fraud in Slovenia",
@@ -912,6 +973,7 @@
       "company_id": null,
       "company_name": "Unassigned",
       "is_negative": false,
+      "neg_subtype": null,
       "is_noise": true,
       "evidence": {
         "observed_fact": "Brazil PV module imports fall 24% to 17.9 GW in 2025",
@@ -949,6 +1011,7 @@
       "company_id": null,
       "company_name": "Unassigned",
       "is_negative": false,
+      "neg_subtype": null,
       "is_noise": true,
       "evidence": {
         "observed_fact": "US ITC opens Section 337 probe into global TOPCon supply chain",
@@ -986,6 +1049,7 @@
       "company_id": null,
       "company_name": "Unassigned",
       "is_negative": false,
+      "neg_subtype": null,
       "is_noise": true,
       "evidence": {
         "observed_fact": "Inland Rail deploys solar-powered level crossings in Australia",
@@ -1023,6 +1087,7 @@
       "company_id": null,
       "company_name": "Unassigned",
       "is_negative": false,
+      "neg_subtype": null,
       "is_noise": true,
       "evidence": {
         "observed_fact": "What are the selling points of marine energy?",
@@ -1060,6 +1125,7 @@
       "company_id": null,
       "company_name": "Unassigned",
       "is_negative": false,
+      "neg_subtype": null,
       "is_noise": true,
       "evidence": {
         "observed_fact": "UK’s first community-owned solar battery seeks investors",
@@ -1097,6 +1163,7 @@
       "company_id": null,
       "company_name": "Unassigned",
       "is_negative": false,
+      "neg_subtype": null,
       "is_noise": true,
       "evidence": {
         "observed_fact": "Solar generation performance with regional weather conditions deviating from long-term averages",
@@ -1134,6 +1201,7 @@
       "company_id": null,
       "company_name": "Unassigned",
       "is_negative": false,
+      "neg_subtype": null,
       "is_noise": true,
       "evidence": {
         "observed_fact": "Wettest February since 2011 cuts irradiance across most of Australia",
@@ -1185,6 +1253,7 @@
           "company_id": "c_form_energy",
           "company_name": "Form Energy",
           "is_negative": false,
+          "neg_subtype": null,
           "is_noise": false,
           "evidence": {
             "observed_fact": "Form Energy signs 12GWh agreement to supply multi-day iron-air batteries to new US AI data centres",
@@ -1242,7 +1311,7 @@
       "status": "success",
       "error": null,
       "items": 10,
-      "fetched_at": "2026-03-28T16:12:24.975176+00:00"
+      "fetched_at": "2026-03-28T16:23:49.785365+00:00"
     },
     {
       "id": "pvmagazine",
@@ -1251,7 +1320,7 @@
       "status": "success",
       "error": null,
       "items": 20,
-      "fetched_at": "2026-03-28T16:12:25.245406+00:00"
+      "fetched_at": "2026-03-28T16:23:50.110604+00:00"
     },
     {
       "id": "energystoragenews",
@@ -1260,16 +1329,16 @@
       "status": "success",
       "error": null,
       "items": 20,
-      "fetched_at": "2026-03-28T16:12:25.690449+00:00"
+      "fetched_at": "2026-03-28T16:23:50.515328+00:00"
     },
     {
       "id": "offshorewind",
       "name": "Offshore Wind Biz",
       "url": "https://www.offshorewind.biz/feed/",
-      "status": "failed",
-      "error": "HTTP 403",
-      "items": 0,
-      "fetched_at": "2026-03-28T16:12:26.183633+00:00"
+      "status": "success",
+      "error": null,
+      "items": 10,
+      "fetched_at": "2026-03-28T16:23:51.053535+00:00"
     },
     {
       "id": "electrek",
@@ -1278,7 +1347,7 @@
       "status": "success",
       "error": null,
       "items": 20,
-      "fetched_at": "2026-03-28T16:12:26.347905+00:00"
+      "fetched_at": "2026-03-28T16:23:51.709587+00:00"
     },
     {
       "id": "h2view",
@@ -1287,15 +1356,71 @@
       "status": "partial",
       "error": "Feed returned 0 usable items",
       "items": 0,
-      "fetched_at": "2026-03-28T16:12:26.637488+00:00"
+      "fetched_at": "2026-03-28T16:23:51.954827+00:00"
     }
   ],
+  "panels": {
+    "negative_signals": [
+      {
+        "event_id": "8bf711ddd82a",
+        "title": "Data center buildouts slowed late last year",
+        "source_name": "Utility Dive",
+        "source_url": "https://www.utilitydive.com/news/data-center-building-boom-slows-despite-massive-spend/815694/",
+        "event_date": "2026-03-25",
+        "company_id": null,
+        "company_name": "Unassigned",
+        "segment": "dc_power",
+        "neg_subtype": "delay",
+        "label": "Project / Certification Delay",
+        "icon": "⏱",
+        "severity": "high",
+        "memo": "Timeline extension increases capital-at-risk. Determine if delay is project-level (isolated) or structural (technology/market)."
+      }
+    ],
+    "missing_evidence": [
+      {
+        "company_id": "c_form_energy",
+        "company_name": "Form Energy",
+        "sector": "ess",
+        "stage": "commercial",
+        "gaps": [
+          {
+            "rule_id": "no_certification",
+            "label": "No Third-Party Certification",
+            "severity": "high",
+            "memo": "No independent certification (DNV GL, TUV, KPX, UL) confirmed. In regulated energy markets this is a legal prerequisite for procurement."
+          },
+          {
+            "rule_id": "no_named_customer",
+            "label": "No Named Strategic Buyer",
+            "severity": "high",
+            "memo": "No named strategic buyer (utility, shipyard, hyperscaler, EPC) in any collected signal. Demand-side validation is absent."
+          },
+          {
+            "rule_id": "no_deployment",
+            "label": "No Deployment / Go-Live",
+            "severity": "medium",
+            "memo": "No operational deployment or commissioning confirmed. TRL-9 status in a commercial setting is unverified."
+          }
+        ],
+        "gap_count": 3,
+        "critical_gaps": 0,
+        "high_gaps": 2
+      }
+    ],
+    "panel_stats": {
+      "negative_count": 1,
+      "critical_neg": 0,
+      "companies_with_gaps": 1,
+      "total_critical_gaps": 0
+    }
+  },
   "reliability": {
     "sources_total": 6,
-    "sources_ok": 4,
+    "sources_ok": 5,
     "sources_partial": 1,
-    "sources_failed": 1,
-    "new_events": 10,
-    "filtered_out": 60
+    "sources_failed": 0,
+    "new_events": 11,
+    "filtered_out": 69
   }
 }
