@@ -32,12 +32,17 @@ TODAY_KR = datetime.now(timezone.utc).strftime("%Y년 %m월 %d일")
 # ══════════════════════════════════════════════════════════
 
 RSS_SOURCES = [
-    {"id":"utilitydive",      "name":"Utility Dive",       "url":"https://www.utilitydive.com/feeds/news/",        "segments":["grid_sw","ess","dc_power"]},
-    {"id":"pvmagazine",       "name":"PV Magazine",         "url":"https://www.pv-magazine.com/feed/",              "segments":["ess","hydrogen","forecasting"]},
-    {"id":"rechargenews",     "name":"Recharge News",       "url":"https://www.rechargenews.com/feed",              "segments":["ess","marine_fc","hvdc"]},
-    {"id":"hydrogeninsight",  "name":"Hydrogen Insight",    "url":"https://www.hydrogeninsight.com/feed",           "segments":["hydrogen","marine_fc"]},
-    {"id":"energystoragenews","name":"Energy Storage News", "url":"https://www.energy-storage.news/feed/",          "segments":["ess"]},
-    {"id":"offshorewind",     "name":"Offshore Wind Biz",   "url":"https://www.offshorewind.biz/feed/",             "segments":["hvdc","ess"]},
+    # ── 안정적 무료 피드 ────────────────────────────────────
+    {"id":"utilitydive",      "name":"Utility Dive",        "url":"https://www.utilitydive.com/feeds/news/",        "segments":["grid_sw","ess","dc_power"]},
+    {"id":"pvmagazine",       "name":"PV Magazine",          "url":"https://www.pv-magazine.com/feed/",              "segments":["ess","hydrogen","forecasting"]},
+    {"id":"energystoragenews","name":"Energy Storage News",  "url":"https://www.energy-storage.news/feed/",          "segments":["ess"]},
+    {"id":"offshorewind",     "name":"Offshore Wind Biz",    "url":"https://www.offshorewind.biz/feed/",             "segments":["hvdc","ess"]},
+    # ── 교체: Recharge News → Electrek (무료, 안정적) ───────
+    # Recharge News = Informa/Riviera 계열, RSS 차단됨
+    {"id":"electrek",         "name":"Electrek",             "url":"https://electrek.co/feed/",                      "segments":["ess","dc_power","forecasting"]},
+    # ── 교체: Hydrogen Insight → H2 View (무료 수소 전문) ───
+    # Hydrogen Insight = 유료 paywall, RSS 접근 차단됨
+    {"id":"h2view",           "name":"H2 View",              "url":"https://www.h2-view.com/feed/",                  "segments":["hydrogen","marine_fc"]},
 ]
 
 # ══════════════════════════════════════════════════════════
