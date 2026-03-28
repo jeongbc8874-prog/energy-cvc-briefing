@@ -1,8 +1,8 @@
 {
   "date": "2026-03-28",
   "dateKr": "2026년 03월 28일",
-  "generatedAt": "2026-03-28T16:33:23.606151+00:00",
-  "brief": "**에너지 CVC 투자 브리핑 (2026.03.28)**\n\nAI 데이터센터 전력 수요 폭증이 에너지 스토리지 시장의 새로운 성장 동력으로 부상하고 있음. Form Energy가 미국 AI 데이터센터 대상 12GWh 규모 multi-day iron-air 배터리 공급계약을 체결한 점이 주목되는데, 이는 기존 리튬이온 배터리와 차별화된 장기저장 솔루션에 대한 시장 니즈가 본격 가시화되는 신호로 해석됨. \n\n동시에 American Battery Factory의 Arizona LFP 기가팩토리 4.5GWh 인수계약 확보는 미국 내 배터리 공급망 자립화 트렌드와 맞물려 있어, 지정학적 리스크 헷지 수요가 투자 기회로 전환되는 양상임. 특히 Gore Street Capital이 BESS 사전건설 단계 데이터 관리의 중요성을 강조한 점은 스토리지 자산운용 전문성이 새로운 밸류체인으로 자리잡고 있음을 시사함.",
+  "generatedAt": "2026-03-28T16:37:12.794803+00:00",
+  "brief": "**에너지 CVC 투자 브리핑 (2026.03.28)**\n\nAI 데이터센터 전력 수요 증가가 에너지 저장 시장의 새로운 성장 동력으로 부상하고 있다. Form Energy가 미국 AI 데이터센터 대상 12GWh 규모 다일간 철-공기 배터리 공급계약을 체결한 것은 단순한 그리드 안정화를 넘어 AI 인프라의 지속적 전력 공급이라는 새로운 니즈를 반영한다. \n\n한편 American Battery Factory의 애리조나 LFP 기가팩토리 4.5GWh 인수계약 확보와 영국 LCCC의 AR7 차액결제계약 체결은 배터리 제조-재생에너지 발전 간 수직적 밸류체인이 본격 가동되고 있음을 시사한다. Gore Street Capital의 BESS 사전 건설단계 데이터 중요성 언급(Energy Storage News)은 운영 최적화가 투자 수익률 결정 요인으로 부각되고 있어, 데이터 분석 역량을 보유한 에너지테크 스타트업들의 투자 매력도가 높아질 전망이다.",
   "stats": {
     "total": 31,
     "high": 5,
@@ -2265,7 +2265,23 @@
         "note": "기존 이벤트에서만 생성됨. 수치/사실 생성 없음."
       },
       "signal_count": 1,
-      "high_count": 1
+      "high_count": 1,
+      "neg_count": 0,
+      "reinforcing": 1,
+      "type_counts": {
+        "Contract": 1
+      },
+      "stage_label": "Commercial",
+      "stage_color": "#0A6640",
+      "stage_desc": "Binding commercial agreement or live deployment confirmed.",
+      "pattern": {
+        "id": "low_density",
+        "label": "Insufficient Signal Density",
+        "color": "#A8A8A8",
+        "memo": "Signal density insufficient for pattern recognition. Primary research required before forming a view."
+      },
+      "ttr": "Near-term",
+      "ttr_color": "#C0392B"
     }
   },
   "sources": [
@@ -2284,7 +2300,7 @@
       "status": "success",
       "error": null,
       "items": 10,
-      "fetched_at": "2026-03-28T16:33:13.889208+00:00"
+      "fetched_at": "2026-03-28T16:37:01.622376+00:00"
     },
     {
       "id": "pvmagazine",
@@ -2293,7 +2309,7 @@
       "status": "success",
       "error": null,
       "items": 20,
-      "fetched_at": "2026-03-28T16:33:14.140771+00:00"
+      "fetched_at": "2026-03-28T16:37:01.767381+00:00"
     },
     {
       "id": "energystoragenews",
@@ -2302,7 +2318,7 @@
       "status": "success",
       "error": null,
       "items": 20,
-      "fetched_at": "2026-03-28T16:33:14.526763+00:00"
+      "fetched_at": "2026-03-28T16:37:02.139456+00:00"
     },
     {
       "id": "offshorewind",
@@ -2311,7 +2327,7 @@
       "status": "success",
       "error": null,
       "items": 10,
-      "fetched_at": "2026-03-28T16:33:14.777698+00:00"
+      "fetched_at": "2026-03-28T16:37:02.442604+00:00"
     },
     {
       "id": "electrek",
@@ -2320,7 +2336,7 @@
       "status": "success",
       "error": null,
       "items": 20,
-      "fetched_at": "2026-03-28T16:33:14.974487+00:00"
+      "fetched_at": "2026-03-28T16:37:02.933990+00:00"
     },
     {
       "id": "h2view",
@@ -2329,7 +2345,7 @@
       "status": "partial",
       "error": "Feed returned 0 usable items",
       "items": 0,
-      "fetched_at": "2026-03-28T16:33:15.174254+00:00"
+      "fetched_at": "2026-03-28T16:37:03.127010+00:00"
     }
   ],
   "panels": {
