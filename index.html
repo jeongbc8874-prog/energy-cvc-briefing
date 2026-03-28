@@ -511,6 +511,25 @@ a{color:inherit;text-decoration:none;}
 }
 .panel-more:hover { background:var(--b2); }
 
+
+/* ══════════════════════════════════════════════════════
+   SCORE BREAKDOWN + RULEBOOK
+══════════════════════════════════════════════════════ */
+.rb-wrap{padding:12px 16px;background:var(--bg);border-top:1px solid var(--b2);}
+.rb-title{font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink4);margin-bottom:8px;}
+.rb-row{display:flex;align-items:center;gap:8px;padding:2px 0;font-family:var(--mono);font-size:10px;flex-wrap:wrap;}
+.rb-delta-pos{color:#16A34A;font-weight:700;min-width:28px;text-align:right;}
+.rb-delta-neg{color:#DC2626;font-weight:700;min-width:28px;text-align:right;}
+.rb-reason{color:var(--ink3);}
+.rb-base{color:var(--ink4);}
+.rb-total{font-family:var(--mono);font-size:11px;font-weight:700;padding-top:6px;margin-top:6px;border-top:1px solid var(--b2);display:flex;align-items:center;gap:8px;}
+
+/* Rulebook tab content */
+.rb-group{margin-bottom:14px;}
+.rb-group-title{font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:4px 0;margin-bottom:6px;border-bottom:1px solid var(--b2);}
+.rb-item{font-size:12px;color:var(--ink2);padding:3px 0;display:flex;align-items:flex-start;gap:7px;line-height:1.5;}
+.rb-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;margin-top:4px;}
+
 </style>
 </head>
 <body>
@@ -600,6 +619,7 @@ a{color:inherit;text-decoration:none;}
     <button class="tab"     onclick="switchTab('negative',this)">Negative</button>
     <button class="tab"     onclick="switchTab('sources',this)">Sources</button>
     <button class="tab"     onclick="switchTab('history',this)">Archive</button>
+    <button class="tab"     onclick="switchTab('rulebook',this)">Score Rules</button>
   </div>
 </div>
 
@@ -670,6 +690,98 @@ a{color:inherit;text-decoration:none;}
 // ════════════════════════════
 var DATA=null,SIGNALS=[],IDX=[],SRCLOG=[];
 var curTier="all",curTab="signals",EXP=new Set(),srcOpen=false;
+
+// ════════════════════════════
+// SCORE BREAKDOWN RENDERER
+// ════════════════════════════
+function renderScoreBreakdown(ev) {
+  var bd  = ev.score_breakdown || [];
+  var str = ev.signal_strength || 0;
+  var clf = ev.event_type || "News";
+  var tier_score = {
+    "Certification":85,"Contract":90,"Deployment":85,
+    "Pilot":70,"Financing":80,"Hiring":70,"Partnership":45,"Grant":45,"Expansion":70,"News":15
+  }[clf] || 15;
+
+  var h = '<div class="rb-wrap">';
+  h += '<div class="rb-title">Score Breakdown — every point explained</div>';
+  h += '<div class="rb-row"><span class="rb-base">base</span><span class="rb-delta-pos">'+tier_score+'</span><span class="rb-reason">'+e(clf)+' event (Tier '+( ev.tier||5)+')</span></div>';
+
+  bd.forEach(function(b) {
+    var neg = b.delta < 0;
+    h += '<div class="rb-row">'
+       + '<span class="'+(neg?"rb-delta-neg":"rb-delta-pos")+'">'+(neg?"":"+")+''+b.delta+'</span>'
+       + '<span class="rb-reason">'+e(b.reason||"")+'</span>'
+       + '<span style="font-family:var(--mono);font-size:9px;color:var(--b);margin-left:4px">'+e(b.id||b.group||"")+'</span>'
+       + '</div>';
+  });
+
+  h += '<div class="rb-total">';
+  var tc = str>=60?"#16A34A":str>=35?"#CA8A04":"#DC2626";
+  h += '<span style="color:'+tc+';font-size:14px">'+str+'</span>';
+  h += '<span style="font-family:var(--mono);font-size:10px;font-weight:700;padding:2px 8px;background:'+tc+'18;color:'+tc+'">'+( ev.signal_tier||"low").toUpperCase()+'</span>';
+  h += '<span style="font-family:var(--mono);font-size:9px;color:var(--ink4)">';
+  if(str>=60)      h+='shown in feed (≥60)';
+  else if(str>=35) h+='shown when Medium selected (≥35)';
+  else if(str>=20) h+='in DB only (≥20, below feed threshold)';
+  else             h+='would be dropped (<20)';
+  h += '</span></div>';
+  h += '</div>';
+  return h;
+}
+
+// ════════════════════════════
+// RULEBOOK TAB
+// ════════════════════════════
+function renderRulebook() {
+  var el = document.getElementById("feed-col");
+  var rb = DATA && DATA.score_rulebook;
+
+  // Static fallback if JSON doesn't have rulebook yet
+  var groups = rb || [
+    {"group":"KEPT (always)","color":"#16A34A","items":["Negative signals → always surfaced","Certification, Contract, Deployment → base 85-90","Strategic pilot (utility/hyperscaler) → base 78","CFO / Head of Finance hire → base 75","Financing round (Series A-E) → base 80"]},
+    {"group":"BOOST (+points)","color":"#1A56DB","items":["Tier-1 buyer (KEPCO, Microsoft, Google): +18","Major industrial/OEM (Hyundai, Samsung): +12","Specific funding amount ($45M): +15","Specific capacity (500MWh, 2GW): +10","Concrete timeframe (Q3 2026): +8","Tracked company matched: +10"]},
+    {"group":"NOISE (-points)","color":"#D97706","items":["Vague language (exploring, in discussions): -35","Intent without action (aims to, plans to): -20","Generic PR (proud to announce): -40","Vision/strategy announcement: -30","Industry award/Gartner: -35","Conference appearance only: -30","Report/research only: -25"]},
+    {"group":"VETO (always drop)","color":"#DC2626","items":["Opinion/commentary article: -60","Market wrap/weekly digest: -60","Generic job posting: -50","Rebranding/new logo: -55"]},
+    {"group":"THRESHOLDS","color":"#6E6E6E","items":["≥ 60 → HIGH (shown in default feed)","35–59 → MEDIUM (shown when Medium selected)","20–34 → LOW (in DB, not in feed)","< 20 → DROPPED (logged in filteredOut)","Negative signals: exempt from all thresholds"]},
+  ];
+
+  var h = '<div class="card">';
+  h += '<div class="chd">Signal Scoring Rulebook — transparent, no black box</div>';
+  h += '<div style="padding:14px">';
+  h += '<div style="font-size:12px;color:var(--ink3);line-height:1.75;margin-bottom:16px;padding:10px 14px;background:var(--bg);border-left:3px solid var(--blue)">';
+  h += 'Every signal score is computed by this rulebook. Base score comes from event type (Tier 1–4). Modifiers are added or subtracted based on text patterns. Final score determines visibility in the feed. No AI, no black box.';
+  h += '</div>';
+
+  groups.forEach(function(g) {
+    h += '<div class="rb-group">';
+    h += '<div class="rb-group-title" style="color:'+e(g.color)+'">'+e(g.group)+'</div>';
+    (g.items||[]).forEach(function(item) {
+      h += '<div class="rb-item"><span class="rb-dot" style="background:'+e(g.color)+'"></span><span>'+e(item)+'</span></div>';
+    });
+    h += '</div>';
+  });
+
+  // Filtered out log
+  var fo = DATA && DATA.filteredOut || [];
+  if (fo.length) {
+    h += '<div class="rb-group" style="margin-top:20px">';
+    h += '<div class="rb-group-title" style="color:var(--red)">DROPPED THIS RUN ('+fo.length+' events)</div>';
+    h += '<div style="font-size:11px;color:var(--ink4);margin-bottom:8px">These events were scored below threshold and excluded from the feed. Shown here for full transparency.</div>';
+    fo.slice(0,10).forEach(function(ev) {
+      h += '<div style="padding:7px 10px;border-bottom:1px solid var(--b2);display:flex;gap:10px;align-items:flex-start">';
+      h += '<span style="font-family:var(--mono);font-size:10px;font-weight:700;color:var(--red);flex-shrink:0">'+( ev.signal_strength||0)+'</span>';
+      h += '<div style="flex:1"><div style="font-size:11px;color:var(--ink3)">'+e(ev.title||"")+'</div>';
+      h += '<div style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-top:2px">'+e(ev.source_name||"")+'  ·  dropped: '+e(ev.drop_reason||"score below threshold")+'</div></div>';
+      h += '</div>';
+    });
+    if (fo.length > 10) h += '<div style="padding:7px 10px;font-family:var(--mono);font-size:10px;color:var(--ink4)">...and '+(fo.length-10)+' more</div>';
+    h += '</div>';
+  }
+
+  h += '</div></div>';
+  el.innerHTML = h;
+}
 
 // ════════════════════════════
 // PANELS — Missing Evidence + Negative Signals
@@ -1304,10 +1416,11 @@ function switchTab(tab,btn){
   if(tab==="companies") renderCompanies();
   if(tab==="sources")   renderSourcesTab();
   if(tab==="history")   renderHistory();
+  if(tab==="rulebook")  renderRulebook();
 }
 function switchTabByName(name){
   var tabs=document.querySelectorAll(".tab");
-  var names=["signals","companies","negative","sources","history"];
+  var names=["signals","companies","negative","sources","history","rulebook"];
   var idx=names.indexOf(name);
   if(idx>=0&&tabs[idx])switchTab(name,tabs[idx]);
 }
