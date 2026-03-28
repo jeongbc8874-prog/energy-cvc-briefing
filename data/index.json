@@ -1,5 +1,21 @@
 [
   {
+    "date": "2026-03-28",
+    "dateKr": "2026년 3월 28일 토요일",
+    "stats": {
+      "total": 2,
+      "newsCount": 2,
+      "dartCount": 0,
+      "kr": 0,
+      "cn": 0,
+      "global": 2,
+      "high": 1,
+      "investigate": 1,
+      "multiSource": 0,
+      "tripleSource": 0
+    }
+  },
+  {
     "date": "2026-03-27",
     "dateKr": "2026년 3월 28일 토요일",
     "stats": {
