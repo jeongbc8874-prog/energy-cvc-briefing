@@ -333,6 +333,184 @@ a{color:inherit;text-decoration:none;}
   gap:4px;
 }
 .ec-src-link:hover{background:var(--blue);color:#FFF;}
+
+/* ══════════════════════════════════════════════════════
+   MISSING EVIDENCE + NEGATIVE SIGNAL PANELS
+══════════════════════════════════════════════════════ */
+
+/* Panel grid — side by side above the feed */
+#panels-row {
+  max-width:1300px;
+  margin:0 auto;
+  padding:0 20px 14px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+@media(max-width:800px){ #panels-row{grid-template-columns:1fr;} }
+
+/* Panel card */
+.panel {
+  border:1px solid var(--b);
+  background:var(--surface);
+  overflow:hidden;
+}
+
+/* Panel header */
+.panel-hd {
+  padding:10px 14px;
+  border-bottom:2px solid;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+.panel-hd-neg  { border-color:var(--red); background:#FFF5F5; }
+.panel-hd-miss { border-color:#B45309;    background:#FFFBEB; }
+.panel-title {
+  font-family:var(--mono);
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+.panel-title-neg  { color:var(--red); }
+.panel-title-miss { color:#B45309; }
+.panel-count {
+  font-family:var(--mono);
+  font-size:11px;
+  font-weight:700;
+  padding:2px 8px;
+  border-radius:2px;
+}
+.panel-count-neg  { background:#FEE2E2; color:var(--red); }
+.panel-count-miss { background:#FEF3C7; color:#B45309; }
+
+/* Severity dot */
+.sev-dot {
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  flex-shrink:0;
+  display:inline-block;
+}
+.sev-critical { background:#DC2626; }
+.sev-high     { background:#EA580C; }
+.sev-medium   { background:#CA8A04; }
+
+/* Negative signal item */
+.neg-item {
+  padding:10px 14px;
+  border-bottom:1px solid var(--b2);
+  border-left:3px solid transparent;
+}
+.neg-item:last-child { border-bottom:none; }
+.neg-item.sev-c { border-left-color:#DC2626; background:#FFFAFA; }
+.neg-item.sev-h { border-left-color:#EA580C; background:#FFFCFA; }
+.neg-item.sev-m { border-left-color:#CA8A04; }
+.neg-label {
+  font-family:var(--mono);
+  font-size:9px;
+  font-weight:700;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  display:flex;
+  align-items:center;
+  gap:6px;
+  margin-bottom:4px;
+}
+.neg-title {
+  font-size:12px;
+  font-weight:500;
+  color:var(--ink);
+  line-height:1.4;
+  margin-bottom:3px;
+}
+.neg-title a { color:var(--ink); }
+.neg-title a:hover { color:var(--red); }
+.neg-memo {
+  font-size:11px;
+  color:var(--ink3);
+  line-height:1.6;
+  margin-top:4px;
+  padding-top:4px;
+  border-top:1px solid var(--b2);
+}
+.neg-co {
+  font-family:var(--mono);
+  font-size:10px;
+  color:var(--blue);
+  font-weight:600;
+  margin-bottom:3px;
+}
+.neg-src {
+  font-family:var(--mono);
+  font-size:9px;
+  color:var(--ink4);
+}
+
+/* Missing evidence item */
+.miss-co {
+  padding:10px 14px;
+  border-bottom:1px solid var(--b2);
+}
+.miss-co:last-child { border-bottom:none; }
+.miss-co-name {
+  font-size:12px;
+  font-weight:700;
+  color:var(--ink);
+  margin-bottom:2px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+.miss-co-meta {
+  font-family:var(--mono);
+  font-size:9px;
+  color:var(--ink4);
+  margin-bottom:7px;
+}
+.miss-gap {
+  display:flex;
+  gap:7px;
+  align-items:flex-start;
+  padding:4px 0;
+}
+.miss-gap-label {
+  font-size:11px;
+  color:#7F1D1D;
+  font-weight:500;
+  line-height:1.45;
+}
+.miss-gap-memo {
+  font-size:10px;
+  color:var(--ink4);
+  line-height:1.55;
+  margin-top:2px;
+}
+
+/* Empty panel */
+.panel-empty {
+  padding:24px 14px;
+  text-align:center;
+  font-family:var(--mono);
+  font-size:10px;
+  color:var(--ink4);
+  letter-spacing:.05em;
+}
+
+/* "See all" link */
+.panel-more {
+  padding:7px 14px;
+  background:var(--bg);
+  border-top:1px solid var(--b2);
+  font-family:var(--mono);
+  font-size:10px;
+  color:var(--blue);
+  cursor:pointer;
+  text-align:center;
+}
+.panel-more:hover { background:var(--b2); }
+
 </style>
 </head>
 <body>
@@ -436,6 +614,26 @@ a{color:inherit;text-decoration:none;}
   </div>
 </div>
 
+<!-- ── Panels row (Missing Evidence + Negative) ── -->
+<div id="panels-row" style="display:none">
+  <!-- Missing Evidence Panel -->
+  <div class="panel" id="miss-panel">
+    <div class="panel-hd panel-hd-miss">
+      <span class="panel-title panel-title-miss">⚑ Missing Evidence</span>
+      <span class="panel-count panel-count-miss" id="miss-count">0</span>
+    </div>
+    <div id="miss-body"></div>
+  </div>
+  <!-- Negative Signals Panel -->
+  <div class="panel" id="neg-panel">
+    <div class="panel-hd panel-hd-neg">
+      <span class="panel-title panel-title-neg">⚠ Negative Signals</span>
+      <span class="panel-count panel-count-neg" id="neg-count">0</span>
+    </div>
+    <div id="neg-body"></div>
+  </div>
+</div>
+
 <!-- ── Main ── -->
 <div id="main">
   <div id="feed-col">
@@ -474,6 +672,114 @@ var DATA=null,SIGNALS=[],IDX=[],SRCLOG=[];
 var curTier="all",curTab="signals",EXP=new Set(),srcOpen=false;
 
 // ════════════════════════════
+// PANELS — Missing Evidence + Negative Signals
+// ════════════════════════════
+
+var NEG_EXPANDED  = new Set();
+var MISS_EXPANDED = new Set();
+var PANELS_EXPANDED = false;  // whether panels row is visible
+
+function renderPanels() {
+  var p = DATA && DATA.panels;
+  if (!p) return;
+
+  var negSigs  = p.negative_signals  || [];
+  var missCos  = p.missing_evidence  || [];
+  var stats    = p.panel_stats       || {};
+
+  // Show/hide panels row
+  var row = document.getElementById("panels-row");
+  if (negSigs.length > 0 || missCos.length > 0) {
+    row.style.display = "grid";
+  }
+
+  // Update counts
+  document.getElementById("neg-count").textContent  = negSigs.length;
+  document.getElementById("miss-count").textContent = missCos.length;
+
+  // ── Negative Signals panel ────────────────────────
+  var negEl = document.getElementById("neg-body");
+  if (!negSigs.length) {
+    negEl.innerHTML = '<div class="panel-empty">NO NEGATIVE SIGNALS DETECTED</div>';
+  } else {
+    var sevClass = {"critical":"sev-c","high":"sev-h","medium":"sev-m"};
+    var sevDot   = {"critical":"sev-critical","high":"sev-high","medium":"sev-medium"};
+    var sevColor = {"critical":"#DC2626","high":"#EA580C","medium":"#CA8A04"};
+    var h = "";
+    // Show top 4 by default, rest on expand
+    var shown   = PANELS_EXPANDED ? negSigs : negSigs.slice(0,4);
+    shown.forEach(function(n) {
+      var sc = sevClass[n.severity]  || "sev-m";
+      var sd = sevDot[n.severity]    || "sev-medium";
+      var col= sevColor[n.severity]  || "var(--amber)";
+      h += '<div class="neg-item ' + sc + '">';
+      h += '<div class="neg-label">';
+      h += '<span class="sev-dot ' + sd + '"></span>';
+      h += '<span style="color:' + col + '">' + esc(n.label) + '</span>';
+      h += '<span style="color:var(--b2)">·</span>';
+      h += '<span style="color:var(--ink4);font-weight:400">' + esc(n.neg_subtype||"") + '</span>';
+      h += '</div>';
+      if (n.company_id) h += '<div class="neg-co">' + esc(n.company_name||"") + '</div>';
+      h += '<div class="neg-title">';
+      h += n.source_url
+        ? '<a href="' + esc(n.source_url) + '" target="_blank" rel="noopener">' + esc(n.title) + '</a>'
+        : esc(n.title);
+      h += '</div>';
+      h += '<div class="neg-src">' + esc(n.source_name||"") + ' · ' + esc(n.event_date||"") + '</div>';
+      h += '<div class="neg-memo">' + esc(n.memo||"") + '</div>';
+      h += '</div>';
+    });
+    if (negSigs.length > 4) {
+      if (!PANELS_EXPANDED) {
+        h += '<div class="panel-more" onclick="PANELS_EXPANDED=true;renderPanels()">+'
+          + (negSigs.length-4) + ' more negative signals →</div>';
+      } else {
+        h += '<div class="panel-more" onclick="PANELS_EXPANDED=false;renderPanels()">▴ Collapse</div>';
+      }
+    }
+    negEl.innerHTML = h;
+  }
+
+  // ── Missing Evidence panel ────────────────────────
+  var missEl = document.getElementById("miss-body");
+  if (!missCos.length) {
+    missEl.innerHTML = '<div class="panel-empty">NO GAPS DETECTED IN TRACKED COMPANIES</div>';
+  } else {
+    var h = "";
+    var shown = PANELS_EXPANDED ? missCos : missCos.slice(0,3);
+    shown.forEach(function(co) {
+      h += '<div class="miss-co">';
+      h += '<div class="miss-co-name">';
+      h += esc(co.company_name);
+      if (co.critical_gaps > 0) h += '<span style="font-family:var(--mono);font-size:9px;font-weight:700;color:#DC2626;padding:1px 6px;background:#FEE2E2">CRITICAL ' + co.critical_gaps + '</span>';
+      else if (co.high_gaps > 0) h += '<span style="font-family:var(--mono);font-size:9px;font-weight:700;color:#EA580C;padding:1px 6px;background:#FFF0E8">' + co.high_gaps + ' HIGH</span>';
+      h += '</div>';
+      h += '<div class="miss-co-meta">' + esc(co.sector||"") + ' · ' + esc(co.stage||"") + ' · ' + co.gap_count + ' gap(s)</div>';
+      co.gaps.forEach(function(g) {
+        var gc = g.severity==="critical"?"#DC2626":g.severity==="high"?"#EA580C":"#CA8A04";
+        var gd = g.severity==="critical"?"sev-critical":g.severity==="high"?"sev-high":"sev-medium";
+        h += '<div class="miss-gap">';
+        h += '<span class="sev-dot ' + gd + '" style="margin-top:3px"></span>';
+        h += '<div>';
+        h += '<div class="miss-gap-label" style="color:' + gc + '">✗ ' + esc(g.label) + '</div>';
+        h += '<div class="miss-gap-memo">' + esc(g.memo) + '</div>';
+        h += '</div></div>';
+      });
+      h += '</div>';
+    });
+    if (missCos.length > 3) {
+      if (!PANELS_EXPANDED) {
+        h += '<div class="panel-more" onclick="PANELS_EXPANDED=true;renderPanels()">+'
+          + (missCos.length-3) + ' more companies →</div>';
+      } else {
+        h += '<div class="panel-more" onclick="PANELS_EXPANDED=false;renderPanels()">▴ Collapse</div>';
+      }
+    }
+    missEl.innerHTML = h;
+  }
+}
+
+// ════════════════════════════
 // LOAD DATA
 // ════════════════════════════
 async function loadData(url){
@@ -488,6 +794,7 @@ async function loadData(url){
     SRCLOG =DATA.source_log||[];
     updateRelBar();
     renderSidebar();
+    renderPanels();
     document.getElementById("btn-copy").style.display="inline-flex";
     return true;
   }catch(err){
