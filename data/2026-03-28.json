@@ -1,26 +1,26 @@
 {
   "date": "2026-03-28",
   "dateKr": "2026년 03월 28일",
-  "generatedAt": "2026-03-28T16:09:17.669688+00:00",
-  "brief": "**에너지 CVC 투자 브리핑 (2026.03.28)**\n\nAI 데이터센터 전력 수요 폭증으로 장기간 에너지 저장 솔루션 시장이 본격 개화하고 있음. Form Energy가 미국 AI 데이터센터 대상 12GWh 규모 철-공기 배터리 공급계약을 체결한 것은 기존 리튬이온 대비 멀티데이 저장이 가능한 차세대 기술의 상용화 신호로 해석됨(Energy Storage News). 동시에 American Battery Factory의 4.5GWh LFP 배터리 선도매 계약 확보는 국내 배터리 제조 기반 강화 트렌드와 맞물려 공급망 리쇼어링 테마 주목 필요(Energy Storage News). 영국 AR7 차액결제계약 체결과 수소 용량 전망 상향은 유럽 그린딜 가속화를 시사하며, Gore Street Capital의 BESS 사전 건설 단계 데이터 중요성 언급은 에너지 저장 자산관리 고도화 니즈를 보여줌.",
+  "generatedAt": "2026-03-28T16:12:36.129004+00:00",
+  "brief": "**에너지 CVC 투자 브리핑 (2026.03.28)**\n\nForm Energy가 미국 AI 데이터센터 대상 12GWh 규모 철-공기 배터리 공급 계약을 체결했다고 Energy Storage News가 보도했으며, 이는 AI 인프라의 전력 안정성 요구가 장기 저장 기술로 확산되는 명확한 신호다. 동시에 American Battery Factory의 애리조나 LFP 기가팩토리 4.5GWh 오프테이크 확보 소식과 함께, 중국 의존도 탈피를 위한 미국 내 배터리 밸류체인 구축 모멘텀이 가속화되고 있다. \n\nGore Street Capital의 BESS 자산관리 헤드가 사전 건설 단계 데이터 관리의 중요성을 강조한 점은 배터리 저장 시장이 대규모 상업 운영 단계로 진입하면서 운영 최적화가 새로운 경쟁 요소로 부상했음을 시사한다. 수소 부문 거래 동향 변화와 함께 종합하면, 에너지 저장 생태계 전반에서 기술 성숙도 기반 대형 상업 계약이 본격화되는 변곡점으로 판단된다.",
   "stats": {
-    "total": 7,
-    "high": 5,
+    "total": 10,
+    "high": 4,
     "medium": 1,
     "negative": 1,
     "matched": 1,
-    "filtered_out": 53,
+    "filtered_out": 60,
     "companies_with_signals": 1,
     "by_segment": {
-      "ess": 4,
-      "hvdc": 1,
+      "ess": 8,
       "hydrogen": 1,
       "dc_power": 1
     },
     "by_type": {
-      "Contract": 4,
+      "Contract": 3,
       "Deployment": 1,
       "Partnership": 1,
+      "News": 4,
       "Negative": 1
     }
   },
@@ -88,42 +88,6 @@
         "matched_rule_name": "offtake agreement",
         "matched_rule_tier": "Tier 1 — Contract",
         "why_it_matters": "An offtake or supply agreement with a named buyer is the clearest signal of commercial-stage transition. LCOS (levelized cost of storage) competitiveness is implied but not confirmed without contract terms.",
-        "missing_evidence": [
-          "Contract ACV (annual contract value) not disclosed",
-          "Contract duration and renewal terms not public",
-          "Exclusivity and geographic scope unknown"
-        ],
-        "confidence": "Medium",
-        "confidence_rationale": "Tier-1 event type, but either company unmatched or score modifiers are mixed. Source verification needed."
-      }
-    },
-    {
-      "id": "1993a3cdbebd",
-      "title": "UK’s LCCC Signs Contracts for Difference with AR7 Winners",
-      "summary": "The UK Low Carbon Contracts Company (LCCC) has signed Contracts for Difference (CfD) with [&#8230;]",
-      "event_date": "2026-03-26",
-      "source_name": "Offshore Wind Biz",
-      "source_url": "https://www.offshorewind.biz/2026/03/26/uks-lccc-signs-contracts-for-difference-with-ar7-winners/",
-      "event_type": "Contract",
-      "impact_type": "Commercial",
-      "matched_rule": "signed contract",
-      "tier": 1,
-      "signal_stage": "commercial",
-      "signal_strength": 90,
-      "signal_tier": "high",
-      "score_breakdown": [],
-      "segment": "hvdc",
-      "company_id": null,
-      "company_name": "Unassigned",
-      "is_negative": false,
-      "is_noise": false,
-      "evidence": {
-        "observed_fact": "UK’s LCCC Signs Contracts for Difference with AR7 Winners",
-        "observed_fact_detail": "The UK Low Carbon Contracts Company (LCCC) has signed Contracts for Difference (CfD) with [&#8230;].",
-        "source_label": "Offshore Wind Biz · 2026-03-26",
-        "matched_rule_name": "signed contract",
-        "matched_rule_tier": "Tier 1 — Contract",
-        "why_it_matters": "A commercial contract is the clearest signal of product-market fit and revenue visibility. Terms (ACV, duration, exclusivity) determine whether this is a reference sale or scalable revenue.",
         "missing_evidence": [
           "Contract ACV (annual contract value) not disclosed",
           "Contract duration and renewal terms not public",
@@ -236,6 +200,170 @@
           "Binding terms (exclusivity, minimum volume) not confirmed",
           "MOU-to-contract conversion rate for this partner unknown",
           "Joint development scope and IP ownership unclear"
+        ],
+        "confidence": "Low",
+        "confidence_rationale": "Score below signal threshold or event type is generic. Context only."
+      }
+    },
+    {
+      "id": "342b58f3f839",
+      "title": "These 5 EVs are $10,000 off right now",
+      "summary": "<div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2026/03/EV-10000-discount.jpeg?quality=82&#038;strip=all&#038;w=1400\" /></div><p>With gas prices surging, driving an EV sounds even more attractive right about now. This month, several automakers are offering discounts of $10,000 or more on popular EVs, including the <a href=\"https://electrek.co/guides/hyundai-ioniq-5/\">Hyundai IONIQ 5</a> and Chevy Equinox EV.</p>\n\n\n\n <a class=\"more-link\" href=\"https://electrek.co/",
+      "event_date": "2026-03-27",
+      "source_name": "Electrek",
+      "source_url": "https://electrek.co/2026/03/27/5-evs-10000-off-right-now/",
+      "event_type": "News",
+      "impact_type": "Informational",
+      "matched_rule": null,
+      "tier": 5,
+      "signal_stage": "strategic",
+      "signal_strength": 30,
+      "signal_tier": "low",
+      "score_breakdown": [
+        {
+          "delta": 15,
+          "reason": "Named strategic buyer"
+        }
+      ],
+      "segment": "ess",
+      "company_id": null,
+      "company_name": "Unassigned",
+      "is_negative": false,
+      "is_noise": false,
+      "evidence": {
+        "observed_fact": "These 5 EVs are $10,000 off right now",
+        "observed_fact_detail": "<div class=\"feat-image\"><img src=\"https://electrek.",
+        "source_label": "Electrek · 2026-03-27",
+        "matched_rule_name": "no rule matched",
+        "matched_rule_tier": "Tier 5 — News",
+        "why_it_matters": "This event did not match a specific investment signal pattern. It is retained for context but should not be weighted in investment assessment without additional corroboration.",
+        "missing_evidence": [
+          "No investment-relevant pattern matched",
+          "Signal quality insufficient for investment assessment",
+          "Primary research required before forming a view"
+        ],
+        "confidence": "Low",
+        "confidence_rationale": "Score below signal threshold or event type is generic. Context only."
+      }
+    },
+    {
+      "id": "9bee5d9356cf",
+      "title": "Day 3 Spring Sale Green Deals – Anker eufy smart security devices 50% off, Bluetti increases power station savings, Segway, more",
+      "summary": "<div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2026/03/Anker-eufy-Bluetti-Segway-Greenworks-GDs-FI.jpg?quality=82&#038;strip=all&#038;w=1600\" /></div><p>It’s day 3 of Amazon’s Big Spring Sale, and we’re continuing our coverage of all the best ongoing deals there and elsewhere through the rest of March. Among today’s headliners, we have <a href=\"https://9to5toys.com/2026/03/27/anker-eufy-smart-security-devices-at-lows-from-60/\">Anker’s massive lineup of eufy smar",
+      "event_date": "2026-03-27",
+      "source_name": "Electrek",
+      "source_url": "https://electrek.co/2026/03/27/day-3-spring-sale-green-deals-anker-eufy-security-bluetti-power-station-segway-more/",
+      "event_type": "News",
+      "impact_type": "Informational",
+      "matched_rule": null,
+      "tier": 5,
+      "signal_stage": "strategic",
+      "signal_strength": 30,
+      "signal_tier": "low",
+      "score_breakdown": [
+        {
+          "delta": 15,
+          "reason": "Named strategic buyer"
+        }
+      ],
+      "segment": "ess",
+      "company_id": null,
+      "company_name": "Unassigned",
+      "is_negative": false,
+      "is_noise": false,
+      "evidence": {
+        "observed_fact": "Day 3 Spring Sale Green Deals – Anker eufy smart security devices 50% off, Bluetti increases power station savings, Segway, more",
+        "observed_fact_detail": "<div class=\"feat-image\"><img src=\"https://electrek.",
+        "source_label": "Electrek · 2026-03-27",
+        "matched_rule_name": "no rule matched",
+        "matched_rule_tier": "Tier 5 — News",
+        "why_it_matters": "This event did not match a specific investment signal pattern. It is retained for context but should not be weighted in investment assessment without additional corroboration.",
+        "missing_evidence": [
+          "No investment-relevant pattern matched",
+          "Signal quality insufficient for investment assessment",
+          "Primary research required before forming a view"
+        ],
+        "confidence": "Low",
+        "confidence_rationale": "Score below signal threshold or event type is generic. Context only."
+      }
+    },
+    {
+      "id": "d25bafa88e2c",
+      "title": "Hyundai’s new electric SUV looks like a twin to the Kia EV2 [Video]",
+      "summary": "<div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2026/02/Hyundai-IONIQ-1-EV-front.jpeg?quality=82&#038;strip=all&#038;w=1400\" /></div><p><a href=\"https://electrek.co/guides/hyundai/\">Hyundai</a> is testing a new compact electric SUV that looks nearly identical to the Kia EV2. The new EV was spotted charging in public ahead of its upcoming debut.</p>\n\n\n\n <a class=\"more-link\" href=\"https://electrek.co/2026/03/27/hyundais-new-ev-suv-looks-like-twin-to-kia-ev2-video/#",
+      "event_date": "2026-03-27",
+      "source_name": "Electrek",
+      "source_url": "https://electrek.co/2026/03/27/hyundais-new-ev-suv-looks-like-twin-to-kia-ev2-video/",
+      "event_type": "News",
+      "impact_type": "Informational",
+      "matched_rule": null,
+      "tier": 5,
+      "signal_stage": "strategic",
+      "signal_strength": 30,
+      "signal_tier": "low",
+      "score_breakdown": [
+        {
+          "delta": 15,
+          "reason": "Named strategic buyer"
+        }
+      ],
+      "segment": "ess",
+      "company_id": null,
+      "company_name": "Unassigned",
+      "is_negative": false,
+      "is_noise": false,
+      "evidence": {
+        "observed_fact": "Hyundai’s new electric SUV looks like a twin to the Kia EV2 [Video]",
+        "observed_fact_detail": "<div class=\"feat-image\"><img src=\"https://electrek.",
+        "source_label": "Electrek · 2026-03-27",
+        "matched_rule_name": "no rule matched",
+        "matched_rule_tier": "Tier 5 — News",
+        "why_it_matters": "This event did not match a specific investment signal pattern. It is retained for context but should not be weighted in investment assessment without additional corroboration.",
+        "missing_evidence": [
+          "No investment-relevant pattern matched",
+          "Signal quality insufficient for investment assessment",
+          "Primary research required before forming a view"
+        ],
+        "confidence": "Low",
+        "confidence_rationale": "Score below signal threshold or event type is generic. Context only."
+      }
+    },
+    {
+      "id": "3e911dbdc632",
+      "title": "Big Spring Sale Green Deals hub – e-bikes, e-scooters, power stations, tools, more",
+      "summary": "<div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2025/11/Lectric-XP4-e-bikes-winter-bike-ride-LS-group.jpg?quality=82&#038;strip=all&#038;w=1600\" /></div><p>The <strong>Amazon Big Spring Sale</strong> is officially in full swing, and in our usual fashion, we wanted to put all the best savings during this weeklong event in one place for all your shopping needs. We’re seeing a <a href=\"https://electrek.co/guides/green-deals/\">bunch of great deals on all the popular ",
+      "event_date": "2026-03-27",
+      "source_name": "Electrek",
+      "source_url": "https://electrek.co/2026/03/27/big-spring-sale-green-deals-hub-e-bikes-e-scooters-power-stations-tools-more/",
+      "event_type": "News",
+      "impact_type": "Informational",
+      "matched_rule": null,
+      "tier": 5,
+      "signal_stage": "strategic",
+      "signal_strength": 30,
+      "signal_tier": "low",
+      "score_breakdown": [
+        {
+          "delta": 15,
+          "reason": "Named strategic buyer"
+        }
+      ],
+      "segment": "ess",
+      "company_id": null,
+      "company_name": "Unassigned",
+      "is_negative": false,
+      "is_noise": false,
+      "evidence": {
+        "observed_fact": "Big Spring Sale Green Deals hub – e-bikes, e-scooters, power stations, tools, more",
+        "observed_fact_detail": "<div class=\"feat-image\"><img src=\"https://electrek.",
+        "source_label": "Electrek · 2026-03-27",
+        "matched_rule_name": "no rule matched",
+        "matched_rule_tier": "Tier 5 — News",
+        "why_it_matters": "This event did not match a specific investment signal pattern. It is retained for context but should not be weighted in investment assessment without additional corroboration.",
+        "missing_evidence": [
+          "No investment-relevant pattern matched",
+          "Signal quality insufficient for investment assessment",
+          "Primary research required before forming a view"
         ],
         "confidence": "Low",
         "confidence_rationale": "Score below signal threshold or event type is generic. Context only."
@@ -1101,10 +1229,10 @@
   "sources": [
     "Utility Dive",
     "PV Magazine",
-    "Recharge News",
-    "Hydrogen Insight",
     "Energy Storage News",
-    "Offshore Wind Biz"
+    "Offshore Wind Biz",
+    "Electrek",
+    "H2 View"
   ],
   "source_log": [
     {
@@ -1114,7 +1242,7 @@
       "status": "success",
       "error": null,
       "items": 10,
-      "fetched_at": "2026-03-28T16:09:05.763202+00:00"
+      "fetched_at": "2026-03-28T16:12:24.975176+00:00"
     },
     {
       "id": "pvmagazine",
@@ -1123,25 +1251,7 @@
       "status": "success",
       "error": null,
       "items": 20,
-      "fetched_at": "2026-03-28T16:09:05.924670+00:00"
-    },
-    {
-      "id": "rechargenews",
-      "name": "Recharge News",
-      "url": "https://www.rechargenews.com/feed",
-      "status": "failed",
-      "error": "HTTP 404",
-      "items": 0,
-      "fetched_at": "2026-03-28T16:09:06.305390+00:00"
-    },
-    {
-      "id": "hydrogeninsight",
-      "name": "Hydrogen Insight",
-      "url": "https://www.hydrogeninsight.com/feed",
-      "status": "failed",
-      "error": "HTTP 404",
-      "items": 0,
-      "fetched_at": "2026-03-28T16:09:07.166962+00:00"
+      "fetched_at": "2026-03-28T16:12:25.245406+00:00"
     },
     {
       "id": "energystoragenews",
@@ -1150,24 +1260,42 @@
       "status": "success",
       "error": null,
       "items": 20,
-      "fetched_at": "2026-03-28T16:09:07.687973+00:00"
+      "fetched_at": "2026-03-28T16:12:25.690449+00:00"
     },
     {
       "id": "offshorewind",
       "name": "Offshore Wind Biz",
       "url": "https://www.offshorewind.biz/feed/",
+      "status": "failed",
+      "error": "HTTP 403",
+      "items": 0,
+      "fetched_at": "2026-03-28T16:12:26.183633+00:00"
+    },
+    {
+      "id": "electrek",
+      "name": "Electrek",
+      "url": "https://electrek.co/feed/",
       "status": "success",
       "error": null,
-      "items": 10,
-      "fetched_at": "2026-03-28T16:09:08.162859+00:00"
+      "items": 20,
+      "fetched_at": "2026-03-28T16:12:26.347905+00:00"
+    },
+    {
+      "id": "h2view",
+      "name": "H2 View",
+      "url": "https://www.h2-view.com/feed/",
+      "status": "partial",
+      "error": "Feed returned 0 usable items",
+      "items": 0,
+      "fetched_at": "2026-03-28T16:12:26.637488+00:00"
     }
   ],
   "reliability": {
     "sources_total": 6,
     "sources_ok": 4,
-    "sources_partial": 0,
-    "sources_failed": 2,
-    "new_events": 7,
-    "filtered_out": 53
+    "sources_partial": 1,
+    "sources_failed": 1,
+    "new_events": 10,
+    "filtered_out": 60
   }
 }
