@@ -189,6 +189,150 @@ a{color:inherit;text-decoration:none;}
 .empty{text-align:center;padding:40px;font-size:13px;color:var(--ink3);}
 .btn{font-family:var(--mono);font-size:10px;font-weight:600;padding:5px 12px;border:1px solid var(--b);background:var(--surface);color:var(--ink2);cursor:pointer;}
 .btn:hover{background:var(--ink);color:#FFF;border-color:var(--ink);}
+
+/* ══════════════════════════════════════════════════════
+   EVIDENCE CARD — all signals render in this format
+══════════════════════════════════════════════════════ */
+
+/* Card wrapper */
+.ec{
+  border-bottom:1px solid var(--b2);
+  background:var(--surface);
+  transition:background .08s;
+}
+.ec:last-child{border-bottom:none;}
+.ec:hover{background:#FAFAF8;}
+
+/* Card header — always visible */
+.ec-hd{
+  padding:13px 20px 10px;
+  cursor:pointer;
+  display:flex;
+  flex-direction:column;
+  gap:5px;
+}
+.ec-meta{display:flex;align-items:center;gap:5px;flex-wrap:wrap;}
+.ec-co{font-family:var(--mono);font-size:11px;font-weight:700;color:var(--blue);letter-spacing:.02em;}
+.ec-title{font-size:14px;font-weight:600;color:var(--ink);line-height:1.4;}
+.ec-title a{color:var(--ink);}
+.ec-title a:hover{color:var(--red);border-bottom:1px solid var(--red);}
+.ec-sub{font-family:var(--mono);font-size:10px;color:var(--ink4);display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.ec-rule{font-family:var(--mono);font-size:9px;color:var(--ink4);display:flex;align-items:center;gap:5px;margin-top:2px;}
+.ec-rule-name{color:var(--amber);font-weight:600;}
+
+/* Score bar inline */
+.ec-score{display:inline-flex;align-items:center;gap:5px;}
+.ec-sbar{width:48px;height:3px;background:var(--b2);overflow:hidden;display:inline-block;}
+.ec-sfill{height:100%;}
+.ec-sn{font-family:var(--mono);font-size:10px;font-weight:700;}
+
+/* Expand hint */
+.ec-hint{font-family:var(--mono);font-size:9px;color:var(--ink4);margin-top:3px;letter-spacing:.04em;}
+
+/* Card body — Evidence Card proper */
+.ec-body{
+  border-top:1px solid var(--b2);
+  animation:fadeIn .15s ease;
+}
+
+/* Section row */
+.ec-row{
+  display:grid;
+  grid-template-columns:160px 1fr;
+  gap:0;
+  border-bottom:1px solid var(--b2);
+}
+.ec-row:last-child{border-bottom:none;}
+.ec-lbl{
+  padding:10px 14px;
+  font-family:var(--mono);
+  font-size:9px;
+  font-weight:700;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--ink4);
+  background:var(--bg);
+  border-right:1px solid var(--b2);
+  display:flex;
+  align-items:flex-start;
+  padding-top:12px;
+}
+.ec-val{
+  padding:10px 16px;
+  font-size:12px;
+  color:var(--ink2);
+  line-height:1.7;
+}
+
+/* Observed fact — blue left border */
+.ec-fact{
+  padding:10px 16px;
+  border-left:3px solid var(--blue);
+  background:#F8FBFF;
+  font-size:13px;
+  color:var(--ink);
+  line-height:1.65;
+}
+.ec-fact-detail{
+  font-size:12px;
+  color:var(--ink3);
+  margin-top:4px;
+  line-height:1.6;
+}
+
+/* Why it matters — amber left border */
+.ec-why{
+  padding:10px 16px;
+  border-left:3px solid var(--amber);
+  background:#FFFDF5;
+  font-size:12px;
+  color:var(--ink2);
+  line-height:1.75;
+}
+
+/* Missing evidence — red left border */
+.ec-miss-item{
+  display:flex;
+  gap:7px;
+  font-size:12px;
+  color:#7F1D1D;
+  padding:3px 0;
+  line-height:1.55;
+}
+.ec-miss-wrap{
+  padding:10px 16px;
+  background:#FFF8F8;
+  border-left:3px solid var(--red);
+}
+
+/* Confidence */
+.ec-conf{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:4px 10px;
+  font-family:var(--mono);
+  font-size:11px;
+  font-weight:700;
+}
+.ec-conf-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
+.ec-conf-rat{font-size:11px;color:var(--ink3);margin-left:6px;font-weight:400;font-family:var(--sans);}
+
+/* Source link */
+.ec-src-link{
+  font-family:var(--mono);
+  font-size:10px;
+  font-weight:600;
+  color:var(--blue);
+  padding:4px 10px;
+  border:1px solid #BFDBFE;
+  background:#EFF6FF;
+  text-decoration:none;
+  display:inline-flex;
+  align-items:center;
+  gap:4px;
+}
+.ec-src-link:hover{background:var(--blue);color:#FFF;}
 </style>
 </head>
 <body>
@@ -573,36 +717,102 @@ function renderFeed(){
     +' SIGNALS <span style="font-weight:400;color:var(--ink4)">'+sigs.length+'</span></div>';
 
   sigs.forEach(function(ev){
-    var op=EXP.has(ev.id);
-    var tc=ev.signal_tier==="high"?"var(--green)":ev.signal_tier==="medium"?"var(--amber)":"var(--ink4)";
-    var bc=ev.is_negative?"var(--red)":ev.signal_tier==="high"?"var(--green)":"transparent";
-    h+='<div class="sig" style="border-left:3px solid '+bc+'" onclick="toggle(\''+ev.id+'\')">';
-    h+='<div class="sig-meta">'+tagFor(ev.event_type,ev.is_negative);
-    h+='<span class="tag t0">'+e(ev.segment||"—")+'</span>';
-    if(ev.signal_tier==="high")  h+='<span class="tag tH">HIGH</span>';
-    if(ev.signal_tier==="medium")h+='<span class="tag tM">MED</span>';
-    if(ev.is_negative)           h+='<span class="tag tN">⚠ NEG</span>';
-    h+='<span style="margin-left:auto;font-family:var(--mono);font-size:9px;color:var(--ink4)">'+e(ev.event_date||"")+'</span></div>';
-    if(ev.company_id)h+='<div class="sig-co">'+e(ev.company_name||"")+'</div>';
-    h+='<div class="sig-title">'+(ev.source_url?'<a href="'+e(ev.source_url)+'" target="_blank" rel="noopener" onclick="event.stopPropagation()">'+e(ev.title||"")+'</a>':e(ev.title||""))+'</div>';
-    h+='<div class="sig-src">'+e(ev.source_name||"")
-      +' <span class="sbar"><div class="sbar-bg"><div class="sbar-fill" style="width:'+(ev.signal_strength||0)+'%;background:'+tc+'"></div></div>'
-      +'<span class="sbar-n" style="color:'+tc+'">'+(ev.signal_strength||0)+'</span></span></div>';
-    if(!op)h+='<div class="hint">▾ '+(ev.company_id?"인사이트 보기":"요약 보기")+'</div>';
-    if(op){
-      h+='<div class="sig-body">';
-      h+='<div style="font-size:12px;color:var(--ink2);line-height:1.65;margin-bottom:10px">'+e((ev.summary||"").slice(0,300))+'…</div>';
-      h+='<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px">';
-      if(ev.source_url)h+='<a href="'+e(ev.source_url)+'" target="_blank" rel="noopener" style="font-family:var(--mono);font-size:10px;color:var(--blue)" onclick="event.stopPropagation()">→ Source</a>';
-      if(ev.matched_rule)h+='<span style="font-family:var(--mono);font-size:10px;color:var(--ink4)">rule: "'+e(ev.matched_rule)+'"</span>';
-      h+='</div>';
-      if(ev.company_id){
-        h+='<button class="btn" onclick="event.stopPropagation();showMemo(\''+ev.company_id+'\',\''+ev.id+'\')">View Investment Memo →</button>';
-        h+='<div id="memo-'+ev.id+'"></div>';
-      }
-      h+='</div>';
+    var op  = EXP.has(ev.id);
+    var ev2 = ev.evidence || {};
+    var tc  = ev.signal_tier==="high"?"var(--green)":ev.signal_tier==="medium"?"var(--amber)":"var(--ink4)";
+    var bc  = ev.is_negative?"var(--red)":ev.signal_tier==="high"?"var(--green)":"var(--b)";
+    var cc  = confColor(ev2.confidence||"Low");
+
+    h += '<div class="ec" style="border-left:3px solid '+bc+'">';
+    h += '<div class="ec-hd" onclick="toggle(\''+ev.id+'\')">';
+
+    // Meta row
+    h += '<div class="ec-meta">';
+    h += tagFor(ev.event_type,ev.is_negative);
+    h += '<span class="tag t0">'+e(ev.segment||"—")+'</span>';
+    if(ev.signal_tier==="high")   h += '<span class="tag tH">HIGH</span>';
+    if(ev.signal_tier==="medium") h += '<span class="tag tM">MED</span>';
+    if(ev.is_negative)            h += '<span class="tag tN">⚠ NEG</span>';
+    h += '<span class="ec-conf" style="border:1px solid '+cc+'40;background:'+cc+'12">';
+    h += '<span class="ec-conf-dot" style="background:'+cc+'"></span>';
+    h += '<span style="font-family:var(--mono);font-size:9px;font-weight:700;color:'+cc+'">'+(ev2.confidence||"—")+'</span></span>';
+    h += '<span style="margin-left:auto;font-family:var(--mono);font-size:9px;color:var(--ink4)">'+e(ev.event_date||"")+'</span>';
+    h += '</div>';
+
+    if(ev.company_id) h += '<div class="ec-co">'+e(ev.company_name||"")+'</div>';
+    h += '<div class="ec-title">';
+    h += ev.source_url
+      ? '<a href="'+e(ev.source_url)+'" target="_blank" rel="noopener" onclick="event.stopPropagation()">'+e(ev.title||"")+'</a>'
+      : e(ev.title||"");
+    h += '</div>';
+
+    h += '<div class="ec-sub">';
+    h += '<span>'+e(ev.source_name||"—")+'</span>';
+    h += '<span style="color:var(--b)">·</span>';
+    h += '<span class="ec-score"><div class="ec-sbar"><div class="ec-sfill" style="width:'+(ev.signal_strength||0)+'%;background:'+tc+'"></div></div>'
+       + '<span class="ec-sn" style="color:'+tc+'">'+(ev.signal_strength||0)+'</span></span>';
+    h += '</div>';
+    if(ev2.matched_rule_name && ev2.matched_rule_name!=="no rule matched"){
+      h += '<div class="ec-rule">rule: <span class="ec-rule-name">'+e(ev2.matched_rule_name)+'</span>'
+         + ' <span style="color:var(--b2)">·</span> <span>'+e(ev2.matched_rule_tier||"")+'</span></div>';
     }
-    h+='</div>';
+    if(!op) h += '<div class="ec-hint">▾ EXPAND EVIDENCE CARD</div>';
+    h += '</div>';
+
+    if(op){
+      h += '<div class="ec-body">';
+
+      // 1. Observed Facts
+      h += '<div class="ec-row"><div class="ec-lbl">Observed<br>Facts</div>';
+      h += '<div class="ec-val"><div class="ec-fact">'+e(ev2.observed_fact||ev.title||"");
+      if(ev2.observed_fact_detail) h += '<div class="ec-fact-detail">'+e(ev2.observed_fact_detail)+'</div>';
+      h += '</div>';
+      h += '<div style="margin-top:6px;display:flex;gap:8px;flex-wrap:wrap">';
+      if(ev.source_url) h += '<a class="ec-src-link" href="'+e(ev.source_url)+'" target="_blank" rel="noopener" onclick="event.stopPropagation()">🔗 Source →</a>';
+      h += '<span style="font-family:var(--mono);font-size:10px;color:var(--ink4)">'+e(ev2.source_label||"")+'</span>';
+      h += '</div></div></div>';
+
+      // 2. Matched Rule
+      h += '<div class="ec-row"><div class="ec-lbl">Matched<br>Rule</div>';
+      h += '<div class="ec-val">';
+      if(ev2.matched_rule_name && ev2.matched_rule_name!=="no rule matched"){
+        h += '<span style="font-family:var(--mono);font-size:11px;font-weight:700;color:var(--amber)">'+e(ev2.matched_rule_name)+'</span>';
+        h += ' <span style="font-family:var(--mono);font-size:10px;color:var(--ink4)">'+e(ev2.matched_rule_tier||"")+'</span>';
+      }else{
+        h += '<span style="font-family:var(--mono);font-size:11px;color:var(--ink4);font-style:italic">No specific rule matched</span>';
+      }
+      h += '</div></div>';
+
+      // 3. Why It Matters
+      h += '<div class="ec-row"><div class="ec-lbl">Why It<br>Matters</div>';
+      h += '<div class="ec-val"><div class="ec-why">'+e(ev2.why_it_matters||"No rationale available.")+'</div></div></div>';
+
+      // 4. What Is Missing
+      h += '<div class="ec-row"><div class="ec-lbl">What Is<br>Missing</div>';
+      h += '<div class="ec-val"><div class="ec-miss-wrap">';
+      (ev2.missing_evidence||["No gap analysis available."]).forEach(function(m){
+        h += '<div class="ec-miss-item"><span style="color:var(--red);font-weight:700;flex-shrink:0">✗</span><span>'+e(m)+'</span></div>';
+      });
+      h += '</div></div></div>';
+
+      // 5. Confidence
+      h += '<div class="ec-row"><div class="ec-lbl">Confidence</div>';
+      h += '<div class="ec-val" style="display:flex;align-items:flex-start;gap:10px;flex-wrap:wrap">';
+      h += '<span class="ec-conf" style="border:1px solid '+cc+'40;background:'+cc+'12">';
+      h += '<span class="ec-conf-dot" style="background:'+cc+'"></span>';
+      h += '<span style="font-family:var(--mono);font-size:12px;font-weight:700;color:'+cc+'">'+(ev2.confidence||"Low")+'</span></span>';
+      h += '<span class="ec-conf-rat">'+e(ev2.confidence_rationale||"")+'</span>';
+      h += '</div></div>';
+
+      if(ev.company_id){
+        h += '<div style="padding:10px 16px;background:var(--bg);border-top:1px solid var(--b2)">';
+        h += '<button class="btn" onclick="event.stopPropagation();showMemo(\''+ev.company_id+'\',\''+ev.id+'\')">View Company Investment Memo →</button>';
+        h += '<div id="memo-'+ev.id+'"></div>';
+        h += '</div>';
+      }
+      h += '</div>';
+    }
+    h += '</div>';
   });
   h+='</div>';
   el.innerHTML=h;
@@ -750,7 +960,7 @@ function copyReport(){
   var s=DATA.stats||{},rel=DATA.reliability||{};
   var t="ENERGY CVC INTELLIGENCE — "+(DATA.dateKr||DATA.date)+"\n";
   t+="Total "+s.total+" · High "+s.high+" · Neg "+s.negative+"\n";
-  t+="Sources ok:"+rel.sources_ok+"/partial:"+rel.sources_partial+"/failed:"+rel.sources_failed+"\n";
+  t+="Sources ok:"+rel.sources_ok+" / partial:"+rel.sources_partial+" / failed:"+rel.sources_failed+"\n";
   t+="=".repeat(50)+"\n\n";
   if(DATA.brief)t+="[BRIEF]\n"+DATA.brief+"\n\n"+"=".repeat(50)+"\n\n";
   getFiltered().forEach(function(ev,i){
@@ -765,6 +975,9 @@ function copyReport(){
 // ════════════════════════════
 // HELPERS
 // ════════════════════════════
+function confColor(c){
+  return {"High":"#16A34A","Medium-High":"#65A30D","Medium":"#CA8A04","Medium-Low":"#EA580C","Low":"#DC2626"}[c]||"var(--ink4)";
+}
 function tagFor(type,isNeg){
   if(isNeg)return'<span class="tag tN">⚠ Neg</span>';
   var m={Certification:"tC",Contract:"tB",Deployment:"tB",Pilot:"tP",Hiring:"tR",Financing:"tF"};
