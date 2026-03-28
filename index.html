@@ -530,6 +530,106 @@ a{color:inherit;text-decoration:none;}
 .rb-item{font-size:12px;color:var(--ink2);padding:3px 0;display:flex;align-items:flex-start;gap:7px;line-height:1.5;}
 .rb-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;margin-top:4px;}
 
+
+/* ══════════════════════════════════════════════════════
+   COMPANY INTELLIGENCE VIEW
+══════════════════════════════════════════════════════ */
+
+/* Grid of company cards */
+.co-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:12px;}
+@media(max-width:600px){.co-grid{grid-template-columns:1fr;}}
+
+/* Company card */
+.co-card{
+  background:var(--surface);
+  border:1px solid var(--b);
+  overflow:hidden;
+  cursor:pointer;
+  transition:border-color .1s, box-shadow .1s;
+}
+.co-card:hover{border-color:#999;box-shadow:0 2px 8px rgba(0,0,0,.06);}
+.co-card.reinforced{border-width:2px;}
+
+/* Card top bar — colored by stage */
+.co-stage-bar{height:3px;width:100%;}
+
+/* Card header */
+.co-hd{padding:14px 16px 10px;}
+.co-name-row{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:6px;}
+.co-name{font-size:15px;font-weight:700;color:var(--ink);}
+.co-meta{font-family:var(--mono);font-size:10px;color:var(--ink4);margin-bottom:8px;}
+
+/* Pattern badge */
+.co-pattern{
+  display:inline-flex;align-items:center;gap:5px;
+  padding:3px 9px;font-family:var(--mono);
+  font-size:9px;font-weight:700;letter-spacing:.05em;
+  text-transform:uppercase;margin-bottom:8px;
+}
+
+/* Stage + TTR row */
+.co-labels{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;}
+.co-label{
+  font-family:var(--mono);font-size:9px;font-weight:700;
+  letter-spacing:.05em;padding:2px 8px;text-transform:uppercase;
+}
+
+/* Signal type pills */
+.co-types{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:10px;}
+.co-type{
+  font-family:var(--mono);font-size:10px;font-weight:600;
+  padding:2px 7px;border:1px solid var(--b);
+  background:var(--bg);color:var(--ink2);
+}
+.co-type.high{border-color:#A7F3D0;color:#0A6640;background:#F0FDF4;}
+
+/* Stats row */
+.co-stats{display:flex;gap:14px;padding:8px 16px;background:var(--bg);border-top:1px solid var(--b2);}
+.co-stat{display:flex;flex-direction:column;align-items:center;}
+.co-stat-n{font-family:var(--mono);font-size:16px;font-weight:700;}
+.co-stat-l{font-family:var(--mono);font-size:9px;color:var(--ink4);text-transform:uppercase;letter-spacing:.05em;}
+
+/* Reinforcing signal callout */
+.co-reinforce{
+  display:flex;align-items:center;gap:6px;
+  padding:5px 10px;margin:0 16px 8px;
+  font-family:var(--mono);font-size:9px;font-weight:700;
+  letter-spacing:.04em;text-transform:uppercase;
+}
+
+/* Expanded company detail */
+.co-detail{
+  border-top:2px solid var(--ink);
+  animation:fadeIn .15s;
+}
+.co-section{padding:14px 16px;border-bottom:1px solid var(--b2);}
+.co-section:last-child{border-bottom:none;}
+.co-section-title{
+  font-family:var(--mono);font-size:9px;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;
+  color:var(--ink4);margin-bottom:10px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+
+/* Timeline inside company detail */
+.co-ev{display:flex;gap:12px;padding:7px 0;border-bottom:1px solid var(--b2);}
+.co-ev:last-child{border-bottom:none;}
+.co-ev-date{font-family:var(--mono);font-size:10px;color:var(--ink4);min-width:82px;padding-top:2px;flex-shrink:0;}
+.co-ev-body{flex:1;}
+.co-ev-title{font-size:12px;font-weight:500;color:var(--ink);line-height:1.4;margin-bottom:2px;}
+.co-ev-title a:hover{color:var(--red);}
+.co-ev-meta{font-family:var(--mono);font-size:10px;color:var(--ink4);}
+
+/* Missing evidence inside company */
+.co-miss{display:flex;gap:7px;font-size:12px;color:#7F1D1D;padding:4px 0;line-height:1.5;}
+.co-miss-dot{color:var(--red);font-weight:700;flex-shrink:0;}
+
+/* Pattern memo */
+.co-pattern-memo{
+  font-size:12px;color:var(--ink2);line-height:1.7;
+  padding:10px 12px;background:#F0F5FF;border-left:3px solid var(--blue);
+}
+
 </style>
 </head>
 <body>
@@ -690,6 +790,7 @@ a{color:inherit;text-decoration:none;}
 // ════════════════════════════
 var DATA=null,SIGNALS=[],IDX=[],SRCLOG=[];
 var curTier="all",curTab="signals",EXP=new Set(),srcOpen=false;
+var CO_EXP=new Set();   // expanded company cards
 
 // ════════════════════════════
 // SCORE BREAKDOWN RENDERER
@@ -1329,31 +1430,210 @@ function renderMemo(ins,name){
 // OTHER TABS
 // ════════════════════════════
 function renderCompanies(){
-  var el=document.getElementById("feed-col");
-  var cos=DATA&&DATA.companies?Object.values(DATA.companies):[];
-  if(!cos.length){el.innerHTML='<div class="empty">기업 데이터 없음</div>';return;}
-  cos.sort(function(a,b){return(b.high_count||0)-(a.high_count||0);});
-  var h='<div class="card"><div class="chd">Companies <span style="font-weight:400;color:var(--ink4)">'+cos.length+'</span></div>';
-  cos.forEach(function(co){
-    var ins=co.insight||{};
-    var cc={"High":"#16A34A","Medium-High":"#65A30D","Medium":"#CA8A04","Medium-Low":"#EA580C","Low":"#DC2626"}[ins.confidence]||"var(--ink4)";
-    h+='<div style="padding:13px 16px;border-bottom:1px solid var(--b2)">';
-    h+='<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px">';
-    h+='<span style="font-size:13px;font-weight:600">'+e(co.name||"")+'</span><span class="tag">'+e(co.stage||"")+'</span></div>';
-    h+='<div style="font-size:11px;color:var(--ink3);margin-bottom:7px">'+e(co.sector||"")+" · "+e(co.country||"")+'</div>';
-    h+='<div style="display:flex;gap:10px;font-size:11px;margin-bottom:7px">';
-    h+='<span style="color:var(--red)">High: '+(co.high_count||0)+'</span>';
-    h+='<span style="color:var(--ink3)">Total: '+(co.signal_count||0)+'</span>';
-    if(ins.confidence)h+='<span style="font-family:var(--mono);font-size:10px;font-weight:700;color:'+cc+'">'+ins.confidence+'</span>';
-    h+='</div>';
-    if(ins.matched_pattern){
-      h+='<details><summary style="font-family:var(--mono);font-size:10px;color:var(--blue);cursor:pointer">→ Investment Memo</summary>';
-      h+=renderMemo(ins,co.name);h+='</details>';
-    }
-    h+='</div>';
+  var el  = document.getElementById("feed-col");
+  var cos = DATA&&DATA.companies ? Object.values(DATA.companies) : [];
+
+  if(!cos.length){
+    el.innerHTML = '<div class="empty">기업 데이터 없음 — 파이프라인 실행 후 생성됩니다</div>';
+    return;
+  }
+
+  // Sort: reinforcing signals desc, then high_count desc
+  cos.sort(function(a,b){
+    var ra = a.reinforcing||0, rb = b.reinforcing||0;
+    if(rb!==ra) return rb-ra;
+    return (b.high_count||0)-(a.high_count||0);
   });
-  h+='</div>';el.innerHTML=h;
+
+  var total      = cos.length;
+  var nearTerm   = cos.filter(function(c){return c.ttr==="Near-term";}).length;
+  var commercial = cos.filter(function(c){return c.stage_label==="Commercial";}).length;
+  var withNegs   = cos.filter(function(c){return (c.neg_count||0)>0;}).length;
+
+  // Summary bar
+  var h = '<div style="padding:10px 16px;background:var(--bg);border-bottom:1px solid var(--b2);display:flex;gap:20px;flex-wrap:wrap">';
+  [{n:total,l:"Companies",c:"var(--ink)"},{n:nearTerm,l:"Near-term",c:"var(--red)"},
+   {n:commercial,l:"Commercial stage",c:"var(--green)"},{n:withNegs,l:"With negatives",c:"var(--amber)"}]
+  .forEach(function(x){
+    h += '<div style="display:flex;flex-direction:column">';
+    h += '<span style="font-family:var(--mono);font-size:18px;font-weight:700;color:'+x.c+'">'+x.n+'</span>';
+    h += '<span style="font-family:var(--mono);font-size:9px;color:var(--ink4);text-transform:uppercase;letter-spacing:.06em">'+x.l+'</span></div>';
+  });
+  h += '</div>';
+
+  // Company grid
+  h += '<div class="co-grid" style="padding:16px">';
+
+  cos.forEach(function(co){
+    var ins      = co.insight    || {};
+    var pat      = co.pattern    || {};
+    var tcs      = co.type_counts|| {};
+    var evs      = co.events     || [];
+    var reinf    = co.reinforcing|| 0;
+    var negCt    = co.neg_count  || 0;
+    var sc       = co.stage_color|| "#A8A8A8";
+    var tc       = co.ttr_color  || "#6E6E6E";
+    var isOpen   = CO_EXP.has(co.id);
+    var isReinf  = reinf >= 2;
+
+    h += '<div class="co-card'+(isReinf?" reinforced":"")
+       + '" style="'+(isReinf?"border-color:"+pat.color+";":"")+'"'
+       + ' onclick="toggleCo(\''+co.id+'\')">';
+
+    // Stage colour bar
+    h += '<div class="co-stage-bar" style="background:'+sc+'"></div>';
+
+    // Header
+    h += '<div class="co-hd">';
+
+    // Name + sector
+    h += '<div class="co-name-row">';
+    h += '<span class="co-name">'+e(co.name||"")+'</span>';
+    h += '<span class="co-label" style="background:'+sc+'18;color:'+sc+';border:1px solid '+sc+'40">';
+    h += e(co.stage_label||"Early")+'</span>';
+    h += '</div>';
+
+    h += '<div class="co-meta">'+e(co.sector||"")
+       + ' · '+e(co.country||"")+'</div>';
+
+    // Reinforcing callout
+    if(isReinf){
+      h += '<div class="co-reinforce" style="background:'+pat.color+'12;color:'+pat.color+';border:1px solid '+pat.color+'30">';
+      h += '▲ '+reinf+' REINFORCING SIGNALS';
+      h += '</div>';
+    }
+
+    // Pattern badge
+    if(pat.label){
+      h += '<div class="co-pattern" style="background:'+pat.color+'15;color:'+pat.color+';border:1px solid '+pat.color+'35">';
+      h += e(pat.label)+'</div>';
+    }
+
+    // Stage + TTR labels
+    h += '<div class="co-labels">';
+    h += '<span class="co-label" style="background:'+tc+'15;color:'+tc+';border:1px solid '+tc+'35">';
+    h += e(co.ttr||"Long-term")+'</span>';
+    if(negCt>0) h += '<span class="co-label" style="background:#FEE2E2;color:var(--red);border:1px solid #FCA5A5">⚠ '+negCt+' NEGATIVE</span>';
+    h += '</div>';
+
+    // Signal type pills
+    h += '<div class="co-types">';
+    var typeOrder = ["Contract","Deployment","Certification","Pilot","Financing","Hiring","Partnership","Grant","Negative","News"];
+    typeOrder.forEach(function(t){
+      if(!tcs[t]) return;
+      var isHigh = t==="Contract"||t==="Deployment"||t==="Certification";
+      h += '<span class="co-type'+(isHigh?" high":"")+'">'+t+' ×'+tcs[t]+'</span>';
+    });
+    h += '</div>';
+
+    h += '</div>'; // co-hd
+
+    // Stats row
+    h += '<div class="co-stats">';
+    [{n:co.signal_count||0,l:"Signals",c:"var(--ink)"},
+     {n:co.high_count||0,  l:"High",   c:"var(--red)"},
+     {n:reinf,             l:"Reinf",  c:pat.color||"var(--blue)"},
+     {n:negCt,             l:"Neg",    c:"var(--amber)"}]
+    .forEach(function(x){
+      h += '<div class="co-stat"><span class="co-stat-n" style="color:'+x.c+'">'+x.n+'</span>';
+      h += '<span class="co-stat-l">'+x.l+'</span></div>';
+    });
+    h += '</div>';
+
+    // ── Expanded detail ─────────────────────────────────────────
+    if(isOpen){
+      h += '<div class="co-detail">';
+
+      // Pattern explanation
+      if(pat.memo){
+        h += '<div class="co-section">';
+        h += '<div class="co-section-title">Detected Pattern</div>';
+        h += '<div class="co-pattern-memo">'+e(pat.memo)+'</div>';
+        h += '</div>';
+      }
+
+      // Stage description
+      h += '<div class="co-section">';
+      h += '<div class="co-section-title">Commercialization Stage';
+      h += '<span style="font-family:var(--mono);font-size:10px;font-weight:700;color:'+sc+'">'+e(co.stage_label||"")+'</span></div>';
+      h += '<div style="font-size:12px;color:var(--ink3);line-height:1.65">'+e(co.stage_desc||"")+'</div>';
+      h += '</div>';
+
+      // Observed facts (from insight)
+      if(ins.observed_facts && ins.observed_facts.length){
+        h += '<div class="co-section">';
+        h += '<div class="co-section-title">Observed Facts <span style="font-weight:400;color:var(--ink4)">(from events only)</span></div>';
+        ins.observed_facts.forEach(function(f){
+          h += '<div style="display:flex;gap:7px;font-size:12px;color:var(--ink2);padding:3px 0;line-height:1.5">';
+          h += '<span style="color:var(--green);font-weight:700;flex-shrink:0">✓</span>'+e(f)+'</div>';
+        });
+        h += '</div>';
+      }
+
+      // Missing evidence
+      var missing = ins.missing || [];
+      if(missing.length){
+        h += '<div class="co-section" style="background:#FFF8F8">';
+        h += '<div class="co-section-title" style="color:var(--red)">Missing Evidence</div>';
+        missing.forEach(function(m){
+          h += '<div class="co-miss"><span class="co-miss-dot">✗</span>'+e(m)+'</div>';
+        });
+        h += '</div>';
+      }
+
+      // What this may indicate
+      if(ins.may_indicate && ins.may_indicate.length){
+        h += '<div class="co-section">';
+        h += '<div class="co-section-title">What This May Indicate <span style="font-weight:400;color:var(--ink4)">(inference)</span></div>';
+        ins.may_indicate.forEach(function(m){
+          h += '<div style="display:flex;gap:7px;font-size:12px;color:var(--ink2);padding:3px 0;line-height:1.5">';
+          h += '<span style="color:var(--blue);font-weight:700;flex-shrink:0">›</span>'+e(m)+'</div>';
+        });
+        h += '</div>';
+      }
+
+      // Next check
+      if(ins.next_check){
+        h += '<div class="co-section" style="background:#FFFBEB">';
+        h += '<div class="co-section-title" style="color:var(--amber)">Suggested Next Check</div>';
+        h += '<div style="font-size:12px;color:var(--ink2);line-height:1.65">'+e(ins.next_check)+'</div>';
+        h += '</div>';
+      }
+
+      // Signal timeline
+      if(evs.length){
+        h += '<div class="co-section">';
+        h += '<div class="co-section-title">Signal Timeline <span style="font-weight:400;color:var(--ink4)">'+evs.length+' events</span></div>';
+        evs.forEach(function(ev){
+          var tc2 = ev.signal_tier==="high"?"var(--green)":ev.signal_tier==="medium"?"var(--amber)":"var(--ink4)";
+          var bc2 = ev.is_negative?"var(--red)":ev.signal_tier==="high"?"var(--green)":"var(--b)";
+          h += '<div class="co-ev" style="border-left:2px solid '+bc2+';padding-left:8px">';
+          h += '<div class="co-ev-date">'+e(ev.event_date||"")+'</div>';
+          h += '<div class="co-ev-body">';
+          h += '<div style="display:flex;gap:5px;margin-bottom:3px;flex-wrap:wrap">';
+          h += tagFor(ev.event_type,ev.is_negative);
+          h += '<span style="font-family:var(--mono);font-size:10px;font-weight:700;color:'+tc2+'">'+( ev.signal_strength||0)+'</span>';
+          h += '</div>';
+          h += '<div class="co-ev-title">';
+          if(ev.source_url) h += '<a href="'+e(ev.source_url)+'" target="_blank" rel="noopener" onclick="event.stopPropagation()">'+e(ev.title||"")+'</a>';
+          else h += e(ev.title||"");
+          h += '</div>';
+          h += '<div class="co-ev-meta">'+e(ev.source_name||"")+'</div>';
+          h += '</div></div>';
+        });
+        h += '</div>';
+      }
+
+      h += '</div>'; // co-detail
+    }
+
+    h += '</div>'; // co-card
+  });
+
+  h += '</div>'; // co-grid
+  el.innerHTML = h;
 }
+
 
 function renderHistory(){
   var el=document.getElementById("feed-col");
@@ -1397,6 +1677,10 @@ function copyReport(){
 function confColor(c){
   return {"High":"#16A34A","Medium-High":"#65A30D","Medium":"#CA8A04","Medium-Low":"#EA580C","Low":"#DC2626"}[c]||"var(--ink4)";
 }
+function toggleCo(id){
+  CO_EXP.has(id)?CO_EXP.delete(id):CO_EXP.add(id);
+  renderCompanies();
+}
 function tagFor(type,isNeg){
   if(isNeg)return'<span class="tag tN">⚠ Neg</span>';
   var m={Certification:"tC",Contract:"tB",Deployment:"tB",Pilot:"tP",Hiring:"tR",Financing:"tF"};
@@ -1413,7 +1697,7 @@ function switchTab(tab,btn){
   EXP.clear();
   if(tab==="signals") {curTier="all";renderFeed();}
   if(tab==="negative"){curTier="neg";renderFeed();}
-  if(tab==="companies") renderCompanies();
+  if(tab==="companies"){CO_EXP.clear();renderCompanies();}
   if(tab==="sources")   renderSourcesTab();
   if(tab==="history")   renderHistory();
   if(tab==="rulebook")  renderRulebook();
