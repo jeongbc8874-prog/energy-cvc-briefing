@@ -4,1175 +4,504 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Energy CVC Intelligence</title>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+KR:wght@300;400;500;600&family=IBM+Plex+Serif:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+KR:wght@400;500;600&family=IBM+Plex+Serif:wght@600&display=swap" rel="stylesheet">
 <style>
-:root {
-  --ink:     #0A0A0A;
-  --ink-2:   #3A3A3A;
-  --ink-3:   #707070;
-  --ink-4:   #A8A8A8;
-  --rule:    #E2E2E2;
-  --rule-2:  #F0F0F0;
-  --paper:   #FAFAF8;
-  --white:   #FFFFFF;
-  --accent:  #D4380D;   /* 파이낸셜 타임스 느낌의 레드 */
-  --accent-2:#0050B3;   /* 딥 블루 */
-  --green:   #135200;
-  --amber:   #874D00;
-  --mono:    'IBM Plex Mono', monospace;
-  --sans:    'IBM Plex Sans KR', sans-serif;
-  --serif:   'IBM Plex Serif', serif;
+:root{
+  --ink:#0D0D0D;--ink2:#3C3C3C;--ink3:#6E6E6E;--ink4:#A8A8A8;
+  --bg:#F7F6F2;--surface:#FFF;--b:#E2E0DA;--b2:#EDEBE6;
+  --red:#C0392B;--blue:#1A56DB;--green:#0A6640;--amber:#7D4E00;
+  --mono:'IBM Plex Mono',monospace;--sans:'IBM Plex Sans KR',sans-serif;
 }
-* { box-sizing:border-box; margin:0; padding:0; }
-html { font-size:14px; }
-body { font-family:var(--sans); background:var(--paper); color:var(--ink); line-height:1.5; }
-a { color:inherit; text-decoration:none; }
-::-webkit-scrollbar { width:4px; }
-::-webkit-scrollbar-thumb { background:var(--rule); }
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:var(--sans);background:var(--bg);color:var(--ink);font-size:14px;}
+a{color:inherit;text-decoration:none;}
+::-webkit-scrollbar{width:4px;}::-webkit-scrollbar-thumb{background:#D0CEC8;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(3px)}to{opacity:1;transform:translateY(0)}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+.blink{animation:blink 1.2s infinite;}
 
-/* ── 최상단 티커 바 ── */
-.ticker {
-  background:var(--ink);
-  color:#888;
-  font-family:var(--mono);
-  font-size:10px;
-  padding:5px 20px;
-  display:flex;
-  align-items:center;
-  gap:20px;
-  overflow:hidden;
-  white-space:nowrap;
-  letter-spacing:0.03em;
-}
-.ticker-label { color:#555; text-transform:uppercase; letter-spacing:0.08em; }
-.ticker-value { color:#C8C8C8; }
-.ticker-sep { color:#333; }
+/* ── Ticker ── */
+#ticker{background:var(--ink);color:#666;font-family:var(--mono);font-size:10px;padding:5px 20px;display:flex;gap:16px;flex-wrap:wrap;align-items:center;}
+.t-live{color:#4ADE80;}.t-sep{color:#333;}.t-val{color:#C0C0C0;}
 
-/* ── 마스트헤드 ── */
-.mast {
-  background:var(--white);
-  border-bottom:3px solid var(--ink);
-  padding:0 20px;
-}
-.mast-in {
-  max-width:1280px;
-  margin:0 auto;
-  display:grid;
-  grid-template-columns:1fr auto 1fr;
-  align-items:center;
-  padding:14px 0 10px;
-  gap:16px;
-}
-.mast-left { display:flex; align-items:center; gap:12px; }
-.mast-center { text-align:center; }
-.mast-title {
-  font-family:var(--serif);
-  font-size:22px;
-  font-weight:600;
-  color:var(--ink);
-  letter-spacing:-0.3px;
-  line-height:1;
-}
-.mast-sub {
-  font-family:var(--mono);
-  font-size:9px;
-  color:var(--ink-3);
-  letter-spacing:0.12em;
-  text-transform:uppercase;
-  margin-top:4px;
-}
-.mast-right { display:flex; align-items:center; justify-content:flex-end; gap:8px; }
-.live-dot {
-  display:inline-flex;
-  align-items:center;
-  gap:5px;
-  font-family:var(--mono);
-  font-size:10px;
-  color:var(--ink-3);
-}
-.live-dot::before {
-  content:'';
-  width:6px;
-  height:6px;
-  background:#22C55E;
-  border-radius:50%;
-  animation:pulse 2s infinite;
-}
-@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+/* ── Header ── */
+#hdr{background:var(--surface);border-bottom:3px solid var(--ink);padding:12px 20px;}
+#hdr-in{max-width:1300px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;}
+#hdr h1{font-family:'IBM Plex Serif',Georgia,serif;font-size:18px;font-weight:600;color:var(--ink);}
+#hdr-sub{font-family:var(--mono);font-size:9px;color:var(--ink4);letter-spacing:.1em;text-transform:uppercase;margin-top:3px;}
 
-/* ── 날짜 바 ── */
-.datebar {
-  border-bottom:1px solid var(--rule);
-  background:var(--white);
-  padding:0 20px;
-}
-.datebar-in {
-  max-width:1280px;
-  margin:0 auto;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:12px;
-  padding:6px 0;
-  flex-wrap:wrap;
-}
-.datebar-date {
-  font-family:var(--mono);
-  font-size:10px;
-  color:var(--ink-3);
-  letter-spacing:0.05em;
-}
-.datebar-actions { display:flex; align-items:center; gap:8px; }
-.btn-sm {
-  font-family:var(--mono);
-  font-size:10px;
-  font-weight:500;
-  padding:4px 10px;
-  border:1px solid var(--rule);
-  background:var(--white);
-  color:var(--ink-2);
-  cursor:pointer;
-  letter-spacing:0.03em;
-  transition:all 0.1s;
-}
-.btn-sm:hover { background:var(--ink); color:var(--white); border-color:var(--ink); }
-.btn-primary { background:var(--accent); color:var(--white); border-color:var(--accent); }
-.btn-primary:hover { background:#A8290A; }
+/* ── Tabs ── */
+#nav{background:var(--surface);border-bottom:1px solid var(--ink);padding:0 20px;}
+#nav-in{max-width:1300px;margin:0 auto;display:flex;overflow-x:auto;}
+.tab{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.05em;text-transform:uppercase;color:var(--ink3);padding:10px 16px 8px;border:none;background:none;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;}
+.tab:hover{color:var(--ink);}
+.tab.on{color:var(--ink);border-bottom-color:var(--red);font-weight:600;}
 
-/* ── 탭 네비 ── */
-.nav {
-  background:var(--white);
-  border-bottom:1px solid var(--ink);
-  padding:0 20px;
-  position:sticky;
-  top:0;
-  z-index:100;
-}
-.nav-in {
-  max-width:1280px;
-  margin:0 auto;
-  display:flex;
-  align-items:flex-end;
-  gap:0;
-}
-.nav-tab {
-  font-family:var(--mono);
-  font-size:11px;
-  font-weight:500;
-  letter-spacing:0.05em;
-  text-transform:uppercase;
-  color:var(--ink-3);
-  padding:11px 18px 9px;
-  border:none;
-  background:none;
-  cursor:pointer;
-  border-bottom:2px solid transparent;
-  transition:color 0.1s;
-  white-space:nowrap;
-}
-.nav-tab:hover { color:var(--ink); }
-.nav-tab.on {
-  color:var(--ink);
-  border-bottom-color:var(--accent);
-  font-weight:600;
-}
+/* ── Filter ── */
+#fbar{background:var(--bg);border-bottom:1px solid var(--b);padding:8px 20px;position:sticky;top:0;z-index:90;}
+#fbar-in{max-width:1300px;margin:0 auto;display:flex;gap:6px;flex-wrap:wrap;align-items:center;}
+#srch{font-family:var(--mono);font-size:11px;padding:5px 10px;border:1px solid var(--b);background:var(--surface);color:var(--ink);outline:none;flex:1;min-width:140px;max-width:250px;}
+#srch:focus{border-color:var(--ink);}
+.pill{font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.04em;padding:4px 10px;border:1px solid var(--b);background:var(--surface);color:var(--ink3);cursor:pointer;}
+.pill:hover{border-color:var(--ink2);}
+.pill.on{background:var(--ink);color:#FFF;border-color:var(--ink);}
+.pill.red.on{background:var(--red);border-color:var(--red);}
 
-/* ── 필터 바 ── */
-.filter-bar {
-  background:var(--paper);
-  border-bottom:1px solid var(--rule);
-  padding:8px 20px;
-  position:sticky;
-  top:42px;
-  z-index:90;
-}
-.filter-in {
-  max-width:1280px;
-  margin:0 auto;
-  display:flex;
-  align-items:center;
-  gap:6px;
-  flex-wrap:wrap;
-}
-.srch {
-  font-family:var(--mono);
-  font-size:11px;
-  padding:5px 10px;
-  border:1px solid var(--rule);
-  background:var(--white);
-  color:var(--ink);
-  outline:none;
-  flex:1;
-  min-width:160px;
-  max-width:260px;
-}
-.srch:focus { border-color:var(--ink); }
-.pill {
-  font-family:var(--mono);
-  font-size:10px;
-  font-weight:500;
-  letter-spacing:0.04em;
-  padding:4px 10px;
-  border:1px solid var(--rule);
-  background:var(--white);
-  color:var(--ink-3);
-  cursor:pointer;
-  transition:all 0.1s;
-}
-.pill:hover { border-color:var(--ink-2); color:var(--ink-2); }
-.pill.on { background:var(--ink); color:var(--white); border-color:var(--ink); }
-.pill.red.on { background:var(--accent); border-color:var(--accent); }
-.pill.blue.on { background:var(--accent-2); border-color:var(--accent-2); }
+/* ── Layout ── */
+#main{max-width:1300px;margin:0 auto;padding:16px 20px;display:grid;grid-template-columns:1fr 280px;gap:16px;}
+@media(max-width:900px){#main{grid-template-columns:1fr;}#sidebar{display:none;}}
 
-/* ── 메인 레이아웃 ── */
-.body {
-  max-width:1280px;
-  margin:0 auto;
-  padding:0 20px;
-  display:grid;
-  grid-template-columns:1fr 280px;
-  gap:0;
-  min-height:calc(100vh - 160px);
-}
-@media(max-width:900px) {
-  .body { grid-template-columns:1fr; }
-  .sidebar { display:none; }
-}
+/* ── Card ── */
+.card{background:var(--surface);border:1px solid var(--b);}
+.chd{padding:9px 14px;border-bottom:1px solid var(--b2);font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink4);}
+.cbd{padding:12px 14px;}
 
-/* ── 메인 피드 ── */
-.feed { border-right:1px solid var(--rule); padding:0; }
-.feed-hd {
-  padding:16px 20px 12px;
-  border-bottom:1px solid var(--rule-2);
-  display:flex;
-  align-items:baseline;
-  gap:10px;
-}
-.feed-title {
-  font-family:var(--mono);
-  font-size:10px;
-  font-weight:600;
-  letter-spacing:0.1em;
-  text-transform:uppercase;
-  color:var(--ink-3);
-}
-.feed-count {
-  font-family:var(--mono);
-  font-size:10px;
-  color:var(--ink-4);
-}
+/* ── Signal row ── */
+.sig{border-bottom:1px solid var(--b2);padding:12px 18px;cursor:pointer;transition:background .08s;}
+.sig:last-child{border-bottom:none;}
+.sig:hover{background:#F7F5F0;}
+.sig-meta{display:flex;align-items:center;gap:5px;margin-bottom:5px;flex-wrap:wrap;}
+.sig-co{font-family:var(--mono);font-size:11px;font-weight:600;color:var(--blue);margin-bottom:3px;}
+.sig-title{font-size:13px;font-weight:500;color:var(--ink);line-height:1.4;margin-bottom:3px;}
+.sig-title a:hover{color:var(--red);border-bottom:1px solid var(--red);}
+.sig-src{font-family:var(--mono);font-size:10px;color:var(--ink4);display:flex;align-items:center;gap:8px;}
+.sig-body{padding:10px 0 2px;border-top:1px solid var(--b2);margin-top:8px;animation:fadeIn .15s ease;}
+.hint{font-family:var(--mono);font-size:10px;color:var(--ink4);margin-top:3px;}
 
-/* ── 신호 카드 ── */
-.sig {
-  border-bottom:1px solid var(--rule-2);
-  padding:16px 20px;
-  cursor:pointer;
-  transition:background 0.08s;
-  position:relative;
-}
-.sig:hover { background:var(--white); }
-.sig.expanded { background:var(--white); }
-.sig-meta {
-  display:flex;
-  align-items:center;
-  gap:8px;
-  margin-bottom:6px;
-  flex-wrap:wrap;
-}
-.tag {
-  font-family:var(--mono);
-  font-size:9px;
-  font-weight:600;
-  letter-spacing:0.08em;
-  text-transform:uppercase;
-  padding:2px 6px;
-}
-.tag-kr  { background:#FFF7E6; color:#874D00; }
-.tag-cn  { background:#FFF1F0; color:#A8071A; }
-.tag-gl  { background:#F0F5FF; color:#0050B3; }
-.tag-dart{ background:#F6FFED; color:#135200; }
-.tag-H   { background:#FFF1F0; color:var(--accent); }
-.tag-M   { background:#FFFBE6; color:var(--amber); }
-.tag-ev  { color:var(--ink-3); border:1px solid var(--rule); background:transparent; }
-.tag-cv  { color:#0050B3; border:1px solid #BAE0FF; background:#F0F5FF; }
-.sig-time {
-  font-family:var(--mono);
-  font-size:10px;
-  color:var(--ink-4);
-  margin-left:auto;
-}
-.sig-co {
-  font-family:var(--mono);
-  font-size:11px;
-  font-weight:600;
-  letter-spacing:0.03em;
-  margin-bottom:4px;
-}
-.sig-title {
-  font-size:14px;
-  font-weight:500;
-  color:var(--ink);
-  line-height:1.45;
-  margin-bottom:4px;
-}
-.sig-title a {
-  color:var(--ink);
-  border-bottom:1px solid transparent;
-  transition:border-color 0.1s;
-}
-.sig-title a:hover { border-bottom-color:var(--accent); color:var(--accent); }
-.sig-src {
-  font-family:var(--mono);
-  font-size:10px;
-  color:var(--ink-4);
-}
-.expand-hint {
-  font-family:var(--mono);
-  font-size:10px;
-  color:var(--ink-4);
-  margin-top:4px;
-}
+/* Score bar */
+.sbar{display:inline-flex;align-items:center;gap:5px;}
+.sbar-bg{width:50px;height:4px;background:var(--b2);overflow:hidden;}
+.sbar-fill{height:100%;}
+.sbar-n{font-family:var(--mono);font-size:10px;font-weight:700;}
 
-/* ── 펼침 영역 ── */
-.sig-body {
-  margin-top:12px;
-  padding-top:12px;
-  border-top:1px solid var(--rule-2);
-  animation:slideDown 0.15s ease;
-}
-@keyframes slideDown { from{opacity:0;transform:translateY(-4px)} to{opacity:1;transform:translateY(0)} }
+/* ── Tags ── */
+.tag{display:inline-flex;align-items:center;padding:1px 6px;font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.03em;white-space:nowrap;border:1px solid var(--b);}
+.t-H{background:#FEE2E2;color:var(--red);border-color:#FCA5A5;}
+.t-M{background:#FEF9C3;color:var(--amber);border-color:#FDE68A;}
+.t-neg{background:#FFF1F0;color:var(--red);border-color:#FFCCC7;}
+.t-cert{background:#F0FDF4;color:var(--green);border-color:#A7F3D0;}
+.t-ctr{background:#EFF6FF;color:var(--blue);border-color:#BFDBFE;}
+.t-pilot{background:#F5F3FF;color:#5B21B6;border-color:#DDD6FE;}
+.t-hire{background:#FFFBEB;color:var(--amber);border-color:#FDE68A;}
+.t-fin{background:#F0FDF4;color:var(--green);border-color:#A7F3D0;}
+.t-news{background:var(--bg);color:var(--ink4);}
 
-.smr {
-  font-size:13px;
-  color:var(--ink-2);
-  line-height:1.7;
-  margin-bottom:10px;
-}
+/* ── Memo ── */
+.memo{border:2px solid var(--ink);margin-top:12px;}
+.memo-hd{background:var(--ink);padding:9px 14px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;}
+.memo-hd-l{font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.12em;color:#777;text-transform:uppercase;}
+.memo-bd{padding:14px;}
+.msec{margin-bottom:14px;}
+.mlbl{font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink4);margin-bottom:6px;}
+.mfact{display:flex;gap:7px;font-size:12px;color:var(--ink2);padding:4px 8px;background:var(--bg);border-left:2px solid var(--green);margin-bottom:4px;line-height:1.5;}
+.mind{display:flex;gap:7px;font-size:12px;color:var(--ink2);padding:4px 8px;border-left:2px solid var(--blue);margin-bottom:4px;line-height:1.5;}
+.mmiss{display:flex;gap:7px;font-size:12px;color:#7F1D1D;padding:4px 8px;background:#FFF5F5;border-left:2px solid var(--red);margin-bottom:4px;line-height:1.5;}
+.mpat{padding:10px 13px;background:#F0F5FF;border-left:3px solid var(--blue);font-size:13px;color:var(--ink);line-height:1.7;}
+.mnxt{padding:10px 13px;background:#FFFBEB;border-left:3px solid var(--amber);font-size:13px;color:var(--ink2);line-height:1.65;}
 
-/* 수치 추출 박스 */
-.facts-row {
-  display:flex;
-  gap:16px;
-  flex-wrap:wrap;
-  margin-bottom:10px;
-  padding:8px 12px;
-  background:var(--paper);
-  border-left:3px solid var(--ink);
-}
-.fact-item { display:flex; flex-direction:column; gap:2px; }
-.fact-label {
-  font-family:var(--mono);
-  font-size:9px;
-  letter-spacing:0.08em;
-  text-transform:uppercase;
-  color:var(--ink-4);
-}
-.fact-value {
-  font-family:var(--mono);
-  font-size:12px;
-  font-weight:600;
-  color:var(--ink);
-}
+/* ── Brief ── */
+#brief-box{background:var(--ink);padding:16px 20px;margin-bottom:14px;}
+#brief-lbl{font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.12em;color:#666;margin-bottom:8px;}
+#brief-txt{font-size:12px;color:#C0C0C0;line-height:1.85;white-space:pre-wrap;}
 
-/* 도메인 인사이트 */
-.insight {
-  border-left:3px solid var(--accent);
-  padding:10px 12px;
-  margin-bottom:8px;
-  background:var(--white);
-}
-.insight-label {
-  font-family:var(--mono);
-  font-size:9px;
-  font-weight:600;
-  letter-spacing:0.1em;
-  text-transform:uppercase;
-  color:var(--accent);
-  margin-bottom:5px;
-}
-.insight-text {
-  font-size:13px;
-  color:var(--ink-2);
-  line-height:1.7;
-}
-.why-now {
-  font-family:var(--mono);
-  font-size:11px;
-  color:var(--ink-3);
-  margin-top:6px;
-  padding-top:6px;
-  border-top:1px solid var(--rule-2);
-}
+/* ── Sidebar ── */
+.sr{display:flex;justify-content:space-between;align-items:baseline;padding:5px 0;border-bottom:1px solid var(--b2);}
+.sl{font-size:12px;color:var(--ink2);}
+.sn{font-family:var(--mono);font-size:15px;font-weight:700;}
+.segrow{display:flex;align-items:center;gap:8px;padding:4px 0;}
+.segnm{font-size:11px;color:var(--ink2);min-width:110px;}
+.segbg{flex:1;height:4px;background:var(--b2);overflow:hidden;}
+.segfl{height:100%;background:var(--blue);}
+.segct{font-family:var(--mono);font-size:10px;color:var(--ink4);min-width:18px;text-align:right;}
 
-/* 교차검증 */
-.cv-row {
-  display:flex;
-  align-items:center;
-  gap:6px;
-  margin-bottom:8px;
-}
-.cv-badge {
-  font-family:var(--mono);
-  font-size:9px;
-  font-weight:600;
-  letter-spacing:0.06em;
-  padding:2px 7px;
-  text-transform:uppercase;
-}
-.cv-1 { background:#F5F5F5; color:var(--ink-3); }
-.cv-2 { background:#E6F4FF; color:#0050B3; }
-.cv-3 { background:#F6FFED; color:#135200; }
+/* ── History ── */
+.hist-row{display:flex;align-items:center;gap:14px;padding:10px 18px;border-bottom:1px solid var(--b2);cursor:pointer;}
+.hist-row:hover{background:var(--bg);}
+.hist-date{font-family:var(--mono);font-size:11px;font-weight:600;color:var(--ink);min-width:88px;}
+.hist-datek{font-size:12px;color:var(--ink3);flex:1;}
+.hist-stats{display:flex;gap:10px;}
+.hist-stat{font-family:var(--mono);font-size:10px;color:var(--ink4);}
 
-/* 원문 링크 */
-.orig-link {
-  display:inline-flex;
-  align-items:center;
-  gap:5px;
-  font-family:var(--mono);
-  font-size:10px;
-  font-weight:500;
-  color:var(--accent-2);
-  padding:4px 10px;
-  border:1px solid #BAE0FF;
-  background:#F0F5FF;
-  letter-spacing:0.03em;
-  transition:all 0.1s;
-}
-.orig-link:hover { background:var(--accent-2); color:var(--white); border-color:var(--accent-2); }
-
-/* 리스크 */
-.risk-row {
-  font-family:var(--mono);
-  font-size:10px;
-  color:var(--amber);
-  margin-top:6px;
-  padding:4px 8px;
-  border:1px solid #FFD591;
-  background:#FFFBE6;
-}
-
-/* ── 사이드바 ── */
-.sidebar {
-  padding:20px 0 20px 20px;
-  display:flex;
-  flex-direction:column;
-  gap:24px;
-}
-.sb-section {}
-.sb-hd {
-  font-family:var(--mono);
-  font-size:9px;
-  font-weight:600;
-  letter-spacing:0.12em;
-  text-transform:uppercase;
-  color:var(--ink-4);
-  padding-bottom:8px;
-  border-bottom:1px solid var(--rule);
-  margin-bottom:10px;
-}
-.sb-stat {
-  display:flex;
-  justify-content:space-between;
-  align-items:baseline;
-  padding:5px 0;
-  border-bottom:1px solid var(--rule-2);
-}
-.sb-stat-l { font-size:12px; color:var(--ink-2); }
-.sb-stat-n { font-family:var(--mono); font-size:15px; font-weight:600; }
-
-/* 정책 미니 카드 */
-.pol-mini {
-  padding:8px 10px;
-  margin-bottom:6px;
-  border-left:2px solid var(--rule);
-  cursor:pointer;
-  transition:all 0.1s;
-}
-.pol-mini:hover { border-left-color:var(--accent); background:var(--white); }
-.pol-mini-label { font-size:11px; font-weight:500; color:var(--ink); margin-bottom:2px; }
-.pol-mini-sub { font-family:var(--mono); font-size:10px; color:var(--ink-4); }
-.pol-mini-H { border-left-color:var(--accent); }
-.pol-mini-M { border-left-color:var(--amber); }
-
-/* 브리핑 */
-.brief-box {
-  background:var(--ink);
-  padding:16px 20px;
-  margin:0;
-}
-.brief-label {
-  font-family:var(--mono);
-  font-size:9px;
-  font-weight:600;
-  letter-spacing:0.12em;
-  text-transform:uppercase;
-  color:#666;
-  margin-bottom:8px;
-  display:flex;
-  align-items:center;
-  gap:8px;
-}
-.brief-label::after {
-  content:'';
-  flex:1;
-  height:1px;
-  background:#333;
-}
-.brief-text {
-  font-size:12px;
-  color:#C0C0C0;
-  line-height:1.85;
-  white-space:pre-wrap;
-}
-
-/* ── 정책 탭 ── */
-.pol-grid {
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(340px,1fr));
-  gap:1px;
-  background:var(--rule);
-}
-.pol-card {
-  background:var(--white);
-  padding:20px;
-}
-.pol-card-hd {
-  display:flex;
-  justify-content:space-between;
-  align-items:flex-start;
-  margin-bottom:10px;
-}
-.pol-card-title { font-size:14px; font-weight:600; color:var(--ink); }
-.pol-urg {
-  font-family:var(--mono);
-  font-size:9px;
-  font-weight:600;
-  letter-spacing:0.06em;
-  padding:2px 7px;
-  text-transform:uppercase;
-}
-.pol-H { background:#FFF1F0; color:var(--accent); }
-.pol-M { background:#FFFBE6; color:var(--amber); }
-.pol-L { background:#F5F5F5; color:var(--ink-3); }
-.pol-desc { font-size:12px; color:var(--ink-2); line-height:1.65; margin-bottom:12px; }
-.pol-cos {
-  display:flex;
-  flex-wrap:wrap;
-  gap:4px;
-  margin-bottom:12px;
-}
-.pol-co {
-  font-family:var(--mono);
-  font-size:10px;
-  padding:2px 8px;
-  border:1px solid var(--rule);
-  color:var(--ink-3);
-}
-.pol-link-btn {
-  display:inline-flex;
-  align-items:center;
-  gap:5px;
-  font-family:var(--mono);
-  font-size:10px;
-  font-weight:600;
-  letter-spacing:0.04em;
-  color:var(--accent-2);
-  padding:5px 12px;
-  border:1px solid #BAE0FF;
-  background:#F0F5FF;
-  text-decoration:none;
-  transition:all 0.1s;
-}
-.pol-link-btn:hover { background:var(--accent-2); color:var(--white); border-color:var(--accent-2); }
-
-/* ── 히스토리 (심플) ── */
-.hist-wrap { padding:0; }
-.hist-srch {
-  padding:16px 20px;
-  border-bottom:1px solid var(--rule);
-  display:flex;
-  gap:8px;
-  align-items:center;
-}
-.hist-list {}
-.hist-row {
-  display:flex;
-  align-items:center;
-  gap:16px;
-  padding:12px 20px;
-  border-bottom:1px solid var(--rule-2);
-  cursor:pointer;
-  transition:background 0.08s;
-}
-.hist-row:hover { background:var(--white); }
-.hist-date {
-  font-family:var(--mono);
-  font-size:11px;
-  font-weight:600;
-  color:var(--ink);
-  min-width:90px;
-}
-.hist-datek { font-size:12px; color:var(--ink-3); flex:1; }
-.hist-stats { display:flex; gap:12px; }
-.hist-stat { font-family:var(--mono); font-size:10px; color:var(--ink-4); }
-
-/* ── DART 탭 ── */
-.dart-empty {
-  padding:48px 20px;
-  text-align:center;
-}
-.dart-row {
-  padding:14px 20px;
-  border-bottom:1px solid var(--rule-2);
-  display:flex;
-  align-items:flex-start;
-  gap:14px;
-}
-.dart-row:hover { background:var(--white); }
-.dart-co {
-  font-family:var(--mono);
-  font-size:10px;
-  font-weight:600;
-  color:var(--green);
-  min-width:100px;
-}
-.dart-title-col { flex:1; }
-.dart-title-link {
-  font-size:13px;
-  font-weight:500;
-  color:var(--ink);
-  border-bottom:1px solid transparent;
-  transition:border-color 0.1s;
-}
-.dart-title-link:hover { border-bottom-color:var(--accent); color:var(--accent); }
-.dart-date { font-family:var(--mono); font-size:10px; color:var(--ink-4); margin-top:3px; }
-
-/* ── 팩트 배너 ── */
-.fact-notice {
-  font-family:var(--mono);
-  font-size:10px;
-  color:var(--ink-4);
-  letter-spacing:0.04em;
-  padding:8px 20px;
-  border-bottom:1px solid var(--rule-2);
-  background:var(--white);
-  display:flex;
-  align-items:center;
-  gap:10px;
-}
-.fact-dot { color:#22C55E; font-size:12px; }
-
-/* ── 로딩 ── */
-.loading {
-  padding:60px 20px;
-  text-align:center;
-  font-family:var(--mono);
-  font-size:11px;
-  color:var(--ink-4);
-  letter-spacing:0.08em;
-}
-@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
-.blink { animation:blink 1.2s infinite; }
-
-/* ── 빈 상태 ── */
-.empty {
-  padding:60px 20px;
-  text-align:center;
-  font-family:var(--mono);
-  font-size:11px;
-  color:var(--ink-4);
-  letter-spacing:0.06em;
-}
+/* ── Empty / Loading ── */
+.loading{text-align:center;padding:40px;font-family:var(--mono);font-size:11px;color:var(--ink4);letter-spacing:.08em;}
+.empty{text-align:center;padding:40px;font-size:13px;color:var(--ink3);}
+.btn{font-family:var(--mono);font-size:10px;font-weight:600;padding:5px 12px;border:1px solid var(--b);background:var(--surface);color:var(--ink2);cursor:pointer;}
+.btn:hover{background:var(--ink);color:#FFF;border-color:var(--ink);}
 </style>
 </head>
 <body>
 
-<!-- 티커 -->
-<div class="ticker">
-  <span class="ticker-label">Energy CVC</span>
-  <span class="ticker-sep">|</span>
-  <span id="tickerDate" class="ticker-value">—</span>
-  <span class="ticker-sep">|</span>
-  <span id="tickerStats" class="ticker-value">로딩 중...</span>
-  <span class="ticker-sep">|</span>
-  <span class="ticker-label">팩트 전용</span>
-  <span class="ticker-sep">|</span>
-  <span class="ticker-value">NewsAPI + DART + 에너지 도메인 분석</span>
+<div id="ticker">
+  <span class="t-live">● LIVE</span>
+  <span class="t-sep">|</span>
+  <span class="t-val" id="t-date">—</span>
+  <span class="t-sep">|</span>
+  <span>Signals: <span class="t-val" id="t-total">—</span></span>
+  <span class="t-sep">|</span>
+  <span style="color:#FCD34D;font-weight:600">High: <span id="t-high">—</span></span>
+  <span class="t-sep">|</span>
+  <span style="color:#FCA5A5">Negative: <span id="t-neg">—</span></span>
+  <span class="t-sep">|</span>
+  <span class="t-val">RSS + AI Analysis · 팩트 전용</span>
 </div>
 
-<!-- 마스트헤드 -->
-<div class="mast">
-  <div class="mast-in">
-    <div class="mast-left">
-      <div class="live-dot" id="liveLabel">LIVE</div>
+<div id="hdr">
+  <div id="hdr-in">
+    <div>
+      <h1>Energy Capital Intelligence</h1>
+      <div id="hdr-sub">Fact-based · Rule-transparent · Daily Pipeline</div>
     </div>
-    <div class="mast-center">
-      <div class="mast-title">Energy CVC Intelligence</div>
-      <div class="mast-sub">에너지 투자 신호 · 팩트 기반 · 도메인 분석</div>
-    </div>
-    <div class="mast-right">
-      <button class="btn-sm" id="copyBtn" style="display:none" onclick="copyReport()">복사</button>
-    </div>
+    <button class="btn" onclick="copyReport()" id="btn-copy" style="display:none">📋 복사</button>
   </div>
 </div>
 
-<!-- 날짜 바 -->
-<div class="datebar">
-  <div class="datebar-in">
-    <div class="datebar-date" id="dateLabel">—</div>
-    <div class="datebar-actions">
-      <span style="font-family:var(--mono);font-size:10px;color:var(--ink-4)" id="cvLabel"></span>
-    </div>
+<div id="nav">
+  <div id="nav-in">
+    <button class="tab on" onclick="switchTab('signals',this)">Signal Feed</button>
+    <button class="tab" onclick="switchTab('companies',this)">Companies</button>
+    <button class="tab" onclick="switchTab('negative',this)">Negative</button>
+    <button class="tab" onclick="switchTab('history',this)">Archive</button>
   </div>
 </div>
 
-<!-- 탭 네비 -->
-<div class="nav">
-  <div class="nav-in">
-    <button class="nav-tab on" onclick="switchTab('today')">Today's Signals</button>
-    <button class="nav-tab" onclick="switchTab('dart')">DART 공시</button>
-    <button class="nav-tab" onclick="switchTab('policy')">Policy Triggers</button>
-    <button class="nav-tab" onclick="switchTab('history')">Archive</button>
+<div id="fbar">
+  <div id="fbar-in">
+    <input id="srch" placeholder="Search signals…" oninput="renderFeed()">
+    <button class="pill on"  onclick="setTier('all',this)">All</button>
+    <button class="pill"     onclick="setTier('high',this)">High</button>
+    <button class="pill"     onclick="setTier('medium',this)">Medium</button>
+    <button class="pill red" onclick="setTier('neg',this)">⚠ Negative</button>
   </div>
 </div>
 
-<!-- 필터 바 -->
-<div class="filter-bar" id="filterBar">
-  <div class="filter-in">
-    <input class="srch" id="srch" placeholder="Search signals…" oninput="renderFeed()">
-    <button class="pill on"       onclick="setF('all',this)">All</button>
-    <button class="pill kr"       onclick="setF('kr',this)">🇰🇷 KR</button>
-    <button class="pill"          onclick="setF('gl',this)">🌍 Global</button>
-    <button class="pill cn"       onclick="setF('cn',this)">🇨🇳 CN</button>
-    <button class="pill red"      onclick="setF('hi',this)">High</button>
-    <button class="pill blue"     onclick="setF('iv',this)">Investigate</button>
-    <button class="pill"          onclick="setF('cv',this)">교차검증</button>
-  </div>
-</div>
-
-<!-- BODY -->
-<div class="body" id="mainBody">
-  <!-- 피드 -->
-  <div class="feed" id="feedCol">
+<div id="main">
+  <div id="feed-col">
     <div class="loading"><span class="blink">■</span> LOADING...</div>
   </div>
-  <!-- 사이드바 -->
-  <div class="sidebar" id="sidebarCol">
-    <div class="sb-section">
-      <div class="sb-hd">Summary</div>
-      <div id="statsBox"></div>
+  <div id="sidebar">
+    <div class="card" style="margin-bottom:12px">
+      <div class="chd">Summary</div>
+      <div class="cbd" id="stats-box"></div>
     </div>
-    <div class="sb-section">
-      <div class="sb-hd">Policy Triggers</div>
-      <div id="policyMini"></div>
+    <div class="card" style="margin-bottom:12px">
+      <div class="chd">Segments</div>
+      <div class="cbd" id="seg-box"></div>
+    </div>
+    <div class="card">
+      <div class="chd">Signal Rules</div>
+      <div class="cbd" style="font-size:11px;color:var(--ink3);line-height:1.8">
+        <div style="padding:3px 7px;border-left:2px solid var(--green);margin-bottom:4px">Cert + Contract + CFO → Series C 준비</div>
+        <div style="padding:3px 7px;border-left:2px solid var(--blue);margin-bottom:4px">유틸리티/하이퍼스케일러 파일럿 → 강한 상업 신호</div>
+        <div style="padding:3px 7px;border-left:2px solid var(--amber);margin-bottom:4px">그랜트 단독 → 오프테이커 없이 약한 신호</div>
+        <div style="padding:3px 7px;border-left:2px solid var(--red)">PR 홍보성 문구 → -40pts (필터)</div>
+      </div>
     </div>
   </div>
 </div>
 
 <script>
-var DATA=null, SIG=[], IDX=[];
-var curF="all", curTab="today", EXP=new Set();
+// ── State ─────────────────────────────────────────────────
+var DATA = null, SIGNALS = [], IDX = [];
+var curTier = "all", curTab = "signals", EXP = new Set();
 
-// ── 정책 데이터 (HTML 내장) ───────────────────────────────
-var POL = [
-  { id:"re100_kr", region:"KR", label:"국내 RE100 이행 가이드라인", urgency:"High",
-    desc:"산업부 RE100 이행 기업 증가 → 기업용 ESS·PPA·VPP 수요 급증.",
-    url:"https://www.motie.go.kr/motie/ne/presse/press2/bbs/bbsView.do?bbs_seq_n=165753",
-    urlLabel:"산업통상자원부",
-    beneficiaries:["그리드위즈","식스티헤르츠","에너지에이아이"] },
-  { id:"h2_roadmap", region:"KR", label:"수소경제 로드맵 2.0", urgency:"High",
-    desc:"2030년 청정수소 목표 → 수전해·연료전지 스타트업 직접 수혜.",
-    url:"https://www.motie.go.kr/motie/ne/presse/press2/bbs/bbsView.do?bbs_seq_n=164649",
-    urlLabel:"산업통상자원부",
-    beneficiaries:["하이리움산업","에스퓨얼셀","범한퓨얼셀"] },
-  { id:"kpx", region:"KR", label:"KPX 보조서비스 시장", urgency:"High",
-    desc:"전력거래소 ESS 보조서비스 참여 확대 → VPP·ESS 수익 모델 강화.",
-    url:"https://www.kpx.or.kr/www/contents.do?key=223",
-    urlLabel:"한국전력거래소",
-    beneficiaries:["그리드위즈","씨에스에너지"] },
-  { id:"dart_main", region:"KR", label:"DART 전자공시", urgency:"Medium",
-    desc:"에너지 기업 실제 공시 — 유상증자·계약체결·전환사채 팩트 확인.",
-    url:"https://dart.fss.or.kr/dsab007/main.do",
-    urlLabel:"금융감독원 DART",
-    beneficiaries:["전체 국내 에너지 기업"] },
-  { id:"imo2030", region:"GLOBAL", label:"IMO 2030 탄소규제", urgency:"High",
-    desc:"선박 탄소집약도 40% 감축 → 대체연료·연료전지 수요 급증.",
-    url:"https://www.imo.org/en/MediaCentre/PressBriefings/pages/CII-and-EEXI-in-force.aspx",
-    urlLabel:"IMO",
-    beneficiaries:["빈센","범한퓨얼셀","CMB.TECH"] },
-  { id:"ira", region:"US", label:"미국 IRA", urgency:"High",
-    desc:"IRA 세액공제 → 미국 ESS·수소 시장 급성장. 한국 기업 수혜.",
-    url:"https://www.energy.gov/lpo/inflation-reduction-act",
-    urlLabel:"U.S. Dept. of Energy",
-    beneficiaries:["LG에너지솔루션 생태계","한화솔루션"] },
-  { id:"eu_cbam", region:"EU", label:"EU CBAM 탄소국경세", urgency:"Medium",
-    desc:"2026년 전면시행 → 청정에너지 기술 수출 경쟁력 강화.",
-    url:"https://taxation-customs.ec.europa.eu/carbon-border-adjustment-mechanism_en",
-    urlLabel:"EU Commission",
-    beneficiaries:["스탠다드에너지","하이리움산업"] },
-  { id:"ferc2222", region:"US", label:"FERC Order 2222", urgency:"Medium",
-    desc:"미국 분산자원 도매시장 참여 허용 → VPP·DR TAM 확대.",
-    url:"https://www.ferc.gov/media/ferc-order-no-2222-fact-sheet",
-    urlLabel:"FERC",
-    beneficiaries:["AutoGrid","Voltus","그리드위즈"] },
-  { id:"cn_ess", region:"CN", label:"중국 ESS 의무설치", urgency:"High",
-    desc:"신재생 ESS 의무 설치 → 중국 시장 급성장, 경쟁 심화.",
-    url:"https://www.ndrc.gov.cn/",
-    urlLabel:"NDRC 중국",
-    beneficiaries:["Pylontech","REPT","EVE Energy"] },
-];
-
-// ── 데이터 로드 ───────────────────────────────────────────
-async function loadData(){
-  try{
-    var r=await fetch("data/latest.json?"+Date.now());
-    if(!r.ok) throw new Error();
-    DATA=await r.json(); SIG=DATA.signals||[];
-    var s=DATA.stats||{};
-    document.getElementById("dateLabel").textContent=(DATA.dateKr||DATA.date||"—");
-    document.getElementById("tickerDate").textContent=(DATA.date||"—");
-    document.getElementById("tickerStats").textContent=
-      "총 "+(s.total||0)+"건  |  High "+(s.high||0)+"  |  교차검증 "+(s.multiSource||0)+"건";
-    document.getElementById("cvLabel").textContent=
-      "교차검증 "+(s.multiSource||0)+"건";
-    document.getElementById("liveLabel").textContent=(DATA.dateKr||"LIVE");
-    document.getElementById("copyBtn").style.display="inline-flex";
-    renderSidebar(); renderFeed(); renderPolicyMini();
-  }catch(e){
-    document.getElementById("feedCol").innerHTML=
-      '<div class="empty">데이터 없음 — GitHub Actions → Run workflow 실행 필요</div>';
-  }
-}
-async function loadIndex(){
-  try{var r=await fetch("data/index.json?"+Date.now());if(!r.ok)return;IDX=await r.json();}catch{}
-}
-
-// ── 사이드바 ──────────────────────────────────────────────
-function renderSidebar(){
-  if(!DATA)return;
-  var s=DATA.stats||{};
-  var rows=[
-    {n:s.total||0,       l:"Total",     c:"var(--ink)"},
-    {n:s.newsCount||0,   l:"News",      c:"var(--accent-2)"},
-    {n:s.dartCount||0,   l:"DART",      c:"var(--green)"},
-    {n:s.kr||0,          l:"KR",        c:"var(--amber)"},
-    {n:s.global||0,      l:"Global",    c:"var(--accent-2)"},
-    {n:s.cn||0,          l:"CN",        c:"#A8071A"},
-    {n:s.high||0,        l:"High",      c:"var(--accent)"},
-    {n:s.investigate||0, l:"Investigate",c:"var(--amber)"},
-    {n:s.multiSource||0, l:"교차검증",  c:"var(--accent-2)"},
-  ];
-  document.getElementById("statsBox").innerHTML=rows.map(function(x){
-    return '<div class="sb-stat"><span class="sb-stat-l">'+x.l+'</span>'
-      +'<span class="sb-stat-n" style="color:'+x.c+'">'+x.n+'</span></div>';
-  }).join("");
-}
-
-function renderPolicyMini(){
-  var el=document.getElementById("policyMini");
-  el.innerHTML="";
-  POL.slice(0,5).forEach(function(p){
-    var d=document.createElement("div");
-    d.className="pol-mini pol-mini-"+(p.urgency||"L");
-    d.title=p.url?"공식 문서 열기":p.desc;
-    d.innerHTML='<div class="pol-mini-label">'+p.label+'</div>'
-      +'<div class="pol-mini-sub">'+p.region+(p.url?' · 🔗 클릭':' · ')+'</div>';
-    d.addEventListener("click",function(){
-      if(p.url) window.open(p.url,"_blank","noopener");
-      else switchTab("policy");
-    });
-    el.appendChild(d);
-  });
-}
-
-// ── 검색 필터 ─────────────────────────────────────────────
-function getFiltered(){
-  var raw=(document.getElementById("srch")||{value:""}).value.trim();
-  var qs=raw.toLowerCase().split(/\s+/).filter(Boolean);
-  return SIG.filter(function(s){
-    if(curF==="kr")  return s.isKorean;
-    if(curF==="gl")  return !s.isKorean&&!s.isChina;
-    if(curF==="cn")  return s.isChina;
-    if(curF==="hi")  return s.signal_quality==="High"||s.relevance==="High";
-    if(curF==="iv")  return s.next_action==="Investigate";
-    if(curF==="cv")  return s.cross_validation&&s.cross_validation.sourceCount>=2;
+// ── Load data ─────────────────────────────────────────────
+async function loadData(url) {
+  url = url || ("data/latest.json?" + Date.now());
+  try {
+    var r = await fetch(url);
+    if (!r.ok) throw new Error("not found");
+    DATA = await r.json();
+    SIGNALS = DATA.signals || [];
+    updateTicker();
+    renderSidebar();
+    document.getElementById("btn-copy").style.display = "inline-flex";
     return true;
-  }).filter(function(s){
-    if(!qs.length)return true;
-    var hay=[
-      s.company||"", s.title||"", s.label||"", s.summary||"",
-      s.source||"", s.domain_insight||"", s.why_now||"",
-      s.signal_quality||"", s.next_action||"", s.eventType||"",
-      s.region||"", s.tag||""
-    ].join(" ").toLowerCase();
-    return qs.every(function(k){return hay.indexOf(k)>=0;});
-  }).sort(function(a,b){
-    var cv=function(s){return s.cross_validation?s.cross_validation.sourceCount:1;};
-    var sq={High:3,Medium:1,Low:0};
-    var sa=cv(a)*2+(sq[a.signal_quality||a.relevance]||0);
-    var sb=cv(b)*2+(sq[b.signal_quality||b.relevance]||0);
-    return sb-sa;
+  } catch(e) {
+    document.getElementById("feed-col").innerHTML =
+      '<div class="empty">데이터 없음 — GitHub Actions → Run workflow 실행 필요</div>';
+    return false;
+  }
+}
+
+async function loadIndex() {
+  try {
+    var r = await fetch("data/index.json?" + Date.now());
+    if (!r.ok) return;
+    IDX = await r.json();
+  } catch(e) {}
+}
+
+function updateTicker() {
+  var s = DATA.stats || {};
+  document.getElementById("t-date").textContent  = DATA.dateKr || DATA.date || "—";
+  document.getElementById("t-total").textContent = s.total || 0;
+  document.getElementById("t-high").textContent  = s.high  || 0;
+  document.getElementById("t-neg").textContent   = s.negative || 0;
+}
+
+// ── Sidebar ───────────────────────────────────────────────
+function renderSidebar() {
+  if (!DATA) return;
+  var s = DATA.stats || {};
+  var rows = [
+    {n:s.total||0,     l:"Total",        c:"var(--ink)"},
+    {n:s.high||0,      l:"High signal",  c:"var(--red)"},
+    {n:s.medium||0,    l:"Medium",       c:"var(--amber)"},
+    {n:s.matched||0,   l:"Company match",c:"var(--blue)"},
+    {n:s.negative||0,  l:"Negative",     c:"var(--red)"},
+    {n:s.filtered_out||0,l:"Filtered",   c:"var(--ink4)"},
+  ];
+  document.getElementById("stats-box").innerHTML =
+    rows.map(function(x){return '<div class="sr"><span class="sl">'+x.l+'</span><span class="sn" style="color:'+x.c+'">'+x.n+'</span></div>';}).join("");
+
+  var segs = s.by_segment || {};
+  var maxSeg = Math.max.apply(null, Object.values(segs).concat([1]));
+  document.getElementById("seg-box").innerHTML =
+    Object.entries(segs).sort(function(a,b){return b[1]-a[1];}).slice(0,8)
+    .map(function(kv){return '<div class="segrow"><span class="segnm">'+kv[0]+'</span><div class="segbg"><div class="segfl" style="width:'+Math.round(kv[1]/maxSeg*100)+'%"></div></div><span class="segct">'+kv[1]+'</span></div>';}).join("");
+}
+
+// ── Feed ──────────────────────────────────────────────────
+function getFiltered() {
+  var q = (document.getElementById("srch")||{value:""}).value.trim().toLowerCase();
+  return SIGNALS.filter(function(e) {
+    if (curTier === "high")   return e.signal_tier === "high";
+    if (curTier === "medium") return e.signal_tier === "medium";
+    if (curTier === "neg")    return e.is_negative;
+    return true;
+  }).filter(function(e) {
+    if (!q) return true;
+    var hay = [e.title, e.company_name, e.segment, e.event_type, e.source_name].join(" ").toLowerCase();
+    return q.split(/\s+/).every(function(k){ return hay.indexOf(k) >= 0; });
   });
 }
 
-// ── 피드 렌더링 ───────────────────────────────────────────
-function renderFeed(){
-  var sigs=getFiltered(), el=document.getElementById("feedCol");
-  var h="";
+function renderFeed() {
+  var sigs = getFiltered();
+  var el   = document.getElementById("feed-col");
+  var h    = "";
 
-  // 팩트 공지
-  h+='<div class="fact-notice">'
-    +'<span class="fact-dot">●</span>'
-    +'<span>모든 신호는 실제 언론사 기사 또는 DART 공시 원문 링크 포함 &nbsp;·&nbsp; '
-    +'AI는 에너지 도메인 해석만 제공 &nbsp;·&nbsp; 수치는 기사 원문에서만 추출</span>'
-    +'</div>';
-
-  // 브리핑
-  if(DATA&&DATA.brief){
-    h+='<div class="brief-box">'
-      +'<div class="brief-label">CVC Intelligence Brief</div>'
-      +'<div class="brief-text">'+e(DATA.brief)+'</div>'
-      +'</div>';
+  // Brief
+  if (DATA && DATA.brief && curTier === "all") {
+    h += '<div id="brief-box"><div id="brief-lbl">CVC INTELLIGENCE BRIEF</div><div id="brief-txt">'+e(DATA.brief)+'</div></div>';
   }
 
-  if(!sigs.length){
-    var raw2=(document.getElementById("srch")||{value:""}).value.trim();
-    h+='<div class="empty">'
-      +(raw2?'"'+e(raw2)+'" — No results':"No signals found")
-      +(raw2?'<br><br><a href="#" onclick="document.getElementById(\'srch\').value=\'\';renderFeed();return false;" style="color:var(--accent-2);font-size:10px">Clear search</a>':"")
-      +'</div>';
-    el.innerHTML=h; return;
+  if (!sigs.length) {
+    h += '<div class="card"><div class="empty">신호 없음</div></div>';
+    el.innerHTML = h; return;
   }
 
-  h+='<div class="feed-hd"><span class="feed-title">Investment Signals</span>'
-    +'<span class="feed-count">'+sigs.length+' results</span></div>';
+  h += '<div class="card"><div class="chd">'+curTier.toUpperCase()+' SIGNALS <span style="font-weight:400;color:var(--ink4)">'+sigs.length+'</span></div>';
 
-  sigs.forEach(function(s){
-    var op=EXP.has(s.id);
-    var isKr=s.isKorean, isCn=s.isChina, isDart=s.isDart||s.tag==="kr_dart";
-    var cv=s.cross_validation||{};
-    var sq=s.signal_quality||s.relevance||"Low";
-    var facts=s.extracted_facts||{};
-    var hasFactNums=facts.amount||facts.round||facts.partner;
+  sigs.forEach(function(ev) {
+    var op    = EXP.has(ev.id);
+    var tc    = ev.signal_tier==="high"?"var(--green)":ev.signal_tier==="medium"?"var(--amber)":"var(--ink4)";
+    var bc    = ev.is_negative?"var(--red)":ev.signal_tier==="high"?"var(--green)":"transparent";
+    var typeTag = tagFor(ev.event_type, ev.is_negative);
 
-    // 교차검증 뱃지
-    var cvClass=cv.sourceCount>=3?"cv-3":cv.sourceCount>=2?"cv-2":"cv-1";
-    var cvLabel=cv.sourceCount>=3?"3+ 소스":cv.sourceCount>=2?"2 소스":"단일 소스";
+    h += '<div class="sig" style="border-left:3px solid '+bc+'" onclick="toggle(\''+ev.id+'\')">';
+    h += '<div class="sig-meta">'+typeTag;
+    h += '<span class="tag t-news">'+e(ev.segment||"—")+'</span>';
+    if (ev.signal_tier==="high")   h += '<span class="tag t-H">HIGH</span>';
+    if (ev.signal_tier==="medium") h += '<span class="tag t-M">MED</span>';
+    if (ev.is_negative)            h += '<span class="tag t-neg">⚠ NEG</span>';
+    h += '<span style="margin-left:auto;font-family:var(--mono);font-size:9px;color:var(--ink4)">'+e(ev.event_date||"")+'</span>';
+    h += '</div>';
 
-    h+='<div class="sig'+(op?" expanded":"")+(isDart?" dart-sig":"")+'" onclick="toggleExp(\''+s.id+'\')">'
-      +'<div class="sig-meta">'
-      +(isKr?'<span class="tag tag-kr">KR</span>':isCn?'<span class="tag tag-cn">CN</span>':'<span class="tag tag-gl">GL</span>')
-      +(isDart?'<span class="tag tag-dart">DART</span>':"")
-      +(s.eventType?'<span class="tag tag-ev">'+e(s.eventType)+'</span>':"")
-      +(sq==="High"?'<span class="tag tag-H">HIGH</span>':sq==="Medium"?'<span class="tag tag-M">MED</span>':"")
-      +(cv.sourceCount>=2?'<span class="tag tag-cv cv-'+(cv.sourceCount>=3?"3":"2")+'">'+cvLabel+'</span>':"")
-      +'<span class="sig-time">'+e(s.pubDate||"")+'</span>'
-      +'</div>'
-      +(s.company?'<div class="sig-co">'+e(s.company)+'</div>':"")
-      +'<div class="sig-title">'
-      +(s.url?'<a href="'+e(s.url)+'" target="_blank" rel="noopener" onclick="event.stopPropagation()">'+e(s.title||"")+'</a>'
-             :'<span>'+e(s.title||"")+'</span>')
-      +'</div>'
-      +'<div class="sig-src">'+e(s.source||"")+(s.next_action&&s.next_action!=="Monitor"&&s.next_action!=="Skip"?' &nbsp;·&nbsp; <strong style="color:var(--accent)">→ '+e(s.next_action)+'</strong>':"")+'</div>'
-      +(!op?'<div class="expand-hint">▾ '+(s.domain_insight?"도메인 분석 보기":"요약 보기")+'</div>':"");
+    if (ev.company_id) h += '<div class="sig-co">'+e(ev.company_name||"")+'</div>';
 
-    if(op){
-      h+='<div class="sig-body">';
+    h += '<div class="sig-title">';
+    if (ev.source_url) h += '<a href="'+e(ev.source_url)+'" target="_blank" rel="noopener" onclick="event.stopPropagation()">'+e(ev.title||"")+'</a>';
+    else               h += e(ev.title||"");
+    h += '</div>';
 
-      // 수치 추출 (기사에서 추출, 생성 아님)
-      if(hasFactNums){
-        h+='<div class="facts-row">';
-        if(facts.amount) h+='<div class="fact-item"><span class="fact-label">Amount</span><span class="fact-value">'+e(facts.amount)+'</span></div>';
-        if(facts.round)  h+='<div class="fact-item"><span class="fact-label">Round</span><span class="fact-value">'+e(facts.round)+'</span></div>';
-        if(facts.partner)h+='<div class="fact-item"><span class="fact-label">Partner</span><span class="fact-value">'+e(facts.partner)+'</span></div>';
-        if(facts.date)   h+='<div class="fact-item"><span class="fact-label">Date</span><span class="fact-value">'+e(facts.date)+'</span></div>';
-        h+='<div class="fact-item"><span class="fact-label">Source</span><span class="fact-value" style="font-size:10px;color:var(--ink-4)">기사 원문 추출</span></div>';
-        h+='</div>';
+    h += '<div class="sig-src">'+e(ev.source_name||"");
+    h += ' <span class="sbar"><div class="sbar-bg"><div class="sbar-fill" style="width:'+( ev.signal_strength||0)+'%;background:'+tc+'"></div></div><span class="sbar-n" style="color:'+tc+'">'+(ev.signal_strength||0)+'</span></span>';
+    h += '</div>';
+
+    if (!op) h += '<div class="hint">▾ '+(ev.company_id?"인사이트 보기":"요약 보기")+'</div>';
+
+    if (op) {
+      h += '<div class="sig-body">';
+      h += '<div style="font-size:12px;color:var(--ink2);line-height:1.65;margin-bottom:10px">'+e((ev.summary||"").slice(0,300))+'…</div>';
+      h += '<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px">';
+      if (ev.source_url) h += '<a href="'+e(ev.source_url)+'" target="_blank" rel="noopener" style="font-family:var(--mono);font-size:10px;color:var(--blue)" onclick="event.stopPropagation()">→ Source</a>';
+      if (ev.matched_rule) h += '<span style="font-family:var(--mono);font-size:10px;color:var(--ink4)">rule: "'+e(ev.matched_rule)+'"</span>';
+      h += '</div>';
+      if (ev.company_id) {
+        h += '<button class="btn" onclick="event.stopPropagation();showMemo(\''+ev.company_id+'\',\''+ev.id+'\')">View Investment Memo →</button>';
+        h += '<div id="memo-'+ev.id+'"></div>';
       }
-
-      // 요약
-      if(s.summary) h+='<div class="smr">'+e(s.summary)+'</div>';
-
-      // 도메인 인사이트
-      if(s.domain_insight){
-        h+='<div class="insight">'
-          +'<div class="insight-label">Energy Domain Analysis</div>'
-          +'<div class="insight-text">'+e(s.domain_insight)+'</div>'
-          +(s.why_now?'<div class="why-now">Why now: '+e(s.why_now)+'</div>':"")
-          +'</div>';
-      }
-
-      // 교차검증 + 원문 링크
-      h+='<div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px">'
-        +'<span class="cv-badge '+cvClass+'">'+cvLabel+' 교차검증</span>'
-        +(s.url?'<a class="orig-link" href="'+e(s.url)+'" target="_blank" rel="noopener" onclick="event.stopPropagation()">원문 보기 →</a>':"")
-        +'</div>';
-
-      // 리스크
-      if(s.risk) h+='<div class="risk-row">⚠ Risk: '+e(s.risk)+'</div>';
-
-      h+='</div>';
+      h += '</div>';
     }
-    h+='</div>';
+    h += '</div>';
   });
-
-  el.innerHTML=h;
+  h += '</div>';
+  el.innerHTML = h;
 }
 
-// ── DART 탭 ───────────────────────────────────────────────
-function renderDart(){
-  var el=document.getElementById("feedCol");
-  var dartSigs=SIG.filter(function(s){return s.isDart||s.tag==="kr_dart";});
-  if(!dartSigs.length){
-    el.innerHTML='<div class="dart-empty">'
-      +'<div style="font-family:var(--mono);font-size:11px;color:var(--ink-4);letter-spacing:0.08em;margin-bottom:12px">DART 공시 없음</div>'
-      +'<div style="font-size:12px;color:var(--ink-3);margin-bottom:16px">DART_API_KEY 등록 후 자동 수집됩니다</div>'
-      +'<a href="https://dart.fss.or.kr" target="_blank" rel="noopener" class="pol-link-btn" style="display:inline-flex;margin:0 auto">→ DART 직접 방문</a>'
-      +'</div>';
+// ── Insight memo ──────────────────────────────────────────
+function showMemo(coId, sigId) {
+  var container = document.getElementById("memo-"+sigId);
+  if (!container) return;
+
+  var co = DATA.companies && DATA.companies[coId];
+  if (!co || !co.insight) {
+    container.innerHTML = '<div style="padding:8px;font-size:12px;color:var(--ink4)">인사이트 데이터 없음</div>';
     return;
   }
-  var h='<div class="feed-hd"><span class="feed-title">DART 전자공시</span>'
-    +'<span class="feed-count">'+dartSigs.length+'건 · 금융감독원 원문</span></div>';
-  dartSigs.forEach(function(s){
-    var sq=s.signal_quality||s.relevance||"";
-    h+='<div class="dart-row">'
-      +'<div class="dart-co">'+e(s.company||"")+'</div>'
-      +'<div class="dart-title-col">'
-      +(s.url?'<a class="dart-title-link" href="'+e(s.url)+'" target="_blank" rel="noopener">'+e(s.title||"")+'</a>'
-             :'<span class="dart-title-link">'+e(s.title||"")+'</span>')
-      +'<div class="dart-date">'+e(s.pubDate||"")+(sq?" &nbsp;·&nbsp; <strong style='color:var(--accent)'>"+e(sq)+"</strong>":"")+'</div>'
-      +'</div>'
-      +'</div>';
-  });
-  el.innerHTML=h;
+
+  container.innerHTML = renderMemo(co.insight, co.name);
 }
 
-// ── 정책 탭 ───────────────────────────────────────────────
-function renderPolicy(){
-  var el=document.getElementById("feedCol");
-  var grid=document.createElement("div");
-  grid.className="pol-grid";
-  POL.forEach(function(p){
-    var card=document.createElement("div");
-    card.className="pol-card";
-    var urgCls="pol-"+(p.urgency==="High"?"H":p.urgency==="Medium"?"M":"L");
-    card.innerHTML='<div class="pol-card-hd">'
-      +'<div class="pol-card-title">'+p.label+'</div>'
-      +'<span class="pol-urg '+urgCls+'">'+p.urgency+' · '+p.region+'</span>'
-      +'</div>'
-      +'<div class="pol-desc">'+p.desc+'</div>'
-      +'<div class="pol-cos">'+( p.beneficiaries||[]).map(function(c){
-        return '<span class="pol-co">'+c.split("(")[0].trim()+'</span>';
-      }).join("")+'</div>';
-    if(p.url){
-      var btn=document.createElement("a");
-      btn.href=p.url; btn.target="_blank"; btn.rel="noopener noreferrer";
-      btn.className="pol-link-btn";
-      btn.textContent="→ "+(p.urlLabel||"공식 문서");
-      card.appendChild(btn);
-    }
-    grid.appendChild(card);
-  });
-  el.innerHTML='<div class="feed-hd"><span class="feed-title">Policy Triggers</span>'
-    +'<span class="feed-count">실제 정부/기관 링크</span></div>';
-  el.appendChild(grid);
-}
+function renderMemo(ins, name) {
+  var confColors = {"High":"#16A34A","Medium-High":"#65A30D","Medium":"#CA8A04","Medium-Low":"#EA580C","Low":"#DC2626"};
+  var cc = confColors[ins.confidence] || "var(--ink4)";
+  var h = '<div class="memo">';
+  h += '<div class="memo-hd"><span class="memo-hd-l">Investment Triage Memo · '+e(name||"")+'</span>';
+  h += '<span style="font-family:var(--mono);font-size:10px;font-weight:700;color:'+cc+'">'+ins.confidence+'</span></div>';
+  h += '<div class="memo-bd">';
+  h += '<div style="font-family:var(--mono);font-size:9px;color:#888;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--b2)">';
+  h += ins.event_count+'건 이벤트 기반 · ⚠ 팩트만 — 수치 생성 없음</div>';
 
-// ── 히스토리 탭 (심플) ────────────────────────────────────
-function renderHistory(){
-  var el=document.getElementById("feedCol");
-  if(!IDX.length){
-    el.innerHTML='<div class="empty">No archive yet</div>';
-    return;
+  h += '<div class="msec"><div class="mlbl">1. Observed Facts <span style="font-weight:400">(이벤트만)</span></div>';
+  if (ins.observed_facts && ins.observed_facts.length) {
+    ins.observed_facts.forEach(function(f){ h += '<div class="mfact"><span style="color:var(--green);font-weight:700;flex-shrink:0">✓</span>'+e(f)+'</div>'; });
+  } else {
+    h += '<div style="font-size:12px;color:var(--ink4);font-style:italic">현재 창에 qualifying 이벤트 없음</div>';
   }
-  var h='<div class="hist-srch">'
-    +'<input class="srch" id="histSrch" placeholder="날짜 검색… (예: 2026-03)" oninput="filterHistory()">'
-    +'</div>'
-    +'<div id="histList">';
-  IDX.forEach(function(d){
-    h+='<div class="hist-row" onclick="loadDate(\''+d.date+'\')">'+
-      '<div class="hist-date">'+d.date+'</div>'+
-      '<div class="hist-datek">'+(d.dateKr||"")+'</div>'+
-      '<div class="hist-stats">'+
-        '<span class="hist-stat">'+( d.stats&&d.stats.total||0)+' signals</span>'+
-        '<span class="hist-stat">High '+(d.stats&&d.stats.high||0)+'</span>'+
-        '<span class="hist-stat">DART '+(d.stats&&d.stats.dartCount||0)+'</span>'+
-      '</div>'+
-    '</div>';
+  h += '</div>';
+
+  h += '<div class="msec"><div class="mlbl">2. Matched Pattern</div><div class="mpat">'+e(ins.matched_pattern||"")+'</div></div>';
+
+  h += '<div class="msec"><div class="mlbl">3. What This May Indicate <span style="font-weight:400">(추론, 팩트 아님)</span></div>';
+  (ins.may_indicate||[]).forEach(function(m){ h += '<div class="mind"><span style="color:var(--blue);font-weight:700;flex-shrink:0">›</span>'+e(m)+'</div>'; });
+  h += '</div>';
+
+  h += '<div class="msec"><div class="mlbl">4. What Is Missing</div>';
+  if (ins.missing && ins.missing.length) {
+    ins.missing.forEach(function(m){ h += '<div class="mmiss"><span style="font-weight:700;flex-shrink:0">✗</span>'+e(m)+'</div>'; });
+  } else {
+    h += '<div style="font-size:12px;color:var(--ink4);font-style:italic">현재 신호 세트에서 critical gap 미감지</div>';
+  }
+  h += '</div>';
+
+  h += '<div class="msec"><div class="mlbl">5. Confidence</div>';
+  h += '<div style="display:inline-flex;align-items:center;gap:6px;padding:5px 11px;border:1px solid '+cc+'40;background:'+cc+'12">';
+  h += '<span style="width:8px;height:8px;border-radius:50%;background:'+cc+';display:inline-block"></span>';
+  h += '<span style="font-family:var(--mono);font-size:12px;font-weight:700;color:'+cc+'">'+ins.confidence+'</span></div></div>';
+
+  h += '<div class="msec"><div class="mlbl">6. Suggested Next Check</div><div class="mnxt">'+e(ins.next_check||"")+'</div></div>';
+  h += '</div></div>';
+  return h;
+}
+
+// ── Companies tab ─────────────────────────────────────────
+function renderCompanies() {
+  var el = document.getElementById("feed-col");
+  var cos = DATA && DATA.companies ? Object.values(DATA.companies) : [];
+  if (!cos.length) { el.innerHTML = '<div class="empty">기업 데이터 없음 — 파이프라인 실행 후 기업 매칭 신호 생성됩니다</div>'; return; }
+  cos.sort(function(a,b){ return (b.high_count||0)-(a.high_count||0); });
+  var h = '<div class="card"><div class="chd">Companies <span style="font-weight:400;color:var(--ink4)">'+cos.length+'</span></div>';
+  cos.forEach(function(co) {
+    var ins = co.insight || {};
+    var confColors = {"High":"#16A34A","Medium-High":"#65A30D","Medium":"#CA8A04","Medium-Low":"#EA580C","Low":"#DC2626"};
+    var cc = confColors[ins.confidence] || "var(--ink4)";
+    h += '<div style="padding:13px 16px;border-bottom:1px solid var(--b2)">';
+    h += '<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px">';
+    h += '<span style="font-size:13px;font-weight:600">'+e(co.name||"")+'</span>';
+    h += '<span class="tag">'+e(co.stage||"")+'</span></div>';
+    h += '<div style="font-size:11px;color:var(--ink3);margin-bottom:7px">'+e(co.sector||"")+" · "+e(co.country||"")+'</div>';
+    h += '<div style="display:flex;gap:10px;font-size:11px;margin-bottom:7px">';
+    h += '<span style="color:var(--red)">High: '+(co.high_count||0)+'</span>';
+    h += '<span style="color:var(--ink3)">Total: '+(co.signal_count||0)+'</span>';
+    if (ins.confidence) h += '<span style="font-family:var(--mono);font-size:10px;font-weight:700;color:'+cc+'">'+ins.confidence+'</span>';
+    h += '</div>';
+    if (ins.matched_pattern) {
+      h += '<details><summary style="font-family:var(--mono);font-size:10px;color:var(--blue);cursor:pointer">→ Investment Memo</summary>';
+      h += renderMemo(ins, co.name);
+      h += '</details>';
+    }
+    h += '</div>';
   });
-  h+='</div>';
-  el.innerHTML=h;
+  h += '</div>';
+  el.innerHTML = h;
 }
 
-function filterHistory(){
-  var q=(document.getElementById("histSrch")||{value:""}).value.trim().toLowerCase();
-  var rows=document.querySelectorAll(".hist-row");
-  rows.forEach(function(r){ r.style.display=(!q||r.textContent.toLowerCase().indexOf(q)>=0)?"flex":"none"; });
-}
-
-// ── UI 이벤트 ─────────────────────────────────────────────
-function switchTab(tab){
-  curTab=tab;
-  document.querySelectorAll(".nav-tab").forEach(function(t,i){
-    t.classList.toggle("on",["today","dart","policy","history"][i]===tab);
+// ── History tab ───────────────────────────────────────────
+function renderHistory() {
+  var el = document.getElementById("feed-col");
+  if (!IDX.length) { el.innerHTML = '<div class="empty">아카이브 없음</div>'; return; }
+  var h = '<div class="card"><div class="chd">Archive <span style="font-weight:400;color:var(--ink4)">'+IDX.length+'일</span></div>';
+  IDX.forEach(function(d) {
+    h += '<div class="hist-row" onclick="loadArchive(\''+d.date+'\')">';
+    h += '<span class="hist-date">'+d.date+'</span>';
+    h += '<span class="hist-datek">'+(d.dateKr||"")+'</span>';
+    h += '<div class="hist-stats">';
+    h += '<span class="hist-stat">'+(d.stats&&d.stats.total||0)+' signals</span>';
+    h += '<span class="hist-stat">High '+(d.stats&&d.stats.high||0)+'</span>';
+    h += '</div></div>';
   });
-  document.getElementById("filterBar").style.display=tab==="today"?"block":"none";
-  if(tab==="today")  renderFeed();
-  else if(tab==="dart")   renderDart();
-  else if(tab==="policy") renderPolicy();
-  else if(tab==="history")renderHistory();
+  h += '</div>';
+  el.innerHTML = h;
 }
 
-function setF(f,btn){
-  curF=f;
-  document.querySelectorAll(".pill").forEach(function(c){c.classList.remove("on");});
+async function loadArchive(date) {
+  var ok = await loadData("data/"+date+".json?"+Date.now());
+  if (ok) switchTabByName("signals");
+}
+
+// ── Copy report ───────────────────────────────────────────
+function copyReport() {
+  if (!DATA) return;
+  var s = DATA.stats || {};
+  var t = "ENERGY CVC INTELLIGENCE — "+(DATA.dateKr||DATA.date)+"\n";
+  t += "Total "+s.total+" · High "+s.high+" · Negative "+s.negative+"\n";
+  t += "=".repeat(50)+"\n\n";
+  if (DATA.brief) t += "[BRIEF]\n"+DATA.brief+"\n\n"+"=".repeat(50)+"\n\n";
+  getFiltered().forEach(function(ev,i) {
+    t += (i+1)+". ["+ev.event_type+"] "+(ev.company_name||"Unassigned")+" — "+ev.title+"\n";
+    t += "   "+ev.source_name+" · "+ev.event_date+" · score: "+ev.signal_strength+"\n";
+    if (ev.source_url) t += "   "+ev.source_url+"\n";
+    t += "\n";
+  });
+  navigator.clipboard.writeText(t).then(function(){alert("✅ 복사 완료!");}).catch(function(){alert("복사 실패");});
+}
+
+// ── UI helpers ────────────────────────────────────────────
+function tagFor(type, isNeg) {
+  if (isNeg) return '<span class="tag t-neg">⚠ Neg</span>';
+  var m = {Certification:"t-cert",Contract:"t-ctr",Deployment:"t-ctr",Pilot:"t-pilot",Hiring:"t-hire",Financing:"t-fin"};
+  return '<span class="tag '+(m[type]||"t-news")+'">'+(type||"News")+'</span>';
+}
+function e(s){return(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
+function toggle(id){EXP.has(id)?EXP.delete(id):EXP.add(id);renderFeed();}
+function setTier(t,btn){curTier=t;document.querySelectorAll(".pill").forEach(function(p){p.classList.remove("on");});btn.classList.add("on");renderFeed();}
+
+function switchTab(tab, btn) {
+  curTab = tab;
+  document.querySelectorAll(".tab").forEach(function(t){t.classList.remove("on");});
   btn.classList.add("on");
-  renderFeed();
+  document.getElementById("fbar").style.display = (tab==="signals"||tab==="negative")?"block":"none";
+  EXP.clear();
+  if (tab==="signals")  { curTier="all"; renderFeed(); }
+  if (tab==="negative") { curTier="neg"; renderFeed(); }
+  if (tab==="companies")  renderCompanies();
+  if (tab==="history")    renderHistory();
+}
+function switchTabByName(name) {
+  var tabs = document.querySelectorAll(".tab");
+  var names = ["signals","companies","negative","history"];
+  var idx   = names.indexOf(name);
+  if (idx >= 0 && tabs[idx]) switchTab(name, tabs[idx]);
 }
 
-function toggleExp(id){
-  if(EXP.has(id)) EXP.delete(id); else EXP.add(id);
-  renderFeed();
-}
-
-function e(s){
-  return(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
-}
-
-async function loadDate(date){
-  try{
-    var r=await fetch("data/"+date+".json?"+Date.now());
-    if(!r.ok)throw new Error();
-    DATA=await r.json(); SIG=DATA.signals||[];
-    renderSidebar(); switchTab("today");
-  }catch{ alert(date+" 데이터를 불러올 수 없습니다."); }
-}
-
-function copyReport(){
-  if(!DATA)return;
-  var s=DATA.stats||{};
-  var t="ENERGY CVC INTELLIGENCE — "+(DATA.dateKr||DATA.date)+"\n"
-    +"총 "+(s.total||0)+"건 · High "+(s.high||0)+" · 교차검증 "+(s.multiSource||0)+"건\n"
-    +"━".repeat(50)+"\n\n";
-  if(DATA.brief) t+="[CVC BRIEF]\n"+DATA.brief+"\n\n"+"━".repeat(50)+"\n\n";
-  getFiltered().forEach(function(sig,i){
-    var f=sig.extracted_facts||{};
-    t+=(i+1)+". "+(sig.company||"")+" — "+sig.title+"\n";
-    t+="   "+( sig.source||"")+" · "+(sig.pubDate||"")+"\n";
-    if(f.amount||f.round) t+="   ["+[f.amount,f.round,f.partner].filter(Boolean).join(" · ")+"]\n";
-    if(sig.domain_insight) t+="   ▶ "+sig.domain_insight+"\n";
-    if(sig.why_now) t+="   Why now: "+sig.why_now+"\n";
-    if(sig.url) t+="   "+sig.url+"\n";
-    t+="\n";
-  });
-  navigator.clipboard.writeText(t)
-    .then(function(){alert("Copied to clipboard");})
-    .catch(function(){alert("Copy failed");});
-}
-
-document.addEventListener("DOMContentLoaded",function(){
-  Promise.all([loadData(),loadIndex()]);
-});
+// ── Init ──────────────────────────────────────────────────
+(async function() {
+  await loadIndex();
+  var ok = await loadData();
+  if (ok) renderFeed();
+})();
 </script>
 </body>
 </html>
