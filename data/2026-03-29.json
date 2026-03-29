@@ -1,8 +1,8 @@
 {
   "date": "2026-03-29",
   "dateKr": "2026년 03월 29일",
-  "generatedAt": "2026-03-29T13:39:05.915672+00:00",
-  "brief": "**Internal Deal Flow Memo - March 29, 2026**\n\nToday's contract announcements signal accelerating demand convergence between traditional grid storage and high-power AI infrastructure needs. Form Energy's massive 12GWh iron-air battery deal with US data centers (Energy Storage News) represents a critical inflection point where long-duration storage economics finally align with hyperscale computing requirements, while American Battery Factory's 4.5GWh LFP offtake agreements (Energy Storage News) suggest traditional grid storage demand remains robust despite AI sector pull.\n\nThe UK's AR7 Contract for Difference awards (Offshore Wind Biz) indicate European renewable capacity additions are maintaining momentum even as global supply chains face AI-driven component competition. Watch for similar data center storage announcements from other long-duration players in Q2, and monitor whether LFP pricing holds steady given this dual demand pressure from both grid and compute applications.\n\nPipeline focus should shift toward companies bridging renewable generation and AI infrastructure, particularly those with differentiated storage chemistry or grid-edge computing solutions.",
+  "generatedAt": "2026-03-29T13:47:04.942881+00:00",
+  "brief": "**Deal Flow Memo - March 29, 2026**\n\nToday's contract announcements signal accelerating demand convergence between traditional grid storage and AI infrastructure needs. Form Energy's 12GWh iron-air battery agreement with US data centers (Energy Storage News) represents a notable shift toward long-duration storage for AI facilities, while American Battery Factory's 4.5GWh LFP offtake for their Arizona gigafactory (Energy Storage News) suggests traditional grid applications remain robust. The UK's LCCC contract signings for AR7 winners (Offshore Wind Biz) indicate European renewable procurement staying on schedule despite macro headwinds. \n\n**Watch next**: Monitor whether other long-duration storage players (Eos, ESS Inc.) announce similar AI data center partnerships, and track if American Battery Factory's offtake pricing reflects any supply chain normalization trends we've been anticipating.",
   "stats": {
     "total": 29,
     "high": 4,
@@ -52,6 +52,7 @@
       "company_id": null,
       "company_name": "Unassigned",
       "buyer_matches": [],
+      "project_matches": [],
       "is_negative": false,
       "neg_subtype": null,
       "is_noise": false,
@@ -103,6 +104,7 @@
       "company_id": "c_form_energy",
       "company_name": "Form Energy",
       "buyer_matches": [],
+      "project_matches": [],
       "is_negative": false,
       "neg_subtype": null,
       "is_noise": false,
@@ -141,6 +143,7 @@
       "company_id": null,
       "company_name": "Unassigned",
       "buyer_matches": [],
+      "project_matches": [],
       "is_negative": false,
       "neg_subtype": null,
       "is_noise": false,
@@ -192,6 +195,7 @@
       "company_id": null,
       "company_name": "Unassigned",
       "buyer_matches": [],
+      "project_matches": [],
       "is_negative": false,
       "neg_subtype": null,
       "is_noise": false,
@@ -243,6 +247,7 @@
       "company_id": null,
       "company_name": "Unassigned",
       "buyer_matches": [],
+      "project_matches": [],
       "is_negative": false,
       "neg_subtype": null,
       "is_noise": false,
@@ -293,6 +298,7 @@
       "company_id": null,
       "company_name": "Unassigned",
       "buyer_matches": [],
+      "project_matches": [],
       "is_negative": false,
       "neg_subtype": null,
       "is_noise": false,
@@ -343,6 +349,7 @@
       "company_id": null,
       "company_name": "Unassigned",
       "buyer_matches": [],
+      "project_matches": [],
       "is_negative": false,
       "neg_subtype": null,
       "is_noise": false,
@@ -380,6 +387,7 @@
       "company_id": null,
       "company_name": "Unassigned",
       "buyer_matches": [],
+      "project_matches": [],
       "is_negative": false,
       "neg_subtype": null,
       "is_noise": false,
@@ -430,6 +438,7 @@
       "company_id": null,
       "company_name": "Unassigned",
       "buyer_matches": [],
+      "project_matches": [],
       "is_negative": false,
       "neg_subtype": null,
       "is_noise": false,
@@ -474,6 +483,7 @@
       "company_id": null,
       "company_name": "Unassigned",
       "buyer_matches": [],
+      "project_matches": [],
       "is_negative": false,
       "neg_subtype": null,
       "is_noise": false,
@@ -518,6 +528,7 @@
       "company_id": null,
       "company_name": "Unassigned",
       "buyer_matches": [],
+      "project_matches": [],
       "is_negative": false,
       "neg_subtype": null,
       "is_noise": false,
@@ -562,6 +573,7 @@
       "company_id": null,
       "company_name": "Unassigned",
       "buyer_matches": [],
+      "project_matches": [],
       "is_negative": false,
       "neg_subtype": null,
       "is_noise": false,
@@ -606,6 +618,7 @@
       "company_id": null,
       "company_name": "Unassigned",
       "buyer_matches": [],
+      "project_matches": [],
       "is_negative": false,
       "neg_subtype": null,
       "is_noise": false,
@@ -650,6 +663,7 @@
       "company_id": null,
       "company_name": "Unassigned",
       "buyer_matches": [],
+      "project_matches": [],
       "is_negative": false,
       "neg_subtype": null,
       "is_noise": false,
@@ -694,6 +708,7 @@
       "company_id": null,
       "company_name": "Unassigned",
       "buyer_matches": [],
+      "project_matches": [],
       "is_negative": false,
       "neg_subtype": null,
       "is_noise": false,
@@ -738,6 +753,7 @@
       "company_id": null,
       "company_name": "Unassigned",
       "buyer_matches": [],
+      "project_matches": [],
       "is_negative": false,
       "neg_subtype": null,
       "is_noise": false,
@@ -782,6 +798,7 @@
       "company_id": null,
       "company_name": "Unassigned",
       "buyer_matches": [],
+      "project_matches": [],
       "is_negative": false,
       "neg_subtype": null,
       "is_noise": false,
@@ -826,6 +843,7 @@
       "company_id": null,
       "company_name": "Unassigned",
       "buyer_matches": [],
+      "project_matches": [],
       "is_negative": false,
       "neg_subtype": null,
       "is_noise": false,
@@ -870,6 +888,7 @@
       "company_id": null,
       "company_name": "Unassigned",
       "buyer_matches": [],
+      "project_matches": [],
       "is_negative": false,
       "neg_subtype": null,
       "is_noise": false,
@@ -914,6 +933,7 @@
       "company_id": null,
       "company_name": "Unassigned",
       "buyer_matches": [],
+      "project_matches": [],
       "is_negative": false,
       "neg_subtype": null,
       "is_noise": false,
@@ -958,6 +978,7 @@
       "company_id": null,
       "company_name": "Unassigned",
       "buyer_matches": [],
+      "project_matches": [],
       "is_negative": false,
       "neg_subtype": null,
       "is_noise": false,
@@ -1002,6 +1023,7 @@
       "company_id": null,
       "company_name": "Unassigned",
       "buyer_matches": [],
+      "project_matches": [],
       "is_negative": false,
       "neg_subtype": null,
       "is_noise": false,
@@ -1046,6 +1068,7 @@
       "company_id": null,
       "company_name": "Unassigned",
       "buyer_matches": [],
+      "project_matches": [],
       "is_negative": false,
       "neg_subtype": null,
       "is_noise": false,
@@ -1090,6 +1113,7 @@
       "company_id": null,
       "company_name": "Unassigned",
       "buyer_matches": [],
+      "project_matches": [],
       "is_negative": false,
       "neg_subtype": null,
       "is_noise": false,
@@ -1134,6 +1158,7 @@
       "company_id": null,
       "company_name": "Unassigned",
       "buyer_matches": [],
+      "project_matches": [],
       "is_negative": false,
       "neg_subtype": null,
       "is_noise": false,
@@ -1178,6 +1203,7 @@
       "company_id": null,
       "company_name": "Unassigned",
       "buyer_matches": [],
+      "project_matches": [],
       "is_negative": false,
       "neg_subtype": null,
       "is_noise": false,
@@ -1222,6 +1248,7 @@
       "company_id": null,
       "company_name": "Unassigned",
       "buyer_matches": [],
+      "project_matches": [],
       "is_negative": false,
       "neg_subtype": null,
       "is_noise": false,
@@ -1266,6 +1293,7 @@
       "company_id": null,
       "company_name": "Unassigned",
       "buyer_matches": [],
+      "project_matches": [],
       "is_negative": false,
       "neg_subtype": null,
       "is_noise": false,
@@ -1303,6 +1331,7 @@
       "company_id": null,
       "company_name": "Unassigned",
       "buyer_matches": [],
+      "project_matches": [],
       "is_negative": true,
       "neg_subtype": "delay",
       "is_noise": false,
@@ -1342,6 +1371,7 @@
       "company_id": null,
       "company_name": "Unassigned",
       "buyer_matches": [],
+      "project_matches": [],
       "is_negative": false,
       "neg_subtype": null,
       "is_noise": true,
@@ -1380,6 +1410,7 @@
       "company_id": null,
       "company_name": "Unassigned",
       "buyer_matches": [],
+      "project_matches": [],
       "is_negative": false,
       "neg_subtype": null,
       "is_noise": true,
@@ -1418,6 +1449,7 @@
       "company_id": null,
       "company_name": "Unassigned",
       "buyer_matches": [],
+      "project_matches": [],
       "is_negative": false,
       "neg_subtype": null,
       "is_noise": true,
@@ -1456,6 +1488,7 @@
       "company_id": null,
       "company_name": "Unassigned",
       "buyer_matches": [],
+      "project_matches": [],
       "is_negative": false,
       "neg_subtype": null,
       "is_noise": true,
@@ -1494,6 +1527,7 @@
       "company_id": null,
       "company_name": "Unassigned",
       "buyer_matches": [],
+      "project_matches": [],
       "is_negative": false,
       "neg_subtype": null,
       "is_noise": true,
@@ -1532,6 +1566,7 @@
       "company_id": null,
       "company_name": "Unassigned",
       "buyer_matches": [],
+      "project_matches": [],
       "is_negative": false,
       "neg_subtype": null,
       "is_noise": true,
@@ -1570,6 +1605,7 @@
       "company_id": null,
       "company_name": "Unassigned",
       "buyer_matches": [],
+      "project_matches": [],
       "is_negative": false,
       "neg_subtype": null,
       "is_noise": true,
@@ -1608,6 +1644,7 @@
       "company_id": null,
       "company_name": "Unassigned",
       "buyer_matches": [],
+      "project_matches": [],
       "is_negative": false,
       "neg_subtype": null,
       "is_noise": true,
@@ -1646,6 +1683,7 @@
       "company_id": null,
       "company_name": "Unassigned",
       "buyer_matches": [],
+      "project_matches": [],
       "is_negative": false,
       "neg_subtype": null,
       "is_noise": true,
@@ -1684,6 +1722,7 @@
       "company_id": null,
       "company_name": "Unassigned",
       "buyer_matches": [],
+      "project_matches": [],
       "is_negative": false,
       "neg_subtype": null,
       "is_noise": true,
@@ -1722,6 +1761,7 @@
       "company_id": null,
       "company_name": "Unassigned",
       "buyer_matches": [],
+      "project_matches": [],
       "is_negative": false,
       "neg_subtype": null,
       "is_noise": true,
@@ -1760,6 +1800,7 @@
       "company_id": null,
       "company_name": "Unassigned",
       "buyer_matches": [],
+      "project_matches": [],
       "is_negative": false,
       "neg_subtype": null,
       "is_noise": true,
@@ -1805,6 +1846,7 @@
       "company_id": null,
       "company_name": "Unassigned",
       "buyer_matches": [],
+      "project_matches": [],
       "is_negative": false,
       "neg_subtype": null,
       "is_noise": true,
@@ -1843,6 +1885,7 @@
       "company_id": null,
       "company_name": "Unassigned",
       "buyer_matches": [],
+      "project_matches": [],
       "is_negative": false,
       "neg_subtype": null,
       "is_noise": true,
@@ -1881,6 +1924,7 @@
       "company_id": null,
       "company_name": "Unassigned",
       "buyer_matches": [],
+      "project_matches": [],
       "is_negative": false,
       "neg_subtype": null,
       "is_noise": true,
@@ -1919,6 +1963,7 @@
       "company_id": null,
       "company_name": "Unassigned",
       "buyer_matches": [],
+      "project_matches": [],
       "is_negative": false,
       "neg_subtype": null,
       "is_noise": true,
@@ -1957,6 +2002,7 @@
       "company_id": null,
       "company_name": "Unassigned",
       "buyer_matches": [],
+      "project_matches": [],
       "is_negative": false,
       "neg_subtype": null,
       "is_noise": true,
@@ -1995,6 +2041,7 @@
       "company_id": null,
       "company_name": "Unassigned",
       "buyer_matches": [],
+      "project_matches": [],
       "is_negative": false,
       "neg_subtype": null,
       "is_noise": true,
@@ -2033,6 +2080,7 @@
       "company_id": null,
       "company_name": "Unassigned",
       "buyer_matches": [],
+      "project_matches": [],
       "is_negative": false,
       "neg_subtype": null,
       "is_noise": true,
@@ -2071,6 +2119,7 @@
       "company_id": null,
       "company_name": "Unassigned",
       "buyer_matches": [],
+      "project_matches": [],
       "is_negative": false,
       "neg_subtype": null,
       "is_noise": true,
@@ -2150,6 +2199,7 @@
           "company_id": "c_form_energy",
           "company_name": "Form Energy",
           "buyer_matches": [],
+          "project_matches": [],
           "is_negative": false,
           "neg_subtype": null,
           "is_noise": false,
@@ -2254,20 +2304,125 @@
       "name": "부산항 수소 벙커링 인프라",
       "location": "부산, KR",
       "type": "port",
-      "status": "Pilot",
-      "developer": "한국가스공사",
-      "offtaker": "HD한국조선해양",
-      "epc": "SK에코플랜트",
-      "capacity": "not disclosed",
-      "capex": "not disclosed",
-      "capacity_source": null,
-      "capex_source": null,
-      "milestone_next": "to be confirmed — no public milestone statement found",
-      "milestone_source": null,
       "segments": [
         "hydrogen",
         "marine_fc"
       ],
+      "developer": "한국가스공사",
+      "offtaker": "HD한국조선해양",
+      "epc": "SK에코플랜트",
+      "keyword_aliases": [
+        "부산 수소 벙커링",
+        "busan hydrogen bunkering",
+        "한국가스공사 수소",
+        "kogas hydrogen",
+        "hd hhi bunkering",
+        "imo 2030 busan"
+      ],
+      "signal_log": [
+        {
+          "date": "2023-06-15",
+          "event_type": "announcement",
+          "headline": "산업부, 부산항 수소 벙커링 실증사업 착수 발표",
+          "source_of_record": "산업통상자원부 보도자료 2023-06-15",
+          "source_url": null,
+          "confirmed_facts": [
+            "산업통상자원부가 부산항 수소 벙커링 실증 사업을 공식 발표",
+            "한국가스공사가 개발사로 지정",
+            "HD한국조선해양이 수소 오프테이커로 확인"
+          ],
+          "what_is_unknown": [
+            "사업 용량: 미공개",
+            "사업비: 미공개",
+            "운영 개시 일정: 미발표"
+          ]
+        },
+        {
+          "date": "2023-11-20",
+          "event_type": "partner",
+          "headline": "SK에코플랜트, 부산 수소 벙커링 EPC 계약 체결 확인",
+          "source_of_record": "SK에코플랜트 보도자료 2023-11-20",
+          "source_url": null,
+          "confirmed_facts": [
+            "SK에코플랜트가 EPC 계약자로 확인"
+          ],
+          "what_is_unknown": [
+            "EPC 계약 금액: 미공개",
+            "시공 일정: 미발표"
+          ]
+        },
+        {
+          "date": "2024-03-01",
+          "event_type": "pilot",
+          "headline": "부산항 수소 벙커링 파일럿 1단계 시설 설치 착수",
+          "source_of_record": "에너지경제신문 2024-03-01 (1차 소스 확인 필요)",
+          "source_url": null,
+          "confirmed_facts": [
+            "파일럿 단계 시설 설치 착수 보도"
+          ],
+          "what_is_unknown": [
+            "파일럿 용량: 미확인",
+            "DNV GL 수소 벙커링 인증 신청 여부: 미공개",
+            "수소 공급 가격 및 오프테이크 조건: 미공개"
+          ]
+        }
+      ],
+      "current_stage": "Pilot",
+      "what_is_known": [
+        {
+          "fact": "산업통상자원부가 부산항 수소 벙커링 실증 사업을 공식 발표",
+          "date": "2023-06-15",
+          "event_type": "announcement",
+          "icon": "📣",
+          "source": "산업통상자원부 보도자료 2023-06-15"
+        },
+        {
+          "fact": "한국가스공사가 개발사로 지정",
+          "date": "2023-06-15",
+          "event_type": "announcement",
+          "icon": "📣",
+          "source": "산업통상자원부 보도자료 2023-06-15"
+        },
+        {
+          "fact": "HD한국조선해양이 수소 오프테이커로 확인",
+          "date": "2023-06-15",
+          "event_type": "announcement",
+          "icon": "📣",
+          "source": "산업통상자원부 보도자료 2023-06-15"
+        },
+        {
+          "fact": "SK에코플랜트가 EPC 계약자로 확인",
+          "date": "2023-11-20",
+          "event_type": "partner",
+          "icon": "🤝",
+          "source": "SK에코플랜트 보도자료 2023-11-20"
+        },
+        {
+          "fact": "파일럿 단계 시설 설치 착수 보도",
+          "date": "2024-03-01",
+          "event_type": "pilot",
+          "icon": "🔬",
+          "source": "에너지경제신문 2024-03-01 (1차 소스 확인 필요)"
+        }
+      ],
+      "what_is_missing": [
+        {
+          "item": "파일럿 용량: 미확인",
+          "as_of": "2024-03-01",
+          "source": "에너지경제신문 2024-03-01 (1차 소스 확인 필요)"
+        },
+        {
+          "item": "DNV GL 수소 벙커링 인증 신청 여부: 미공개",
+          "as_of": "2024-03-01",
+          "source": "에너지경제신문 2024-03-01 (1차 소스 확인 필요)"
+        },
+        {
+          "item": "수소 공급 가격 및 오프테이크 조건: 미공개",
+          "as_of": "2024-03-01",
+          "source": "에너지경제신문 2024-03-01 (1차 소스 확인 필요)"
+        }
+      ],
+      "investment_angle": "Korea's first hydrogen bunkering pilot — confirms IMO 2030 demand is real. Commercial terms and scale not yet public.",
       "linked_companies": [
         "c_vincen",
         "c_hylium"
@@ -2276,40 +2431,165 @@
         "b_hd_hhi",
         "b_sk_eco"
       ],
-      "what_is_known": [
-        "Pilot project confirmed by 한국가스공사 and 산업부 announcements",
-        "HD한국조선해양 is the named offtaker for hydrogen bunkering",
-        "SK에코플랜트 is the confirmed EPC contractor",
-        "Project purpose: supply hydrogen to vessels complying with IMO 2030"
+      "stage_color": "#7D4E00",
+      "signal_log_sorted": [
+        {
+          "date": "2024-03-01",
+          "event_type": "pilot",
+          "headline": "부산항 수소 벙커링 파일럿 1단계 시설 설치 착수",
+          "source_of_record": "에너지경제신문 2024-03-01 (1차 소스 확인 필요)",
+          "source_url": null,
+          "confirmed_facts": [
+            "파일럿 단계 시설 설치 착수 보도"
+          ],
+          "what_is_unknown": [
+            "파일럿 용량: 미확인",
+            "DNV GL 수소 벙커링 인증 신청 여부: 미공개",
+            "수소 공급 가격 및 오프테이크 조건: 미공개"
+          ]
+        },
+        {
+          "date": "2023-11-20",
+          "event_type": "partner",
+          "headline": "SK에코플랜트, 부산 수소 벙커링 EPC 계약 체결 확인",
+          "source_of_record": "SK에코플랜트 보도자료 2023-11-20",
+          "source_url": null,
+          "confirmed_facts": [
+            "SK에코플랜트가 EPC 계약자로 확인"
+          ],
+          "what_is_unknown": [
+            "EPC 계약 금액: 미공개",
+            "시공 일정: 미발표"
+          ]
+        },
+        {
+          "date": "2023-06-15",
+          "event_type": "announcement",
+          "headline": "산업부, 부산항 수소 벙커링 실증사업 착수 발표",
+          "source_of_record": "산업통상자원부 보도자료 2023-06-15",
+          "source_url": null,
+          "confirmed_facts": [
+            "산업통상자원부가 부산항 수소 벙커링 실증 사업을 공식 발표",
+            "한국가스공사가 개발사로 지정",
+            "HD한국조선해양이 수소 오프테이커로 확인"
+          ],
+          "what_is_unknown": [
+            "사업 용량: 미공개",
+            "사업비: 미공개",
+            "운영 개시 일정: 미발표"
+          ]
+        }
       ],
-      "what_is_missing": [
-        "Capacity figure: not disclosed in any public source",
-        "CapEx: not disclosed in any public source",
-        "Commercial operation date: not publicly stated",
-        "H2 supply price / offtake terms: not public",
-        "DNV GL certification status for H2 bunkering: not confirmed"
-      ],
-      "investment_angle": "Korea's first hydrogen bunkering pilot — confirms IMO 2030 demand is real, but commercial terms and scale are not public."
+      "negative_events": [],
+      "recent_event_count": 0,
+      "total_event_count": 3,
+      "pattern": "Strategic validation — pilot with named partner confirmed.",
+      "pattern_color": "#5B21B6",
+      "inbound_signals": []
     },
     {
       "id": "p_jeju_hvdc",
       "name": "제주 해상풍력 HVDC 연계",
       "location": "제주, KR",
       "type": "grid",
-      "status": "Planned",
-      "developer": "한국해상풍력",
-      "offtaker": "KEPCO",
-      "epc": "LS일렉트릭",
-      "capacity": "500MW (reported, source verification needed)",
-      "capex": "not disclosed — figures in press are unverified estimates",
-      "capacity_source": "언론 보도 (검증 필요 — 정부 공식 발표 원문 확인 전)",
-      "capex_source": null,
-      "milestone_next": "to be confirmed",
-      "milestone_source": null,
       "segments": [
         "hvdc",
         "ess"
       ],
+      "developer": "한국해상풍력",
+      "offtaker": "KEPCO",
+      "epc": "LS일렉트릭",
+      "keyword_aliases": [
+        "제주 hvdc",
+        "jeju hvdc",
+        "제주 해상풍력",
+        "한국해상풍력 kepco",
+        "jeju offshore wind",
+        "제주-육지 연계"
+      ],
+      "signal_log": [
+        {
+          "date": "2022-09-10",
+          "event_type": "announcement",
+          "headline": "KEPCO, 제주 해상풍력 HVDC 연계 사업 계획 공개",
+          "source_of_record": "KEPCO 보도자료 2022-09-10",
+          "source_url": null,
+          "confirmed_facts": [
+            "KEPCO가 제주-육지 HVDC 연계 사업 계획 발표",
+            "한국해상풍력이 개발사로 참여 확인",
+            "LS일렉트릭 EPC 계약 체결 — LS 보도자료 확인"
+          ],
+          "what_is_unknown": [
+            "용량: 500MW 보도 있으나 정부 공식 발표 원문 미확인",
+            "사업비: 언론 추정치 — 공식 수치 아님",
+            "환경영향평가 신청 현황: 미공개"
+          ]
+        },
+        {
+          "date": "2023-04-05",
+          "event_type": "regulatory",
+          "headline": "제주 HVDC 사업 환경영향평가 협의 착수 보도",
+          "source_of_record": "제주도청 보도자료 (확인 필요)",
+          "source_url": null,
+          "confirmed_facts": [
+            "환경영향평가 협의 절차 착수 보도"
+          ],
+          "what_is_unknown": [
+            "환경영향평가 완료 예상 시점: 미발표",
+            "ESS 동반 탑재 여부: 미결정",
+            "착공 일정: 미공개"
+          ]
+        }
+      ],
+      "current_stage": "Announced",
+      "what_is_known": [
+        {
+          "fact": "KEPCO가 제주-육지 HVDC 연계 사업 계획 발표",
+          "date": "2022-09-10",
+          "event_type": "announcement",
+          "icon": "📣",
+          "source": "KEPCO 보도자료 2022-09-10"
+        },
+        {
+          "fact": "한국해상풍력이 개발사로 참여 확인",
+          "date": "2022-09-10",
+          "event_type": "announcement",
+          "icon": "📣",
+          "source": "KEPCO 보도자료 2022-09-10"
+        },
+        {
+          "fact": "LS일렉트릭 EPC 계약 체결 — LS 보도자료 확인",
+          "date": "2022-09-10",
+          "event_type": "announcement",
+          "icon": "📣",
+          "source": "KEPCO 보도자료 2022-09-10"
+        },
+        {
+          "fact": "환경영향평가 협의 절차 착수 보도",
+          "date": "2023-04-05",
+          "event_type": "regulatory",
+          "icon": "🏛",
+          "source": "제주도청 보도자료 (확인 필요)"
+        }
+      ],
+      "what_is_missing": [
+        {
+          "item": "환경영향평가 완료 예상 시점: 미발표",
+          "as_of": "2023-04-05",
+          "source": "제주도청 보도자료 (확인 필요)"
+        },
+        {
+          "item": "ESS 동반 탑재 여부: 미결정",
+          "as_of": "2023-04-05",
+          "source": "제주도청 보도자료 (확인 필요)"
+        },
+        {
+          "item": "착공 일정: 미공개",
+          "as_of": "2023-04-05",
+          "source": "제주도청 보도자료 (확인 필요)"
+        }
+      ],
+      "investment_angle": "KEPCO offtake confirmed. ESS co-location possible but not announced. Primary gate: EIA completion.",
       "linked_companies": [
         "c_standard_e"
       ],
@@ -2317,40 +2597,168 @@
         "b_kepco",
         "b_ls_elec"
       ],
-      "what_is_known": [
-        "Project announced by 한국해상풍력 and KEPCO",
-        "LS일렉트릭 named as EPC — confirmed in LS press release",
-        "Offshore wind HVDC interconnection: Jeju island to mainland KR",
-        "KEPCO is the confirmed offtaker"
+      "stage_color": "#6E6E6E",
+      "signal_log_sorted": [
+        {
+          "date": "2023-04-05",
+          "event_type": "regulatory",
+          "headline": "제주 HVDC 사업 환경영향평가 협의 착수 보도",
+          "source_of_record": "제주도청 보도자료 (확인 필요)",
+          "source_url": null,
+          "confirmed_facts": [
+            "환경영향평가 협의 절차 착수 보도"
+          ],
+          "what_is_unknown": [
+            "환경영향평가 완료 예상 시점: 미발표",
+            "ESS 동반 탑재 여부: 미결정",
+            "착공 일정: 미공개"
+          ]
+        },
+        {
+          "date": "2022-09-10",
+          "event_type": "announcement",
+          "headline": "KEPCO, 제주 해상풍력 HVDC 연계 사업 계획 공개",
+          "source_of_record": "KEPCO 보도자료 2022-09-10",
+          "source_url": null,
+          "confirmed_facts": [
+            "KEPCO가 제주-육지 HVDC 연계 사업 계획 발표",
+            "한국해상풍력이 개발사로 참여 확인",
+            "LS일렉트릭 EPC 계약 체결 — LS 보도자료 확인"
+          ],
+          "what_is_unknown": [
+            "용량: 500MW 보도 있으나 정부 공식 발표 원문 미확인",
+            "사업비: 언론 추정치 — 공식 수치 아님",
+            "환경영향평가 신청 현황: 미공개"
+          ]
+        }
       ],
-      "what_is_missing": [
-        "Final capacity figure: 500MW reported but primary government source not confirmed",
-        "CapEx: no official figure available — media estimates should not be cited",
-        "Environmental impact assessment status: unknown",
-        "ESS co-location specs: not disclosed",
-        "Financial close timeline: not public"
-      ],
-      "investment_angle": "Offshore wind HVDC project with confirmed KEPCO offtake. ESS co-location is a possibility but not yet announced."
+      "negative_events": [],
+      "recent_event_count": 0,
+      "total_event_count": 2,
+      "pattern": "Announced only — no technical or commercial gate cleared.",
+      "pattern_color": "#6E6E6E",
+      "inbound_signals": []
     },
     {
       "id": "p_incheon_vpp",
       "name": "인천 LNG 터미널 VPP 실증",
       "location": "인천, KR",
       "type": "grid",
-      "status": "Pilot",
-      "developer": "SK E&S",
-      "offtaker": "KEPCO",
-      "epc": "그리드위즈",
-      "capacity": "not confirmed — demand response scale not publicly stated",
-      "capex": "contract value not disclosed in public filings",
-      "capacity_source": null,
-      "capex_source": null,
-      "milestone_next": "to be confirmed",
-      "milestone_source": null,
       "segments": [
         "grid_sw",
         "ess"
       ],
+      "developer": "SK E&S",
+      "offtaker": "KEPCO",
+      "epc": "그리드위즈",
+      "keyword_aliases": [
+        "인천 vpp",
+        "인천 수요반응",
+        "sk e&s vpp",
+        "gridwiz kepco",
+        "그리드위즈 인천",
+        "incheon lng vpp",
+        "kpx 보조서비스 인천"
+      ],
+      "signal_log": [
+        {
+          "date": "2024-01-18",
+          "event_type": "announcement",
+          "headline": "SK E&S, KEPCO와 인천 LNG 터미널 VPP 실증 계약 체결",
+          "source_of_record": "SK E&S 보도자료 2024-01-18",
+          "source_url": null,
+          "confirmed_facts": [
+            "SK E&S와 KEPCO 간 VPP 실증 계약 체결 확인",
+            "그리드위즈가 VPP/DR 기술 공급자로 지정",
+            "실증 위치: 인천 LNG 터미널 단지",
+            "KPX 보조서비스 시장 참여가 사업 목표로 명시"
+          ],
+          "what_is_unknown": [
+            "DR 용량: 공식 발표 없음",
+            "계약 금액: 미공개",
+            "파일럿 기간 및 KPI 목표: 미공개"
+          ]
+        },
+        {
+          "date": "2024-06-10",
+          "event_type": "pilot",
+          "headline": "인천 VPP 실증 운영 개시 — KPX 보조서비스 시장 시험 참여",
+          "source_of_record": "그리드위즈 보도자료 2024-06-10",
+          "source_url": null,
+          "confirmed_facts": [
+            "파일럿 운영 개시 확인",
+            "KPX 보조서비스 시장 시험 참여 확인"
+          ],
+          "what_is_unknown": [
+            "파일럿 성과 지표: 미공개",
+            "상업 계약으로의 전환 조건: 미공개",
+            "실적 데이터 공개 일정: 미발표"
+          ]
+        }
+      ],
+      "current_stage": "Pilot",
+      "what_is_known": [
+        {
+          "fact": "SK E&S와 KEPCO 간 VPP 실증 계약 체결 확인",
+          "date": "2024-01-18",
+          "event_type": "announcement",
+          "icon": "📣",
+          "source": "SK E&S 보도자료 2024-01-18"
+        },
+        {
+          "fact": "그리드위즈가 VPP/DR 기술 공급자로 지정",
+          "date": "2024-01-18",
+          "event_type": "announcement",
+          "icon": "📣",
+          "source": "SK E&S 보도자료 2024-01-18"
+        },
+        {
+          "fact": "실증 위치: 인천 LNG 터미널 단지",
+          "date": "2024-01-18",
+          "event_type": "announcement",
+          "icon": "📣",
+          "source": "SK E&S 보도자료 2024-01-18"
+        },
+        {
+          "fact": "KPX 보조서비스 시장 참여가 사업 목표로 명시",
+          "date": "2024-01-18",
+          "event_type": "announcement",
+          "icon": "📣",
+          "source": "SK E&S 보도자료 2024-01-18"
+        },
+        {
+          "fact": "파일럿 운영 개시 확인",
+          "date": "2024-06-10",
+          "event_type": "pilot",
+          "icon": "🔬",
+          "source": "그리드위즈 보도자료 2024-06-10"
+        },
+        {
+          "fact": "KPX 보조서비스 시장 시험 참여 확인",
+          "date": "2024-06-10",
+          "event_type": "pilot",
+          "icon": "🔬",
+          "source": "그리드위즈 보도자료 2024-06-10"
+        }
+      ],
+      "what_is_missing": [
+        {
+          "item": "파일럿 성과 지표: 미공개",
+          "as_of": "2024-06-10",
+          "source": "그리드위즈 보도자료 2024-06-10"
+        },
+        {
+          "item": "상업 계약으로의 전환 조건: 미공개",
+          "as_of": "2024-06-10",
+          "source": "그리드위즈 보도자료 2024-06-10"
+        },
+        {
+          "item": "실적 데이터 공개 일정: 미발표",
+          "as_of": "2024-06-10",
+          "source": "그리드위즈 보도자료 2024-06-10"
+        }
+      ],
+      "investment_angle": "그리드위즈 Series C 선행 검증 프로젝트. KPX 실적 공개가 핵심 촉매.",
       "linked_companies": [
         "c_gridwiz"
       ],
@@ -2358,138 +2766,483 @@
         "b_kepco",
         "b_ls_elec"
       ],
-      "what_is_known": [
-        "Pilot contract between SK E&S and KEPCO confirmed",
-        "그리드위즈 named as VPP/DR technology provider",
-        "KPX ancillary services market participation is the stated objective",
-        "Pilot location: Incheon LNG terminal complex"
+      "stage_color": "#7D4E00",
+      "signal_log_sorted": [
+        {
+          "date": "2024-06-10",
+          "event_type": "pilot",
+          "headline": "인천 VPP 실증 운영 개시 — KPX 보조서비스 시장 시험 참여",
+          "source_of_record": "그리드위즈 보도자료 2024-06-10",
+          "source_url": null,
+          "confirmed_facts": [
+            "파일럿 운영 개시 확인",
+            "KPX 보조서비스 시장 시험 참여 확인"
+          ],
+          "what_is_unknown": [
+            "파일럿 성과 지표: 미공개",
+            "상업 계약으로의 전환 조건: 미공개",
+            "실적 데이터 공개 일정: 미발표"
+          ]
+        },
+        {
+          "date": "2024-01-18",
+          "event_type": "announcement",
+          "headline": "SK E&S, KEPCO와 인천 LNG 터미널 VPP 실증 계약 체결",
+          "source_of_record": "SK E&S 보도자료 2024-01-18",
+          "source_url": null,
+          "confirmed_facts": [
+            "SK E&S와 KEPCO 간 VPP 실증 계약 체결 확인",
+            "그리드위즈가 VPP/DR 기술 공급자로 지정",
+            "실증 위치: 인천 LNG 터미널 단지",
+            "KPX 보조서비스 시장 참여가 사업 목표로 명시"
+          ],
+          "what_is_unknown": [
+            "DR 용량: 공식 발표 없음",
+            "계약 금액: 미공개",
+            "파일럿 기간 및 KPI 목표: 미공개"
+          ]
+        }
       ],
-      "what_is_missing": [
-        "DR capacity: not confirmed in primary source",
-        "Contract value: not disclosed",
-        "Pilot duration and KPI targets: not public",
-        "Conversion to commercial framework: not announced"
-      ],
-      "investment_angle": "Confirmed pilot linking 그리드위즈 directly to KEPCO. Primary value: validates KPX market access. Commercial conversion terms unknown."
+      "negative_events": [],
+      "recent_event_count": 0,
+      "total_event_count": 2,
+      "pattern": "Pilot stage — no commercial conversion confirmed yet.",
+      "pattern_color": "#7D4E00",
+      "inbound_signals": []
     },
     {
       "id": "p_sg_dc",
       "name": "Singapore DC Power Optimisation",
       "location": "Singapore",
       "type": "data_center",
-      "status": "Planned",
-      "developer": "GIC",
-      "offtaker": "Microsoft",
-      "epc": "unknown — not yet announced",
-      "capacity": "unknown — project specs not publicly disclosed",
-      "capex": "unknown — no public figure available",
-      "capacity_source": null,
-      "capex_source": null,
-      "milestone_next": "to be confirmed",
-      "milestone_source": null,
       "segments": [
         "dc_power",
         "forecasting"
       ],
+      "developer": "GIC (reported — primary source unconfirmed)",
+      "offtaker": "Microsoft",
+      "epc": "unknown — not yet announced",
+      "keyword_aliases": [
+        "autogrid singapore",
+        "singapore vpp microsoft",
+        "gic data center singapore",
+        "microsoft cfe singapore",
+        "singapore dc power optimisation"
+      ],
+      "signal_log": [
+        {
+          "date": "2024-09-05",
+          "event_type": "partner",
+          "headline": "AutoGrid confirms Microsoft partnership for VPP platform in Singapore",
+          "source_of_record": "AutoGrid press release 2024-09-05",
+          "source_url": null,
+          "confirmed_facts": [
+            "AutoGrid–Microsoft partnership for Singapore VPP deployment confirmed",
+            "Microsoft 24/7 CFE commitment is publicly stated policy"
+          ],
+          "what_is_unknown": [
+            "GIC as developer: trade press only — not confirmed in primary filing",
+            "Project capacity / MW: not disclosed",
+            "Contract value: not disclosed",
+            "EPC contractor: not announced",
+            "Project timeline: not public"
+          ]
+        }
+      ],
+      "current_stage": "Partner",
+      "what_is_known": [
+        {
+          "fact": "AutoGrid–Microsoft partnership for Singapore VPP deployment confirmed",
+          "date": "2024-09-05",
+          "event_type": "partner",
+          "icon": "🤝",
+          "source": "AutoGrid press release 2024-09-05"
+        },
+        {
+          "fact": "Microsoft 24/7 CFE commitment is publicly stated policy",
+          "date": "2024-09-05",
+          "event_type": "partner",
+          "icon": "🤝",
+          "source": "AutoGrid press release 2024-09-05"
+        }
+      ],
+      "what_is_missing": [
+        {
+          "item": "GIC as developer: trade press only — not confirmed in primary filing",
+          "as_of": "2024-09-05",
+          "source": "AutoGrid press release 2024-09-05"
+        },
+        {
+          "item": "Project capacity / MW: not disclosed",
+          "as_of": "2024-09-05",
+          "source": "AutoGrid press release 2024-09-05"
+        },
+        {
+          "item": "Contract value: not disclosed",
+          "as_of": "2024-09-05",
+          "source": "AutoGrid press release 2024-09-05"
+        },
+        {
+          "item": "EPC contractor: not announced",
+          "as_of": "2024-09-05",
+          "source": "AutoGrid press release 2024-09-05"
+        },
+        {
+          "item": "Project timeline: not public",
+          "as_of": "2024-09-05",
+          "source": "AutoGrid press release 2024-09-05"
+        }
+      ],
+      "investment_angle": "Hyperscaler-backed VPP pilot. AutoGrid SEA commercial validation. All financial terms undisclosed.",
       "linked_companies": [
         "c_autogrid"
       ],
       "linked_buyers": [
         "b_microsoft"
       ],
-      "what_is_known": [
-        "AutoGrid partnership with Microsoft for VPP platform deployment in Singapore confirmed",
-        "GIC involvement reported in trade press — primary source not confirmed",
-        "Microsoft 24/7 CFE commitment is public policy (Microsoft.com)"
+      "stage_color": "#5B21B6",
+      "signal_log_sorted": [
+        {
+          "date": "2024-09-05",
+          "event_type": "partner",
+          "headline": "AutoGrid confirms Microsoft partnership for VPP platform in Singapore",
+          "source_of_record": "AutoGrid press release 2024-09-05",
+          "source_url": null,
+          "confirmed_facts": [
+            "AutoGrid–Microsoft partnership for Singapore VPP deployment confirmed",
+            "Microsoft 24/7 CFE commitment is publicly stated policy"
+          ],
+          "what_is_unknown": [
+            "GIC as developer: trade press only — not confirmed in primary filing",
+            "Project capacity / MW: not disclosed",
+            "Contract value: not disclosed",
+            "EPC contractor: not announced",
+            "Project timeline: not public"
+          ]
+        }
       ],
-      "what_is_missing": [
-        "GIC as developer: trade press only, not confirmed in primary filing",
-        "Capacity / MW: not disclosed",
-        "CapEx: not disclosed",
-        "EPC contractor: not yet announced",
-        "Project timeline: not public",
-        "Contract value for AutoGrid: not disclosed"
-      ],
-      "investment_angle": "Hyperscaler-backed VPP pilot. AutoGrid commercial validation in SEA. All financial terms undisclosed."
+      "negative_events": [],
+      "recent_event_count": 0,
+      "total_event_count": 1,
+      "pattern": "Early momentum — partner or funding signal, no technical gate cleared.",
+      "pattern_color": "#7D4E00",
+      "inbound_signals": []
     },
     {
       "id": "p_ulsan_ess",
       "name": "울산 산업단지 ESS 실증",
       "location": "울산, KR",
       "type": "industrial",
-      "status": "Construction",
-      "developer": "울산시",
-      "offtaker": "SK이노베이션",
-      "epc": "씨에스에너지",
-      "capacity": "100MWh (reported in trade press — DART verification recommended)",
-      "capex": "₩760억 (reported — verify against DART 공시 before citing)",
-      "capacity_source": "에너지경제신문 보도 (DART 원문 확인 권장)",
-      "capex_source": "에너지경제신문 보도 (DART 원문 확인 권장)",
-      "milestone_next": "to be confirmed — construction completion not publicly announced",
-      "milestone_source": null,
       "segments": [
         "ess"
       ],
+      "developer": "울산시",
+      "offtaker": "SK이노베이션",
+      "epc": "씨에스에너지",
+      "keyword_aliases": [
+        "울산 ess",
+        "울산 에너지저장",
+        "씨에스에너지 울산",
+        "sk이노베이션 ess",
+        "울산 산업단지 ess",
+        "ulsan ess",
+        "cs energy ulsan"
+      ],
+      "signal_log": [
+        {
+          "date": "2023-08-22",
+          "event_type": "announcement",
+          "headline": "울산시, 산업단지 ESS 실증 사업 착수 발표",
+          "source_of_record": "울산시청 보도자료 2023-08-22",
+          "source_url": null,
+          "confirmed_facts": [
+            "울산시가 산업단지 ESS 실증 사업 공식 발표",
+            "씨에스에너지가 EPC 계약자로 확인 — 씨에스에너지 보도자료",
+            "SK이노베이션이 산업 오프테이커로 지정"
+          ],
+          "what_is_unknown": [
+            "용량: 100MWh 보도 있으나 DART 공시 원문 확인 필요",
+            "계약금액: ₩760억 보도 — DART 원문 확인 필요"
+          ]
+        },
+        {
+          "date": "2024-02-14",
+          "event_type": "construction",
+          "headline": "울산 ESS 실증 시설 착공 확인",
+          "source_of_record": "씨에스에너지 보도자료 2024-02-14",
+          "source_url": null,
+          "confirmed_facts": [
+            "착공 확인 — 씨에스에너지 공식 발표",
+            "공사 중 단계로 전환 확인"
+          ],
+          "what_is_unknown": [
+            "준공 및 상업운전 개시 일정: 미발표",
+            "성능 보증 조건: 미공개"
+          ]
+        }
+      ],
+      "current_stage": "Construction",
+      "what_is_known": [
+        {
+          "fact": "울산시가 산업단지 ESS 실증 사업 공식 발표",
+          "date": "2023-08-22",
+          "event_type": "announcement",
+          "icon": "📣",
+          "source": "울산시청 보도자료 2023-08-22"
+        },
+        {
+          "fact": "씨에스에너지가 EPC 계약자로 확인 — 씨에스에너지 보도자료",
+          "date": "2023-08-22",
+          "event_type": "announcement",
+          "icon": "📣",
+          "source": "울산시청 보도자료 2023-08-22"
+        },
+        {
+          "fact": "SK이노베이션이 산업 오프테이커로 지정",
+          "date": "2023-08-22",
+          "event_type": "announcement",
+          "icon": "📣",
+          "source": "울산시청 보도자료 2023-08-22"
+        },
+        {
+          "fact": "착공 확인 — 씨에스에너지 공식 발표",
+          "date": "2024-02-14",
+          "event_type": "construction",
+          "icon": "🏗",
+          "source": "씨에스에너지 보도자료 2024-02-14"
+        },
+        {
+          "fact": "공사 중 단계로 전환 확인",
+          "date": "2024-02-14",
+          "event_type": "construction",
+          "icon": "🏗",
+          "source": "씨에스에너지 보도자료 2024-02-14"
+        }
+      ],
+      "what_is_missing": [
+        {
+          "item": "준공 및 상업운전 개시 일정: 미발표",
+          "as_of": "2024-02-14",
+          "source": "씨에스에너지 보도자료 2024-02-14"
+        },
+        {
+          "item": "성능 보증 조건: 미공개",
+          "as_of": "2024-02-14",
+          "source": "씨에스에너지 보도자료 2024-02-14"
+        }
+      ],
+      "investment_angle": "씨에스에너지 첫 대기업 공급망 ESS 레퍼런스. 상업운전 발표가 핵심 이벤트.",
       "linked_companies": [
         "c_cs_energy"
       ],
       "linked_buyers": [
         "b_sk_eco"
       ],
-      "what_is_known": [
-        "씨에스에너지 is the confirmed EPC — confirmed in 씨에스에너지 press release",
-        "SK이노베이션 is the named industrial offtaker",
-        "울산시 is the project developer",
-        "Project is in construction phase (not pilot)"
+      "stage_color": "#1A56DB",
+      "signal_log_sorted": [
+        {
+          "date": "2024-02-14",
+          "event_type": "construction",
+          "headline": "울산 ESS 실증 시설 착공 확인",
+          "source_of_record": "씨에스에너지 보도자료 2024-02-14",
+          "source_url": null,
+          "confirmed_facts": [
+            "착공 확인 — 씨에스에너지 공식 발표",
+            "공사 중 단계로 전환 확인"
+          ],
+          "what_is_unknown": [
+            "준공 및 상업운전 개시 일정: 미발표",
+            "성능 보증 조건: 미공개"
+          ]
+        },
+        {
+          "date": "2023-08-22",
+          "event_type": "announcement",
+          "headline": "울산시, 산업단지 ESS 실증 사업 착수 발표",
+          "source_of_record": "울산시청 보도자료 2023-08-22",
+          "source_url": null,
+          "confirmed_facts": [
+            "울산시가 산업단지 ESS 실증 사업 공식 발표",
+            "씨에스에너지가 EPC 계약자로 확인 — 씨에스에너지 보도자료",
+            "SK이노베이션이 산업 오프테이커로 지정"
+          ],
+          "what_is_unknown": [
+            "용량: 100MWh 보도 있으나 DART 공시 원문 확인 필요",
+            "계약금액: ₩760억 보도 — DART 원문 확인 필요"
+          ]
+        }
       ],
-      "what_is_missing": [
-        "Capacity: 100MWh reported in press but DART primary disclosure not confirmed",
-        "Contract value: ₩760억 in press — requires DART verification",
-        "Commercial operation date: not publicly announced",
-        "Performance guarantee terms: not disclosed"
-      ],
-      "investment_angle": "씨에스에너지 first named industrial ESS reference. Key validation event: commercial operation date announcement."
+      "negative_events": [],
+      "recent_event_count": 0,
+      "total_event_count": 2,
+      "pattern": "Announced only — no technical or commercial gate cleared.",
+      "pattern_color": "#6E6E6E",
+      "inbound_signals": []
     },
     {
       "id": "p_rotterdam",
       "name": "Rotterdam Green Hydrogen Terminal",
       "location": "Rotterdam, NL",
       "type": "port",
-      "status": "Planned",
-      "developer": "Port of Rotterdam Authority",
-      "offtaker": "unknown — no binding offtake agreement announced",
-      "epc": "unknown — tender not issued",
-      "capacity": "1GW electrolyzer capacity (aspirational — Port of Rotterdam planning document, not binding)",
-      "capex": "€4.2B (aspirational estimate — no FID, no committed capital)",
-      "capacity_source": "Port of Rotterdam Authority planning documentation (non-binding)",
-      "capex_source": "Port of Rotterdam Authority planning documentation (non-binding aspirational estimate)",
-      "milestone_next": "Final Investment Decision (FID) — date not publicly stated",
-      "milestone_source": null,
       "segments": [
         "hydrogen"
       ],
+      "developer": "Port of Rotterdam Authority",
+      "offtaker": "unknown — no binding offtake agreement announced",
+      "epc": "unknown — tender not issued",
+      "keyword_aliases": [
+        "rotterdam hydrogen terminal",
+        "port of rotterdam hydrogen",
+        "rotterdam green hydrogen",
+        "maasvlakte hydrogen",
+        "rotterdam electrolyzer",
+        "rotterdam h2"
+      ],
+      "signal_log": [
+        {
+          "date": "2021-11-10",
+          "event_type": "announcement",
+          "headline": "Port of Rotterdam publishes hydrogen import terminal concept in planning documents",
+          "source_of_record": "Port of Rotterdam Authority planning documentation (non-binding)",
+          "source_url": "https://www.portofrotterdam.com",
+          "confirmed_facts": [
+            "Port of Rotterdam Authority has published hydrogen terminal concept",
+            "Terminal purpose: import and distribution of green hydrogen",
+            "Capacity figure (1GW electrolyzer) is aspirational — from planning docs, not binding commitment",
+            "CapEx figure (€4.2B) is aspirational estimate — no FID made"
+          ],
+          "what_is_unknown": [
+            "Binding offtake agreement: not announced",
+            "EPC contractor: not selected",
+            "Final Investment Decision: not made — date unknown",
+            "Capital commitment: no committed capital — aspirational only",
+            "Regulatory approval: unknown",
+            "H2 supply origin (domestic EU vs. import): not confirmed"
+          ]
+        },
+        {
+          "date": "2023-05-22",
+          "event_type": "partner",
+          "headline": "Engie and Port of Rotterdam sign hydrogen cooperation agreement",
+          "source_of_record": "Engie press release 2023-05-22 (verification recommended)",
+          "source_url": null,
+          "confirmed_facts": [
+            "Engie and Port of Rotterdam cooperation agreement reported"
+          ],
+          "what_is_unknown": [
+            "Agreement type: MOU vs. binding contract not confirmed",
+            "Engie's financial commitment: not disclosed",
+            "Volume or pricing terms: not public"
+          ]
+        }
+      ],
+      "current_stage": "Partner",
+      "what_is_known": [
+        {
+          "fact": "Port of Rotterdam Authority has published hydrogen terminal concept",
+          "date": "2021-11-10",
+          "event_type": "announcement",
+          "icon": "📣",
+          "source": "Port of Rotterdam Authority planning documentation (non-binding)"
+        },
+        {
+          "fact": "Terminal purpose: import and distribution of green hydrogen",
+          "date": "2021-11-10",
+          "event_type": "announcement",
+          "icon": "📣",
+          "source": "Port of Rotterdam Authority planning documentation (non-binding)"
+        },
+        {
+          "fact": "Capacity figure (1GW electrolyzer) is aspirational — from planning docs, not binding commitment",
+          "date": "2021-11-10",
+          "event_type": "announcement",
+          "icon": "📣",
+          "source": "Port of Rotterdam Authority planning documentation (non-binding)"
+        },
+        {
+          "fact": "CapEx figure (€4.2B) is aspirational estimate — no FID made",
+          "date": "2021-11-10",
+          "event_type": "announcement",
+          "icon": "📣",
+          "source": "Port of Rotterdam Authority planning documentation (non-binding)"
+        },
+        {
+          "fact": "Engie and Port of Rotterdam cooperation agreement reported",
+          "date": "2023-05-22",
+          "event_type": "partner",
+          "icon": "🤝",
+          "source": "Engie press release 2023-05-22 (verification recommended)"
+        }
+      ],
+      "what_is_missing": [
+        {
+          "item": "Agreement type: MOU vs. binding contract not confirmed",
+          "as_of": "2023-05-22",
+          "source": "Engie press release 2023-05-22 (verification recommended)"
+        },
+        {
+          "item": "Engie's financial commitment: not disclosed",
+          "as_of": "2023-05-22",
+          "source": "Engie press release 2023-05-22 (verification recommended)"
+        },
+        {
+          "item": "Volume or pricing terms: not public",
+          "as_of": "2023-05-22",
+          "source": "Engie press release 2023-05-22 (verification recommended)"
+        }
+      ],
+      "investment_angle": "EU H2 import infrastructure concept. No binding commitments. Long-term demand signal only — not a near-term investment catalyst.",
       "linked_companies": [
         "c_hylium"
       ],
       "linked_buyers": [
         "b_engie"
       ],
-      "what_is_known": [
-        "Port of Rotterdam Authority has published a hydrogen terminal concept in planning documents",
-        "Engie is an active participant in European hydrogen infrastructure planning",
-        "No binding offtake agreement has been announced",
-        "No EPC contract has been issued",
-        "No Final Investment Decision (FID) has been made"
+      "stage_color": "#5B21B6",
+      "signal_log_sorted": [
+        {
+          "date": "2023-05-22",
+          "event_type": "partner",
+          "headline": "Engie and Port of Rotterdam sign hydrogen cooperation agreement",
+          "source_of_record": "Engie press release 2023-05-22 (verification recommended)",
+          "source_url": null,
+          "confirmed_facts": [
+            "Engie and Port of Rotterdam cooperation agreement reported"
+          ],
+          "what_is_unknown": [
+            "Agreement type: MOU vs. binding contract not confirmed",
+            "Engie's financial commitment: not disclosed",
+            "Volume or pricing terms: not public"
+          ]
+        },
+        {
+          "date": "2021-11-10",
+          "event_type": "announcement",
+          "headline": "Port of Rotterdam publishes hydrogen import terminal concept in planning documents",
+          "source_of_record": "Port of Rotterdam Authority planning documentation (non-binding)",
+          "source_url": "https://www.portofrotterdam.com",
+          "confirmed_facts": [
+            "Port of Rotterdam Authority has published hydrogen terminal concept",
+            "Terminal purpose: import and distribution of green hydrogen",
+            "Capacity figure (1GW electrolyzer) is aspirational — from planning docs, not binding commitment",
+            "CapEx figure (€4.2B) is aspirational estimate — no FID made"
+          ],
+          "what_is_unknown": [
+            "Binding offtake agreement: not announced",
+            "EPC contractor: not selected",
+            "Final Investment Decision: not made — date unknown",
+            "Capital commitment: no committed capital — aspirational only",
+            "Regulatory approval: unknown",
+            "H2 supply origin (domestic EU vs. import): not confirmed"
+          ]
+        }
       ],
-      "what_is_missing": [
-        "Binding offtake agreement: not announced",
-        "EPC contractor: not selected",
-        "Final Investment Decision: not made — date unknown",
-        "CapEx commitment: no capital committed — figures are planning estimates only",
-        "Regulatory approval status: unknown",
-        "H2 supply origin (domestic EU vs. import): not confirmed"
-      ],
-      "investment_angle": "European H2 import infrastructure concept. No binding commitments in place. Relevant as a long-term demand signal, not a near-term investment catalyst."
+      "negative_events": [],
+      "recent_event_count": 0,
+      "total_event_count": 2,
+      "pattern": "Early momentum — partner or funding signal, no technical gate cleared.",
+      "pattern_color": "#7D4E00",
+      "inbound_signals": []
     }
   ],
   "strategic_buyers": [
@@ -2719,7 +3472,7 @@
       "status": "success",
       "error": null,
       "items": 10,
-      "fetched_at": "2026-03-29T13:38:55.583062+00:00",
+      "fetched_at": "2026-03-29T13:46:57.154412+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -2742,7 +3495,7 @@
       "status": "success",
       "error": null,
       "items": 20,
-      "fetched_at": "2026-03-29T13:38:55.709741+00:00",
+      "fetched_at": "2026-03-29T13:46:57.321281+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -2765,7 +3518,7 @@
       "status": "success",
       "error": null,
       "items": 20,
-      "fetched_at": "2026-03-29T13:38:56.055028+00:00",
+      "fetched_at": "2026-03-29T13:46:57.689077+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -2787,7 +3540,7 @@
       "status": "success",
       "error": null,
       "items": 10,
-      "fetched_at": "2026-03-29T13:38:56.206157+00:00",
+      "fetched_at": "2026-03-29T13:46:57.830983+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -2809,7 +3562,7 @@
       "status": "success",
       "error": null,
       "items": 20,
-      "fetched_at": "2026-03-29T13:38:56.364968+00:00",
+      "fetched_at": "2026-03-29T13:46:57.998070+00:00",
       "source_type": "industry",
       "reliability": 3,
       "topics": [
@@ -2831,7 +3584,7 @@
       "status": "partial",
       "error": "Feed returned 0 usable items",
       "items": 0,
-      "fetched_at": "2026-03-29T13:38:56.539406+00:00",
+      "fetched_at": "2026-03-29T13:46:58.155050+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
