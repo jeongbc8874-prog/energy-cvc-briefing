@@ -297,6 +297,36 @@ button{font-family:var(--mono);cursor:pointer;}
 .empty{text-align:center;padding:40px;font-size:13px;color:var(--ink3);}
 .gbtn{font-family:var(--mono);font-size:10px;font-weight:600;padding:5px 12px;border:1px solid var(--b);background:var(--surface);color:var(--ink2);}
 .gbtn:hover{background:var(--ink);color:#FFF;border-color:var(--ink);}
+
+/* ── Commercialisation tier badges ─────────────────────────── */
+.tier-badge{display:inline-flex;align-items:center;gap:4px;font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.06em;padding:2px 7px;text-transform:uppercase;}
+.tier-mvp  {background:#F0FDF4;color:#0A6640;border:1px solid #A7F3D0;}
+.tier-paid {background:#EFF6FF;color:#1A56DB;border:1px solid #BFDBFE;}
+.tier-scale{background:#F5F3FF;color:#5B21B6;border:1px solid #DDD6FE;}
+.tier-lock {background:#F4F4F5;color:#71717A;border:1px solid #D4D4D8;}
+/* Feature stub banner */
+.feature-stub{background:var(--bg);border:1px solid var(--b);border-left:3px solid #1A56DB;padding:12px 16px;margin-bottom:12px;}
+.feature-stub h4{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#1A56DB;margin-bottom:6px;}
+.feature-stub p{font-size:12px;color:var(--ink3);line-height:1.65;}
+/* Watchlist item */
+.wl-item{display:flex;align-items:center;gap:12px;padding:12px 18px;border-bottom:1px solid var(--b2);cursor:pointer;}
+.wl-item:last-child{border-bottom:none;}
+.wl-item:hover{background:#FAFAF8;}
+.wl-nm{font-size:13px;font-weight:600;flex:1;}
+.wl-ttr{font-family:var(--mono);font-size:10px;font-weight:700;padding:2px 7px;}
+/* Analyst note stub */
+.note-stub{background:#FFFBEB;border:1px dashed #FDE68A;padding:10px 14px;font-size:12px;color:var(--amber);display:flex;gap:8px;align-items:center;}
+/* Outcome stub */
+.outcome-stub{background:#F0F5FF;border:1px dashed #BFDBFE;padding:10px 14px;font-size:12px;color:var(--blue);display:flex;gap:8px;align-items:center;}
+/* Sector rulebook */
+.rb-sector-card{background:var(--surface);border:1px solid var(--b);margin-bottom:12px;overflow:hidden;}
+.rb-sector-hd{padding:12px 16px;border-bottom:1px solid var(--b2);display:flex;align-items:center;justify-content:space-between;}
+.rb-sector-nm{font-size:14px;font-weight:700;}
+.rb-sector-row{display:grid;grid-template-columns:180px 1fr;border-bottom:1px solid var(--b2);}
+.rb-sector-row:last-child{border-bottom:none;}
+.rb-sector-lbl{padding:9px 12px;font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink4);background:var(--bg);border-right:1px solid var(--b2);}
+.rb-sector-val{padding:9px 14px;font-size:12px;color:var(--ink2);line-height:1.65;}
+
 </style>
 </head>
 <body>
@@ -348,6 +378,8 @@ button{font-family:var(--mono);cursor:pointer;}
     <button class="tab"     onclick="switchTab('buyers',this)">Buyers</button>
     <button class="tab"     onclick="switchTab('negative',this)">Negative<span class="tab-badge" id="neg-badge" style="display:none">0</span></button>
     <button class="tab"     onclick="switchTab('sources',this)">Sources</button>
+    <button class="tab"     onclick="switchTab('watchlist',this)">Watchlist<span class="tab-badge" id="wl-badge" style="display:none">0</span></button>
+    <button class="tab"     onclick="switchTab('sectors',this)">Sector Rulebooks</button>
     <button class="tab"     onclick="switchTab('rulebook',this)">Score Rules</button>
     <button class="tab"     onclick="switchTab('history',this)">Archive</button>
   </div>
@@ -424,6 +456,9 @@ async function loadData(url){
     var negCt=(D.panels&&D.panels.panel_stats&&D.panels.panel_stats.negative_count)||0;
     var nb=document.getElementById("neg-badge");
     if(negCt>0){nb.textContent=negCt;nb.style.display="inline";}
+    var wlCt=(D.panels&&D.panels.panel_stats&&D.panels.panel_stats.watchlist_count)||0;
+    var wb=document.getElementById("wl-badge");
+    if(wb&&wlCt>0){wb.textContent=wlCt;wb.style.display="inline";}
     return true;
   }catch(err){ setRelState("error",err.message); renderErr(err.message); return false; }
 }
@@ -643,8 +678,18 @@ function renderCompanies(){
       if(gaps.length) h+=`<div class="co-sec" style="background:#FFF8F8"><div class="co-sec-title" style="color:var(--red)">Missing Evidence</div>${gaps.map(g=>{var gc=g.severity==="critical"?"#DC2626":g.severity==="high"?"#EA580C":"var(--amber)";return`<div class="co-miss"><span style="color:${gc};font-weight:700;flex-shrink:0">✗</span><div><div style="font-weight:500;color:${gc}">${esc(g.label)}</div><div class="co-gap-memo">${esc(g.memo)}</div></div></div>`;}).join("")}</div>`;
       if(ins.may_indicate&&ins.may_indicate.length) h+=`<div class="co-sec"><div class="co-sec-title">What This May Indicate <span style="font-weight:400;color:var(--ink4)">(inference)</span></div>${ins.may_indicate.map(m=>`<div style="display:flex;gap:7px;font-size:12px;color:var(--ink2);padding:3px 0;line-height:1.5"><span style="color:var(--blue);font-weight:700;flex-shrink:0">›</span>${esc(m)}</div>`).join("")}</div>`;
       if(ins.next_check) h+=`<div class="co-sec" style="background:#FFFBEB"><div class="co-sec-title" style="color:var(--amber)">Suggested Next Check</div><div style="font-size:12px;color:var(--ink2);line-height:1.65">${esc(ins.next_check)}</div></div>`;
+      // Sector rulebook context
+      if(co.sector_rulebook&&co.sector_rulebook.key_gate&&co.sector_rulebook.key_gate!=="—"){
+        h+=`<div class="co-sec"><div class="co-sec-title">Sector Gate <span style="font-weight:400;color:var(--ink4)">${esc(co.sector||"")}</span></div>`;
+        h+=`<div style="font-size:12px;color:var(--ink2);margin-bottom:5px;line-height:1.65"><b>Key Gate:</b> ${esc(co.sector_rulebook.key_gate)}</div>`;
+        h+=`<div style="font-size:12px;color:var(--ink2);margin-bottom:5px;line-height:1.65"><b>Commercial Threshold:</b> ${esc(co.sector_rulebook.commercial_threshold||"—")}</div>`;
+        if(co.sector_rulebook.red_flags&&co.sector_rulebook.red_flags.length) h+=`<div style="font-size:11px;color:var(--red)">${co.sector_rulebook.red_flags.map(f=>"✗ "+esc(f)).join(" · ")}</div>`;
+        h+=`</div>`;
+      }
       // linked projects
       if(co.linked_projects&&co.linked_projects.length) h+=`<div class="co-sec"><div class="co-sec-title">Linked Projects</div>${co.linked_projects.map(p=>`<div style="display:flex;gap:8px;font-size:12px;padding:3px 0"><span style="font-family:var(--mono);font-size:10px;padding:1px 6px;background:var(--bg);border:1px solid var(--b)">${esc(p.status)}</span><span>${esc(p.name)} <span style="color:var(--ink4)">— ${esc(p.location)}</span></span></div>`).join("")}</div>`;
+      // Analyst notes + triage + outcome stubs (paid/scale tier)
+      h+=renderAnalystStubs(co.id);
       if(evs.length) h+=`<div class="co-sec"><div class="co-sec-title">Signal Timeline <span style="font-weight:400;color:var(--ink4)">${evs.length} events</span></div>${evs.map(ev=>{var tc2=ev.signal_tier==="high"?"var(--green)":ev.signal_tier==="medium"?"var(--amber)":"var(--ink4)";var bc2=ev.is_negative?"var(--red)":ev.signal_tier==="high"?"var(--green)":"var(--b)";return`<div class="co-ev" style="border-left:2px solid ${bc2};padding-left:8px"><div class="co-ev-dt">${esc(ev.event_date||"")}</div><div style="flex:1"><div style="display:flex;gap:5px;margin-bottom:3px;flex-wrap:wrap">${tagFor(ev.event_type,ev.is_negative)}<span style="font-family:var(--mono);font-size:10px;font-weight:700;color:${tc2}">${ev.signal_strength||0}</span></div><div class="co-ev-title">${ev.source_url?`<a href="${esc(ev.source_url)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">${esc(ev.title||"")}</a>`:esc(ev.title||"")}</div><div class="co-ev-src">${esc(ev.source_name||"")}</div></div></div>`;}).join("")}</div>`;
       h+=`</div>`;
     }
@@ -673,6 +718,8 @@ function renderProjects(){
     if(p.capacity) h+=`<div><div class="proj-k">Capacity</div><div class="proj-v">${esc(p.capacity)}</div></div>`;
     if(p.capex)    h+=`<div><div class="proj-k">CapEx</div><div class="proj-v">${esc(p.capex)}</div></div>`;
     h+=`</div><div class="proj-desc">${esc(p.description||"")}</div>`;
+    if(p.investment_angle) h+=`<div style="padding:7px 10px;background:#F0F5FF;border-left:3px solid var(--blue);font-size:11px;color:var(--ink2);margin-bottom:8px;line-height:1.6"><b style="font-family:var(--mono);font-size:9px;color:var(--blue)">INVESTMENT ANGLE</b><br>${esc(p.investment_angle)}</div>`;
+    if(p.milestone_next)   h+=`<div style="padding:7px 10px;background:#FFFBEB;border-left:3px solid var(--amber);font-size:11px;color:var(--ink2);margin-bottom:8px;line-height:1.6"><b style="font-family:var(--mono);font-size:9px;color:var(--amber)">NEXT MILESTONE</b><br>${esc(p.milestone_next)}</div>`;
     if(cos.length) h+=`<div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:8px">${cos.map(c=>`<span style="font-family:var(--mono);font-size:9px;padding:1px 7px;border:1px solid ${c.stage_color||"var(--b)"};color:${c.stage_color||"var(--ink4)"}">↗ ${esc(c.name)}</span>`).join("")}</div>`;
     h+=`</div><div class="proj-parties">`;
     if(p.developer) h+=`<div class="proj-party"><span class="proj-party-l">Developer</span><span class="proj-party-v">${esc(p.developer)}</span></div>`;
@@ -702,7 +749,12 @@ function renderBuyers(){
     h+=`<div class="buyer-hd"><div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:3px"><span class="buyer-nm">${esc(b.name||"")}</span><span style="font-family:var(--mono);font-size:9px;font-weight:700;padding:2px 8px;background:${tc}15;color:${tc};border:1px solid ${tc}35">${esc(b.type)}</span></div>`;
     h+=`<div class="buyer-type">${esc(b.region||"")} · ${(b.active_segments||[]).join(", ")}</div>`;
     h+=`<div class="buyer-segs">${(b.active_segments||[]).map(s=>`<span class="tag t0">${esc(s)}</span>`).join("")}</div>`;
-    h+=`<div class="buyer-signal">${esc(b.procurement_signal||"")}</div>`;
+    h+=`<div class="buyer-signal">${esc(b.procurement_notes||b.procurement_signal||"")}</div>`;
+    var hasKv=(b.annual_capex_est||b.decision_cycle);
+    if(hasKv) h+=`<div style="display:flex;gap:14px;padding:8px 16px;background:var(--bg);border-top:1px solid var(--b2)">`;
+    if(b.annual_capex_est) h+=`<div><div style="font-family:var(--mono);font-size:9px;color:var(--ink4);text-transform:uppercase;margin-bottom:2px">Annual CapEx Est.</div><div style="font-size:12px;font-weight:600">${esc(b.annual_capex_est||"—")}</div></div>`;
+    if(b.decision_cycle)   h+=`<div><div style="font-family:var(--mono);font-size:9px;color:var(--ink4);text-transform:uppercase;margin-bottom:2px">Decision Cycle</div><div style="font-size:12px;font-weight:600">${esc(b.decision_cycle||"—")}</div></div>`;
+    if(hasKv) h+=`</div>`;
     if(act&&act.events&&act.events.length){
       h+=`<div class="buyer-activity"><div style="font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink4);margin-bottom:6px">Recent Signal Activity (${act.events.length})</div>`;
       act.events.slice(0,3).forEach(ev=>{h+=`<div class="buyer-ev"><span class="buyer-ev-dt">${esc(ev.date||"")}</span><div style="flex:1"><div>${esc(ev.title||"")}</div><div style="font-family:var(--mono);font-size:9px;color:var(--ink4)">${esc(ev.event_type||"")} · score ${ev.score||0} · ${esc(ev.source||"")}</div></div></div>`;});
@@ -736,6 +788,167 @@ function renderSourcesTab(){
   });
   h+=`<div style="padding:12px 18px;background:var(--bg);font-size:11px;color:var(--ink3);line-height:1.7">⚠ Failed source signals are not included. Data completeness may be affected.</div></div>`;
   el.innerHTML=h;
+}
+
+
+// ════════════════════════════════════════════════════════════════
+// FEATURE TIER BADGE HELPER
+// Shows MVP / Paid Pilot / Scale label on each feature
+// ════════════════════════════════════════════════════════════════
+function tierBadge(tier){
+  var cfg = {
+    mvp:   {cls:"tier-mvp",  label:"MVP"},
+    paid:  {cls:"tier-paid", label:"Paid Pilot"},
+    scale: {cls:"tier-scale",label:"Scale"},
+    lock:  {cls:"tier-lock", label:"Locked"},
+  }[tier]||{cls:"tier-lock",label:"—"};
+  return `<span class="tier-badge ${cfg.cls}">${cfg.label}</span>`;
+}
+
+// ════════════════════════════════════════════════════════════════
+// WATCHLIST TAB
+// MVP: pre-curated default watchlist (companies with watchlist_default=true)
+// Paid pilot: user-editable watchlist with per-company alert thresholds
+// Scale: shared team watchlists, alert webhooks
+// ════════════════════════════════════════════════════════════════
+function renderWatchlist(){
+  var el=document.getElementById("feed-col");
+  var p=D&&D.panels;
+  var wl=p&&p.watchlist||[];
+  var cos=D&&D.companies||{};
+
+  var h=`<div style="margin-bottom:16px">`;
+
+  // Feature tier overview
+  h+=`<div class="card" style="margin-bottom:12px"><div class="chd">Watchlist ${tierBadge("mvp")}</div><div style="padding:12px 16px">`;
+  h+=`<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:12px">`;
+  // MVP
+  h+=`<div style="background:var(--bg);padding:12px;border:1px solid var(--b)"><div style="display:flex;align-items:center;gap:6px;margin-bottom:8px">${tierBadge("mvp")}<span style="font-family:var(--mono);font-size:9px;font-weight:700;text-transform:uppercase;color:var(--ink4)">Included Now</span></div><div style="font-size:11px;color:var(--ink2);line-height:1.65">Pre-curated watchlist of analyst-selected companies. Updated when analyst edits code registry.</div></div>`;
+  // Paid
+  h+=`<div style="background:var(--bg);padding:12px;border:1px solid var(--b);border-top:3px solid var(--blue)"><div style="display:flex;align-items:center;gap:6px;margin-bottom:8px">${tierBadge("paid")}<span style="font-family:var(--mono);font-size:9px;font-weight:700;text-transform:uppercase;color:var(--ink4)">Paid Pilot</span></div><div style="font-size:11px;color:var(--ink2);line-height:1.65">User-editable watchlist. Per-company alert threshold. Email/Slack when new HIGH signal detected.</div></div>`;
+  // Scale
+  h+=`<div style="background:var(--bg);padding:12px;border:1px solid var(--b);border-top:3px solid #5B21B6"><div style="display:flex;align-items:center;gap:6px;margin-bottom:8px">${tierBadge("scale")}<span style="font-family:var(--mono);font-size:9px;font-weight:700;text-transform:uppercase;color:var(--ink4)">Scale</span></div><div style="font-size:11px;color:var(--ink2);line-height:1.65">Team-shared watchlists, @mentions, activity feed. Webhook integration. Custom entity registry per client.</div></div>`;
+  h+=`</div></div></div>`;
+
+  // Current watchlist
+  h+=`<div class="card"><div class="chd">Default Watchlist <span style="font-weight:400;color:var(--ink4)">${wl.length} companies</span> ${tierBadge("mvp")}</div>`;
+  if(!wl.length){
+    h+=`<div class="empty">No watchlist companies. Pipeline must run first.</div>`;
+  } else {
+    wl.forEach(item=>{
+      var co=cos[item.company_id]||{};
+      var sc=co.stage_color||"#6E6E6E", tc=co.ttr_color||"#6E6E6E";
+      var pat=co.pattern||{};
+      h+=`<div class="wl-item" onclick="switchTabByName('companies');CO_EXP.add('${item.company_id}');renderCompanies()">`;
+      h+=`<div style="width:3px;height:36px;background:${sc};flex-shrink:0;border-radius:2px"></div>`;
+      h+=`<div style="flex:1"><div class="wl-nm">${esc(item.company_name||"")}</div>`;
+      h+=`<div style="font-family:var(--mono);font-size:10px;color:var(--ink4)">${esc(co.sector||"")} · ${esc(item.stage||"")}</div></div>`;
+      h+=`<div style="display:flex;gap:6px;align-items:center">`;
+      if(item.high_count>0) h+=`<span class="tag tH">HIGH ${item.high_count}</span>`;
+      h+=`<span class="wl-ttr" style="background:${tc}15;color:${tc};border:1px solid ${tc}35">${esc(item.ttr||"—")}</span>`;
+      if(pat.label) h+=`<span style="font-family:var(--mono);font-size:9px;padding:1px 7px;background:${pat.color||"var(--bg)"}15;color:${pat.color||"var(--ink4)"};border:1px solid ${pat.color||"var(--b)"}35">${esc(pat.label)}</span>`;
+      h+=`</div>`;
+      // Analyst note stub
+      h+=`<div style="margin:6px 0 0 0" onclick="event.stopPropagation()">`;
+      h+=`<div class="note-stub"><span style="font-size:14px">📝</span><span>Analyst notes — <span style="font-weight:600">Paid Pilot</span>. Add your thesis, questions, and follow-up actions per company.</span>${tierBadge("paid")}</div>`;
+      h+=`</div>`;
+      h+=`</div>`;
+    });
+  }
+  h+=`</div>`;
+
+  // Stub sections: Alerts, Triage, Outcome
+  h+=`<div class="card" style="margin-top:12px"><div class="chd">Feature Roadmap</div><div style="padding:14px">`;
+  var stubs=[
+    {tier:"paid", icon:"🔔",title:"Alerts",desc:"Email or Slack notification when a tracked company receives a new HIGH signal. Configurable threshold per company."},
+    {tier:"paid", icon:"📊",title:"Triage Status",desc:"Pass / Watch / Investigate status per company. Set by analyst. Visible to all team members. Timestamp + rationale logged."},
+    {tier:"paid", icon:"📋",title:"Analyst Notes",desc:"Free-text memo field per company, per project, per signal. Timestamped. Author-attributed. Shared across team seats."},
+    {tier:"paid", icon:"📜",title:"Evidence History",desc:"90-day per-company signal timeline. Persisted across daily runs. Shows signal drift and pattern evolution."},
+    {tier:"scale",icon:"✓",title:"Outcome Tracking",desc:"Analyst logs what happened after each signal (e.g. 'Contract confirmed 3 months later', 'Pilot failed to convert'). Builds model accuracy over time."},
+    {tier:"scale",icon:"🔌",title:"API Access",desc:"GET /api/company/{id}/card — evidence card as JSON. POST /api/watchlist/diff — webhook diff alerts. Full REST API for LP portal embedding."},
+    {tier:"scale",icon:"🗂️",title:"Comparables DB",desc:"Curated deal terms database. Post-money valuations, round history, investor mix. Analyst-curated, proprietary."},
+  ];
+  stubs.forEach(s=>{
+    h+=`<div style="display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--b2)">`;
+    h+=`<span style="font-size:18px;flex-shrink:0">${s.icon}</span>`;
+    h+=`<div style="flex:1"><div style="display:flex;align-items:center;gap:8px;margin-bottom:3px"><span style="font-size:13px;font-weight:600">${s.title}</span>${tierBadge(s.tier)}</div>`;
+    h+=`<div style="font-size:12px;color:var(--ink3);line-height:1.65">${s.desc}</div></div></div>`;
+  });
+  h+=`</div></div>`;
+  h+=`</div>`;
+  el.innerHTML=h;
+}
+
+// ════════════════════════════════════════════════════════════════
+// SECTOR RULEBOOKS TAB
+// MVP: embedded rulebooks (key gate, commercial threshold, policy driver,
+//      red flags, positive signals, LCOS benchmark)
+// Paid pilot: analyst-editable thresholds, notes on each signal rule
+// Scale: per-client sector pack customisation
+// ════════════════════════════════════════════════════════════════
+function renderSectors(){
+  var el=document.getElementById("feed-col");
+  var rbs=D&&D.sector_rulebooks||{};
+
+  if(!Object.keys(rbs).length){
+    // Fallback static rulebooks if JSON doesn't have them yet
+    rbs={
+      ess:{name:"Long-Duration Energy Storage",key_gate:"UL 9540 / IEC 62619 certification + grid interconnection agreement",commercial_threshold:"First offtake or supply agreement with named utility/industrial",policy_driver:"IRA Storage ITC (US), EU Battery Regulation, KR RPS ESS 가중치",red_flags:["Grant-only (no offtaker)","Li-ion commodity competition","Single geography exposure"],positive_signals:["Utility framework contract","Hyperscaler pilot with CFE mandate","DOE grant + offtaker co-investment"]},
+      marine_fc:{name:"Marine Fuel Cells",key_gate:"DNV GL or ClassNK Class Approval (Type Approval Certificate)",commercial_threshold:"Named shipyard contract post-certification",policy_driver:"IMO CII 2024, EU ETS Ships, IMO 2030 GHG Strategy",red_flags:["No DNV GL path defined","Hydrogen supply chain unresolved","Single fuel-type dependency"],positive_signals:["DNV GL/ClassNK type approval","Shipyard newbuild specification","Port bunkering co-development"]},
+      grid_sw:{name:"Grid Software / VPP",key_gate:"KPX / FERC / ENTSO-E certification + first recurring contract",commercial_threshold:"Multi-year framework contract with named utility/TSO",policy_driver:"FERC 2222 (US), EU Flexibility Markets, KPX 보조서비스 개편",red_flags:["Single utility dependency","No API/integration layer","Incumbent competition (Siemens, GE)"],positive_signals:["KPX/FERC certified","Multi-utility framework","CFO hire + international BD"]},
+      hydrogen:{name:"Hydrogen Infrastructure",key_gate:"Named offtaker at contracted price (not MOU) + permits",commercial_threshold:"First commercial delivery or long-term supply agreement (>3 years)",policy_driver:"EU Green Hydrogen Standard, US IRA §45V, MOTIE 수소경제 로드맵",red_flags:["Grant-only (no offtaker)","LCOH above $5/kg without cost-down path","No offtake contract"],positive_signals:["Named industrial offtaker + contracted price","Port/bunkering infrastructure connection","EU H2 Bank award"]},
+    };
+  }
+
+  var segColors={"ess":"#1A56DB","marine_fc":"#0A6640","grid_sw":"#0050B3","hydrogen":"#7D4E00","hvdc":"#5B21B6","dc_power":"#9E1068"};
+
+  var h=`<div style="margin-bottom:10px;display:flex;align-items:center;justify-content:space-between"><span style="font-family:var(--mono);font-size:10px;font-weight:700;color:var(--ink4);text-transform:uppercase;letter-spacing:.08em">Sector Intelligence Rulebooks ${tierBadge("mvp")}</span><span style="font-size:12px;color:var(--ink3)">These rules define what constitutes a strong signal in each sector. Transparent and analyst-editable.</span></div>`;
+
+  Object.entries(rbs).forEach(([seg,rb])=>{
+    var sc=segColors[seg]||"#6E6E6E";
+    h+=`<div class="rb-sector-card"><div class="rb-sector-hd"><span class="rb-sector-nm">${esc(rb.name||seg)}</span><span style="font-family:var(--mono);font-size:9px;font-weight:700;padding:2px 9px;background:${sc}15;color:${sc};border:1px solid ${sc}35">${esc(seg)}</span></div>`;
+    var rows=[
+      {l:"Key Gate",           v:rb.key_gate||"—"},
+      {l:"Commercial Threshold",v:rb.commercial_threshold||"—"},
+      {l:"Policy Driver",       v:rb.policy_driver||"—"},
+    ];
+    rows.forEach(r=>{h+=`<div class="rb-sector-row"><div class="rb-sector-lbl">${esc(r.l)}</div><div class="rb-sector-val">${esc(r.v)}</div></div>`;});
+    if(rb.positive_signals&&rb.positive_signals.length){
+      h+=`<div class="rb-sector-row"><div class="rb-sector-lbl">Positive Signals</div><div class="rb-sector-val">${rb.positive_signals.map(s=>`<div style="display:flex;gap:6px;padding:2px 0"><span style="color:var(--green);font-weight:700;flex-shrink:0">✓</span>${esc(s)}</div>`).join("")}</div></div>`;
+    }
+    if(rb.red_flags&&rb.red_flags.length){
+      h+=`<div class="rb-sector-row"><div class="rb-sector-lbl">Red Flags</div><div class="rb-sector-val" style="background:#FFF8F8">${rb.red_flags.map(s=>`<div style="display:flex;gap:6px;padding:2px 0"><span style="color:var(--red);font-weight:700;flex-shrink:0">✗</span>${esc(s)}</div>`).join("")}</div></div>`;
+    }
+    h+=`</div>`;
+  });
+
+  // Stub: paid-tier analyst customisation
+  h+=`<div class="feature-stub"><h4>Sector Rulebook Editor ${tierBadge("paid")}</h4><p>In the Paid Pilot tier, analysts can override signal weights, add custom red flags, and annotate each rule with fund-specific criteria. Changes are versioned and team-visible.</p></div>`;
+
+  el.innerHTML=h;
+}
+
+// ════════════════════════════════════════════════════════════════
+// COMPANY DETAIL: inject analyst notes + outcome stubs
+// These are rendered inside expanded company cards
+// ════════════════════════════════════════════════════════════════
+function renderAnalystStubs(coId){
+  // MVP: shows what these sections look like
+  // Paid: backed by private DB per company_id
+  return `<div class="co-sec"><div class="co-sec-title">Analyst Notes ${tierBadge("paid")}</div>
+    <div class="note-stub"><span style="font-size:14px">📝</span><div><div style="font-weight:600;margin-bottom:3px">Paid Pilot feature</div><div>Timestamped analyst memos per company. Team-visible. "Investigated 2026-03-15 — CFO confirmed via LinkedIn. Meeting requested." etc.</div></div></div>
+  </div>
+  <div class="co-sec"><div class="co-sec-title">Triage Status ${tierBadge("paid")}</div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <span style="font-family:var(--mono);font-size:10px;font-weight:700;padding:4px 12px;background:var(--bg);border:2px solid var(--b);color:var(--ink4)">⦿ Pass</span>
+      <span style="font-family:var(--mono);font-size:10px;font-weight:700;padding:4px 12px;background:var(--bg);border:2px solid var(--b);color:var(--ink4)">◎ Watch</span>
+      <span style="font-family:var(--mono);font-size:10px;font-weight:700;padding:4px 12px;background:var(--bg);border:2px solid var(--b);color:var(--ink4)">◉ Investigate</span>
+    </div>
+    <div style="font-size:11px;color:var(--ink4);margin-top:6px">Click to set triage status. Visible to all team members. Logged with timestamp + author.</div>
+  </div>
+  <div class="co-sec"><div class="co-sec-title">Outcome Tracking ${tierBadge("scale")}</div>
+    <div class="outcome-stub"><span style="font-size:14px">✓</span><div><div style="font-weight:600;margin-bottom:3px">Scale-tier feature</div><div>Log what happened after each signal: "Certification → Contract 3mo later", "Pilot failed to convert Q3 2026". Builds closed-loop signal quality over time.</div></div></div>
+  </div>`;
 }
 
 // ════════════════════════════════════════════════════════════════
@@ -854,10 +1067,12 @@ function switchTab(tab,btn){
   if(tab==="projects")   renderProjects();
   if(tab==="buyers")     renderBuyers();
   if(tab==="sources")    renderSourcesTab();
+  if(tab==="watchlist")  renderWatchlist();
+  if(tab==="sectors")    renderSectors();
   if(tab==="rulebook")   renderRulebook();
   if(tab==="history")    renderHistory();
 }
-function switchTabByName(n){var tabs=document.querySelectorAll(".tab");var names=["signals","companies","projects","buyers","negative","sources","rulebook","history"];var i=names.indexOf(n);if(i>=0&&tabs[i])switchTab(n,tabs[i]);}
+function switchTabByName(n){var tabs=document.querySelectorAll(".tab");var names=["signals","companies","projects","buyers","negative","sources","watchlist","sectors","rulebook","history"];var i=names.indexOf(n);if(i>=0&&tabs[i])switchTab(n,tabs[i]);}
 
 // ════════════════════════════════════════════════════════════════
 // INIT
