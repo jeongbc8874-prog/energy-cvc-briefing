@@ -327,6 +327,51 @@ button{font-family:var(--mono);cursor:pointer;}
 .rb-sector-lbl{padding:9px 12px;font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink4);background:var(--bg);border-right:1px solid var(--b2);}
 .rb-sector-val{padding:9px 14px;font-size:12px;color:var(--ink2);line-height:1.65;}
 
+
+/* ── Source Registry ─────────────────────────────────────────── */
+.src-reg-card{background:var(--surface);border:1px solid var(--b);margin-bottom:10px;overflow:hidden;}
+.src-reg-hd{padding:12px 16px 10px;border-bottom:1px solid var(--b2);}
+.src-reg-name{font-size:14px;font-weight:700;color:var(--ink);margin-bottom:3px;}
+.src-reg-meta{font-family:var(--mono);font-size:10px;color:var(--ink4);display:flex;gap:10px;flex-wrap:wrap;align-items:center;}
+.src-reg-topics{display:flex;gap:4px;flex-wrap:wrap;margin-top:7px;}
+.src-reg-topic{font-family:var(--mono);font-size:9px;padding:1px 7px;background:var(--bg);border:1px solid var(--b);color:var(--ink3);}
+.src-reg-notes{font-size:11px;color:var(--ink3);line-height:1.65;padding:8px 16px;background:var(--bg);border-top:1px solid var(--b2);}
+.rel-badge{font-family:var(--mono);font-size:9px;font-weight:700;padding:2px 7px;letter-spacing:.04em;}
+.rel-1{background:#F0FDF4;color:#0A6640;border:1px solid #A7F3D0;}
+.rel-2{background:#EFF6FF;color:#1A56DB;border:1px solid #BFDBFE;}
+.rel-3{background:#FFFBEB;color:#92400E;border:1px solid #FDE68A;}
+.type-badge{font-family:var(--mono);font-size:9px;font-weight:600;padding:2px 7px;}
+.type-industry {background:var(--bg);color:var(--ink3);border:1px solid var(--b);}
+.type-government{background:#FDF4FF;color:#7E22CE;border:1px solid #E9D5FF;}
+.type-company   {background:#F0F9FF;color:#0369A1;border:1px solid #BAE6FD;}
+.type-academic  {background:#FFF7ED;color:#C2410C;border:1px solid #FED7AA;}
+/* Proposal form */
+.prop-form{background:var(--surface);border:2px solid var(--ink);padding:0;}
+.prop-form-hd{background:var(--ink);padding:10px 16px;font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.08em;color:#888;text-transform:uppercase;}
+.prop-form-bd{padding:16px;}
+.prop-row{margin-bottom:12px;}
+.prop-lbl{font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--ink4);margin-bottom:4px;display:flex;align-items:center;gap:6px;}
+.prop-lbl .req{color:var(--red);}
+.prop-input{font-family:var(--mono);font-size:12px;padding:6px 10px;border:1px solid var(--b);background:var(--surface);color:var(--ink);outline:none;width:100%;}
+.prop-input:focus{border-color:var(--ink);}
+.prop-select{font-family:var(--mono);font-size:12px;padding:6px 10px;border:1px solid var(--b);background:var(--surface);color:var(--ink);outline:none;}
+.prop-input::placeholder{color:var(--ink4);}
+.prop-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+@media(max-width:600px){.prop-grid{grid-template-columns:1fr;}}
+.prop-note{font-size:11px;color:var(--ink4);margin-top:3px;line-height:1.5;}
+.prop-action{display:flex;gap:8px;align-items:center;margin-top:16px;padding-top:14px;border-top:1px solid var(--b2);}
+.prop-submit{font-family:var(--mono);font-size:11px;font-weight:700;padding:7px 18px;background:var(--ink);color:#FFF;border:none;cursor:pointer;letter-spacing:.04em;}
+.prop-submit:hover{background:#2A2A2A;}
+.prop-cancel{font-family:var(--mono);font-size:10px;color:var(--ink4);background:none;border:none;cursor:pointer;padding:7px 10px;}
+.prop-cancel:hover{color:var(--ink);}
+/* Proposal queue */
+.prop-queue-item{padding:10px 14px;border-bottom:1px solid var(--b2);border-left:3px solid var(--blue);background:#F8FBFF;}
+.prop-queue-item:last-child{border-bottom:none;}
+.prop-status{font-family:var(--mono);font-size:9px;font-weight:700;padding:2px 7px;text-transform:uppercase;}
+.prop-pending {background:#FEF9C3;color:#92400E;border:1px solid #FDE68A;}
+.prop-approved{background:#F0FDF4;color:#0A6640;border:1px solid #A7F3D0;}
+.prop-rejected{background:#FEE2E2;color:#B91C1C;border:1px solid #FCA5A5;}
+
 </style>
 </head>
 <body>
@@ -835,35 +880,365 @@ function renderProjects(){
   el.innerHTML=h;
 }
 
+// ═════════════════════════════════════════════════════function renderSourcesTab(){
+  var el = document.getElementById("feed-col");
+  // Use enriched source_log from pipeline + registry from JSON
+  var log = SRCLOG;
+  var reg = D && D.source_registry || [];
+
+  // ── Summary bar ────────────────────────────────────────────────────────
+  var approved  = reg.filter(s => !s.status).length;
+  var proposed  = reg.filter(s => s.status === "proposed").length;
+  var ok  = log.filter(s => s.status === "success").length;
+  var par = log.filter(s => s.status === "partial").length;
+  var fai = log.filter(s => s.status === "failed").length;
+  var t1  = reg.filter(s => !s.status && s.reliability === 1).length;
+  var t2  = reg.filter(s => !s.status && s.reliability === 2).length;
+  var t3  = reg.filter(s => !s.status && s.reliability === 3).length;
+
+  var h = "";
+
+  // Policy notice
+  h += `<div style="padding:12px 16px;background:#FFF8F0;border-bottom:2px solid var(--amber);margin-bottom:0">
+    <div style="font-family:var(--mono);font-size:9px;font-weight:700;color:var(--amber);letter-spacing:.08em;text-transform:uppercase;margin-bottom:3px">⚠ SOURCE GOVERNANCE POLICY</div>
+    <div style="font-size:12px;color:var(--ink2);line-height:1.65">Sources are <b>never added automatically.</b> Every source must be manually approved by an analyst and committed to the source registry. Proposed sources enter a review queue and do not fetch data until approved.</div>
+  </div>`;
+
+  // Stats
+  h += `<div class="card" style="margin-bottom:12px"><div style="padding:12px 16px;display:flex;gap:24px;flex-wrap:wrap;border-bottom:1px solid var(--b2)">`;
+  [{n:approved,l:"Approved",c:"var(--green)"},{n:ok,l:"Live today",c:"var(--green)"},
+   {n:fai+par,l:"Issues today",c:fai?"var(--red)":"var(--amber)"},
+   {n:t1,l:"Tier 1",c:"#0A6640"},{n:t2,l:"Tier 2",c:"var(--blue)"},{n:t3,l:"Tier 3",c:"var(--amber)"},
+   {n:proposed,l:"Proposed",c:"var(--blue)"}]
+  .forEach(x => {h += `<div><div style="font-family:var(--mono);font-size:18px;font-weight:700;color:${x.c}">${x.n}</div><div style="font-family:var(--mono);font-size:9px;color:var(--ink4);text-transform:uppercase;letter-spacing:.05em">${x.l}</div></div>`;});
+  h += `</div>`;
+
+  // Reliability tier legend
+  h += `<div style="padding:10px 16px;display:flex;gap:16px;flex-wrap:wrap;background:var(--bg);border-bottom:1px solid var(--b2)">`;
+  [{t:1,desc:"Primary — regulatory filings, official announcements"},{t:2,desc:"Trade press — specialist publications, verify financials"},{t:3,desc:"Aggregator / general — breadth only, always verify"}]
+  .forEach(x => {h += `<span style="font-size:11px;color:var(--ink3)"><span class="rel-badge rel-${x.t}">Tier ${x.t}</span> ${esc(x.desc)}</span>`;});
+  h += `</div></div>`;
+
+  // ── Approved sources ────────────────────────────────────────────────────
+  h += `<div class="card" style="margin-bottom:12px">
+    <div class="chd">Approved Sources <span style="font-weight:400;color:var(--ink4)">${approved}</span></div>`;
+
+  // Build lookup: log entry by source id
+  var logById = {};
+  log.forEach(s => { logById[s.id] = s; });
+
+  reg.filter(s => !s.status).forEach(s => {
+    var live = logById[s.id] || {};
+    var liveStatus  = live.status || "not run";
+    var liveItems   = live.items  !== undefined ? live.items : "—";
+    var liveTime    = "";
+    if(live.fetched_at){try{liveTime=new Date(live.fetched_at).toLocaleTimeString("ko-KR",{hour:"2-digit",minute:"2-digit"});}catch(e){}}
+    var statusColor = liveStatus==="success"?"var(--green)":liveStatus==="failed"?"var(--red)":liveStatus==="partial"?"var(--amber)":"var(--ink4)";
+    var statusDot   = liveStatus==="success"?"●":liveStatus==="failed"?"✗":liveStatus==="partial"?"◐":"○";
+
+    h += `<div class="src-reg-card">`;
+    h += `<div class="src-reg-hd">`;
+    h += `<div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:6px">`;
+    h += `<span class="src-reg-name">${esc(s.name)}</span>`;
+    h += `<div style="display:flex;gap:5px;align-items:center;flex-shrink:0">`;
+    h += `<span class="rel-badge rel-${s.reliability}">Tier ${s.reliability}</span>`;
+    h += `<span class="type-badge type-${s.source_type}">${esc(s.source_type)}</span>`;
+    h += `</div></div>`;
+
+    // Live fetch status + metadata row
+    h += `<div class="src-reg-meta">`;
+    h += `<span style="color:${statusColor};font-weight:700">${statusDot} ${liveStatus.toUpperCase()}</span>`;
+    if(liveTime) h += `<span>${liveItems} items · ${liveTime}</span>`;
+    h += `<span>🌐 ${esc(s.geography)}</span>`;
+    h += `<span>🗣 ${esc(s.language)}</span>`;
+    h += `<span style="color:var(--ink4)">approved: ${esc(s.approved_date)} by ${esc(s.approved_by)}</span>`;
+    h += `<a href="${esc(s.url)}" target="_blank" rel="noopener" style="font-family:var(--mono);font-size:10px;color:var(--blue)">→ Feed URL</a>`;
+    h += `</div>`;
+
+    // Topics
+    h += `<div class="src-reg-topics">${(s.topics||[]).map(t=>`<span class="src-reg-topic">${esc(t)}</span>`).join("")}</div>`;
+
+    // Error if any
+    if(live.error) h += `<div style="margin-top:6px;font-family:var(--mono);font-size:10px;color:var(--red);background:#FFF5F5;padding:4px 8px;border-left:2px solid var(--red)">⚠ ${esc(live.error)}</div>`;
+
+    h += `</div>`; // src-reg-hd
+
+    // Notes
+    if(s.notes) h += `<div class="src-reg-notes">${esc(s.notes)}</div>`;
+
+    h += `</div>`; // src-reg-card
+  });
+
+  h += `</div>`; // approved card
+
+  // ── Propose new source ──────────────────────────────────────────────────
+  h += `<div class="card" style="margin-bottom:12px">
+    <div class="chd">Propose New Source</div>
+    <div style="padding:14px 16px">
+      <div style="font-size:12px;color:var(--ink3);line-height:1.65;margin-bottom:14px;padding:9px 12px;background:var(--bg);border-left:3px solid var(--blue)">
+        Proposals enter a review queue. They do <b>not</b> fetch data until an analyst approves them
+        and adds them to the <code>SOURCE_REGISTRY</code> in <code>generate-signals.py</code>.
+        The proposal is saved to <code>data/source_proposals.json</code>.
+      </div>
+      <div id="prop-form-wrap">`;
+
+  h += `<div class="prop-form">
+    <div class="prop-form-hd">New Source Proposal</div>
+    <div class="prop-form-bd">
+      <div class="prop-grid">
+        <div class="prop-row">
+          <div class="prop-lbl">Source Name <span class="req">*</span></div>
+          <input class="prop-input" id="p-name" placeholder="e.g. BloombergNEF">
+          <div class="prop-note">Full display name of the publication or source.</div>
+        </div>
+        <div class="prop-row">
+          <div class="prop-lbl">RSS Feed URL <span class="req">*</span></div>
+          <input class="prop-input" id="p-url" placeholder="https://example.com/feed/">
+          <div class="prop-note">Direct RSS/Atom URL. Must be publicly accessible.</div>
+        </div>
+        <div class="prop-row">
+          <div class="prop-lbl">Source Type <span class="req">*</span></div>
+          <select class="prop-input prop-select" id="p-type">
+            <option value="">— select —</option>
+            <option value="industry">industry (trade press, specialist publication)</option>
+            <option value="government">government (regulator, ministry, agency)</option>
+            <option value="company">company (official press releases)</option>
+            <option value="academic">academic (research institution)</option>
+          </select>
+        </div>
+        <div class="prop-row">
+          <div class="prop-lbl">Reliability Tier <span class="req">*</span></div>
+          <select class="prop-input prop-select" id="p-tier">
+            <option value="">— select —</option>
+            <option value="1">Tier 1 — Primary source (regulatory/official)</option>
+            <option value="2">Tier 2 — Trade press (specialist, editorial standards)</option>
+            <option value="3">Tier 3 — Aggregator / general press</option>
+          </select>
+          <div class="prop-note">Be conservative. When in doubt, select Tier 3.</div>
+        </div>
+        <div class="prop-row">
+          <div class="prop-lbl">Geography</div>
+          <select class="prop-input prop-select" id="p-geo">
+            <option value="GLOBAL">GLOBAL</option>
+            <option value="KR">KR — Korea</option>
+            <option value="US">US — United States</option>
+            <option value="EU">EU — Europe</option>
+            <option value="APAC">APAC</option>
+          </select>
+        </div>
+        <div class="prop-row">
+          <div class="prop-lbl">Language</div>
+          <select class="prop-input prop-select" id="p-lang">
+            <option value="en">English</option>
+            <option value="ko">Korean</option>
+            <option value="de">German</option>
+            <option value="ja">Japanese</option>
+          </select>
+        </div>
+      </div>
+      <div class="prop-row">
+        <div class="prop-lbl">Topics Covered <span class="req">*</span></div>
+        <input class="prop-input" id="p-topics" placeholder="e.g. hydrogen, electrolyzer, offshore wind, HVDC">
+        <div class="prop-note">Comma-separated. Helps with filtering and coverage assessment.</div>
+      </div>
+      <div class="prop-row">
+        <div class="prop-lbl">Reason for Proposal <span class="req">*</span></div>
+        <input class="prop-input" id="p-reason" placeholder="Why should we add this source? What gap does it fill?">
+        <div class="prop-note">Be specific. What signals would this source provide that current sources miss?</div>
+      </div>
+      <div class="prop-row">
+        <div class="prop-lbl">Known Limitations</div>
+        <input class="prop-input" id="p-limits" placeholder="e.g. financial figures need primary-source verification">
+        <div class="prop-note">Optional but encouraged. Any paywall, bias, or accuracy concerns.</div>
+      </div>
+      <div class="prop-action">
+        <button class="prop-submit" onclick="submitProposal()">Submit for Review</button>
+        <button class="prop-cancel" onclick="clearProposalForm()">Clear</button>
+        <span id="prop-status" style="font-family:var(--mono);font-size:11px;color:var(--green);display:none">✓ Saved to proposal queue</span>
+        <span id="prop-error"  style="font-family:var(--mono);font-size:11px;color:var(--red); display:none"></span>
+      </div>
+    </div>
+  </div>`;
+
+  h += `</div></div></div>`;
+
+  // ── Proposal queue ──────────────────────────────────────────────────────
+  h += `<div class="card">
+    <div class="chd">Proposal Queue <span id="prop-queue-count" style="font-weight:400;color:var(--ink4)"></span></div>
+    <div id="prop-queue-body"><div style="padding:14px;font-size:12px;color:var(--ink4)">Loading proposals…</div></div>
+  </div>`;
+
+  el.innerHTML = h;
+
+  // Load proposal queue from localStorage (fallback — in production, use DB)
+  renderProposalQueue();
+}
+
 // ════════════════════════════════════════════════════════════════
-// BUYERS TAB
+// PROPOSAL QUEUE  (client-side for MVP; replace with DB API in Paid tier)
 // ════════════════════════════════════════════════════════════════
-function renderBuyers(){
-  var el=document.getElementById("feed-col");
-  var buyers=D&&D.strategic_buyers||[];
-  var buyerAct=D&&D.buyer_activity||{};
-  if(!buyers.length){el.innerHTML='<div class="empty">No buyer data</div>';return;}
-  var typeColor={"Utility":"#1A56DB","Shipyard":"#0A6640","Hyperscaler":"#5B21B6","EPC/OEM":"#7D4E00","EPC":"#7D4E00","Industrial":"#3C3C3C"};
-  var h=`<div class="card"><div class="chd">Strategic Buyers <span style="font-weight:400;color:var(--ink4)">${buyers.length}</span></div><div class="buyer-grid">`;
-  buyers.forEach(b=>{
-    var tc=typeColor[b.type]||"#6E6E6E",act=buyerAct[b.id],isOpen=BUYER_EXP.has(b.id);
-    h+=`<div class="buyer-card" onclick="toggleBuyer('${b.id}')">`;
-    h+=`<div class="buyer-hd"><div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:3px"><span class="buyer-nm">${esc(b.name||"")}</span><span style="font-family:var(--mono);font-size:9px;font-weight:700;padding:2px 8px;background:${tc}15;color:${tc};border:1px solid ${tc}35">${esc(b.type)}</span></div>`;
-    h+=`<div class="buyer-type">${esc(b.region||"")} · ${(b.active_segments||[]).join(", ")}</div>`;
-    h+=`<div class="buyer-segs">${(b.active_segments||[]).map(s=>`<span class="tag t0">${esc(s)}</span>`).join("")}</div>`;
-    h+=`<div class="buyer-signal">${esc(b.procurement_notes||b.procurement_signal||"")}</div>`;
-    var hasKv=(b.annual_capex_est||b.decision_cycle);
-    if(hasKv) h+=`<div style="display:flex;gap:14px;padding:8px 16px;background:var(--bg);border-top:1px solid var(--b2)">`;
-    if(b.annual_capex_est&&!b.annual_capex_est.includes("not disclosed")) {
-      h+=`<div><div style="font-family:var(--mono);font-size:9px;color:var(--ink4);text-transform:uppercase;margin-bottom:2px">CapEx Ref.</div><div style="font-size:11px;font-weight:600;color:var(--ink2)">${esc(b.annual_capex_est||"—")}</div></div>`;
-    } else {
-      h+=`<div><div style="font-family:var(--mono);font-size:9px;color:var(--ink4);text-transform:uppercase;margin-bottom:2px">CapEx Ref.</div><div style="font-size:11px;color:var(--red)">not disclosed</div></div>`;
+
+function getProposals(){
+  try{ return JSON.parse(localStorage.getItem("src_proposals")||"[]"); }
+  catch(e){ return []; }
+}
+function saveProposals(arr){
+  try{ localStorage.setItem("src_proposals",JSON.stringify(arr)); }
+  catch(e){ console.warn("localStorage unavailable — proposals not persisted"); }
+}
+
+function submitProposal(){
+  var name   = (document.getElementById("p-name")||{}).value.trim();
+  var url    = (document.getElementById("p-url")||{}).value.trim();
+  var type   = (document.getElementById("p-type")||{}).value;
+  var tier   = (document.getElementById("p-tier")||{}).value;
+  var geo    = (document.getElementById("p-geo")||{}).value  || "GLOBAL";
+  var lang   = (document.getElementById("p-lang")||{}).value || "en";
+  var topics = (document.getElementById("p-topics")||{}).value.trim();
+  var reason = (document.getElementById("p-reason")||{}).value.trim();
+  var limits = (document.getElementById("p-limits")||{}).value.trim();
+
+  var err = document.getElementById("prop-error");
+  var ok  = document.getElementById("prop-status");
+  err.style.display="none"; ok.style.display="none";
+
+  // Validate required fields
+  var missing = [];
+  if(!name)   missing.push("name");
+  if(!url)    missing.push("RSS URL");
+  if(!type)   missing.push("source type");
+  if(!tier)   missing.push("reliability tier");
+  if(!topics) missing.push("topics");
+  if(!reason) missing.push("reason for proposal");
+  if(missing.length){
+    err.textContent = "Required: "+missing.join(", ");
+    err.style.display="inline";
+    return;
+  }
+
+  // Basic URL check
+  if(!url.startsWith("http")){
+    err.textContent = "RSS URL must start with http:// or https://";
+    err.style.display="inline";
+    return;
+  }
+
+  var proposal = {
+    id:            "prop_"+Date.now(),
+    name:          name,
+    url:           url,
+    source_type:   type,
+    reliability:   parseInt(tier),
+    topics:        topics.split(",").map(t=>t.trim()).filter(Boolean),
+    geography:     geo,
+    language:      lang,
+    proposed_reason: reason,
+    known_limitations: limits||null,
+    proposed_date: new Date().toISOString().slice(0,10),
+    status:        "pending",
+    review_notes:  null,
+  };
+
+  var proposals = getProposals();
+  proposals.unshift(proposal);
+  saveProposals(proposals);
+
+  ok.style.display="inline";
+  clearProposalForm();
+  renderProposalQueue();
+}
+
+function clearProposalForm(){
+  ["p-name","p-url","p-topics","p-reason","p-limits"].forEach(id=>{
+    var el=document.getElementById(id); if(el) el.value="";
+  });
+  ["p-type","p-tier"].forEach(id=>{
+    var el=document.getElementById(id); if(el) el.selectedIndex=0;
+  });
+  var err=document.getElementById("prop-error");
+  if(err) err.style.display="none";
+}
+
+function renderProposalQueue(){
+  var body  = document.getElementById("prop-queue-body");
+  var count = document.getElementById("prop-queue-count");
+  if(!body) return;
+
+  var proposals = getProposals();
+  if(count) count.textContent = proposals.length;
+
+  if(!proposals.length){
+    body.innerHTML=`<div style="padding:14px;font-family:var(--mono);font-size:10px;color:var(--ink4)">No proposals yet. Use the form above to propose a new source.</div>`;
+    return;
+  }
+
+  var statusClass = {pending:"prop-pending",approved:"prop-approved",rejected:"prop-rejected"};
+  var h = "";
+  proposals.forEach((p,idx)=>{
+    var sc = statusClass[p.status]||"prop-pending";
+    h += `<div class="prop-queue-item">`;
+    h += `<div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:5px">`;
+    h += `<div><span style="font-size:13px;font-weight:600">${esc(p.name)}</span>`;
+    h += ` <span class="rel-badge rel-${p.reliability}">Tier ${p.reliability}</span>`;
+    h += ` <span class="type-badge type-${p.source_type}">${esc(p.source_type)}</span></div>`;
+    h += `<div style="display:flex;gap:5px;align-items:center;flex-shrink:0">`;
+    h += `<span class="prop-status ${sc}">${esc(p.status).toUpperCase()}</span>`;
+    if(p.status==="pending"){
+      h += `<button onclick="approveProposal(${idx})" style="font-family:var(--mono);font-size:9px;font-weight:700;padding:2px 8px;background:#F0FDF4;color:#0A6640;border:1px solid #A7F3D0;cursor:pointer">✓ APPROVE</button>`;
+      h += `<button onclick="rejectProposal(${idx})" style="font-family:var(--mono);font-size:9px;font-weight:700;padding:2px 8px;background:#FEE2E2;color:var(--red);border:1px solid #FCA5A5;cursor:pointer">✗ REJECT</button>`;
     }
-    if(b.decision_cycle) h+=`<div><div style="font-family:var(--mono);font-size:9px;color:var(--ink4);text-transform:uppercase;margin-bottom:2px">Decision Cycle</div><div style="font-size:11px;font-weight:600;color:var(--ink2)">${esc(b.decision_cycle||"—")}</div></div>`;
-    if(hasKv) h+=`</div>`;
-    if(act&&act.events&&act.events.length){
-      h+=`<div class="buyer-activity"><div style="font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink4);margin-bottom:6px">Recent Signal Activity (${act.events.length})</div>`;
-      act.events.slice(0,3).forEach(ev=>{h+=`<div class="buyer-ev"><span class="buyer-ev-dt">${esc(ev.date||"")}</span><div style="flex:1"><div>${esc(ev.title||"")}</div><div style="font-family:var(--mono);font-size:9px;color:var(--ink4)">${esc(ev.event_type||"")} · score ${ev.score||0} · ${esc(ev.source||"")}</div></div></div>`;});
+    h += `<button onclick="deleteProposal(${idx})" style="font-family:var(--mono);font-size:9px;padding:2px 8px;background:var(--bg);color:var(--ink4);border:1px solid var(--b);cursor:pointer">✕</button>`;
+    h += `</div></div>`;
+    h += `<div style="font-family:var(--mono);font-size:10px;color:var(--ink4);margin-bottom:5px">`;
+    h += `<a href="${esc(p.url)}" target="_blank" rel="noopener" style="color:var(--blue)">${esc(p.url)}</a>`;
+    h += ` · ${esc(p.geography)} · ${esc(p.language)} · Proposed ${esc(p.proposed_date)}</div>`;
+    h += `<div style="display:flex;gap:4px;flex-wrap:wrap;margin-bottom:6px">${(p.topics||[]).map(t=>`<span class="src-reg-topic">${esc(t)}</span>`).join("")}</div>`;
+    h += `<div style="font-size:12px;color:var(--ink2);line-height:1.6"><b>Reason:</b> ${esc(p.proposed_reason)}</div>`;
+    if(p.known_limitations) h += `<div style="font-size:11px;color:var(--amber);margin-top:3px"><b>Limitations:</b> ${esc(p.known_limitations)}</div>`;
+    if(p.status!=="pending"){
+      h += `<div style="margin-top:8px;padding:6px 10px;background:var(--bg);border-left:2px solid var(--b);font-family:var(--mono);font-size:10px;color:var(--ink4)">`;
+      h += p.status==="approved"
+        ? `✓ Approved. To activate: add entry to SOURCE_REGISTRY in generate-signals.py and redeploy.`
+        : `✗ Rejected.`;
+      if(p.review_notes) h += ` ${esc(p.review_notes)}`;
+      h += `</div>`;
+    }
+    h += `</div>`;
+  });
+  body.innerHTML = h;
+}
+
+function approveProposal(idx){
+  var proposals = getProposals();
+  if(!proposals[idx]) return;
+  var note = prompt("Approval note (optional — e.g. 'Add to ESS sources, Tier 2'):");
+  proposals[idx].status = "approved";
+  proposals[idx].review_notes = note||null;
+  proposals[idx].reviewed_date = new Date().toISOString().slice(0,10);
+  saveProposals(proposals);
+  renderProposalQueue();
+}
+
+function rejectProposal(idx){
+  var proposals = getProposals();
+  if(!proposals[idx]) return;
+  var note = prompt("Rejection reason:");
+  proposals[idx].status = "rejected";
+  proposals[idx].review_notes = note||"No reason given.";
+  proposals[idx].reviewed_date = new Date().toISOString().slice(0,10);
+  saveProposals(proposals);
+  renderProposalQueue();
+}
+
+function deleteProposal(idx){
+  if(!confirm("Delete this proposal?")) return;
+  var proposals = getProposals();
+  proposals.splice(idx,1);
+  saveProposals(proposals);
+  renderProposalQueue();
+}
+
+c(ev.title||"")}</div><div style="font-family:var(--mono);font-size:9px;color:var(--ink4)">${esc(ev.event_type||"")} · score ${ev.score||0} · ${esc(ev.source||"")}</div></div></div>`;});
       if(act.events.length>3)h+=`<div style="font-family:var(--mono);font-size:10px;color:var(--ink4);padding:4px 0">+ ${act.events.length-3} more</div>`;
       h+=`</div>`;
     }else{h+=`<div style="padding:8px 16px;font-family:var(--mono);font-size:10px;color:var(--ink4)">No activity in current window</div>`;}
