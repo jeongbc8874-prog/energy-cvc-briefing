@@ -1,5 +1,31 @@
 [
   {
+    "date": "2026-03-29",
+    "dateKr": "2026년 03월 29일",
+    "stats": {
+      "total": 29,
+      "high": 4,
+      "medium": 4,
+      "negative": 1,
+      "matched": 1,
+      "filtered_out": 51,
+      "companies_with_signals": 1,
+      "by_segment": {
+        "ess": 22,
+        "hvdc": 3,
+        "hydrogen": 1,
+        "grid_sw": 1,
+        "dc_power": 2
+      },
+      "by_type": {
+        "Contract": 4,
+        "News": 23,
+        "Partnership": 1,
+        "Negative": 1
+      }
+    }
+  },
+  {
     "date": "2026-03-28",
     "dateKr": "2026년 3월 28일 토요일",
     "stats": {
