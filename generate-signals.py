@@ -128,22 +128,186 @@ TODAY_KR = datetime.now(timezone.utc).strftime("%Y년 %m월 %d일")
 
 
 # ══════════════════════════════════════════════════════════════════════════
-# SECTION 1  RSS SOURCES
+# SECTION 1  CURATED SOURCE REGISTRY
 # ══════════════════════════════════════════════════════════════════════════
-# MVP: 6 free sources → feedparser
-# Paid pilot: add premium sources (Bloomberg NEF, BNEF, S&P) via paid API keys
-# Scale: customer-configurable source list per sector module
+#
+# POLICY: Sources are NEVER added automatically.
+# Every source must be explicitly approved by an analyst and added here.
+# New sources proposed via UI are written to data/source_proposals.json
+# and require a human to move them into this file.
+#
+# SOURCE SCHEMA:
+#   id              unique slug, no spaces
+#   name            display name
+#   url             RSS feed URL
+#   source_type     "industry" | "company" | "government" | "academic"
+#   reliability     1 (primary/verified) | 2 (secondary/trade) | 3 (aggregator/blog)
+#   topics          list of covered topics (for display and filtering)
+#   segments        internal segment IDs used by scoring engine
+#   geography       "KR" | "US" | "EU" | "GLOBAL"
+#   language        "en" | "ko" | "de" etc.
+#   access          "free" | "premium" | "requires_key"
+#   approved_by     analyst who added this source
+#   approved_date   ISO date of approval
+#   notes           why this source was approved, any known limitations
+#
+# RELIABILITY TIERS:
+#   Tier 1 — Primary source: regulatory filings, official press releases,
+#             direct company announcements, government publications.
+#             Signals from T1 sources carry higher evidential weight.
+#   Tier 2 — Trade press: industry-specialist publications with editorial
+#             standards. Good for market news, deal announcements.
+#             Verify financial figures against primary source.
+#   Tier 3 — Aggregators / general tech press / blogs. Useful for breadth,
+#             but all figures require primary-source verification before citing.
+#
+# ══════════════════════════════════════════════════════════════════════════
 
+SOURCE_REGISTRY = [
+
+    # ── Tier 2 — Energy trade press (approved, free RSS) ─────────────────
+
+    {
+        "id":            "utilitydive",
+        "name":          "Utility Dive",
+        "url":           "https://www.utilitydive.com/feeds/news/",
+        "source_type":   "industry",
+        "reliability":   2,
+        "topics":        ["grid software","demand response","VPP","utility procurement",
+                          "energy storage","data center power","regulatory"],
+        "segments":      ["grid_sw","ess","dc_power"],
+        "geography":     "US",
+        "language":      "en",
+        "access":        "free",
+        "approved_by":   "analyst",
+        "approved_date": "2025-01-01",
+        "notes":         "Strong US utility market coverage. Financial figures are secondary — verify against FERC/SEC filings.",
+    },
+    {
+        "id":            "pvmagazine",
+        "name":          "PV Magazine",
+        "url":           "https://www.pv-magazine.com/feed/",
+        "source_type":   "industry",
+        "reliability":   2,
+        "topics":        ["solar PV","energy storage","hydrogen","grid forecasting",
+                          "electrolyzer","green hydrogen","battery"],
+        "segments":      ["ess","hydrogen","forecasting"],
+        "geography":     "GLOBAL",
+        "language":      "en",
+        "access":        "free",
+        "approved_by":   "analyst",
+        "approved_date": "2025-01-01",
+        "notes":         "Good European + global coverage. Project figures should be verified against developer announcements.",
+    },
+    {
+        "id":            "energystoragenews",
+        "name":          "Energy Storage News",
+        "url":           "https://www.energy-storage.news/feed/",
+        "source_type":   "industry",
+        "reliability":   2,
+        "topics":        ["battery storage","BESS","grid-scale ESS","flow battery",
+                          "long-duration storage","utility ESS"],
+        "segments":      ["ess"],
+        "geography":     "GLOBAL",
+        "language":      "en",
+        "access":        "free",
+        "approved_by":   "analyst",
+        "approved_date": "2025-01-01",
+        "notes":         "Specialist ESS trade press. Good for deployment and contract announcements.",
+    },
+    {
+        "id":            "offshorewind",
+        "name":          "Offshore Wind Biz",
+        "url":           "https://www.offshorewind.biz/feed/",
+        "source_type":   "industry",
+        "reliability":   2,
+        "topics":        ["offshore wind","HVDC","subsea cable","port infrastructure",
+                          "OEM contracts","grid connection"],
+        "segments":      ["hvdc","ess"],
+        "geography":     "EU",
+        "language":      "en",
+        "access":        "free",
+        "approved_by":   "analyst",
+        "approved_date": "2025-01-01",
+        "notes":         "Strong North Sea / European offshore coverage. Useful for HVDC cable and interconnect signals.",
+    },
+    {
+        "id":            "electrek",
+        "name":          "Electrek",
+        "url":           "https://electrek.co/feed/",
+        "source_type":   "industry",
+        "reliability":   3,
+        "topics":        ["EV","energy storage","clean energy","DC power",
+                          "hyperscaler energy","utility-scale battery"],
+        "segments":      ["ess","dc_power","forecasting"],
+        "geography":     "US",
+        "language":      "en",
+        "access":        "free",
+        "approved_by":   "analyst",
+        "approved_date": "2025-01-01",
+        "notes":         "Tier 3 — broad coverage, often first to report but verify all figures. "
+                         "Replaced Recharge News (Informa paywall). Not suitable as primary citation.",
+    },
+    {
+        "id":            "h2view",
+        "name":          "H2 View",
+        "url":           "https://www.h2-view.com/feed/",
+        "source_type":   "industry",
+        "reliability":   2,
+        "topics":        ["green hydrogen","electrolyzer","hydrogen production",
+                          "hydrogen transport","marine hydrogen","bunkering",
+                          "fuel cell","PEM","SOEC"],
+        "segments":      ["hydrogen","marine_fc"],
+        "geography":     "GLOBAL",
+        "language":      "en",
+        "access":        "free",
+        "approved_by":   "analyst",
+        "approved_date": "2025-01-01",
+        "notes":         "Replaced Hydrogen Insight (Informa paywall blocked RSS). "
+                         "Specialist hydrogen trade press. Verify project capex against developer filings.",
+    },
+
+    # ── PROPOSED (not yet approved — do not add to RSS_SOURCES below) ────
+    # To propose a source, use the UI → Sources tab → Propose New Source.
+    # These entries exist for transparency; they are NOT fetched.
+    # To approve: analyst moves entry to the active list above, sets
+    # approved_by and approved_date, then deploys.
+
+    # {"id":"fuelcellsworks","name":"Fuel Cells Works","url":"https://fuelcellsworks.com/feed/",
+    #  "source_type":"industry","reliability":3,
+    #  "topics":["fuel cell","hydrogen","marine FC","stationary power"],
+    #  "segments":["marine_fc","hydrogen"],"geography":"GLOBAL","language":"en","access":"free",
+    #  "status":"proposed","proposed_by":"analyst","proposed_date":"2026-03-01",
+    #  "proposed_reason":"Additional marine FC coverage. Verify editorial standards before approving."},
+
+    # {"id":"greencarcongress","name":"Green Car Congress","url":"https://www.greencarcongress.com/atom.xml",
+    #  "source_type":"industry","reliability":3,
+    #  "topics":["hydrogen","fuel cell","clean transportation","electrolyzer"],
+    #  "segments":["hydrogen","marine_fc"],"geography":"US","language":"en","access":"free",
+    #  "status":"proposed","proposed_by":"analyst","proposed_date":"2026-03-01",
+    #  "proposed_reason":"Broad hydrogen + fuel cell coverage. Tier 3 only."},
+]
+
+# ── Build active RSS_SOURCES from approved registry entries ───────────
+# Only entries WITHOUT a "status" field (i.e. approved) are fetched.
+# Proposed entries are excluded automatically.
 RSS_SOURCES = [
-    {"id":"utilitydive",      "name":"Utility Dive",       "url":"https://www.utilitydive.com/feeds/news/",      "segments":["grid_sw","ess","dc_power"],  "tier":"free"},
-    {"id":"pvmagazine",       "name":"PV Magazine",         "url":"https://www.pv-magazine.com/feed/",            "segments":["ess","hydrogen","forecasting"],"tier":"free"},
-    {"id":"energystoragenews","name":"Energy Storage News", "url":"https://www.energy-storage.news/feed/",        "segments":["ess"],                         "tier":"free"},
-    {"id":"offshorewind",     "name":"Offshore Wind Biz",   "url":"https://www.offshorewind.biz/feed/",           "segments":["hvdc","ess"],                  "tier":"free"},
-    {"id":"electrek",         "name":"Electrek",            "url":"https://electrek.co/feed/",                    "segments":["ess","dc_power","forecasting"], "tier":"free"},
-    {"id":"h2view",           "name":"H2 View",             "url":"https://www.h2-view.com/feed/",                "segments":["hydrogen","marine_fc"],         "tier":"free"},
-    # PAID PILOT additions (require API keys, not yet wired):
-    # {"id":"bnef",     "name":"BloombergNEF", "url":"...", "segments":["all"], "tier":"premium", "requires":"BNEF_API_KEY"},
-    # {"id":"spglobal", "name":"S&P Global",   "url":"...", "segments":["all"], "tier":"premium", "requires":"SP_API_KEY"},
+    {
+        "id":       s["id"],
+        "name":     s["name"],
+        "url":      s["url"],
+        "segments": s["segments"],
+        # Pass through metadata for source_log enrichment
+        "source_type":  s["source_type"],
+        "reliability":  s["reliability"],
+        "topics":       s["topics"],
+        "geography":    s.get("geography","GLOBAL"),
+        "language":     s.get("language","en"),
+        "approved_by":  s.get("approved_by","unknown"),
+        "approved_date":s.get("approved_date","unknown"),
+    }
+    for s in SOURCE_REGISTRY
+    if "status" not in s  # only approved sources (no status key = approved)
 ]
 
 
@@ -941,13 +1105,31 @@ def fetch_sources():
                              "published_date":date,"raw_text":(title+" "+summary).lower()})
                 count += 1
             if count==0: errors.append("Feed returned 0 usable items")
-            source_log.append({"id":s["id"],"name":s["name"],"url":s["url"],
-                                "status":"success" if count>0 else "partial","error":errors[0] if errors else None,
-                                "items":count,"fetched_at":ts})
+            source_log.append({
+                                "id":s["id"],"name":s["name"],"url":s["url"],
+                                "status":"success" if count>0 else "partial",
+                                "error":errors[0] if errors else None,
+                                "items":count,"fetched_at":ts,
+                                # registry metadata — passed through for UI
+                                "source_type":  s.get("source_type","industry"),
+                                "reliability":  s.get("reliability",3),
+                                "topics":       s.get("topics",[]),
+                                "geography":    s.get("geography","GLOBAL"),
+                                "approved_by":  s.get("approved_by","unknown"),
+                                "approved_date":s.get("approved_date","unknown"),
+                            })
             print(f"  ✓ {s['name']}: {count}")
         except Exception as ex:
-            source_log.append({"id":s["id"],"name":s["name"],"url":s["url"],
-                                "status":"failed","error":str(ex),"items":0,"fetched_at":ts})
+            source_log.append({
+                                "id":s["id"],"name":s["name"],"url":s["url"],
+                                "status":"failed","error":str(ex),"items":0,"fetched_at":ts,
+                                "source_type":  s.get("source_type","industry"),
+                                "reliability":  s.get("reliability",3),
+                                "topics":       s.get("topics",[]),
+                                "geography":    s.get("geography","GLOBAL"),
+                                "approved_by":  s.get("approved_by","unknown"),
+                                "approved_date":s.get("approved_date","unknown"),
+                            })
             print(f"  ✗ {s['name']}: {ex}")
     return raw, source_log
 
@@ -1224,7 +1406,7 @@ def main():
               "brief":brief,"stats":stats,"signals":kept,"filteredOut":filtered[:20],
               "companies":co_intel,"projects":PROJECTS,"strategic_buyers":STRATEGIC_BUYERS,
               "buyer_activity":buyer_global,"panels":panels,"source_log":source_log,
-              "score_rulebook":SCORE_RULEBOOK_DISPLAY,"sector_rulebooks":SECTOR_RULEBOOKS,
+              "source_registry":SOURCE_REGISTRY,"score_rulebook":SCORE_RULEBOOK_DISPLAY,"sector_rulebooks":SECTOR_RULEBOOKS,
               "reliability":{"sources_total":len(source_log),"sources_ok":sum(1 for s in source_log if s["status"]=="success"),
                              "sources_partial":sum(1 for s in source_log if s["status"]=="partial"),"sources_failed":sum(1 for s in source_log if s["status"]=="failed"),
                              "new_events":len(kept),"filtered_out":len(filtered)},
