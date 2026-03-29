@@ -1,8 +1,8 @@
 {
   "date": "2026-03-29",
   "dateKr": "2026년 03월 29일",
-  "generatedAt": "2026-03-29T13:32:18.378820+00:00",
-  "brief": "**Deal Flow Memo - March 29, 2026**\n\nToday's contract announcements signal accelerating convergence between energy storage and AI infrastructure demand. Form Energy's 12GWh iron-air battery agreement with US data centers (Energy Storage News) represents a significant validation of long-duration storage economics, while American Battery Factory's 4.5GWh LFP offtake deals (Energy Storage News) suggest domestic manufacturing capacity is finally meeting anticipated demand. The UK's LCCC contract signings for AR7 offshore wind projects (Offshore Wind Biz) indicate European renewable buildout remains on aggressive timeline despite grid integration challenges. \n\n**Watch next:** Monitor whether other long-duration storage players can replicate Form's data center penetration strategy, and track if American Battery Factory's offtake momentum translates to additional US LFP manufacturing announcements in Q2.",
+  "generatedAt": "2026-03-29T13:39:05.915672+00:00",
+  "brief": "**Internal Deal Flow Memo - March 29, 2026**\n\nToday's contract announcements signal accelerating demand convergence between traditional grid storage and high-power AI infrastructure needs. Form Energy's massive 12GWh iron-air battery deal with US data centers (Energy Storage News) represents a critical inflection point where long-duration storage economics finally align with hyperscale computing requirements, while American Battery Factory's 4.5GWh LFP offtake agreements (Energy Storage News) suggest traditional grid storage demand remains robust despite AI sector pull.\n\nThe UK's AR7 Contract for Difference awards (Offshore Wind Biz) indicate European renewable capacity additions are maintaining momentum even as global supply chains face AI-driven component competition. Watch for similar data center storage announcements from other long-duration players in Q2, and monitor whether LFP pricing holds steady given this dual demand pressure from both grid and compute applications.\n\nPipeline focus should shift toward companies bridging renewable generation and AI infrastructure, particularly those with differentiated storage chemistry or grid-edge computing solutions.",
   "stats": {
     "total": 29,
     "high": 4,
@@ -2719,7 +2719,21 @@
       "status": "success",
       "error": null,
       "items": 10,
-      "fetched_at": "2026-03-29T13:32:09.806669+00:00"
+      "fetched_at": "2026-03-29T13:38:55.583062+00:00",
+      "source_type": "industry",
+      "reliability": 2,
+      "topics": [
+        "grid software",
+        "demand response",
+        "VPP",
+        "utility procurement",
+        "energy storage",
+        "data center power",
+        "regulatory"
+      ],
+      "geography": "US",
+      "approved_by": "analyst",
+      "approved_date": "2025-01-01"
     },
     {
       "id": "pvmagazine",
@@ -2728,7 +2742,21 @@
       "status": "success",
       "error": null,
       "items": 20,
-      "fetched_at": "2026-03-29T13:32:09.971945+00:00"
+      "fetched_at": "2026-03-29T13:38:55.709741+00:00",
+      "source_type": "industry",
+      "reliability": 2,
+      "topics": [
+        "solar PV",
+        "energy storage",
+        "hydrogen",
+        "grid forecasting",
+        "electrolyzer",
+        "green hydrogen",
+        "battery"
+      ],
+      "geography": "GLOBAL",
+      "approved_by": "analyst",
+      "approved_date": "2025-01-01"
     },
     {
       "id": "energystoragenews",
@@ -2737,7 +2765,20 @@
       "status": "success",
       "error": null,
       "items": 20,
-      "fetched_at": "2026-03-29T13:32:10.360531+00:00"
+      "fetched_at": "2026-03-29T13:38:56.055028+00:00",
+      "source_type": "industry",
+      "reliability": 2,
+      "topics": [
+        "battery storage",
+        "BESS",
+        "grid-scale ESS",
+        "flow battery",
+        "long-duration storage",
+        "utility ESS"
+      ],
+      "geography": "GLOBAL",
+      "approved_by": "analyst",
+      "approved_date": "2025-01-01"
     },
     {
       "id": "offshorewind",
@@ -2746,7 +2787,20 @@
       "status": "success",
       "error": null,
       "items": 10,
-      "fetched_at": "2026-03-29T13:32:10.609219+00:00"
+      "fetched_at": "2026-03-29T13:38:56.206157+00:00",
+      "source_type": "industry",
+      "reliability": 2,
+      "topics": [
+        "offshore wind",
+        "HVDC",
+        "subsea cable",
+        "port infrastructure",
+        "OEM contracts",
+        "grid connection"
+      ],
+      "geography": "EU",
+      "approved_by": "analyst",
+      "approved_date": "2025-01-01"
     },
     {
       "id": "electrek",
@@ -2755,7 +2809,20 @@
       "status": "success",
       "error": null,
       "items": 20,
-      "fetched_at": "2026-03-29T13:32:10.818074+00:00"
+      "fetched_at": "2026-03-29T13:38:56.364968+00:00",
+      "source_type": "industry",
+      "reliability": 3,
+      "topics": [
+        "EV",
+        "energy storage",
+        "clean energy",
+        "DC power",
+        "hyperscaler energy",
+        "utility-scale battery"
+      ],
+      "geography": "US",
+      "approved_by": "analyst",
+      "approved_date": "2025-01-01"
     },
     {
       "id": "h2view",
@@ -2764,7 +2831,182 @@
       "status": "partial",
       "error": "Feed returned 0 usable items",
       "items": 0,
-      "fetched_at": "2026-03-29T13:32:10.995081+00:00"
+      "fetched_at": "2026-03-29T13:38:56.539406+00:00",
+      "source_type": "industry",
+      "reliability": 2,
+      "topics": [
+        "green hydrogen",
+        "electrolyzer",
+        "hydrogen production",
+        "hydrogen transport",
+        "marine hydrogen",
+        "bunkering",
+        "fuel cell",
+        "PEM",
+        "SOEC"
+      ],
+      "geography": "GLOBAL",
+      "approved_by": "analyst",
+      "approved_date": "2025-01-01"
+    }
+  ],
+  "source_registry": [
+    {
+      "id": "utilitydive",
+      "name": "Utility Dive",
+      "url": "https://www.utilitydive.com/feeds/news/",
+      "source_type": "industry",
+      "reliability": 2,
+      "topics": [
+        "grid software",
+        "demand response",
+        "VPP",
+        "utility procurement",
+        "energy storage",
+        "data center power",
+        "regulatory"
+      ],
+      "segments": [
+        "grid_sw",
+        "ess",
+        "dc_power"
+      ],
+      "geography": "US",
+      "language": "en",
+      "access": "free",
+      "approved_by": "analyst",
+      "approved_date": "2025-01-01",
+      "notes": "Strong US utility market coverage. Financial figures are secondary — verify against FERC/SEC filings."
+    },
+    {
+      "id": "pvmagazine",
+      "name": "PV Magazine",
+      "url": "https://www.pv-magazine.com/feed/",
+      "source_type": "industry",
+      "reliability": 2,
+      "topics": [
+        "solar PV",
+        "energy storage",
+        "hydrogen",
+        "grid forecasting",
+        "electrolyzer",
+        "green hydrogen",
+        "battery"
+      ],
+      "segments": [
+        "ess",
+        "hydrogen",
+        "forecasting"
+      ],
+      "geography": "GLOBAL",
+      "language": "en",
+      "access": "free",
+      "approved_by": "analyst",
+      "approved_date": "2025-01-01",
+      "notes": "Good European + global coverage. Project figures should be verified against developer announcements."
+    },
+    {
+      "id": "energystoragenews",
+      "name": "Energy Storage News",
+      "url": "https://www.energy-storage.news/feed/",
+      "source_type": "industry",
+      "reliability": 2,
+      "topics": [
+        "battery storage",
+        "BESS",
+        "grid-scale ESS",
+        "flow battery",
+        "long-duration storage",
+        "utility ESS"
+      ],
+      "segments": [
+        "ess"
+      ],
+      "geography": "GLOBAL",
+      "language": "en",
+      "access": "free",
+      "approved_by": "analyst",
+      "approved_date": "2025-01-01",
+      "notes": "Specialist ESS trade press. Good for deployment and contract announcements."
+    },
+    {
+      "id": "offshorewind",
+      "name": "Offshore Wind Biz",
+      "url": "https://www.offshorewind.biz/feed/",
+      "source_type": "industry",
+      "reliability": 2,
+      "topics": [
+        "offshore wind",
+        "HVDC",
+        "subsea cable",
+        "port infrastructure",
+        "OEM contracts",
+        "grid connection"
+      ],
+      "segments": [
+        "hvdc",
+        "ess"
+      ],
+      "geography": "EU",
+      "language": "en",
+      "access": "free",
+      "approved_by": "analyst",
+      "approved_date": "2025-01-01",
+      "notes": "Strong North Sea / European offshore coverage. Useful for HVDC cable and interconnect signals."
+    },
+    {
+      "id": "electrek",
+      "name": "Electrek",
+      "url": "https://electrek.co/feed/",
+      "source_type": "industry",
+      "reliability": 3,
+      "topics": [
+        "EV",
+        "energy storage",
+        "clean energy",
+        "DC power",
+        "hyperscaler energy",
+        "utility-scale battery"
+      ],
+      "segments": [
+        "ess",
+        "dc_power",
+        "forecasting"
+      ],
+      "geography": "US",
+      "language": "en",
+      "access": "free",
+      "approved_by": "analyst",
+      "approved_date": "2025-01-01",
+      "notes": "Tier 3 — broad coverage, often first to report but verify all figures. Replaced Recharge News (Informa paywall). Not suitable as primary citation."
+    },
+    {
+      "id": "h2view",
+      "name": "H2 View",
+      "url": "https://www.h2-view.com/feed/",
+      "source_type": "industry",
+      "reliability": 2,
+      "topics": [
+        "green hydrogen",
+        "electrolyzer",
+        "hydrogen production",
+        "hydrogen transport",
+        "marine hydrogen",
+        "bunkering",
+        "fuel cell",
+        "PEM",
+        "SOEC"
+      ],
+      "segments": [
+        "hydrogen",
+        "marine_fc"
+      ],
+      "geography": "GLOBAL",
+      "language": "en",
+      "access": "free",
+      "approved_by": "analyst",
+      "approved_date": "2025-01-01",
+      "notes": "Replaced Hydrogen Insight (Informa paywall blocked RSS). Specialist hydrogen trade press. Verify project capex against developer filings."
     }
   ],
   "score_rulebook": [
