@@ -1,8 +1,8 @@
 {
   "date": "2026-03-29",
   "dateKr": "2026년 03월 29일",
-  "generatedAt": "2026-03-29T01:25:07.975259+00:00",
-  "brief": "**Deal Flow Memo - March 29, 2026**\n\nToday's contract announcements signal accelerating demand across three critical infrastructure segments. American Battery Factory's 4.5GWh LFP offtake (Energy Storage News) and Form Energy's massive 12GWh iron-air deal with AI data centers highlight the bifurcation we've been tracking—standard lithium for mobility/grid applications versus specialized long-duration tech for compute infrastructure. The UK's AR7 Contracts for Difference signing (Offshore Wind Biz) suggests European offshore wind deployment is moving past supply chain bottlenecks into execution phase. \n\nForm Energy's data center pivot is particularly noteworthy given AI's growing power density requirements and our thesis on storage-as-infrastructure plays. Watch for similar long-duration storage announcements from Microsoft, Google, and Amazon over the next 60 days as hyperscalers lock in grid stability solutions ahead of their 2027 capacity expansions.",
+  "generatedAt": "2026-03-29T13:26:34.411590+00:00",
+  "brief": "**Deal Flow Memo - March 29, 2026**\n\nToday's contract announcements signal accelerating consolidation around proven storage technologies and new demand verticals. American Battery Factory's 4.5GWh LFP offtake (Energy Storage News) and Form Energy's massive 12GWh iron-air deal for AI data centers (Energy Storage News) demonstrate both the scale-up of established players and emergence of AI infrastructure as a major storage demand driver. The AI-storage nexus is particularly noteworthy - data centers requiring multi-day backup are creating entirely new market segments that favor long-duration technologies like Form's iron-air over traditional lithium solutions.\n\nMeanwhile, the UK's AR7 CfD announcements (Offshore Wind Biz) and hydrogen capacity shifts (PV Magazine) suggest continued policy-driven momentum in traditional renewables infrastructure. Watch for more AI-storage partnerships in Q2 earnings calls and whether other long-duration storage companies can secure similar hyperscale deals - this could be an early indicator of a new investment cycle around AI energy infrastructure rather than just renewable generation.",
   "stats": {
     "total": 29,
     "high": 4,
@@ -61,14 +61,14 @@
         "source_label": "Energy Storage News · 2026-03-25",
         "matched_rule_name": "offtake agreement",
         "matched_rule_tier": "Tier 1 — Contract",
-        "why_it_matters": "Offtake/supply agreement is the clearest commercial-stage signal. LCOS competitiveness is implied but unconfirmed without disclosed contract terms.",
+        "why_it_matters": "Offtake/supply agreement is the clearest commercial-stage signal. LCOS competitiveness implied but requires contract terms for confirmation.",
         "missing_evidence": [
-          "Contract ACV (annual contract value) not disclosed",
+          "Contract ACV not disclosed",
           "Duration and renewal terms not public",
           "Exclusivity and geographic scope unknown"
         ],
         "confidence": "Medium",
-        "confidence_rationale": "Tier-1 event type; company unmatched or mixed score modifiers."
+        "confidence_rationale": "Tier-1 event type; company unmatched or mixed modifiers."
       }
     },
     {
@@ -112,9 +112,9 @@
         "source_label": "Energy Storage News · 2026-03-27",
         "matched_rule_name": "supply agreement",
         "matched_rule_tier": "Tier 1 — Contract",
-        "why_it_matters": "Offtake/supply agreement is the clearest commercial-stage signal. LCOS competitiveness is implied but unconfirmed without disclosed contract terms.",
+        "why_it_matters": "Offtake/supply agreement is the clearest commercial-stage signal. LCOS competitiveness implied but requires contract terms for confirmation.",
         "missing_evidence": [
-          "Contract ACV (annual contract value) not disclosed",
+          "Contract ACV not disclosed",
           "Duration and renewal terms not public",
           "Exclusivity and geographic scope unknown"
         ],
@@ -152,12 +152,12 @@
         "matched_rule_tier": "Tier 1 — Contract",
         "why_it_matters": "No rationale available.",
         "missing_evidence": [
-          "Contract ACV (annual contract value) not disclosed",
+          "Contract ACV not disclosed",
           "Duration and renewal terms not public",
           "Exclusivity and geographic scope unknown"
         ],
         "confidence": "Medium",
-        "confidence_rationale": "Tier-1 event type; company unmatched or mixed score modifiers."
+        "confidence_rationale": "Tier-1 event type; company unmatched or mixed modifiers."
       }
     },
     {
@@ -203,12 +203,12 @@
         "matched_rule_tier": "Tier 1 — Contract",
         "why_it_matters": "Offtake agreement is the critical missing link in most hydrogen project theses. Without a named buyer at contracted price, projects remain unviable.",
         "missing_evidence": [
-          "Contract ACV (annual contract value) not disclosed",
+          "Contract ACV not disclosed",
           "Duration and renewal terms not public",
           "Exclusivity and geographic scope unknown"
         ],
         "confidence": "Medium",
-        "confidence_rationale": "Tier-1 event type; company unmatched or mixed score modifiers."
+        "confidence_rationale": "Tier-1 event type; company unmatched or mixed modifiers."
       }
     },
     {
@@ -252,13 +252,13 @@
         "source_label": "Energy Storage News · 2026-03-25",
         "matched_rule_name": "no rule matched",
         "matched_rule_tier": "Tier 5 — News",
-        "why_it_matters": "No specific investment pattern matched. Context only — not weighted in assessment without corroboration.",
+        "why_it_matters": "No specific investment pattern matched. Context only — not weighted without corroboration.",
         "missing_evidence": [
           "No investment-relevant pattern matched",
-          "Primary research required before forming a view"
+          "Primary research required"
         ],
         "confidence": "Low",
-        "confidence_rationale": "Score below signal threshold. Context only."
+        "confidence_rationale": "Score below threshold. Context only."
       }
     },
     {
@@ -302,13 +302,13 @@
         "source_label": "Energy Storage News · 2026-03-25",
         "matched_rule_name": "no rule matched",
         "matched_rule_tier": "Tier 5 — News",
-        "why_it_matters": "No specific investment pattern matched. Context only — not weighted in assessment without corroboration.",
+        "why_it_matters": "No specific investment pattern matched. Context only — not weighted without corroboration.",
         "missing_evidence": [
           "No investment-relevant pattern matched",
-          "Primary research required before forming a view"
+          "Primary research required"
         ],
         "confidence": "Low",
-        "confidence_rationale": "Score below signal threshold. Context only."
+        "confidence_rationale": "Score below threshold. Context only."
       }
     },
     {
@@ -352,13 +352,13 @@
         "source_label": "Energy Storage News · 2026-03-26",
         "matched_rule_name": "no rule matched",
         "matched_rule_tier": "Tier 5 — News",
-        "why_it_matters": "No specific investment pattern matched. Context only — not weighted in assessment without corroboration.",
+        "why_it_matters": "No specific investment pattern matched. Context only — not weighted without corroboration.",
         "missing_evidence": [
           "No investment-relevant pattern matched",
-          "Primary research required before forming a view"
+          "Primary research required"
         ],
         "confidence": "Low",
-        "confidence_rationale": "Score below signal threshold. Context only."
+        "confidence_rationale": "Score below threshold. Context only."
       }
     },
     {
@@ -389,13 +389,13 @@
         "source_label": "PV Magazine · 2026-03-27",
         "matched_rule_name": "collaboration",
         "matched_rule_tier": "Tier 3 — Partnership",
-        "why_it_matters": "Named strategic partnership is directional. MOU alone does not confirm commercial intent — check for binding terms (exclusivity, minimum volume).",
+        "why_it_matters": "Named strategic partnership is directional. MOU alone does not confirm commercial intent — check for binding terms.",
         "missing_evidence": [
           "Binding terms (exclusivity, minimum volume) not confirmed",
-          "IP ownership and development scope unclear"
+          "IP ownership unclear"
         ],
         "confidence": "Low",
-        "confidence_rationale": "Score below signal threshold. Context only."
+        "confidence_rationale": "Score below threshold. Context only."
       }
     },
     {
@@ -439,13 +439,13 @@
         "source_label": "Energy Storage News · 2026-03-25",
         "matched_rule_name": "no rule matched",
         "matched_rule_tier": "Tier 5 — News",
-        "why_it_matters": "No specific investment pattern matched. Context only — not weighted in assessment without corroboration.",
+        "why_it_matters": "No specific investment pattern matched. Context only — not weighted without corroboration.",
         "missing_evidence": [
           "No investment-relevant pattern matched",
-          "Primary research required before forming a view"
+          "Primary research required"
         ],
         "confidence": "Low",
-        "confidence_rationale": "Score below signal threshold. Context only."
+        "confidence_rationale": "Score below threshold. Context only."
       }
     },
     {
@@ -483,13 +483,13 @@
         "source_label": "Electrek · 2026-03-27",
         "matched_rule_name": "no rule matched",
         "matched_rule_tier": "Tier 5 — News",
-        "why_it_matters": "No specific investment pattern matched. Context only — not weighted in assessment without corroboration.",
+        "why_it_matters": "No specific investment pattern matched. Context only — not weighted without corroboration.",
         "missing_evidence": [
           "No investment-relevant pattern matched",
-          "Primary research required before forming a view"
+          "Primary research required"
         ],
         "confidence": "Low",
-        "confidence_rationale": "Score below signal threshold. Context only."
+        "confidence_rationale": "Score below threshold. Context only."
       }
     },
     {
@@ -527,13 +527,13 @@
         "source_label": "Electrek · 2026-03-27",
         "matched_rule_name": "no rule matched",
         "matched_rule_tier": "Tier 5 — News",
-        "why_it_matters": "No specific investment pattern matched. Context only — not weighted in assessment without corroboration.",
+        "why_it_matters": "No specific investment pattern matched. Context only — not weighted without corroboration.",
         "missing_evidence": [
           "No investment-relevant pattern matched",
-          "Primary research required before forming a view"
+          "Primary research required"
         ],
         "confidence": "Low",
-        "confidence_rationale": "Score below signal threshold. Context only."
+        "confidence_rationale": "Score below threshold. Context only."
       }
     },
     {
@@ -571,13 +571,13 @@
         "source_label": "Utility Dive · 2026-03-26",
         "matched_rule_name": "no rule matched",
         "matched_rule_tier": "Tier 5 — News",
-        "why_it_matters": "No specific investment pattern matched. Context only — not weighted in assessment without corroboration.",
+        "why_it_matters": "No specific investment pattern matched. Context only — not weighted without corroboration.",
         "missing_evidence": [
           "No investment-relevant pattern matched",
-          "Primary research required before forming a view"
+          "Primary research required"
         ],
         "confidence": "Low",
-        "confidence_rationale": "Score below signal threshold. Context only."
+        "confidence_rationale": "Score below threshold. Context only."
       }
     },
     {
@@ -615,13 +615,13 @@
         "source_label": "Electrek · 2026-03-27",
         "matched_rule_name": "no rule matched",
         "matched_rule_tier": "Tier 5 — News",
-        "why_it_matters": "No specific investment pattern matched. Context only — not weighted in assessment without corroboration.",
+        "why_it_matters": "No specific investment pattern matched. Context only — not weighted without corroboration.",
         "missing_evidence": [
           "No investment-relevant pattern matched",
-          "Primary research required before forming a view"
+          "Primary research required"
         ],
         "confidence": "Low",
-        "confidence_rationale": "Score below signal threshold. Context only."
+        "confidence_rationale": "Score below threshold. Context only."
       }
     },
     {
@@ -659,13 +659,13 @@
         "source_label": "Electrek · 2026-03-27",
         "matched_rule_name": "no rule matched",
         "matched_rule_tier": "Tier 5 — News",
-        "why_it_matters": "No specific investment pattern matched. Context only — not weighted in assessment without corroboration.",
+        "why_it_matters": "No specific investment pattern matched. Context only — not weighted without corroboration.",
         "missing_evidence": [
           "No investment-relevant pattern matched",
-          "Primary research required before forming a view"
+          "Primary research required"
         ],
         "confidence": "Low",
-        "confidence_rationale": "Score below signal threshold. Context only."
+        "confidence_rationale": "Score below threshold. Context only."
       }
     },
     {
@@ -703,13 +703,13 @@
         "source_label": "Electrek · 2026-03-27",
         "matched_rule_name": "no rule matched",
         "matched_rule_tier": "Tier 5 — News",
-        "why_it_matters": "No specific investment pattern matched. Context only — not weighted in assessment without corroboration.",
+        "why_it_matters": "No specific investment pattern matched. Context only — not weighted without corroboration.",
         "missing_evidence": [
           "No investment-relevant pattern matched",
-          "Primary research required before forming a view"
+          "Primary research required"
         ],
         "confidence": "Low",
-        "confidence_rationale": "Score below signal threshold. Context only."
+        "confidence_rationale": "Score below threshold. Context only."
       }
     },
     {
@@ -747,13 +747,13 @@
         "source_label": "Energy Storage News · 2026-03-24",
         "matched_rule_name": "no rule matched",
         "matched_rule_tier": "Tier 5 — News",
-        "why_it_matters": "No specific investment pattern matched. Context only — not weighted in assessment without corroboration.",
+        "why_it_matters": "No specific investment pattern matched. Context only — not weighted without corroboration.",
         "missing_evidence": [
           "No investment-relevant pattern matched",
-          "Primary research required before forming a view"
+          "Primary research required"
         ],
         "confidence": "Low",
-        "confidence_rationale": "Score below signal threshold. Context only."
+        "confidence_rationale": "Score below threshold. Context only."
       }
     },
     {
@@ -791,13 +791,13 @@
         "source_label": "Energy Storage News · 2026-03-25",
         "matched_rule_name": "no rule matched",
         "matched_rule_tier": "Tier 5 — News",
-        "why_it_matters": "No specific investment pattern matched. Context only — not weighted in assessment without corroboration.",
+        "why_it_matters": "No specific investment pattern matched. Context only — not weighted without corroboration.",
         "missing_evidence": [
           "No investment-relevant pattern matched",
-          "Primary research required before forming a view"
+          "Primary research required"
         ],
         "confidence": "Low",
-        "confidence_rationale": "Score below signal threshold. Context only."
+        "confidence_rationale": "Score below threshold. Context only."
       }
     },
     {
@@ -835,13 +835,13 @@
         "source_label": "Utility Dive · 2026-03-26",
         "matched_rule_name": "no rule matched",
         "matched_rule_tier": "Tier 5 — News",
-        "why_it_matters": "No specific investment pattern matched. Context only — not weighted in assessment without corroboration.",
+        "why_it_matters": "No specific investment pattern matched. Context only — not weighted without corroboration.",
         "missing_evidence": [
           "No investment-relevant pattern matched",
-          "Primary research required before forming a view"
+          "Primary research required"
         ],
         "confidence": "Low",
-        "confidence_rationale": "Score below signal threshold. Context only."
+        "confidence_rationale": "Score below threshold. Context only."
       }
     },
     {
@@ -879,13 +879,13 @@
         "source_label": "Utility Dive · 2026-03-26",
         "matched_rule_name": "no rule matched",
         "matched_rule_tier": "Tier 5 — News",
-        "why_it_matters": "No specific investment pattern matched. Context only — not weighted in assessment without corroboration.",
+        "why_it_matters": "No specific investment pattern matched. Context only — not weighted without corroboration.",
         "missing_evidence": [
           "No investment-relevant pattern matched",
-          "Primary research required before forming a view"
+          "Primary research required"
         ],
         "confidence": "Low",
-        "confidence_rationale": "Score below signal threshold. Context only."
+        "confidence_rationale": "Score below threshold. Context only."
       }
     },
     {
@@ -923,13 +923,13 @@
         "source_label": "Energy Storage News · 2026-03-26",
         "matched_rule_name": "no rule matched",
         "matched_rule_tier": "Tier 5 — News",
-        "why_it_matters": "No specific investment pattern matched. Context only — not weighted in assessment without corroboration.",
+        "why_it_matters": "No specific investment pattern matched. Context only — not weighted without corroboration.",
         "missing_evidence": [
           "No investment-relevant pattern matched",
-          "Primary research required before forming a view"
+          "Primary research required"
         ],
         "confidence": "Low",
-        "confidence_rationale": "Score below signal threshold. Context only."
+        "confidence_rationale": "Score below threshold. Context only."
       }
     },
     {
@@ -967,13 +967,13 @@
         "source_label": "PV Magazine · 2026-03-27",
         "matched_rule_name": "no rule matched",
         "matched_rule_tier": "Tier 5 — News",
-        "why_it_matters": "No specific investment pattern matched. Context only — not weighted in assessment without corroboration.",
+        "why_it_matters": "No specific investment pattern matched. Context only — not weighted without corroboration.",
         "missing_evidence": [
           "No investment-relevant pattern matched",
-          "Primary research required before forming a view"
+          "Primary research required"
         ],
         "confidence": "Low",
-        "confidence_rationale": "Score below signal threshold. Context only."
+        "confidence_rationale": "Score below threshold. Context only."
       }
     },
     {
@@ -1011,13 +1011,13 @@
         "source_label": "PV Magazine · 2026-03-27",
         "matched_rule_name": "no rule matched",
         "matched_rule_tier": "Tier 5 — News",
-        "why_it_matters": "No specific investment pattern matched. Context only — not weighted in assessment without corroboration.",
+        "why_it_matters": "No specific investment pattern matched. Context only — not weighted without corroboration.",
         "missing_evidence": [
           "No investment-relevant pattern matched",
-          "Primary research required before forming a view"
+          "Primary research required"
         ],
         "confidence": "Low",
-        "confidence_rationale": "Score below signal threshold. Context only."
+        "confidence_rationale": "Score below threshold. Context only."
       }
     },
     {
@@ -1055,13 +1055,13 @@
         "source_label": "PV Magazine · 2026-03-27",
         "matched_rule_name": "no rule matched",
         "matched_rule_tier": "Tier 5 — News",
-        "why_it_matters": "No specific investment pattern matched. Context only — not weighted in assessment without corroboration.",
+        "why_it_matters": "No specific investment pattern matched. Context only — not weighted without corroboration.",
         "missing_evidence": [
           "No investment-relevant pattern matched",
-          "Primary research required before forming a view"
+          "Primary research required"
         ],
         "confidence": "Low",
-        "confidence_rationale": "Score below signal threshold. Context only."
+        "confidence_rationale": "Score below threshold. Context only."
       }
     },
     {
@@ -1099,13 +1099,13 @@
         "source_label": "Energy Storage News · 2026-03-27",
         "matched_rule_name": "no rule matched",
         "matched_rule_tier": "Tier 5 — News",
-        "why_it_matters": "No specific investment pattern matched. Context only — not weighted in assessment without corroboration.",
+        "why_it_matters": "No specific investment pattern matched. Context only — not weighted without corroboration.",
         "missing_evidence": [
           "No investment-relevant pattern matched",
-          "Primary research required before forming a view"
+          "Primary research required"
         ],
         "confidence": "Low",
-        "confidence_rationale": "Score below signal threshold. Context only."
+        "confidence_rationale": "Score below threshold. Context only."
       }
     },
     {
@@ -1143,13 +1143,13 @@
         "source_label": "Energy Storage News · 2026-03-27",
         "matched_rule_name": "no rule matched",
         "matched_rule_tier": "Tier 5 — News",
-        "why_it_matters": "No specific investment pattern matched. Context only — not weighted in assessment without corroboration.",
+        "why_it_matters": "No specific investment pattern matched. Context only — not weighted without corroboration.",
         "missing_evidence": [
           "No investment-relevant pattern matched",
-          "Primary research required before forming a view"
+          "Primary research required"
         ],
         "confidence": "Low",
-        "confidence_rationale": "Score below signal threshold. Context only."
+        "confidence_rationale": "Score below threshold. Context only."
       }
     },
     {
@@ -1187,13 +1187,13 @@
         "source_label": "Energy Storage News · 2026-03-27",
         "matched_rule_name": "no rule matched",
         "matched_rule_tier": "Tier 5 — News",
-        "why_it_matters": "No specific investment pattern matched. Context only — not weighted in assessment without corroboration.",
+        "why_it_matters": "No specific investment pattern matched. Context only — not weighted without corroboration.",
         "missing_evidence": [
           "No investment-relevant pattern matched",
-          "Primary research required before forming a view"
+          "Primary research required"
         ],
         "confidence": "Low",
-        "confidence_rationale": "Score below signal threshold. Context only."
+        "confidence_rationale": "Score below threshold. Context only."
       }
     },
     {
@@ -1231,13 +1231,13 @@
         "source_label": "Offshore Wind Biz · 2026-03-27",
         "matched_rule_name": "no rule matched",
         "matched_rule_tier": "Tier 5 — News",
-        "why_it_matters": "No specific investment pattern matched. Context only — not weighted in assessment without corroboration.",
+        "why_it_matters": "No specific investment pattern matched. Context only — not weighted without corroboration.",
         "missing_evidence": [
           "No investment-relevant pattern matched",
-          "Primary research required before forming a view"
+          "Primary research required"
         ],
         "confidence": "Low",
-        "confidence_rationale": "Score below signal threshold. Context only."
+        "confidence_rationale": "Score below threshold. Context only."
       }
     },
     {
@@ -1275,13 +1275,13 @@
         "source_label": "Electrek · 2026-03-27",
         "matched_rule_name": "no rule matched",
         "matched_rule_tier": "Tier 5 — News",
-        "why_it_matters": "No specific investment pattern matched. Context only — not weighted in assessment without corroboration.",
+        "why_it_matters": "No specific investment pattern matched. Context only — not weighted without corroboration.",
         "missing_evidence": [
           "No investment-relevant pattern matched",
-          "Primary research required before forming a view"
+          "Primary research required"
         ],
         "confidence": "Low",
-        "confidence_rationale": "Score below signal threshold. Context only."
+        "confidence_rationale": "Score below threshold. Context only."
       }
     },
     {
@@ -1312,14 +1312,13 @@
         "source_label": "Utility Dive · 2026-03-25",
         "matched_rule_name": "delay",
         "matched_rule_tier": "Tier 4 — Negative",
-        "why_it_matters": "Negative signals require investment timeline reassessment. Determine if project-level (isolated) or structural (market/technology).",
+        "why_it_matters": "Negative signals require investment timeline reassessment. Determine if project-level or structural.",
         "missing_evidence": [
           "Root cause not confirmed",
-          "Management mitigation plan not public",
-          "Impact on existing contracts not disclosed"
+          "Management mitigation plan not public"
         ],
         "confidence": "Low",
-        "confidence_rationale": "Negative signal — primary source verification required."
+        "confidence_rationale": "Negative — primary source verification required."
       }
     }
   ],
@@ -1352,13 +1351,13 @@
         "source_label": "Utility Dive · 2026-03-27",
         "matched_rule_name": "no rule matched",
         "matched_rule_tier": "Tier 5 — News",
-        "why_it_matters": "No specific investment pattern matched. Context only — not weighted in assessment without corroboration.",
+        "why_it_matters": "No specific investment pattern matched. Context only — not weighted without corroboration.",
         "missing_evidence": [
           "No investment-relevant pattern matched",
-          "Primary research required before forming a view"
+          "Primary research required"
         ],
         "confidence": "Low",
-        "confidence_rationale": "Score below signal threshold. Context only."
+        "confidence_rationale": "Score below threshold. Context only."
       },
       "drop_reason": "score below threshold"
     },
@@ -1390,13 +1389,13 @@
         "source_label": "Utility Dive · 2026-03-27",
         "matched_rule_name": "no rule matched",
         "matched_rule_tier": "Tier 5 — News",
-        "why_it_matters": "No specific investment pattern matched. Context only — not weighted in assessment without corroboration.",
+        "why_it_matters": "No specific investment pattern matched. Context only — not weighted without corroboration.",
         "missing_evidence": [
           "No investment-relevant pattern matched",
-          "Primary research required before forming a view"
+          "Primary research required"
         ],
         "confidence": "Low",
-        "confidence_rationale": "Score below signal threshold. Context only."
+        "confidence_rationale": "Score below threshold. Context only."
       },
       "drop_reason": "score below threshold"
     },
@@ -1428,13 +1427,13 @@
         "source_label": "Utility Dive · 2026-03-27",
         "matched_rule_name": "no rule matched",
         "matched_rule_tier": "Tier 5 — News",
-        "why_it_matters": "No specific investment pattern matched. Context only — not weighted in assessment without corroboration.",
+        "why_it_matters": "No specific investment pattern matched. Context only — not weighted without corroboration.",
         "missing_evidence": [
           "No investment-relevant pattern matched",
-          "Primary research required before forming a view"
+          "Primary research required"
         ],
         "confidence": "Low",
-        "confidence_rationale": "Score below signal threshold. Context only."
+        "confidence_rationale": "Score below threshold. Context only."
       },
       "drop_reason": "score below threshold"
     },
@@ -1466,13 +1465,13 @@
         "source_label": "Utility Dive · 2026-03-26",
         "matched_rule_name": "no rule matched",
         "matched_rule_tier": "Tier 5 — News",
-        "why_it_matters": "No specific investment pattern matched. Context only — not weighted in assessment without corroboration.",
+        "why_it_matters": "No specific investment pattern matched. Context only — not weighted without corroboration.",
         "missing_evidence": [
           "No investment-relevant pattern matched",
-          "Primary research required before forming a view"
+          "Primary research required"
         ],
         "confidence": "Low",
-        "confidence_rationale": "Score below signal threshold. Context only."
+        "confidence_rationale": "Score below threshold. Context only."
       },
       "drop_reason": "score below threshold"
     },
@@ -1504,13 +1503,13 @@
         "source_label": "Utility Dive · 2026-03-25",
         "matched_rule_name": "no rule matched",
         "matched_rule_tier": "Tier 5 — News",
-        "why_it_matters": "No specific investment pattern matched. Context only — not weighted in assessment without corroboration.",
+        "why_it_matters": "No specific investment pattern matched. Context only — not weighted without corroboration.",
         "missing_evidence": [
           "No investment-relevant pattern matched",
-          "Primary research required before forming a view"
+          "Primary research required"
         ],
         "confidence": "Low",
-        "confidence_rationale": "Score below signal threshold. Context only."
+        "confidence_rationale": "Score below threshold. Context only."
       },
       "drop_reason": "score below threshold"
     },
@@ -1542,13 +1541,13 @@
         "source_label": "Utility Dive · 2026-03-25",
         "matched_rule_name": "no rule matched",
         "matched_rule_tier": "Tier 5 — News",
-        "why_it_matters": "No specific investment pattern matched. Context only — not weighted in assessment without corroboration.",
+        "why_it_matters": "No specific investment pattern matched. Context only — not weighted without corroboration.",
         "missing_evidence": [
           "No investment-relevant pattern matched",
-          "Primary research required before forming a view"
+          "Primary research required"
         ],
         "confidence": "Low",
-        "confidence_rationale": "Score below signal threshold. Context only."
+        "confidence_rationale": "Score below threshold. Context only."
       },
       "drop_reason": "score below threshold"
     },
@@ -1580,13 +1579,13 @@
         "source_label": "PV Magazine · 2026-03-27",
         "matched_rule_name": "no rule matched",
         "matched_rule_tier": "Tier 5 — News",
-        "why_it_matters": "No specific investment pattern matched. Context only — not weighted in assessment without corroboration.",
+        "why_it_matters": "No specific investment pattern matched. Context only — not weighted without corroboration.",
         "missing_evidence": [
           "No investment-relevant pattern matched",
-          "Primary research required before forming a view"
+          "Primary research required"
         ],
         "confidence": "Low",
-        "confidence_rationale": "Score below signal threshold. Context only."
+        "confidence_rationale": "Score below threshold. Context only."
       },
       "drop_reason": "score below threshold"
     },
@@ -1618,13 +1617,13 @@
         "source_label": "PV Magazine · 2026-03-27",
         "matched_rule_name": "no rule matched",
         "matched_rule_tier": "Tier 5 — News",
-        "why_it_matters": "No specific investment pattern matched. Context only — not weighted in assessment without corroboration.",
+        "why_it_matters": "No specific investment pattern matched. Context only — not weighted without corroboration.",
         "missing_evidence": [
           "No investment-relevant pattern matched",
-          "Primary research required before forming a view"
+          "Primary research required"
         ],
         "confidence": "Low",
-        "confidence_rationale": "Score below signal threshold. Context only."
+        "confidence_rationale": "Score below threshold. Context only."
       },
       "drop_reason": "score below threshold"
     },
@@ -1656,13 +1655,13 @@
         "source_label": "PV Magazine · 2026-03-27",
         "matched_rule_name": "no rule matched",
         "matched_rule_tier": "Tier 5 — News",
-        "why_it_matters": "No specific investment pattern matched. Context only — not weighted in assessment without corroboration.",
+        "why_it_matters": "No specific investment pattern matched. Context only — not weighted without corroboration.",
         "missing_evidence": [
           "No investment-relevant pattern matched",
-          "Primary research required before forming a view"
+          "Primary research required"
         ],
         "confidence": "Low",
-        "confidence_rationale": "Score below signal threshold. Context only."
+        "confidence_rationale": "Score below threshold. Context only."
       },
       "drop_reason": "score below threshold"
     },
@@ -1694,13 +1693,13 @@
         "source_label": "PV Magazine · 2026-03-27",
         "matched_rule_name": "no rule matched",
         "matched_rule_tier": "Tier 5 — News",
-        "why_it_matters": "No specific investment pattern matched. Context only — not weighted in assessment without corroboration.",
+        "why_it_matters": "No specific investment pattern matched. Context only — not weighted without corroboration.",
         "missing_evidence": [
           "No investment-relevant pattern matched",
-          "Primary research required before forming a view"
+          "Primary research required"
         ],
         "confidence": "Low",
-        "confidence_rationale": "Score below signal threshold. Context only."
+        "confidence_rationale": "Score below threshold. Context only."
       },
       "drop_reason": "score below threshold"
     },
@@ -1732,13 +1731,13 @@
         "source_label": "PV Magazine · 2026-03-27",
         "matched_rule_name": "no rule matched",
         "matched_rule_tier": "Tier 5 — News",
-        "why_it_matters": "No specific investment pattern matched. Context only — not weighted in assessment without corroboration.",
+        "why_it_matters": "No specific investment pattern matched. Context only — not weighted without corroboration.",
         "missing_evidence": [
           "No investment-relevant pattern matched",
-          "Primary research required before forming a view"
+          "Primary research required"
         ],
         "confidence": "Low",
-        "confidence_rationale": "Score below signal threshold. Context only."
+        "confidence_rationale": "Score below threshold. Context only."
       },
       "drop_reason": "score below threshold"
     },
@@ -1770,13 +1769,13 @@
         "source_label": "PV Magazine · 2026-03-27",
         "matched_rule_name": "no rule matched",
         "matched_rule_tier": "Tier 5 — News",
-        "why_it_matters": "No specific investment pattern matched. Context only — not weighted in assessment without corroboration.",
+        "why_it_matters": "No specific investment pattern matched. Context only — not weighted without corroboration.",
         "missing_evidence": [
           "No investment-relevant pattern matched",
-          "Primary research required before forming a view"
+          "Primary research required"
         ],
         "confidence": "Low",
-        "confidence_rationale": "Score below signal threshold. Context only."
+        "confidence_rationale": "Score below threshold. Context only."
       },
       "drop_reason": "score below threshold"
     },
@@ -1815,13 +1814,13 @@
         "source_label": "PV Magazine · 2026-03-27",
         "matched_rule_name": "no rule matched",
         "matched_rule_tier": "Tier 5 — News",
-        "why_it_matters": "No specific investment pattern matched. Context only — not weighted in assessment without corroboration.",
+        "why_it_matters": "No specific investment pattern matched. Context only — not weighted without corroboration.",
         "missing_evidence": [
           "No investment-relevant pattern matched",
-          "Primary research required before forming a view"
+          "Primary research required"
         ],
         "confidence": "Low",
-        "confidence_rationale": "Score below signal threshold. Context only."
+        "confidence_rationale": "Score below threshold. Context only."
       },
       "drop_reason": "Intent stated, no confirmed action"
     },
@@ -1853,13 +1852,13 @@
         "source_label": "PV Magazine · 2026-03-27",
         "matched_rule_name": "no rule matched",
         "matched_rule_tier": "Tier 5 — News",
-        "why_it_matters": "No specific investment pattern matched. Context only — not weighted in assessment without corroboration.",
+        "why_it_matters": "No specific investment pattern matched. Context only — not weighted without corroboration.",
         "missing_evidence": [
           "No investment-relevant pattern matched",
-          "Primary research required before forming a view"
+          "Primary research required"
         ],
         "confidence": "Low",
-        "confidence_rationale": "Score below signal threshold. Context only."
+        "confidence_rationale": "Score below threshold. Context only."
       },
       "drop_reason": "score below threshold"
     },
@@ -1891,13 +1890,13 @@
         "source_label": "PV Magazine · 2026-03-27",
         "matched_rule_name": "no rule matched",
         "matched_rule_tier": "Tier 5 — News",
-        "why_it_matters": "No specific investment pattern matched. Context only — not weighted in assessment without corroboration.",
+        "why_it_matters": "No specific investment pattern matched. Context only — not weighted without corroboration.",
         "missing_evidence": [
           "No investment-relevant pattern matched",
-          "Primary research required before forming a view"
+          "Primary research required"
         ],
         "confidence": "Low",
-        "confidence_rationale": "Score below signal threshold. Context only."
+        "confidence_rationale": "Score below threshold. Context only."
       },
       "drop_reason": "score below threshold"
     },
@@ -1929,13 +1928,13 @@
         "source_label": "PV Magazine · 2026-03-27",
         "matched_rule_name": "no rule matched",
         "matched_rule_tier": "Tier 5 — News",
-        "why_it_matters": "No specific investment pattern matched. Context only — not weighted in assessment without corroboration.",
+        "why_it_matters": "No specific investment pattern matched. Context only — not weighted without corroboration.",
         "missing_evidence": [
           "No investment-relevant pattern matched",
-          "Primary research required before forming a view"
+          "Primary research required"
         ],
         "confidence": "Low",
-        "confidence_rationale": "Score below signal threshold. Context only."
+        "confidence_rationale": "Score below threshold. Context only."
       },
       "drop_reason": "score below threshold"
     },
@@ -1967,13 +1966,13 @@
         "source_label": "PV Magazine · 2026-03-27",
         "matched_rule_name": "no rule matched",
         "matched_rule_tier": "Tier 5 — News",
-        "why_it_matters": "No specific investment pattern matched. Context only — not weighted in assessment without corroboration.",
+        "why_it_matters": "No specific investment pattern matched. Context only — not weighted without corroboration.",
         "missing_evidence": [
           "No investment-relevant pattern matched",
-          "Primary research required before forming a view"
+          "Primary research required"
         ],
         "confidence": "Low",
-        "confidence_rationale": "Score below signal threshold. Context only."
+        "confidence_rationale": "Score below threshold. Context only."
       },
       "drop_reason": "score below threshold"
     },
@@ -2005,13 +2004,13 @@
         "source_label": "PV Magazine · 2026-03-27",
         "matched_rule_name": "no rule matched",
         "matched_rule_tier": "Tier 5 — News",
-        "why_it_matters": "No specific investment pattern matched. Context only — not weighted in assessment without corroboration.",
+        "why_it_matters": "No specific investment pattern matched. Context only — not weighted without corroboration.",
         "missing_evidence": [
           "No investment-relevant pattern matched",
-          "Primary research required before forming a view"
+          "Primary research required"
         ],
         "confidence": "Low",
-        "confidence_rationale": "Score below signal threshold. Context only."
+        "confidence_rationale": "Score below threshold. Context only."
       },
       "drop_reason": "score below threshold"
     },
@@ -2043,13 +2042,13 @@
         "source_label": "PV Magazine · 2026-03-27",
         "matched_rule_name": "no rule matched",
         "matched_rule_tier": "Tier 5 — News",
-        "why_it_matters": "No specific investment pattern matched. Context only — not weighted in assessment without corroboration.",
+        "why_it_matters": "No specific investment pattern matched. Context only — not weighted without corroboration.",
         "missing_evidence": [
           "No investment-relevant pattern matched",
-          "Primary research required before forming a view"
+          "Primary research required"
         ],
         "confidence": "Low",
-        "confidence_rationale": "Score below signal threshold. Context only."
+        "confidence_rationale": "Score below threshold. Context only."
       },
       "drop_reason": "score below threshold"
     },
@@ -2081,13 +2080,13 @@
         "source_label": "PV Magazine · 2026-03-27",
         "matched_rule_name": "no rule matched",
         "matched_rule_tier": "Tier 5 — News",
-        "why_it_matters": "No specific investment pattern matched. Context only — not weighted in assessment without corroboration.",
+        "why_it_matters": "No specific investment pattern matched. Context only — not weighted without corroboration.",
         "missing_evidence": [
           "No investment-relevant pattern matched",
-          "Primary research required before forming a view"
+          "Primary research required"
         ],
         "confidence": "Low",
-        "confidence_rationale": "Score below signal threshold. Context only."
+        "confidence_rationale": "Score below threshold. Context only."
       },
       "drop_reason": "score below threshold"
     }
@@ -2104,12 +2103,20 @@
       "country": "US",
       "stage": "Scaling",
       "investor_type": "Infrastructure/PF",
-      "description": "Iron-air 100h+ LDES. ArcelorMittal strategic. Georgia gigafactory under construction.",
+      "founded": 2017,
+      "hq": "Somerville MA, US",
+      "description": "Iron-air 100h+ LDES. ArcelorMittal $100M strategic. Georgia gigafactory under construction. Three US utility contracts.",
       "tags": [
         "비상장",
         "Iron-Air",
         "Series-E"
       ],
+      "known_investors": [
+        "ArcelorMittal",
+        "GS Energy",
+        "Breakthrough Energy"
+      ],
+      "watchlist_default": true,
       "events": [
         {
           "id": "aa1ddf545241",
@@ -2152,9 +2159,9 @@
             "source_label": "Energy Storage News · 2026-03-27",
             "matched_rule_name": "supply agreement",
             "matched_rule_tier": "Tier 1 — Contract",
-            "why_it_matters": "Offtake/supply agreement is the clearest commercial-stage signal. LCOS competitiveness is implied but unconfirmed without disclosed contract terms.",
+            "why_it_matters": "Offtake/supply agreement is the clearest commercial-stage signal. LCOS competitiveness implied but requires contract terms for confirmation.",
             "missing_evidence": [
-              "Contract ACV (annual contract value) not disclosed",
+              "Contract ACV not disclosed",
               "Duration and renewal terms not public",
               "Exclusivity and geographic scope unknown"
             ],
@@ -2176,7 +2183,7 @@
           "No third-party certification — procurement prerequisite in this sector"
         ],
         "confidence": "Low",
-        "next_check": "Direct outreach or channel check recommended.",
+        "next_check": "Direct outreach recommended.",
         "event_count": 1,
         "high_signal": 1,
         "note": "Generated from existing events only. No data invented."
@@ -2190,12 +2197,12 @@
       },
       "stage_label": "PF-Ready",
       "stage_color": "#0F4C75",
-      "stage_desc": "Multiple commercial deployments or project-financed asset. Infrastructure/PF investment framework applicable.",
+      "stage_desc": "Multiple commercial deployments or project-financed asset. Infrastructure/PF framework applicable.",
       "pattern": {
         "id": "low_density",
         "label": "Insufficient Signal",
         "color": "#A8A8A8",
-        "memo": "Signal density insufficient for pattern recognition. Primary research required before forming a view."
+        "memo": "Signal density insufficient for pattern recognition. Primary research required."
       },
       "ttr": "Near-term",
       "ttr_color": "#C0392B",
@@ -2204,25 +2211,41 @@
           "rule_id": "no_cert",
           "label": "No Third-Party Certification",
           "severity": "high",
-          "memo": "No independent certification (DNV GL, TÜV, KPX, UL) confirmed. Required for procurement in most regulated energy segments."
+          "memo": "No independent certification (DNV GL, TÜV, KPX, UL). Required for regulated procurement."
         },
         {
           "rule_id": "no_buyer",
           "label": "No Named Strategic Buyer",
           "severity": "high",
-          "memo": "No named strategic buyer in any collected signal. Demand-side validation is absent."
+          "memo": "No named strategic buyer in any signal. Demand-side validation absent."
         },
         {
           "rule_id": "no_deploy",
           "label": "No Deployment / Go-Live",
           "severity": "medium",
-          "memo": "No operational deployment confirmed. TRL-9 in a commercial setting is unverified."
+          "memo": "No operational deployment confirmed. TRL-9 in commercial setting unverified."
         }
       ],
       "critical_gaps": 0,
       "high_gaps": 2,
       "buyer_activity": {},
-      "linked_projects": []
+      "linked_projects": [],
+      "sector_rulebook": {
+        "key_gate": "Third-party certification (UL 9540, IEC 62619) + grid interconnection agreement",
+        "commercial_threshold": "First offtake or supply agreement with named utility/industrial",
+        "policy_driver": "IRA Storage ITC (US), EU Battery Regulation, KR RPS ESS 가중치",
+        "red_flags": [
+          "Grant-only (no offtaker)",
+          "Li-ion commodity competition",
+          "Single geography exposure"
+        ],
+        "positive_signals": [
+          "Utility framework contract",
+          "Hyperscaler pilot with CFE mandate",
+          "Co-location with offshore wind",
+          "DOE grant + offtaker co-investment"
+        ]
+      }
     }
   },
   "projects": [
@@ -2249,6 +2272,8 @@
         "b_hd_hhi",
         "b_sk_eco"
       ],
+      "milestone_next": "DNV GL 수소 연료공급 시스템 인증 신청 (2026 Q3 예정)",
+      "investment_angle": "국내 최초 수소 벙커링 → IMO 2030 준수 선박 전환 핵심 인프라",
       "description": "Korea's first hydrogen bunkering pilot. Critical enabler for IMO 2030 fleet compliance."
     },
     {
@@ -2273,7 +2298,9 @@
         "b_kepco",
         "b_ls_elec"
       ],
-      "description": "Offshore wind HVDC backbone. Long-duration ESS co-located opportunity."
+      "milestone_next": "환경영향평가 완료 (2026 Q4 예정)",
+      "investment_angle": "장주기 ESS 동반 탑재 가능성 → VRFB/Iron-Air 기업 수요",
+      "description": "Offshore wind HVDC backbone. Long-duration ESS co-location opportunity."
     },
     {
       "id": "p_incheon_vpp",
@@ -2297,6 +2324,8 @@
         "b_kepco",
         "b_ls_elec"
       ],
+      "milestone_next": "KPX 보조서비스 시장 실적 공개 (2026 Q2)",
+      "investment_angle": "그리드위즈 Series C 선행 검증 프로젝트 — 파일럿 KPI가 임박",
       "description": "VPP/DR pilot linked directly to KPX ancillary services market entry."
     },
     {
@@ -2320,7 +2349,9 @@
       "linked_buyers": [
         "b_microsoft"
       ],
-      "description": "Hyperscaler-backed DC power optimisation. AutoGrid VPP platform pilot."
+      "milestone_next": "EPC selection (H2 2026)",
+      "investment_angle": "Hyperscaler-backed DC power reference — AutoGrid VPP commercial validation",
+      "description": "GIC-developed DC campus. Microsoft 24/7 CFE anchor tenant. AutoGrid VPP platform pilot."
     },
     {
       "id": "p_ulsan_ess",
@@ -2342,6 +2373,8 @@
       "linked_buyers": [
         "b_sk_eco"
       ],
+      "milestone_next": "준공 및 상업운전 개시 (2026 Q3)",
+      "investment_angle": "씨에스에너지 2번째 대기업 공급망 진입 확인 시 Series B 가능성",
       "description": "Industrial ESS reference. SK Innovation supply chain qualification in progress."
     },
     {
@@ -2364,7 +2397,9 @@
       "linked_buyers": [
         "b_engie"
       ],
-      "description": "European hydrogen import terminal. Structural demand anchor for liquid H2 logistics chain."
+      "milestone_next": "Final investment decision gate (2027)",
+      "investment_angle": "European hydrogen import terminal — structural demand anchor for liquid H2 logistics chain",
+      "description": "Europe's largest planned hydrogen terminal. Structural demand anchor for LH2 logistics."
     }
   ],
   "strategic_buyers": [
@@ -2383,7 +2418,9 @@
         "ess",
         "hydrogen"
       ],
-      "procurement_signal": "VPP 실증 RFP 발주. DR·보조서비스 참여기업 수요 확대."
+      "procurement_notes": "VPP 실증사업 RFP 발주. DR·보조서비스 시장 참여기업 수요.",
+      "annual_capex_est": "₩3-5조 (전체 사업)",
+      "decision_cycle": "RFP 공고 → 3-6개월"
     },
     {
       "id": "b_hd_hhi",
@@ -2400,7 +2437,9 @@
         "marine_fc",
         "hydrogen"
       ],
-      "procurement_signal": "암모니아 이중연료 선박 수주 확대. 연료전지 내재화 검토."
+      "procurement_notes": "암모니아 이중연료 선박 수주 확대. 연료전지 기술 내재화 검토.",
+      "annual_capex_est": "N/A (수주 계약 기반)",
+      "decision_cycle": "기술 검토 → MOU → 공식 수주 12-24개월"
     },
     {
       "id": "b_microsoft",
@@ -2417,7 +2456,9 @@
         "ess",
         "forecasting"
       ],
-      "procurement_signal": "Nuclear PPA. 24/7 CFE 목표. DC power 파일럿 확대."
+      "procurement_notes": "Nuclear PPA. 24/7 CFE 목표. DC power 파일럿 확대.",
+      "annual_capex_est": "$50B+ (글로벌 인프라)",
+      "decision_cycle": "파일럿 → 프레임워크 계약 → 스케일업 18-36개월"
     },
     {
       "id": "b_ls_elec",
@@ -2434,7 +2475,9 @@
         "grid_sw",
         "hvdc"
       ],
-      "procurement_signal": "VPP 플랫폼 내재화 전략 추진. ESS 턴키 계약 확대."
+      "procurement_notes": "VPP 플랫폼 내재화 전략 추진. ESS 턴키 계약 확대.",
+      "annual_capex_est": "₩5,000억+ (에너지 사업부)",
+      "decision_cycle": "협력사 검토 → 파트너십 → 공급계약 6-18개월"
     },
     {
       "id": "b_engie",
@@ -2449,7 +2492,9 @@
         "grid_sw",
         "hydrogen"
       ],
-      "procurement_signal": "유럽 ESS 입찰 활성화. VPP 플랫폼 투자자이자 고객."
+      "procurement_notes": "유럽 ESS 입찰 활성화. VPP 플랫폼 투자자이자 고객.",
+      "annual_capex_est": "€4-6B (재생에너지·저장)",
+      "decision_cycle": "파일럿 RFP → 평가 → 계약 6-12개월"
     },
     {
       "id": "b_samsung_hvy",
@@ -2465,7 +2510,9 @@
         "marine_fc",
         "hvdc"
       ],
-      "procurement_signal": "선박 연료전지 파일럿 프로그램. HVDC 해상풍력 연계."
+      "procurement_notes": "선박 연료전지 파일럿 프로그램. HVDC 해상풍력 연계.",
+      "annual_capex_est": "N/A (수주 기반)",
+      "decision_cycle": "기술검토 → 파일럿 → 양산 24-36개월"
     },
     {
       "id": "b_google",
@@ -2482,7 +2529,9 @@
         "ess",
         "wte"
       ],
-      "procurement_signal": "CFE 100% 목표. 새로운 ESS 기술 파일럿 적극적."
+      "procurement_notes": "24/7 CFE 100% 목표. 새로운 ESS 기술 파일럿 적극적.",
+      "annual_capex_est": "$12B+ (인프라)",
+      "decision_cycle": "파일럿 → 배포 계약 12-24개월"
     },
     {
       "id": "b_sk_eco",
@@ -2499,7 +2548,9 @@
         "wte",
         "ess"
       ],
-      "procurement_signal": "바이오가스→수소 전환. EPC로서 에너지 신기술 도입."
+      "procurement_notes": "바이오가스→수소 전환. EPC로서 에너지 신기술 도입.",
+      "annual_capex_est": "₩1조+ (친환경 사업)",
+      "decision_cycle": "기술 검증 → 파트너십 → 계약 12-18개월"
     }
   ],
   "buyer_activity": {},
@@ -2518,7 +2569,7 @@
         "label": "Delay",
         "icon": "⏱",
         "severity": "high",
-        "memo": "Timeline extension raises capital-at-risk. Determine if project-level (isolated) or structural (market/tech)."
+        "memo": "Timeline extension raises capital-at-risk. Project-level vs. structural distinction is key."
       }
     ],
     "missing_evidence": [
@@ -2532,19 +2583,19 @@
             "rule_id": "no_cert",
             "label": "No Third-Party Certification",
             "severity": "high",
-            "memo": "No independent certification (DNV GL, TÜV, KPX, UL) confirmed. Required for procurement in most regulated energy segments."
+            "memo": "No independent certification (DNV GL, TÜV, KPX, UL). Required for regulated procurement."
           },
           {
             "rule_id": "no_buyer",
             "label": "No Named Strategic Buyer",
             "severity": "high",
-            "memo": "No named strategic buyer in any collected signal. Demand-side validation is absent."
+            "memo": "No named strategic buyer in any signal. Demand-side validation absent."
           },
           {
             "rule_id": "no_deploy",
             "label": "No Deployment / Go-Live",
             "severity": "medium",
-            "memo": "No operational deployment confirmed. TRL-9 in a commercial setting is unverified."
+            "memo": "No operational deployment confirmed. TRL-9 in commercial setting unverified."
           }
         ],
         "gap_count": 3,
@@ -2552,11 +2603,22 @@
         "high_gaps": 2
       }
     ],
+    "watchlist": [
+      {
+        "company_id": "c_form_energy",
+        "company_name": "Form Energy",
+        "ttr": "Near-term",
+        "stage": "PF-Ready",
+        "high_count": 1,
+        "pattern_id": "low_density"
+      }
+    ],
     "panel_stats": {
       "negative_count": 1,
       "critical_neg": 0,
       "companies_with_gaps": 1,
-      "total_critical_gaps": 0
+      "total_critical_gaps": 0,
+      "watchlist_count": 1
     }
   },
   "source_log": [
@@ -2567,7 +2629,7 @@
       "status": "success",
       "error": null,
       "items": 10,
-      "fetched_at": "2026-03-29T01:24:58.228170+00:00"
+      "fetched_at": "2026-03-29T13:26:24.084507+00:00"
     },
     {
       "id": "pvmagazine",
@@ -2576,7 +2638,7 @@
       "status": "success",
       "error": null,
       "items": 20,
-      "fetched_at": "2026-03-29T01:24:58.426001+00:00"
+      "fetched_at": "2026-03-29T13:26:24.254089+00:00"
     },
     {
       "id": "energystoragenews",
@@ -2585,7 +2647,7 @@
       "status": "success",
       "error": null,
       "items": 20,
-      "fetched_at": "2026-03-29T01:24:58.810330+00:00"
+      "fetched_at": "2026-03-29T13:26:24.597657+00:00"
     },
     {
       "id": "offshorewind",
@@ -2594,7 +2656,7 @@
       "status": "success",
       "error": null,
       "items": 10,
-      "fetched_at": "2026-03-29T01:24:59.280107+00:00"
+      "fetched_at": "2026-03-29T13:26:24.943667+00:00"
     },
     {
       "id": "electrek",
@@ -2603,7 +2665,7 @@
       "status": "success",
       "error": null,
       "items": 20,
-      "fetched_at": "2026-03-29T01:25:00.177046+00:00"
+      "fetched_at": "2026-03-29T13:26:25.508455+00:00"
     },
     {
       "id": "h2view",
@@ -2612,7 +2674,7 @@
       "status": "partial",
       "error": "Feed returned 0 usable items",
       "items": 0,
-      "fetched_at": "2026-03-29T01:25:00.357450+00:00"
+      "fetched_at": "2026-03-29T13:26:25.695777+00:00"
     }
   ],
   "score_rulebook": [
@@ -2643,7 +2705,7 @@
         "Vague language (exploring, potential): -35",
         "Intent without action (aims to): -20",
         "Generic PR (proud to announce): -40",
-        "Vision/strategy announcement: -30",
+        "Vision/strategy: -30",
         "Industry award/Gartner: -35",
         "Conference appearance: -30",
         "Report publication: -25"
@@ -2671,6 +2733,100 @@
       ]
     }
   ],
+  "sector_rulebooks": {
+    "ess": {
+      "name": "Long-Duration Energy Storage",
+      "key_gate": "Third-party certification (UL 9540, IEC 62619) + grid interconnection agreement",
+      "commercial_threshold": "First offtake or supply agreement with named utility/industrial",
+      "buyer_types": [
+        "Grid operators",
+        "Utilities",
+        "Hyperscalers",
+        "Industrial C&I"
+      ],
+      "lcos_benchmark": "$100-150/kWh (Li-ion), $80-120/kWh (VRFB target), $60-80/kWh (Iron-Air target)",
+      "policy_driver": "IRA Storage ITC (US), EU Battery Regulation, KR RPS ESS 가중치",
+      "red_flags": [
+        "Grant-only (no offtaker)",
+        "Li-ion commodity competition",
+        "Single geography exposure"
+      ],
+      "positive_signals": [
+        "Utility framework contract",
+        "Hyperscaler pilot with CFE mandate",
+        "Co-location with offshore wind",
+        "DOE grant + offtaker co-investment"
+      ]
+    },
+    "marine_fc": {
+      "name": "Marine Fuel Cells",
+      "key_gate": "DNV GL or ClassNK class approval (Type Approval Certificate)",
+      "commercial_threshold": "Named shipyard contract post-certification (newbuild or retrofit)",
+      "buyer_types": [
+        "Shipyards",
+        "Shipping companies",
+        "Port operators"
+      ],
+      "lcos_benchmark": "N/A — cost per kW installed, target <$1,500/kW for commercial viability",
+      "policy_driver": "IMO CII 2024, EU ETS Ships 2024, IMO 2030 GHG Strategy",
+      "red_flags": [
+        "No DNV GL path defined",
+        "Hydrogen supply chain unresolved",
+        "Single fuel-type dependency"
+      ],
+      "positive_signals": [
+        "DNV GL/ClassNK type approval",
+        "Shipyard newbuild specification",
+        "Port bunkering infrastructure co-development"
+      ]
+    },
+    "grid_sw": {
+      "name": "Grid Software / VPP",
+      "key_gate": "Grid operator certification (KPX, FERC, ENTSO-E) + first recurring revenue contract",
+      "commercial_threshold": "Multi-year framework contract with named utility/TSO",
+      "buyer_types": [
+        "Utilities",
+        "TSOs/DSOs",
+        "C&I aggregators",
+        "Hyperscalers"
+      ],
+      "lcos_benchmark": "SaaS: $0.5-2/MWh managed (target), Enterprise: $1-5M ARR first contract",
+      "policy_driver": "FERC 2222 (US), EU Flexibility Markets, KPX 보조서비스 제도 개편",
+      "red_flags": [
+        "Single utility dependency",
+        "No API/integration layer",
+        "Vertical incumbent competition (Siemens, GE)"
+      ],
+      "positive_signals": [
+        "KPX/FERC certified",
+        "Multi-utility framework",
+        "CFO hire + international BD"
+      ]
+    },
+    "hydrogen": {
+      "name": "Hydrogen Infrastructure",
+      "key_gate": "Named offtaker at contracted price (not MOU) + permits",
+      "commercial_threshold": "First commercial delivery or long-term supply agreement (>3 years)",
+      "buyer_types": [
+        "Refineries",
+        "Port operators",
+        "Industrial facilities",
+        "Shipping companies"
+      ],
+      "lcos_benchmark": "Green H2 target <$2/kg (2030 EU), <$1/kg (2035 US DOE). Current: $4-8/kg",
+      "policy_driver": "EU Green Hydrogen Standard, US Inflation Reduction Act §45V, MOTIE 수소경제 로드맵",
+      "red_flags": [
+        "Grant-only (no offtaker)",
+        "LCOH above $5/kg without cost-down path",
+        "No offtake contract"
+      ],
+      "positive_signals": [
+        "Named industrial offtaker + contracted price",
+        "Port/bunkering infrastructure connection",
+        "EU H2 Bank award"
+      ]
+    }
+  },
   "reliability": {
     "sources_total": 6,
     "sources_ok": 5,
@@ -2678,5 +2834,15 @@
     "sources_failed": 0,
     "new_events": 29,
     "filtered_out": 51
+  },
+  "_feature_stubs": {
+    "analyst_notes": "⚠ PAID PILOT — stored in private DB, not in public JSON",
+    "watchlist_custom": "⚠ PAID PILOT — per-user watchlist with alert thresholds",
+    "alerts": "⚠ PAID PILOT — email/Slack when HIGH signal on watchlisted company",
+    "triage_status": "⚠ PAID PILOT — Pass / Watch / Investigate per company",
+    "evidence_history": "⚠ PAID PILOT — 90-day per-company signal timeline",
+    "outcome_tracking": "⚠ SCALE — analyst logs what happened after each signal",
+    "comparables_db": "⚠ SCALE — proprietary deal terms and round history",
+    "api_access": "⚠ SCALE — GET /api/company/{id}/card + webhooks"
   }
 }
