@@ -297,49 +297,49 @@ STRATEGIC_BUYERS = [
      "aliases":["kepco","한국전력","kpx"],
      "active_segments":["grid_sw","ess","hydrogen"],
      "procurement_notes":"VPP 실증사업 RFP 발주. DR·보조서비스 시장 참여기업 수요.",
-     "annual_capex_est":"₩3-5조 (전체 사업)",
+     "annual_capex_est":"not disclosed — internal estimate removed",
      "decision_cycle":"RFP 공고 → 3-6개월"},
     {"id":"b_hd_hhi",     "name":"HD한국조선해양", "type":"Shipyard",   "region":"KR",
      "aliases":["hd hyundai","hd 현대","한국조선해양","hd hhi"],
      "active_segments":["marine_fc","hydrogen"],
      "procurement_notes":"암모니아 이중연료 선박 수주 확대. 연료전지 기술 내재화 검토.",
-     "annual_capex_est":"N/A (수주 계약 기반)",
+     "annual_capex_est":"not disclosed",
      "decision_cycle":"기술 검토 → MOU → 공식 수주 12-24개월"},
     {"id":"b_microsoft",  "name":"Microsoft",      "type":"Hyperscaler","region":"US",
      "aliases":["microsoft","azure","msft"],
      "active_segments":["dc_power","ess","forecasting"],
      "procurement_notes":"Nuclear PPA. 24/7 CFE 목표. DC power 파일럿 확대.",
-     "annual_capex_est":"$50B+ (글로벌 인프라)",
+     "annual_capex_est":"public figure: see Microsoft annual report for infrastructure capex",
      "decision_cycle":"파일럿 → 프레임워크 계약 → 스케일업 18-36개월"},
     {"id":"b_ls_elec",    "name":"LS일렉트릭",     "type":"EPC/OEM",   "region":"KR",
      "aliases":["ls electric","ls일렉트릭","ls elec"],
      "active_segments":["ess","grid_sw","hvdc"],
      "procurement_notes":"VPP 플랫폼 내재화 전략 추진. ESS 턴키 계약 확대.",
-     "annual_capex_est":"₩5,000억+ (에너지 사업부)",
+     "annual_capex_est":"not disclosed",
      "decision_cycle":"협력사 검토 → 파트너십 → 공급계약 6-18개월"},
     {"id":"b_engie",      "name":"Engie",          "type":"Utility",    "region":"EU",
      "aliases":["engie"],
      "active_segments":["ess","grid_sw","hydrogen"],
      "procurement_notes":"유럽 ESS 입찰 활성화. VPP 플랫폼 투자자이자 고객.",
-     "annual_capex_est":"€4-6B (재생에너지·저장)",
+     "annual_capex_est":"not disclosed — Engie annual report reference only",
      "decision_cycle":"파일럿 RFP → 평가 → 계약 6-12개월"},
     {"id":"b_samsung_hvy","name":"삼성중공업",     "type":"Shipyard",   "region":"KR",
      "aliases":["samsung heavy","삼성중공업","samsung hvy"],
      "active_segments":["marine_fc","hvdc"],
      "procurement_notes":"선박 연료전지 파일럿 프로그램. HVDC 해상풍력 연계.",
-     "annual_capex_est":"N/A (수주 기반)",
+     "annual_capex_est":"not disclosed",
      "decision_cycle":"기술검토 → 파일럿 → 양산 24-36개월"},
     {"id":"b_google",     "name":"Google",         "type":"Hyperscaler","region":"US",
      "aliases":["google","alphabet","gcp"],
      "active_segments":["dc_power","ess","wte"],
      "procurement_notes":"24/7 CFE 100% 목표. 새로운 ESS 기술 파일럿 적극적.",
-     "annual_capex_est":"$12B+ (인프라)",
+     "annual_capex_est":"public figure: see Alphabet annual report for infrastructure capex",
      "decision_cycle":"파일럿 → 배포 계약 12-24개월"},
     {"id":"b_sk_eco",     "name":"SK에코플랜트",   "type":"EPC",        "region":"KR",
      "aliases":["sk eco","sk에코","sk ecoplant"],
      "active_segments":["hydrogen","wte","ess"],
      "procurement_notes":"바이오가스→수소 전환. EPC로서 에너지 신기술 도입.",
-     "annual_capex_est":"₩1조+ (친환경 사업)",
+     "annual_capex_est":"not disclosed",
      "decision_cycle":"기술 검증 → 파트너십 → 계약 12-18개월"},
 ]
 
@@ -347,67 +347,274 @@ STRATEGIC_BUYERS = [
 # MVP: static list curated by analyst
 # Paid pilot: project-level signal tracking, milestone updates
 # Scale: project timeline database with DART/SEC filing integration
+# ── PROJECT DATA INTEGRITY RULES ─────────────────────────────────────────
+# RULE: No generated or estimated numerical values.
+# RULE: capacity / capex / timelines ONLY if explicitly stated in a named
+#       public source (press release, regulatory filing, news article).
+# RULE: If unknown → use "not disclosed", "unknown", or "to be confirmed"
+# RULE: Each project has what_is_known[] and what_is_missing[] — mandatory.
+# SOURCE REQUIREMENT: Every data point must have a source citation.
+#   source_of_record = "name of the specific publication or filing"
+# ─────────────────────────────────────────────────────────────────────────
+
 PROJECTS = [
-    {"id":"p_busan_h2",   "name":"부산항 수소 벙커링 인프라",
-     "location":"부산, KR",  "type":"port",        "status":"Pilot",
-     "developer":"한국가스공사", "offtaker":"HD한국조선해양", "epc":"SK에코플랜트",
-     "capacity":"5,000톤/년", "capex":"₩2,300억",
-     "segments":["hydrogen","marine_fc"],
-     "linked_companies":["c_vincen","c_hylium"],
-     "linked_buyers":["b_hd_hhi","b_sk_eco"],
-     "milestone_next":"DNV GL 수소 연료공급 시스템 인증 신청 (2026 Q3 예정)",
-     "investment_angle":"국내 최초 수소 벙커링 → IMO 2030 준수 선박 전환 핵심 인프라",
-     "description":"Korea's first hydrogen bunkering pilot. Critical enabler for IMO 2030 fleet compliance."},
-    {"id":"p_jeju_hvdc",  "name":"제주 해상풍력 HVDC 연계",
-     "location":"제주, KR",  "type":"grid",        "status":"Planned",
-     "developer":"한국해상풍력", "offtaker":"KEPCO",   "epc":"LS일렉트릭",
-     "capacity":"500MW",     "capex":"₩8,700억",
-     "segments":["hvdc","ess"],
-     "linked_companies":["c_standard_e"],
-     "linked_buyers":["b_kepco","b_ls_elec"],
-     "milestone_next":"환경영향평가 완료 (2026 Q4 예정)",
-     "investment_angle":"장주기 ESS 동반 탑재 가능성 → VRFB/Iron-Air 기업 수요",
-     "description":"Offshore wind HVDC backbone. Long-duration ESS co-location opportunity."},
-    {"id":"p_incheon_vpp","name":"인천 LNG 터미널 VPP 실증",
-     "location":"인천, KR",  "type":"grid",        "status":"Pilot",
-     "developer":"SK E&S",    "offtaker":"KEPCO",   "epc":"그리드위즈",
-     "capacity":"200MW DR",  "capex":"₩340억",
-     "segments":["grid_sw","ess"],
-     "linked_companies":["c_gridwiz"],
-     "linked_buyers":["b_kepco","b_ls_elec"],
-     "milestone_next":"KPX 보조서비스 시장 실적 공개 (2026 Q2)",
-     "investment_angle":"그리드위즈 Series C 선행 검증 프로젝트 — 파일럿 KPI가 임박",
-     "description":"VPP/DR pilot linked directly to KPX ancillary services market entry."},
-    {"id":"p_sg_dc",      "name":"Singapore DC Power Optimisation",
-     "location":"Singapore", "type":"data_center",  "status":"Planned",
-     "developer":"GIC",       "offtaker":"Microsoft","epc":"TBD",
-     "capacity":"50MW",      "capex":"$120M",
-     "segments":["dc_power","forecasting"],
-     "linked_companies":["c_autogrid"],
-     "linked_buyers":["b_microsoft"],
-     "milestone_next":"EPC selection (H2 2026)",
-     "investment_angle":"Hyperscaler-backed DC power reference — AutoGrid VPP commercial validation",
-     "description":"GIC-developed DC campus. Microsoft 24/7 CFE anchor tenant. AutoGrid VPP platform pilot."},
-    {"id":"p_ulsan_ess",  "name":"울산 산업단지 ESS 실증",
-     "location":"울산, KR",  "type":"industrial",  "status":"Construction",
-     "developer":"울산시",   "offtaker":"SK이노베이션","epc":"씨에스에너지",
-     "capacity":"100MWh",   "capex":"₩760억",
-     "segments":["ess"],
-     "linked_companies":["c_cs_energy"],
-     "linked_buyers":["b_sk_eco"],
-     "milestone_next":"준공 및 상업운전 개시 (2026 Q3)",
-     "investment_angle":"씨에스에너지 2번째 대기업 공급망 진입 확인 시 Series B 가능성",
-     "description":"Industrial ESS reference. SK Innovation supply chain qualification in progress."},
-    {"id":"p_rotterdam",  "name":"Rotterdam Green Hydrogen Terminal",
-     "location":"Rotterdam, NL","type":"port",      "status":"Planned",
-     "developer":"Port of Rotterdam","offtaker":"TBD","epc":"TBD",
-     "capacity":"1GW electrolyzer","capex":"€4.2B",
-     "segments":["hydrogen"],
-     "linked_companies":["c_hylium"],
-     "linked_buyers":["b_engie"],
-     "milestone_next":"Final investment decision gate (2027)",
-     "investment_angle":"European hydrogen import terminal — structural demand anchor for liquid H2 logistics chain",
-     "description":"Europe's largest planned hydrogen terminal. Structural demand anchor for LH2 logistics."},
+    {
+        "id": "p_busan_h2",
+        "name": "부산항 수소 벙커링 인프라",
+        "location": "부산, KR",
+        "type": "port",
+        "status": "Pilot",
+
+        # ── Confirmed parties ──────────────────────────────────────────────
+        # Source: 한국가스공사 보도자료, 산업통상자원부 공시
+        "developer": "한국가스공사",
+        "offtaker":  "HD한국조선해양",
+        "epc":       "SK에코플랜트",
+
+        # ── Capacity / CapEx — NOT DISCLOSED ─────────────────────────────
+        # These figures are NOT in any publicly available source.
+        # Do not display without a named citation.
+        "capacity":             "not disclosed",
+        "capex":                "not disclosed",
+        "capacity_source":      None,
+        "capex_source":         None,
+
+        # ── Timeline ─────────────────────────────────────────────────────
+        # Pilot phase confirmed; commercial timeline not publicly stated.
+        "milestone_next":       "to be confirmed — no public milestone statement found",
+        "milestone_source":     None,
+
+        "segments": ["hydrogen","marine_fc"],
+        "linked_companies": ["c_vincen","c_hylium"],
+        "linked_buyers":    ["b_hd_hhi","b_sk_eco"],
+
+        # ── What is known (source-cited facts only) ───────────────────────
+        "what_is_known": [
+            "Pilot project confirmed by 한국가스공사 and 산업부 announcements",
+            "HD한국조선해양 is the named offtaker for hydrogen bunkering",
+            "SK에코플랜트 is the confirmed EPC contractor",
+            "Project purpose: supply hydrogen to vessels complying with IMO 2030",
+        ],
+
+        # ── What is missing (explicitly unknown) ─────────────────────────
+        "what_is_missing": [
+            "Capacity figure: not disclosed in any public source",
+            "CapEx: not disclosed in any public source",
+            "Commercial operation date: not publicly stated",
+            "H2 supply price / offtake terms: not public",
+            "DNV GL certification status for H2 bunkering: not confirmed",
+        ],
+
+        "investment_angle": "Korea's first hydrogen bunkering pilot — confirms IMO 2030 demand is real, but commercial terms and scale are not public.",
+    },
+    {
+        "id": "p_jeju_hvdc",
+        "name": "제주 해상풍력 HVDC 연계",
+        "location": "제주, KR",
+        "type": "grid",
+        "status": "Planned",
+
+        "developer": "한국해상풍력",
+        "offtaker":  "KEPCO",
+        "epc":       "LS일렉트릭",
+
+        # ── Capacity / CapEx ─────────────────────────────────────────────
+        # "500MW" and "₩8,700억" figures appear in news but original
+        # government announcement source requires verification before citing.
+        "capacity":             "500MW (reported, source verification needed)",
+        "capex":                "not disclosed — figures in press are unverified estimates",
+        "capacity_source":      "언론 보도 (검증 필요 — 정부 공식 발표 원문 확인 전)",
+        "capex_source":         None,
+
+        "milestone_next":       "to be confirmed",
+        "milestone_source":     None,
+
+        "segments": ["hvdc","ess"],
+        "linked_companies": ["c_standard_e"],
+        "linked_buyers":    ["b_kepco","b_ls_elec"],
+
+        "what_is_known": [
+            "Project announced by 한국해상풍력 and KEPCO",
+            "LS일렉트릭 named as EPC — confirmed in LS press release",
+            "Offshore wind HVDC interconnection: Jeju island to mainland KR",
+            "KEPCO is the confirmed offtaker",
+        ],
+        "what_is_missing": [
+            "Final capacity figure: 500MW reported but primary government source not confirmed",
+            "CapEx: no official figure available — media estimates should not be cited",
+            "Environmental impact assessment status: unknown",
+            "ESS co-location specs: not disclosed",
+            "Financial close timeline: not public",
+        ],
+
+        "investment_angle": "Offshore wind HVDC project with confirmed KEPCO offtake. ESS co-location is a possibility but not yet announced.",
+    },
+    {
+        "id": "p_incheon_vpp",
+        "name": "인천 LNG 터미널 VPP 실증",
+        "location": "인천, KR",
+        "type": "grid",
+        "status": "Pilot",
+
+        "developer": "SK E&S",
+        "offtaker":  "KEPCO",
+        "epc":       "그리드위즈",
+
+        # ── Capacity / CapEx ─────────────────────────────────────────────
+        # "200MW DR" and "₩340억" are from secondary sources.
+        # Contract value not confirmed in primary filing.
+        "capacity":             "not confirmed — demand response scale not publicly stated",
+        "capex":                "contract value not disclosed in public filings",
+        "capacity_source":      None,
+        "capex_source":         None,
+
+        "milestone_next":       "to be confirmed",
+        "milestone_source":     None,
+
+        "segments": ["grid_sw","ess"],
+        "linked_companies": ["c_gridwiz"],
+        "linked_buyers":    ["b_kepco","b_ls_elec"],
+
+        "what_is_known": [
+            "Pilot contract between SK E&S and KEPCO confirmed",
+            "그리드위즈 named as VPP/DR technology provider",
+            "KPX ancillary services market participation is the stated objective",
+            "Pilot location: Incheon LNG terminal complex",
+        ],
+        "what_is_missing": [
+            "DR capacity: not confirmed in primary source",
+            "Contract value: not disclosed",
+            "Pilot duration and KPI targets: not public",
+            "Conversion to commercial framework: not announced",
+        ],
+
+        "investment_angle": "Confirmed pilot linking 그리드위즈 directly to KEPCO. Primary value: validates KPX market access. Commercial conversion terms unknown.",
+    },
+    {
+        "id": "p_sg_dc",
+        "name": "Singapore DC Power Optimisation",
+        "location": "Singapore",
+        "type": "data_center",
+        "status": "Planned",
+
+        "developer": "GIC",
+        "offtaker":  "Microsoft",
+        "epc":       "unknown — not yet announced",
+
+        "capacity":             "unknown — project specs not publicly disclosed",
+        "capex":                "unknown — no public figure available",
+        "capacity_source":      None,
+        "capex_source":         None,
+
+        "milestone_next":       "to be confirmed",
+        "milestone_source":     None,
+
+        "segments": ["dc_power","forecasting"],
+        "linked_companies": ["c_autogrid"],
+        "linked_buyers":    ["b_microsoft"],
+
+        "what_is_known": [
+            "AutoGrid partnership with Microsoft for VPP platform deployment in Singapore confirmed",
+            "GIC involvement reported in trade press — primary source not confirmed",
+            "Microsoft 24/7 CFE commitment is public policy (Microsoft.com)",
+        ],
+        "what_is_missing": [
+            "GIC as developer: trade press only, not confirmed in primary filing",
+            "Capacity / MW: not disclosed",
+            "CapEx: not disclosed",
+            "EPC contractor: not yet announced",
+            "Project timeline: not public",
+            "Contract value for AutoGrid: not disclosed",
+        ],
+
+        "investment_angle": "Hyperscaler-backed VPP pilot. AutoGrid commercial validation in SEA. All financial terms undisclosed.",
+    },
+    {
+        "id": "p_ulsan_ess",
+        "name": "울산 산업단지 ESS 실증",
+        "location": "울산, KR",
+        "type": "industrial",
+        "status": "Construction",
+
+        "developer": "울산시",
+        "offtaker":  "SK이노베이션",
+        "epc":       "씨에스에너지",
+
+        # ── Capacity / CapEx ─────────────────────────────────────────────
+        # "100MWh" and "₩760억" from DART-linked news. DART disclosure
+        # is the highest-quality source available for KR companies.
+        # Flagged as "reported" until DART filing confirmed.
+        "capacity":             "100MWh (reported in trade press — DART verification recommended)",
+        "capex":                "₩760억 (reported — verify against DART 공시 before citing)",
+        "capacity_source":      "에너지경제신문 보도 (DART 원문 확인 권장)",
+        "capex_source":         "에너지경제신문 보도 (DART 원문 확인 권장)",
+
+        "milestone_next":       "to be confirmed — construction completion not publicly announced",
+        "milestone_source":     None,
+
+        "segments": ["ess"],
+        "linked_companies": ["c_cs_energy"],
+        "linked_buyers":    ["b_sk_eco"],
+
+        "what_is_known": [
+            "씨에스에너지 is the confirmed EPC — confirmed in 씨에스에너지 press release",
+            "SK이노베이션 is the named industrial offtaker",
+            "울산시 is the project developer",
+            "Project is in construction phase (not pilot)",
+        ],
+        "what_is_missing": [
+            "Capacity: 100MWh reported in press but DART primary disclosure not confirmed",
+            "Contract value: ₩760억 in press — requires DART verification",
+            "Commercial operation date: not publicly announced",
+            "Performance guarantee terms: not disclosed",
+        ],
+
+        "investment_angle": "씨에스에너지 first named industrial ESS reference. Key validation event: commercial operation date announcement.",
+    },
+    {
+        "id": "p_rotterdam",
+        "name": "Rotterdam Green Hydrogen Terminal",
+        "location": "Rotterdam, NL",
+        "type": "port",
+        "status": "Planned",
+
+        "developer": "Port of Rotterdam Authority",
+        "offtaker":  "unknown — no binding offtake agreement announced",
+        "epc":       "unknown — tender not issued",
+
+        # ── Capacity / CapEx ─────────────────────────────────────────────
+        # "1GW" and "€4.2B" are aspirational figures from Port of Rotterdam
+        # planning documents — NOT binding commitments.
+        "capacity":             "1GW electrolyzer capacity (aspirational — Port of Rotterdam planning document, not binding)",
+        "capex":                "€4.2B (aspirational estimate — no FID, no committed capital)",
+        "capacity_source":      "Port of Rotterdam Authority planning documentation (non-binding)",
+        "capex_source":         "Port of Rotterdam Authority planning documentation (non-binding aspirational estimate)",
+
+        "milestone_next":       "Final Investment Decision (FID) — date not publicly stated",
+        "milestone_source":     None,
+
+        "segments": ["hydrogen"],
+        "linked_companies": ["c_hylium"],
+        "linked_buyers":    ["b_engie"],
+
+        "what_is_known": [
+            "Port of Rotterdam Authority has published a hydrogen terminal concept in planning documents",
+            "Engie is an active participant in European hydrogen infrastructure planning",
+            "No binding offtake agreement has been announced",
+            "No EPC contract has been issued",
+            "No Final Investment Decision (FID) has been made",
+        ],
+        "what_is_missing": [
+            "Binding offtake agreement: not announced",
+            "EPC contractor: not selected",
+            "Final Investment Decision: not made — date unknown",
+            "CapEx commitment: no capital committed — figures are planning estimates only",
+            "Regulatory approval status: unknown",
+            "H2 supply origin (domestic EU vs. import): not confirmed",
+        ],
+
+        "investment_angle": "European H2 import infrastructure concept. No binding commitments in place. Relevant as a long-term demand signal, not a near-term investment catalyst.",
+    },
 ]
 
 # Sector rulebooks — per-segment investment signal logic
@@ -420,7 +627,7 @@ SECTOR_RULEBOOKS = {
         "key_gate": "Third-party certification (UL 9540, IEC 62619) + grid interconnection agreement",
         "commercial_threshold": "First offtake or supply agreement with named utility/industrial",
         "buyer_types": ["Grid operators","Utilities","Hyperscalers","Industrial C&I"],
-        "lcos_benchmark": "$100-150/kWh (Li-ion), $80-120/kWh (VRFB target), $60-80/kWh (Iron-Air target)",
+        "lcos_benchmark": "Industry estimates vary — verify against latest BNEF/Wood Mackenzie reports before citing. No single authoritative figure.",
         "policy_driver": "IRA Storage ITC (US), EU Battery Regulation, KR RPS ESS 가중치",
         "red_flags": ["Grant-only (no offtaker)","Li-ion commodity competition","Single geography exposure"],
         "positive_signals": ["Utility framework contract","Hyperscaler pilot with CFE mandate","Co-location with offshore wind","DOE grant + offtaker co-investment"],
@@ -430,7 +637,7 @@ SECTOR_RULEBOOKS = {
         "key_gate": "DNV GL or ClassNK class approval (Type Approval Certificate)",
         "commercial_threshold": "Named shipyard contract post-certification (newbuild or retrofit)",
         "buyer_types": ["Shipyards","Shipping companies","Port operators"],
-        "lcos_benchmark": "N/A — cost per kW installed, target <$1,500/kW for commercial viability",
+        "lcos_benchmark": "Cost benchmarks not standardised across vessels. Verify against shipyard-specific RFQ data.",
         "policy_driver": "IMO CII 2024, EU ETS Ships 2024, IMO 2030 GHG Strategy",
         "red_flags": ["No DNV GL path defined","Hydrogen supply chain unresolved","Single fuel-type dependency"],
         "positive_signals": ["DNV GL/ClassNK type approval","Shipyard newbuild specification","Port bunkering infrastructure co-development"],
@@ -440,7 +647,7 @@ SECTOR_RULEBOOKS = {
         "key_gate": "Grid operator certification (KPX, FERC, ENTSO-E) + first recurring revenue contract",
         "commercial_threshold": "Multi-year framework contract with named utility/TSO",
         "buyer_types": ["Utilities","TSOs/DSOs","C&I aggregators","Hyperscalers"],
-        "lcos_benchmark": "SaaS: $0.5-2/MWh managed (target), Enterprise: $1-5M ARR first contract",
+        "lcos_benchmark": "No public benchmark standard. Contract values vary widely by utility size and geography.",
         "policy_driver": "FERC 2222 (US), EU Flexibility Markets, KPX 보조서비스 제도 개편",
         "red_flags": ["Single utility dependency","No API/integration layer","Vertical incumbent competition (Siemens, GE)"],
         "positive_signals": ["KPX/FERC certified","Multi-utility framework","CFO hire + international BD"],
@@ -450,9 +657,9 @@ SECTOR_RULEBOOKS = {
         "key_gate": "Named offtaker at contracted price (not MOU) + permits",
         "commercial_threshold": "First commercial delivery or long-term supply agreement (>3 years)",
         "buyer_types": ["Refineries","Port operators","Industrial facilities","Shipping companies"],
-        "lcos_benchmark": "Green H2 target <$2/kg (2030 EU), <$1/kg (2035 US DOE). Current: $4-8/kg",
+        "lcos_benchmark": "EU target: <$2/kg by 2030 (source: EU Hydrogen Strategy). US DOE target: <$1/kg by 2031 (source: DOE H2 Earthshot). Current cost varies — verify against latest project data.",
         "policy_driver": "EU Green Hydrogen Standard, US Inflation Reduction Act §45V, MOTIE 수소경제 로드맵",
-        "red_flags": ["Grant-only (no offtaker)","LCOH above $5/kg without cost-down path","No offtake contract"],
+        "red_flags": ["Grant-only (no offtaker)","LCOH without credible cost-down pathway to offtaker-viable price","No offtake contract"],
         "positive_signals": ["Named industrial offtaker + contracted price","Port/bunkering infrastructure connection","EU H2 Bank award"],
     },
 }
