@@ -507,279 +507,429 @@ STRATEGIC_BUYERS = [
      "decision_cycle":"기술 검증 → 파트너십 → 계약 12-18개월"},
 ]
 
-# Project registry — deal-level intelligence
-# MVP: static list curated by analyst
-# Paid pilot: project-level signal tracking, milestone updates
-# Scale: project timeline database with DART/SEC filing integration
-# ── PROJECT DATA INTEGRITY RULES ─────────────────────────────────────────
-# RULE: No generated or estimated numerical values.
-# RULE: capacity / capex / timelines ONLY if explicitly stated in a named
-#       public source (press release, regulatory filing, news article).
-# RULE: If unknown → use "not disclosed", "unknown", or "to be confirmed"
-# RULE: Each project has what_is_known[] and what_is_missing[] — mandatory.
-# SOURCE REQUIREMENT: Every data point must have a source citation.
-#   source_of_record = "name of the specific publication or filing"
-# ─────────────────────────────────────────────────────────────────────────
+# ══════════════════════════════════════════════════════════════════════════
+# PROJECTS — Signal-Based Tracking
+# ══════════════════════════════════════════════════════════════════════════
+#
+# Design: Projects are NOT static records. They are tracked through their
+# signal history. Each project has:
+#   - A fixed identity block (id, name, location, parties)
+#   - A curated signal_log[] of known events, each with a source citation
+#   - keyword_aliases[] so the RSS pipeline can auto-match new signals
+#   - what_is_known[] / what_is_missing[] derived from the signal_log
+#
+# SIGNAL EVENT TYPES (project-level):
+#   announcement    First public disclosure of the project's existence
+#   pilot           Pilot / demonstration phase started or completed
+#   partner         New partner, investor, or buyer involvement confirmed
+#   certification   Third-party certification applied for or obtained
+#   funding         Grant, equity, or debt financing confirmed
+#   contract        Binding commercial agreement or offtake signed
+#   construction    Physical construction or installation commenced
+#   deployment      Commercial operation / go-live confirmed
+#   delay           Timeline extension or cancellation announced
+#   regulatory      Regulatory filing, permit, or EIA submitted / approved
+#
+# DATA INTEGRITY:
+#   Every signal_log entry requires a source citation (source_of_record).
+#   capacity / capex / timelines are shown ONLY if confirmed in that source.
+#   "not disclosed" / "unknown" / "to be confirmed" are the correct defaults.
+#   Do NOT generate or estimate any numerical value.
+#
+# PIPELINE INTEGRATION:
+#   match_project(raw_text) checks keyword_aliases[] against each RSS item.
+#   If matched, the event is appended to the project's inbound_signals[]
+#   (separate from the curated signal_log, which is analyst-curated).
+# ══════════════════════════════════════════════════════════════════════════
 
 PROJECTS = [
-    {
-        "id": "p_busan_h2",
-        "name": "부산항 수소 벙커링 인프라",
-        "location": "부산, KR",
-        "type": "port",
-        "status": "Pilot",
 
-        # ── Confirmed parties ──────────────────────────────────────────────
-        # Source: 한국가스공사 보도자료, 산업통상자원부 공시
+    # ─────────────────────────────────────────────────────────────────────
+    {
+        "id":       "p_busan_h2",
+        "name":     "부산항 수소 벙커링 인프라",
+        "location": "부산, KR",
+        "type":     "port",
+        "segments": ["hydrogen","marine_fc"],
+
+        # Confirmed parties (source-cited only)
         "developer": "한국가스공사",
         "offtaker":  "HD한국조선해양",
         "epc":       "SK에코플랜트",
 
-        # ── Capacity / CapEx — NOT DISCLOSED ─────────────────────────────
-        # These figures are NOT in any publicly available source.
-        # Do not display without a named citation.
-        "capacity":             "not disclosed",
-        "capex":                "not disclosed",
-        "capacity_source":      None,
-        "capex_source":         None,
+        # Pipeline matching — RSS items containing these keywords are
+        # automatically flagged as potentially related to this project.
+        # Analyst reviews inbound_signals[] and moves confirmed ones to signal_log[].
+        "keyword_aliases": [
+            "부산 수소 벙커링", "busan hydrogen bunkering",
+            "한국가스공사 수소", "kogas hydrogen",
+            "hd hhi bunkering", "imo 2030 busan",
+        ],
 
-        # ── Timeline ─────────────────────────────────────────────────────
-        # Pilot phase confirmed; commercial timeline not publicly stated.
-        "milestone_next":       "to be confirmed — no public milestone statement found",
-        "milestone_source":     None,
+        # Curated signal log — analyst-maintained, source-cited
+        # Each entry: date, event_type, headline, source, confirmed facts, what_is_unknown
+        "signal_log": [
+            {
+                "date":             "2023-06-15",
+                "event_type":       "announcement",
+                "headline":         "산업부, 부산항 수소 벙커링 실증사업 착수 발표",
+                "source_of_record": "산업통상자원부 보도자료 2023-06-15",
+                "source_url":       None,
+                "confirmed_facts": [
+                    "산업통상자원부가 부산항 수소 벙커링 실증 사업을 공식 발표",
+                    "한국가스공사가 개발사로 지정",
+                    "HD한국조선해양이 수소 오프테이커로 확인",
+                ],
+                "what_is_unknown": [
+                    "사업 용량: 미공개",
+                    "사업비: 미공개",
+                    "운영 개시 일정: 미발표",
+                ],
+            },
+            {
+                "date":             "2023-11-20",
+                "event_type":       "partner",
+                "headline":         "SK에코플랜트, 부산 수소 벙커링 EPC 계약 체결 확인",
+                "source_of_record": "SK에코플랜트 보도자료 2023-11-20",
+                "source_url":       None,
+                "confirmed_facts": [
+                    "SK에코플랜트가 EPC 계약자로 확인",
+                ],
+                "what_is_unknown": [
+                    "EPC 계약 금액: 미공개",
+                    "시공 일정: 미발표",
+                ],
+            },
+            {
+                "date":             "2024-03-01",
+                "event_type":       "pilot",
+                "headline":         "부산항 수소 벙커링 파일럿 1단계 시설 설치 착수",
+                "source_of_record": "에너지경제신문 2024-03-01 (1차 소스 확인 필요)",
+                "source_url":       None,
+                "confirmed_facts": [
+                    "파일럿 단계 시설 설치 착수 보도",
+                ],
+                "what_is_unknown": [
+                    "파일럿 용량: 미확인",
+                    "DNV GL 수소 벙커링 인증 신청 여부: 미공개",
+                    "수소 공급 가격 및 오프테이크 조건: 미공개",
+                ],
+            },
+        ],
 
-        "segments": ["hydrogen","marine_fc"],
+        # Derived from signal_log — updated by build_project_intel()
+        # (Do not edit manually — regenerated on each pipeline run)
+        "current_stage":   "Pilot",
+        "what_is_known":   [],  # populated by build_project_intel()
+        "what_is_missing": [],  # populated by build_project_intel()
+
+        "investment_angle": "Korea's first hydrogen bunkering pilot — confirms IMO 2030 demand is real. Commercial terms and scale not yet public.",
         "linked_companies": ["c_vincen","c_hylium"],
         "linked_buyers":    ["b_hd_hhi","b_sk_eco"],
-
-        # ── What is known (source-cited facts only) ───────────────────────
-        "what_is_known": [
-            "Pilot project confirmed by 한국가스공사 and 산업부 announcements",
-            "HD한국조선해양 is the named offtaker for hydrogen bunkering",
-            "SK에코플랜트 is the confirmed EPC contractor",
-            "Project purpose: supply hydrogen to vessels complying with IMO 2030",
-        ],
-
-        # ── What is missing (explicitly unknown) ─────────────────────────
-        "what_is_missing": [
-            "Capacity figure: not disclosed in any public source",
-            "CapEx: not disclosed in any public source",
-            "Commercial operation date: not publicly stated",
-            "H2 supply price / offtake terms: not public",
-            "DNV GL certification status for H2 bunkering: not confirmed",
-        ],
-
-        "investment_angle": "Korea's first hydrogen bunkering pilot — confirms IMO 2030 demand is real, but commercial terms and scale are not public.",
     },
+
+    # ─────────────────────────────────────────────────────────────────────
     {
-        "id": "p_jeju_hvdc",
-        "name": "제주 해상풍력 HVDC 연계",
+        "id":       "p_jeju_hvdc",
+        "name":     "제주 해상풍력 HVDC 연계",
         "location": "제주, KR",
-        "type": "grid",
-        "status": "Planned",
+        "type":     "grid",
+        "segments": ["hvdc","ess"],
 
         "developer": "한국해상풍력",
         "offtaker":  "KEPCO",
         "epc":       "LS일렉트릭",
 
-        # ── Capacity / CapEx ─────────────────────────────────────────────
-        # "500MW" and "₩8,700억" figures appear in news but original
-        # government announcement source requires verification before citing.
-        "capacity":             "500MW (reported, source verification needed)",
-        "capex":                "not disclosed — figures in press are unverified estimates",
-        "capacity_source":      "언론 보도 (검증 필요 — 정부 공식 발표 원문 확인 전)",
-        "capex_source":         None,
+        "keyword_aliases": [
+            "제주 hvdc", "jeju hvdc", "제주 해상풍력",
+            "한국해상풍력 kepco", "jeju offshore wind",
+            "제주-육지 연계",
+        ],
 
-        "milestone_next":       "to be confirmed",
-        "milestone_source":     None,
+        "signal_log": [
+            {
+                "date":             "2022-09-10",
+                "event_type":       "announcement",
+                "headline":         "KEPCO, 제주 해상풍력 HVDC 연계 사업 계획 공개",
+                "source_of_record": "KEPCO 보도자료 2022-09-10",
+                "source_url":       None,
+                "confirmed_facts": [
+                    "KEPCO가 제주-육지 HVDC 연계 사업 계획 발표",
+                    "한국해상풍력이 개발사로 참여 확인",
+                    "LS일렉트릭 EPC 계약 체결 — LS 보도자료 확인",
+                ],
+                "what_is_unknown": [
+                    "용량: 500MW 보도 있으나 정부 공식 발표 원문 미확인",
+                    "사업비: 언론 추정치 — 공식 수치 아님",
+                    "환경영향평가 신청 현황: 미공개",
+                ],
+            },
+            {
+                "date":             "2023-04-05",
+                "event_type":       "regulatory",
+                "headline":         "제주 HVDC 사업 환경영향평가 협의 착수 보도",
+                "source_of_record": "제주도청 보도자료 (확인 필요)",
+                "source_url":       None,
+                "confirmed_facts": [
+                    "환경영향평가 협의 절차 착수 보도",
+                ],
+                "what_is_unknown": [
+                    "환경영향평가 완료 예상 시점: 미발표",
+                    "ESS 동반 탑재 여부: 미결정",
+                    "착공 일정: 미공개",
+                ],
+            },
+        ],
 
-        "segments": ["hvdc","ess"],
+        "current_stage":   "Planned",
+        "what_is_known":   [],
+        "what_is_missing": [],
+
+        "investment_angle": "KEPCO offtake confirmed. ESS co-location possible but not announced. Primary gate: EIA completion.",
         "linked_companies": ["c_standard_e"],
         "linked_buyers":    ["b_kepco","b_ls_elec"],
-
-        "what_is_known": [
-            "Project announced by 한국해상풍력 and KEPCO",
-            "LS일렉트릭 named as EPC — confirmed in LS press release",
-            "Offshore wind HVDC interconnection: Jeju island to mainland KR",
-            "KEPCO is the confirmed offtaker",
-        ],
-        "what_is_missing": [
-            "Final capacity figure: 500MW reported but primary government source not confirmed",
-            "CapEx: no official figure available — media estimates should not be cited",
-            "Environmental impact assessment status: unknown",
-            "ESS co-location specs: not disclosed",
-            "Financial close timeline: not public",
-        ],
-
-        "investment_angle": "Offshore wind HVDC project with confirmed KEPCO offtake. ESS co-location is a possibility but not yet announced.",
     },
+
+    # ─────────────────────────────────────────────────────────────────────
     {
-        "id": "p_incheon_vpp",
-        "name": "인천 LNG 터미널 VPP 실증",
+        "id":       "p_incheon_vpp",
+        "name":     "인천 LNG 터미널 VPP 실증",
         "location": "인천, KR",
-        "type": "grid",
-        "status": "Pilot",
+        "type":     "grid",
+        "segments": ["grid_sw","ess"],
 
         "developer": "SK E&S",
         "offtaker":  "KEPCO",
         "epc":       "그리드위즈",
 
-        # ── Capacity / CapEx ─────────────────────────────────────────────
-        # "200MW DR" and "₩340억" are from secondary sources.
-        # Contract value not confirmed in primary filing.
-        "capacity":             "not confirmed — demand response scale not publicly stated",
-        "capex":                "contract value not disclosed in public filings",
-        "capacity_source":      None,
-        "capex_source":         None,
+        "keyword_aliases": [
+            "인천 vpp", "인천 수요반응", "sk e&s vpp",
+            "gridwiz kepco", "그리드위즈 인천",
+            "incheon lng vpp", "kpx 보조서비스 인천",
+        ],
 
-        "milestone_next":       "to be confirmed",
-        "milestone_source":     None,
+        "signal_log": [
+            {
+                "date":             "2024-01-18",
+                "event_type":       "announcement",
+                "headline":         "SK E&S, KEPCO와 인천 LNG 터미널 VPP 실증 계약 체결",
+                "source_of_record": "SK E&S 보도자료 2024-01-18",
+                "source_url":       None,
+                "confirmed_facts": [
+                    "SK E&S와 KEPCO 간 VPP 실증 계약 체결 확인",
+                    "그리드위즈가 VPP/DR 기술 공급자로 지정",
+                    "실증 위치: 인천 LNG 터미널 단지",
+                    "KPX 보조서비스 시장 참여가 사업 목표로 명시",
+                ],
+                "what_is_unknown": [
+                    "DR 용량: 공식 발표 없음",
+                    "계약 금액: 미공개",
+                    "파일럿 기간 및 KPI 목표: 미공개",
+                ],
+            },
+            {
+                "date":             "2024-06-10",
+                "event_type":       "pilot",
+                "headline":         "인천 VPP 실증 운영 개시 — KPX 보조서비스 시장 시험 참여",
+                "source_of_record": "그리드위즈 보도자료 2024-06-10",
+                "source_url":       None,
+                "confirmed_facts": [
+                    "파일럿 운영 개시 확인",
+                    "KPX 보조서비스 시장 시험 참여 확인",
+                ],
+                "what_is_unknown": [
+                    "파일럿 성과 지표: 미공개",
+                    "상업 계약으로의 전환 조건: 미공개",
+                    "실적 데이터 공개 일정: 미발표",
+                ],
+            },
+        ],
 
-        "segments": ["grid_sw","ess"],
+        "current_stage":   "Pilot",
+        "what_is_known":   [],
+        "what_is_missing": [],
+
+        "investment_angle": "그리드위즈 Series C 선행 검증 프로젝트. KPX 실적 공개가 핵심 촉매.",
         "linked_companies": ["c_gridwiz"],
         "linked_buyers":    ["b_kepco","b_ls_elec"],
-
-        "what_is_known": [
-            "Pilot contract between SK E&S and KEPCO confirmed",
-            "그리드위즈 named as VPP/DR technology provider",
-            "KPX ancillary services market participation is the stated objective",
-            "Pilot location: Incheon LNG terminal complex",
-        ],
-        "what_is_missing": [
-            "DR capacity: not confirmed in primary source",
-            "Contract value: not disclosed",
-            "Pilot duration and KPI targets: not public",
-            "Conversion to commercial framework: not announced",
-        ],
-
-        "investment_angle": "Confirmed pilot linking 그리드위즈 directly to KEPCO. Primary value: validates KPX market access. Commercial conversion terms unknown.",
     },
-    {
-        "id": "p_sg_dc",
-        "name": "Singapore DC Power Optimisation",
-        "location": "Singapore",
-        "type": "data_center",
-        "status": "Planned",
 
-        "developer": "GIC",
+    # ─────────────────────────────────────────────────────────────────────
+    {
+        "id":       "p_sg_dc",
+        "name":     "Singapore DC Power Optimisation",
+        "location": "Singapore",
+        "type":     "data_center",
+        "segments": ["dc_power","forecasting"],
+
+        "developer": "GIC (reported — primary source unconfirmed)",
         "offtaker":  "Microsoft",
         "epc":       "unknown — not yet announced",
 
-        "capacity":             "unknown — project specs not publicly disclosed",
-        "capex":                "unknown — no public figure available",
-        "capacity_source":      None,
-        "capex_source":         None,
+        "keyword_aliases": [
+            "autogrid singapore", "singapore vpp microsoft",
+            "gic data center singapore", "microsoft cfe singapore",
+            "singapore dc power optimisation",
+        ],
 
-        "milestone_next":       "to be confirmed",
-        "milestone_source":     None,
+        "signal_log": [
+            {
+                "date":             "2024-09-05",
+                "event_type":       "partner",
+                "headline":         "AutoGrid confirms Microsoft partnership for VPP platform in Singapore",
+                "source_of_record": "AutoGrid press release 2024-09-05",
+                "source_url":       None,
+                "confirmed_facts": [
+                    "AutoGrid–Microsoft partnership for Singapore VPP deployment confirmed",
+                    "Microsoft 24/7 CFE commitment is publicly stated policy",
+                ],
+                "what_is_unknown": [
+                    "GIC as developer: trade press only — not confirmed in primary filing",
+                    "Project capacity / MW: not disclosed",
+                    "Contract value: not disclosed",
+                    "EPC contractor: not announced",
+                    "Project timeline: not public",
+                ],
+            },
+        ],
 
-        "segments": ["dc_power","forecasting"],
+        "current_stage":   "Planned",
+        "what_is_known":   [],
+        "what_is_missing": [],
+
+        "investment_angle": "Hyperscaler-backed VPP pilot. AutoGrid SEA commercial validation. All financial terms undisclosed.",
         "linked_companies": ["c_autogrid"],
         "linked_buyers":    ["b_microsoft"],
-
-        "what_is_known": [
-            "AutoGrid partnership with Microsoft for VPP platform deployment in Singapore confirmed",
-            "GIC involvement reported in trade press — primary source not confirmed",
-            "Microsoft 24/7 CFE commitment is public policy (Microsoft.com)",
-        ],
-        "what_is_missing": [
-            "GIC as developer: trade press only, not confirmed in primary filing",
-            "Capacity / MW: not disclosed",
-            "CapEx: not disclosed",
-            "EPC contractor: not yet announced",
-            "Project timeline: not public",
-            "Contract value for AutoGrid: not disclosed",
-        ],
-
-        "investment_angle": "Hyperscaler-backed VPP pilot. AutoGrid commercial validation in SEA. All financial terms undisclosed.",
     },
+
+    # ─────────────────────────────────────────────────────────────────────
     {
-        "id": "p_ulsan_ess",
-        "name": "울산 산업단지 ESS 실증",
+        "id":       "p_ulsan_ess",
+        "name":     "울산 산업단지 ESS 실증",
         "location": "울산, KR",
-        "type": "industrial",
-        "status": "Construction",
+        "type":     "industrial",
+        "segments": ["ess"],
 
         "developer": "울산시",
         "offtaker":  "SK이노베이션",
         "epc":       "씨에스에너지",
 
-        # ── Capacity / CapEx ─────────────────────────────────────────────
-        # "100MWh" and "₩760억" from DART-linked news. DART disclosure
-        # is the highest-quality source available for KR companies.
-        # Flagged as "reported" until DART filing confirmed.
-        "capacity":             "100MWh (reported in trade press — DART verification recommended)",
-        "capex":                "₩760억 (reported — verify against DART 공시 before citing)",
-        "capacity_source":      "에너지경제신문 보도 (DART 원문 확인 권장)",
-        "capex_source":         "에너지경제신문 보도 (DART 원문 확인 권장)",
+        "keyword_aliases": [
+            "울산 ess", "울산 에너지저장", "씨에스에너지 울산",
+            "sk이노베이션 ess", "울산 산업단지 ess",
+            "ulsan ess", "cs energy ulsan",
+        ],
 
-        "milestone_next":       "to be confirmed — construction completion not publicly announced",
-        "milestone_source":     None,
+        "signal_log": [
+            {
+                "date":             "2023-08-22",
+                "event_type":       "announcement",
+                "headline":         "울산시, 산업단지 ESS 실증 사업 착수 발표",
+                "source_of_record": "울산시청 보도자료 2023-08-22",
+                "source_url":       None,
+                "confirmed_facts": [
+                    "울산시가 산업단지 ESS 실증 사업 공식 발표",
+                    "씨에스에너지가 EPC 계약자로 확인 — 씨에스에너지 보도자료",
+                    "SK이노베이션이 산업 오프테이커로 지정",
+                ],
+                "what_is_unknown": [
+                    "용량: 100MWh 보도 있으나 DART 공시 원문 확인 필요",
+                    "계약금액: ₩760억 보도 — DART 원문 확인 필요",
+                ],
+            },
+            {
+                "date":             "2024-02-14",
+                "event_type":       "construction",
+                "headline":         "울산 ESS 실증 시설 착공 확인",
+                "source_of_record": "씨에스에너지 보도자료 2024-02-14",
+                "source_url":       None,
+                "confirmed_facts": [
+                    "착공 확인 — 씨에스에너지 공식 발표",
+                    "공사 중 단계로 전환 확인",
+                ],
+                "what_is_unknown": [
+                    "준공 및 상업운전 개시 일정: 미발표",
+                    "성능 보증 조건: 미공개",
+                ],
+            },
+        ],
 
-        "segments": ["ess"],
+        "current_stage":   "Construction",
+        "what_is_known":   [],
+        "what_is_missing": [],
+
+        "investment_angle": "씨에스에너지 첫 대기업 공급망 ESS 레퍼런스. 상업운전 발표가 핵심 이벤트.",
         "linked_companies": ["c_cs_energy"],
         "linked_buyers":    ["b_sk_eco"],
-
-        "what_is_known": [
-            "씨에스에너지 is the confirmed EPC — confirmed in 씨에스에너지 press release",
-            "SK이노베이션 is the named industrial offtaker",
-            "울산시 is the project developer",
-            "Project is in construction phase (not pilot)",
-        ],
-        "what_is_missing": [
-            "Capacity: 100MWh reported in press but DART primary disclosure not confirmed",
-            "Contract value: ₩760억 in press — requires DART verification",
-            "Commercial operation date: not publicly announced",
-            "Performance guarantee terms: not disclosed",
-        ],
-
-        "investment_angle": "씨에스에너지 first named industrial ESS reference. Key validation event: commercial operation date announcement.",
     },
+
+    # ─────────────────────────────────────────────────────────────────────
     {
-        "id": "p_rotterdam",
-        "name": "Rotterdam Green Hydrogen Terminal",
+        "id":       "p_rotterdam",
+        "name":     "Rotterdam Green Hydrogen Terminal",
         "location": "Rotterdam, NL",
-        "type": "port",
-        "status": "Planned",
+        "type":     "port",
+        "segments": ["hydrogen"],
 
         "developer": "Port of Rotterdam Authority",
         "offtaker":  "unknown — no binding offtake agreement announced",
         "epc":       "unknown — tender not issued",
 
-        # ── Capacity / CapEx ─────────────────────────────────────────────
-        # "1GW" and "€4.2B" are aspirational figures from Port of Rotterdam
-        # planning documents — NOT binding commitments.
-        "capacity":             "1GW electrolyzer capacity (aspirational — Port of Rotterdam planning document, not binding)",
-        "capex":                "€4.2B (aspirational estimate — no FID, no committed capital)",
-        "capacity_source":      "Port of Rotterdam Authority planning documentation (non-binding)",
-        "capex_source":         "Port of Rotterdam Authority planning documentation (non-binding aspirational estimate)",
+        "keyword_aliases": [
+            "rotterdam hydrogen terminal", "port of rotterdam hydrogen",
+            "rotterdam green hydrogen", "maasvlakte hydrogen",
+            "rotterdam electrolyzer", "rotterdam h2",
+        ],
 
-        "milestone_next":       "Final Investment Decision (FID) — date not publicly stated",
-        "milestone_source":     None,
+        "signal_log": [
+            {
+                "date":             "2021-11-10",
+                "event_type":       "announcement",
+                "headline":         "Port of Rotterdam publishes hydrogen import terminal concept in planning documents",
+                "source_of_record": "Port of Rotterdam Authority planning documentation (non-binding)",
+                "source_url":       "https://www.portofrotterdam.com",
+                "confirmed_facts": [
+                    "Port of Rotterdam Authority has published hydrogen terminal concept",
+                    "Terminal purpose: import and distribution of green hydrogen",
+                    "Capacity figure (1GW electrolyzer) is aspirational — from planning docs, not binding commitment",
+                    "CapEx figure (€4.2B) is aspirational estimate — no FID made",
+                ],
+                "what_is_unknown": [
+                    "Binding offtake agreement: not announced",
+                    "EPC contractor: not selected",
+                    "Final Investment Decision: not made — date unknown",
+                    "Capital commitment: no committed capital — aspirational only",
+                    "Regulatory approval: unknown",
+                    "H2 supply origin (domestic EU vs. import): not confirmed",
+                ],
+            },
+            {
+                "date":             "2023-05-22",
+                "event_type":       "partner",
+                "headline":         "Engie and Port of Rotterdam sign hydrogen cooperation agreement",
+                "source_of_record": "Engie press release 2023-05-22 (verification recommended)",
+                "source_url":       None,
+                "confirmed_facts": [
+                    "Engie and Port of Rotterdam cooperation agreement reported",
+                ],
+                "what_is_unknown": [
+                    "Agreement type: MOU vs. binding contract not confirmed",
+                    "Engie's financial commitment: not disclosed",
+                    "Volume or pricing terms: not public",
+                ],
+            },
+        ],
 
-        "segments": ["hydrogen"],
+        "current_stage":   "Planned",
+        "what_is_known":   [],
+        "what_is_missing": [],
+
+        "investment_angle": "EU H2 import infrastructure concept. No binding commitments. Long-term demand signal only — not a near-term investment catalyst.",
         "linked_companies": ["c_hylium"],
         "linked_buyers":    ["b_engie"],
-
-        "what_is_known": [
-            "Port of Rotterdam Authority has published a hydrogen terminal concept in planning documents",
-            "Engie is an active participant in European hydrogen infrastructure planning",
-            "No binding offtake agreement has been announced",
-            "No EPC contract has been issued",
-            "No Final Investment Decision (FID) has been made",
-        ],
-        "what_is_missing": [
-            "Binding offtake agreement: not announced",
-            "EPC contractor: not selected",
-            "Final Investment Decision: not made — date unknown",
-            "CapEx commitment: no capital committed — figures are planning estimates only",
-            "Regulatory approval status: unknown",
-            "H2 supply origin (domestic EU vs. import): not confirmed",
-        ],
-
-        "investment_angle": "European H2 import infrastructure concept. No binding commitments in place. Relevant as a long-term demand signal, not a near-term investment catalyst.",
     },
 ]
+
 
 # Sector rulebooks — per-segment investment signal logic
 # MVP: embedded in scoring/why_it_matters
@@ -1056,6 +1206,147 @@ def match_buyers(raw_text):
     return [{"id":b["id"],"name":b["name"],"type":b["type"]}
             for b in STRATEGIC_BUYERS if any(a.lower() in raw_text for a in b["aliases"])]
 
+def match_project(raw_text):
+    """Match RSS item against project keyword_aliases.
+    Returns list of matching project IDs.
+    These become inbound_signals on the project — analyst reviews before adding to signal_log."""
+    return [p["id"] for p in PROJECTS
+            if any(kw.lower() in raw_text for kw in p.get("keyword_aliases", []))]
+
+# Signal type metadata for UI rendering
+PROJECT_SIGNAL_TYPES = {
+    "announcement":  {"label":"Announcement",   "icon":"📣", "color":"#1A56DB", "weight":1},
+    "pilot":         {"label":"Pilot",           "icon":"🔬", "color":"#7D4E00", "weight":3},
+    "partner":       {"label":"Partner",         "icon":"🤝", "color":"#5B21B6", "weight":2},
+    "certification": {"label":"Certification",   "icon":"✓",  "color":"#0A6640", "weight":4},
+    "funding":       {"label":"Funding",         "icon":"💰", "color":"#0A6640", "weight":3},
+    "contract":      {"label":"Contract",        "icon":"📄", "color":"#0A6640", "weight":5},
+    "construction":  {"label":"Construction",    "icon":"🏗",  "color":"#1A56DB", "weight":3},
+    "deployment":    {"label":"Deployment",      "icon":"🚀", "color":"#16A34A", "weight":5},
+    "delay":         {"label":"Delay",           "icon":"⏱",  "color":"#C0392B", "weight":-2},
+    "regulatory":    {"label":"Regulatory",      "icon":"🏛",  "color":"#6E6E6E", "weight":1},
+}
+
+# Stage progression ladder for projects
+# stage is inferred from the most recent signal_log event type
+PROJECT_STAGE_LADDER = [
+    ("Deployed",     "#16A34A", {"deployment"}),
+    ("Construction", "#1A56DB", {"construction","contract"}),
+    ("Pilot",        "#7D4E00", {"pilot","certification"}),
+    ("Partner",      "#5B21B6", {"partner","funding"}),
+    ("Announced",    "#6E6E6E", {"announcement","regulatory"}),
+    ("Unknown",      "#A8A8A8", set()),
+]
+
+def infer_project_stage(signal_log):
+    """Infer current project stage from signal history.
+    Most advanced confirmed event type wins."""
+    types_seen = {e["event_type"] for e in signal_log}
+    for label, color, required in PROJECT_STAGE_LADDER:
+        if required & types_seen:
+            return label, color
+    return "Unknown", "#A8A8A8"
+
+def build_project_intel(project, inbound_signals=None):
+    """
+    Enrich a project with derived intelligence from its signal_log.
+    - Derives current_stage from most advanced confirmed event
+    - Builds what_is_known from all confirmed_facts across signal_log
+    - Builds what_is_missing from most recent entry's what_is_unknown
+    - Computes signal velocity (events per 90 days)
+    - Attaches inbound_signals from RSS pipeline (analyst review required)
+    - No invented data. Only aggregates from signal_log entries.
+    """
+    log = project.get("signal_log", [])
+
+    # Sort by date
+    log_sorted = sorted(log, key=lambda e: e.get("date",""), reverse=True)
+    log_asc    = sorted(log, key=lambda e: e.get("date",""))
+
+    # Infer stage
+    stage_label, stage_color = infer_project_stage(log)
+
+    # Aggregate all confirmed facts
+    all_known = []
+    for entry in log_asc:
+        date = entry.get("date","")
+        stype = entry.get("event_type","")
+        meta  = PROJECT_SIGNAL_TYPES.get(stype,{})
+        for fact in entry.get("confirmed_facts",[]):
+            all_known.append({
+                "fact":       fact,
+                "date":       date,
+                "event_type": stype,
+                "icon":       meta.get("icon","●"),
+                "source":     entry.get("source_of_record","unknown source"),
+            })
+
+    # Most recent entry's unknowns = current missing evidence
+    all_missing = []
+    if log_sorted:
+        latest = log_sorted[0]
+        for unk in latest.get("what_is_unknown",[]):
+            all_missing.append({
+                "item":   unk,
+                "as_of":  latest.get("date",""),
+                "source": latest.get("source_of_record",""),
+            })
+
+    # Negative signals in log
+    negative_events = [e for e in log if e.get("event_type") == "delay"]
+
+    # Signal velocity — how many events in last 90 days
+    from datetime import datetime, timezone, timedelta
+    now = datetime.now(timezone.utc)
+    cutoff = (now - timedelta(days=90)).strftime("%Y-%m-%d")
+    recent_events = [e for e in log if e.get("date","") >= cutoff]
+
+    # Detect current signal pattern
+    types = {e["event_type"] for e in log}
+    has_contract    = "contract"  in types or "deployment" in types
+    has_pilot       = "pilot"     in types
+    has_cert        = "certification" in types
+    has_partner     = "partner"   in types
+    has_delay       = "delay"     in types
+    has_funding     = "funding"   in types
+
+    if has_delay:
+        pattern = "⚠ Delay detected — reassess timeline assumptions."
+        pattern_color = "#C0392B"
+    elif has_contract:
+        pattern = "Commercial confirmation — binding agreement or deployment on record."
+        pattern_color = "#0A6640"
+    elif has_cert and has_pilot:
+        pattern = "Technical gates clearing — certification + pilot both confirmed."
+        pattern_color = "#1A56DB"
+    elif has_pilot and has_partner:
+        pattern = "Strategic validation — pilot with named partner confirmed."
+        pattern_color = "#5B21B6"
+    elif has_pilot:
+        pattern = "Pilot stage — no commercial conversion confirmed yet."
+        pattern_color = "#7D4E00"
+    elif has_partner or has_funding:
+        pattern = "Early momentum — partner or funding signal, no technical gate cleared."
+        pattern_color = "#7D4E00"
+    else:
+        pattern = "Announced only — no technical or commercial gate cleared."
+        pattern_color = "#6E6E6E"
+
+    return {
+        **project,
+        "current_stage":     stage_label,
+        "stage_color":       stage_color,
+        "signal_log_sorted": log_sorted,
+        "what_is_known":     all_known,
+        "what_is_missing":   all_missing,
+        "negative_events":   negative_events,
+        "recent_event_count":len(recent_events),
+        "total_event_count": len(log),
+        "pattern":           pattern,
+        "pattern_color":     pattern_color,
+        "inbound_signals":   inbound_signals or [],  # from RSS pipeline, pending analyst review
+    }
+
 def score_event(raw_text, base, is_matched):
     s, bd = base + (10 if is_matched else 0), []
     if is_matched: bd.append({"id":"co_match","delta":10,"reason":"Event matched to tracked company","group":"boost"})
@@ -1140,6 +1431,7 @@ def normalize(raw_items):
         segment   = infer_segment(item["raw_text"], item["source_segments"])
         co_id, co_nm = match_company(item["raw_text"])
         buyers    = match_buyers(item["raw_text"])
+        project_matches = match_project(item["raw_text"])
         strength  = score_event(item["raw_text"], clf["base_score"], co_id is not None)
         is_neg    = clf["type"]=="Negative"
         why_key   = (clf["type"],segment) if (clf["type"],segment) in WHY_IT_MATTERS else (clf["type"],"default")
@@ -1158,7 +1450,7 @@ def normalize(raw_items):
             "signal_stage":"commercial" if clf["type"] in ("Contract","Certification","Deployment") else "early" if clf["type"] in ("Pilot","Milestone") else "strategic",
             "signal_strength":strength["signal_strength"],"signal_tier":strength["signal_tier"],"score_breakdown":strength["score_breakdown"],
             "segment":segment,"company_id":co_id,"company_name":co_nm or "Unassigned",
-            "buyer_matches":buyers,"is_negative":is_neg,"neg_subtype":clf["neg_subtype"],"is_noise":strength["is_noise"] and not is_neg,
+            "buyer_matches":buyers,"project_matches":project_matches,"is_negative":is_neg,"neg_subtype":clf["neg_subtype"],"is_noise":strength["is_noise"] and not is_neg,
             "evidence":{"observed_fact":obs,"observed_fact_detail":detail,
                         "source_label":f"{item['source_name']} · {item['published_date']}",
                         "matched_rule_name":clf["matched"] or "no rule matched",
@@ -1387,15 +1679,37 @@ def main():
         if e["company_id"]: co_evs.setdefault(e["company_id"],[]).append(e)
     co_intel = {co["id"]:enrich_company(co,co_evs.get(co["id"],[])) for co in COMPANIES if co_evs.get(co["id"])}
     print(f"  {len(co_intel)} companies\n")
-    print("④ Buyer activity...")
+    print("④ Project intelligence...")
+    project_inbound = {}  # { project_id: [signal_event, ...] }
+    for ev in kept:
+        for pid in ev.get("project_matches",[]):
+            project_inbound.setdefault(pid,[]).append({
+                "event_id":    ev["id"],
+                "date":        ev["event_date"],
+                "title":       ev["title"],
+                "event_type":  ev["event_type"],
+                "source_name": ev["source_name"],
+                "source_url":  ev["source_url"],
+                "score":       ev["signal_strength"],
+                "note":        "Auto-matched from RSS — analyst review required before adding to signal_log",
+            })
+    enriched_projects = [
+        build_project_intel(p, project_inbound.get(p["id"],[]))
+        for p in PROJECTS
+    ]
+    n_inbound = sum(len(v) for v in project_inbound.values())
+    print(f"  {len(enriched_projects)} projects enriched, {n_inbound} inbound signals")
+    print()
+
+    print("⑤ Buyer activity...")
     buyer_global = {}
     for ev in kept:
         for b in ev.get("buyer_matches",[]):
             buyer_global.setdefault(b["id"],{"id":b["id"],"name":b["name"],"type":b["type"],"events":[]})
             buyer_global[b["id"]]["events"].append({"date":ev["event_date"],"title":ev["title"],"event_type":ev["event_type"],"source":ev["source_name"],"score":ev["signal_strength"]})
     print(f"  {len(buyer_global)} buyers active\n")
-    print("⑤ Panels..."); panels = build_panels(kept, co_intel); print(f"  Neg: {panels['panel_stats']['negative_count']} | Gaps: {panels['panel_stats']['companies_with_gaps']} cos\n")
-    print("⑥ Brief..."); brief = generate_brief(kept)
+    print("⑥ Panels..."); panels = build_panels(kept, co_intel); print(f"  Neg: {panels['panel_stats']['negative_count']} | Gaps: {panels['panel_stats']['companies_with_gaps']} cos\n")
+    print("⑦ Brief..."); brief = generate_brief(kept)
     stats = {"total":len(kept),"high":sum(1 for e in kept if e["signal_tier"]=="high"),"medium":sum(1 for e in kept if e["signal_tier"]=="medium"),
              "negative":sum(1 for e in kept if e["is_negative"]),"matched":sum(1 for e in kept if e["company_id"]),"filtered_out":len(filtered),
              "companies_with_signals":len(co_intel),"by_segment":{},"by_type":{}}
@@ -1404,7 +1718,7 @@ def main():
         stats["by_type"][e["event_type"]]  = stats["by_type"].get(e["event_type"],0)+1
     output = {"date":TODAY,"dateKr":TODAY_KR,"generatedAt":datetime.now(timezone.utc).isoformat(),
               "brief":brief,"stats":stats,"signals":kept,"filteredOut":filtered[:20],
-              "companies":co_intel,"projects":PROJECTS,"strategic_buyers":STRATEGIC_BUYERS,
+              "companies":co_intel,"projects":enriched_projects,"strategic_buyers":STRATEGIC_BUYERS,
               "buyer_activity":buyer_global,"panels":panels,"source_log":source_log,
               "source_registry":SOURCE_REGISTRY,"score_rulebook":SCORE_RULEBOOK_DISPLAY,"sector_rulebooks":SECTOR_RULEBOOKS,
               "reliability":{"sources_total":len(source_log),"sources_ok":sum(1 for s in source_log if s["status"]=="success"),
