@@ -372,6 +372,10 @@ button{font-family:var(--mono);cursor:pointer;}
 .prop-approved{background:#F0FDF4;color:#0A6640;border:1px solid #A7F3D0;}
 .prop-rejected{background:#FEE2E2;color:#B91C1C;border:1px solid #FCA5A5;}
 
+
+/* ── Project signal timeline ─────────────────────────────────── */
+.proj-timeline-dot{width:28px;height:28px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;}
+
 </style>
 </head>
 <body>
@@ -752,133 +756,254 @@ function renderProjects(){
   var projs=D&&D.projects||[];
   if(!projs.length){el.innerHTML='<div class="empty">No project data — run pipeline first</div>';return;}
 
-  var statusColor={"Pilot":"#7D4E00","Planned":"#1A56DB","Construction":"#0A6640","Operating":"#16A34A","Demo":"#5B21B6"};
+  var typeIcon  ={"announcement":"📣","pilot":"🔬","partner":"🤝","certification":"✓","funding":"💰","contract":"📄","construction":"🏗","deployment":"🚀","delay":"⏱","regulatory":"🏛"};
+  var typeColor ={"announcement":"#1A56DB","pilot":"#7D4E00","partner":"#5B21B6","certification":"#0A6640","funding":"#0A6640","contract":"#0A6640","construction":"#1A56DB","deployment":"#16A34A","delay":"#C0392B","regulatory":"#6E6E6E"};
+  var typeLabel ={"announcement":"Announcement","pilot":"Pilot","partner":"Partner","certification":"Certification","funding":"Funding","contract":"Contract","construction":"Construction","deployment":"Deployment","delay":"Delay","regulatory":"Regulatory"};
 
-  var h=`<div style="padding:10px 16px;background:#FFF8F0;border-bottom:2px solid var(--amber);margin-bottom:0">
-    <div style="font-family:var(--mono);font-size:9px;font-weight:700;color:var(--amber);letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px">⚠ DATA INTEGRITY NOTICE</div>
-    <div style="font-size:12px;color:var(--ink2);line-height:1.65">All project data is shown exactly as sourced. Fields marked <b>not disclosed</b> or <b>to be confirmed</b> have no verified public source. <b>Do not cite unverified figures.</b> See "What Is Missing" on each card.</div>
-  </div>`;
+  // Summary bar
+  var total=projs.length, withInbound=projs.filter(p=>(p.inbound_signals||[]).length>0).length;
+  var byStage={};projs.forEach(p=>{byStage[p.current_stage||"Unknown"]=(byStage[p.current_stage||"Unknown"]||0)+1;});
+  var h=`<div class="card" style="margin-bottom:14px">`;
+  h+=`<div style="padding:10px 16px;background:#FFF8F0;border-bottom:2px solid var(--amber)">`;
+  h+=`<div style="font-family:var(--mono);font-size:9px;font-weight:700;color:var(--amber);letter-spacing:.08em;text-transform:uppercase;margin-bottom:3px">⚠ DATA INTEGRITY</div>`;
+  h+=`<div style="font-size:12px;color:var(--ink2);line-height:1.65">Signal log entries are <b>analyst-curated</b> with source citations. Inbound signals from RSS are <b>pending review</b> — not yet confirmed facts. Do not cite unverified figures.</div>`;
+  h+=`</div>`;
+  h+=`<div style="padding:10px 16px;display:flex;gap:20px;flex-wrap:wrap;border-bottom:1px solid var(--b2)">`;
+  [{n:total,l:"Projects",c:"var(--ink)"},...Object.entries(byStage).map(([k,v])=>({n:v,l:k,c:typeColor[k.toLowerCase()]||"var(--ink4)"})),{n:withInbound,l:"New signals (pending)",c:"var(--blue)"}]
+    .forEach(x=>{h+=`<div><div style="font-family:var(--mono);font-size:18px;font-weight:700;color:${x.c}">${x.n}</div><div style="font-family:var(--mono);font-size:9px;color:var(--ink4);text-transform:uppercase;letter-spacing:.05em">${esc(x.l)}</div></div>`;});
+  h+=`</div></div>`;
 
-  h+=`<div class="card"><div class="chd">Projects <span style="font-weight:400;color:var(--ink4)">${projs.length}</span></div><div class="proj-grid">`;
-
+  // Project cards
   projs.forEach(p=>{
-    var sc=statusColor[p.status]||"#6E6E6E", isOpen=PROJ_EXP.has(p.id);
-    var cos=D&&D.companies?Object.values(D.companies).filter(c=>p.linked_companies&&p.linked_companies.includes(c.id)):[];
+    var sc=p.stage_color||"#6E6E6E", isOpen=PROJ_EXP.has(p.id);
+    var log=p.signal_log_sorted||p.signal_log||[];
+    var logAsc=[...log].reverse();
+    var known=p.what_is_known||[];
+    var missing=p.what_is_missing||[];
+    var inbound=p.inbound_signals||[];
+    var negEvts=p.negative_events||[];
+    var pc=p.pattern_color||"var(--ink4)";
 
-    h+=`<div class="proj-card" onclick="toggleProj('${p.id}')">`;
-    h+=`<div class="proj-status" style="background:${sc}"></div>`;
-    h+=`<div class="proj-hd">`;
+    h+=`<div class="card" style="margin-bottom:12px;border-left:4px solid ${sc}">`;
 
-    // Name + status
-    h+=`<div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:3px">`;
-    h+=`<span class="proj-nm">${esc(p.name||"")}</span>`;
-    h+=`<span style="font-family:var(--mono);font-size:9px;font-weight:700;padding:2px 8px;background:${sc}18;color:${sc};border:1px solid ${sc}40">${esc(p.status)}</span>`;
-    h+=`</div>`;
-    h+=`<div class="proj-loc">📍 ${esc(p.location||"")} · ${esc(p.type||"")}</div>`;
+    // ── Card header ─────────────────────────────────────────────────────
+    h+=`<div style="padding:14px 16px 12px;cursor:pointer" onclick="toggleProj('${p.id}')">`;
 
-    // Confirmed parties
-    h+=`<div class="proj-kv">`;
-    if(p.developer&&p.developer!=="unknown") h+=`<div><div class="proj-k">Developer</div><div class="proj-v">${esc(p.developer)}</div></div>`;
-    if(p.offtaker) {
-      var offColor = p.offtaker==="unknown"||p.offtaker.includes("TBD")||p.offtaker.includes("unknown") ? "var(--red)" : "var(--ink)";
-      h+=`<div><div class="proj-k">Offtaker</div><div class="proj-v" style="color:${offColor}">${esc(p.offtaker)}</div></div>`;
-    }
-    if(p.epc) {
-      var epcColor = p.epc==="unknown"||p.epc.includes("TBD")||p.epc.includes("unknown") ? "var(--amber)" : "var(--ink)";
-      h+=`<div><div class="proj-k">EPC</div><div class="proj-v" style="color:${epcColor}">${esc(p.epc)}</div></div>`;
-    }
+    // Title row
+    h+=`<div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:6px">`;
+    h+=`<span style="font-size:15px;font-weight:700;color:var(--ink)">${esc(p.name||"")}</span>`;
+    h+=`<span style="font-family:var(--mono);font-size:9px;font-weight:700;padding:3px 9px;background:${sc}18;color:${sc};border:1px solid ${sc}40;white-space:nowrap">${esc(p.current_stage||"Unknown")}</span>`;
     h+=`</div>`;
 
-    // Capacity + CapEx — with source integrity indicators
+    // Location + type + parties
+    h+=`<div style="font-family:var(--mono);font-size:10px;color:var(--ink4);margin-bottom:7px">`;
+    h+=`📍 ${esc(p.location||"")} · ${esc(p.type||"")}`;
+    h+=`</div>`;
+
+    // Parties row
     h+=`<div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:8px">`;
-    if(p.capacity){
-      var capIsKnown = !p.capacity.includes("not disclosed")&&!p.capacity.includes("unknown")&&!p.capacity.includes("aspirational");
-      var capBg = capIsKnown?"var(--bg)":"#FFF5F5";
-      var capColor = capIsKnown?"var(--ink2)":"var(--red)";
-      h+=`<div style="padding:5px 9px;background:${capBg};border:1px solid var(--b)">`;
-      h+=`<div style="font-family:var(--mono);font-size:9px;color:var(--ink4);text-transform:uppercase;margin-bottom:2px">Capacity</div>`;
-      h+=`<div style="font-size:11px;font-weight:600;color:${capColor}">${esc(p.capacity)}</div>`;
-      if(p.capacity_source) h+=`<div style="font-family:var(--mono);font-size:8px;color:var(--ink4);margin-top:2px">source: ${esc(p.capacity_source)}</div>`;
+    [{l:"Developer",v:p.developer},{l:"Offtaker",v:p.offtaker},{l:"EPC",v:p.epc}].forEach(kv=>{
+      if(!kv.v) return;
+      var isUnknown = kv.v.includes("unknown")||kv.v.includes("TBD")||kv.v.includes("not yet");
+      h+=`<div style="padding:4px 9px;background:var(--bg);border:1px solid var(--b)">`;
+      h+=`<div style="font-family:var(--mono);font-size:8px;color:var(--ink4);text-transform:uppercase;margin-bottom:1px">${esc(kv.l)}</div>`;
+      h+=`<div style="font-size:11px;font-weight:600;color:${isUnknown?"var(--red)":"var(--ink)"}">${esc(kv.v)}</div>`;
       h+=`</div>`;
-    }
-    if(p.capex){
-      var cxIsKnown = !p.capex.includes("not disclosed")&&!p.capex.includes("unknown")&&!p.capex.includes("aspirational")&&!p.capex.includes("no official");
-      var cxBg = cxIsKnown?"var(--bg)":"#FFF5F5";
-      var cxColor = cxIsKnown?"var(--ink2)":"var(--red)";
-      h+=`<div style="padding:5px 9px;background:${cxBg};border:1px solid var(--b)">`;
-      h+=`<div style="font-family:var(--mono);font-size:9px;color:var(--ink4);text-transform:uppercase;margin-bottom:2px">CapEx</div>`;
-      h+=`<div style="font-size:11px;font-weight:600;color:${cxColor}">${esc(p.capex)}</div>`;
-      if(p.capex_source) h+=`<div style="font-family:var(--mono);font-size:8px;color:var(--ink4);margin-top:2px">source: ${esc(p.capex_source)}</div>`;
-      h+=`</div>`;
-    }
+    });
     h+=`</div>`;
 
-    // Investment angle
-    if(p.investment_angle) h+=`<div style="padding:7px 10px;background:#F0F5FF;border-left:3px solid var(--blue);font-size:11px;color:var(--ink2);margin-bottom:8px;line-height:1.6"><b style="font-family:var(--mono);font-size:9px;color:var(--blue)">INVESTMENT ANGLE</b><br>${esc(p.investment_angle)}</div>`;
+    // Pattern
+    if(p.pattern){
+      h+=`<div style="font-size:11px;font-weight:500;color:${pc};margin-bottom:7px">`;
+      h+=`${negEvts.length?"⚠":"●"} ${esc(p.pattern)}</div>`;
+    }
 
-    // Linked companies
-    if(cos.length) h+=`<div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:4px">${cos.map(c=>`<span style="font-family:var(--mono);font-size:9px;padding:1px 7px;border:1px solid ${c.stage_color||"var(--b)"};color:${c.stage_color||"var(--ink4)"}">↗ ${esc(c.name)}</span>`).join("")}</div>`;
+    // Signal mini-timeline (collapsed view — last 3 events)
+    if(log.length>0){
+      h+=`<div style="display:flex;gap:0;align-items:center;margin-bottom:6px">`;
+      logAsc.slice(-6).forEach((ev,i,arr)=>{
+        var et=ev.event_type||"announcement";
+        var ec=typeColor[et]||"#6E6E6E";
+        var ei=typeIcon[et]||"●";
+        var isLast=i===arr.length-1;
+        h+=`<div style="display:flex;align-items:center">`;
+        h+=`<span title="${esc(typeLabel[et]||et)} — ${esc(ev.date)}" style="width:22px;height:22px;border-radius:50%;background:${ec}18;border:1.5px solid ${ec};display:inline-flex;align-items:center;justify-content:center;font-size:11px;cursor:default">${ei}</span>`;
+        if(!isLast) h+=`<span style="width:16px;height:1.5px;background:var(--b2);display:inline-block;margin:0 -1px"></span>`;
+        h+=`</div>`;
+      });
+      if(log.length>6) h+=`<span style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-left:6px">+${log.length-6} more</span>`;
+      h+=`</div>`;
+    }
 
-    h+=`</div>`; // proj-hd
+    // Stats row
+    h+=`<div style="display:flex;gap:10px;align-items:center">`;
+    h+=`<span style="font-family:var(--mono);font-size:10px;color:var(--ink4)">${log.length} confirmed event${log.length!==1?"s":""}</span>`;
+    if(p.recent_event_count>0) h+=`<span style="font-family:var(--mono);font-size:10px;color:var(--blue)">${p.recent_event_count} in last 90d</span>`;
+    if(negEvts.length>0) h+=`<span style="font-family:var(--mono);font-size:10px;color:var(--red)">⚠ ${negEvts.length} delay</span>`;
+    if(inbound.length>0) h+=`<span style="font-family:var(--mono);font-size:10px;color:var(--blue);padding:1px 7px;background:#EFF6FF;border:1px solid #BFDBFE">${inbound.length} pending review</span>`;
+    h+=`</div>`;
 
-    // Expand: What Is Known + What Is Missing (mandatory)
+    if(!isOpen) h+=`<div style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-top:6px;letter-spacing:.04em">▾ EXPAND SIGNAL HISTORY</div>`;
+    h+=`</div>`; // header click zone
+
+    // ── Expanded detail ─────────────────────────────────────────────────
     if(isOpen){
-      h+=`<div class="proj-detail">`;
+      h+=`<div style="border-top:2px solid var(--ink);animation:fadeIn .15s">`;
+
+      // Investment angle
+      if(p.investment_angle){
+        h+=`<div style="padding:10px 16px;background:#F0F5FF;border-bottom:1px solid var(--b2)">`;
+        h+=`<div style="font-family:var(--mono);font-size:9px;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px">Investment Angle</div>`;
+        h+=`<div style="font-size:12px;color:var(--ink2);line-height:1.65">${esc(p.investment_angle)}</div>`;
+        h+=`</div>`;
+      }
+
+      // ── Signal log timeline ───────────────────────────────────────────
+      h+=`<div style="padding:12px 16px 0">`;
+      h+=`<div style="font-family:var(--mono);font-size:9px;font-weight:700;color:var(--ink4);letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px">Signal History <span style="font-weight:400">(analyst-curated, source-cited)</span></div>`;
+
+      if(!logAsc.length){
+        h+=`<div style="font-size:12px;color:var(--ink4);font-style:italic;padding:8px 0">No confirmed signals logged yet.</div>`;
+      } else {
+        logAsc.forEach((ev,idx)=>{
+          var et=ev.event_type||"announcement";
+          var ec=typeColor[et]||"#6E6E6E";
+          var ei=typeIcon[et]||"●";
+          var el2=typeLabel[et]||et;
+          var isLast=idx===logAsc.length-1;
+
+          h+=`<div style="display:flex;gap:12px;padding-bottom:${isLast?16:0}px">`;
+          // Timeline spine
+          h+=`<div style="display:flex;flex-direction:column;align-items:center;flex-shrink:0">`;
+          h+=`<span style="width:28px;height:28px;border-radius:50%;background:${ec}18;border:2px solid ${ec};display:inline-flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0">${ei}</span>`;
+          if(!isLast) h+=`<div style="width:2px;flex:1;min-height:20px;background:var(--b2);margin:3px 0"></div>`;
+          h+=`</div>`;
+          // Event content
+          h+=`<div style="flex:1;padding-bottom:${isLast?0:16}px">`;
+          h+=`<div style="display:flex;align-items:center;gap:7px;margin-bottom:4px;flex-wrap:wrap">`;
+          h+=`<span style="font-family:var(--mono);font-size:9px;font-weight:700;padding:2px 7px;background:${ec}15;color:${ec};border:1px solid ${ec}35;text-transform:uppercase;letter-spacing:.04em">${esc(el2)}</span>`;
+          h+=`<span style="font-family:var(--mono);font-size:10px;color:var(--ink4)">${esc(ev.date||"")}</span>`;
+          h+=`</div>`;
+          h+=`<div style="font-size:13px;font-weight:500;color:var(--ink);margin-bottom:4px;line-height:1.4">${esc(ev.headline||"")}</div>`;
+          // Source
+          h+=`<div style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-bottom:6px">`;
+          h+=`📄 ${esc(ev.source_of_record||"source unknown")}`;
+          if(ev.source_url) h+=` <a href="${esc(ev.source_url)}" target="_blank" rel="noopener" style="color:var(--blue);margin-left:4px" onclick="event.stopPropagation()">→</a>`;
+          h+=`</div>`;
+          // Confirmed facts
+          if((ev.confirmed_facts||[]).length){
+            h+=`<div style="margin-bottom:4px">`;
+            ev.confirmed_facts.forEach(f=>{
+              h+=`<div style="display:flex;gap:6px;font-size:11px;color:var(--ink2);padding:2px 0;line-height:1.5">`;
+              h+=`<span style="color:var(--green);font-weight:700;flex-shrink:0">✓</span><span>${esc(f)}</span>`;
+              h+=`</div>`;
+            });
+            h+=`</div>`;
+          }
+          // Unknowns at this point in time
+          if((ev.what_is_unknown||[]).length){
+            h+=`<div style="background:#FFF8F8;border-left:2px solid var(--red);padding:5px 8px;margin-top:4px">`;
+            ev.what_is_unknown.forEach(u=>{
+              h+=`<div style="display:flex;gap:6px;font-size:10px;color:#7F1D1D;padding:1px 0;line-height:1.5">`;
+              h+=`<span style="font-weight:700;flex-shrink:0">✗</span><span>${esc(u)}</span>`;
+              h+=`</div>`;
+            });
+            h+=`</div>`;
+          }
+          h+=`</div>`; // event content
+          h+=`</div>`; // timeline row
+        });
+      }
+      h+=`</div>`; // signal log section
+
+      // ── Current: What Is Known / What Is Missing ───────────────────────
+      h+=`<div style="display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--b2)">`;
 
       // What is known
-      var known = p.what_is_known||[];
-      h+=`<div style="margin-bottom:12px">`;
-      h+=`<div style="font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--green);margin-bottom:6px">What Is Known</div>`;
-      if(known.length){
-        known.forEach(k=>{h+=`<div style="display:flex;gap:7px;font-size:12px;color:var(--ink2);padding:3px 0;line-height:1.5"><span style="color:var(--green);font-weight:700;flex-shrink:0">✓</span><span>${esc(k)}</span></div>`;});
-      }else{
-        h+=`<div style="font-size:12px;color:var(--ink4);font-style:italic">No confirmed facts available — do not invest based on this entry.</div>`;
+      h+=`<div style="padding:12px 14px;border-right:1px solid var(--b2)">`;
+      h+=`<div style="font-family:var(--mono);font-size:9px;font-weight:700;color:var(--green);letter-spacing:.08em;text-transform:uppercase;margin-bottom:7px">Current: Known</div>`;
+      if(!known.length){
+        h+=`<div style="font-size:11px;color:var(--ink4);font-style:italic">No confirmed facts on record.</div>`;
+      } else {
+        known.slice(-5).forEach(k=>{
+          var kc=typeColor[k.event_type]||"#6E6E6E";
+          h+=`<div style="display:flex;gap:6px;padding:3px 0;font-size:11px;color:var(--ink2);line-height:1.5">`;
+          h+=`<span style="color:var(--green);font-weight:700;flex-shrink:0">✓</span>`;
+          h+=`<div><div>${esc(k.fact)}</div>`;
+          h+=`<div style="font-family:var(--mono);font-size:8px;color:var(--ink4)">${esc(k.date)} · ${esc(k.source)}</div>`;
+          h+=`</div></div>`;
+        });
+        if(known.length>5) h+=`<div style="font-family:var(--mono);font-size:9px;color:var(--ink4);padding-top:4px">+${known.length-5} earlier facts in log above</div>`;
       }
       h+=`</div>`;
 
       // What is missing
-      var missing = p.what_is_missing||[];
-      h+=`<div style="background:#FFF8F8;padding:10px 12px;border-left:3px solid var(--red)">`;
-      h+=`<div style="font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--red);margin-bottom:6px">What Is Missing</div>`;
-      if(missing.length){
-        missing.forEach(m=>{h+=`<div style="display:flex;gap:7px;font-size:12px;color:#7F1D1D;padding:3px 0;line-height:1.5"><span style="font-weight:700;flex-shrink:0">✗</span><span>${esc(m)}</span></div>`;});
-      }else{
-        h+=`<div style="font-size:12px;color:var(--ink4);font-style:italic">No missing fields recorded.</div>`;
+      h+=`<div style="padding:12px 14px;background:#FFF8F8">`;
+      h+=`<div style="font-family:var(--mono);font-size:9px;font-weight:700;color:var(--red);letter-spacing:.08em;text-transform:uppercase;margin-bottom:7px">Current: Missing</div>`;
+      if(!missing.length){
+        h+=`<div style="font-size:11px;color:var(--ink4);font-style:italic">No gaps logged for latest entry.</div>`;
+      } else {
+        missing.forEach(m=>{
+          h+=`<div style="display:flex;gap:6px;padding:3px 0;font-size:11px;color:#7F1D1D;line-height:1.5">`;
+          h+=`<span style="font-weight:700;flex-shrink:0">✗</span>`;
+          h+=`<div>${esc(m.item||m)}</div>`;
+          h+=`</div>`;
+        });
       }
       h+=`</div>`;
 
-      // Next milestone
-      if(p.milestone_next) {
-        var msColor = p.milestone_next.includes("to be confirmed")||p.milestone_next.includes("not publicly") ? "var(--amber)" : "var(--ink2)";
-        h+=`<div style="margin-top:10px;padding:7px 10px;background:#FFFBEB;border-left:3px solid var(--amber)">`;
-        h+=`<div style="font-family:var(--mono);font-size:9px;font-weight:700;color:var(--amber);text-transform:uppercase;margin-bottom:3px">Next Milestone</div>`;
-        h+=`<div style="font-size:12px;color:${msColor}">${esc(p.milestone_next)}</div>`;
-        if(p.milestone_source) h+=`<div style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-top:3px">source: ${esc(p.milestone_source)}</div>`;
+      h+=`</div>`; // known/missing grid
+
+      // ── Inbound signals (pending analyst review) ──────────────────────
+      if(inbound.length>0){
+        h+=`<div style="border-top:1px solid var(--b2);padding:12px 16px;background:#F8FBFF">`;
+        h+=`<div style="font-family:var(--mono);font-size:9px;font-weight:700;color:var(--blue);letter-spacing:.08em;text-transform:uppercase;margin-bottom:7px">`;
+        h+=`⚡ Inbound Signals — Pending Review <span style="font-weight:400">(auto-matched from RSS)</span></div>`;
+        h+=`<div style="font-size:11px;color:var(--blue);background:#EFF6FF;border:1px solid #BFDBFE;padding:5px 9px;margin-bottom:7px;line-height:1.5">`;
+        h+=`These signals were auto-matched by keyword. <b>Analyst review required</b> before adding to the confirmed signal log.</div>`;
+        inbound.forEach(s=>{
+          var sc2=typeColor[s.event_type]||"var(--blue)";
+          h+=`<div style="display:flex;gap:8px;padding:5px 0;border-bottom:1px solid var(--b2);font-size:11px">`;
+          h+=`<span style="font-family:var(--mono);font-size:10px;color:var(--ink4);min-width:80px;flex-shrink:0">${esc(s.date||"")}</span>`;
+          h+=`<div style="flex:1">`;
+          h+=`<div style="font-weight:500;color:var(--ink)">${esc(s.title||"")}</div>`;
+          h+=`<div style="font-family:var(--mono);font-size:9px;color:var(--ink4)">${esc(s.source_name||"")} · score ${s.score||0} · ${esc(s.event_type||"")}</div>`;
+          h+=`<div style="font-family:var(--mono);font-size:9px;color:var(--amber);margin-top:1px">${esc(s.note||"")}</div>`;
+          h+=`</div>`;
+          if(s.source_url) h+=`<a href="${esc(s.source_url)}" target="_blank" rel="noopener" style="font-family:var(--mono);font-size:9px;color:var(--blue);flex-shrink:0" onclick="event.stopPropagation()">→</a>`;
+          h+=`</div>`;
+        });
         h+=`</div>`;
       }
 
-      // Segments + linked buyers
-      h+=`<div style="margin-top:10px">`;
-      h+=`<div style="font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink4);margin-bottom:5px">Segments</div>`;
-      h+=`<div style="display:flex;gap:5px;flex-wrap:wrap">${(p.segments||[]).map(s=>`<span class="tag t0">${esc(s)}</span>`).join("")}</div>`;
-      h+=`</div>`;
-
-      if(p.linked_buyers&&p.linked_buyers.length){
-        h+=`<div style="margin-top:10px">`;
-        h+=`<div style="font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink4);margin-bottom:5px">Buyer Connections</div>`;
-        h+=`<div style="display:flex;gap:6px;flex-wrap:wrap">${p.linked_buyers.map(bid=>{var b=(D.strategic_buyers||[]).find(x=>x.id===bid);return b?`<span style="font-family:var(--mono);font-size:10px;padding:2px 8px;background:var(--bg);border:1px solid var(--b)">${esc(b.name)} <span style="color:var(--ink4)">(${esc(b.type)})</span></span>`:"";}).join("")}</div>`;
+      // ── Linked companies + buyers ─────────────────────────────────────
+      var cos=D&&D.companies?Object.values(D.companies).filter(c=>(p.linked_companies||[]).includes(c.id)):[];
+      if(cos.length||( p.linked_buyers&&p.linked_buyers.length)){
+        h+=`<div style="padding:10px 16px;border-top:1px solid var(--b2);display:flex;gap:16px;flex-wrap:wrap;background:var(--bg)">`;
+        if(cos.length){
+          h+=`<div><div style="font-family:var(--mono);font-size:9px;color:var(--ink4);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px">Tracked Companies</div>`;
+          h+=`<div style="display:flex;gap:5px;flex-wrap:wrap">`;
+          cos.forEach(c=>{h+=`<span style="font-family:var(--mono);font-size:9px;padding:2px 7px;border:1px solid ${c.stage_color||"var(--b)"};color:${c.stage_color||"var(--ink4)"};background:${c.stage_color||"var(--b)"}10">↗ ${esc(c.name)}</span>`;});
+          h+=`</div></div>`;
+        }
+        if(p.linked_buyers&&p.linked_buyers.length){
+          h+=`<div><div style="font-family:var(--mono);font-size:9px;color:var(--ink4);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px">Buyer Connections</div>`;
+          h+=`<div style="display:flex;gap:5px;flex-wrap:wrap">`;
+          p.linked_buyers.forEach(bid=>{var b=(D.strategic_buyers||[]).find(x=>x.id===bid);if(b) h+=`<span style="font-family:var(--mono);font-size:9px;padding:2px 7px;background:var(--bg);border:1px solid var(--b)">${esc(b.name)} <span style="color:var(--ink4)">(${esc(b.type)})</span></span>`;});
+          h+=`</div></div>`;
+        }
         h+=`</div>`;
       }
 
-      h+=`</div>`; // proj-detail
+      h+=`</div>`; // expanded
     }
 
-    h+=`</div>`; // proj-card
+    h+=`</div>`; // card
   });
 
-  h+=`</div></div>`;
   el.innerHTML=h;
 }
+
 
 // ═════════════════════════════════════════════════════function renderSourcesTab(){
   var el = document.getElementById("feed-col");
