@@ -1,26 +1,26 @@
 {
   "date": "2026-03-29",
   "dateKr": "2026년 03월 29일",
-  "generatedAt": "2026-03-29T13:47:04.942881+00:00",
-  "brief": "**Deal Flow Memo - March 29, 2026**\n\nToday's contract announcements signal accelerating demand convergence between traditional grid storage and AI infrastructure needs. Form Energy's 12GWh iron-air battery agreement with US data centers (Energy Storage News) represents a notable shift toward long-duration storage for AI facilities, while American Battery Factory's 4.5GWh LFP offtake for their Arizona gigafactory (Energy Storage News) suggests traditional grid applications remain robust. The UK's LCCC contract signings for AR7 winners (Offshore Wind Biz) indicate European renewable procurement staying on schedule despite macro headwinds. \n\n**Watch next**: Monitor whether other long-duration storage players (Eos, ESS Inc.) announce similar AI data center partnerships, and track if American Battery Factory's offtake pricing reflects any supply chain normalization trends we've been anticipating.",
+  "generatedAt": "2026-03-29T23:04:02.945569+00:00",
+  "brief": "**Deal Flow Memo - March 29, 2026**\n\nThe data center energy crunch is accelerating battery offtake agreements, with Form Energy's 12GWh iron-air battery deal (Energy Storage News) representing a significant shift toward long-duration storage for AI infrastructure—a market pivot we should track closely given the multi-day storage requirements versus traditional 4-hour lithium systems. American Battery Factory's 4.5GWh LFP offtake for their Arizona facility (Energy Storage News) continues the domestic manufacturing build-out theme, though we need visibility into their cost structure versus Chinese competitors. The Hydrogen Stream's capacity outlook growth (PV Magazine) suggests deal momentum is building in the hydrogen space, but the \"deals shift\" language implies changing project economics or geographic focus that warrants deeper analysis. Pattern recognition: large-scale storage offtakes are moving faster than expected, driven by AI power demands rather than just grid modernization. Watch for more iron-air and alternative chemistry announcements in Q2 as data center developers seek differentiated storage solutions beyond standard lithium.",
   "stats": {
-    "total": 29,
-    "high": 4,
+    "total": 27,
+    "high": 3,
     "medium": 4,
     "negative": 1,
     "matched": 1,
-    "filtered_out": 51,
+    "filtered_out": 43,
     "companies_with_signals": 1,
     "by_segment": {
       "ess": 22,
-      "hvdc": 3,
       "hydrogen": 1,
       "grid_sw": 1,
+      "hvdc": 1,
       "dc_power": 2
     },
     "by_type": {
-      "Contract": 4,
-      "News": 23,
+      "Contract": 3,
+      "News": 22,
       "Partnership": 1,
       "Negative": 1
     }
@@ -122,45 +122,6 @@
         ],
         "confidence": "Medium-High",
         "confidence_rationale": "Tier-1 event with company match and high score."
-      }
-    },
-    {
-      "id": "1993a3cdbebd",
-      "title": "UK’s LCCC Signs Contracts for Difference with AR7 Winners",
-      "summary": "The UK Low Carbon Contracts Company (LCCC) has signed Contracts for Difference (CfD) with [&#8230;]",
-      "event_date": "2026-03-26",
-      "source_name": "Offshore Wind Biz",
-      "source_url": "https://www.offshorewind.biz/2026/03/26/uks-lccc-signs-contracts-for-difference-with-ar7-winners/",
-      "event_type": "Contract",
-      "impact_type": "Commercial",
-      "matched_rule": "signed contract",
-      "tier": 1,
-      "signal_stage": "commercial",
-      "signal_strength": 92,
-      "signal_tier": "high",
-      "score_breakdown": [],
-      "segment": "hvdc",
-      "company_id": null,
-      "company_name": "Unassigned",
-      "buyer_matches": [],
-      "project_matches": [],
-      "is_negative": false,
-      "neg_subtype": null,
-      "is_noise": false,
-      "evidence": {
-        "observed_fact": "UK’s LCCC Signs Contracts for Difference with AR7 Winners",
-        "observed_fact_detail": "The UK Low Carbon Contracts Company (LCCC) has signed Contracts for Difference (CfD) with [&#8230;].",
-        "source_label": "Offshore Wind Biz · 2026-03-26",
-        "matched_rule_name": "signed contract",
-        "matched_rule_tier": "Tier 1 — Contract",
-        "why_it_matters": "No rationale available.",
-        "missing_evidence": [
-          "Contract ACV not disclosed",
-          "Duration and renewal terms not public",
-          "Exclusivity and geographic scope unknown"
-        ],
-        "confidence": "Medium",
-        "confidence_rationale": "Tier-1 event type; company unmatched or mixed modifiers."
       }
     },
     {
@@ -489,51 +450,6 @@
       "is_noise": false,
       "evidence": {
         "observed_fact": "Day 3 Spring Sale Green Deals – Anker eufy smart security devices 50% off, Bluetti increases power station savings, Segway, more",
-        "observed_fact_detail": "<div class=\"feat-image\"><img src=\"https://electrek.",
-        "source_label": "Electrek · 2026-03-27",
-        "matched_rule_name": "no rule matched",
-        "matched_rule_tier": "Tier 5 — News",
-        "why_it_matters": "No specific investment pattern matched. Context only — not weighted without corroboration.",
-        "missing_evidence": [
-          "No investment-relevant pattern matched",
-          "Primary research required"
-        ],
-        "confidence": "Low",
-        "confidence_rationale": "Score below threshold. Context only."
-      }
-    },
-    {
-      "id": "3e911dbdc632",
-      "title": "Big Spring Sale Green Deals hub – e-bikes, e-scooters, power stations, tools, more",
-      "summary": "<div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2025/11/Lectric-XP4-e-bikes-winter-bike-ride-LS-group.jpg?quality=82&#038;strip=all&#038;w=1600\" /></div><p>The <strong>Amazon Big Spring Sale</strong> is officially in full swing, and in our usual fashion, we wanted to put all the best savings during this weeklong event in one place for all your shopping needs. We’re seeing a <a href=\"https://electrek.co/guides/green-deals/\">bunch of great deals on all the popular ",
-      "event_date": "2026-03-27",
-      "source_name": "Electrek",
-      "source_url": "https://electrek.co/2026/03/27/big-spring-sale-green-deals-hub-e-bikes-e-scooters-power-stations-tools-more/",
-      "event_type": "News",
-      "impact_type": "Informational",
-      "matched_rule": null,
-      "tier": 5,
-      "signal_stage": "strategic",
-      "signal_strength": 33,
-      "signal_tier": "low",
-      "score_breakdown": [
-        {
-          "id": "buyer_t1",
-          "delta": 18,
-          "reason": "Tier-1 strategic buyer named",
-          "group": "boost"
-        }
-      ],
-      "segment": "ess",
-      "company_id": null,
-      "company_name": "Unassigned",
-      "buyer_matches": [],
-      "project_matches": [],
-      "is_negative": false,
-      "neg_subtype": null,
-      "is_noise": false,
-      "evidence": {
-        "observed_fact": "Big Spring Sale Green Deals hub – e-bikes, e-scooters, power stations, tools, more",
         "observed_fact_detail": "<div class=\"feat-image\"><img src=\"https://electrek.",
         "source_label": "Electrek · 2026-03-27",
         "matched_rule_name": "no rule matched",
@@ -1223,12 +1139,12 @@
       }
     },
     {
-      "id": "0c4a46d6d7e6",
-      "title": "UK Continues Offshore Wind Expansion with 6 GW Leasing Round Planned for Early 2027",
-      "summary": "The Crown Estate has unveiled plans for the UK&#8217;s Offshore Wind Leasing Round 6 [&#8230;]",
-      "event_date": "2026-03-27",
-      "source_name": "Offshore Wind Biz",
-      "source_url": "https://www.offshorewind.biz/2026/03/27/uk-continues-offshore-wind-expansion-with-6-gw-leasing-round-planned-for-early-2027/",
+      "id": "53e44365b2c6",
+      "title": "This friendly robot just installed 100 MW of solar power",
+      "summary": "<div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2026/03/maximo_MAIN.jpg?quality=82&#038;strip=all&#038;w=1600\" /></div><p>In one of the largest real-world demonstrations of construction robots being used at utility-scale solar construction so far, a Maximo robot has completed the successful installation of 100 MW of solar capacity at the sprawling AES Bellefield solar complex.</p>\n\n\n\n <a class=\"more-link\" href=\"https://electrek.co/2026/03/29/this-friendly-robot-j",
+      "event_date": "2026-03-29",
+      "source_name": "Electrek",
+      "source_url": "https://electrek.co/2026/03/29/this-friendly-robot-just-installed-100-mw-of-solar-power/",
       "event_type": "News",
       "impact_type": "Informational",
       "matched_rule": null,
@@ -1244,7 +1160,7 @@
           "group": "boost"
         }
       ],
-      "segment": "hvdc",
+      "segment": "ess",
       "company_id": null,
       "company_name": "Unassigned",
       "buyer_matches": [],
@@ -1253,9 +1169,9 @@
       "neg_subtype": null,
       "is_noise": false,
       "evidence": {
-        "observed_fact": "UK Continues Offshore Wind Expansion with 6 GW Leasing Round Planned for Early 2027",
-        "observed_fact_detail": "The Crown Estate has unveiled plans for the UK&#8217;s Offshore Wind Leasing Round 6 [&#8230;].",
-        "source_label": "Offshore Wind Biz · 2026-03-27",
+        "observed_fact": "This friendly robot just installed 100 MW of solar power",
+        "observed_fact_detail": "<div class=\"feat-image\"><img src=\"https://electrek.",
+        "source_label": "Electrek · 2026-03-29",
         "matched_rule_name": "no rule matched",
         "matched_rule_tier": "Tier 5 — News",
         "why_it_matters": "No specific investment pattern matched. Context only — not weighted without corroboration.",
@@ -3472,7 +3388,7 @@
       "status": "success",
       "error": null,
       "items": 10,
-      "fetched_at": "2026-03-29T13:46:57.154412+00:00",
+      "fetched_at": "2026-03-29T23:03:52.574731+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -3495,7 +3411,7 @@
       "status": "success",
       "error": null,
       "items": 20,
-      "fetched_at": "2026-03-29T13:46:57.321281+00:00",
+      "fetched_at": "2026-03-29T23:03:52.859869+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -3518,7 +3434,7 @@
       "status": "success",
       "error": null,
       "items": 20,
-      "fetched_at": "2026-03-29T13:46:57.689077+00:00",
+      "fetched_at": "2026-03-29T23:03:53.327987+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -3537,10 +3453,10 @@
       "id": "offshorewind",
       "name": "Offshore Wind Biz",
       "url": "https://www.offshorewind.biz/feed/",
-      "status": "success",
-      "error": null,
-      "items": 10,
-      "fetched_at": "2026-03-29T13:46:57.830983+00:00",
+      "status": "failed",
+      "error": "HTTP 403",
+      "items": 0,
+      "fetched_at": "2026-03-29T23:03:53.709502+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -3562,7 +3478,7 @@
       "status": "success",
       "error": null,
       "items": 20,
-      "fetched_at": "2026-03-29T13:46:57.998070+00:00",
+      "fetched_at": "2026-03-29T23:03:53.826654+00:00",
       "source_type": "industry",
       "reliability": 3,
       "topics": [
@@ -3584,7 +3500,7 @@
       "status": "partial",
       "error": "Feed returned 0 usable items",
       "items": 0,
-      "fetched_at": "2026-03-29T13:46:58.155050+00:00",
+      "fetched_at": "2026-03-29T23:03:54.072414+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -3914,11 +3830,11 @@
   },
   "reliability": {
     "sources_total": 6,
-    "sources_ok": 5,
+    "sources_ok": 4,
     "sources_partial": 1,
-    "sources_failed": 0,
-    "new_events": 29,
-    "filtered_out": 51
+    "sources_failed": 1,
+    "new_events": 27,
+    "filtered_out": 43
   },
   "_feature_stubs": {
     "analyst_notes": "⚠ PAID PILOT — stored in private DB, not in public JSON",
