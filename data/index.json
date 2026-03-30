@@ -1,5 +1,30 @@
 [
   {
+    "date": "2026-03-30",
+    "dateKr": "2026년 03월 30일",
+    "stats": {
+      "total": 33,
+      "high": 7,
+      "medium": 4,
+      "negative": 0,
+      "matched": 1,
+      "filtered_out": 47,
+      "companies_with_signals": 1,
+      "by_segment": {
+        "ess": 28,
+        "hydrogen": 1,
+        "hvdc": 4
+      },
+      "by_type": {
+        "Contract": 4,
+        "Deployment": 1,
+        "Financing": 1,
+        "Pilot": 1,
+        "News": 26
+      }
+    }
+  },
+  {
     "date": "2026-03-29",
     "dateKr": "2026년 03월 29일",
     "stats": {
