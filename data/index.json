@@ -1,5 +1,28 @@
 [
   {
+    "date": "2026-03-31",
+    "dateKr": "2026년 03월 31일",
+    "stats": {
+      "total": 37,
+      "high": 5,
+      "medium": 4,
+      "negative": 0,
+      "matched": 2,
+      "filtered_out": 43,
+      "companies_with_signals": 1,
+      "by_segment": {
+        "ess": 33,
+        "hvdc": 4
+      },
+      "by_type": {
+        "Contract": 3,
+        "Financing": 2,
+        "News": 31,
+        "Partnership": 1
+      }
+    }
+  },
+  {
     "date": "2026-03-30",
     "dateKr": "2026년 03월 30일",
     "stats": {
