@@ -22,8 +22,9 @@
 ║                                                                              ║
 ║  TIER 2 — PAID PILOT  ($500-2,000/seat/month, 3-5 seats per fund)         ║
 ║    ○ Analyst notes  (per company/project — free-text, timestamped)        ║
-║    ○ Watchlist  (saved companies + alert threshold per entry)              ║
-║    ○ Alerts  (new HIGH signal on watchlisted company → email/Slack)       ║
+║    ✓ Watchlist  (localStorage — companies/projects/segments/buyers)        ║
+║    ✓ Alerts    (in-app alert feed, what changed + why + confidence)        ║
+║    ○ Alerts    (email/Slack delivery — Paid Pilot upgrade)                 ║
 ║    ○ Evidence history  (30-90 day signal timeline per company)            ║
 ║    ○ Triage status  (Pass / Watch / Investigate per company)               ║
 ║    ○ Team workflow  (shared notes, activity log, @mentions)               ║
@@ -1604,12 +1605,141 @@ def enrich_company(co, evs):
 
 
 # ══════════════════════════════════════════════════════════════════════════
-# SECTION 8  PANEL BUILDERS + WATCHLIST STUBS
+# SECTION 8  PANEL BUILDERS + ALERT ENGINE
 # ══════════════════════════════════════════════════════════════════════════
-# Watchlist, analyst notes, alerts, outcome tracking:
-# → Stored in private DB in paid tier
-# → Here we emit the DEFAULT watchlist (curated flag on company) and
-#   stub structures that the DB will eventually populate
+#
+# ALERT SYSTEM DESIGN
+# ────────────────────
+# The pipeline emits alert_candidates[] in the JSON — one per HIGH/NEG signal
+# that occurred today. The UI checks alert_candidates against the user's
+# localStorage watchlist and surfaces matches as alerts.
+#
+# Alert candidate schema:
+#   signal_id      the event id
+#   entity_type    "company" | "project" | "segment" | "buyer"
+#   entity_id      the matched entity id
+#   entity_name    display name
+#   alert_type     "high_signal" | "negative" | "pattern_change" | "new_inbound"
+#   event_type     Certification / Contract / Pilot / Negative / etc.
+#   headline       event title
+#   why_it_matters sector-specific explanation from evidence card
+#   confidence     Low / Medium / Medium-High / High
+#   score          signal_strength 0-100
+#   date           event_date
+#   source         source_name
+#   source_url     link to original article
+#
+# In Paid Pilot tier, alert_candidates are additionally sent via:
+#   - Email digest (daily batch, per-user watchlist filter)
+#   - Slack webhook (immediate, per-team channel)
+#   Both channels are NOT wired in this MVP build — stubs documented below.
+#
+# EMAIL DIGEST STUB (Paid Pilot):
+#   POST https://alerts.yourdomain.com/digest
+#   Body: { user_id, watchlist_ids, alert_candidates, date }
+#   → Service filters by watchlist, formats HTML email, sends via SES/Postmark
+#
+# SLACK WEBHOOK STUB (Paid Pilot):
+#   POST https://hooks.slack.com/services/YOUR/WEBHOOK/URL
+#   Body: { text: alert_summary, blocks: [...] }
+#   → SLACK_WEBHOOK_URL = os.environ.get("SLACK_WEBHOOK_URL", "")
+# ══════════════════════════════════════════════════════════════════════════
+
+def build_alert_candidates(signals, company_insights, enriched_projects, buyer_activity):
+    """
+    Produce alert candidates from today's signals.
+    One candidate per HIGH or NEGATIVE signal, enriched with:
+      - entity match (company / project / segment / buyer)
+      - why_it_matters from evidence card
+      - confidence + score
+    These are checked against the user's watchlist in the UI.
+    """
+    candidates = []
+    seen_ids = set()
+
+    for ev in signals:
+        # Only surface HIGH signals and all NEGATIVE signals
+        if ev["signal_tier"] not in ("high","medium") and not ev["is_negative"]:
+            continue
+        if ev["id"] in seen_ids:
+            continue
+        seen_ids.add(ev["id"])
+
+        ev2 = ev.get("evidence", {})
+        base = {
+            "signal_id":    ev["id"],
+            "alert_type":   "negative" if ev["is_negative"] else "high_signal",
+            "event_type":   ev["event_type"],
+            "headline":     ev["title"],
+            "why_it_matters": ev2.get("why_it_matters",""),
+            "confidence":   ev2.get("confidence","Low"),
+            "score":        ev["signal_strength"],
+            "date":         ev["event_date"],
+            "source":       ev["source_name"],
+            "source_url":   ev.get("source_url",""),
+            "segment":      ev.get("segment",""),
+        }
+
+        # Match to company
+        if ev.get("company_id"):
+            co = company_insights.get(ev["company_id"], {})
+            candidates.append({
+                **base,
+                "entity_type": "company",
+                "entity_id":   ev["company_id"],
+                "entity_name": ev.get("company_name",""),
+                "stage":       co.get("stage_label",""),
+                "pattern":     co.get("pattern",{}).get("label",""),
+            })
+
+        # Match to project via project_matches
+        for pid in ev.get("project_matches", []):
+            proj = next((p for p in enriched_projects if p["id"] == pid), None)
+            if proj:
+                candidates.append({
+                    **base,
+                    "entity_type": "project",
+                    "entity_id":   pid,
+                    "entity_name": proj.get("name",""),
+                    "stage":       proj.get("current_stage",""),
+                    "pattern":     "",
+                })
+
+        # Match to buyer
+        for bm in ev.get("buyer_matches", []):
+            candidates.append({
+                **base,
+                "entity_type": "buyer",
+                "entity_id":   bm["id"],
+                "entity_name": bm["name"],
+                "stage":       "",
+                "pattern":     "",
+            })
+
+        # Segment-level (always add)
+        if ev.get("segment"):
+            candidates.append({
+                **base,
+                "entity_type": "segment",
+                "entity_id":   ev["segment"],
+                "entity_name": ev["segment"],
+                "stage":       "",
+                "pattern":     "",
+            })
+
+    # Deduplicate: one alert per (entity_id, signal_id)
+    seen_pairs = set()
+    deduped = []
+    for c in candidates:
+        key = (c["entity_id"], c["signal_id"])
+        if key not in seen_pairs:
+            seen_pairs.add(key)
+            deduped.append(c)
+
+    # Sort: negative first, then by score desc
+    deduped.sort(key=lambda x: (0 if x["alert_type"]=="negative" else 1, -(x["score"])))
+    return deduped
+
 
 def build_panels(signals, cos):
     sev = {"critical":0,"high":1,"medium":2,"low":3}
@@ -1708,7 +1838,11 @@ def main():
             buyer_global.setdefault(b["id"],{"id":b["id"],"name":b["name"],"type":b["type"],"events":[]})
             buyer_global[b["id"]]["events"].append({"date":ev["event_date"],"title":ev["title"],"event_type":ev["event_type"],"source":ev["source_name"],"score":ev["signal_strength"]})
     print(f"  {len(buyer_global)} buyers active\n")
-    print("⑥ Panels..."); panels = build_panels(kept, co_intel); print(f"  Neg: {panels['panel_stats']['negative_count']} | Gaps: {panels['panel_stats']['companies_with_gaps']} cos\n")
+    print("⑥ Panels...")
+    panels = build_panels(kept, co_intel)
+    alert_candidates = build_alert_candidates(kept, co_intel, enriched_projects, buyer_global)
+    print(f"  Neg: {panels['panel_stats']['negative_count']} | Gaps: {panels['panel_stats']['companies_with_gaps']} companies | Alerts: {len(alert_candidates)}")
+    print()
     print("⑦ Brief..."); brief = generate_brief(kept)
     stats = {"total":len(kept),"high":sum(1 for e in kept if e["signal_tier"]=="high"),"medium":sum(1 for e in kept if e["signal_tier"]=="medium"),
              "negative":sum(1 for e in kept if e["is_negative"]),"matched":sum(1 for e in kept if e["company_id"]),"filtered_out":len(filtered),
@@ -1719,7 +1853,7 @@ def main():
     output = {"date":TODAY,"dateKr":TODAY_KR,"generatedAt":datetime.now(timezone.utc).isoformat(),
               "brief":brief,"stats":stats,"signals":kept,"filteredOut":filtered[:20],
               "companies":co_intel,"projects":enriched_projects,"strategic_buyers":STRATEGIC_BUYERS,
-              "buyer_activity":buyer_global,"panels":panels,"source_log":source_log,
+              "buyer_activity":buyer_global,"panels":panels,"alert_candidates":alert_candidates,"source_log":source_log,
               "source_registry":SOURCE_REGISTRY,"score_rulebook":SCORE_RULEBOOK_DISPLAY,"sector_rulebooks":SECTOR_RULEBOOKS,
               "reliability":{"sources_total":len(source_log),"sources_ok":sum(1 for s in source_log if s["status"]=="success"),
                              "sources_partial":sum(1 for s in source_log if s["status"]=="partial"),"sources_failed":sum(1 for s in source_log if s["status"]=="failed"),
@@ -1727,8 +1861,8 @@ def main():
               # Feature stubs — these fields will be populated by private DB in paid tier
               "_feature_stubs": {
                   "analyst_notes":     "⚠ PAID PILOT — stored in private DB, not in public JSON",
-                  "watchlist_custom":  "⚠ PAID PILOT — per-user watchlist with alert thresholds",
-                  "alerts":            "⚠ PAID PILOT — email/Slack when HIGH signal on watchlisted company",
+                  "watchlist_custom":  "✓ MVP — client-side localStorage watchlist (companies/projects/segments/buyers). Upgrade to DB in Paid Pilot.",
+                  "alerts":            "✓ MVP — in-app alerts from alert_candidates[] checked against localStorage watchlist. Email/Slack delivery in Paid Pilot.",
                   "triage_status":     "⚠ PAID PILOT — Pass / Watch / Investigate per company",
                   "evidence_history":  "⚠ PAID PILOT — 90-day per-company signal timeline",
                   "outcome_tracking":  "⚠ SCALE — analyst logs what happened after each signal",
