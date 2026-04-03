@@ -1,8 +1,8 @@
 {
   "date": "2026-04-03",
   "dateKr": "2026년 04월 03일",
-  "generatedAt": "2026-04-03T15:01:46.574005+00:00",
-  "brief": "**Deal Flow Memo - April 3, 2026**\n\nEnerVenue's $300M Series B (Energy Storage News) signals continued investor appetite for differentiated battery chemistry, particularly their 30,000-cycle nickel-hydrogen technology targeting long-duration applications where Li-ion cycle life remains limiting. The timing aligns with our thesis on industrial storage needing decade-plus asset lifecycles—worth monitoring if this validates premium pricing for ultra-long-cycle chemistries across our pipeline companies.\n\nMeanwhile, PV Magazine's BBDF coverage highlights industrial buyers' continued hesitation around hybrid PPAs, suggesting complexity and risk allocation remain barriers despite developer enthusiasm. This reinforces our view that the commercial/industrial renewables procurement market needs more standardized products—potential opportunity for software/marketplace plays that simplify hybrid contracting. Watch for follow-on coverage from BBDF panels on specific buyer concerns and whether any startups pitched solutions.",
+  "generatedAt": "2026-04-03T15:23:07.111241+00:00",
+  "brief": "**Deal Flow Memo - April 3, 2026**\n\nEnerVenue's $300M Series B (Energy Storage News) signals continued institutional appetite for alternative battery chemistries, particularly those promising extreme cycle life like their 30,000-cycle nickel-hydrogen tech. The timing aligns with increasing corporate demand for long-duration storage assets that can handle daily cycling without rapid degradation. Meanwhile, PV Magazine's BBDF reporting on slow hybrid PPA uptake among industrial buyers suggests a disconnect between innovative financing structures and actual corporate procurement practices. This creates potential opportunities in companies developing simpler, more standardized renewable energy contracts or those building better risk assessment tools for hybrid assets. Watch for follow-on rounds in the battery chemistry space and potential pivots among hybrid PPA platforms toward more traditional structures.",
   "stats": {
     "total": 25,
     "high": 2,
@@ -2280,7 +2280,7 @@
         "source_count": 1,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-03T15:01:38.836734+00:00"
+        "generated_at": "2026-04-03T15:23:00.312430+00:00"
       },
       "narrative": null,
       "generated_date": "2026-04-03"
@@ -3564,7 +3564,7 @@
       "status": "success",
       "error": null,
       "items": 10,
-      "fetched_at": "2026-04-03T15:01:36.497617+00:00",
+      "fetched_at": "2026-04-03T15:22:58.369785+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -3587,7 +3587,7 @@
       "status": "success",
       "error": null,
       "items": 20,
-      "fetched_at": "2026-04-03T15:01:36.817637+00:00",
+      "fetched_at": "2026-04-03T15:22:58.599267+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -3610,7 +3610,7 @@
       "status": "success",
       "error": null,
       "items": 20,
-      "fetched_at": "2026-04-03T15:01:37.664520+00:00",
+      "fetched_at": "2026-04-03T15:22:58.974769+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -3632,7 +3632,7 @@
       "status": "success",
       "error": null,
       "items": 10,
-      "fetched_at": "2026-04-03T15:01:37.808232+00:00",
+      "fetched_at": "2026-04-03T15:22:59.171880+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -3654,7 +3654,7 @@
       "status": "success",
       "error": null,
       "items": 20,
-      "fetched_at": "2026-04-03T15:01:38.306362+00:00",
+      "fetched_at": "2026-04-03T15:22:59.669249+00:00",
       "source_type": "industry",
       "reliability": 3,
       "topics": [
@@ -3676,7 +3676,7 @@
       "status": "partial",
       "error": "Feed returned 0 usable items",
       "items": 0,
-      "fetched_at": "2026-04-03T15:01:38.499370+00:00",
+      "fetched_at": "2026-04-03T15:22:59.909614+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
