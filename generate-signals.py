@@ -1605,6 +1605,252 @@ def enrich_company(co, evs):
 
 
 # ══════════════════════════════════════════════════════════════════════════
+# SECTION 7B  INVESTMENT MEMO BUILDER
+# ══════════════════════════════════════════════════════════════════════════
+#
+# Builds a structured investment memo object from existing enriched company data.
+# Rule: uses ONLY data already present in the enriched company dict.
+# Rule: does NOT call Claude, does NOT generate new facts, does NOT invent numbers.
+# Claude is called optionally for the narrative summary — with a strict prompt
+# that prohibits generating any fact not in the input.
+#
+# Memo sections:
+#   header          company identity, stage, sector, TTR
+#   observed_facts  every confirmed event ≥ score 40, source-cited
+#   key_signals     top 3 HIGH signals with score + evidence card
+#   pattern         detected multi-signal cluster + what it implies
+#   why_it_matters  sector gate, commercial threshold, policy driver
+#   risks           negative events + structural gaps (critical + high)
+#   missing_evidence all structural gaps from MISSING_RULES
+#   next_questions  generated from gap type — strictly rule-based
+#   linked_projects project context where company appears
+#   buyer_context   strategic buyer activity tied to this company
+#   data_quality    signal count, sources, confidence level, caveats
+# ══════════════════════════════════════════════════════════════════════════
+
+# Next questions — rule-based, keyed by gap rule_id
+NEXT_QUESTIONS_BY_GAP = {
+    "no_contract": [
+        "Is there a named customer in active commercial discussions? If yes, what is the expected close timeline?",
+        "What is preventing contract conversion from the current pilot or partnership stage?",
+        "Has management disclosed ARR or revenue run-rate in any investor update?",
+    ],
+    "no_cert": [
+        "Has a certification application been formally submitted to DNV GL / KPX / TÜV?",
+        "If submitted, what is the expected certification timeline and are there known blockers?",
+        "Is there a named test partner co-sponsoring the certification process?",
+    ],
+    "no_buyer": [
+        "Is there a named utility, shipyard, or industrial customer in the pipeline — even if undisclosed publicly?",
+        "What is the current BD funnel — how many active RFP responses are in progress?",
+        "Has any strategic buyer taken an equity position or signed an MOU?",
+    ],
+    "no_deploy": [
+        "What is the next planned field deployment date and location?",
+        "Has any customer committed capex to a deployment (vs. pilot)?",
+        "Are there any reference deployments at comparable scale in adjacent markets?",
+    ],
+    "pilot_gap": [
+        "What was the pilot KPI target and what result was achieved?",
+        "Has the pilot sponsor indicated intent to convert to a commercial agreement?",
+        "What is blocking conversion — technical, commercial, or budget approval?",
+    ],
+    "grant_only": [
+        "Does the grant require a commercial co-funding partner? If yes, who is named?",
+        "Is there a demand-side validator (buyer, anchor tenant) attached to this grant?",
+        "What is the grant's output milestone — and does it produce a commercially deployable asset?",
+    ],
+}
+
+# Risk framing — keyed by neg_subtype
+RISK_FRAMING = {
+    "delay":         "Timeline risk: extension increases cost-of-capital and fundraising uncertainty.",
+    "funding_risk":  "Capital risk: potential bridge or down-round. Monitor burn rate and investor behavior.",
+    "cost_overrun":  "Execution risk: capex overshoot compresses equity returns and signals project management concern.",
+    "supply_chain":  "Supply risk: component shortage may delay deployment; check if sector-wide or vendor-specific.",
+    "hiring_freeze": "Org risk: headcount reduction signals cost pressure; reassess runway and strategic direction.",
+    "cancellation":  "Contract risk: revenue removed. Determine if demand-side (customer) or supply-side (execution).",
+    "competitor_win":"Market risk: named competitor secured TAM contract. Reassess differentiation and pricing thesis.",
+    "subsidy_risk":  "Policy risk: subsidy-dependent revenue without commercial anchor is not investable.",
+}
+
+
+def build_investment_memo(co_enriched, call_ai=True):
+    """
+    Assemble a structured investment memo from an already-enriched company dict.
+    Returns a memo dict with all sections populated from existing data.
+    Optionally calls Claude for a concise narrative summary (2-3 sentences).
+    Claude is given only facts already in this function's inputs — no fabrication.
+    """
+    co      = co_enriched
+    ins     = co.get("insight", {})
+    evs     = co.get("events", [])
+    gaps    = co.get("gaps", [])
+    rb      = co.get("sector_rulebook", {})
+    pat     = co.get("pattern", {})
+    ba      = co.get("buyer_activity", {})
+    lp      = co.get("linked_projects", [])
+    neg_evs = [e for e in evs if e["is_negative"]]
+    high_evs= [e for e in evs if e["signal_tier"]=="high"]
+
+    # ── Observed facts (source-cited, score ≥ 40) ─────────────────────
+    observed_facts = ins.get("observed_facts", [])
+
+    # ── Key signals (top 3 HIGH, with full evidence card) ─────────────
+    key_signals = []
+    for ev in sorted(high_evs, key=lambda e: -e["signal_strength"])[:3]:
+        ev2 = ev.get("evidence", {})
+        key_signals.append({
+            "headline":         ev["title"],
+            "event_type":       ev["event_type"],
+            "score":            ev["signal_strength"],
+            "date":             ev["event_date"],
+            "source":           ev["source_name"],
+            "source_url":       ev.get("source_url",""),
+            "observed_fact":    ev2.get("observed_fact",""),
+            "why_it_matters":   ev2.get("why_it_matters",""),
+            "confidence":       ev2.get("confidence","Low"),
+            "missing_for_this": ev2.get("missing_evidence",[]),
+        })
+
+    # ── Risks (negative events + structural gaps) ─────────────────────
+    risks = []
+    for ev in neg_evs:
+        sub   = ev.get("neg_subtype","delay")
+        frame = RISK_FRAMING.get(sub, "Negative signal — verify with primary source.")
+        risks.append({
+            "type":    "negative_signal",
+            "subtype": sub,
+            "headline":ev["title"],
+            "source":  ev["source_name"],
+            "date":    ev["event_date"],
+            "framing": frame,
+        })
+    for gap in gaps:
+        if gap["severity"] in ("critical","high"):
+            risks.append({
+                "type":    "structural_gap",
+                "subtype": gap["rule_id"],
+                "headline":gap["label"],
+                "source":  "Rule-based gap detection",
+                "date":    TODAY,
+                "framing": gap["memo"],
+            })
+
+    # ── Missing evidence (all gaps, with next questions) ───────────────
+    missing_evidence = []
+    for gap in gaps:
+        questions = NEXT_QUESTIONS_BY_GAP.get(gap["rule_id"], [
+            "Verify status through direct outreach or primary filing."
+        ])
+        missing_evidence.append({
+            "label":     gap["label"],
+            "severity":  gap["severity"],
+            "memo":      gap["memo"],
+            "questions": questions,
+        })
+
+    # ── Next questions (aggregate, deduped) ────────────────────────────
+    all_questions = []
+    seen_q = set()
+    for m in missing_evidence:
+        for q in m["questions"][:2]:  # max 2 per gap
+            if q not in seen_q:
+                seen_q.add(q)
+                all_questions.append({"question": q, "from_gap": m["label"]})
+
+    # Append pattern-specific next check
+    nc = ins.get("next_check","")
+    if nc and nc not in seen_q:
+        all_questions.append({"question": nc, "from_gap": "Pattern analysis"})
+
+    # ── Buyer context ──────────────────────────────────────────────────
+    buyer_context = []
+    for bid, bdata in ba.items():
+        b_info = next((b for b in STRATEGIC_BUYERS if b["id"]==bid), {})
+        buyer_context.append({
+            "buyer_name":       bdata["name"],
+            "buyer_type":       bdata["type"],
+            "signal_count":     bdata["count"],
+            "procurement_notes":b_info.get("procurement_notes",""),
+            "recent_events":    bdata["events"][:2],
+        })
+
+    # ── Data quality assessment ────────────────────────────────────────
+    sources_used = list({e["source_name"] for e in evs})
+    data_quality = {
+        "total_signals":    len(evs),
+        "high_signals":     len(high_evs),
+        "negative_signals": len(neg_evs),
+        "sources":          sources_used,
+        "source_count":     len(sources_used),
+        "confidence":       ins.get("confidence","Low"),
+        "caveat":           "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
+        "generated_at":     datetime.now(timezone.utc).isoformat(),
+    }
+
+    # ── Optional Claude narrative (2-3 sentences, facts-only) ─────────
+    narrative = None
+    if call_ai and ANTHROPIC_KEY and observed_facts:
+        facts_text = "\n".join(f"- {f}" for f in observed_facts)
+        gaps_text  = "\n".join(f"- {g['label']}: {g['memo']}" for g in gaps[:4])
+        neg_text   = "\n".join(f"- {e['title']} ({e['source_name']})" for e in neg_evs[:2])
+        prompt = f"""You are a senior analyst at an energy-focused VC/CVC fund.
+Write a 3-sentence internal investment memo summary for {co['name']}.
+
+CONFIRMED FACTS (from public sources only — use ONLY these):
+{facts_text if facts_text else "No high-confidence events in current window."}
+
+STRUCTURAL GAPS:
+{gaps_text if gaps_text else "No major gaps detected."}
+
+NEGATIVE SIGNALS:
+{neg_text if neg_text else "None detected."}
+
+RULES:
+- Internal memo tone. Not marketing.
+- Do NOT invent any fact, figure, or timeline not listed above.
+- If a fact is absent, say it is absent — do not fill the gap.
+- Maximum 3 sentences.
+- End with one specific thing to verify next."""
+        result = call_claude(prompt)
+        if result:
+            narrative = result.strip()
+
+    return {
+        "company_id":       co["id"],
+        "company_name":     co["name"],
+        "sector":           co.get("sector",""),
+        "country":          co.get("country",""),
+        "stage_label":      co.get("stage_label",""),
+        "stage_desc":       co.get("stage_desc",""),
+        "ttr":              co.get("ttr","Long-term"),
+        "ttr_color":        co.get("ttr_color","#6E6E6E"),
+        "investor_type":    co.get("investor_type",""),
+        "description":      co.get("description",""),
+        "tags":             co.get("tags",[]),
+        "known_investors":  co.get("known_investors",[]),
+        "pattern":          pat,
+        "observed_facts":   observed_facts,
+        "key_signals":      key_signals,
+        "why_it_matters": {
+            "key_gate":             rb.get("key_gate","—"),
+            "commercial_threshold": rb.get("commercial_threshold","—"),
+            "policy_driver":        rb.get("policy_driver","—"),
+            "positive_signals":     rb.get("positive_signals",[]),
+        },
+        "risks":             risks,
+        "missing_evidence":  missing_evidence,
+        "next_questions":    all_questions,
+        "buyer_context":     buyer_context,
+        "linked_projects":   lp,
+        "data_quality":      data_quality,
+        "narrative":         narrative,
+        "generated_date":    TODAY,
+    }
+
+
+# ══════════════════════════════════════════════════════════════════════════
 # SECTION 8  PANEL BUILDERS + ALERT ENGINE
 # ══════════════════════════════════════════════════════════════════════════
 #
@@ -1808,7 +2054,13 @@ def main():
     for e in kept:
         if e["company_id"]: co_evs.setdefault(e["company_id"],[]).append(e)
     co_intel = {co["id"]:enrich_company(co,co_evs.get(co["id"],[])) for co in COMPANIES if co_evs.get(co["id"])}
-    print(f"  {len(co_intel)} companies\n")
+    print(f"  {len(co_intel)} companies enriched")
+    print()
+
+    print("③b Investment memos...")
+    memos = {co_id: build_investment_memo(co_data, call_ai=True) for co_id, co_data in co_intel.items()}
+    print(f"  {len(memos)} memos generated")
+    print()
     print("④ Project intelligence...")
     project_inbound = {}  # { project_id: [signal_event, ...] }
     for ev in kept:
@@ -1852,7 +2104,7 @@ def main():
         stats["by_type"][e["event_type"]]  = stats["by_type"].get(e["event_type"],0)+1
     output = {"date":TODAY,"dateKr":TODAY_KR,"generatedAt":datetime.now(timezone.utc).isoformat(),
               "brief":brief,"stats":stats,"signals":kept,"filteredOut":filtered[:20],
-              "companies":co_intel,"projects":enriched_projects,"strategic_buyers":STRATEGIC_BUYERS,
+              "companies":co_intel,"memos":memos,"projects":enriched_projects,"strategic_buyers":STRATEGIC_BUYERS,
               "buyer_activity":buyer_global,"panels":panels,"alert_candidates":alert_candidates,"source_log":source_log,
               "source_registry":SOURCE_REGISTRY,"score_rulebook":SCORE_RULEBOOK_DISPLAY,"sector_rulebooks":SECTOR_RULEBOOKS,
               "reliability":{"sources_total":len(source_log),"sources_ok":sum(1 for s in source_log if s["status"]=="success"),
