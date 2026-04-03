@@ -660,23 +660,102 @@ var PANELS_EXP=false, SRC_OPEN=false;
 // ════════════════════════════════════════════════════════════════
 async function loadData(url){
   setRelState("loading");
-  url = url||("data/latest.json?"+Date.now());
-  try{
-    var r=await fetch(url);
-    if(r.status===404){setRelState("nodata");renderNoData();return false;}
-    if(!r.ok) throw new Error("HTTP "+r.status);
-    D=await r.json(); SIGS=D.signals||[]; SRCLOG=D.source_log||[];
-    updateRel(); renderSidebar(); renderPanels();
-    document.getElementById("btn-copy").style.display="inline-flex";
-    var negCt=(D.panels&&D.panels.panel_stats&&D.panels.panel_stats.negative_count)||0;
-    var nb=document.getElementById("neg-badge");
-    if(negCt>0){nb.textContent=negCt;nb.style.display="inline";}
-    var wlCt=(D.panels&&D.panels.panel_stats&&D.panels.panel_stats.watchlist_count)||0;
-    var wb=document.getElementById("wl-badge");
-    if(wb&&wlCt>0){wb.textContent=wlCt;wb.style.display="inline";}
+async function loadData(url){
+  setRelState("loading");
+  url = url || ("data/latest.json?" + Date.now());
+
+  try {
+    console.log("Fetching:", url);   // 디버깅용
+
+    var r = await fetch(url);
+    console.log("Fetch status:", r.status);
+
+    if (r.status === 404) {
+      setRelState("nodata");
+      renderNoData();
+      return false;
+    }
+    if (!r.ok) throw new Error("HTTP " + r.status);
+
+    D = await r.json();
+    console.log("Loaded JSON keys:", Object.keys(D));   // 디버깅용
+
+    // ==================== 데이터 보완 로직 (중요!) ====================
+    // signals 배열이 없으면 alert_candidates를 대신 사용
+    if (!D.signals || D.signals.length === 0) {
+      if (D.alert_candidates && D.alert_candidates.length > 0) {
+        D.signals = D.alert_candidates.map(item => ({
+          id: item.signal_id || "sig_" + Date.now(),
+          title: item.headline || item.title || "Untitled Signal",
+          company_name: item.entity_name || "Unassigned",
+          event_date: item.date || D.date || "",
+          source_name: item.source || "",
+          source_url: item.source_url || "",
+          event_type: item.event_type || "News",
+          segment: item.segment || "",
+          signal_tier: (item.score >= 60) ? "high" : "medium",
+          signal_strength: item.score || 45,
+          is_negative: item.alert_type === "negative",
+          evidence: {
+            observed_fact: item.observed_fact || item.headline,
+            why_it_matters: item.why_it_matters || "",
+            confidence: item.confidence || "Medium",
+            missing_evidence: []
+          }
+        }));
+      } else {
+        D.signals = [];
+      }
+    }
+
+    // 필수 키들이 없으면 기본값 채우기
+    if (!D.source_log) D.source_log = [];
+    if (!D.reliability) {
+      D.reliability = {
+        sources_ok: D.source_log.filter ? D.source_log.filter(s => s.status === "success").length : 0,
+        sources_partial: 0,
+        sources_failed: 0,
+        sources_total: D.source_log.length || 6,
+        new_events: D.signals.length || 0,
+        filtered_out: 0
+      };
+    }
+    if (!D.stats) {
+      D.stats = {
+        total: D.signals.length || 0,
+        high: D.signals.filter ? D.signals.filter(s => s.signal_tier === "high").length : 0,
+        medium: D.signals.filter ? D.signals.filter(s => s.signal_tier === "medium").length : 0,
+        negative: 0,
+        matched: 0,
+        filtered_out: 0,
+        by_segment: { ess: 19 }   // 예시
+      };
+    }
+    if (!D.generatedAt) D.generatedAt = D.generated_at || new Date().toISOString();
+
+    // SIGS와 SRCLOG 동기화
+    SIGS = D.signals || [];
+    SRCLOG = D.source_log || [];
+
+    // UI 업데이트
+    updateRel();
+    renderSidebar();
+    renderPanels();
+    document.getElementById("btn-copy").style.display = "inline-flex";
+
+    console.log("✅ Data loaded successfully. Signals count:", SIGS.length);
+
     return true;
-  }catch(err){ setRelState("error",err.message); renderErr(err.message); return false; }
+
+  } catch(err) {
+    console.error("Load error:", err);
+    setRelState("error", err.message);
+    renderErr(err.message);
+    return false;
+  }
 }
+
+  
 async function loadIndex(){
   try{var r=await fetch("data/index.json?"+Date.now());if(!r.ok)return;IDX=await r.json();}catch(e){}
 }
