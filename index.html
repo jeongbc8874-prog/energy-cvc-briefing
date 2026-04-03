@@ -449,6 +449,98 @@ button{font-family:var(--mono);cursor:pointer;}
 .th-medium{background:#FEF9C3;color:#92400E;border:1px solid #FDE68A;}
 .th-all   {background:#EFF6FF;color:#1A56DB;border:1px solid #BFDBFE;}
 
+
+/* ════════════════════════════════════════════════════════
+   INVESTMENT MEMO
+════════════════════════════════════════════════════════ */
+.memo-page{max-width:860px;margin:0 auto;}
+.memo-doc{background:var(--surface);border:1px solid var(--b);padding:0;margin-bottom:16px;}
+
+/* Memo header — classification bar */
+.memo-classbar{background:var(--ink);padding:8px 24px;display:flex;align-items:center;justify-content:space-between;}
+.memo-classbar-l{font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.14em;color:#666;text-transform:uppercase;}
+.memo-classbar-r{font-family:var(--mono);font-size:9px;color:#444;}
+
+/* Company identity block */
+.memo-identity{padding:24px 28px 18px;border-bottom:3px solid var(--ink);}
+.memo-co-name{font-family:var(--serif);font-size:22px;font-weight:600;color:var(--ink);margin-bottom:6px;}
+.memo-co-meta{font-family:var(--mono);font-size:10px;color:var(--ink4);display:flex;gap:14px;flex-wrap:wrap;margin-bottom:10px;}
+.memo-co-desc{font-size:13px;color:var(--ink2);line-height:1.7;margin-bottom:10px;}
+.memo-co-tags{display:flex;gap:5px;flex-wrap:wrap;}
+.memo-stage-badge{font-family:var(--mono);font-size:9px;font-weight:700;padding:3px 10px;text-transform:uppercase;letter-spacing:.05em;}
+
+/* Section layout */
+.memo-section{padding:18px 28px;border-bottom:1px solid var(--b2);}
+.memo-section:last-child{border-bottom:none;}
+.memo-section-title{font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ink4);margin-bottom:12px;display:flex;align-items:center;gap:8px;}
+.memo-section-num{font-family:var(--mono);font-size:9px;font-weight:700;width:18px;height:18px;border-radius:50%;background:var(--ink);color:#FFF;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;}
+
+/* Narrative (AI summary) */
+.memo-narrative{font-family:var(--serif);font-size:14px;color:var(--ink);line-height:1.8;padding:14px 16px;background:#F9F7F3;border-left:3px solid var(--ink);margin-bottom:0;}
+.memo-narrative-caveat{font-family:var(--mono);font-size:9px;color:var(--ink4);margin-top:6px;}
+
+/* Observed facts */
+.memo-fact{display:flex;gap:10px;padding:5px 0;border-bottom:1px solid var(--b2);font-size:12px;color:var(--ink2);line-height:1.5;}
+.memo-fact:last-child{border-bottom:none;}
+.memo-fact-icon{flex-shrink:0;width:20px;text-align:center;}
+.memo-fact-source{font-family:var(--mono);font-size:9px;color:var(--ink4);margin-top:2px;}
+
+/* Key signals */
+.memo-signal{padding:10px 12px;border:1px solid var(--b);margin-bottom:8px;border-left-width:3px;}
+.memo-signal:last-child{margin-bottom:0;}
+.memo-signal-hd{display:flex;align-items:flex-start;gap:10px;margin-bottom:5px;}
+.memo-signal-title{font-size:13px;font-weight:600;color:var(--ink);flex:1;line-height:1.4;}
+.memo-signal-why{font-size:11px;color:var(--ink3);line-height:1.65;padding:6px 9px;background:var(--bg);border-left:2px solid var(--amber);margin-bottom:5px;}
+.memo-signal-miss{font-size:10px;color:#7F1D1D;padding:4px 8px;background:#FFF5F5;}
+
+/* Why it matters */
+.memo-gate-row{display:grid;grid-template-columns:140px 1fr;gap:0;border-bottom:1px solid var(--b2);}
+.memo-gate-row:last-child{border-bottom:none;}
+.memo-gate-lbl{padding:8px 10px;font-family:var(--mono);font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--ink4);background:var(--bg);border-right:1px solid var(--b2);}
+.memo-gate-val{padding:8px 12px;font-size:12px;color:var(--ink2);line-height:1.6;}
+
+/* Risks */
+.memo-risk{display:flex;gap:10px;padding:8px 0;border-bottom:1px solid var(--b2);align-items:flex-start;}
+.memo-risk:last-child{border-bottom:none;}
+.memo-risk-sev{font-family:var(--mono);font-size:9px;font-weight:700;padding:1px 7px;text-transform:uppercase;flex-shrink:0;margin-top:2px;}
+.memo-risk-body{flex:1;}
+.memo-risk-headline{font-size:12px;font-weight:600;color:var(--ink);margin-bottom:2px;}
+.memo-risk-frame{font-size:11px;color:var(--ink3);line-height:1.55;}
+
+/* Missing evidence */
+.memo-gap{padding:10px 0;border-bottom:1px solid var(--b2);}
+.memo-gap:last-child{border-bottom:none;}
+.memo-gap-hd{display:flex;align-items:center;gap:8px;margin-bottom:5px;}
+.memo-gap-label{font-size:12px;font-weight:600;}
+.memo-gap-memo{font-size:11px;color:var(--ink3);line-height:1.6;margin-bottom:6px;}
+.memo-gap-q{display:flex;gap:7px;font-size:11px;color:var(--ink2);padding:3px 0;line-height:1.5;}
+.memo-gap-q-num{font-family:var(--mono);font-size:10px;font-weight:700;color:var(--blue);flex-shrink:0;}
+
+/* Next questions */
+.memo-q{display:flex;gap:10px;padding:6px 0;border-bottom:1px solid var(--b2);align-items:flex-start;}
+.memo-q:last-child{border-bottom:none;}
+.memo-q-num{font-family:var(--mono);font-size:11px;font-weight:700;color:var(--blue);flex-shrink:0;width:20px;}
+.memo-q-body{flex:1;}
+.memo-q-text{font-size:12px;color:var(--ink);line-height:1.5;}
+.memo-q-from{font-family:var(--mono);font-size:9px;color:var(--ink4);margin-top:2px;}
+
+/* Data quality footer */
+.memo-dq{padding:14px 28px;background:var(--bg);border-top:2px solid var(--ink);}
+.memo-dq-title{font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink4);margin-bottom:6px;}
+.memo-dq-caveat{font-size:11px;color:var(--ink3);line-height:1.65;font-style:italic;}
+
+/* Action bar */
+.memo-actions{display:flex;gap:8px;padding:12px 0;flex-wrap:wrap;}
+
+
+@media print {
+  #rbar,#hdr,#nav,#fbar,#panels-row,#sidebar,.memo-actions,.wl-btn,.alert-dismiss,.gbtn{display:none!important;}
+  body{background:#FFF;}
+  #main{grid-template-columns:1fr;padding:0;}
+  #feed-col{padding:0;}
+  .memo-doc{border:none;box-shadow:none;}
+}
+
 </style>
 </head>
 <body>
@@ -500,6 +592,7 @@ button{font-family:var(--mono);cursor:pointer;}
     <button class="tab"     onclick="switchTab('buyers',this)">Buyers</button>
     <button class="tab"     onclick="switchTab('negative',this)">Negative<span class="tab-badge" id="neg-badge" style="display:none">0</span></button>
     <button class="tab"     onclick="switchTab('sources',this)">Sources</button>
+    <button class="tab"     onclick="switchTab('memo',this)">Memo Generator</button>
     <button class="tab"     onclick="switchTab('watchlist',this)">Watchlist<span class="tab-badge" id="wl-badge" style="display:none">0</span></button>
     <button class="tab"     onclick="switchTab('sectors',this)">Sector Rulebooks</button>
     <button class="tab"     onclick="switchTab('rulebook',this)">Score Rules</button>
@@ -644,9 +737,9 @@ function renderSidebar(){
      {n:s.medium||0,l:"Medium",c:"var(--amber)"},{n:s.matched||0,l:"Company match",c:"var(--blue)"},
      {n:s.negative||0,l:"Negative",c:"var(--red)"},{n:s.filtered_out||0,l:"Filtered",c:"var(--ink4)"}]
     .map(x=>`<div class="sr"><span class="sl">${x.l}</span><span class="sn" style="color:${x.c}">${x.n}</span></div>`).join("");
-  var segs=s.by_segment||{}, mx=Math.max(...Object.values(segs),1);
+  var segs=s.by_segment||{}, mx=(function(v){return v.length?Math.max.apply(null,v.concat([1])):1;})(Object.values(segs));
   document.getElementById("seg-box").innerHTML=Object.entries(segs).sort((a,b)=>b[1]-a[1]).slice(0,8)
-    .map(([k,v])=>`<div class="segrow"><span class="segnm">${k}</span><div class="segbg"><div class="segfl" style="width:${Math.round(v/mx*100)}%"></div></div><span class="segct">${v}</span></div>`).join("");
+    .map(function(kv){var k=kv[0],v=kv[1];return `<div class="segrow"><span class="segnm">${k}</span><div class="segbg"><div class="segfl" style="width:${Math.round(v/mx*100)}%"></div></div><span class="segct">${v}</span></div>`;}).join("");
 }
 
 // ════════════════════════════════════════════════════════════════
@@ -816,6 +909,10 @@ function renderCompanies(){
       }
       // linked projects
       if(co.linked_projects&&co.linked_projects.length) h+=`<div class="co-sec"><div class="co-sec-title">Linked Projects</div>${co.linked_projects.map(p=>`<div style="display:flex;gap:8px;font-size:12px;padding:3px 0"><span style="font-family:var(--mono);font-size:10px;padding:1px 6px;background:var(--bg);border:1px solid var(--b)">${esc(p.status)}</span><span>${esc(p.name)} <span style="color:var(--ink4)">— ${esc(p.location)}</span></span></div>`).join("")}</div>`;
+      // Memo generator button
+      h+=`<div class="co-sec" style="background:#F9F7F3"><div class="co-sec-title">Investment Memo</div>
+        <div style="display:flex;gap:8px;align-items:center"><button class="gbtn" onclick="event.stopPropagation();openMemo('${co.id}')">📄 Generate Memo →</button>
+        <span style="font-size:11px;color:var(--ink3)">Uses existing signal data only — no data invented</span></div></div>`;
       // Analyst notes + triage + outcome stubs (paid/scale tier)
       h+=renderAnalystStubs(co.id);
       if(evs.length) h+=`<div class="co-sec"><div class="co-sec-title">Signal Timeline <span style="font-weight:400;color:var(--ink4)">${evs.length} events</span></div>${evs.map(ev=>{var tc2=ev.signal_tier==="high"?"var(--green)":ev.signal_tier==="medium"?"var(--amber)":"var(--ink4)";var bc2=ev.is_negative?"var(--red)":ev.signal_tier==="high"?"var(--green)":"var(--b)";return`<div class="co-ev" style="border-left:2px solid ${bc2};padding-left:8px"><div class="co-ev-dt">${esc(ev.event_date||"")}</div><div style="flex:1"><div style="display:flex;gap:5px;margin-bottom:3px;flex-wrap:wrap">${tagFor(ev.event_type,ev.is_negative)}<span style="font-family:var(--mono);font-size:10px;font-weight:700;color:${tc2}">${ev.signal_strength||0}</span></div><div class="co-ev-title">${ev.source_url?`<a href="${esc(ev.source_url)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">${esc(ev.title||"")}</a>`:esc(ev.title||"")}</div><div class="co-ev-src">${esc(ev.source_name||"")}</div></div></div>`;}).join("")}</div>`;
@@ -848,7 +945,7 @@ function renderProjects(){
   h+=`<div style="font-size:12px;color:var(--ink2);line-height:1.65">Signal log entries are <b>analyst-curated</b> with source citations. Inbound signals from RSS are <b>pending review</b> — not yet confirmed facts. Do not cite unverified figures.</div>`;
   h+=`</div>`;
   h+=`<div style="padding:10px 16px;display:flex;gap:20px;flex-wrap:wrap;border-bottom:1px solid var(--b2)">`;
-  [{n:total,l:"Projects",c:"var(--ink)"},...Object.entries(byStage).map(([k,v])=>({n:v,l:k,c:typeColor[k.toLowerCase()]||"var(--ink4)"})),{n:withInbound,l:"New signals (pending)",c:"var(--blue)"}]
+  (function(){var arr=[{n:total,l:"Projects",c:"var(--ink)"}];Object.entries(byStage).forEach(function(kv){arr.push({n:kv[1],l:kv[0],c:typeColor[kv[0].toLowerCase()]||"var(--ink4)"});});arr.push({n:withInbound,l:"New signals (pending)",c:"var(--blue)"});return arr;})()
     .forEach(x=>{h+=`<div><div style="font-family:var(--mono);font-size:18px;font-weight:700;color:${x.c}">${x.n}</div><div style="font-family:var(--mono);font-size:9px;color:var(--ink4);text-transform:uppercase;letter-spacing:.05em">${esc(x.l)}</div></div>`;});
   h+=`</div></div>`;
 
@@ -856,7 +953,7 @@ function renderProjects(){
   projs.forEach(p=>{
     var sc=p.stage_color||"#6E6E6E", isOpen=PROJ_EXP.has(p.id);
     var log=p.signal_log_sorted||p.signal_log||[];
-    var logAsc=[...log].reverse();
+    var logAsc=log.slice().reverse();
     var known=p.what_is_known||[];
     var missing=p.what_is_missing||[];
     var inbound=p.inbound_signals||[];
@@ -1660,12 +1757,12 @@ function getMatchingAlerts(){
     // Negative signals always pass threshold
 
     var alertId = c.signal_id + "_" + c.entity_id;
-    results.push({
-      ...c,
-      alert_id:    alertId,
-      is_new:      !seen.includes(alertId),
-      wl_entry:    entry,
+    var alertObj = Object.assign({}, c, {
+      alert_id:  alertId,
+      is_new:    !seen.includes(alertId),
+      wl_entry:  entry,
     });
+    results.push(alertObj);
   });
 
   // Sort: unread first, then negative, then score
@@ -2072,7 +2169,7 @@ function renderSectors(){
 
   var h=`<div style="margin-bottom:10px;display:flex;align-items:center;justify-content:space-between"><span style="font-family:var(--mono);font-size:10px;font-weight:700;color:var(--ink4);text-transform:uppercase;letter-spacing:.08em">Sector Intelligence Rulebooks ${tierBadge("mvp")}</span><span style="font-size:12px;color:var(--ink3)">These rules define what constitutes a strong signal in each sector. Transparent and analyst-editable.</span></div>`;
 
-  Object.entries(rbs).forEach(([seg,rb])=>{
+  Object.entries(rbs).forEach(function(entry){var seg=entry[0],rb=entry[1];
     var sc=segColors[seg]||"#6E6E6E";
     h+=`<div class="rb-sector-card"><div class="rb-sector-hd"><span class="rb-sector-nm">${esc(rb.name||seg)}</span><span style="font-family:var(--mono);font-size:9px;font-weight:700;padding:2px 9px;background:${sc}15;color:${sc};border:1px solid ${sc}35">${esc(seg)}</span></div>`;
     var rows=[
@@ -2187,6 +2284,429 @@ function renderMemo(ins,name){
 }
 
 // ════════════════════════════════════════════════════════════════
+// INVESTMENT MEMO  — full renderer
+// Data source: D.memos[company_id]  (pre-built by pipeline)
+// Fallback: renderMemoFromCompany() assembles on-the-fly from
+//           D.companies[company_id] if memos not yet in JSON.
+// ════════════════════════════════════════════════════════════════
+
+var MEMO_CO_ID = null;   // currently open memo
+
+function openMemo(coId){
+  MEMO_CO_ID = coId;
+  switchTabByName("memo");
+}
+
+function renderMemoTab(){
+  var el = document.getElementById("feed-col");
+
+  // If no company selected, show company picker
+  if(!MEMO_CO_ID){
+    renderMemoPicker(el);
+    return;
+  }
+
+  // Prefer pre-built memo from pipeline; fall back to on-the-fly
+  var memo = D && D.memos && D.memos[MEMO_CO_ID];
+  if(!memo){
+    // Build on-the-fly from enriched company data
+    var co = D && D.companies && D.companies[MEMO_CO_ID];
+    if(!co){ el.innerHTML='<div class="empty">Company not found. Run pipeline first.</div>'; return; }
+    memo = buildMemoFromCompany(co);
+  }
+
+  renderMemoDoc(el, memo);
+}
+
+// On-the-fly memo builder (client-side, no Claude)
+// Used when pipeline hasn't run yet or memo not in JSON
+function buildMemoFromCompany(co){
+  var ins  = co.insight     || {};
+  var evs  = co.events      || [];
+  var gaps = co.gaps        || [];
+  var rb   = co.sector_rulebook || {};
+  var pat  = co.pattern     || {};
+  var ba   = co.buyer_activity || {};
+  var lp   = co.linked_projects || [];
+  var neg  = evs.filter(function(e){ return e.is_negative; });
+  var high = evs.filter(function(e){ return e.signal_tier==="high"; });
+
+  // Observed facts from insight
+  var facts = (ins.observed_facts||[]).map(function(f){ return {fact:f,source:"see event log"}; });
+
+  // Key signals
+  var keySignals = high.slice(0,3).map(function(ev){
+    var ev2 = ev.evidence||{};
+    return {
+      headline: ev.title, event_type: ev.event_type, score: ev.signal_strength,
+      date: ev.event_date, source: ev.source_name, source_url: ev.source_url||"",
+      observed_fact: ev2.observed_fact||"", why_it_matters: ev2.why_it_matters||"",
+      confidence: ev2.confidence||"Low", missing_for_this: ev2.missing_evidence||[],
+    };
+  });
+
+  // Risks from negatives + critical/high gaps
+  var risks = neg.map(function(ev){
+    return {type:"negative_signal",subtype:ev.neg_subtype||"delay",headline:ev.title,source:ev.source_name,date:ev.event_date,framing:""};
+  }).concat(gaps.filter(function(g){ return g.severity==="critical"||g.severity==="high"; }).map(function(g){
+    return {type:"structural_gap",subtype:g.rule_id,headline:g.label,source:"Rule-based detection",date:"",framing:g.memo};
+  }));
+
+  // Missing + questions
+  var QUESTIONS = {
+    no_contract:["Is there a named customer in active commercial discussions?","Has management disclosed ARR in any investor update?"],
+    no_cert:    ["Has a certification application been formally submitted?","Is there a named test partner co-sponsoring the certification process?"],
+    no_buyer:   ["Is there a named buyer in the pipeline, even if undisclosed publicly?","Has any strategic buyer taken an equity position?"],
+    no_deploy:  ["What is the next planned field deployment date?","Has any customer committed capex to a deployment?"],
+    pilot_gap:  ["What was the pilot KPI target and what result was achieved?","Has the pilot sponsor indicated intent to convert to a commercial agreement?"],
+    grant_only: ["Does the grant require a commercial co-funding partner?","Is there a demand-side validator attached to this grant?"],
+  };
+  var missingEvidence = gaps.map(function(g){
+    return {label:g.label,severity:g.severity,memo:g.memo,questions:QUESTIONS[g.rule_id]||["Verify status through direct outreach."]};
+  });
+
+  // Next questions
+  var allQ = [], seenQ = {};
+  missingEvidence.forEach(function(m){ (m.questions||[]).slice(0,2).forEach(function(q){ if(!seenQ[q]){seenQ[q]=1;allQ.push({question:q,from_gap:m.label});}});});
+  if(ins.next_check && !seenQ[ins.next_check]) allQ.push({question:ins.next_check,from_gap:"Pattern analysis"});
+
+  // Buyer context
+  var buyerContext = Object.values(ba).map(function(b){
+    var info = (D.strategic_buyers||[]).find(function(x){ return x.id===b.id; })||{};
+    return {buyer_name:b.name,buyer_type:b.type,signal_count:b.count,procurement_notes:info.procurement_notes||"",recent_events:(b.events||[]).slice(0,2)};
+  });
+
+  return {
+    company_id: co.id, company_name: co.name||"", sector: co.sector||"",
+    country: co.country||"", stage_label: co.stage_label||"", stage_desc: co.stage_desc||"",
+    ttr: co.ttr||"Long-term", ttr_color: co.ttr_color||"#6E6E6E",
+    investor_type: co.investor_type||"", description: co.description||"",
+    tags: co.tags||[], known_investors: co.known_investors||[],
+    pattern: pat, observed_facts: facts, key_signals: keySignals,
+    why_it_matters:{key_gate:rb.key_gate||"—",commercial_threshold:rb.commercial_threshold||"—",policy_driver:rb.policy_driver||"—",positive_signals:rb.positive_signals||[]},
+    risks: risks, missing_evidence: missingEvidence, next_questions: allQ,
+    buyer_context: buyerContext, linked_projects: lp,
+    data_quality:{total_signals:evs.length,high_signals:high.length,negative_signals:neg.length,sources:(function(a){var s={},r=[];a.forEach(function(x){if(!s[x]){s[x]=1;r.push(x);}});return r;})(evs.map(function(e){return e.source_name;})),confidence:ins.confidence||"Low",caveat:"Generated from public RSS signals only. No primary research used.",generated_at:new Date().toISOString()},
+    narrative: null, generated_date: D&&D.date||"",
+  };
+}
+
+// ── Memo picker ────────────────────────────────────────────────
+function renderMemoPicker(el){
+  var cos = D&&D.companies ? Object.values(D.companies) : [];
+  var memos = D&&D.memos || {};
+  cos = cos.slice().sort(function(a,b){ return (b.high_count||0)-(a.high_count||0); });
+
+  var h = '<div class="memo-page">';
+  h += '<div style="margin-bottom:16px"><div style="font-family:var(--mono);font-size:10px;font-weight:700;color:var(--ink4);letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px">Investment Memo Generator</div>';
+  h += '<div style="font-size:13px;color:var(--ink2);line-height:1.65">Select a company to generate a structured investment memo from today\'s signal data. All content is derived exclusively from confirmed public signals — no data is invented.</div></div>';
+
+  if(!cos.length){
+    h += '<div class="card"><div style="padding:28px;text-align:center"><div style="font-size:28px;margin-bottom:8px">📭</div><div style="font-size:13px;font-weight:600">No company data</div><div style="font-size:12px;color:var(--ink3);margin-top:4px">Run the pipeline first to generate company intelligence.</div></div></div>';
+  } else {
+    h += '<div class="card">';
+    cos.forEach(function(co){
+      var hasMemo = !!memos[co.id];
+      var sc = co.stage_color||"#A8A8A8";
+      h += '<div style="display:flex;align-items:center;gap:12px;padding:11px 16px;border-bottom:1px solid var(--b2);cursor:pointer;transition:background .07s" onmouseover="this.style.background=\'#FAFAF8\'" onmouseout="this.style.background=\'\'" onclick="openMemo(\''+co.id+'\')">';
+      h += '<div style="width:3px;height:36px;background:'+sc+';flex-shrink:0;border-radius:2px"></div>';
+      h += '<div style="flex:1">';
+      h += '<div style="font-size:13px;font-weight:600">'+esc(co.name||"")+'</div>';
+      h += '<div style="font-family:var(--mono);font-size:10px;color:var(--ink4)">'+esc(co.sector||"")+" · "+esc(co.stage_label||"")+" · "+esc(co.ttr||"")+'</div>';
+      h += '</div>';
+      h += '<div style="display:flex;gap:6px;align-items:center">';
+      if(co.high_count>0) h += '<span class="tag tH">HIGH '+co.high_count+'</span>';
+      if((co.neg_count||0)>0) h += '<span class="tag tN">⚠ '+co.neg_count+'</span>';
+      if(hasMemo) h += '<span style="font-family:var(--mono);font-size:9px;padding:2px 7px;background:#F0FDF4;color:#0A6640;border:1px solid #A7F3D0">✓ memo ready</span>';
+      h += '<span style="font-family:var(--mono);font-size:10px;color:var(--blue)">→</span>';
+      h += '</div></div>';
+    });
+    h += '</div>';
+  }
+  h += '</div>';
+  el.innerHTML = h;
+}
+
+// ── Memo document renderer ─────────────────────────────────────
+function renderMemoDoc(el, m){
+  var confColor2 = {High:"#16A34A","Medium-High":"#65A30D",Medium:"#CA8A04","Medium-Low":"#EA580C",Low:"#DC2626"};
+  var sevColor   = {critical:"#DC2626",high:"#EA580C",medium:"#CA8A04"};
+  var sevBg      = {critical:"#FEE2E2",high:"#FFF0E8",medium:"#FFFBEB"};
+  var cc = confColor2[m.data_quality&&m.data_quality.confidence] || "#DC2626";
+  var sc = m.stage_color || "#6E6E6E";
+  var pat = m.pattern||{};
+
+  var h = '<div class="memo-page">';
+
+  // Back + export actions
+  h += '<div class="memo-actions">';
+  h += '<button class="gbtn" onclick="MEMO_CO_ID=null;renderMemoTab()">← All Companies</button>';
+  h += '<button class="gbtn" onclick="copyMemo()">📋 Copy text</button>';
+  h += '<button class="gbtn" onclick="printMemo()">🖨 Print / PDF</button>';
+  h += '</div>';
+
+  h += '<div class="memo-doc" id="memo-printable">';
+
+  // Classification bar
+  h += '<div class="memo-classbar">';
+  h += '<span class="memo-classbar-l">Internal Investment Triage Memo — Confidential</span>';
+  h += '<span class="memo-classbar-r">'+esc(m.generated_date||"")+'  ·  Signal-based  ·  Not for distribution</span>';
+  h += '</div>';
+
+  // Identity block
+  h += '<div class="memo-identity">';
+  h += '<div style="display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap">';
+  h += '<div>';
+  h += '<div class="memo-co-name">'+esc(m.company_name||"")+'</div>';
+  h += '<div class="memo-co-meta">';
+  h += '<span>'+esc(m.sector||"—")+'</span>';
+  h += '<span>'+esc(m.country||"—")+'</span>';
+  h += '<span>'+esc(m.investor_type||"—")+'</span>';
+  if(m.known_investors&&m.known_investors.length) h += '<span>Known investors: '+esc(m.known_investors.join(", "))+'</span>';
+  h += '</div>';
+  h += '<div class="memo-co-desc">'+esc(m.description||"")+'</div>';
+  if(m.tags&&m.tags.length) h += '<div class="memo-co-tags">'+m.tags.map(function(t){return '<span class="tag t0">'+esc(t)+'</span>';}).join("")+'</div>';
+  h += '</div>';
+  // Stage + TTR + Confidence
+  h += '<div style="display:flex;flex-direction:column;gap:6px;align-items:flex-end;flex-shrink:0">';
+  h += '<span class="memo-stage-badge" style="background:'+sc+'18;color:'+sc+';border:1px solid '+sc+'40">'+esc(m.stage_label||"Lab")+'</span>';
+  h += '<span class="memo-stage-badge" style="background:'+(m.ttr_color||"#6E6E6E")+'18;color:'+(m.ttr_color||"#6E6E6E")+';border:1px solid '+(m.ttr_color||"#6E6E6E")+'40">'+esc(m.ttr||"Long-term")+'</span>';
+  h += '<span class="memo-stage-badge" style="background:'+cc+'18;color:'+cc+';border:1px solid '+cc+'40">Confidence: '+esc((m.data_quality&&m.data_quality.confidence)||"Low")+'</span>';
+  if(pat.label) h += '<span class="memo-stage-badge" style="background:'+(pat.color||"#A8A8A8")+'18;color:'+(pat.color||"#A8A8A8")+';border:1px solid '+(pat.color||"#A8A8A8")+'40">'+esc(pat.label)+'</span>';
+  h += '</div></div>';
+  h += '</div>'; // identity
+
+  // ── AI Narrative (if present) ─────────────────────────────────────
+  if(m.narrative){
+    h += '<div class="memo-section">';
+    h += '<div class="memo-section-title"><span class="memo-section-num">✦</span>Summary</div>';
+    h += '<div class="memo-narrative">'+esc(m.narrative)+'</div>';
+    h += '<div class="memo-narrative-caveat">⚠ Generated by Claude from confirmed signal facts only. No additional data was provided.</div>';
+    h += '</div>';
+  }
+
+  // ── 1. Observed facts ──────────────────────────────────────────────
+  h += '<div class="memo-section">';
+  h += '<div class="memo-section-title"><span class="memo-section-num">1</span>Observed Facts <span style="font-weight:400;font-size:9px;color:var(--ink4)">(source-cited only — no inference)</span></div>';
+  if(!(m.observed_facts&&m.observed_facts.length)){
+    h += '<div style="font-size:12px;color:var(--ink4);font-style:italic">No qualifying events in current signal window.</div>';
+  } else {
+    m.observed_facts.forEach(function(f){
+      var text   = typeof f==="string" ? f : (f.fact||"");
+      var src2   = typeof f==="string" ? "" : (f.source||"");
+      h += '<div class="memo-fact">';
+      h += '<span class="memo-fact-icon" style="color:var(--green);font-weight:700">✓</span>';
+      h += '<div><div>'+esc(text)+'</div>';
+      if(src2) h += '<div class="memo-fact-source">'+esc(src2)+'</div>';
+      h += '</div></div>';
+    });
+  }
+  h += '</div>';
+
+  // ── 2. Key signals ─────────────────────────────────────────────────
+  h += '<div class="memo-section">';
+  h += '<div class="memo-section-title"><span class="memo-section-num">2</span>Key Signals <span style="font-weight:400;font-size:9px;color:var(--ink4)">(highest-scoring events)</span></div>';
+  if(!(m.key_signals&&m.key_signals.length)){
+    h += '<div style="font-size:12px;color:var(--ink4);font-style:italic">No high-signal events in current window.</div>';
+  } else {
+    m.key_signals.forEach(function(sig){
+      var sc2  = sig.score>=60?"#0A6640":"#CA8A04";
+      var cc2  = confColor2[sig.confidence]||"#DC2626";
+      h += '<div class="memo-signal" style="border-left-color:'+sc2+'">';
+      h += '<div class="memo-signal-hd">';
+      h += '<div class="memo-signal-title">'+(sig.source_url?'<a href="'+esc(sig.source_url)+'" target="_blank" rel="noopener">'+esc(sig.headline)+'</a>':esc(sig.headline))+'</div>';
+      h += '<div style="display:flex;flex-direction:column;gap:3px;align-items:flex-end;flex-shrink:0">';
+      h += '<span class="tag tH" style="color:'+sc2+';border-color:'+sc2+'40;background:'+sc2+'10">'+esc(sig.event_type||"")+'</span>';
+      h += '<span style="font-family:var(--mono);font-size:10px;font-weight:700;color:'+sc2+'">'+sig.score+'</span>';
+      h += '</div></div>';
+      h += '<div style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-bottom:5px">'+esc(sig.source||"")+" · "+esc(sig.date||"")+'</div>';
+      if(sig.why_it_matters) h += '<div class="memo-signal-why">'+esc(sig.why_it_matters)+'</div>';
+      if(sig.missing_for_this&&sig.missing_for_this.length){
+        h += '<div class="memo-signal-miss">'+sig.missing_for_this.map(function(m2){return '✗ '+esc(m2);}).join(" &nbsp;·&nbsp; ")+'</div>';
+      }
+      h += '</div>';
+    });
+  }
+  h += '</div>';
+
+  // ── 3. Pattern detected ────────────────────────────────────────────
+  h += '<div class="memo-section">';
+  h += '<div class="memo-section-title"><span class="memo-section-num">3</span>Detected Pattern</div>';
+  if(pat.memo){
+    h += '<div style="padding:10px 12px;background:'+(pat.color||"#A8A8A8")+'0E;border-left:3px solid '+(pat.color||"#A8A8A8")+';font-size:12px;color:var(--ink2);line-height:1.7;margin-bottom:6px">'+esc(pat.memo)+'</div>';
+  }
+  if(m.why_it_matters&&m.why_it_matters.key_gate!=="—"){
+    h += '<div style="border:1px solid var(--b)">';
+    [["Key Gate",m.why_it_matters.key_gate],["Commercial Threshold",m.why_it_matters.commercial_threshold],["Policy Driver",m.why_it_matters.policy_driver]]
+    .forEach(function(row){
+      h += '<div class="memo-gate-row"><div class="memo-gate-lbl">'+esc(row[0])+'</div><div class="memo-gate-val">'+esc(row[1]||"—")+'</div></div>';
+    });
+    if(m.why_it_matters.positive_signals&&m.why_it_matters.positive_signals.length){
+      h += '<div class="memo-gate-row"><div class="memo-gate-lbl">Positive Signals</div><div class="memo-gate-val">';
+      m.why_it_matters.positive_signals.forEach(function(s){h += '<div style="display:flex;gap:5px;padding:2px 0;font-size:11px"><span style="color:var(--green);font-weight:700">✓</span>'+esc(s)+'</div>';});
+      h += '</div></div>';
+    }
+    h += '</div>';
+  }
+  h += '</div>';
+
+  // ── 4. Risks ───────────────────────────────────────────────────────
+  h += '<div class="memo-section">';
+  h += '<div class="memo-section-title"><span class="memo-section-num">4</span>Risks <span style="font-weight:400;font-size:9px;color:var(--ink4)">(negative signals + structural gaps)</span></div>';
+  if(!(m.risks&&m.risks.length)){
+    h += '<div style="font-size:12px;color:var(--green);padding:6px 0">No negative signals or critical structural gaps detected in current window.</div>';
+  } else {
+    m.risks.forEach(function(r){
+      var isNeg = r.type==="negative_signal";
+      var rc = isNeg ? "#DC2626" : sevColor[r.subtype]||"#EA580C";
+      var rb2= isNeg ? "#FEE2E2" : sevBg[r.subtype]||"#FFF0E8";
+      h += '<div class="memo-risk">';
+      h += '<span class="memo-risk-sev" style="background:'+rb2+';color:'+rc+';border:1px solid '+rc+'40">'+(isNeg?"NEG":r.subtype.replace("_"," ").toUpperCase())+'</span>';
+      h += '<div class="memo-risk-body">';
+      h += '<div class="memo-risk-headline">'+esc(r.headline||"")+'</div>';
+      if(r.framing) h += '<div class="memo-risk-frame">'+esc(r.framing)+'</div>';
+      if(r.source&&r.type==="negative_signal") h += '<div style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-top:3px">'+esc(r.source)+(r.date?" · "+esc(r.date):"")+'</div>';
+      h += '</div></div>';
+    });
+  }
+  h += '</div>';
+
+  // ── 5. Missing evidence ────────────────────────────────────────────
+  h += '<div class="memo-section">';
+  h += '<div class="memo-section-title"><span class="memo-section-num">5</span>Missing Evidence</div>';
+  if(!(m.missing_evidence&&m.missing_evidence.length)){
+    h += '<div style="font-size:12px;color:var(--green);padding:6px 0">No structural evidence gaps detected.</div>';
+  } else {
+    m.missing_evidence.forEach(function(gap){
+      var gc = sevColor[gap.severity]||"#CA8A04";
+      var gb = sevBg[gap.severity]||"#FFFBEB";
+      h += '<div class="memo-gap">';
+      h += '<div class="memo-gap-hd">';
+      h += '<span style="background:'+gb+';color:'+gc+';border:1px solid '+gc+'40;font-family:var(--mono);font-size:9px;font-weight:700;padding:1px 7px;text-transform:uppercase">'+esc(gap.severity||"")+'</span>';
+      h += '<span class="memo-gap-label" style="color:'+gc+'">✗ '+esc(gap.label||"")+'</span>';
+      h += '</div>';
+      if(gap.memo) h += '<div class="memo-gap-memo">'+esc(gap.memo)+'</div>';
+      h += '</div>';
+    });
+  }
+  h += '</div>';
+
+  // ── 6. Next questions ──────────────────────────────────────────────
+  h += '<div class="memo-section">';
+  h += '<div class="memo-section-title"><span class="memo-section-num">6</span>Suggested Next Questions <span style="font-weight:400;font-size:9px;color:var(--ink4)">(for IC discussion or founder meeting)</span></div>';
+  if(!(m.next_questions&&m.next_questions.length)){
+    h += '<div style="font-size:12px;color:var(--ink4);font-style:italic">No questions generated.</div>';
+  } else {
+    m.next_questions.forEach(function(q,i){
+      h += '<div class="memo-q">';
+      h += '<span class="memo-q-num">'+(i+1)+'.</span>';
+      h += '<div class="memo-q-body">';
+      h += '<div class="memo-q-text">'+esc(q.question||q)+'</div>';
+      if(q.from_gap) h += '<div class="memo-q-from">↳ from gap: '+esc(q.from_gap)+'</div>';
+      h += '</div></div>';
+    });
+  }
+  h += '</div>';
+
+  // ── Buyer context (if any) ─────────────────────────────────────────
+  if(m.buyer_context&&m.buyer_context.length){
+    h += '<div class="memo-section">';
+    h += '<div class="memo-section-title"><span class="memo-section-num">+</span>Strategic Buyer Context</div>';
+    m.buyer_context.forEach(function(b){
+      h += '<div style="display:flex;gap:10px;padding:6px 0;border-bottom:1px solid var(--b2);font-size:12px">';
+      h += '<span style="font-family:var(--mono);font-size:10px;font-weight:700;color:var(--blue);flex-shrink:0">'+esc(b.buyer_name||"")+'</span>';
+      h += '<span style="color:var(--ink4);flex-shrink:0">('+esc(b.buyer_type||"")+')</span>';
+      if(b.procurement_notes) h += '<span style="color:var(--ink3)">'+esc(b.procurement_notes)+'</span>';
+      h += '<span style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-left:auto;flex-shrink:0">'+b.signal_count+' signal'+(b.signal_count===1?"":"s")+'</span>';
+      h += '</div>';
+    });
+    h += '</div>';
+  }
+
+  // ── Linked projects (if any) ───────────────────────────────────────
+  if(m.linked_projects&&m.linked_projects.length){
+    h += '<div class="memo-section">';
+    h += '<div class="memo-section-title"><span class="memo-section-num">+</span>Linked Projects</div>';
+    m.linked_projects.forEach(function(p){
+      h += '<div style="display:flex;gap:10px;padding:6px 0;border-bottom:1px solid var(--b2);font-size:12px">';
+      h += '<span style="font-size:12px;font-weight:600">'+esc(p.name||"")+'</span>';
+      h += '<span style="font-family:var(--mono);font-size:10px;padding:1px 7px;background:var(--bg);border:1px solid var(--b)">'+esc(p.status||"")+'</span>';
+      h += '<span style="color:var(--ink4)">'+esc(p.location||"")+'</span>';
+      if(p.offtaker&&!p.offtaker.includes("unknown")) h += '<span style="color:var(--ink3)">Offtaker: '+esc(p.offtaker)+'</span>';
+      h += '</div>';
+    });
+    h += '</div>';
+  }
+
+  // ── Data quality footer ────────────────────────────────────────────
+  var dq = m.data_quality||{};
+  h += '<div class="memo-dq">';
+  h += '<div class="memo-dq-title">Data Quality & Provenance</div>';
+  h += '<div style="font-family:var(--mono);font-size:10px;color:var(--ink4);margin-bottom:5px">';
+  h += esc(dq.total_signals||0)+' total signals  ·  ';
+  h += esc(dq.high_signals||0)+' high  ·  ';
+  h += esc(dq.negative_signals||0)+' negative  ·  ';
+  h += 'Sources: '+(dq.sources||[]).map(esc).join(", ");
+  h += '</div>';
+  h += '<div class="memo-dq-caveat">'+esc(dq.caveat||"")+'</div>';
+  h += '</div>';
+
+  h += '</div>'; // memo-doc
+  h += '</div>'; // memo-page
+
+  el.innerHTML = h;
+}
+
+// ── Copy memo as plain text ────────────────────────────────────
+function copyMemo(){
+  var memo = D&&D.memos&&D.memos[MEMO_CO_ID];
+  if(!memo){ var co=D&&D.companies&&D.companies[MEMO_CO_ID]; if(co) memo=buildMemoFromCompany(co); }
+  if(!memo){ alert("No memo data."); return; }
+
+  var lines = [];
+  lines.push("INTERNAL INVESTMENT TRIAGE MEMO — CONFIDENTIAL");
+  lines.push("=".repeat(60));
+  lines.push(memo.company_name + " · " + memo.sector + " · " + memo.stage_label + " · " + memo.ttr);
+  lines.push("Confidence: " + (memo.data_quality&&memo.data_quality.confidence||"Low"));
+  lines.push("");
+  if(memo.narrative){ lines.push("SUMMARY"); lines.push(memo.narrative); lines.push(""); }
+  lines.push("1. OBSERVED FACTS");
+  (memo.observed_facts||[]).forEach(function(f){ lines.push("  ✓ " + (typeof f==="string"?f:f.fact||"")); });
+  lines.push("");
+  lines.push("2. KEY SIGNALS");
+  (memo.key_signals||[]).forEach(function(s,i){ lines.push("  ["+(i+1)+"] " + s.headline + " — score " + s.score + " · " + s.source + " · " + s.date); if(s.why_it_matters) lines.push("      WHY: " + s.why_it_matters); });
+  lines.push("");
+  lines.push("3. DETECTED PATTERN");
+  if(memo.pattern&&memo.pattern.memo) lines.push("  " + memo.pattern.memo);
+  lines.push("");
+  lines.push("4. RISKS");
+  if(!(memo.risks&&memo.risks.length)) lines.push("  No negative signals or critical gaps detected.");
+  (memo.risks||[]).forEach(function(r){ lines.push("  ⚠ " + r.headline); if(r.framing) lines.push("    " + r.framing); });
+  lines.push("");
+  lines.push("5. MISSING EVIDENCE");
+  if(!(memo.missing_evidence&&memo.missing_evidence.length)) lines.push("  No gaps detected.");
+  (memo.missing_evidence||[]).forEach(function(g){ lines.push("  ✗ [" + (g.severity||"").toUpperCase() + "] " + g.label); });
+  lines.push("");
+  lines.push("6. NEXT QUESTIONS");
+  (memo.next_questions||[]).forEach(function(q,i){ lines.push("  " + (i+1) + ". " + (q.question||q)); });
+  lines.push("");
+  var dq = memo.data_quality||{};
+  lines.push("DATA QUALITY: " + (dq.total_signals||0) + " signals · Sources: " + (dq.sources||[]).join(", "));
+  lines.push(dq.caveat||"");
+  lines.push(memo.generated_date||"");
+
+  navigator.clipboard.writeText(lines.join("\n"))
+    .then(function(){ alert("✅ Memo copied to clipboard"); })
+    .catch(function(){ alert("Copy failed — check clipboard permissions"); });
+}
+
+// ── Print / PDF ────────────────────────────────────────────────
+function printMemo(){
+  window.print();
+}
+
+
+// ════════════════════════════════════════════════════════════════
 // UI STATE RENDERERS
 // ════════════════════════════════════════════════════════════════
 function renderNoData(){
@@ -2235,6 +2755,7 @@ function switchTab(tab,btn){
   if(tab==="projects")   renderProjects();
   if(tab==="buyers")     renderBuyers();
   if(tab==="sources")    renderSourcesTab();
+  if(tab==="memo")       renderMemoTab();
   if(tab==="watchlist")  renderWatchlist();
   if(tab==="alerts")     renderAlerts();
   if(tab==="sectors")    renderSectors();
