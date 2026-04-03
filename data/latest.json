@@ -1,8 +1,8 @@
 {
   "date": "2026-04-03",
   "dateKr": "2026년 04월 03일",
-  "generatedAt": "2026-04-03T14:51:41.799850+00:00",
-  "brief": "**Internal Deal Flow Memo - April 3, 2026**\n\nEnerVenue's $300M Series B (Energy Storage News) signals continued investor appetite for alternative battery chemistries, particularly as their nickel-hydrogen tech promises 30,000 cycles—a significant durability advantage over lithium-ion for grid-scale applications. The timing aligns with increasing grid storage demands, though we should monitor whether this validates a broader shift toward non-lithium chemistries or remains a niche play for ultra-long-duration applications.\n\nMeanwhile, PV Magazine's BBDF 2026 coverage highlighting slow hybrid PPA uptake among industrial buyers suggests a gap between renewable energy financing innovation and corporate procurement comfort levels. This procurement friction could create opportunities in risk management tools or simplified contracting platforms that bridge the complexity gap for industrial customers. Worth tracking whether this industrial hesitancy persists as renewable costs continue declining and whether it opens space for intermediary solutions.",
+  "generatedAt": "2026-04-03T15:01:46.574005+00:00",
+  "brief": "**Deal Flow Memo - April 3, 2026**\n\nEnerVenue's $300M Series B (Energy Storage News) signals continued investor appetite for differentiated battery chemistry, particularly their 30,000-cycle nickel-hydrogen technology targeting long-duration applications where Li-ion cycle life remains limiting. The timing aligns with our thesis on industrial storage needing decade-plus asset lifecycles—worth monitoring if this validates premium pricing for ultra-long-cycle chemistries across our pipeline companies.\n\nMeanwhile, PV Magazine's BBDF coverage highlights industrial buyers' continued hesitation around hybrid PPAs, suggesting complexity and risk allocation remain barriers despite developer enthusiasm. This reinforces our view that the commercial/industrial renewables procurement market needs more standardized products—potential opportunity for software/marketplace plays that simplify hybrid contracting. Watch for follow-on coverage from BBDF panels on specific buyer concerns and whether any startups pitched solutions.",
   "stats": {
     "total": 25,
     "high": 2,
@@ -2121,6 +2121,171 @@
       }
     }
   },
+  "memos": {
+    "c_form_energy": {
+      "company_id": "c_form_energy",
+      "company_name": "Form Energy",
+      "sector": "ess",
+      "country": "US",
+      "stage_label": "Lab",
+      "stage_desc": "Limited public signal. Company at lab/early stage or undisclosed.",
+      "ttr": "Long-term",
+      "ttr_color": "#6E6E6E",
+      "investor_type": "Infrastructure/PF",
+      "description": "Iron-air 100h+ LDES. ArcelorMittal $100M strategic. Georgia gigafactory under construction. Three US utility contracts.",
+      "tags": [
+        "비상장",
+        "Iron-Air",
+        "Series-E"
+      ],
+      "known_investors": [
+        "ArcelorMittal",
+        "GS Energy",
+        "Breakthrough Energy"
+      ],
+      "pattern": {
+        "id": "low_density",
+        "label": "Insufficient Signal",
+        "color": "#A8A8A8",
+        "memo": "Signal density insufficient for pattern recognition. Primary research required."
+      },
+      "observed_facts": [],
+      "key_signals": [],
+      "why_it_matters": {
+        "key_gate": "Third-party certification (UL 9540, IEC 62619) + grid interconnection agreement",
+        "commercial_threshold": "First offtake or supply agreement with named utility/industrial",
+        "policy_driver": "IRA Storage ITC (US), EU Battery Regulation, KR RPS ESS 가중치",
+        "positive_signals": [
+          "Utility framework contract",
+          "Hyperscaler pilot with CFE mandate",
+          "Co-location with offshore wind",
+          "DOE grant + offtaker co-investment"
+        ]
+      },
+      "risks": [
+        {
+          "type": "structural_gap",
+          "subtype": "no_contract",
+          "headline": "No Commercial Contract",
+          "source": "Rule-based gap detection",
+          "date": "2026-04-03",
+          "framing": "No binding commercial agreement on record. All revenue is hypothetical."
+        },
+        {
+          "type": "structural_gap",
+          "subtype": "no_cert",
+          "headline": "No Third-Party Certification",
+          "source": "Rule-based gap detection",
+          "date": "2026-04-03",
+          "framing": "No independent certification (DNV GL, TÜV, KPX, UL). Required for regulated procurement."
+        },
+        {
+          "type": "structural_gap",
+          "subtype": "no_buyer",
+          "headline": "No Named Strategic Buyer",
+          "source": "Rule-based gap detection",
+          "date": "2026-04-03",
+          "framing": "No named strategic buyer in any signal. Demand-side validation absent."
+        }
+      ],
+      "missing_evidence": [
+        {
+          "label": "No Commercial Contract",
+          "severity": "critical",
+          "memo": "No binding commercial agreement on record. All revenue is hypothetical.",
+          "questions": [
+            "Is there a named customer in active commercial discussions? If yes, what is the expected close timeline?",
+            "What is preventing contract conversion from the current pilot or partnership stage?",
+            "Has management disclosed ARR or revenue run-rate in any investor update?"
+          ]
+        },
+        {
+          "label": "No Third-Party Certification",
+          "severity": "high",
+          "memo": "No independent certification (DNV GL, TÜV, KPX, UL). Required for regulated procurement.",
+          "questions": [
+            "Has a certification application been formally submitted to DNV GL / KPX / TÜV?",
+            "If submitted, what is the expected certification timeline and are there known blockers?",
+            "Is there a named test partner co-sponsoring the certification process?"
+          ]
+        },
+        {
+          "label": "No Named Strategic Buyer",
+          "severity": "high",
+          "memo": "No named strategic buyer in any signal. Demand-side validation absent.",
+          "questions": [
+            "Is there a named utility, shipyard, or industrial customer in the pipeline — even if undisclosed publicly?",
+            "What is the current BD funnel — how many active RFP responses are in progress?",
+            "Has any strategic buyer taken an equity position or signed an MOU?"
+          ]
+        },
+        {
+          "label": "No Deployment / Go-Live",
+          "severity": "medium",
+          "memo": "No operational deployment confirmed. TRL-9 in commercial setting unverified.",
+          "questions": [
+            "What is the next planned field deployment date and location?",
+            "Has any customer committed capex to a deployment (vs. pilot)?",
+            "Are there any reference deployments at comparable scale in adjacent markets?"
+          ]
+        }
+      ],
+      "next_questions": [
+        {
+          "question": "Is there a named customer in active commercial discussions? If yes, what is the expected close timeline?",
+          "from_gap": "No Commercial Contract"
+        },
+        {
+          "question": "What is preventing contract conversion from the current pilot or partnership stage?",
+          "from_gap": "No Commercial Contract"
+        },
+        {
+          "question": "Has a certification application been formally submitted to DNV GL / KPX / TÜV?",
+          "from_gap": "No Third-Party Certification"
+        },
+        {
+          "question": "If submitted, what is the expected certification timeline and are there known blockers?",
+          "from_gap": "No Third-Party Certification"
+        },
+        {
+          "question": "Is there a named utility, shipyard, or industrial customer in the pipeline — even if undisclosed publicly?",
+          "from_gap": "No Named Strategic Buyer"
+        },
+        {
+          "question": "What is the current BD funnel — how many active RFP responses are in progress?",
+          "from_gap": "No Named Strategic Buyer"
+        },
+        {
+          "question": "What is the next planned field deployment date and location?",
+          "from_gap": "No Deployment / Go-Live"
+        },
+        {
+          "question": "Has any customer committed capex to a deployment (vs. pilot)?",
+          "from_gap": "No Deployment / Go-Live"
+        },
+        {
+          "question": "Direct outreach recommended.",
+          "from_gap": "Pattern analysis"
+        }
+      ],
+      "buyer_context": [],
+      "linked_projects": [],
+      "data_quality": {
+        "total_signals": 1,
+        "high_signals": 0,
+        "negative_signals": 0,
+        "sources": [
+          "Energy Storage News"
+        ],
+        "source_count": 1,
+        "confidence": "Low",
+        "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
+        "generated_at": "2026-04-03T15:01:38.836734+00:00"
+      },
+      "narrative": null,
+      "generated_date": "2026-04-03"
+    }
+  },
   "projects": [
     {
       "id": "p_busan_h2",
@@ -3399,7 +3564,7 @@
       "status": "success",
       "error": null,
       "items": 10,
-      "fetched_at": "2026-04-03T14:51:31.987189+00:00",
+      "fetched_at": "2026-04-03T15:01:36.497617+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -3422,7 +3587,7 @@
       "status": "success",
       "error": null,
       "items": 20,
-      "fetched_at": "2026-04-03T14:51:32.217500+00:00",
+      "fetched_at": "2026-04-03T15:01:36.817637+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -3445,7 +3610,7 @@
       "status": "success",
       "error": null,
       "items": 20,
-      "fetched_at": "2026-04-03T14:51:32.645777+00:00",
+      "fetched_at": "2026-04-03T15:01:37.664520+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -3467,7 +3632,7 @@
       "status": "success",
       "error": null,
       "items": 10,
-      "fetched_at": "2026-04-03T14:51:32.961294+00:00",
+      "fetched_at": "2026-04-03T15:01:37.808232+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -3489,7 +3654,7 @@
       "status": "success",
       "error": null,
       "items": 20,
-      "fetched_at": "2026-04-03T14:51:33.470601+00:00",
+      "fetched_at": "2026-04-03T15:01:38.306362+00:00",
       "source_type": "industry",
       "reliability": 3,
       "topics": [
@@ -3511,7 +3676,7 @@
       "status": "partial",
       "error": "Feed returned 0 usable items",
       "items": 0,
-      "fetched_at": "2026-04-03T14:51:33.743816+00:00",
+      "fetched_at": "2026-04-03T15:01:38.499370+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
