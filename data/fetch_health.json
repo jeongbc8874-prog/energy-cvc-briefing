@@ -1,0 +1,67 @@
+{
+  "doe_main": {
+    "consecutive_fails": 1,
+    "last_fail": "2026-04-04",
+    "last_error": "HTTP 404"
+  },
+  "energystoragenews": {
+    "consecutive_fails": 0,
+    "last_success": "2026-04-04",
+    "skip_until": ""
+  },
+  "canarymedia": {
+    "consecutive_fails": 0,
+    "last_success": "2026-04-04",
+    "skip_until": ""
+  },
+  "utilitydive": {
+    "consecutive_fails": 0,
+    "last_success": "2026-04-04",
+    "skip_until": ""
+  },
+  "doe_cleancities": {
+    "consecutive_fails": 1,
+    "last_fail": "2026-04-04",
+    "last_error": "Bozo + no entries: <unknown>:35:2: mismatched tag"
+  },
+  "pvmagazine": {
+    "consecutive_fails": 0,
+    "last_success": "2026-04-04",
+    "skip_until": ""
+  },
+  "electrek": {
+    "consecutive_fails": 0,
+    "last_success": "2026-04-04",
+    "skip_until": ""
+  },
+  "cleantechnica": {
+    "consecutive_fails": 0,
+    "last_success": "2026-04-04",
+    "skip_until": ""
+  },
+  "offshorewind": {
+    "consecutive_fails": 0,
+    "last_success": "2026-04-04",
+    "skip_until": ""
+  },
+  "h2view": {
+    "consecutive_fails": 1,
+    "last_fail": "2026-04-04",
+    "last_error": "Empty feed (0 entries)"
+  },
+  "azocleantech": {
+    "consecutive_fails": 1,
+    "last_fail": "2026-04-04",
+    "last_error": "HTTP 404"
+  },
+  "iea": {
+    "consecutive_fails": 1,
+    "last_fail": "2026-04-04",
+    "last_error": "HTTP 404"
+  },
+  "eia_today": {
+    "consecutive_fails": 0,
+    "last_success": "2026-04-04",
+    "skip_until": ""
+  }
+}

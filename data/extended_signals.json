@@ -1,80 +1,25 @@
 {
   "date": "2026-04-04",
-  "generated_at": "2026-04-04T09:33:44.637857+00:00",
-  "signal_count": 0,
+  "generated_at": "2026-04-04T09:49:15.664701+00:00",
+  "signal_count": 2,
   "stats": {
-    "total": 0,
+    "total": 2,
     "high": 0,
-    "medium": 0,
+    "medium": 1,
     "negative": 0,
-    "dropped_noise": 0,
-    "sources_ok": 0,
-    "sources_total": 23,
-    "by_sector": {},
-    "by_event_type": {}
+    "dropped_noise": 2,
+    "sources_ok": 1,
+    "sources_total": 13,
+    "fail_rate_pct": 92,
+    "by_sector": {
+      "other_cleantech": 2
+    },
+    "by_event_type": {
+      "policy": 1,
+      "other": 1
+    }
   },
   "source_logs": [
-    {
-      "id": "utilitydive",
-      "name": "Utility Dive",
-      "url": "https://www.utilitydive.com/feeds/news/",
-      "status": "partial",
-      "items": 0,
-      "error": null,
-      "fetched_at": "2026-04-04T09:33:44.637857+00:00",
-      "reliability": 2,
-      "segments": [
-        "grid_software",
-        "battery_storage",
-        "data_center_power",
-        "transmission"
-      ]
-    },
-    {
-      "id": "eia_todayinenergy",
-      "name": "EIA Today in Energy",
-      "url": "https://www.eia.gov/rss/todayinenergy.xml",
-      "status": "partial",
-      "items": 0,
-      "error": null,
-      "fetched_at": "2026-04-04T09:33:44.637857+00:00",
-      "reliability": 1,
-      "segments": [
-        "battery_storage",
-        "green_hydrogen",
-        "grid_software",
-        "offshore_wind",
-        "other_cleantech"
-      ]
-    },
-    {
-      "id": "doe_fossil",
-      "name": "DOE Fossil Energy & Carbon Management",
-      "url": "https://www.energy.gov/fecm/articles/rss.xml",
-      "status": "failed",
-      "items": 0,
-      "error": "HTTP 404",
-      "fetched_at": "2026-04-04T09:33:44.637857+00:00",
-      "reliability": 1,
-      "segments": [
-        "green_hydrogen",
-        "other_cleantech"
-      ]
-    },
-    {
-      "id": "doe_cleancities",
-      "name": "DOE Clean Cities & Communities",
-      "url": "https://www.energy.gov/scep/slsc/clean-cities-communities/articles/rss.xml",
-      "status": "failed",
-      "items": 0,
-      "error": "HTTP 404",
-      "fetched_at": "2026-04-04T09:33:44.637857+00:00",
-      "reliability": 1,
-      "segments": [
-        "other_cleantech",
-        "data_center_power"
-      ]
-    },
     {
       "id": "doe_main",
       "name": "DOE Energy.gov News",
@@ -82,61 +27,14 @@
       "status": "failed",
       "items": 0,
       "error": "HTTP 404",
-      "fetched_at": "2026-04-04T09:33:44.637857+00:00",
-      "reliability": 1,
+      "fetched_at": "2026-04-04T09:49:15.664701+00:00",
+      "reliability": "★★★",
+      "tier": 1,
       "segments": [
         "battery_storage",
         "green_hydrogen",
         "grid_software",
         "advanced_nuclear",
-        "offshore_wind"
-      ]
-    },
-    {
-      "id": "doe_eere",
-      "name": "DOE EERE News",
-      "url": "https://www.energy.gov/eere/articles/rss.xml",
-      "status": "failed",
-      "items": 0,
-      "error": "HTTP 404",
-      "fetched_at": "2026-04-04T09:33:44.637857+00:00",
-      "reliability": 1,
-      "segments": [
-        "battery_storage",
-        "long_duration_storage",
-        "green_hydrogen",
-        "offshore_wind",
-        "geothermal",
-        "other_cleantech"
-      ]
-    },
-    {
-      "id": "doe_ne",
-      "name": "DOE Nuclear Energy",
-      "url": "https://www.energy.gov/ne/articles/rss.xml",
-      "status": "failed",
-      "items": 0,
-      "error": "HTTP 404",
-      "fetched_at": "2026-04-04T09:33:44.637857+00:00",
-      "reliability": 1,
-      "segments": [
-        "advanced_nuclear"
-      ]
-    },
-    {
-      "id": "canarymedia",
-      "name": "Canary Media",
-      "url": "https://www.canarymedia.com/rss",
-      "status": "partial",
-      "items": 0,
-      "error": null,
-      "fetched_at": "2026-04-04T09:33:44.637857+00:00",
-      "reliability": 2,
-      "segments": [
-        "battery_storage",
-        "grid_software",
-        "data_center_power",
-        "green_hydrogen",
         "offshore_wind"
       ]
     },
@@ -147,11 +45,62 @@
       "status": "partial",
       "items": 0,
       "error": null,
-      "fetched_at": "2026-04-04T09:33:44.637857+00:00",
-      "reliability": 2,
+      "fetched_at": "2026-04-04T09:49:15.664701+00:00",
+      "reliability": "★★★",
+      "tier": 2,
       "segments": [
         "battery_storage",
         "long_duration_storage"
+      ]
+    },
+    {
+      "id": "canarymedia",
+      "name": "Canary Media",
+      "url": "https://www.canarymedia.com/rss.rss",
+      "status": "partial",
+      "items": 0,
+      "error": null,
+      "fetched_at": "2026-04-04T09:49:15.664701+00:00",
+      "reliability": "★★★",
+      "tier": 2,
+      "segments": [
+        "battery_storage",
+        "grid_software",
+        "data_center_power",
+        "green_hydrogen",
+        "offshore_wind"
+      ]
+    },
+    {
+      "id": "utilitydive",
+      "name": "Utility Dive",
+      "url": "https://www.utilitydive.com/feeds/news/",
+      "status": "partial",
+      "items": 0,
+      "error": null,
+      "fetched_at": "2026-04-04T09:49:15.664701+00:00",
+      "reliability": "★★★",
+      "tier": 2,
+      "segments": [
+        "grid_software",
+        "battery_storage",
+        "data_center_power",
+        "transmission"
+      ]
+    },
+    {
+      "id": "doe_cleancities",
+      "name": "DOE Clean Cities & Communities",
+      "url": "https://cleancities.energy.gov/news-events/rss",
+      "status": "failed",
+      "items": 0,
+      "error": "Bozo + no entries: <unknown>:35:2: mismatched tag",
+      "fetched_at": "2026-04-04T09:49:15.664701+00:00",
+      "reliability": "★★",
+      "tier": 1,
+      "segments": [
+        "other_cleantech",
+        "data_center_power"
       ]
     },
     {
@@ -161,82 +110,13 @@
       "status": "partial",
       "items": 0,
       "error": null,
-      "fetched_at": "2026-04-04T09:33:44.637857+00:00",
-      "reliability": 2,
+      "fetched_at": "2026-04-04T09:49:15.664701+00:00",
+      "reliability": "★★★",
+      "tier": 2,
       "segments": [
         "battery_storage",
         "green_hydrogen",
         "other_cleantech"
-      ]
-    },
-    {
-      "id": "offshorewind",
-      "name": "Offshore Wind Biz",
-      "url": "https://www.offshorewind.biz/feed/",
-      "status": "partial",
-      "items": 0,
-      "error": null,
-      "fetched_at": "2026-04-04T09:33:44.637857+00:00",
-      "reliability": 2,
-      "segments": [
-        "offshore_wind",
-        "transmission"
-      ]
-    },
-    {
-      "id": "nuclearengineer",
-      "name": "Nuclear Engineering International",
-      "url": "https://www.neimagazine.com/rss",
-      "status": "partial",
-      "items": 0,
-      "error": null,
-      "fetched_at": "2026-04-04T09:33:44.637857+00:00",
-      "reliability": 2,
-      "segments": [
-        "advanced_nuclear"
-      ]
-    },
-    {
-      "id": "h2view",
-      "name": "H2 View",
-      "url": "https://www.h2-view.com/feed/",
-      "status": "partial",
-      "items": 0,
-      "error": null,
-      "fetched_at": "2026-04-04T09:33:44.637857+00:00",
-      "reliability": 2,
-      "segments": [
-        "green_hydrogen"
-      ]
-    },
-    {
-      "id": "irena",
-      "name": "IRENA",
-      "url": "https://www.irena.org/rss",
-      "status": "failed",
-      "items": 0,
-      "error": "HTTP 403",
-      "fetched_at": "2026-04-04T09:33:44.637857+00:00",
-      "reliability": 1,
-      "segments": [
-        "offshore_wind",
-        "green_hydrogen",
-        "battery_storage",
-        "geothermal",
-        "other_cleantech"
-      ]
-    },
-    {
-      "id": "geothermalrisingbulletin",
-      "name": "Geothermal Rising",
-      "url": "https://geothermal.org/feed/",
-      "status": "failed",
-      "items": 0,
-      "error": "HTTP 404",
-      "fetched_at": "2026-04-04T09:33:44.637857+00:00",
-      "reliability": 2,
-      "segments": [
-        "geothermal"
       ]
     },
     {
@@ -246,8 +126,9 @@
       "status": "partial",
       "items": 0,
       "error": null,
-      "fetched_at": "2026-04-04T09:33:44.637857+00:00",
-      "reliability": 3,
+      "fetched_at": "2026-04-04T09:49:15.664701+00:00",
+      "reliability": "★★★",
+      "tier": 3,
       "segments": [
         "battery_storage",
         "data_center_power",
@@ -258,26 +139,44 @@
       "id": "cleantechnica",
       "name": "CleanTechnica",
       "url": "https://cleantechnica.com/feed/",
-      "status": "partial",
-      "items": 0,
+      "status": "success",
+      "items": 4,
       "error": null,
-      "fetched_at": "2026-04-04T09:33:44.637857+00:00",
-      "reliability": 3,
+      "fetched_at": "2026-04-04T09:49:15.664701+00:00",
+      "reliability": "★★★",
+      "tier": 3,
       "segments": [
         "battery_storage",
         "grid_software",
-        "data_center_power"
+        "data_center_power",
+        "other_cleantech"
       ]
     },
     {
-      "id": "hydrogeninsight",
-      "name": "Hydrogen Insight",
-      "url": "https://www.hydrogeninsight.com/feed",
-      "status": "failed",
+      "id": "offshorewind",
+      "name": "Offshore Wind Biz",
+      "url": "https://www.offshorewind.biz/feed/",
+      "status": "partial",
       "items": 0,
-      "error": "HTTP 404",
-      "fetched_at": "2026-04-04T09:33:44.637857+00:00",
-      "reliability": 2,
+      "error": null,
+      "fetched_at": "2026-04-04T09:49:15.664701+00:00",
+      "reliability": "★★★",
+      "tier": 2,
+      "segments": [
+        "offshore_wind",
+        "transmission"
+      ]
+    },
+    {
+      "id": "h2view",
+      "name": "H2 View",
+      "url": "https://www.h2-view.com/feed/",
+      "status": "partial",
+      "items": 0,
+      "error": "Empty feed (0 entries)",
+      "fetched_at": "2026-04-04T09:49:15.664701+00:00",
+      "reliability": "★★",
+      "tier": 2,
       "segments": [
         "green_hydrogen"
       ]
@@ -289,8 +188,9 @@
       "status": "failed",
       "items": 0,
       "error": "HTTP 404",
-      "fetched_at": "2026-04-04T09:33:44.637857+00:00",
-      "reliability": 3,
+      "fetched_at": "2026-04-04T09:49:15.664701+00:00",
+      "reliability": "★★",
+      "tier": 3,
       "segments": [
         "battery_storage",
         "green_hydrogen",
@@ -300,59 +200,15 @@
       ]
     },
     {
-      "id": "renewablesnow",
-      "name": "Renewables Now",
-      "url": "https://renewablesnow.com/news/feed/",
-      "status": "failed",
-      "items": 0,
-      "error": "HTTP 404",
-      "fetched_at": "2026-04-04T09:33:44.637857+00:00",
-      "reliability": 2,
-      "segments": [
-        "battery_storage",
-        "offshore_wind",
-        "green_hydrogen"
-      ]
-    },
-    {
-      "id": "energynewsnetwork",
-      "name": "Energy News Network",
-      "url": "https://energynews.us/feed/",
-      "status": "failed",
-      "items": 0,
-      "error": "Feed parse error: <unknown>:6:30: not well-formed (invalid token)",
-      "fetched_at": "2026-04-04T09:33:44.637857+00:00",
-      "reliability": 2,
-      "segments": [
-        "grid_software",
-        "battery_storage",
-        "data_center_power"
-      ]
-    },
-    {
-      "id": "rechargenews",
-      "name": "Recharge News",
-      "url": "https://www.rechargenews.com/feed",
-      "status": "failed",
-      "items": 0,
-      "error": "HTTP 404",
-      "fetched_at": "2026-04-04T09:33:44.637857+00:00",
-      "reliability": 2,
-      "segments": [
-        "green_hydrogen",
-        "offshore_wind",
-        "battery_storage"
-      ]
-    },
-    {
-      "id": "ieaenergy",
+      "id": "iea",
       "name": "IEA News",
       "url": "https://www.iea.org/api/rss",
       "status": "failed",
       "items": 0,
       "error": "HTTP 404",
-      "fetched_at": "2026-04-04T09:33:44.637857+00:00",
-      "reliability": 1,
+      "fetched_at": "2026-04-04T09:49:15.664701+00:00",
+      "reliability": "★★",
+      "tier": 1,
       "segments": [
         "green_hydrogen",
         "battery_storage",
@@ -360,7 +216,81 @@
         "offshore_wind",
         "other_cleantech"
       ]
+    },
+    {
+      "id": "eia_today",
+      "name": "EIA Today in Energy",
+      "url": "https://www.eia.gov/rss/todayinenergy.xml",
+      "status": "partial",
+      "items": 0,
+      "error": null,
+      "fetched_at": "2026-04-04T09:49:15.664701+00:00",
+      "reliability": "★★★",
+      "tier": 1,
+      "segments": [
+        "battery_storage",
+        "green_hydrogen",
+        "grid_software",
+        "offshore_wind",
+        "other_cleantech"
+      ]
     }
   ],
-  "signals": []
+  "signals": [
+    {
+      "id": "d3773c7416893d84",
+      "title": "High Gas Prices? No Worries, Just Use More Ethanol",
+      "source_name": "CleanTechnica",
+      "source_url": "https://cleantechnica.com/2026/04/02/high-gas-prices-no-worries-just-use-more-ethanol/",
+      "published_date": "2026-04-02",
+      "observed_fact": "The EPA says it will lower gas prices by raising the percentage of ethanol in gasoline to 15% and waiving clean air regulations.",
+      "why_it_matters_investment": "Policy event in other cleantech sector. Assess binding terms, named counterparties, and capital efficiency.",
+      "missing_evidence": [
+        "Implementation regulations not yet issued",
+        "Budget appropriation certainty unknown"
+      ],
+      "signal_tier": "medium",
+      "signal_strength": 55,
+      "sector": "other_cleantech",
+      "event_type": "policy",
+      "companies_mentioned": [],
+      "is_negative": false,
+      "matched_keyword": "regulation",
+      "score_breakdown": [],
+      "source_reliability": "★★★",
+      "source_tier": 3,
+      "raw_summary": "The EPA says it will lower gas prices by raising the percentage of ethanol in gasoline to 15% and waiving clean air regulations. The post High Gas Prices? No Worries, Just Use More Ethanol appeared first on CleanTechnica .",
+      "fetched_at": "2026-04-04T09:49:15.664701+00:00"
+    },
+    {
+      "id": "c85e855a23526aab",
+      "title": "Hyundai IONIQ 6 N Crowned 2026 World Performance Car",
+      "source_name": "CleanTechnica",
+      "source_url": "https://cleantechnica.com/2026/04/02/hyundai-ioniq-6-n-crowned-2026-world-performance-car/",
+      "published_date": "2026-04-03",
+      "observed_fact": "IONIQ 6 N named 2026 World Performance Car, marking the second time in three years that Hyundai’s N brand has secured the award after IONIQ 5 N in 2024 This marks the fifth consecutive year Hyundai Motor has been honored at the World Car Awards Hyundai Motor Company has achieved ...",
+      "why_it_matters_investment": "Other event in other cleantech sector. Assess binding terms, named counterparties, and capital efficiency.",
+      "missing_evidence": [
+        "No investment-specific gap analysis available"
+      ],
+      "signal_tier": "low",
+      "signal_strength": 27,
+      "sector": "other_cleantech",
+      "event_type": "other",
+      "companies_mentioned": [],
+      "is_negative": false,
+      "matched_keyword": null,
+      "score_breakdown": [
+        {
+          "delta": 12,
+          "reason": "Major industrial/OEM",
+          "type": "boost"
+        }
+      ],
+      "source_reliability": "★★★",
+      "source_tier": 3,
+      "raw_summary": "IONIQ 6 N named 2026 World Performance Car, marking the second time in three years that Hyundai’s N brand has secured the award after IONIQ 5 N in 2024 This marks the fifth consecutive year Hyundai Motor has been honored at the World Car Awards Hyundai Motor Company has achieved ... [continued] The post Hyundai IONIQ 6 N Crowned 2026 World Performance Car appeared first on CleanTechnica .",
+      "fetched_at": "2026-04-04T09:49:15.664701+00:00"
+    }
+  ]
 }
