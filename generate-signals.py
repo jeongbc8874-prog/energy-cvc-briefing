@@ -1605,6 +1605,251 @@ def enrich_company(co, evs):
 
 
 # ══════════════════════════════════════════════════════════════════════════
+# SECTION 7C  TRANSPARENT INVESTMENT SCORING
+# ══════════════════════════════════════════════════════════════════════════
+#
+# A simple, analyst-readable point system for per-company investment traction.
+# Separate from the signal noise-filter score (SCORE_RULES, used for RSS).
+# This score answers: "How much investable evidence exists for this company?"
+#
+# RULES — each rule has:
+#   id          slug
+#   label       human-readable name shown in UI
+#   points      integer (positive = positive signal, negative = concern)
+#   rationale   one-sentence explanation of why this matters
+#   check       function(events, company_dict) → list of matching evidence strings
+#
+# PHILOSOPHY:
+#   - Every point must be traceable to a specific source-cited event
+#   - Rules are visible in the UI; no black-box weighting
+#   - Analyst can override any score component via notes (Paid Pilot)
+#   - Score is intentionally simple — 10 rules max, integer points
+#   - Score interpretation guide shown alongside score
+# ══════════════════════════════════════════════════════════════════════════
+
+INVESTMENT_SCORE_RULES = [
+    {
+        "id":        "commercial_contract",
+        "label":     "Commercial Contract",
+        "icon":      "📄",
+        "points":    +3,
+        "color":     "#0A6640",
+        "rationale": "Named binding commercial agreement or deployment. Strongest single signal of revenue visibility.",
+        "check":     lambda evs, co: [
+            f"{e['event_type']}: {e['title']} ({e['event_date']})"
+            for e in evs if e["event_type"] in ("Contract", "Deployment") and not e["is_negative"]
+        ],
+    },
+    {
+        "id":        "certification",
+        "label":     "Technical Certification",
+        "icon":      "✓",
+        "points":    +2,
+        "color":     "#1A56DB",
+        "rationale": "Independent third-party certification (DNV GL, KPX, UL, TÜV). Required gate for regulated procurement.",
+        "check":     lambda evs, co: [
+            f"Certification: {e['title']} ({e['event_date']})"
+            for e in evs if e["event_type"] == "Certification" and not e["is_negative"]
+        ],
+    },
+    {
+        "id":        "pilot",
+        "label":     "Pilot / Demo",
+        "icon":      "🔬",
+        "points":    +2,
+        "color":     "#7D4E00",
+        "rationale": "Confirmed field pilot with a named third-party. De-risks technical claims; precursor to certification or contract.",
+        "check":     lambda evs, co: [
+            f"Pilot: {e['title']} ({e['event_date']})"
+            for e in evs if e["event_type"] == "Pilot" and not e["is_negative"]
+        ],
+    },
+    {
+        "id":        "strategic_partner",
+        "label":     "Named Strategic Partner",
+        "icon":      "🤝",
+        "points":    +1,
+        "color":     "#5B21B6",
+        "rationale": "Named strategic partnership (utility, shipyard, hyperscaler). Directional — value depends on binding terms.",
+        "check":     lambda evs, co: [
+            f"Partner: {e['title']} ({e['event_date']})"
+            for e in evs if e["event_type"] == "Partnership" and not e["is_negative"]
+            and any(b["type"] in ("Utility","Shipyard","Hyperscaler","EPC","EPC/OEM")
+                    for b in e.get("buyer_matches",[]))
+        ],
+    },
+    {
+        "id":        "financing",
+        "label":     "Equity Financing",
+        "icon":      "💰",
+        "points":    +1,
+        "color":     "#0A6640",
+        "rationale": "Confirmed equity round. External capital validation. Weight depends on investor type (strategic >> financial).",
+        "check":     lambda evs, co: [
+            f"Financing: {e['title']} ({e['event_date']})"
+            for e in evs if e["event_type"] == "Financing" and not e["is_negative"]
+        ],
+    },
+    {
+        "id":        "cfo_bd_hire",
+        "label":     "CFO / BD Hire",
+        "icon":      "👤",
+        "points":    +1,
+        "color":     "#1A56DB",
+        "rationale": "Finance or business development hire signals imminent fundraise or active contract pipeline.",
+        "check":     lambda evs, co: [
+            f"Hiring: {e['title']} ({e['event_date']})"
+            for e in evs if e["event_type"] == "Hiring" and not e["is_negative"]
+        ],
+    },
+    {
+        "id":        "grant_only",
+        "label":     "Grant Only (no contract)",
+        "icon":      "🏛",
+        "points":    -1,
+        "color":     "#D97706",
+        "rationale": "Government grant without commercial anchor. Validates technology direction but not market demand.",
+        "check":     lambda evs, co: (
+            [f"Grant present but no commercial contract: {e['title']} ({e['event_date']})"
+             for e in evs if e["event_type"] == "Grant"]
+            if any(e["event_type"] == "Grant" for e in evs)
+            and not any(e["event_type"] in ("Contract","Deployment","Pilot") for e in evs)
+            else []
+        ),
+    },
+    {
+        "id":        "pr_language",
+        "label":     "PR / Vague Language",
+        "icon":      "📢",
+        "points":    -2,
+        "color":     "#C0392B",
+        "rationale": "Signals dominated by PR framing, vision statements, or vague exploratory language. No confirmable evidence.",
+        "check":     lambda evs, co: (
+            [f"{sum(1 for e in evs if e.get('is_noise',False))} signal(s) filtered as noise (vague/PR language)"]
+            if sum(1 for e in evs if e.get("is_noise", False)) >= 3
+            else []
+        ),
+    },
+    {
+        "id":        "negative_signal",
+        "label":     "Negative Signal",
+        "icon":      "⚠",
+        "points":    -2,
+        "color":     "#DC2626",
+        "rationale": "Delay, funding risk, cancellation, or competitor win. Each negative event subtracts points.",
+        "check":     lambda evs, co: [
+            f"Negative ({e.get('neg_subtype','delay')}): {e['title']} ({e['event_date']})"
+            for e in evs if e["is_negative"]
+        ],
+    },
+]
+
+def build_company_scorecard(co_enriched):
+    """
+    Compute a transparent per-company investment score from enriched company data.
+
+    Returns:
+        total_score    integer (can be negative)
+        max_possible   integer (if all positive rules fired)
+        components[]   list of {rule_id, label, icon, points, earned, evidence[]}
+        interpretation "Strong" / "Building" / "Early" / "Concern"
+        rationale      one-sentence explanation of interpretation
+        note           data quality caveat
+
+    Rules:
+        ONLY FIRES when at least one evidence item is found.
+        Negative rules fire per occurrence (e.g. 2 negative events = 2 × -2).
+        No invented data — all evidence links back to a source-cited event.
+    """
+    evs = co_enriched.get("events", [])
+    co  = co_enriched
+
+    components = []
+    total = 0
+    max_possible = sum(r["points"] for r in INVESTMENT_SCORE_RULES if r["points"] > 0)
+
+    for rule in INVESTMENT_SCORE_RULES:
+        try:
+            evidence = rule["check"](evs, co)
+        except Exception:
+            evidence = []
+
+        if not evidence:
+            # Rule didn't fire — show as 0, evidence empty
+            components.append({
+                "rule_id":   rule["id"],
+                "label":     rule["label"],
+                "icon":      rule["icon"],
+                "points":    rule["points"],
+                "earned":    0,
+                "evidence":  [],
+                "color":     rule["color"],
+                "rationale": rule["rationale"],
+                "fired":     False,
+            })
+            continue
+
+        # Negative rules: multiply by evidence count (capped at 2×)
+        if rule["points"] < 0:
+            multiplier = min(len(evidence), 2)
+            earned = rule["points"] * multiplier
+        else:
+            # Positive rules: fire once regardless of how many matching events
+            earned = rule["points"]
+
+        total += earned
+        components.append({
+            "rule_id":   rule["id"],
+            "label":     rule["label"],
+            "icon":      rule["icon"],
+            "points":    rule["points"],
+            "earned":    earned,
+            "evidence":  evidence[:3],  # cap at 3 examples
+            "color":     rule["color"],
+            "rationale": rule["rationale"],
+            "fired":     True,
+        })
+
+    # Interpretation
+    if total >= 6:
+        interpretation = "Strong"
+        interp_color   = "#0A6640"
+        rationale      = "Multiple independent positive signals — commercial traction confirmed."
+    elif total >= 4:
+        interpretation = "Building"
+        interp_color   = "#1A56DB"
+        rationale      = "Positive momentum with technical or commercial gates cleared."
+    elif total >= 2:
+        interpretation = "Early"
+        interp_color   = "#7D4E00"
+        rationale      = "Early-stage signals only. No commercial gate cleared."
+    elif total >= 0:
+        interpretation = "Insufficient"
+        interp_color   = "#6E6E6E"
+        rationale      = "Insufficient evidence to assess. Primary research required."
+    else:
+        interpretation = "Concern"
+        interp_color   = "#DC2626"
+        rationale      = "Negative signals outweigh positive. Reassess investment thesis."
+
+    return {
+        "company_id":     co["id"],
+        "company_name":   co.get("name",""),
+        "sector":         co.get("sector",""),
+        "stage_label":    co.get("stage_label","Lab"),
+        "stage_color":    co.get("stage_color","#A8A8A8"),
+        "total_score":    total,
+        "max_possible":   max_possible,
+        "components":     components,
+        "interpretation": interpretation,
+        "interp_color":   interp_color,
+        "rationale":      rationale,
+        "note":           "Score derived from public RSS signals only. Each point traceable to a source-cited event. No AI inference used.",
+        "signal_count":   len(evs),
+    }
+
+
+# ══════════════════════════════════════════════════════════════════════════
 # SECTION 7B  INVESTMENT MEMO BUILDER
 # ══════════════════════════════════════════════════════════════════════════
 #
@@ -2291,7 +2536,8 @@ def main():
 
     print("③b Investment memos...")
     memos = {co_id: build_investment_memo(co_data, call_ai=True) for co_id, co_data in co_intel.items()}
-    print(f"  {len(memos)} memos generated")
+    scorecards = {co_id: build_company_scorecard(co_data) for co_id, co_data in co_intel.items()}
+    print(f"  {len(memos)} memos, {len(scorecards)} scorecards")
     print()
     print("④ Project intelligence...")
     project_inbound = {}  # { project_id: [signal_event, ...] }
@@ -2341,7 +2587,8 @@ def main():
         stats["by_type"][e["event_type"]]  = stats["by_type"].get(e["event_type"],0)+1
     output = {"date":TODAY,"dateKr":TODAY_KR,"generatedAt":datetime.now(timezone.utc).isoformat(),
               "brief":brief,"stats":stats,"signals":kept,"filteredOut":filtered[:20],
-              "companies":co_intel,"memos":memos,"projects":enriched_projects,"strategic_buyers":STRATEGIC_BUYERS,
+              "companies":co_intel,"memos":memos,"scorecards":scorecards,
+              "projects":enriched_projects,"strategic_buyers":STRATEGIC_BUYERS,
               "buyer_activity":buyer_global,"segment_intel":segment_intel,"panels":panels,"alert_candidates":alert_candidates,"source_log":source_log,
               "source_registry":SOURCE_REGISTRY,"score_rulebook":SCORE_RULEBOOK_DISPLAY,"sector_rulebooks":SECTOR_RULEBOOKS,
               "reliability":{"sources_total":len(source_log),"sources_ok":sum(1 for s in source_log if s["status"]=="success"),
