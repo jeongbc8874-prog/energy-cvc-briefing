@@ -1987,6 +1987,238 @@ def build_alert_candidates(signals, company_insights, enriched_projects, buyer_a
     return deduped
 
 
+# ══════════════════════════════════════════════════════════════════════════
+# SECTION 8A  SEGMENT INTELLIGENCE
+# ══════════════════════════════════════════════════════════════════════════
+#
+# Builds a per-segment intelligence object from:
+#   - signals (scored RSS events)
+#   - company insights (stage, pattern, gaps)
+#   - buyer activity (procurement signals)
+#   - sector rulebooks (key gate, policy driver)
+#
+# Output: segment_intel{} — one entry per segment
+#   signal_count        total signals this run
+#   high_count          HIGH-tier signals
+#   neg_count           negative signals
+#   signal_trend        "up" / "flat" / "down" (vs. stats average)
+#   top_events[]        top 3 signals by score
+#   companies[]         tracked companies in this segment (enriched summary)
+#   stage_distribution  count per stage label
+#   buyers[]            strategic buyers active in this segment
+#   capital_signal      "Active" / "Building" / "Quiet" / "Watching"
+#   key_drivers         policy / demand / infra drivers from rulebook
+#   red_flags[]         from sector rulebook
+#   positive_signals[]  from sector rulebook
+# ══════════════════════════════════════════════════════════════════════════
+
+SEGMENT_META = {
+    "ess": {
+        "label":     "Long-Duration Energy Storage",
+        "short":     "ESS / LDES",
+        "icon":      "⚡",
+        "color":     "#1A56DB",
+        "drivers": {
+            "policy":  "IRA Storage ITC (US), EU Battery Regulation, KR RPS ESS 가중치",
+            "demand":  "Utility-scale renewables integration, hyperscaler 24/7 CFE mandates, industrial C&I",
+            "infra":   "Grid interconnection capacity, BESS site permitting, vanadium / iron supply chains",
+        },
+    },
+    "marine_fc": {
+        "label":     "Marine Fuel Cells",
+        "short":     "Marine FC",
+        "icon":      "🚢",
+        "color":     "#0A6640",
+        "drivers": {
+            "policy":  "IMO CII 2024 ratings, EU ETS Ships 2024, IMO 2030 GHG Strategy",
+            "demand":  "Shipyard newbuild specs, shipping company decarbonization commitments, port incentives",
+            "infra":   "Hydrogen bunkering infrastructure, DNV GL certification pipeline, ammonia supply chain",
+        },
+    },
+    "grid_sw": {
+        "label":     "Grid Software / VPP",
+        "short":     "Grid SW",
+        "icon":      "🔌",
+        "color":     "#0050B3",
+        "drivers": {
+            "policy":  "FERC Order 2222 (US), EU Flexibility Markets, KPX 보조서비스 제도 개편",
+            "demand":  "Utility VPP mandates, C&I aggregators, hyperscaler DC power optimization",
+            "infra":   "Smart meter rollouts, grid edge device penetration, API/SCADA integration layers",
+        },
+    },
+    "hydrogen": {
+        "label":     "Hydrogen Infrastructure",
+        "short":     "Hydrogen",
+        "icon":      "💧",
+        "color":     "#7D4E00",
+        "drivers": {
+            "policy":  "EU Green Hydrogen Standard, US IRA §45V ($3/kg credit), MOTIE 수소경제 로드맵",
+            "demand":  "Industrial decarbonization (refineries, steel, ammonia), port bunkering, power-to-X",
+            "infra":   "Electrolyzer manufacturing scale-up, H2 transport pipelines, import terminal construction",
+        },
+    },
+    "hvdc": {
+        "label":     "HVDC Transmission",
+        "short":     "HVDC",
+        "icon":      "🔋",
+        "color":     "#5B21B6",
+        "drivers": {
+            "policy":  "EU offshore wind targets, KR 재생에너지 3020, US DOE Grid Deployment",
+            "demand":  "Offshore wind grid connection (EU North Sea, KR Jeju), long-distance transmission",
+            "infra":   "Subsea cable manufacturing capacity (Prysmian, Nexans), converter station siting",
+        },
+    },
+    "dc_power": {
+        "label":     "Data Center Power",
+        "short":     "DC Power",
+        "icon":      "🖥",
+        "color":     "#9E1068",
+        "drivers": {
+            "policy":  "EU Data Act, Singapore DC moratorium, US Executive Order on AI infrastructure",
+            "demand":  "AI compute expansion (hyperscalers), 24/7 CFE commitments, UPS / backup power",
+            "infra":   "Power electronics supply chains, cooling technology, grid interconnection queue",
+        },
+    },
+    "forecasting": {
+        "label":     "Grid Forecasting / AI",
+        "short":     "Forecasting",
+        "icon":      "📈",
+        "color":     "#6E6E6E",
+        "drivers": {
+            "policy":  "FERC transparency rules, EU ENTSO-E forecasting standards",
+            "demand":  "VPP operators, TSOs / DSOs, renewable curtailment reduction",
+            "infra":   "Smart meter data availability, SCADA integration, ML infrastructure",
+        },
+    },
+    "wte": {
+        "label":     "Waste-to-Energy",
+        "short":     "WtE",
+        "icon":      "♻",
+        "color":     "#166534",
+        "drivers": {
+            "policy":  "EU Circular Economy Action Plan, KR 폐자원 에너지화, carbon credit frameworks",
+            "demand":  "Municipal solid waste management, industrial biogas, landfill gas capture",
+            "infra":   "Incineration plant permitting, biogas upgrading to RNG, grid connection",
+        },
+    },
+}
+
+def build_segment_intel(signals, company_insights, buyer_activity_global, sector_rulebooks):
+    """
+    Aggregate per-segment intelligence from today's signals and enriched entities.
+    Returns dict keyed by segment id.
+    No invented data — all numbers derived from signals[] and company_insights{}.
+    """
+    seg_intel = {}
+    total_signals = max(len(signals), 1)  # avoid /0
+
+    for seg_id, meta in SEGMENT_META.items():
+        # ── Signal slice ───────────────────────────────────────────────
+        seg_signals = [ev for ev in signals if ev.get("segment") == seg_id]
+        high_evs    = [ev for ev in seg_signals if ev.get("signal_tier") == "high"]
+        neg_evs     = [ev for ev in seg_signals if ev.get("is_negative")]
+        top_events  = sorted(seg_signals, key=lambda e: -e.get("signal_strength", 0))[:3]
+
+        # ── Signal velocity (share of total) ──────────────────────────
+        share = len(seg_signals) / total_signals
+        # Capital signal heuristic: share + high-signal density
+        high_share = len(high_evs) / max(len(seg_signals), 1)
+        if len(high_evs) >= 2 and high_share >= 0.15:
+            capital_signal = "Active"
+        elif len(seg_signals) >= 3 and len(high_evs) >= 1:
+            capital_signal = "Building"
+        elif len(neg_evs) > len(high_evs):
+            capital_signal = "Watching"
+        else:
+            capital_signal = "Quiet"
+
+        # ── Companies in this segment ──────────────────────────────────
+        seg_companies = []
+        for co_id, co in company_insights.items():
+            if co.get("sector") == seg_id:
+                seg_companies.append({
+                    "id":          co_id,
+                    "name":        co.get("name",""),
+                    "stage_label": co.get("stage_label","Lab"),
+                    "stage_color": co.get("stage_color","#A8A8A8"),
+                    "ttr":         co.get("ttr","Long-term"),
+                    "ttr_color":   co.get("ttr_color","#6E6E6E"),
+                    "pattern":     co.get("pattern",{}).get("label",""),
+                    "pattern_color":co.get("pattern",{}).get("color","#A8A8A8"),
+                    "high_count":  co.get("high_count",0),
+                    "neg_count":   co.get("neg_count",0),
+                    "signal_count":co.get("signal_count",0),
+                    "critical_gaps":co.get("critical_gaps",0),
+                    "investor_type":co.get("investor_type",""),
+                    "country":     co.get("country",""),
+                })
+        seg_companies.sort(key=lambda c: -(c["high_count"] * 3 + c["signal_count"]))
+
+        # ── Stage distribution ─────────────────────────────────────────
+        stage_order = ["PF-Ready","Scaling","First Commercial","Demo","Pilot","Lab"]
+        stage_dist  = {s: 0 for s in stage_order}
+        for co in seg_companies:
+            sl = co["stage_label"]
+            if sl in stage_dist:
+                stage_dist[sl] += 1
+            else:
+                stage_dist["Lab"] = stage_dist.get("Lab", 0) + 1
+
+        # ── Buyers active in this segment ─────────────────────────────
+        seg_buyers = []
+        for b in STRATEGIC_BUYERS:
+            if seg_id in b.get("active_segments", []):
+                act = buyer_activity_global.get(b["id"], {})
+                seg_buyers.append({
+                    "id":          b["id"],
+                    "name":        b["name"],
+                    "type":        b["type"],
+                    "region":      b.get("region",""),
+                    "procurement_notes": b.get("procurement_notes",""),
+                    "signal_count":len(act.get("events",[])),
+                    "recent_events":act.get("events",[])[:2],
+                })
+        seg_buyers.sort(key=lambda b: -b["signal_count"])
+
+        # ── Sector rulebook ────────────────────────────────────────────
+        rb = sector_rulebooks.get(seg_id, {})
+
+        seg_intel[seg_id] = {
+            "id":              seg_id,
+            "label":           meta["label"],
+            "short":           meta["short"],
+            "icon":            meta["icon"],
+            "color":           meta["color"],
+            "signal_count":    len(seg_signals),
+            "high_count":      len(high_evs),
+            "neg_count":       len(neg_evs),
+            "share_of_total":  round(share, 3),
+            "capital_signal":  capital_signal,
+            "top_events":      [{
+                "id":          ev["id"],
+                "title":       ev["title"],
+                "event_type":  ev["event_type"],
+                "score":       ev["signal_strength"],
+                "date":        ev["event_date"],
+                "source":      ev["source_name"],
+                "source_url":  ev.get("source_url",""),
+                "company":     ev.get("company_name",""),
+                "confidence":  ev.get("evidence",{}).get("confidence","Low"),
+            } for ev in top_events],
+            "companies":         seg_companies,
+            "company_count":     len(seg_companies),
+            "stage_distribution":stage_dist,
+            "buyers":            seg_buyers,
+            "drivers":           meta["drivers"],
+            "key_gate":          rb.get("key_gate","—"),
+            "commercial_threshold": rb.get("commercial_threshold","—"),
+            "red_flags":         rb.get("red_flags",[]),
+            "positive_signals":  rb.get("positive_signals",[]),
+        }
+
+    return seg_intel
+
+
 def build_panels(signals, cos):
     sev = {"critical":0,"high":1,"medium":2,"low":3}
     negs = []
@@ -2090,6 +2322,11 @@ def main():
             buyer_global.setdefault(b["id"],{"id":b["id"],"name":b["name"],"type":b["type"],"events":[]})
             buyer_global[b["id"]]["events"].append({"date":ev["event_date"],"title":ev["title"],"event_type":ev["event_type"],"source":ev["source_name"],"score":ev["signal_strength"]})
     print(f"  {len(buyer_global)} buyers active\n")
+
+    print("⑥ Segment intelligence...")
+    segment_intel = build_segment_intel(kept, co_intel, buyer_global, SECTOR_RULEBOOKS)
+    active_segs = sum(1 for s in segment_intel.values() if s["capital_signal"] in ("Active","Building"))
+    print(f"  {len(segment_intel)} segments · {active_segs} Active/Building\n")
     print("⑥ Panels...")
     panels = build_panels(kept, co_intel)
     alert_candidates = build_alert_candidates(kept, co_intel, enriched_projects, buyer_global)
@@ -2105,7 +2342,7 @@ def main():
     output = {"date":TODAY,"dateKr":TODAY_KR,"generatedAt":datetime.now(timezone.utc).isoformat(),
               "brief":brief,"stats":stats,"signals":kept,"filteredOut":filtered[:20],
               "companies":co_intel,"memos":memos,"projects":enriched_projects,"strategic_buyers":STRATEGIC_BUYERS,
-              "buyer_activity":buyer_global,"panels":panels,"alert_candidates":alert_candidates,"source_log":source_log,
+              "buyer_activity":buyer_global,"segment_intel":segment_intel,"panels":panels,"alert_candidates":alert_candidates,"source_log":source_log,
               "source_registry":SOURCE_REGISTRY,"score_rulebook":SCORE_RULEBOOK_DISPLAY,"sector_rulebooks":SECTOR_RULEBOOKS,
               "reliability":{"sources_total":len(source_log),"sources_ok":sum(1 for s in source_log if s["status"]=="success"),
                              "sources_partial":sum(1 for s in source_log if s["status"]=="partial"),"sources_failed":sum(1 for s in source_log if s["status"]=="failed"),
