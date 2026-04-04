@@ -1,25 +1,27 @@
 {
   "date": "2026-04-04",
   "dateKr": "2026년 04월 04일",
-  "generatedAt": "2026-04-04T15:21:08.313429+00:00",
-  "brief": "**Deal Flow Memo - April 4, 2026**\n\nEnerVenue's $300M Series B (Energy Storage News) signals continued institutional appetite for alternative battery chemistries, particularly as nickel-hydrogen's 30,000-cycle durability advantage becomes more compelling for utility-scale deployments. This follows the broader pattern of investors backing differentiated storage technologies that can command premium pricing over commodity lithium-ion solutions. \n\nMeanwhile, PV Magazine's BBDF 2026 coverage highlights that hybrid PPAs are still struggling with industrial buyer adoption, suggesting the market complexity around bundled renewable+storage contracts remains a friction point despite improving storage economics. The disconnect between available capital for storage manufacturers and slow enterprise adoption of hybrid products creates an interesting timing mismatch.\n\n**Watch:** EnerVenue's manufacturing scale-up timeline and whether other alternative chemistry players can secure similar funding rounds in Q2 2026.",
+  "generatedAt": "2026-04-04T15:36:40.049235+00:00",
+  "brief": "**Deal Flow Memo - April 4, 2026**\n\nEnerVenue's $300M Series B (Energy Storage News) signals continued investor appetite for differentiated battery chemistries, particularly as their 30,000-cycle nickel-hydrogen tech targets the ultra-long-duration storage market that lithium struggles to serve economically. The timing aligns with our thesis that 2026 would be the breakout year for alternative battery technologies as grid storage requirements extend beyond 4-8 hour lithium systems.\n\nMeanwhile, PV Magazine's BBDF coverage highlighting slow hybrid PPA uptake among industrial buyers suggests the market complexity we've been tracking—corporates remain hesitant on bundled renewable-plus-storage contracts despite compelling economics. This adoption lag creates opportunity for startups simplifying the procurement process or offering risk-mitigation tools.\n\nWatch for follow-on rounds in the nickel-hydrogen space and potential consolidation plays as storage OEMs seek differentiated chemistries, while monitoring whether hybrid PPA adoption accelerates through standardized contract structures or intermediary platforms.",
   "stats": {
-    "total": 22,
+    "total": 24,
     "high": 2,
-    "medium": 1,
+    "medium": 3,
     "negative": 0,
     "matched": 1,
-    "filtered_out": 52,
+    "filtered_out": 60,
     "companies_with_signals": 13,
     "by_segment": {
       "ess": 18,
-      "marine_fc": 1,
+      "hvdc": 1,
+      "marine_fc": 2,
       "grid_sw": 2,
       "battery_storage": 1
     },
     "by_type": {
       "Financing": 1,
       "Contract": 1,
+      "Partnership": 2,
       "News": 20
     }
   },
@@ -109,6 +111,44 @@
       }
     },
     {
+      "id": "cffbf246ae62",
+      "title": "TenneT, National Grid Ink Joint Development Agreement for LionLink Offshore Wind Interconnector",
+      "summary": "Transmission system operators (TSOs) TenneT and National Grid Ventures (NGV) have signed a Joint [&#8230;]",
+      "event_date": "2026-04-02",
+      "source_name": "Offshore Wind Biz",
+      "source_url": "https://www.offshorewind.biz/2026/04/02/tennet-national-grid-ink-joint-development-agreement-for-lionlink-offshore-wind-interconnector/",
+      "event_type": "Partnership",
+      "impact_type": "Commercial",
+      "matched_rule": "joint development agreement",
+      "tier": 3,
+      "signal_stage": "strategic",
+      "signal_strength": 58,
+      "signal_tier": "medium",
+      "score_breakdown": [],
+      "segment": "hvdc",
+      "company_id": null,
+      "company_name": "Unassigned",
+      "buyer_matches": [],
+      "project_matches": [],
+      "is_negative": false,
+      "neg_subtype": null,
+      "is_noise": false,
+      "evidence": {
+        "observed_fact": "TenneT, National Grid Ink Joint Development Agreement for LionLink Offshore Wind Interconnector",
+        "observed_fact_detail": "Transmission system operators (TSOs) TenneT and National Grid Ventures (NGV) have signed a Joint [&#8230;].",
+        "source_label": "Offshore Wind Biz · 2026-04-02",
+        "matched_rule_name": "joint development agreement",
+        "matched_rule_tier": "Tier 3 — Partnership",
+        "why_it_matters": "Named strategic partnership is directional. MOU alone does not confirm commercial intent — check for binding terms.",
+        "missing_evidence": [
+          "Binding terms (exclusivity, minimum volume) not confirmed",
+          "IP ownership unclear"
+        ],
+        "confidence": "Low",
+        "confidence_rationale": "Tier-3 or borderline. Context only."
+      }
+    },
+    {
       "id": "a9b8727bb1d6",
       "title": "ROUNDUP: Aypa’s US$500 million credit facility upsizing, Georgia Power begins construction on 260MW BESS, Eolus sells 506MWh BESS to DESRI",
       "summary": "In this news roundup, Aypa power upsizes its credit facility, Georgia Power begins construction on a 260MW BESS, and IOWN Energy on behalf of Eolus sells a 506MWh BESS to DESRI",
@@ -154,6 +194,44 @@
         "missing_evidence": [
           "No investment-relevant pattern matched",
           "Primary research required"
+        ],
+        "confidence": "Low",
+        "confidence_rationale": "Score below threshold. Context only."
+      }
+    },
+    {
+      "id": "dd8b48eaab0d",
+      "title": "Japan’s FLOWRA, Bureau Veritas Sign Floating Wind MoU",
+      "summary": "Japan’s Floating Offshore Wind Power Technology Research Association (FLOWRA) and Bureau Veritas Marine &#38; [&#8230;]",
+      "event_date": "2026-04-01",
+      "source_name": "Offshore Wind Biz",
+      "source_url": "https://www.offshorewind.biz/2026/04/01/japans-flowra-bureau-veritas-sign-floating-wind-mou/",
+      "event_type": "Partnership",
+      "impact_type": "Commercial",
+      "matched_rule": "mou",
+      "tier": 3,
+      "signal_stage": "strategic",
+      "signal_strength": 36,
+      "signal_tier": "medium",
+      "score_breakdown": [],
+      "segment": "marine_fc",
+      "company_id": null,
+      "company_name": "Unassigned",
+      "buyer_matches": [],
+      "project_matches": [],
+      "is_negative": false,
+      "neg_subtype": null,
+      "is_noise": false,
+      "evidence": {
+        "observed_fact": "Japan’s FLOWRA, Bureau Veritas Sign Floating Wind MoU",
+        "observed_fact_detail": "Japan’s Floating Offshore Wind Power Technology Research Association (FLOWRA) and Bureau Veritas Marine &#38; [&#8230;].",
+        "source_label": "Offshore Wind Biz · 2026-04-01",
+        "matched_rule_name": "mou",
+        "matched_rule_tier": "Tier 3 — Partnership",
+        "why_it_matters": "Named strategic partnership is directional. MOU alone does not confirm commercial intent — check for binding terms.",
+        "missing_evidence": [
+          "Binding terms (exclusivity, minimum volume) not confirmed",
+          "IP ownership unclear"
         ],
         "confidence": "Low",
         "confidence_rationale": "Score below threshold. Context only."
@@ -3427,7 +3505,7 @@
         "source_count": 0,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-04T15:21:01.716543+00:00"
+        "generated_at": "2026-04-04T15:36:32.133235+00:00"
       },
       "narrative": null,
       "generated_date": "2026-04-04"
@@ -3586,7 +3664,7 @@
         "source_count": 0,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-04T15:21:01.716577+00:00"
+        "generated_at": "2026-04-04T15:36:32.133279+00:00"
       },
       "narrative": null,
       "generated_date": "2026-04-04"
@@ -3756,7 +3834,7 @@
         "source_count": 0,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-04T15:21:01.716733+00:00"
+        "generated_at": "2026-04-04T15:36:32.133305+00:00"
       },
       "narrative": null,
       "generated_date": "2026-04-04"
@@ -3926,7 +4004,7 @@
         "source_count": 0,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-04T15:21:01.716749+00:00"
+        "generated_at": "2026-04-04T15:36:32.133330+00:00"
       },
       "narrative": null,
       "generated_date": "2026-04-04"
@@ -4078,7 +4156,7 @@
         "source_count": 0,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-04T15:21:01.716761+00:00"
+        "generated_at": "2026-04-04T15:36:32.133499+00:00"
       },
       "narrative": null,
       "generated_date": "2026-04-04"
@@ -4248,7 +4326,7 @@
         "source_count": 0,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-04T15:21:01.716773+00:00"
+        "generated_at": "2026-04-04T15:36:32.133529+00:00"
       },
       "narrative": null,
       "generated_date": "2026-04-04"
@@ -4411,7 +4489,7 @@
         "source_count": 1,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-04T15:21:01.716785+00:00"
+        "generated_at": "2026-04-04T15:36:32.133584+00:00"
       },
       "narrative": null,
       "generated_date": "2026-04-04"
@@ -4581,7 +4659,7 @@
         "source_count": 0,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-04T15:21:01.716799+00:00"
+        "generated_at": "2026-04-04T15:36:32.133613+00:00"
       },
       "narrative": null,
       "generated_date": "2026-04-04"
@@ -4715,7 +4793,7 @@
         "source_count": 0,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-04T15:21:01.716812+00:00"
+        "generated_at": "2026-04-04T15:36:32.133635+00:00"
       },
       "narrative": null,
       "generated_date": "2026-04-04"
@@ -4875,7 +4953,7 @@
         "source_count": 0,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-04T15:21:01.716825+00:00"
+        "generated_at": "2026-04-04T15:36:32.133660+00:00"
       },
       "narrative": null,
       "generated_date": "2026-04-04"
@@ -5008,7 +5086,7 @@
         "source_count": 0,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-04T15:21:01.716835+00:00"
+        "generated_at": "2026-04-04T15:36:32.133679+00:00"
       },
       "narrative": null,
       "generated_date": "2026-04-04"
@@ -5168,7 +5246,7 @@
         "source_count": 0,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-04T15:21:01.716846+00:00"
+        "generated_at": "2026-04-04T15:36:32.133699+00:00"
       },
       "narrative": null,
       "generated_date": "2026-04-04"
@@ -5328,7 +5406,7 @@
         "source_count": 0,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-04T15:21:01.716857+00:00"
+        "generated_at": "2026-04-04T15:36:32.133718+00:00"
       },
       "narrative": null,
       "generated_date": "2026-04-04"
@@ -7955,7 +8033,7 @@
       "signal_count": 18,
       "high_count": 2,
       "neg_count": 0,
-      "share_of_total": 0.818,
+      "share_of_total": 0.75,
       "capital_signal": "Building",
       "top_events": [
         {
@@ -8156,12 +8234,23 @@
       "short": "Marine FC",
       "icon": "🚢",
       "color": "#0A6640",
-      "signal_count": 1,
+      "signal_count": 2,
       "high_count": 0,
       "neg_count": 0,
-      "share_of_total": 0.045,
+      "share_of_total": 0.083,
       "capital_signal": "Quiet",
       "top_events": [
+        {
+          "id": "dd8b48eaab0d",
+          "title": "Japan’s FLOWRA, Bureau Veritas Sign Floating Wind MoU",
+          "event_type": "Partnership",
+          "score": 36,
+          "date": "2026-04-01",
+          "source": "Offshore Wind Biz",
+          "source_url": "https://www.offshorewind.biz/2026/04/01/japans-flowra-bureau-veritas-sign-floating-wind-mou/",
+          "company": "Unassigned",
+          "confidence": "Low"
+        },
         {
           "id": "8ccdbedecfe0",
           "title": "FERC urged to reject TeraWulf’s power plant purchase due to undisclosed Google ownership stake",
@@ -8280,7 +8369,7 @@
       "signal_count": 2,
       "high_count": 0,
       "neg_count": 0,
-      "share_of_total": 0.091,
+      "share_of_total": 0.083,
       "capital_signal": "Quiet",
       "top_events": [
         {
@@ -8545,12 +8634,24 @@
       "short": "HVDC",
       "icon": "🔋",
       "color": "#5B21B6",
-      "signal_count": 0,
+      "signal_count": 1,
       "high_count": 0,
       "neg_count": 0,
-      "share_of_total": 0.0,
+      "share_of_total": 0.042,
       "capital_signal": "Quiet",
-      "top_events": [],
+      "top_events": [
+        {
+          "id": "cffbf246ae62",
+          "title": "TenneT, National Grid Ink Joint Development Agreement for LionLink Offshore Wind Interconnector",
+          "event_type": "Partnership",
+          "score": 58,
+          "date": "2026-04-02",
+          "source": "Offshore Wind Biz",
+          "source_url": "https://www.offshorewind.biz/2026/04/02/tennet-national-grid-ink-joint-development-agreement-for-lionlink-offshore-wind-interconnector/",
+          "company": "Unassigned",
+          "confidence": "Low"
+        }
+      ],
       "companies": [],
       "company_count": 0,
       "stage_distribution": {
@@ -9284,6 +9385,24 @@
       "pattern": ""
     },
     {
+      "signal_id": "cffbf246ae62",
+      "alert_type": "high_signal",
+      "event_type": "Partnership",
+      "headline": "TenneT, National Grid Ink Joint Development Agreement for LionLink Offshore Wind Interconnector",
+      "why_it_matters": "Named strategic partnership is directional. MOU alone does not confirm commercial intent — check for binding terms.",
+      "confidence": "Low",
+      "score": 58,
+      "date": "2026-04-02",
+      "source": "Offshore Wind Biz",
+      "source_url": "https://www.offshorewind.biz/2026/04/02/tennet-national-grid-ink-joint-development-agreement-for-lionlink-offshore-wind-interconnector/",
+      "segment": "hvdc",
+      "entity_type": "segment",
+      "entity_id": "hvdc",
+      "entity_name": "hvdc",
+      "stage": "",
+      "pattern": ""
+    },
+    {
       "signal_id": "a9b8727bb1d6",
       "alert_type": "high_signal",
       "event_type": "News",
@@ -9300,6 +9419,24 @@
       "entity_name": "ess",
       "stage": "",
       "pattern": ""
+    },
+    {
+      "signal_id": "dd8b48eaab0d",
+      "alert_type": "high_signal",
+      "event_type": "Partnership",
+      "headline": "Japan’s FLOWRA, Bureau Veritas Sign Floating Wind MoU",
+      "why_it_matters": "Named strategic partnership is directional. MOU alone does not confirm commercial intent — check for binding terms.",
+      "confidence": "Low",
+      "score": 36,
+      "date": "2026-04-01",
+      "source": "Offshore Wind Biz",
+      "source_url": "https://www.offshorewind.biz/2026/04/01/japans-flowra-bureau-veritas-sign-floating-wind-mou/",
+      "segment": "marine_fc",
+      "entity_type": "segment",
+      "entity_id": "marine_fc",
+      "entity_name": "marine_fc",
+      "stage": "",
+      "pattern": ""
     }
   ],
   "source_log": [
@@ -9310,7 +9447,7 @@
       "status": "success",
       "error": null,
       "items": 10,
-      "fetched_at": "2026-04-04T15:21:00.270489+00:00",
+      "fetched_at": "2026-04-04T15:36:30.823236+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -9333,7 +9470,7 @@
       "status": "success",
       "error": null,
       "items": 20,
-      "fetched_at": "2026-04-04T15:21:00.432942+00:00",
+      "fetched_at": "2026-04-04T15:36:30.887798+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -9356,7 +9493,7 @@
       "status": "success",
       "error": null,
       "items": 20,
-      "fetched_at": "2026-04-04T15:21:00.713558+00:00",
+      "fetched_at": "2026-04-04T15:36:31.138371+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -9375,10 +9512,10 @@
       "id": "offshorewind",
       "name": "Offshore Wind Biz",
       "url": "https://www.offshorewind.biz/feed/",
-      "status": "failed",
-      "error": "HTTP 403",
-      "items": 0,
-      "fetched_at": "2026-04-04T15:21:00.873535+00:00",
+      "status": "success",
+      "error": null,
+      "items": 10,
+      "fetched_at": "2026-04-04T15:36:31.290364+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -9400,7 +9537,7 @@
       "status": "success",
       "error": null,
       "items": 20,
-      "fetched_at": "2026-04-04T15:21:00.952219+00:00",
+      "fetched_at": "2026-04-04T15:36:31.431348+00:00",
       "source_type": "industry",
       "reliability": 3,
       "topics": [
@@ -9422,7 +9559,7 @@
       "status": "partial",
       "error": "Feed returned 0 usable items",
       "items": 0,
-      "fetched_at": "2026-04-04T15:21:01.193390+00:00",
+      "fetched_at": "2026-04-04T15:36:31.590014+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -9874,11 +10011,11 @@
   },
   "reliability": {
     "sources_total": 13,
-    "sources_ok": 5,
+    "sources_ok": 6,
     "sources_partial": 3,
-    "sources_failed": 5,
-    "new_events": 22,
-    "filtered_out": 52
+    "sources_failed": 4,
+    "new_events": 24,
+    "filtered_out": 60
   },
   "_feature_stubs": {
     "analyst_notes": "⚠ PAID PILOT — stored in private DB, not in public JSON",
