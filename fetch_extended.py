@@ -1,32 +1,27 @@
 #!/usr/bin/env python3
 """
 ════════════════════════════════════════════════════════════════════
-fetch_extended.py  —  Energy CVC Signal Pipeline v2.0
+fetch_extended.py  —  Energy CVC Signal Pipeline v3.0
 ════════════════════════════════════════════════════════════════════
 
-목적:  하루 80~150개 signals (무료 소스만)
-소스:  RSS 22개 병렬 + EIA Today in Energy RSS + EIA Open Data API
-비용:  완전 무료. 유료 API, paywall, 상업 구독 없음.
+목적:  하루 80~150개 signals, 실패율 < 30%
+소스:  검증된 무료 RSS 13개 + EIA Open Data API
+금지:  paywall, 상업구독, 불안정 RSS (Renewables Now, Recharge,
+       Wood Mackenzie, S&P Global, Hydrogen Insight 등)
+
+설계 원칙:
+  - 모든 소스는 실제 공개 접근 가능한 URL만
+  - 실패 소스는 fetch_health.json에 기록 → 다음 실행 시 자동 스킵
+  - asyncio + ThreadPoolExecutor 하이브리드 (feedparser는 동기)
+  - 7일 dedup 캐시, 3일 기사 cutoff
+  - 각 소스 독립 예외처리 — 한 소스 실패가 전체에 영향 없음
 
 출력:
-  data/extended_raw.json      전체 수집 raw articles
-  data/extended_signals.json  구조화된 signals
-  data/fetch_cache.json       7일 dedup 캐시
+  data/extended_raw.json       수집된 raw articles
+  data/extended_signals.json   구조화 signals (메인 파이프라인 merge용)
+  data/fetch_cache.json        dedup ID 캐시
+  data/fetch_health.json       소스별 성공/실패 이력
 
-스키마 (extended_signals.json 내 각 signal):
-  id, title, source_name, source_url, published_date,
-  observed_fact, why_it_matters_investment, missing_evidence[],
-  signal_tier, signal_strength(0-100),
-  sector, event_type, companies_mentioned[]
-
-sector 값:
-  long_duration_storage | battery_storage | green_hydrogen |
-  grid_software | transmission | advanced_nuclear |
-  data_center_power | geothermal | offshore_wind | other_cleantech
-
-event_type 값:
-  policy | funding | grant | contract | deployment |
-  pilot | partnership | regulatory
 ════════════════════════════════════════════════════════════════════
 """
 
@@ -39,7 +34,7 @@ import os
 import re
 import socket
 import time
-from concurrent.futures import ThreadPoolExecutor, as_completed, TimeoutError
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
 from typing import Optional
@@ -47,269 +42,260 @@ from typing import Optional
 # ── Logging ───────────────────────────────────────────────────────
 logging.basicConfig(
     level=logging.INFO,
-    format="%(asctime)s [%(levelname)s] %(message)s",
+    format="%(asctime)s %(levelname)s  %(message)s",
     datefmt="%H:%M:%S",
 )
-log = logging.getLogger("fetch_extended")
+log = logging.getLogger("fetch")
 
-# ── Optional deps ─────────────────────────────────────────────────
+# ── Deps ──────────────────────────────────────────────────────────
 try:
     import feedparser
     HAS_FEEDPARSER = True
 except ImportError:
     HAS_FEEDPARSER = False
-    log.warning("feedparser not installed — pip install feedparser")
+    log.error("feedparser missing: pip install feedparser")
 
 try:
-    import urllib.request as _ur
+    import urllib.request as _urllib
+    import urllib.error as _urlerr
     HAS_URLLIB = True
 except ImportError:
     HAS_URLLIB = False
 
-# ── Runtime constants ─────────────────────────────────────────────
-TODAY    = datetime.now(timezone.utc).strftime("%Y-%m-%d")
-NOW_ISO  = datetime.now(timezone.utc).isoformat()
-MAX_AGE_DAYS   = 3     # skip articles older than this
-CACHE_DAYS     = 7     # dedup cache retention
-FETCH_TIMEOUT  = 25    # seconds per source
-MAX_WORKERS    = 10    # parallel fetch threads
+# ── Constants ─────────────────────────────────────────────────────
+TODAY      = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+NOW_ISO    = datetime.now(timezone.utc).isoformat()
 
-EIA_API_KEY   = os.environ.get("EIA_API_KEY", "")
-ANTHROPIC_KEY = os.environ.get("ANTHROPIC_API_KEY", "")
+MAX_AGE_DAYS    = 3      # skip articles older than N days
+CACHE_DAYS      = 7      # dedup cache retention window
+FETCH_TIMEOUT   = 20     # per-source timeout (seconds)
+MAX_WORKERS     = 8      # parallel threads
+HEALTH_FAIL_CAP = 3      # consecutive failures before auto-skip
 
-CACHE_PATH = Path("data/fetch_cache.json")
-RAW_PATH   = Path("data/extended_raw.json")
-OUT_PATH   = Path("data/extended_signals.json")
+EIA_API_KEY  = os.environ.get("EIA_API_KEY", "")
+
+CACHE_PATH   = Path("data/fetch_cache.json")
+HEALTH_PATH  = Path("data/fetch_health.json")
+RAW_PATH     = Path("data/extended_raw.json")
+OUT_PATH     = Path("data/extended_signals.json")
 
 
 # ════════════════════════════════════════════════════════════════════
 # SECTION 1  SOURCE REGISTRY
-# 22 free RSS feeds + EIA RSS + EIA API
-# Reliability: 1=primary gov/official  2=specialist trade  3=general
+#
+# URL 신뢰도 등급 (2026년 기준 실측 기반):
+#   ★★★  거의 항상 성공 (정부 RSS, 대형 trade)
+#   ★★   보통 성공 (trade press, 일부 정부)
+#   ★    가끔 실패 (개인 미디어, 불안정 CDN)
+#
+# 제외 사유 명시:
+#   Renewables Now    — Cloudflare 차단, 불안정
+#   Recharge News     — Informa paywall
+#   Wood Mackenzie    — 상업 구독 RSS
+#   S&P Global        — 상업 구독 RSS
+#   Hydrogen Insight  — Informa paywall
+#   DOE EERE/Fossil/Nuclear RSS — 404 반복 (2025 재구성 이후)
 # ════════════════════════════════════════════════════════════════════
 
-SOURCES = [
+SOURCES: list[dict] = [
 
-    # ── Priority tier: explicitly requested ────────────────────────
+    # ══ TIER 1 — 정부/국제기구 (★★★ 매우 안정적) ══════════════════
 
     {
-        "id": "canarymedia",
-        "name": "Canary Media",
-        "url": "https://www.canarymedia.com/rss",
-        "reliability": 2,
-        "segments": ["battery_storage", "grid_software", "data_center_power",
-                     "green_hydrogen", "offshore_wind"],
-        "max_items": 30,
-        "notes": "High-quality US clean energy journalism. Strong on financing, policy, commercialization.",
+        "id":           "eia_today",
+        "name":         "EIA Today in Energy",
+        "url":          "https://www.eia.gov/rss/todayinenergy.xml",
+        "reliability":  "★★★",
+        "tier":         1,
+        "max_items":    20,
+        "segments":     ["battery_storage", "green_hydrogen", "grid_software",
+                         "offshore_wind", "other_cleantech"],
+        "notes":        "US government primary source. Very stable. ~5 articles/day.",
     },
     {
-        "id": "pvmagazine",
-        "name": "PV Magazine",
-        "url": "https://www.pv-magazine.com/feed/",
-        "reliability": 2,
-        "segments": ["battery_storage", "green_hydrogen", "other_cleantech"],
-        "max_items": 30,
+        "id":           "doe_main",
+        "name":         "DOE Energy.gov News",
+        "url":          "https://www.energy.gov/articles/rss.xml",
+        "reliability":  "★★★",
+        "tier":         1,
+        "max_items":    20,
+        "segments":     ["battery_storage", "green_hydrogen", "grid_software",
+                         "advanced_nuclear", "offshore_wind"],
+        "notes":        "DOE top-level — cross-cutting announcements, grants, deployments.",
     },
     {
-        "id": "energystoragenews",
-        "name": "Energy Storage News",
-        "url": "https://www.energy-storage.news/feed/",
-        "reliability": 2,
-        "segments": ["battery_storage", "long_duration_storage"],
-        "max_items": 30,
+        "id":           "doe_cleancities",
+        "name":         "DOE Clean Cities & Communities",
+        "url":          "https://cleancities.energy.gov/news-events/rss",
+        "reliability":  "★★",
+        "tier":         1,
+        "max_items":    15,
+        "segments":     ["other_cleantech", "data_center_power"],
+        "notes":        "Fleet electrification, charging, community energy.",
     },
     {
-        "id": "utilitydive",
-        "name": "Utility Dive",
-        "url": "https://www.utilitydive.com/feeds/news/",
-        "reliability": 2,
-        "segments": ["grid_software", "battery_storage", "data_center_power", "transmission"],
-        "max_items": 30,
-        "notes": "Best US utility/grid coverage. FERC news often syndicated here.",
-    },
-    {
-        "id": "eia_todayinenergy",
-        "name": "EIA Today in Energy",
-        "url": "https://www.eia.gov/rss/todayinenergy.xml",
-        "reliability": 1,
-        "segments": ["battery_storage", "green_hydrogen", "grid_software",
-                     "offshore_wind", "other_cleantech"],
-        "max_items": 20,
-        "notes": "Tier 1 primary source. US government energy statistics and analysis.",
+        "id":           "iea",
+        "name":         "IEA News",
+        "url":          "https://www.iea.org/api/rss",
+        "reliability":  "★★",
+        "tier":         1,
+        "max_items":    15,
+        "segments":     ["green_hydrogen", "battery_storage", "grid_software",
+                         "offshore_wind", "other_cleantech"],
+        "notes":        "International Energy Agency. Policy, market analysis. Occasionally slow.",
     },
 
-    # ── DOE official RSS feeds ─────────────────────────────────────
+    # ══ TIER 2 — 전문 trade press (★★~★★★) ══════════════════════
+
     {
-        "id": "doe_eere",
-        "name": "DOE EERE News",
-        "url": "https://www.energy.gov/eere/articles/rss.xml",
-        "reliability": 1,
-        "segments": ["battery_storage", "long_duration_storage", "green_hydrogen",
-                     "offshore_wind", "geothermal", "other_cleantech"],
-        "max_items": 20,
-        "notes": "Office of Energy Efficiency and Renewable Energy. Grant announcements, deployments.",
+        "id":           "canarymedia",
+        "name":         "Canary Media",
+        "url":          "https://www.canarymedia.com/rss.rss",
+        "reliability":  "★★★",
+        "tier":         2,
+        "max_items":    30,
+        "segments":     ["battery_storage", "grid_software", "data_center_power",
+                         "green_hydrogen", "offshore_wind"],
+        "notes":        "Best US clean energy journalism. Financing, policy, commercialization.",
     },
     {
-        "id": "doe_fossil",
-        "name": "DOE Fossil Energy & Carbon Management",
-        "url": "https://www.energy.gov/fecm/articles/rss.xml",
-        "reliability": 1,
-        "segments": ["green_hydrogen", "other_cleantech"],
-        "max_items": 15,
-        "notes": "Carbon capture, clean hydrogen, advanced energy from fossil. DOE primary.",
+        "id":           "pvmagazine",
+        "name":         "PV Magazine",
+        "url":          "https://www.pv-magazine.com/feed/",
+        "reliability":  "★★★",
+        "tier":         2,
+        "max_items":    25,
+        "segments":     ["battery_storage", "green_hydrogen", "other_cleantech"],
+        "notes":        "Very stable. 15-20 articles/day. Strong EU + global.",
     },
     {
-        "id": "doe_cleancities",
-        "name": "DOE Clean Cities & Communities",
-        "url": "https://www.energy.gov/scep/slsc/clean-cities-communities/articles/rss.xml",
-        "reliability": 1,
-        "segments": ["other_cleantech", "data_center_power"],
-        "max_items": 15,
-        "notes": "Fleet electrification, charging infrastructure, community energy.",
+        "id":           "energystoragenews",
+        "name":         "Energy Storage News",
+        "url":          "https://www.energy-storage.news/feed/",
+        "reliability":  "★★★",
+        "tier":         2,
+        "max_items":    25,
+        "segments":     ["battery_storage", "long_duration_storage"],
+        "notes":        "Specialist BESS/LDES trade press. Very consistent.",
     },
     {
-        "id": "doe_ne",
-        "name": "DOE Nuclear Energy",
-        "url": "https://www.energy.gov/ne/articles/rss.xml",
-        "reliability": 1,
-        "segments": ["advanced_nuclear"],
-        "max_items": 15,
-        "notes": "Advanced reactor, SMR, fusion news from DOE Office of Nuclear Energy.",
+        "id":           "utilitydive",
+        "name":         "Utility Dive",
+        "url":          "https://www.utilitydive.com/feeds/news/",
+        "reliability":  "★★★",
+        "tier":         2,
+        "max_items":    25,
+        "segments":     ["grid_software", "battery_storage", "data_center_power", "transmission"],
+        "notes":        "Best US utility/grid coverage. FERC news often here first.",
     },
     {
-        "id": "doe_main",
-        "name": "DOE Energy.gov News",
-        "url": "https://www.energy.gov/articles/rss.xml",
-        "reliability": 1,
-        "segments": ["battery_storage", "green_hydrogen", "grid_software",
-                     "advanced_nuclear", "offshore_wind"],
-        "max_items": 20,
-        "notes": "Top-level DOE news — catches cross-cutting announcements.",
+        "id":           "offshorewind",
+        "name":         "Offshore Wind Biz",
+        "url":          "https://www.offshorewind.biz/feed/",
+        "reliability":  "★★★",
+        "tier":         2,
+        "max_items":    20,
+        "segments":     ["offshore_wind", "transmission"],
+        "notes":        "Specialist offshore wind. Very stable WordPress RSS.",
+    },
+    {
+        "id":           "h2view",
+        "name":         "H2 View",
+        "url":          "https://www.h2-view.com/feed/",
+        "reliability":  "★★",
+        "tier":         2,
+        "max_items":    20,
+        "segments":     ["green_hydrogen"],
+        "notes":        "Specialist hydrogen. Occasionally returns empty feed.",
     },
 
-    # ── IRENA ──────────────────────────────────────────────────────
-    {
-        "id": "irena",
-        "name": "IRENA",
-        "url": "https://www.irena.org/rss",
-        "reliability": 1,
-        "segments": ["offshore_wind", "green_hydrogen", "battery_storage",
-                     "geothermal", "other_cleantech"],
-        "max_items": 15,
-        "notes": "International Renewable Energy Agency. Global policy, capacity, cost data.",
-    },
+    # ══ TIER 3 — 종합 cleantech (★~★★★) ══════════════════════════
 
-    # ── Specialist trade press ─────────────────────────────────────
     {
-        "id": "offshorewind",
-        "name": "Offshore Wind Biz",
-        "url": "https://www.offshorewind.biz/feed/",
-        "reliability": 2,
-        "segments": ["offshore_wind", "transmission"],
-        "max_items": 20,
+        "id":           "cleantechnica",
+        "name":         "CleanTechnica",
+        "url":          "https://cleantechnica.com/feed/",
+        "reliability":  "★★★",
+        "tier":         3,
+        "max_items":    25,
+        "segments":     ["battery_storage", "grid_software", "data_center_power",
+                         "other_cleantech"],
+        "notes":        "High volume. Tier 3 — verify all figures. Very stable.",
     },
     {
-        "id": "h2view",
-        "name": "H2 View",
-        "url": "https://www.h2-view.com/feed/",
-        "reliability": 2,
-        "segments": ["green_hydrogen"],
-        "max_items": 20,
+        "id":           "electrek",
+        "name":         "Electrek",
+        "url":          "https://electrek.co/feed/",
+        "reliability":  "★★★",
+        "tier":         3,
+        "max_items":    20,
+        "segments":     ["battery_storage", "data_center_power", "other_cleantech"],
+        "notes":        "Very stable. Broad coverage. Tier 3.",
     },
     {
-        "id": "hydrogeninsight",
-        "name": "Hydrogen Insight",
-        "url": "https://www.hydrogeninsight.com/feed",
-        "reliability": 2,
-        "segments": ["green_hydrogen"],
-        "max_items": 20,
-        "notes": "Specialist hydrogen trade press.",
-    },
-    {
-        "id": "nuclearengineer",
-        "name": "Nuclear Engineering International",
-        "url": "https://www.neimagazine.com/rss",
-        "reliability": 2,
-        "segments": ["advanced_nuclear"],
-        "max_items": 15,
-        "notes": "Specialist nuclear trade press. SMR, advanced reactor coverage.",
-    },
-    {
-        "id": "geothermalrisingbulletin",
-        "name": "Geothermal Rising",
-        "url": "https://geothermal.org/feed/",
-        "reliability": 2,
-        "segments": ["geothermal"],
-        "max_items": 15,
-        "notes": "US geothermal industry association. Project, policy, financing news.",
-    },
-    {
-        "id": "renewablesnow",
-        "name": "Renewables Now",
-        "url": "https://renewablesnow.com/news/feed/",
-        "reliability": 2,
-        "segments": ["battery_storage", "offshore_wind", "green_hydrogen"],
-        "max_items": 20,
-    },
-    {
-        "id": "energynewsnetwork",
-        "name": "Energy News Network",
-        "url": "https://energynews.us/feed/",
-        "reliability": 2,
-        "segments": ["grid_software", "battery_storage", "data_center_power"],
-        "max_items": 20,
-        "notes": "US state-level energy policy and utility news.",
-    },
-    {
-        "id": "azocleantech",
-        "name": "AZoCleantech",
-        "url": "https://www.azocleantech.com/rss/news.aspx",
-        "reliability": 3,
-        "segments": ["battery_storage", "green_hydrogen", "other_cleantech",
-                     "advanced_nuclear", "geothermal"],
-        "max_items": 20,
-        "notes": "Broad cleantech news aggregator. Tier 3 — verify all figures.",
-    },
-    {
-        "id": "electrek",
-        "name": "Electrek",
-        "url": "https://electrek.co/feed/",
-        "reliability": 3,
-        "segments": ["battery_storage", "data_center_power", "other_cleantech"],
-        "max_items": 20,
-    },
-    {
-        "id": "cleantechnica",
-        "name": "CleanTechnica",
-        "url": "https://cleantechnica.com/feed/",
-        "reliability": 3,
-        "segments": ["battery_storage", "grid_software", "data_center_power"],
-        "max_items": 20,
-        "notes": "Tier 3. Broad coverage. Verify all figures.",
-    },
-    {
-        "id": "rechargenews",
-        "name": "Recharge News",
-        "url": "https://www.rechargenews.com/feed",
-        "reliability": 2,
-        "segments": ["green_hydrogen", "offshore_wind", "battery_storage"],
-        "max_items": 20,
-    },
-    {
-        "id": "ieaenergy",
-        "name": "IEA News",
-        "url": "https://www.iea.org/api/rss",
-        "reliability": 1,
-        "segments": ["green_hydrogen", "battery_storage", "grid_software",
-                     "offshore_wind", "other_cleantech"],
-        "max_items": 15,
-        "notes": "Tier 1 — IEA primary source. Policy and market analysis.",
+        "id":           "azocleantech",
+        "name":         "AZoCleantech",
+        "url":          "https://www.azocleantech.com/rss/news.aspx",
+        "reliability":  "★★",
+        "tier":         3,
+        "max_items":    20,
+        "segments":     ["battery_storage", "green_hydrogen", "other_cleantech",
+                         "advanced_nuclear", "geothermal"],
+        "notes":        "Broad cleantech aggregator. Occasionally slow.",
     },
 ]
 
 
 # ════════════════════════════════════════════════════════════════════
-# SECTION 2  CACHE
+# SECTION 2  SOURCE HEALTH TRACKER
+#   Tracks consecutive failures per source.
+#   After HEALTH_FAIL_CAP failures → auto-skip until next day.
+# ════════════════════════════════════════════════════════════════════
+
+def load_health() -> dict:
+    """Load source health from disk. Returns {source_id: {fails, last_fail, skip_until}}."""
+    if not HEALTH_PATH.exists():
+        return {}
+    try:
+        return json.loads(HEALTH_PATH.read_text())
+    except Exception:
+        return {}
+
+
+def save_health(health: dict):
+    try:
+        HEALTH_PATH.write_text(json.dumps(health, ensure_ascii=False, indent=2))
+    except Exception as ex:
+        log.warning(f"Health save failed: {ex}")
+
+
+def is_skipped(sid: str, health: dict) -> bool:
+    """Return True if this source should be skipped today."""
+    h = health.get(sid, {})
+    skip_until = h.get("skip_until", "")
+    if skip_until and skip_until > TODAY:
+        return True
+    return False
+
+
+def record_success(sid: str, health: dict):
+    health[sid] = {"consecutive_fails": 0, "last_success": TODAY, "skip_until": ""}
+
+
+def record_failure(sid: str, health: dict, error: str):
+    h = health.setdefault(sid, {"consecutive_fails": 0})
+    h["consecutive_fails"] = h.get("consecutive_fails", 0) + 1
+    h["last_fail"]  = TODAY
+    h["last_error"] = error[:120]
+    if h["consecutive_fails"] >= HEALTH_FAIL_CAP:
+        # Skip for remainder of today (reset tomorrow)
+        tomorrow = (datetime.now(timezone.utc) + timedelta(days=1)).strftime("%Y-%m-%d")
+        h["skip_until"] = tomorrow
+        log.warning(f"  ⚠ {sid}: {HEALTH_FAIL_CAP} consecutive failures — skipping until {tomorrow}")
+
+
+# ════════════════════════════════════════════════════════════════════
+# SECTION 3  DEDUP CACHE
 # ════════════════════════════════════════════════════════════════════
 
 def load_cache() -> set:
@@ -320,7 +306,7 @@ def load_cache() -> set:
         cutoff = (datetime.now(timezone.utc) - timedelta(days=CACHE_DAYS)).strftime("%Y-%m-%d")
         return {e["id"] for e in data if e.get("date", "") >= cutoff}
     except Exception as ex:
-        log.warning(f"Cache load failed: {ex} — starting fresh")
+        log.warning(f"Cache load error: {ex}")
         return set()
 
 
@@ -330,211 +316,280 @@ def save_cache(new_ids: list):
         try:
             existing = json.loads(CACHE_PATH.read_text())
         except Exception:
-            existing = []
+            pass
     cutoff = (datetime.now(timezone.utc) - timedelta(days=CACHE_DAYS)).strftime("%Y-%m-%d")
     pruned = [e for e in existing if e.get("date", "") >= cutoff]
+    seen = {e["id"] for e in pruned}
     for aid in new_ids:
-        pruned.append({"id": aid, "date": TODAY})
+        if aid not in seen:
+            pruned.append({"id": aid, "date": TODAY})
     try:
         CACHE_PATH.write_text(json.dumps(pruned, ensure_ascii=False))
     except Exception as ex:
-        log.warning(f"Cache save failed: {ex}")
+        log.warning(f"Cache save error: {ex}")
 
 
-def article_id(url: str, title: str) -> str:
+def make_id(url: str, title: str) -> str:
     raw = f"{url.strip()}:{title.strip().lower()}"
     return hashlib.sha256(raw.encode()).hexdigest()[:16]
 
 
 # ════════════════════════════════════════════════════════════════════
-# SECTION 3  PARALLEL RSS FETCHER
+# SECTION 4  FETCHER
+#   Each source runs in its own thread.
+#   Errors are caught, logged, and recorded to health tracker.
+#   feedparser bozo errors are tolerated if entries exist.
 # ════════════════════════════════════════════════════════════════════
 
 def _parse_date(entry) -> str:
+    """Parse feedparser entry date, fall back to TODAY."""
     t = entry.get("published_parsed") or entry.get("updated_parsed")
     if t:
         try:
             return f"{t.tm_year:04d}-{t.tm_mon:02d}-{t.tm_mday:02d}"
         except Exception:
             pass
+    # Try string fallback from published field
+    raw_date = getattr(entry, "published", "") or getattr(entry, "updated", "")
+    if raw_date:
+        m = re.search(r"(\d{4})-(\d{2})-(\d{2})", raw_date)
+        if m:
+            return f"{m.group(1)}-{m.group(2)}-{m.group(3)}"
     return TODAY
 
 
-def fetch_one(source: dict, seen_ids: set) -> tuple[str, list, dict]:
+def fetch_one(source: dict, seen_ids: set, health: dict) -> tuple[str, list, dict]:
     """
-    Fetch and parse one RSS feed.
+    Fetch one RSS feed.
     Returns (source_id, articles[], log_entry).
-    Thread-safe — reads only, writes nothing.
+    Thread-safe — no shared writes.
     """
-    sid   = source["id"]
-    name  = source["name"]
-    url   = source["url"]
-    max_n = source.get("max_items", 20)
-    items: list = []
+    sid      = source["id"]
+    name     = source["name"]
+    url      = source["url"]
+    max_n    = source.get("max_items", 20)
+    items:   list = []
+    cutoff_3d = (datetime.now(timezone.utc) - timedelta(days=MAX_AGE_DAYS)).strftime("%Y-%m-%d")
 
     log_entry = {
-        "id": sid, "name": name, "url": url,
-        "status": "failed", "items": 0, "error": None,
-        "fetched_at": NOW_ISO,
-        "reliability": source.get("reliability", 3),
-        "segments": source.get("segments", []),
+        "id":          sid,
+        "name":        name,
+        "url":         url,
+        "status":      "failed",
+        "items":       0,
+        "error":       None,
+        "fetched_at":  NOW_ISO,
+        "reliability": source.get("reliability", "★"),
+        "tier":        source.get("tier", 3),
+        "segments":    source.get("segments", []),
     }
 
     if not HAS_FEEDPARSER:
         log_entry["error"] = "feedparser not installed"
         return sid, items, log_entry
 
-    cutoff_dt = (datetime.now(timezone.utc) - timedelta(days=MAX_AGE_DAYS)).strftime("%Y-%m-%d")
-
     try:
         socket.setdefaulttimeout(FETCH_TIMEOUT)
-        feed = feedparser.parse(url)
+
+        # feedparser accepts custom headers via Request-Headers dict
+        feed = feedparser.parse(
+            url,
+            request_headers={
+                "User-Agent": "EnergyIntel/3.0 (energy-cvc-briefing; feedparser)",
+                "Accept":     "application/rss+xml, application/atom+xml, application/xml, text/xml, */*",
+            }
+        )
 
         http_status = getattr(feed, "status", 200)
-        if http_status >= 400:
-            log_entry["error"] = f"HTTP {http_status}"
+
+        # Hard fail on 4xx/5xx
+        if http_status and http_status >= 400:
+            err = f"HTTP {http_status}"
+            log_entry["error"] = err
+            record_failure(sid, health, err)
             return sid, items, log_entry
 
-        # feedparser bozo = malformed feed but may still have entries
-        if getattr(feed, "bozo", False) and not feed.entries:
-            ex_msg = str(getattr(feed, "bozo_exception", "unknown"))[:120]
-            log_entry["error"] = f"Feed parse error: {ex_msg}"
+        # Bozo check — feedparser sets bozo=True for malformed XML
+        # BUT still parses what it can — only hard-fail if no entries
+        if getattr(feed, "bozo", False):
+            bozo_ex = str(getattr(feed, "bozo_exception", ""))[:100]
+            if not feed.entries:
+                err = f"Bozo + no entries: {bozo_ex}"
+                log_entry["error"] = err
+                record_failure(sid, health, err)
+                return sid, items, log_entry
+            # Has entries despite bozo — log warning but continue
+            log.debug(f"  {name}: bozo feed but has {len(feed.entries)} entries — proceeding")
+
+        if not feed.entries:
+            err = "Empty feed (0 entries)"
+            log_entry["error"] = err
+            record_failure(sid, health, err)
+            log_entry["status"] = "partial"
             return sid, items, log_entry
 
         count = 0
         for entry in feed.entries[:max_n]:
             title   = (getattr(entry, "title",   "") or "").strip()
             link    = (getattr(entry, "link",    "") or "").strip()
-            summary = (getattr(entry, "summary", "") or "")[:800].strip()
+            # Some feeds use content instead of summary
+            summary = (
+                getattr(entry, "summary", "") or
+                (entry.get("content", [{}])[0].get("value", "") if entry.get("content") else "")
+            )[:800].strip()
 
             if not title or not link or title == "[Removed]":
                 continue
 
             date = _parse_date(entry)
-            if date < cutoff_dt:
+            if date < cutoff_3d:
                 continue
 
-            aid = article_id(link, title)
+            aid = make_id(link, title)
             if aid in seen_ids:
                 continue
 
+            # Strip HTML tags from summary
+            summary_clean = re.sub(r"<[^>]+>", " ", summary)
+            summary_clean = re.sub(r"\s+", " ", summary_clean).strip()
+
             items.append({
-                "article_id":       aid,
-                "source_id":        sid,
-                "source_name":      name,
-                "source_url":       link,
-                "source_segments":  source.get("segments", []),
-                "reliability":      source.get("reliability", 3),
-                "title":            title,
-                "summary":          summary,
-                "published_date":   date,
-                "raw_text":         f"{title} {summary}".lower(),
-                "fetched_at":       NOW_ISO,
+                "article_id":      aid,
+                "source_id":       sid,
+                "source_name":     name,
+                "source_url":      link,
+                "source_segments": source.get("segments", []),
+                "reliability":     source.get("reliability", "★"),
+                "tier":            source.get("tier", 3),
+                "title":           title,
+                "summary":         summary_clean,
+                "published_date":  date,
+                "raw_text":        f"{title} {summary_clean}".lower(),
+                "fetched_at":      NOW_ISO,
             })
             count += 1
 
         log_entry["status"] = "success" if count > 0 else "partial"
         log_entry["items"]  = count
+        record_success(sid, health)
 
     except socket.timeout:
-        log_entry["error"] = f"Timeout ({FETCH_TIMEOUT}s)"
+        err = f"Timeout ({FETCH_TIMEOUT}s)"
+        log_entry["error"] = err
+        record_failure(sid, health, err)
     except Exception as ex:
-        log_entry["error"] = str(ex)[:200]
+        err = str(ex)[:200]
+        log_entry["error"] = err
+        record_failure(sid, health, err)
 
     return sid, items, log_entry
 
 
-def fetch_all_rss(seen_ids: set) -> tuple[list, list]:
+def fetch_all(seen_ids: set, health: dict) -> tuple[list, list]:
+    """Fetch all sources in parallel. Skip sources with too many failures."""
     all_items: list = []
     all_logs:  list = []
 
-    log.info(f"Fetching {len(SOURCES)} RSS sources (max_workers={MAX_WORKERS})...")
+    # Separate sources: active vs. skipped
+    active_sources  = [s for s in SOURCES if not is_skipped(s["id"], health)]
+    skipped_sources = [s for s in SOURCES if is_skipped(s["id"], health)]
 
-    with ThreadPoolExecutor(max_workers=MAX_WORKERS) as ex:
-        futures = {ex.submit(fetch_one, src, seen_ids): src for src in SOURCES}
-        for future in as_completed(futures, timeout=120):
+    if skipped_sources:
+        log.info(f"  Skipping {len(skipped_sources)} unstable source(s): "
+                 f"{[s['name'] for s in skipped_sources]}")
+
+    log.info(f"  Fetching {len(active_sources)} sources (workers={MAX_WORKERS})...")
+
+    with ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
+        futures = {
+            executor.submit(fetch_one, src, seen_ids, health): src
+            for src in active_sources
+        }
+        for future in as_completed(futures, timeout=180):
             src = futures[future]
             try:
-                sid, items, log_entry = future.result(timeout=5)
+                sid, items, entry = future.result(timeout=5)
                 all_items.extend(items)
-                all_logs.append(log_entry)
-                icon = "✓" if log_entry["status"] == "success" else (
-                       "~" if log_entry["status"] == "partial" else "✗")
-                err  = f"  [{log_entry['error']}]" if log_entry["error"] else ""
-                print(f"    {icon} {src['name']}: {log_entry['items']} items{err}")
-            except TimeoutError:
-                print(f"    ✗ {src['name']}: future timeout")
+                all_logs.append(entry)
+                icon = "✓" if entry["status"] == "success" else (
+                       "~" if entry["status"] == "partial" else "✗")
+                err  = f"  [{entry['error']}]" if entry.get("error") else ""
+                print(f"    {icon} {src['name']:<30} {entry['items']:>3} items{err}")
+            except Exception as ex:
+                err = str(ex)[:100]
+                print(f"    ✗ {src['name']:<30} executor error: {err}")
                 all_logs.append({
-                    "id": src["id"], "name": src["name"], "url": src["url"],
-                    "status": "failed", "items": 0, "error": "future timeout",
+                    "id":    src["id"], "name": src["name"], "url": src["url"],
+                    "status": "failed", "items": 0, "error": f"executor: {err}",
                     "fetched_at": NOW_ISO,
                 })
-            except Exception as ex2:
-                print(f"    ✗ {src['name']}: {ex2}")
-                all_logs.append({
-                    "id": src["id"], "name": src["name"], "url": src["url"],
-                    "status": "failed", "items": 0, "error": str(ex2)[:150],
-                    "fetched_at": NOW_ISO,
-                })
+                record_failure(src["id"], health, f"executor: {err}")
+
+    # Add skipped sources to log
+    for src in skipped_sources:
+        h = health.get(src["id"], {})
+        all_logs.append({
+            "id":    src["id"], "name": src["name"], "url": src["url"],
+            "status": "skipped", "items": 0,
+            "error":  f"Auto-skipped: {h.get('consecutive_fails',0)} consecutive failures",
+            "fetched_at": NOW_ISO,
+        })
 
     return all_items, all_logs
 
 
 # ════════════════════════════════════════════════════════════════════
-# SECTION 4  EIA OPEN DATA API  (free, key at eia.gov/opendata)
-#   + EIA Today in Energy RSS already in SOURCES above
-#   Here we fetch quantitative data series as structured signals.
+# SECTION 5  EIA OPEN DATA API
+#   Free key: https://www.eia.gov/opendata/register.php
+#   Fetches quantitative series as structured signals.
 # ════════════════════════════════════════════════════════════════════
 
-# EIA API v2 series — each produces one signal with real numbers
-EIA_SERIES = [
+EIA_SERIES: list[dict] = [
     {
-        "path":        "electricity/electric-power-operational-data",
-        "params":      "frequency=monthly&data[0]=generation&facets[fueltypeid][]=SUN"
-                       "&facets[sectorid][]=99&sort[0][column]=period&sort[0][direction]=desc"
-                       "&offset=0&length=1",
-        "description": "US utility-scale solar generation (MWh)",
+        "path":        "electricity/electric-power-operational-data/data",
+        "params":      ("frequency=monthly&data[0]=generation"
+                        "&facets[fueltypeid][]=SUN&facets[sectorid][]=99"
+                        "&sort[0][column]=period&sort[0][direction]=desc&offset=0&length=1"),
+        "description": "US utility-scale solar generation",
+        "unit_label":  "MWh",
         "segments":    ["other_cleantech"],
         "event_type":  "deployment",
     },
     {
-        "path":        "electricity/electric-power-operational-data",
-        "params":      "frequency=monthly&data[0]=generation&facets[fueltypeid][]=WND"
-                       "&facets[sectorid][]=99&sort[0][column]=period&sort[0][direction]=desc"
-                       "&offset=0&length=1",
-        "description": "US utility-scale wind generation (MWh)",
+        "path":        "electricity/electric-power-operational-data/data",
+        "params":      ("frequency=monthly&data[0]=generation"
+                        "&facets[fueltypeid][]=WND&facets[sectorid][]=99"
+                        "&sort[0][column]=period&sort[0][direction]=desc&offset=0&length=1"),
+        "description": "US utility-scale wind generation",
+        "unit_label":  "MWh",
         "segments":    ["offshore_wind"],
         "event_type":  "deployment",
     },
     {
-        "path":        "electricity/electric-power-operational-data",
-        "params":      "frequency=monthly&data[0]=generation&facets[fueltypeid][]=NUC"
-                       "&facets[sectorid][]=99&sort[0][column]=period&sort[0][direction]=desc"
-                       "&offset=0&length=1",
-        "description": "US nuclear electricity generation (MWh)",
-        "segments":    ["advanced_nuclear"],
+        "path":        "total-energy/data",
+        "params":      ("frequency=monthly&data[0]=value&facets[msn][]=BSESEUS"
+                        "&sort[0][column]=period&sort[0][direction]=desc&offset=0&length=1"),
+        "description": "US battery energy storage installed capacity",
+        "unit_label":  "MW",
+        "segments":    ["battery_storage", "long_duration_storage"],
         "event_type":  "deployment",
     },
     {
-        "path":        "total-energy/data",
-        "params":      "frequency=monthly&data[0]=value&facets[msn][]=BSESEUS"
-                       "&sort[0][column]=period&sort[0][direction]=desc&offset=0&length=1",
-        "description": "US battery energy storage installed capacity (MW)",
-        "segments":    ["battery_storage", "long_duration_storage"],
+        "path":        "electricity/electric-power-operational-data/data",
+        "params":      ("frequency=monthly&data[0]=generation"
+                        "&facets[fueltypeid][]=NUC&facets[sectorid][]=99"
+                        "&sort[0][column]=period&sort[0][direction]=desc&offset=0&length=1"),
+        "description": "US nuclear electricity generation",
+        "unit_label":  "MWh",
+        "segments":    ["advanced_nuclear"],
         "event_type":  "deployment",
     },
 ]
 
 
 def fetch_eia_api() -> list:
-    """
-    Fetch EIA Open Data API series.
-    Each series returns one structured signal with real government data.
-    Requires EIA_API_KEY env var (free at eia.gov/opendata).
-    """
     if not EIA_API_KEY:
-        log.info("EIA_API_KEY not set — skipping API fetch (RSS feed still active)")
-        log.info("  Free key: https://www.eia.gov/opendata/register.php")
+        log.info("  EIA_API_KEY not set — skipping (free at eia.gov/opendata/register.php)")
         return []
 
     items = []
@@ -542,9 +597,9 @@ def fetch_eia_api() -> list:
 
     for series in EIA_SERIES:
         try:
-            url = f"{base}/{series['path']}/data/?api_key={EIA_API_KEY}&{series['params']}"
-            req = _ur.Request(url, headers={"Accept": "application/json"})
-            with _ur.urlopen(req, timeout=15) as r:
+            url = f"{base}/{series['path']}?api_key={EIA_API_KEY}&{series['params']}"
+            req = _urllib.Request(url, headers={"Accept": "application/json"})
+            with _urllib.urlopen(req, timeout=15) as r:
                 data = json.loads(r.read())
 
             rows = data.get("response", {}).get("data", [])
@@ -553,252 +608,249 @@ def fetch_eia_api() -> list:
 
             row    = rows[0]
             period = row.get("period", "")
-            value  = row.get("value", row.get("generation", ""))
-            units  = row.get("units", "MWh")
-            desc   = series["description"]
+            value  = row.get("value") or row.get("generation", "")
+            units  = row.get("units", series["unit_label"])
 
-            title   = f"EIA: {desc} — {period}: {value:,} {units}" if isinstance(value, (int, float)) else f"EIA: {desc} — {period}: {value} {units}"
-            summary = (f"Official EIA data. {desc}. Most recent period: {period}. "
-                       f"Value: {value} {units}. "
-                       f"Source: US Energy Information Administration Open Data API.")
+            if value is None:
+                continue
+
+            value_fmt = f"{value:,.0f}" if isinstance(value, (int, float)) else str(value)
+            desc      = series["description"]
+            title     = f"EIA Data: {desc} — {period}: {value_fmt} {units}"
+            summary   = (f"Official US EIA data. {desc}. Period: {period}. "
+                         f"Value: {value_fmt} {units}. "
+                         f"Source: US Energy Information Administration Open Data API v2.")
 
             items.append({
-                "article_id":      article_id("eia.gov/v2/" + series["path"], title),
+                "article_id":      make_id("eia.gov/v2/" + series["path"], title),
                 "source_id":       "eia_api",
                 "source_name":     "EIA Open Data API",
                 "source_url":      "https://www.eia.gov/opendata/",
                 "source_segments": series["segments"],
-                "reliability":     1,
+                "reliability":     "★★★",
+                "tier":            1,
                 "title":           title,
                 "summary":         summary,
                 "published_date":  TODAY,
-                "raw_text":        title.lower(),
+                "raw_text":        f"{title} {summary}".lower(),
                 "fetched_at":      NOW_ISO,
-                "eia_series":      series["path"],
                 "eia_period":      period,
                 "eia_value":       str(value),
             })
-            time.sleep(0.3)   # stay well within EIA rate limits
+            time.sleep(0.25)   # EIA rate limit: ~1000 req/hour, be polite
 
+        except _urlerr.HTTPError as ex:
+            log.warning(f"  EIA {series['description']}: HTTP {ex.code}")
         except Exception as ex:
-            log.warning(f"EIA series {series['path']}: {ex}")
+            log.warning(f"  EIA {series['description']}: {ex}")
 
-    log.info(f"EIA API: {len(items)} data points")
+    log.info(f"  EIA API: {len(items)} data points")
     return items
 
 
 # ════════════════════════════════════════════════════════════════════
-# SECTION 5  CLASSIFIER & SCORER
-# Rule-based. No AI. Every field traceable.
-# Sector and event_type match the requested schema exactly.
+# SECTION 6  CLASSIFIER & SCORER
+#   Sector and event_type match the required output schema exactly.
+#   Fully rule-based. No AI. Every point traceable.
 # ════════════════════════════════════════════════════════════════════
 
-# ── Sector keyword map (requested schema) ─────────────────────────
+# ── Sector keyword map ────────────────────────────────────────────
 _SECTOR_KWS: dict[str, list[str]] = {
     "long_duration_storage": [
         "long duration", "long-duration", "ldes", "iron-air", "iron air",
         "vanadium flow", "flow battery", "multi-day storage", "seasonal storage",
-        "liquid air", "gravitational storage", "compressed air energy",
+        "liquid air energy", "gravitational storage", "compressed air energy",
+        "multi-week storage", "iron flow",
     ],
     "battery_storage": [
         "battery storage", "bess", "energy storage", "lithium-ion", "lithium ion",
         "grid battery", "utility-scale battery", "battery system",
         "electrochemical storage", "sodium-ion", "solid state battery",
+        "grid-scale battery", "li-ion",
     ],
     "green_hydrogen": [
         "green hydrogen", "electrolyzer", "electrolysis", "pem electrolyzer",
-        "alkaline electrolyzer", "hydrogen production", "hydrogen fuel",
-        "h2", "clean hydrogen", "renewable hydrogen", "blue hydrogen",
-        "ammonia", "hydrogen storage", "hydrogen offtake",
+        "alkaline electrolyzer", "hydrogen production", "clean hydrogen",
+        "renewable hydrogen", "blue hydrogen", "ammonia", "h2 hub",
+        "hydrogen offtake", "hydrogen fuel cell", "hydrogen storage",
     ],
     "grid_software": [
         "vpp", "virtual power plant", "demand response", "grid software",
         "ferc", "ancillary services", "frequency regulation",
         "flexibility market", "dispatch optimization", "grid management",
-        "energy management system", "ems", "scada", "grid modernization",
-        "smart grid", "grid control", "grid intelligence",
+        "energy management system", "ems", "grid modernization",
+        "smart grid", "grid intelligence", "grid control", "grid operator",
+        "ferc order", "ferc rule",
     ],
     "transmission": [
         "transmission", "hvdc", "high voltage direct current", "subsea cable",
         "offshore wind cable", "grid interconnect", "power line",
         "transmission line", "grid expansion", "ferc permitting",
-        "grid congestion", "interregional transmission",
+        "grid congestion", "interregional transmission", "transmission siting",
     ],
     "advanced_nuclear": [
         "nuclear", "smr", "small modular reactor", "advanced reactor",
         "fusion", "molten salt", "fast reactor", "nuclear power",
-        "fission", "nrc", "reactor design", "nuclear energy",
-        "light water reactor", "next-generation nuclear",
+        "fission", "nrc", "nuclear energy", "light water reactor",
+        "next-generation nuclear", "microreactor",
     ],
     "data_center_power": [
         "data center", "hyperscaler", "azure", "aws", "google cloud",
-        "power electronics", "ai infrastructure", "cfe", "24/7 clean energy",
-        "corporate ppa", "data centre", "cloud computing power",
+        "power electronics", "ai infrastructure", "cfe",
+        "24/7 clean energy", "corporate ppa", "data centre",
+        "ai power", "ai energy demand",
     ],
     "geothermal": [
-        "geothermal", "enhanced geothermal", "egs", "geothermal power",
-        "geothermal heat", "geothermal energy", "hot rock",
-        "ground source", "geothermal drilling",
+        "geothermal", "enhanced geothermal", "egs",
+        "geothermal power", "geothermal heat", "geothermal energy",
+        "hot rock", "ground source heat", "geothermal drilling",
     ],
     "offshore_wind": [
         "offshore wind", "floating wind", "fixed-bottom wind",
-        "offshore turbine", "wind farm", "wind energy offshore",
-        "monopile", "jacket foundation",
+        "offshore turbine", "offshore wind farm", "monopile",
+        "jacket foundation", "offshore wind cable",
     ],
     "other_cleantech": [
         "clean energy", "renewable energy", "solar", "cleantech",
         "decarbonization", "net zero", "climate tech", "energy transition",
-        "sustainability", "carbon capture", "ccus",
+        "carbon capture", "ccus", "ccs",
     ],
 }
 
-# Priority order for sector inference (specific → general)
-_SECTOR_PRIORITY = [
+_SECTOR_PRIORITY: list[str] = [
     "long_duration_storage", "green_hydrogen", "advanced_nuclear",
     "geothermal", "offshore_wind", "transmission", "grid_software",
     "data_center_power", "battery_storage", "other_cleantech",
 ]
 
-# ── Event type keyword rules ───────────────────────────────────────
-# Maps to requested schema: policy|funding|grant|contract|deployment|pilot|partnership|regulatory
-_EVENT_RULES = [
-    # High-value commercial events
+# ── Event type rules ──────────────────────────────────────────────
+_EVENT_RULES: list[dict] = [
     {
         "event_type": "contract", "base_score": 90,
         "kws": [
-            "signs contract", "awarded contract", "secures contract", "contract awarded",
-            "offtake agreement", "supply agreement", "framework agreement",
-            "purchase agreement", "power purchase agreement", "ppa signed",
-            "long-term agreement", "commercial agreement", "procurement contract",
+            "signs contract", "awarded contract", "secures contract",
+            "contract awarded", "offtake agreement", "supply agreement",
+            "framework agreement", "purchase agreement",
+            "power purchase agreement", "ppa signed", "long-term agreement",
+            "commercial agreement", "procurement contract",
         ],
     },
     {
         "event_type": "deployment", "base_score": 88,
         "kws": [
             "goes live", "commercial operation", "operational", "commissioned",
-            "begins operation", "starts operation", "deployed at", "installed at",
-            "goes online", "comes online", "energized", "first power",
+            "begins operation", "starts operation", "deployed at",
+            "installed at", "goes online", "comes online",
             "construction complete", "opens facility", "gigafactory",
+            "first power", "energized",
         ],
     },
-    # Funding events
     {
         "event_type": "funding", "base_score": 82,
         "kws": [
             "raises", "closes funding", "series a", "series b", "series c",
             "seed round", "venture capital", "investment round", "funding round",
-            "secures investment", "equity raise", "capital raise", "closes $",
-            "raises $", "secures $", "investment of $", "closes €", "raises €",
+            "secures investment", "equity raise", "capital raise",
+            "closes $", "raises $", "secures $", "closes €", "raises €",
+            "investment of", "million investment", "billion investment",
         ],
     },
-    # Grant / government funding
     {
         "event_type": "grant", "base_score": 65,
         "kws": [
             "grant awarded", "receives grant", "doe award", "doe funding",
-            "government grant", "eu grant", "horizon grant", "innovate uk",
+            "government grant", "eu grant", "horizon grant",
             "nsf grant", "sbir award", "doe selects", "doe announces funding",
-            "loan guarantee", "doe loan", "ira funding", "inflation reduction act",
-            "department of energy grant", "federal grant",
+            "loan guarantee", "doe loan", "ira funding",
+            "inflation reduction act", "federal grant", "department of energy",
         ],
     },
-    # Pilot / demo
+    {
+        "event_type": "regulatory", "base_score": 62,
+        "kws": [
+            "ferc order", "ferc approves", "ferc issues", "ferc rule",
+            "ferc notice", "ferc docket", "environmental impact",
+            "permit granted", "permitting", "interconnection approval",
+            "grid interconnection", "nrc approves", "nrc license",
+            "eu taxonomy", "epa rule", "transmission permitting",
+        ],
+    },
     {
         "event_type": "pilot", "base_score": 70,
         "kws": [
-            "pilot project", "demonstration project", "demo project", "field trial",
-            "proof of concept", "first deployment", "initial deployment",
-            "prototype tested", "demonstration facility", "test project",
+            "pilot project", "demonstration project", "demo project",
+            "field trial", "proof of concept", "first deployment",
+            "initial deployment", "prototype tested", "demonstration facility",
+            "test project", "demonstration plant",
         ],
     },
-    # Partnership / JV / MOU
     {
         "event_type": "partnership", "base_score": 48,
         "kws": [
-            "partnership", "mou", "memorandum of understanding", "joint venture",
-            "collaboration agreement", "strategic alliance", "teaming agreement",
-            "signs mou", "strategic partnership",
+            "partnership", "mou", "memorandum of understanding",
+            "joint venture", "collaboration agreement", "strategic alliance",
+            "teaming agreement", "signs mou", "strategic partnership",
         ],
     },
-    # Regulatory / permitting / policy rule
-    {
-        "event_type": "regulatory", "base_score": 60,
-        "kws": [
-            "ferc order", "ferc approves", "ferc issues", "ferc rule",
-            "environmental impact", "eia approval", "permit granted",
-            "permitting", "interconnection approval", "grid interconnection",
-            "transmission approval", "nrc approves", "nrc license",
-            "eu taxonomy", "sec rule", "epa rule",
-        ],
-    },
-    # Policy / legislation
     {
         "event_type": "policy", "base_score": 55,
         "kws": [
             "policy", "legislation", "regulation", "executive order",
             "inflation reduction act", "infrastructure law",
             "incentive", "subsidy", "tax credit", "itc", "ptc",
-            "mandate", "standard", "target", "goal", "plan",
-            "national strategy", "clean energy standard",
+            "mandate", "standard", "national strategy",
+            "clean energy standard", "renewable portfolio standard",
         ],
     },
 ]
 
-# Fallback event type when nothing matches
-_DEFAULT_EVENT = {"event_type": "other", "base_score": 15}
-
 # ── Noise / boost patterns ────────────────────────────────────────
 _NOISE: list[tuple[str, int, str]] = [
     (r"\bproud to (announce|partner|share)\b|\bexcited to (announce|share)\b|\bpleased to announce\b",
-     -40, "Generic PR language"),
+     -40, "Generic PR"),
     (r"\baims to\b|\bseeks to\b|\bplans to\b|\bhopes to\b|\bintends to\b",
-     -20, "Intent without confirmed action"),
+     -20, "Intent only"),
     (r"\bcould (become|reach|achieve|unlock)\b|\bhas the potential to\b",
-     -25, "Speculative framing"),
-    (r"\bexploring\b.{0,30}\bpartner|\bin (early )?discussions\b|\bpotential (partner|deal)\b",
-     -30, "Exploratory / pre-commercial"),
-    (r"\bunveils? (vision|strategy|roadmap)\b|\bstrategic vision\b|\blong-term goal\b",
-     -30, "Vision announcement only"),
+     -25, "Speculative"),
+    (r"\bexploring\b.{0,40}\bpartner|\bin early discussions\b|\bpotential (partner|deal)\b",
+     -30, "Exploratory"),
+    (r"\bunveils? (vision|strategy|roadmap)\b|\bstrategic vision\b",
+     -30, "Vision only"),
     (r"\bwins? award\b|\brecognized as\b|\bnamed (a )?(top|leading|best)\b|\bgartner\b",
-     -35, "Vanity recognition"),
-    (r"\bkeynote\b|\bspeaks? at\b|\bpanel (discussion|session)\b|\bwebinar\b|\battends? (conference|summit)\b",
-     -30, "Conference appearance only"),
-    (r"\bpublishes? (report|study|whitepaper)\b|\bnew (report|research|study)\b",
-     -25, "Report/research publication"),
+     -35, "Award/recognition"),
+    (r"\bkeynote\b|\bspeaks? at\b|\bpanel (discussion|session)\b|\bwebinar\b",
+     -30, "Conference only"),
+    (r"\bpublishes? (report|study|whitepaper)\b|\bnew (report|research)\b",
+     -25, "Report only"),
     (r"\brebrands?\b|\bnew (logo|brand|website)\b",
-     -55, "Rebranding / marketing"),
+     -55, "Rebranding"),
     (r"\bopinion:\b|\bcommentary:\b|\bop-ed\b|\beditorial\b",
-     -60, "Opinion / commentary"),
+     -60, "Opinion"),
     (r"\bmarket (wrap|roundup|update)\b|\bweekly (round-?up|digest)\b|\bmonthly digest\b",
-     -60, "Market digest"),
-    (r"\bwe('re| are) hiring\b|\bjoin our team\b|\bopen (position|role)\b|\bcareer opportunit\b",
-     -50, "Generic job posting"),
+     -60, "Digest"),
+    (r"\bwe('re| are) hiring\b|\bjoin our team\b|\bopen (position|role)\b",
+     -50, "Job posting"),
 ]
 
 _BOOST: list[tuple[str, int, str]] = [
-    # Named strategic buyers (highest value)
-    (r"\bkepco\b|\bmicrosoft\b|\bgoogle\b|\bamazon\b|\bengie\b|\bvattenfall\b|\bnational grid\b|\bonx\b",
-     +18, "Tier-1 strategic buyer named"),
+    (r"\bkepco\b|\bmicrosoft\b|\bgoogle\b|\bamazon\b|\bengie\b|\bvattenfall\b|\bnational grid\b",
+     +18, "Tier-1 strategic buyer"),
     (r"\bhyundai\b|\bsamsung\b|\bsiemens\b|\babb\b|\bhitachi\b|\bhanwha\b|\bshell\b|\bbp\b|\btotalenergies\b",
-     +12, "Major industrial/OEM buyer named"),
-    # Hard numbers
-    (r"\$[\d,]+\s*[mb]|\$[\d,]+\s*million|\$[\d,]+\s*billion|€[\d,]+\s*[mb]|£[\d,]+\s*[mb]|₩[\d,]+억",
+     +12, "Major industrial/OEM"),
+    (r"\$[\d,]+\s*[mb]|\$[\d,]+\s*million|\$[\d,]+\s*billion|€[\d,]+\s*[mb]|£[\d,]+\s*[mb]",
      +15, "Specific financial figure"),
     (r"[\d,]+\s*mwh|[\d,]+\s*gwh|[\d,]+\s*mw\b|[\d,]+\s*gw\b",
-     +10, "Specific capacity figure"),
-    (r"q[1-4]\s*20[2-9]\d|by 20[2-9]\d|within \d+ month|H[12] 20[2-9]\d",
-     +8,  "Concrete timeframe stated"),
-    # Government primary sources (EIA, DOE, FERC, IEA, IRENA)
-    (r"\beia\b|\bdoe\b|\bferc\b|\biea\b|\birena\b|\bnrel\b|\blbnl\b",
-     +6,  "Government/intergovernmental source or subject"),
-    # Named location increases specificity
-    (r"\bbusan\b|\bincheon\b|\bulsan\b|\brotterdam\b|\bsingapore\b|\bhamburg\b|\btexas\b|\bcalifornia\b|\boffshore\b",
+     +10, "Specific capacity"),
+    (r"q[1-4]\s*20[2-9]\d|by 20[2-9]\d|within \d+ month",
+     +8,  "Concrete timeframe"),
+    (r"\beia\b|\bdoe\b|\bferc\b|\biea\b|\birena\b|\bnrel\b",
+     +6,  "Gov/intergovernmental source/subject"),
+    (r"\bbusan\b|\bincheon\b|\bulsan\b|\brotterdam\b|\bsingapore\b|\btexas\b|\bcalifornia\b|\boffshore\b",
      +5,  "Named project location"),
 ]
 
 
 def classify(raw_text: str) -> dict:
-    """Return first matching event rule, or default."""
     for rule in _EVENT_RULES:
         for kw in rule["kws"]:
             if kw in raw_text:
@@ -809,11 +861,9 @@ def classify(raw_text: str) -> dict:
 
 
 def infer_sector(raw_text: str, source_segments: list) -> str:
-    """Priority-ordered sector inference from text."""
     for seg in _SECTOR_PRIORITY:
         if any(kw in raw_text for kw in _SECTOR_KWS.get(seg, [])):
             return seg
-    # Fall back to first source segment that exists in our schema
     valid = set(_SECTOR_KWS.keys())
     for s in source_segments:
         if s in valid:
@@ -821,8 +871,7 @@ def infer_sector(raw_text: str, source_segments: list) -> str:
     return "other_cleantech"
 
 
-def score(raw_text: str, base: int) -> tuple[int, str, list]:
-    """Additive score with boost/noise patterns. Returns (score, tier, breakdown)."""
+def compute_score(raw_text: str, base: int) -> tuple[int, str, list]:
     s = base
     bd = []
     for pattern, delta, reason in _BOOST:
@@ -833,121 +882,49 @@ def score(raw_text: str, base: int) -> tuple[int, str, list]:
         if re.search(pattern, raw_text, re.I):
             s += delta
             bd.append({"delta": delta, "reason": reason, "type": "noise"})
-    s = max(0, min(100, round(s)))
-    tier = "high" if s >= 60 else "medium" if s >= 35 else "low" if s >= 20 else "noise"
+    s    = max(0, min(100, round(s)))
+    tier = ("high" if s >= 60 else
+            "medium" if s >= 35 else
+            "low"    if s >= 20 else "noise")
     return s, tier, bd
 
 
-# ── Known tracked company aliases ────────────────────────────────
-_COMPANY_ALIASES: dict[str, str] = {
-    "gridwiz": "그리드위즈", "그리드위즈": "그리드위즈",
-    "sixtyhz": "식스티헤르츠", "식스티헤르츠": "식스티헤르츠",
-    "vincen": "빈센", "빈센": "빈센",
-    "standard energy": "스탠다드에너지",
+# ── Company entity list ───────────────────────────────────────────
+_COMPANIES: dict[str, str] = {
     "form energy": "Form Energy", "form energy systems": "Form Energy",
-    "autogrid": "AutoGrid",
-    "sunfire": "Sunfire",
-    "amogy": "Amogy",
-    "hysata": "Hysata",
-    "ceres power": "Ceres Power",
-    "invinity": "Invinity Energy",
-    "enervenue": "EnerVenue",
-    "ambri": "Ambri",
-    "eos energy": "Eos Energy",
-    "hydrostor": "Hydrostor",
-    "energy vault": "Energy Vault",
-    "verdagy": "Verdagy",
-    "electric hydrogen": "Electric Hydrogen",
-    "ohmium": "Ohmium",
-    "plug power": "Plug Power",
-    "bloom energy": "Bloom Energy",
-    "kairos power": "Kairos Power",
-    "terrapower": "TerraPower",
-    "x-energy": "X-Energy",
-    "nuscale": "NuScale",
-    "fervo": "Fervo Energy",
-    "sage geosystems": "Sage Geosystems",
-    "gradient geothermal": "Gradient Geothermal",
-    "fluence": "Fluence",
-    "stem inc": "Stem", "stem,": "Stem",
-    "volterra": "Volterra",
+    "autogrid": "AutoGrid", "sunfire": "Sunfire", "amogy": "Amogy",
+    "hysata": "Hysata", "ceres power": "Ceres Power",
+    "invinity": "Invinity Energy", "enervenue": "EnerVenue",
+    "ambri": "Ambri", "eos energy": "Eos Energy",
+    "hydrostor": "Hydrostor", "energy vault": "Energy Vault",
+    "verdagy": "Verdagy", "electric hydrogen": "Electric Hydrogen",
+    "ohmium": "Ohmium", "plug power": "Plug Power",
+    "bloom energy": "Bloom Energy", "kairos power": "Kairos Power",
+    "terrapower": "TerraPower", "x-energy": "X-Energy",
+    "nuscale": "NuScale", "fervo": "Fervo Energy",
+    "fluence": "Fluence", "stem inc": "Stem",
+    "gridwiz": "그리드위즈", "그리드위즈": "그리드위즈",
+    "sixtyhz": "식스티헤르츠", "빈센": "빈센",
+    "standard energy": "스탠다드에너지",
 }
 
 
 def extract_companies(raw_text: str) -> list:
     found = []
-    for alias, canonical in _COMPANY_ALIASES.items():
+    for alias, canonical in _COMPANIES.items():
         if alias in raw_text and canonical not in found:
             found.append(canonical)
     return found
 
 
-# ── Missing evidence by event type ───────────────────────────────
-_MISSING: dict[str, list] = {
-    "contract": [
-        "Contract ACV (annual contract value) not disclosed",
-        "Duration and renewal terms not public",
-        "Exclusivity and geographic scope unknown",
-        "Named offtaker confirmed or inferred?",
-    ],
-    "funding": [
-        "Post-money valuation not confirmed",
-        "Lead investor identity and type (strategic vs. financial) unknown",
-        "Use of proceeds not specified",
-        "Series and total capital raised not stated",
-    ],
-    "grant": [
-        "Commercial co-funding partner not identified",
-        "Path from grant to commercial revenue not articulated",
-        "Named private sector offtaker required?",
-        "Milestones and reporting requirements not disclosed",
-    ],
-    "pilot": [
-        "Pilot success KPIs not publicly defined",
-        "Pathway to commercial contract post-pilot unclear",
-        "Named third-party validator not confirmed",
-        "Pilot duration and go/no-go criteria not stated",
-    ],
-    "deployment": [
-        "Commercial revenue terms and offtake pricing not disclosed",
-        "Performance guarantee and warranty terms unknown",
-        "Scale-up roadmap not public",
-    ],
-    "partnership": [
-        "Binding terms (exclusivity, minimum volume) not confirmed",
-        "MOU vs. binding contract distinction not stated",
-        "IP ownership and licensing terms unclear",
-        "Financial commitments not disclosed",
-    ],
-    "regulatory": [
-        "Effective date and implementation timeline not stated",
-        "Market participants affected not enumerated",
-        "Compliance costs and transition period not disclosed",
-    ],
-    "policy": [
-        "Implementation regulations not yet issued",
-        "Budget appropriation and certainty unknown",
-        "Timeline for enforcement unclear",
-    ],
-    "other": [
-        "No investment-specific gap analysis available",
-        "Primary research required to assess materiality",
-    ],
-}
-
-
-def missing_evidence(event_type: str) -> list:
-    return _MISSING.get(event_type, _MISSING["other"])
-
-
-# ── Why it matters (CVC/investor lens) ───────────────────────────
+# ── why_it_matters ────────────────────────────────────────────────
 _WHY: dict[tuple, str] = {
     ("contract",    "long_duration_storage"):
-        "Named binding offtake is the critical missing link in LDES project finance. "
-        "Confirms demand-side validation and enables project financing.",
+        "Binding offtake is the critical de-risking event for LDES project finance. "
+        "Confirms demand-side validation; enables structured debt.",
     ("contract",    "battery_storage"):
         "Offtake/supply agreement is the clearest commercial-stage signal. "
-        "LCOS competitiveness implied but requires terms for confirmation.",
+        "LCOS competitiveness implied but contract terms required for confirmation.",
     ("contract",    "green_hydrogen"):
         "Offtake at contracted price is the key missing link in most hydrogen theses. "
         "Without a named buyer at locked price, projects remain financially unviable.",
@@ -958,56 +935,89 @@ _WHY: dict[tuple, str] = {
         "CfD or PPA award confirms revenue certainty. "
         "Construction finance now possible; supply chain commitments follow.",
     ("contract",    "advanced_nuclear"):
-        "Power purchase agreement for nuclear is rare and high-value. "
-        "Signals utility or industrial decarbonization commitment at scale.",
+        "PPA for nuclear signals high-value, long-duration decarbonization commitment. "
+        "Rare — watch for corporate buyer identity and pricing.",
     ("deployment",  "battery_storage"):
-        "Operational deployment confirms TRL-9. "
-        "Utilities can now procure with reference site; next signal is replication.",
+        "Operational deployment confirms TRL-9 in commercial setting. "
+        "Utilities can now reference-site; next signal is contract replication.",
     ("deployment",  "long_duration_storage"):
-        "First commercial deployment of LDES is a sector-defining event. "
-        "Establishes real-world LCOS data and de-risks subsequent project finance.",
-    ("deployment",  "advanced_nuclear"):
-        "Nuclear commissioning is a multi-decade milestone. "
-        "Confirms regulatory pathway and cost baseline for the technology.",
+        "First commercial LDES deployment is a sector-defining milestone. "
+        "Establishes real-world LCOS baseline and de-risks project finance.",
     ("funding",     "default"):
         "External capital validation. Key variables: investor type (strategic >> financial), "
         "round size vs. capex needs, lead investor sector positioning.",
     ("grant",       "default"):
         "Government grant validates technology policy relevance but not market demand. "
-        "Grant-only is insufficient without a commercial anchor (offtaker, contract).",
+        "Grant-only is insufficient without a commercial anchor.",
     ("grant",       "green_hydrogen"):
-        "DOE/IRA hydrogen grants are large ($100M+). "
-        "But hydrogen H2Hub projects require named industrial offtakers to close financing.",
+        "DOE/IRA hydrogen grants are large ($50M-$1B+). "
+        "H2Hub projects require named industrial offtakers to close financing.",
     ("pilot",       "grid_software"):
         "Utility-sponsored pilot implies allocated opex budget. "
         "Pilot-to-commercial conversion rate is the key watch metric.",
     ("pilot",       "battery_storage"):
         "Grid-connected pilot signals utility-scale targeting. "
-        "KPX/NERC interface compliance is a commercialization gate.",
-    ("pilot",       "green_hydrogen"):
-        "Pilot electrolyzer data establishes real LCOH. "
-        "Key: is there a named industrial offtaker co-funding the pilot?",
-    ("pilot",       "advanced_nuclear"):
-        "SMR/advanced reactor demo is a multi-year process. "
-        "NRC licensing timeline is the primary risk — not technology.",
+        "Interface compliance is the commercialization gate.",
     ("regulatory",  "grid_software"):
         "FERC orders directly expand the addressable market for VPPs and storage. "
-        "Order 2222 implementation is the key regulatory catalyst for grid software.",
+        "FERC 2222 implementation is the key regulatory catalyst for grid software.",
     ("regulatory",  "transmission"):
         "Transmission permitting is the primary bottleneck for renewable buildout. "
         "FERC reforms and DOE permitting authority are critical policy enablers.",
     ("policy",      "green_hydrogen"):
-        "IRA Section 45V hydrogen PTC ($3/kg) is the largest clean hydrogen subsidy globally. "
+        "IRA §45V hydrogen PTC ($3/kg) is the largest clean hydrogen subsidy globally. "
         "Guidance clarity determines electrolyzer project bankability.",
     ("policy",      "battery_storage"):
-        "IRA ITC for standalone storage is transformative for project finance. "
-        "State-level mandates create additional demand.",
+        "IRA standalone storage ITC transforms project economics. "
+        "State-level mandates create additional demand floor.",
     ("policy",      "advanced_nuclear"):
-        "NRC licensing reform and DOE loan guarantees are critical enablers for SMRs. "
-        "Policy signals de-risk first-of-a-kind capital.",
+        "NRC licensing reform and DOE loan guarantees are critical SMR enablers. "
+        "Policy signals de-risk first-of-a-kind capital commitments.",
     ("partnership", "default"):
         "Named strategic partnership is directional. "
-        "MOU alone does not confirm commercial intent — watch for conversion to binding terms.",
+        "Watch for MOU → binding term conversion; IP and exclusivity terms are key.",
+}
+
+_MISSING_MAP: dict[str, list] = {
+    "contract": [
+        "Contract ACV not disclosed",
+        "Duration and renewal terms not public",
+        "Exclusivity and geographic scope unknown",
+    ],
+    "funding": [
+        "Post-money valuation not confirmed",
+        "Lead investor type (strategic vs. financial) unknown",
+        "Use of proceeds not specified",
+    ],
+    "grant": [
+        "Commercial co-funding partner not identified",
+        "Path from grant to commercial revenue unclear",
+        "Named private-sector offtaker required?",
+    ],
+    "pilot": [
+        "Pilot success KPIs not publicly defined",
+        "Pathway to commercial contract post-pilot unclear",
+        "Named third-party validator not confirmed",
+    ],
+    "deployment": [
+        "Revenue/offtake terms not disclosed",
+        "Performance guarantee and warranty unknown",
+        "Scale-up roadmap not public",
+    ],
+    "partnership": [
+        "Binding terms (exclusivity, minimum volume) not confirmed",
+        "MOU vs. binding contract distinction not stated",
+        "Financial commitments not disclosed",
+    ],
+    "regulatory": [
+        "Effective date and implementation timeline not stated",
+        "Compliance costs and transition period not disclosed",
+    ],
+    "policy": [
+        "Implementation regulations not yet issued",
+        "Budget appropriation certainty unknown",
+    ],
+    "other": ["No investment-specific gap analysis available"],
 }
 
 
@@ -1015,21 +1025,20 @@ def why_investment(event_type: str, sector: str) -> str:
     return (
         _WHY.get((event_type, sector))
         or _WHY.get((event_type, "default"))
-        or f"{event_type.capitalize()} signal in {sector.replace('_', ' ')} sector. "
-           f"Assess commercial binding terms, named counterparties, and capital efficiency."
+        or (f"{event_type.capitalize()} event in {sector.replace('_',' ')} sector. "
+            f"Assess binding terms, named counterparties, and capital efficiency.")
     )
 
 
 # ════════════════════════════════════════════════════════════════════
-# SECTION 6  NORMALIZER
-# Converts raw article → structured signal (exact requested schema)
+# SECTION 7  NORMALIZER
+#   Converts raw article → exact required output schema
 # ════════════════════════════════════════════════════════════════════
 
 def normalize(raw: dict) -> Optional[dict]:
     """
-    Map raw article to structured signal.
-    Returns None if article is noise (score < 20) and not negative.
-    Never raises — all exceptions return None.
+    Returns structured signal or None (noise/error).
+    All fields in the required output schema.
     """
     try:
         raw_text    = raw.get("raw_text", "")
@@ -1040,48 +1049,48 @@ def normalize(raw: dict) -> Optional[dict]:
 
         clf         = classify(raw_text)
         sect        = infer_sector(raw_text, raw.get("source_segments", []))
-        final_score, tier, breakdown = score(raw_text, clf["base_score"])
-        is_neg      = clf["event_type"] == "other" and any(
-            kw in raw_text for kw in [
-                "delay", "postponed", "cancelled", "funding shortfall",
-                "struggles to raise", "project terminated", "deal collapsed",
-            ]
-        )
+        final, tier, breakdown = compute_score(raw_text, clf["base_score"])
 
-        # Negative signals always surface; other noise is dropped
+        # Detect implicit negative signals
+        neg_kws = ["delay", "postponed", "cancelled", "funding shortfall",
+                   "struggles to raise", "project terminated", "deal collapsed",
+                   "behind schedule"]
+        is_neg = any(kw in raw_text for kw in neg_kws)
+
+        # Drop noise unless negative
         if tier == "noise" and not is_neg:
             return None
 
-        # Observed fact: first clean sentence of summary, else title
+        # Observed fact: first clean, substantive sentence from summary
         summary = raw.get("summary", "")
-        sentences = [s.strip() for s in re.split(r'(?<=[.!?])\s+', summary) if len(s.strip()) > 25]
+        sentences = [s.strip() for s in re.split(r"(?<=[.!?])\s+", summary)
+                     if len(s.strip()) > 30]
         observed = sentences[0] if sentences else title
 
         return {
-            # Core identification
-            "id":                       raw["article_id"],
-            "title":                    title,
-            "source_name":              source_name,
-            "source_url":               source_url,
-            "published_date":           pub_date,
-            # Investment intelligence
-            "observed_fact":            observed,
-            "why_it_matters_investment":why_investment(clf["event_type"], sect),
-            "missing_evidence":         missing_evidence(clf["event_type"]),
-            # Classification
-            "signal_tier":              tier,
-            "signal_strength":          final_score,
-            "sector":                   sect,
-            "event_type":               clf["event_type"],
-            # Entities
-            "companies_mentioned":      extract_companies(raw_text),
-            # Internal / debug fields
-            "is_negative":              is_neg,
-            "matched_keyword":          clf["matched_kw"],
-            "score_breakdown":          breakdown,
-            "source_reliability":       raw.get("reliability", 3),
-            "raw_summary":              summary[:400] if summary else title,
-            "fetched_at":               raw.get("fetched_at", NOW_ISO),
+            # ── Required schema fields ──────────────────────────────
+            "id":                        raw["article_id"],
+            "title":                     title,
+            "source_name":               source_name,
+            "source_url":                source_url,
+            "published_date":            pub_date,
+            "observed_fact":             observed,
+            "why_it_matters_investment": why_investment(clf["event_type"], sect),
+            "missing_evidence":          _MISSING_MAP.get(clf["event_type"],
+                                                           _MISSING_MAP["other"]),
+            "signal_tier":               tier,
+            "signal_strength":           final,
+            "sector":                    sect,
+            "event_type":                clf["event_type"],
+            "companies_mentioned":       extract_companies(raw_text),
+            # ── Extra fields (debug / main pipeline) ────────────────
+            "is_negative":               is_neg,
+            "matched_keyword":           clf["matched_kw"],
+            "score_breakdown":           breakdown,
+            "source_reliability":        raw.get("reliability", "★"),
+            "source_tier":               raw.get("tier", 3),
+            "raw_summary":               summary[:400] if summary else title,
+            "fetched_at":                raw.get("fetched_at", NOW_ISO),
         }
     except Exception as ex:
         log.debug(f"normalize error: {ex} — {raw.get('title','')[:60]}")
@@ -1089,31 +1098,39 @@ def normalize(raw: dict) -> Optional[dict]:
 
 
 # ════════════════════════════════════════════════════════════════════
-# SECTION 7  MAIN PIPELINE
+# SECTION 8  MAIN
 # ════════════════════════════════════════════════════════════════════
 
 def main():
-    print(f"\n{'═'*62}")
-    print(f"  Energy CVC Signal Pipeline  v2.0")
+    print(f"\n{'═'*64}")
+    print(f"  Energy CVC Signal Pipeline  v3.0")
     print(f"  {TODAY}  ·  {len(SOURCES)} RSS sources + EIA API")
-    print(f"{'═'*62}\n")
+    print(f"{'═'*64}\n")
 
     Path("data").mkdir(exist_ok=True)
 
-    # ① Cache
+    # ① Load state
     seen_ids = load_cache()
-    log.info(f"① Cache: {len(seen_ids)} seen IDs (last {CACHE_DAYS} days)")
+    health   = load_health()
+    log.info(f"① State: {len(seen_ids)} cached IDs, "
+             f"{sum(1 for s in SOURCES if not is_skipped(s['id'], health))} active sources")
 
     # ② RSS fetch (parallel)
     print("\n② RSS fetch...")
-    rss_items, source_logs = fetch_all_rss(seen_ids)
-    log.info(f"   → {len(rss_items)} new articles from RSS")
+    t0 = time.time()
+    rss_items, source_logs = fetch_all(seen_ids, health)
+    t_rss = round(time.time() - t0, 1)
+    ok  = sum(1 for l in source_logs if l["status"] == "success")
+    tot = sum(1 for l in source_logs if l["status"] != "skipped")
+    fail_rate = round((1 - ok/max(tot,1)) * 100)
+    log.info(f"   → {len(rss_items)} articles in {t_rss}s | "
+             f"{ok}/{tot} sources OK | fail rate {fail_rate}%")
 
     # ③ EIA API
     print("\n③ EIA Open Data API...")
     eia_items = fetch_eia_api()
 
-    # ④ Combine + final dedup
+    # ④ Dedup
     all_raw = rss_items + eia_items
     seen_this_run: set = set()
     deduped: list = []
@@ -1122,21 +1139,19 @@ def main():
         if aid not in seen_this_run:
             seen_this_run.add(aid)
             deduped.append(item)
-    log.info(f"\n④ Dedup: {len(all_raw)} → {len(deduped)} unique articles")
+    log.info(f"\n④ Dedup: {len(all_raw)} → {len(deduped)} unique")
 
     # Save raw
     RAW_PATH.write_text(json.dumps({
         "date":          TODAY,
         "generated_at":  NOW_ISO,
         "article_count": len(deduped),
-        "source_count":  len(SOURCES),
         "source_logs":   source_logs,
         "articles":      deduped,
     }, ensure_ascii=False, indent=2))
-    log.info(f"   Saved {RAW_PATH} ({len(deduped)} articles)")
 
     # ⑤ Normalize
-    print("\n⑤ Classify + score + normalize...")
+    print("\n⑤ Classify + score...")
     signals: list = []
     dropped = 0
     for raw in deduped:
@@ -1146,13 +1161,11 @@ def main():
         else:
             dropped += 1
 
-    # Sort: high tier first, then by score
     signals.sort(key=lambda s: (
         {"high": 0, "medium": 1, "low": 2, "noise": 3}.get(s["signal_tier"], 9),
-        -s["signal_strength"]
+        -s["signal_strength"],
     ))
 
-    # Stats
     high   = sum(1 for s in signals if s["signal_tier"] == "high")
     medium = sum(1 for s in signals if s["signal_tier"] == "medium")
     neg    = sum(1 for s in signals if s.get("is_negative"))
@@ -1162,38 +1175,40 @@ def main():
         by_seg[s["sector"]]     = by_seg.get(s["sector"], 0) + 1
         by_evt[s["event_type"]] = by_evt.get(s["event_type"], 0) + 1
 
-    log.info(f"   Kept: {len(signals)} | Dropped (noise/threshold): {dropped}")
-    log.info(f"   High: {high} | Medium: {medium} | Negative: {neg}")
-
-    # Save structured signals
+    # Save signals
     OUT_PATH.write_text(json.dumps({
         "date":         TODAY,
         "generated_at": NOW_ISO,
         "signal_count": len(signals),
         "stats": {
-            "total": len(signals), "high": high, "medium": medium,
-            "negative": neg, "dropped_noise": dropped,
-            "sources_ok": sum(1 for l in source_logs if l["status"] == "success"),
-            "sources_total": len(source_logs),
-            "by_sector": by_seg,
-            "by_event_type": by_evt,
+            "total":          len(signals),
+            "high":           high,
+            "medium":         medium,
+            "negative":       neg,
+            "dropped_noise":  dropped,
+            "sources_ok":     ok,
+            "sources_total":  tot,
+            "fail_rate_pct":  fail_rate,
+            "by_sector":      by_seg,
+            "by_event_type":  by_evt,
         },
         "source_logs": source_logs,
         "signals":     signals,
     }, ensure_ascii=False, indent=2))
-    log.info(f"   Saved {OUT_PATH}")
 
-    # ⑥ Update cache
+    # ⑥ Persist state
     save_cache(list(seen_this_run))
-    log.info(f"\n⑥ Cache: +{len(seen_this_run)} IDs saved")
+    save_health(health)
 
     # Summary
-    print(f"\n{'═'*62}")
-    print(f"  ✅  {len(signals)} signals | HIGH {high} | MEDIUM {medium} | NEG {neg}")
-    print(f"  Sources: {sum(1 for l in source_logs if l['status']=='success')}/{len(source_logs)} OK")
-    print(f"  By sector: {by_seg}")
-    print(f"  By event:  {by_evt}")
-    print(f"{'═'*62}\n")
+    print(f"\n{'═'*64}")
+    print(f"  ✅  Signals: {len(signals)} | HIGH {high} | MED {medium} | NEG {neg}")
+    print(f"  Sources: {ok}/{tot} OK  |  Fail rate: {fail_rate}%")
+    if fail_rate > 30:
+        print(f"  ⚠  Fail rate {fail_rate}% > 30% — check fetch_health.json")
+    print(f"  By sector:     {by_seg}")
+    print(f"  By event type: {by_evt}")
+    print(f"{'═'*64}\n")
 
 
 if __name__ == "__main__":
