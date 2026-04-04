@@ -594,7 +594,7 @@ button{font-family:var(--mono);cursor:pointer;}
     <button class="tab"     onclick="switchTab('sources',this)">Sources</button>
     <button class="tab"     onclick="switchTab('memo',this)">Memo Generator</button>
     <button class="tab"     onclick="switchTab('watchlist',this)">Watchlist<span class="tab-badge" id="wl-badge" style="display:none">0</span></button>
-    <button class="tab"     onclick="switchTab('sectors',this)">Sector Rulebooks</button>
+    <button class="tab"     onclick="switchTab('sectors',this)">Segments</button>
     <button class="tab"     onclick="switchTab('rulebook',this)">Score Rules</button>
     <button class="tab"     onclick="switchTab('history',this)">Archive</button>
   </div>
@@ -1067,22 +1067,414 @@ function renderSourcesTab(){
 // ════════════════════════════════════════════════════════════════
 // SECTOR RULEBOOKS
 // ════════════════════════════════════════════════════════════════
-function renderSectors(){
-  var el=document.getElementById("feed-col");
-  var rbs=D&&D.sector_rulebooks||{};
-  if(!Object.keys(rbs).length){rbs={ess:{name:"Long-Duration ESS",key_gate:"UL 9540 / IEC 62619 + grid interconnection",commercial_threshold:"First offtake/supply agreement with named utility",policy_driver:"IRA Storage ITC, EU Battery Regulation, KR RPS ESS 가중치",red_flags:["Grant-only (no offtaker)","Single geography"],positive_signals:["Utility framework contract","Hyperscaler CFE pilot"]},marine_fc:{name:"Marine Fuel Cells",key_gate:"DNV GL or ClassNK Class Approval",commercial_threshold:"Named shipyard contract post-certification",policy_driver:"IMO CII 2024, EU ETS Ships, IMO 2030",red_flags:["No DNV GL path","H2 supply unresolved"],positive_signals:["DNV GL type approval","Shipyard newbuild specification"]},grid_sw:{name:"Grid Software / VPP",key_gate:"KPX / FERC / ENTSO-E certification + first contract",commercial_threshold:"Multi-year framework with named utility/TSO",policy_driver:"FERC 2222, EU Flexibility Markets, KPX 보조서비스 개편",red_flags:["Single utility dependency","Incumbent competition"],positive_signals:["KPX/FERC certified","CFO hire + international BD"]},hydrogen:{name:"Hydrogen Infrastructure",key_gate:"Named offtaker at contracted price (not MOU)",commercial_threshold:"First commercial delivery or supply agreement (>3yr)",policy_driver:"EU Green Hydrogen Standard, US IRA §45V, MOTIE 수소경제",red_flags:["Grant-only (no offtaker)","No offtake contract"],positive_signals:["Named industrial offtaker","EU H2 Bank award"]}};}
-  var segColors={"ess":"#1A56DB","marine_fc":"#0A6640","grid_sw":"#0050B3","hydrogen":"#7D4E00"};
-  var h='';
-  Object.entries(rbs).forEach(function(entry){
-    var seg=entry[0],rb=entry[1],sc=segColors[seg]||"#6E6E6E";
-    h+='<div class="rb-sector-card"><div class="rb-sector-hd"><span class="rb-sector-nm">'+esc(rb.name||seg)+'</span><span style="font-family:var(--mono);font-size:9px;font-weight:700;padding:2px 9px;background:'+sc+'15;color:'+sc+';border:1px solid '+sc+'35">'+esc(seg)+'</span></div>';
-    [{l:"Key Gate",v:rb.key_gate},{l:"Commercial Threshold",v:rb.commercial_threshold},{l:"Policy Driver",v:rb.policy_driver}].forEach(function(r){h+='<div class="rb-sector-row"><div class="rb-sector-lbl">'+esc(r.l)+'</div><div class="rb-sector-val">'+esc(r.v||"—")+'</div></div>';});
-    if((rb.positive_signals||[]).length){h+='<div class="rb-sector-row"><div class="rb-sector-lbl">Positive Signals</div><div class="rb-sector-val">'+(rb.positive_signals||[]).map(function(s){return '<div style="display:flex;gap:6px;padding:2px 0"><span style="color:var(--green);font-weight:700">✓</span>'+esc(s)+'</div>';}).join("")+'</div></div>';}
-    if((rb.red_flags||[]).length){h+='<div class="rb-sector-row"><div class="rb-sector-lbl">Red Flags</div><div class="rb-sector-val" style="background:#FFF8F8">'+(rb.red_flags||[]).map(function(s){return '<div style="display:flex;gap:6px;padding:2px 0"><span style="color:var(--red);font-weight:700">✗</span>'+esc(s)+'</div>';}).join("")+'</div></div>';}
-    h+='</div>';
+// ════════════════════════════════════════════════════════════════
+// SEGMENT INTELLIGENCE VIEW
+// Data source: D.segment_intel{} — built by build_segment_intel()
+// Fallback: builds summary from D.signals + D.companies inline
+// ════════════════════════════════════════════════════════════════
+
+var SEG_SELECTED = null;   // null = overview grid, string = detail view
+
+var SEG_META_FALLBACK = {
+  ess:        {label:"Long-Duration Energy Storage",short:"ESS / LDES",icon:"⚡",color:"#1A56DB"},
+  marine_fc:  {label:"Marine Fuel Cells",           short:"Marine FC", icon:"🚢",color:"#0A6640"},
+  grid_sw:    {label:"Grid Software / VPP",          short:"Grid SW",   icon:"🔌",color:"#0050B3"},
+  hydrogen:   {label:"Hydrogen Infrastructure",      short:"Hydrogen",  icon:"💧",color:"#7D4E00"},
+  hvdc:       {label:"HVDC Transmission",            short:"HVDC",      icon:"🔋",color:"#5B21B6"},
+  dc_power:   {label:"Data Center Power",            short:"DC Power",  icon:"🖥", color:"#9E1068"},
+  forecasting:{label:"Grid Forecasting / AI",        short:"Forecasting",icon:"📈",color:"#6E6E6E"},
+  wte:        {label:"Waste-to-Energy",              short:"WtE",       icon:"♻", color:"#166534"},
+};
+
+var CAPITAL_COLORS = {
+  Active:   {bg:"#F0FDF4",border:"#16A34A",text:"#0A6640",dot:"#16A34A"},
+  Building: {bg:"#EFF6FF",border:"#1A56DB",text:"#1A56DB",dot:"#1A56DB"},
+  Watching: {bg:"#FEF9C3",border:"#CA8A04",text:"#92400E",dot:"#CA8A04"},
+  Quiet:    {bg:"var(--bg)",border:"var(--b)",text:"var(--ink4)",dot:"#A8A8A8"},
+};
+
+var STAGE_ORDER = ["PF-Ready","Scaling","First Commercial","Demo","Pilot","Lab"];
+var STAGE_COLORS = {
+  "PF-Ready":"#0F4C75","Scaling":"#0A6640","First Commercial":"#1A56DB",
+  "Demo":"#5B21B6","Pilot":"#7D4E00","Lab":"#6E6E6E",
+};
+
+// ── Build segment intel from raw signals when pipeline hasn't emitted it yet
+function deriveSegmentIntel(){
+  var sigs = D && D.signals || [];
+  var cos  = D && D.companies ? Object.values(D.companies) : [];
+  var buyers = D && D.strategic_buyers || [];
+  var buyerAct = D && D.buyer_activity || {};
+  var rbs  = D && D.sector_rulebooks || {};
+  var total = Math.max(sigs.length, 1);
+  var result = {};
+
+  Object.keys(SEG_META_FALLBACK).forEach(function(segId){
+    var meta = SEG_META_FALLBACK[segId];
+    var segSigs = sigs.filter(function(e){ return e.segment===segId; });
+    var highEvs = segSigs.filter(function(e){ return e.signal_tier==="high"; });
+    var negEvs  = segSigs.filter(function(e){ return e.is_negative; });
+    var top3    = segSigs.slice().sort(function(a,b){ return b.signal_strength-a.signal_strength; }).slice(0,3);
+
+    var share = segSigs.length/total;
+    var highShare = highEvs.length / Math.max(segSigs.length,1);
+    var capSig = highEvs.length>=2&&highShare>=0.15 ? "Active"
+               : segSigs.length>=3&&highEvs.length>=1 ? "Building"
+               : negEvs.length>highEvs.length ? "Watching" : "Quiet";
+
+    var segCos = cos.filter(function(c){ return c.sector===segId; })
+      .sort(function(a,b){ return (b.high_count||0)*3+(b.signal_count||0) - ((a.high_count||0)*3+(a.signal_count||0)); });
+
+    var stageDist = {};
+    STAGE_ORDER.forEach(function(s){ stageDist[s]=0; });
+    segCos.forEach(function(c){ var sl=c.stage_label||"Lab"; if(stageDist[sl]!==undefined)stageDist[sl]++; else stageDist["Lab"]++; });
+
+    var segBuyers = buyers.filter(function(b){ return (b.active_segments||[]).indexOf(segId)>=0; })
+      .map(function(b){ var act=buyerAct[b.id]||{}; return {id:b.id,name:b.name,type:b.type,region:b.region||"",procurement_notes:b.procurement_notes||"",signal_count:(act.events||[]).length,recent_events:(act.events||[]).slice(0,2)}; })
+      .sort(function(a,b){ return b.signal_count-a.signal_count; });
+
+    var rb = rbs[segId]||{};
+    result[segId] = {
+      id:segId, label:meta.label, short:meta.short, icon:meta.icon, color:meta.color,
+      signal_count:segSigs.length, high_count:highEvs.length, neg_count:negEvs.length,
+      share_of_total:Math.round(share*1000)/1000, capital_signal:capSig,
+      top_events:top3.map(function(ev){ return {id:ev.id,title:ev.title,event_type:ev.event_type,score:ev.signal_strength,date:ev.event_date,source:ev.source_name,source_url:ev.source_url||"",company:ev.company_name||"",confidence:(ev.evidence&&ev.evidence.confidence)||"Low"}; }),
+      companies:segCos.map(function(c){ return {id:c.id,name:c.name||"",stage_label:c.stage_label||"Lab",stage_color:c.stage_color||"#A8A8A8",ttr:c.ttr||"Long-term",ttr_color:c.ttr_color||"#6E6E6E",pattern:(c.pattern&&c.pattern.label)||"",pattern_color:(c.pattern&&c.pattern.color)||"#A8A8A8",high_count:c.high_count||0,neg_count:c.neg_count||0,signal_count:c.signal_count||0,critical_gaps:c.critical_gaps||0,investor_type:c.investor_type||"",country:c.country||""}; }),
+      company_count:segCos.length, stage_distribution:stageDist,
+      buyers:segBuyers,
+      drivers:{policy:rb.policy_driver||"—",demand:"—",infra:"—"},
+      key_gate:rb.key_gate||"—", commercial_threshold:rb.commercial_threshold||"—",
+      red_flags:rb.red_flags||[], positive_signals:rb.positive_signals||[],
+    };
   });
-  el.innerHTML=h;
+  return result;
 }
+
+function getSegmentIntel(){
+  return (D && D.segment_intel && Object.keys(D.segment_intel).length)
+    ? D.segment_intel
+    : deriveSegmentIntel();
+}
+
+// ════════════════════════════════════════════════════════════════
+// MAIN RENDERER
+// ════════════════════════════════════════════════════════════════
+function renderSectors(){
+  var el = document.getElementById("feed-col");
+  var intel = getSegmentIntel();
+
+  if(SEG_SELECTED && intel[SEG_SELECTED]){
+    renderSegmentDetail(el, intel[SEG_SELECTED], intel);
+  } else {
+    renderSegmentOverview(el, intel);
+  }
+}
+
+// ════════════════════════════════════════════════════════════════
+// OVERVIEW GRID — capital flow heatmap
+// ════════════════════════════════════════════════════════════════
+function renderSegmentOverview(el, intel){
+  var segs = Object.values(intel).sort(function(a,b){ return b.signal_count-a.signal_count; });
+  var maxSig = Math.max.apply(null, segs.map(function(s){ return s.signal_count; }).concat([1]));
+
+  var h = "";
+
+  // ── Header ────────────────────────────────────────────────────
+  h += '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:8px">';
+  h += '<div><div style="font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink4);margin-bottom:3px">Segment Intelligence</div>';
+  h += '<div style="font-size:13px;color:var(--ink2)">Where capital is moving — signal density, stage distribution, buyer activity by sector</div></div>';
+  h += '</div>';
+
+  // ── Capital signal summary bar ─────────────────────────────────
+  var capCounts = {Active:0,Building:0,Watching:0,Quiet:0};
+  segs.forEach(function(s){ capCounts[s.capital_signal]=(capCounts[s.capital_signal]||0)+1; });
+  h += '<div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap">';
+  ["Active","Building","Watching","Quiet"].forEach(function(cap){
+    if(!capCounts[cap]) return;
+    var c = CAPITAL_COLORS[cap];
+    h += '<div style="display:flex;align-items:center;gap:6px;padding:5px 12px;background:'+c.bg+';border:1px solid '+c.border+'">';
+    h += '<span style="width:8px;height:8px;border-radius:50%;background:'+c.dot+';display:inline-block;flex-shrink:0"></span>';
+    h += '<span style="font-family:var(--mono);font-size:10px;font-weight:700;color:'+c.text+'">'+capCounts[cap]+' '+cap+'</span>';
+    h += '</div>';
+  });
+  h += '</div>';
+
+  // ── Segment grid ───────────────────────────────────────────────
+  h += '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:12px;">';
+
+  segs.forEach(function(s){
+    var c  = CAPITAL_COLORS[s.capital_signal];
+    var mc = s.color || "#6E6E6E";
+    var barW = Math.max(4, Math.round(s.signal_count / maxSig * 100));
+    var confColor2 = {"High":"#16A34A","Medium-High":"#65A30D","Medium":"#CA8A04","Medium-Low":"#EA580C","Low":"#DC2626"};
+
+    h += '<div style="background:var(--surface);border:1px solid var(--b);border-top:3px solid '+mc+';cursor:pointer;transition:box-shadow .1s" onmouseover="this.style.boxShadow=\'0 2px 10px rgba(0,0,0,.07)\'" onmouseout="this.style.boxShadow=\'\'" onclick="SEG_SELECTED=\''+s.id+'\';renderSectors()">';
+
+    // Card header
+    h += '<div style="padding:14px 16px 10px">';
+    h += '<div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:6px">';
+    h += '<div style="display:flex;align-items:center;gap:8px"><span style="font-size:18px">'+s.icon+'</span>';
+    h += '<div><div style="font-size:13px;font-weight:700;color:var(--ink)">'+esc(s.short||s.label)+'</div>';
+    h += '<div style="font-family:var(--mono);font-size:9px;color:var(--ink4)">'+esc(s.label)+'</div></div></div>';
+    h += '<span style="font-family:var(--mono);font-size:9px;font-weight:700;padding:3px 9px;background:'+c.bg+';color:'+c.text+';border:1px solid '+c.border+'">'+esc(s.capital_signal)+'</span>';
+    h += '</div>';
+
+    // Signal bar
+    h += '<div style="margin-bottom:10px">';
+    h += '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px">';
+    h += '<span style="font-family:var(--mono);font-size:9px;color:var(--ink4);text-transform:uppercase;letter-spacing:.05em">Signal Volume</span>';
+    h += '<span style="font-family:var(--mono);font-size:10px;font-weight:700;color:'+mc+'">'+s.signal_count+' total</span>';
+    h += '</div>';
+    h += '<div style="height:5px;background:var(--b2);border-radius:2px;overflow:hidden">';
+    h += '<div style="width:'+barW+'%;height:100%;background:'+mc+';border-radius:2px"></div>';
+    h += '</div>';
+    h += '<div style="display:flex;gap:10px;margin-top:4px;flex-wrap:wrap">';
+    if(s.high_count>0) h += '<span style="font-family:var(--mono);font-size:9px;color:#0A6640;font-weight:600">▲ '+s.high_count+' HIGH</span>';
+    if(s.neg_count>0)  h += '<span style="font-family:var(--mono);font-size:9px;color:var(--red);font-weight:600">⚠ '+s.neg_count+' NEG</span>';
+    h += '</div></div>';
+
+    // Stage distribution mini bar
+    if(s.company_count > 0){
+      h += '<div style="margin-bottom:10px">';
+      h += '<div style="font-family:var(--mono);font-size:9px;color:var(--ink4);text-transform:uppercase;letter-spacing:.05em;margin-bottom:5px">Stage Distribution ('+s.company_count+' companies)</div>';
+      h += '<div style="display:flex;height:6px;border-radius:3px;overflow:hidden;gap:1px">';
+      STAGE_ORDER.forEach(function(sl){
+        var n = s.stage_distribution[sl]||0;
+        if(!n) return;
+        var w = Math.round(n/s.company_count*100);
+        h += '<div title="'+sl+' ('+n+')" style="width:'+w+'%;height:100%;background:'+STAGE_COLORS[sl]+'" ></div>';
+      });
+      h += '</div>';
+      // Legend
+      h += '<div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:4px">';
+      STAGE_ORDER.forEach(function(sl){
+        var n=s.stage_distribution[sl]||0;
+        if(!n) return;
+        h += '<span style="font-family:var(--mono);font-size:8px;color:var(--ink4)"><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:'+STAGE_COLORS[sl]+';vertical-align:middle;margin-right:2px"></span>'+esc(sl)+' '+n+'</span>';
+      });
+      h += '</div></div>';
+    }
+
+    // Top 2 companies
+    if(s.companies.length){
+      h += '<div style="border-top:1px solid var(--b2);padding-top:8px;margin-top:2px">';
+      s.companies.slice(0,2).forEach(function(co){
+        h += '<div style="display:flex;align-items:center;gap:7px;padding:3px 0">';
+        h += '<span style="width:6px;height:6px;border-radius:50%;background:'+co.stage_color+';flex-shrink:0"></span>';
+        h += '<span style="font-size:11px;font-weight:600;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+esc(co.name)+'</span>';
+        h += '<span style="font-family:var(--mono);font-size:9px;color:'+co.stage_color+';padding:1px 5px;background:'+co.stage_color+'12;border:1px solid '+co.stage_color+'30">'+esc(co.stage_label)+'</span>';
+        if(co.high_count>0) h += '<span style="font-family:var(--mono);font-size:9px;color:var(--green);font-weight:700">H'+co.high_count+'</span>';
+        h += '</div>';
+      });
+      if(s.companies.length>2) h += '<div style="font-family:var(--mono);font-size:9px;color:var(--ink4);padding-top:2px">+'+( s.companies.length-2)+' more</div>';
+      h += '</div>';
+    }
+
+    // Buyer count
+    if(s.buyers.length){
+      h += '<div style="border-top:1px solid var(--b2);padding:7px 0 2px;margin-top:4px;display:flex;align-items:center;gap:8px;flex-wrap:wrap">';
+      h += '<span style="font-family:var(--mono);font-size:9px;color:var(--ink4)">Buyers:</span>';
+      s.buyers.slice(0,3).forEach(function(b){
+        var typeC={"Utility":"#1A56DB","Shipyard":"#0A6640","Hyperscaler":"#5B21B6","EPC/OEM":"#7D4E00","EPC":"#7D4E00"}[b.type]||"#6E6E6E";
+        h += '<span style="font-family:var(--mono);font-size:9px;font-weight:600;padding:1px 6px;background:'+typeC+'10;color:'+typeC+';border:1px solid '+typeC+'25">'+esc(b.name)+(b.signal_count>0?" ·"+b.signal_count:"")+'</span>';
+      });
+      h += '</div>';
+    }
+
+    h += '</div>'; // padding
+    h += '<div style="padding:6px 16px;background:var(--bg);border-top:1px solid var(--b2);font-family:var(--mono);font-size:9px;color:var(--blue)">→ View segment intelligence</div>';
+    h += '</div>'; // card
+  });
+
+  h += '</div>';
+  el.innerHTML = h;
+}
+
+// ════════════════════════════════════════════════════════════════
+// SEGMENT DETAIL VIEW
+// ════════════════════════════════════════════════════════════════
+function renderSegmentDetail(el, s, allIntel){
+  var mc = s.color || "#6E6E6E";
+  var c  = CAPITAL_COLORS[s.capital_signal];
+  var confColor2 = {"High":"#16A34A","Medium-High":"#65A30D","Medium":"#CA8A04","Medium-Low":"#EA580C","Low":"#DC2626"};
+  var typeC = {"Utility":"#1A56DB","Shipyard":"#0A6640","Hyperscaler":"#5B21B6","EPC/OEM":"#7D4E00","EPC":"#7D4E00"};
+
+  var h = "";
+
+  // ── Back + nav ─────────────────────────────────────────────────
+  h += '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:8px">';
+  h += '<button class="gbtn" onclick="SEG_SELECTED=null;renderSectors()">← All Segments</button>';
+  h += '<div style="display:flex;gap:6px;flex-wrap:wrap">';
+  Object.values(allIntel).filter(function(x){return x.id!==s.id;}).forEach(function(x){
+    h += '<button class="gbtn" onclick="SEG_SELECTED=\''+x.id+'\';renderSectors()" style="font-size:9px;padding:3px 8px">'+x.icon+' '+esc(x.short)+'</button>';
+  });
+  h += '</div></div>';
+
+  // ── Segment header ─────────────────────────────────────────────
+  h += '<div style="background:var(--surface);border:1px solid var(--b);border-top:4px solid '+mc+';padding:20px 24px 16px;margin-bottom:14px">';
+  h += '<div style="display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap">';
+  h += '<div style="display:flex;align-items:center;gap:12px">';
+  h += '<span style="font-size:32px">'+s.icon+'</span>';
+  h += '<div><div style="font-size:20px;font-weight:700;color:var(--ink)">'+esc(s.label)+'</div>';
+  h += '<div style="font-family:var(--mono);font-size:10px;color:var(--ink4);margin-top:3px">'+s.signal_count+' signals · '+s.high_count+' high · '+s.company_count+' tracked companies · '+s.buyers.length+' strategic buyers</div></div>';
+  h += '</div>';
+  h += '<span style="font-family:var(--mono);font-size:11px;font-weight:700;padding:6px 14px;background:'+c.bg+';color:'+c.text+';border:1px solid '+c.border+';align-self:flex-start"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:'+c.dot+';margin-right:6px;vertical-align:middle"></span>'+esc(s.capital_signal)+'</span>';
+  h += '</div></div>';
+
+  // ── Three-col summary ──────────────────────────────────────────
+  h += '<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:14px">';
+
+  // Signal stats
+  h += '<div class="card"><div class="chd">Signal Activity</div><div style="padding:12px 14px">';
+  [{n:s.signal_count,l:"Total signals",c:mc},{n:s.high_count,l:"High confidence",c:"#0A6640"},{n:s.neg_count,l:"Negative signals",c:"var(--red)"}].forEach(function(x){
+    h += '<div style="display:flex;justify-content:space-between;align-items:baseline;padding:4px 0;border-bottom:1px solid var(--b2)">';
+    h += '<span style="font-size:12px;color:var(--ink3)">'+x.l+'</span>';
+    h += '<span style="font-family:var(--mono);font-size:16px;font-weight:700;color:'+x.c+'">'+x.n+'</span>';
+    h += '</div>';
+  });
+  var sharePercent = Math.round((s.share_of_total||0)*100);
+  h += '<div style="display:flex;justify-content:space-between;align-items:baseline;padding:4px 0">';
+  h += '<span style="font-size:12px;color:var(--ink3)">Share of feed</span>';
+  h += '<span style="font-family:var(--mono);font-size:16px;font-weight:700;color:'+mc+'">'+sharePercent+'%</span>';
+  h += '</div></div></div>';
+
+  // Stage distribution
+  h += '<div class="card"><div class="chd">Commercialisation Stages</div><div style="padding:12px 14px">';
+  if(s.company_count===0){
+    h += '<div style="font-size:12px;color:var(--ink4);font-style:italic">No tracked companies in this segment</div>';
+  } else {
+    STAGE_ORDER.forEach(function(sl){
+      var n=s.stage_distribution[sl]||0;
+      if(!n) return;
+      var pct=Math.round(n/s.company_count*100);
+      h += '<div style="display:flex;align-items:center;gap:8px;padding:3px 0">';
+      h += '<span style="font-size:11px;color:var(--ink2);min-width:110px">'+sl+'</span>';
+      h += '<div style="flex:1;height:5px;background:var(--b2);border-radius:2px;overflow:hidden"><div style="width:'+pct+'%;height:100%;background:'+STAGE_COLORS[sl]+'"></div></div>';
+      h += '<span style="font-family:var(--mono);font-size:10px;color:var(--ink4);min-width:28px;text-align:right">'+n+'</span>';
+      h += '</div>';
+    });
+  }
+  h += '</div></div>';
+
+  // Key gate
+  h += '<div class="card"><div class="chd">Investment Gate</div><div style="padding:12px 14px">';
+  if(s.key_gate && s.key_gate!=="—"){
+    h += '<div style="font-family:var(--mono);font-size:9px;font-weight:700;text-transform:uppercase;color:var(--ink4);letter-spacing:.07em;margin-bottom:5px">Key Gate</div>';
+    h += '<div style="font-size:12px;color:var(--ink2);line-height:1.65;padding:8px 10px;background:var(--bg);border-left:3px solid '+mc+';margin-bottom:10px">'+esc(s.key_gate)+'</div>';
+  }
+  if(s.commercial_threshold && s.commercial_threshold!=="—"){
+    h += '<div style="font-family:var(--mono);font-size:9px;font-weight:700;text-transform:uppercase;color:var(--ink4);letter-spacing:.07em;margin-bottom:5px">Commercial Threshold</div>';
+    h += '<div style="font-size:12px;color:var(--ink2);line-height:1.65">'+esc(s.commercial_threshold)+'</div>';
+  }
+  h += '</div></div>';
+  h += '</div>'; // three-col
+
+  // ── Key drivers ────────────────────────────────────────────────
+  var drivers = s.drivers || {};
+  if(drivers.policy || drivers.demand || drivers.infra){
+    h += '<div class="card" style="margin-bottom:14px"><div class="chd">Key Drivers — Where Capital Is Moving</div><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:0">';
+    [{k:"policy",l:"Policy & Regulation",icon:"🏛"},{k:"demand",l:"Demand Signal",icon:"📊"},{k:"infra",l:"Infrastructure",icon:"🔩"}].forEach(function(d,i){
+      var val=drivers[d.k]||"—";
+      h += '<div style="padding:14px 16px'+(i<2?";border-right:1px solid var(--b2)":"")+'"><div style="font-family:var(--mono);font-size:9px;font-weight:700;color:var(--ink4);text-transform:uppercase;letter-spacing:.07em;margin-bottom:7px">'+d.icon+' '+d.l+'</div>';
+      h += '<div style="font-size:12px;color:var(--ink2);line-height:1.7">'+esc(val)+'</div></div>';
+    });
+    h += '</div></div>';
+  }
+
+  // ── Top signals ────────────────────────────────────────────────
+  if(s.top_events && s.top_events.length){
+    h += '<div class="card" style="margin-bottom:14px"><div class="chd">Top Signals This Run</div>';
+    s.top_events.forEach(function(ev){
+      var sc2=ev.score>=60?"#0A6640":"var(--amber)";
+      var cc2=confColor2[ev.confidence]||"var(--ink4)";
+      h += '<div style="padding:10px 16px;border-bottom:1px solid var(--b2)">';
+      h += '<div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;flex-wrap:wrap">';
+      h += tagFor(ev.event_type,false);
+      h += '<span style="font-family:var(--mono);font-size:10px;font-weight:700;color:'+sc2+'">'+ev.score+'</span>';
+      if(ev.company) h += '<span style="font-family:var(--mono);font-size:10px;font-weight:600;color:var(--blue)">'+esc(ev.company)+'</span>';
+      h += '<span style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-left:auto">'+esc(ev.date)+'</span>';
+      h += '</div>';
+      h += '<div style="font-size:12px;font-weight:500;color:var(--ink);line-height:1.4;margin-bottom:3px">'+(ev.source_url?'<a href="'+esc(ev.source_url)+'" target="_blank" rel="noopener">'+esc(ev.title)+'</a>':esc(ev.title))+'</div>';
+      h += '<div style="font-family:var(--mono);font-size:9px;color:var(--ink4)">'+esc(ev.source)+'</div>';
+      h += '</div>';
+    });
+    h += '</div>';
+  }
+
+  // ── Companies in this segment ──────────────────────────────────
+  h += '<div class="card" style="margin-bottom:14px"><div class="chd">Tracked Companies ('+s.company_count+')</div>';
+  if(!s.companies.length){
+    h += '<div style="padding:14px;font-size:12px;color:var(--ink4)">No tracked companies in this segment yet.</div>';
+  } else {
+    s.companies.forEach(function(co){
+      var sc2=co.stage_color||"#A8A8A8";
+      var tc2=co.ttr_color||"#6E6E6E";
+      h += '<div style="display:flex;align-items:center;gap:12px;padding:10px 16px;border-bottom:1px solid var(--b2);cursor:pointer" onclick="switchTabByName(\'companies\');CO_EXP.add(\''+co.id+'\');renderCompanies()">';
+      h += '<div style="width:3px;height:36px;background:'+sc2+';flex-shrink:0;border-radius:2px"></div>';
+      h += '<div style="flex:1;min-width:0">';
+      h += '<div style="font-size:13px;font-weight:600;margin-bottom:2px">'+esc(co.name)+'</div>';
+      h += '<div style="font-family:var(--mono);font-size:9px;color:var(--ink4)">'+esc(co.country)+' · '+esc(co.investor_type)+'</div>';
+      h += '</div>';
+      h += '<div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center">';
+      h += '<span style="font-family:var(--mono);font-size:9px;font-weight:700;padding:2px 7px;background:'+sc2+'15;color:'+sc2+';border:1px solid '+sc2+'35">'+esc(co.stage_label)+'</span>';
+      h += '<span style="font-family:var(--mono);font-size:9px;padding:2px 7px;background:'+tc2+'15;color:'+tc2+';border:1px solid '+tc2+'35">'+esc(co.ttr)+'</span>';
+      if(co.high_count>0) h += '<span class="tag tH">H'+co.high_count+'</span>';
+      if(co.neg_count>0)  h += '<span class="tag tN">⚠'+co.neg_count+'</span>';
+      if(co.critical_gaps>0) h += '<span style="font-family:var(--mono);font-size:9px;color:var(--red);font-weight:700">GAP</span>';
+      h += '</div>';
+      h += '<span style="font-family:var(--mono);font-size:10px;color:var(--blue);flex-shrink:0">→</span>';
+      h += '</div>';
+    });
+  }
+  h += '</div>';
+
+  // ── Strategic buyers ───────────────────────────────────────────
+  h += '<div class="card" style="margin-bottom:14px"><div class="chd">Strategic Buyers ('+s.buyers.length+')</div>';
+  if(!s.buyers.length){
+    h += '<div style="padding:14px;font-size:12px;color:var(--ink4)">No tracked buyers for this segment.</div>';
+  } else {
+    s.buyers.forEach(function(b){
+      var btc=typeC[b.type]||"#6E6E6E";
+      h += '<div style="padding:10px 16px;border-bottom:1px solid var(--b2)">';
+      h += '<div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;flex-wrap:wrap">';
+      h += '<span style="font-size:13px;font-weight:600">'+esc(b.name)+'</span>';
+      h += '<span style="font-family:var(--mono);font-size:9px;font-weight:600;padding:1px 6px;background:'+btc+'12;color:'+btc+';border:1px solid '+btc+'30">'+esc(b.type)+'</span>';
+      h += '<span style="font-family:var(--mono);font-size:9px;color:var(--ink4)">'+esc(b.region)+'</span>';
+      if(b.signal_count>0) h += '<span style="font-family:var(--mono);font-size:9px;color:var(--blue);margin-left:auto">'+b.signal_count+' signal'+(b.signal_count!==1?"s":"")+'</span>';
+      h += '</div>';
+      if(b.procurement_notes) h += '<div style="font-size:11px;color:var(--ink3);line-height:1.6;padding:5px 9px;background:var(--bg);border-left:2px solid var(--amber)">'+esc(b.procurement_notes)+'</div>';
+      if(b.recent_events&&b.recent_events.length){
+        h += '<div style="margin-top:6px">';
+        b.recent_events.forEach(function(ev){h += '<div style="font-family:var(--mono);font-size:9px;color:var(--ink4);padding:2px 0">'+esc(ev.date||"")+' · '+esc(ev.event_type||"")+" · "+esc(ev.title||"")+'</div>';});
+        h += '</div>';
+      }
+      h += '</div>';
+    });
+  }
+  h += '</div>';
+
+  // ── Positive signals + Red flags ───────────────────────────────
+  if((s.positive_signals&&s.positive_signals.length)||(s.red_flags&&s.red_flags.length)){
+    h += '<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px">';
+    // Positive
+    h += '<div class="card"><div class="chd" style="color:var(--green)">✓ Investable Signals</div><div style="padding:12px 14px">';
+    (s.positive_signals||[]).forEach(function(p){h += '<div style="display:flex;gap:7px;font-size:12px;color:var(--ink2);padding:4px 0;line-height:1.5"><span style="color:var(--green);font-weight:700;flex-shrink:0">✓</span>'+esc(p)+'</div>';});
+    if(!(s.positive_signals&&s.positive_signals.length)) h += '<div style="font-size:12px;color:var(--ink4);font-style:italic">No positive signals defined.</div>';
+    h += '</div></div>';
+    // Red flags
+    h += '<div class="card"><div class="chd" style="color:var(--red)">✗ Red Flags</div><div style="padding:12px 14px;background:#FFF8F8">';
+    (s.red_flags||[]).forEach(function(r){h += '<div style="display:flex;gap:7px;font-size:12px;color:#7F1D1D;padding:4px 0;line-height:1.5"><span style="font-weight:700;flex-shrink:0">✗</span>'+esc(r)+'</div>';});
+    if(!(s.red_flags&&s.red_flags.length)) h += '<div style="font-size:12px;color:var(--ink4);font-style:italic">No red flags defined.</div>';
+    h += '</div></div>';
+    h += '</div>';
+  }
+
+  // ── Watchlist button ───────────────────────────────────────────
+  h += '<div style="padding:10px 0">'+wlButtonHtml("segment",s.id,s.label||s.short||s.id,{})+'</div>';
+
+  el.innerHTML = h;
+}
+
 
 // ════════════════════════════════════════════════════════════════
 // SCORE RULES
