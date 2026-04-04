@@ -1636,9 +1636,9 @@ def enrich_company(co, evs):
             buyer_act.setdefault(b["id"],{"name":b["name"],"type":b["type"],"count":0,"events":[]})
             buyer_act[b["id"]]["count"] += 1
             buyer_act[b["id"]]["events"].append({"date":e["event_date"],"title":e["title"],"event_type":e["event_type"],"score":e["signal_strength"]})
-    linked_proj = [{"id":p["id"],"name":p["name"],"status":p["status"],"location":p["location"],
+    linked_proj = [{"id":p["id"],"name":p["name"],"status":p.get("status","unknown"),"location":p.get("location",""),
                     "offtaker":p.get("offtaker","TBD"),"capex":p.get("capex","—"),
-                    "milestone_next":p.get("milestone_next","—")} for p in PROJECTS if co["id"] in p["linked_companies"]]
+                    "milestone_next":p.get("milestone_next","—")} for p in PROJECTS if co["id"] in p.get("linked_companies",[])]
     sector_rb = SECTOR_RULEBOOKS.get(co.get("sector",""),{})
     return {**co,
             "events":sorted(evs,key=lambda e:e["event_date"],reverse=True)[:10],
