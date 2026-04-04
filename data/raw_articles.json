@@ -1,7 +1,7 @@
 {
   "date": "2026-04-04",
-  "generated_at": "2026-04-04T15:53:14.080628+00:00",
-  "article_count": 0,
+  "generated_at": "2026-04-04T23:01:49.982793+00:00",
+  "article_count": 6,
   "source_count": 9,
   "source_logs": [
     {
@@ -11,7 +11,7 @@
       "status": "partial",
       "items": 0,
       "error": null,
-      "fetched_at": "2026-04-04T15:53:14.080628+00:00",
+      "fetched_at": "2026-04-04T23:01:49.982793+00:00",
       "tier": 1,
       "segments": [
         "battery_storage",
@@ -28,7 +28,7 @@
       "status": "partial",
       "items": 0,
       "error": null,
-      "fetched_at": "2026-04-04T15:53:14.080628+00:00",
+      "fetched_at": "2026-04-04T23:01:49.982793+00:00",
       "tier": 2,
       "segments": [
         "battery_storage",
@@ -45,7 +45,7 @@
       "status": "partial",
       "items": 0,
       "error": null,
-      "fetched_at": "2026-04-04T15:53:14.080628+00:00",
+      "fetched_at": "2026-04-04T23:01:49.982793+00:00",
       "tier": 2,
       "segments": [
         "battery_storage",
@@ -60,7 +60,7 @@
       "status": "partial",
       "items": 0,
       "error": null,
-      "fetched_at": "2026-04-04T15:53:14.080628+00:00",
+      "fetched_at": "2026-04-04T23:01:49.982793+00:00",
       "tier": 2,
       "segments": [
         "battery_storage",
@@ -74,7 +74,7 @@
       "status": "partial",
       "items": 0,
       "error": null,
-      "fetched_at": "2026-04-04T15:53:14.080628+00:00",
+      "fetched_at": "2026-04-04T23:01:49.982793+00:00",
       "tier": 2,
       "segments": [
         "grid_software",
@@ -90,7 +90,7 @@
       "status": "partial",
       "items": 0,
       "error": null,
-      "fetched_at": "2026-04-04T15:53:14.080628+00:00",
+      "fetched_at": "2026-04-04T23:01:49.982793+00:00",
       "tier": 2,
       "segments": [
         "offshore_wind",
@@ -101,10 +101,10 @@
       "id": "cleantechnica",
       "name": "CleanTechnica",
       "url": "https://cleantechnica.com/feed/",
-      "status": "partial",
-      "items": 0,
+      "status": "success",
+      "items": 5,
       "error": null,
-      "fetched_at": "2026-04-04T15:53:14.080628+00:00",
+      "fetched_at": "2026-04-04T23:01:49.982793+00:00",
       "tier": 3,
       "segments": [
         "battery_storage",
@@ -117,10 +117,10 @@
       "id": "electrek",
       "name": "Electrek",
       "url": "https://electrek.co/feed/",
-      "status": "partial",
-      "items": 0,
+      "status": "success",
+      "items": 1,
       "error": null,
-      "fetched_at": "2026-04-04T15:53:14.080628+00:00",
+      "fetched_at": "2026-04-04T23:01:49.982793+00:00",
       "tier": 3,
       "segments": [
         "battery_storage",
@@ -135,8 +135,122 @@
       "status": "skipped",
       "items": 0,
       "error": "Skipped: 3 consecutive fails",
-      "fetched_at": "2026-04-04T15:53:14.080628+00:00"
+      "fetched_at": "2026-04-04T23:01:49.982793+00:00"
     }
   ],
-  "articles": []
+  "articles": [
+    {
+      "article_id": "1056d98abdd2afbe",
+      "source_id": "cleantechnica",
+      "source_name": "CleanTechnica",
+      "source_url": "https://cleantechnica.com/2026/04/04/whats-going-on-with-hyundai-ask-mary/",
+      "source_segments": [
+        "battery_storage",
+        "grid_software",
+        "data_center_power",
+        "other_cleantech"
+      ],
+      "reliability": "★★★",
+      "tier": 3,
+      "title": "What’s Going On With Hyundai? Ask Mary?",
+      "summary": "At the New York Auto Show on Wednesday, Hyundai announced a strategic departure on its vehicles. CEO Jose Munos announced that they are adding focus to the US market, which is Hyundai’s largest market. They are investing $26 billion in the US and building a steel plant, while planning for ... [continued] The post What’s Going On With Hyundai? Ask Mary? appeared first on CleanTechnica .",
+      "published_date": "2026-04-04",
+      "raw_text": "what’s going on with hyundai? ask mary? at the new york auto show on wednesday, hyundai announced a strategic departure on its vehicles. ceo jose munos announced that they are adding focus to the us market, which is hyundai’s largest market. they are investing $26 billion in the us and building a steel plant, while planning for ... [continued] the post what’s going on with hyundai? ask mary? appeared first on cleantechnica .",
+      "fetched_at": "2026-04-04T23:01:49.982793+00:00"
+    },
+    {
+      "article_id": "ffab996054eb37d4",
+      "source_id": "cleantechnica",
+      "source_name": "CleanTechnica",
+      "source_url": "https://cleantechnica.com/2026/04/04/climate-degradation-will-have-consequences-for-hundreds-and-thousands-of-years/",
+      "source_segments": [
+        "battery_storage",
+        "grid_software",
+        "data_center_power",
+        "other_cleantech"
+      ],
+      "reliability": "★★★",
+      "tier": 3,
+      "title": "Climate Degradation Will Have Consequences For “Hundreds And Thousands Of Years”",
+      "summary": "The latest report from the WMO shows how the Earth is overheating and why. CleanTechnica readers already know the answers. The post Climate Degradation Will Have Consequences For &#8220;Hundreds And Thousands Of Years&#8221; appeared first on CleanTechnica .",
+      "published_date": "2026-04-04",
+      "raw_text": "climate degradation will have consequences for “hundreds and thousands of years” the latest report from the wmo shows how the earth is overheating and why. cleantechnica readers already know the answers. the post climate degradation will have consequences for &#8220;hundreds and thousands of years&#8221; appeared first on cleantechnica .",
+      "fetched_at": "2026-04-04T23:01:49.982793+00:00"
+    },
+    {
+      "article_id": "5b0165c0a806a68c",
+      "source_id": "cleantechnica",
+      "source_name": "CleanTechnica",
+      "source_url": "https://cleantechnica.com/2026/04/04/superfund-site-still-on-track-for-solar-power-green-hydrogen/",
+      "source_segments": [
+        "battery_storage",
+        "grid_software",
+        "data_center_power",
+        "other_cleantech"
+      ],
+      "reliability": "★★★",
+      "tier": 3,
+      "title": "Superfund Site Still On Track For Solar Power & Green Hydrogen",
+      "summary": "A Superfund site in New Mexico will soon host a 50-megawatt solar array, earmarked to produce green hydrogen for night-time clean power. The post Superfund Site Still On Track For Solar Power &#038; Green Hydrogen appeared first on CleanTechnica .",
+      "published_date": "2026-04-04",
+      "raw_text": "superfund site still on track for solar power & green hydrogen a superfund site in new mexico will soon host a 50-megawatt solar array, earmarked to produce green hydrogen for night-time clean power. the post superfund site still on track for solar power &#038; green hydrogen appeared first on cleantechnica .",
+      "fetched_at": "2026-04-04T23:01:49.982793+00:00"
+    },
+    {
+      "article_id": "93f942313b490658",
+      "source_id": "cleantechnica",
+      "source_name": "CleanTechnica",
+      "source_url": "https://cleantechnica.com/2026/04/04/the-ev-reformation-at-the-dealership-door/",
+      "source_segments": [
+        "battery_storage",
+        "grid_software",
+        "data_center_power",
+        "other_cleantech"
+      ],
+      "reliability": "★★★",
+      "tier": 3,
+      "title": "The EV Reformation At The Dealership Door",
+      "summary": "Seen through an Easter lens, the car dealership model looks a bit like the medieval Catholic church. It sat between ordinary people and the sacred object, translated doctrine, administered rituals, collected its dues, and reminded everyone that salvation could not be obtained directly. In the internal combustion car era, that ... [continued] The post The EV Reformation At The Dealership Door appeared first on CleanTechnica .",
+      "published_date": "2026-04-04",
+      "raw_text": "the ev reformation at the dealership door seen through an easter lens, the car dealership model looks a bit like the medieval catholic church. it sat between ordinary people and the sacred object, translated doctrine, administered rituals, collected its dues, and reminded everyone that salvation could not be obtained directly. in the internal combustion car era, that ... [continued] the post the ev reformation at the dealership door appeared first on cleantechnica .",
+      "fetched_at": "2026-04-04T23:01:49.982793+00:00"
+    },
+    {
+      "article_id": "6b1d50ea5b6f3f75",
+      "source_id": "cleantechnica",
+      "source_name": "CleanTechnica",
+      "source_url": "https://cleantechnica.com/2026/04/04/hyundai-ioniq-5-sales-actually-up-this-year/",
+      "source_segments": [
+        "battery_storage",
+        "grid_software",
+        "data_center_power",
+        "other_cleantech"
+      ],
+      "reliability": "★★★",
+      "tier": 3,
+      "title": "Hyundai IONIQ 5 Sales Actually Up This Year!",
+      "summary": "Last night, I wrote about how Ford and Nissan EV sales collapsed in the US in 2025. Tesla sales also weren&#8217;t good, and the overall US EV market is clearly down following the ending if the $7,500 US EV tax credit. So, I was quite surprised to see that the ... [continued] The post Hyundai IONIQ 5 Sales Actually Up This Year! appeared first on CleanTechnica .",
+      "published_date": "2026-04-04",
+      "raw_text": "hyundai ioniq 5 sales actually up this year! last night, i wrote about how ford and nissan ev sales collapsed in the us in 2025. tesla sales also weren&#8217;t good, and the overall us ev market is clearly down following the ending if the $7,500 us ev tax credit. so, i was quite surprised to see that the ... [continued] the post hyundai ioniq 5 sales actually up this year! appeared first on cleantechnica .",
+      "fetched_at": "2026-04-04T23:01:49.982793+00:00"
+    },
+    {
+      "article_id": "ef0f6efb6eaaf4b6",
+      "source_id": "electrek",
+      "source_name": "Electrek",
+      "source_url": "https://electrek.co/2026/04/04/port-of-la-turns-to-electric-terminal-trucks-to-to-slash-dwell-times/",
+      "source_segments": [
+        "battery_storage",
+        "data_center_power",
+        "other_cleantech"
+      ],
+      "reliability": "★★★",
+      "tier": 3,
+      "title": "Port of LA turns to electric terminal trucks to to slash dwell times",
+      "summary": "APM Terminals has been electrifying its operations at the Port of Los Angeles over the last few years – and they’ve been able to effectively decarbonize and cut their fuel costs substantially. Those efforts have yielded another unexpected benefit, too: they’ve slashed truck idle times at the port by almost 85% . more…",
+      "published_date": "2026-04-04",
+      "raw_text": "port of la turns to electric terminal trucks to to slash dwell times apm terminals has been electrifying its operations at the port of los angeles over the last few years – and they’ve been able to effectively decarbonize and cut their fuel costs substantially. those efforts have yielded another unexpected benefit, too: they’ve slashed truck idle times at the port by almost 85% . more…",
+      "fetched_at": "2026-04-04T23:01:49.982793+00:00"
+    }
+  ]
 }
