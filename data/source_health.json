@@ -1,0 +1,47 @@
+{
+  "utilitydive": {
+    "consecutive_fails": 0,
+    "last_success": "2026-04-04",
+    "skip_until": ""
+  },
+  "eia_today": {
+    "consecutive_fails": 0,
+    "last_success": "2026-04-04",
+    "skip_until": ""
+  },
+  "cleantechnica": {
+    "consecutive_fails": 0,
+    "last_success": "2026-04-04",
+    "skip_until": ""
+  },
+  "offshorewind": {
+    "consecutive_fails": 0,
+    "last_success": "2026-04-04",
+    "skip_until": ""
+  },
+  "canarymedia": {
+    "consecutive_fails": 0,
+    "last_success": "2026-04-04",
+    "skip_until": ""
+  },
+  "pvmagazine": {
+    "consecutive_fails": 0,
+    "last_success": "2026-04-04",
+    "skip_until": ""
+  },
+  "doe_main": {
+    "consecutive_fails": 1,
+    "last_error": "HTTP 404",
+    "last_fail": "2026-04-04"
+  },
+  "energystoragenews": {
+    "consecutive_fails": 0,
+    "last_success": "2026-04-04",
+    "skip_until": ""
+  },
+  "electrek": {
+    "consecutive_fails": 0,
+    "last_success": "2026-04-04",
+    "skip_until": ""
+  }
+}

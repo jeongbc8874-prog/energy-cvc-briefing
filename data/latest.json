@@ -1,8 +1,8 @@
 {
   "date": "2026-04-04",
   "dateKr": "2026년 04월 04일",
-  "generatedAt": "2026-04-04T09:49:33.163536+00:00",
-  "brief": "**Internal Deal Flow Memo - April 4, 2026**\n\nEnerVenue's $300M Series B (Energy Storage News) signals continued institutional appetite for differentiated battery chemistries, particularly their 30,000-cycle nickel-hydrogen tech that targets the ultra-long duration storage gap between lithium and mechanical solutions. The financing size suggests they're moving toward commercial manufacturing scale, which we should monitor as a potential competitive threat to our existing LDES portfolio companies. \n\nMeanwhile, BBDF 2026's report on slow hybrid PPA uptake (PV Magazine) among industrial buyers indicates structural challenges in the offtake market that could impact storage+solar developers we're tracking. This friction between financing availability (EnerVenue raise) and customer adoption (hybrid PPA hesitation) creates a timing mismatch worth watching—expect to see more storage companies pivoting toward utility-scale rather than C&I channels through 2026. \n\nNext 30 days: Track EnerVenue's manufacturing partnerships and any follow-on moves from other nickel-hydrogen players.",
+  "generatedAt": "2026-04-04T10:32:58.324488+00:00",
+  "brief": "**Deal Flow Memo - April 4, 2026**\n\nEnerVenue's $300M Series B (Energy Storage News) signals continued institutional appetite for differentiated battery chemistries, particularly their nickel-hydrogen technology promising 30,000 cycles versus typical lithium-ion's 3,000-6,000 range. The timing aligns with growing industrial demand for ultra-long-duration storage as grid operators seek alternatives to traditional peaking plants. \n\nMeanwhile, PV Magazine's BBDF 2026 coverage highlights that hybrid PPAs remain stuck in early adopter phase among industrial buyers, suggesting procurement complexity still outweighs cost benefits for most corporates. \n\n**Watch next:** Industrial storage offtakers who might bridge these trends—companies evaluating both hybrid PPA structures and premium storage technologies like EnerVenue's for behind-the-meter applications where cycle durability justifies higher capex.",
   "stats": {
     "total": 24,
     "high": 2,
@@ -2230,7 +2230,7 @@
         "source_count": 1,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-04T09:49:24.962729+00:00"
+        "generated_at": "2026-04-04T10:32:52.424247+00:00"
       },
       "narrative": null,
       "generated_date": "2026-04-04"
@@ -4262,7 +4262,7 @@
       "status": "success",
       "error": null,
       "items": 10,
-      "fetched_at": "2026-04-04T09:49:23.990154+00:00",
+      "fetched_at": "2026-04-04T10:32:51.159571+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -4285,7 +4285,7 @@
       "status": "success",
       "error": null,
       "items": 20,
-      "fetched_at": "2026-04-04T09:49:24.050483+00:00",
+      "fetched_at": "2026-04-04T10:32:51.226504+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -4308,7 +4308,7 @@
       "status": "success",
       "error": null,
       "items": 20,
-      "fetched_at": "2026-04-04T09:49:24.274144+00:00",
+      "fetched_at": "2026-04-04T10:32:51.453580+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -4330,7 +4330,7 @@
       "status": "success",
       "error": null,
       "items": 10,
-      "fetched_at": "2026-04-04T09:49:24.389832+00:00",
+      "fetched_at": "2026-04-04T10:32:51.585713+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -4352,7 +4352,7 @@
       "status": "success",
       "error": null,
       "items": 20,
-      "fetched_at": "2026-04-04T09:49:24.543434+00:00",
+      "fetched_at": "2026-04-04T10:32:51.910235+00:00",
       "source_type": "industry",
       "reliability": 3,
       "topics": [
@@ -4374,7 +4374,7 @@
       "status": "partial",
       "error": "Feed returned 0 usable items",
       "items": 0,
-      "fetched_at": "2026-04-04T09:49:24.710722+00:00",
+      "fetched_at": "2026-04-04T10:32:52.074370+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
