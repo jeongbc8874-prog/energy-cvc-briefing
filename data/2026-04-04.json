@@ -1,28 +1,27 @@
 {
   "date": "2026-04-04",
   "dateKr": "2026년 04월 04일",
-  "generatedAt": "2026-04-04T09:02:44.511967+00:00",
-  "brief": "**Deal Flow Memo - April 4, 2026**\n\nEnerVenue's $300M Series B (Energy Storage News) signals continued investor appetite for differentiated battery chemistries, particularly their 30,000-cycle nickel-hydrogen technology targeting ultra-long duration storage applications. The financing size suggests commercial readiness and manufacturing scale-up, putting them in direct competition with iron-air and other emerging LDES technologies for utility-scale deployments. \n\nMeanwhile, PV Magazine's BBDF 2026 coverage highlights industrial buyers' hesitancy around hybrid PPAs, indicating a maturity gap between storage technology advancement and corporate procurement sophistication. This disconnect creates opportunity for intermediary platforms or simplified hybrid PPA products that can bridge the complexity gap for industrial offtakers.\n\n**Watch**: Other LDES players' funding announcements in Q2 2026 and any corporate PPA advisory services raising capital to address the hybrid procurement bottleneck.",
+  "generatedAt": "2026-04-04T09:33:56.015720+00:00",
+  "brief": "**Deal Flow Memo - April 4, 2026**\n\nEnerVenue's $300M Series B (Energy Storage News) signals continued mega-round appetite for proven long-duration storage technologies, particularly as their 30,000-cycle nickel-hydrogen chemistry addresses the industrial/grid-scale durability gap that lithium hasn't solved at scale. The timing aligns with our thesis that 2026 would be the breakout year for non-lithium chemistries as offtake agreements mature and manufacturing economics hit inflection points.\n\nMeanwhile, PV Magazine's BBDF coverage on hybrid PPA hesitancy among industrial buyers suggests the market timing mismatch we've been tracking—corporates want the storage benefits but aren't ready to commit to complex multi-asset procurement structures. This creates an opening for simpler financing models and potentially for storage-as-a-service plays that can abstract the technology complexity.\n\nWatch for follow-on rounds in the nickel-hydrogen space and whether EnerVenue's competitors (particularly Iron Flow players) accelerate their own fundraising timelines in response.",
   "stats": {
-    "total": 24,
+    "total": 23,
     "high": 2,
     "medium": 3,
     "negative": 0,
     "matched": 1,
-    "filtered_out": 59,
+    "filtered_out": 57,
     "companies_with_signals": 1,
     "by_segment": {
       "ess": 18,
       "hvdc": 1,
       "marine_fc": 2,
-      "grid_sw": 2,
-      "battery_storage": 1
+      "grid_sw": 2
     },
     "by_type": {
       "Financing": 1,
       "Contract": 1,
       "Partnership": 2,
-      "News": 20
+      "News": 19
     }
   },
   "signals": [
@@ -952,51 +951,6 @@
         "observed_fact": "Agratas advances 20 GWh battery plant in western India",
         "observed_fact_detail": "Agratas, the global battery business of the Tata Group, has completed the steel frame of its Sanand facility in India, with production expected to begin in 2027.",
         "source_label": "PV Magazine · 2026-04-03",
-        "matched_rule_name": "no rule matched",
-        "matched_rule_tier": "Tier 5 — News",
-        "why_it_matters": "No specific investment pattern matched. Context only — not weighted without corroboration.",
-        "missing_evidence": [
-          "No investment-relevant pattern matched",
-          "Primary research required"
-        ],
-        "confidence": "Low",
-        "confidence_rationale": "Score below threshold. Context only."
-      }
-    },
-    {
-      "id": "118f4147bf7e",
-      "title": "Rooftop solar photovoltaic systems account for 20% of Puerto Rico's capacity mix",
-      "summary": "Rooftop solar generating capacity in Puerto Rico totaled 1,456 megawatts (MW) at the end of 2025, 20% of the overall capacity mix. Rooftop solar capacity has increased faster than other sources over the past decade. Between 2016 and 2025 rooftop solar installations accounted for 81% of the new generating capacity in Puerto Rico, according to data from our Electric Power Monthly and Puerto Rico Energy Bureau's (PREB) Quarterly Report on System Data. In 2025, rooftop solar became the second-largest capacity source, after petroleum liquids capacity (3,671 MW), and surpassed natural gas capacity (1,391 MW).",
-      "event_date": "2026-04-04",
-      "source_name": "EIA Today in Energy",
-      "source_url": "https://www.eia.gov/todayinenergy/detail.php?id=67406",
-      "event_type": "News",
-      "impact_type": "Informational",
-      "matched_rule": null,
-      "tier": 5,
-      "signal_stage": "strategic",
-      "signal_strength": 25,
-      "signal_tier": "low",
-      "score_breakdown": [
-        {
-          "id": "fig_mw",
-          "delta": 10,
-          "reason": "Specific capacity figure",
-          "group": "boost"
-        }
-      ],
-      "segment": "battery_storage",
-      "company_id": null,
-      "company_name": "Unassigned",
-      "buyer_matches": [],
-      "project_matches": [],
-      "is_negative": false,
-      "neg_subtype": null,
-      "is_noise": false,
-      "evidence": {
-        "observed_fact": "Rooftop solar photovoltaic systems account for 20% of Puerto Rico's capacity mix",
-        "observed_fact_detail": "Rooftop solar generating capacity in Puerto Rico totaled 1,456 megawatts (MW) at the end of 2025, 20% of the overall capacity mix.",
-        "source_label": "EIA Today in Energy · 2026-04-04",
         "matched_rule_name": "no rule matched",
         "matched_rule_tier": "Tier 5 — News",
         "why_it_matters": "No specific investment pattern matched. Context only — not weighted without corroboration.",
@@ -2230,7 +2184,7 @@
         "source_count": 1,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-04T09:02:37.440797+00:00"
+        "generated_at": "2026-04-04T09:33:48.537788+00:00"
       },
       "narrative": null,
       "generated_date": "2026-04-04"
@@ -3477,7 +3431,7 @@
       "signal_count": 18,
       "high_count": 2,
       "neg_count": 0,
-      "share_of_total": 0.75,
+      "share_of_total": 0.783,
       "capital_signal": "Building",
       "top_events": [
         {
@@ -3633,7 +3587,7 @@
       "signal_count": 2,
       "high_count": 0,
       "neg_count": 0,
-      "share_of_total": 0.083,
+      "share_of_total": 0.087,
       "capital_signal": "Quiet",
       "top_events": [
         {
@@ -3716,7 +3670,7 @@
       "signal_count": 2,
       "high_count": 0,
       "neg_count": 0,
-      "share_of_total": 0.083,
+      "share_of_total": 0.087,
       "capital_signal": "Quiet",
       "top_events": [
         {
@@ -3886,7 +3840,7 @@
       "signal_count": 1,
       "high_count": 0,
       "neg_count": 0,
-      "share_of_total": 0.042,
+      "share_of_total": 0.043,
       "capital_signal": "Quiet",
       "top_events": [
         {
@@ -4262,7 +4216,7 @@
       "status": "success",
       "error": null,
       "items": 10,
-      "fetched_at": "2026-04-04T09:02:35.559462+00:00",
+      "fetched_at": "2026-04-04T09:33:47.028577+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -4285,7 +4239,7 @@
       "status": "success",
       "error": null,
       "items": 20,
-      "fetched_at": "2026-04-04T09:02:35.712403+00:00",
+      "fetched_at": "2026-04-04T09:33:47.101325+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -4308,7 +4262,7 @@
       "status": "success",
       "error": null,
       "items": 20,
-      "fetched_at": "2026-04-04T09:02:36.033897+00:00",
+      "fetched_at": "2026-04-04T09:33:47.380494+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -4330,7 +4284,7 @@
       "status": "success",
       "error": null,
       "items": 10,
-      "fetched_at": "2026-04-04T09:02:36.188717+00:00",
+      "fetched_at": "2026-04-04T09:33:47.518645+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -4352,7 +4306,7 @@
       "status": "success",
       "error": null,
       "items": 20,
-      "fetched_at": "2026-04-04T09:02:36.423449+00:00",
+      "fetched_at": "2026-04-04T09:33:47.857071+00:00",
       "source_type": "industry",
       "reliability": 3,
       "topics": [
@@ -4374,7 +4328,7 @@
       "status": "partial",
       "error": "Feed returned 0 usable items",
       "items": 0,
-      "fetched_at": "2026-04-04T09:02:36.649634+00:00",
+      "fetched_at": "2026-04-04T09:33:48.094499+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -4396,10 +4350,10 @@
       "id": "eia_todayinenergy",
       "name": "EIA Today in Energy",
       "url": "https://www.eia.gov/rss/todayinenergy.xml",
-      "status": "success",
-      "items": 2,
+      "status": "partial",
+      "items": 0,
       "error": null,
-      "fetched_at": "2026-04-04T09:02:33.044067+00:00",
+      "fetched_at": "2026-04-04T09:33:44.637857+00:00",
       "reliability": 1,
       "segments": [
         "battery_storage",
@@ -4410,13 +4364,27 @@
       ]
     },
     {
+      "id": "doe_fossil",
+      "name": "DOE Fossil Energy & Carbon Management",
+      "url": "https://www.energy.gov/fecm/articles/rss.xml",
+      "status": "failed",
+      "items": 0,
+      "error": "HTTP 404",
+      "fetched_at": "2026-04-04T09:33:44.637857+00:00",
+      "reliability": 1,
+      "segments": [
+        "green_hydrogen",
+        "other_cleantech"
+      ]
+    },
+    {
       "id": "doe_cleancities",
       "name": "DOE Clean Cities & Communities",
       "url": "https://www.energy.gov/scep/slsc/clean-cities-communities/articles/rss.xml",
       "status": "failed",
       "items": 0,
       "error": "HTTP 404",
-      "fetched_at": "2026-04-04T09:02:33.044067+00:00",
+      "fetched_at": "2026-04-04T09:33:44.637857+00:00",
       "reliability": 1,
       "segments": [
         "other_cleantech",
@@ -4424,17 +4392,20 @@
       ]
     },
     {
-      "id": "doe_fossil",
-      "name": "DOE Fossil Energy & Carbon Management",
-      "url": "https://www.energy.gov/fecm/articles/rss.xml",
+      "id": "doe_main",
+      "name": "DOE Energy.gov News",
+      "url": "https://www.energy.gov/articles/rss.xml",
       "status": "failed",
       "items": 0,
       "error": "HTTP 404",
-      "fetched_at": "2026-04-04T09:02:33.044067+00:00",
+      "fetched_at": "2026-04-04T09:33:44.637857+00:00",
       "reliability": 1,
       "segments": [
+        "battery_storage",
         "green_hydrogen",
-        "other_cleantech"
+        "grid_software",
+        "advanced_nuclear",
+        "offshore_wind"
       ]
     },
     {
@@ -4444,7 +4415,7 @@
       "status": "failed",
       "items": 0,
       "error": "HTTP 404",
-      "fetched_at": "2026-04-04T09:02:33.044067+00:00",
+      "fetched_at": "2026-04-04T09:33:44.637857+00:00",
       "reliability": 1,
       "segments": [
         "battery_storage",
@@ -4462,7 +4433,7 @@
       "status": "failed",
       "items": 0,
       "error": "HTTP 404",
-      "fetched_at": "2026-04-04T09:02:33.044067+00:00",
+      "fetched_at": "2026-04-04T09:33:44.637857+00:00",
       "reliability": 1,
       "segments": [
         "advanced_nuclear"
@@ -4475,7 +4446,7 @@
       "status": "partial",
       "items": 0,
       "error": null,
-      "fetched_at": "2026-04-04T09:02:33.044067+00:00",
+      "fetched_at": "2026-04-04T09:33:44.637857+00:00",
       "reliability": 2,
       "segments": [
         "battery_storage",
@@ -4486,37 +4457,16 @@
       ]
     },
     {
-      "id": "doe_main",
-      "name": "DOE Energy.gov News",
-      "url": "https://www.energy.gov/articles/rss.xml",
-      "status": "failed",
+      "id": "nuclearengineer",
+      "name": "Nuclear Engineering International",
+      "url": "https://www.neimagazine.com/rss",
+      "status": "partial",
       "items": 0,
-      "error": "HTTP 404",
-      "fetched_at": "2026-04-04T09:02:33.044067+00:00",
-      "reliability": 1,
+      "error": null,
+      "fetched_at": "2026-04-04T09:33:44.637857+00:00",
+      "reliability": 2,
       "segments": [
-        "battery_storage",
-        "green_hydrogen",
-        "grid_software",
-        "advanced_nuclear",
-        "offshore_wind"
-      ]
-    },
-    {
-      "id": "azocleantech",
-      "name": "AZoCleantech",
-      "url": "https://www.azocleantech.com/rss/news.aspx",
-      "status": "failed",
-      "items": 0,
-      "error": "HTTP 404",
-      "fetched_at": "2026-04-04T09:02:33.044067+00:00",
-      "reliability": 3,
-      "segments": [
-        "battery_storage",
-        "green_hydrogen",
-        "other_cleantech",
-        "advanced_nuclear",
-        "geothermal"
+        "advanced_nuclear"
       ]
     },
     {
@@ -4526,7 +4476,7 @@
       "status": "failed",
       "items": 0,
       "error": "HTTP 403",
-      "fetched_at": "2026-04-04T09:02:33.044067+00:00",
+      "fetched_at": "2026-04-04T09:33:44.637857+00:00",
       "reliability": 1,
       "segments": [
         "offshore_wind",
@@ -4537,16 +4487,31 @@
       ]
     },
     {
-      "id": "nuclearengineer",
-      "name": "Nuclear Engineering International",
-      "url": "https://www.neimagazine.com/rss",
+      "id": "geothermalrisingbulletin",
+      "name": "Geothermal Rising",
+      "url": "https://geothermal.org/feed/",
+      "status": "failed",
+      "items": 0,
+      "error": "HTTP 404",
+      "fetched_at": "2026-04-04T09:33:44.637857+00:00",
+      "reliability": 2,
+      "segments": [
+        "geothermal"
+      ]
+    },
+    {
+      "id": "cleantechnica",
+      "name": "CleanTechnica",
+      "url": "https://cleantechnica.com/feed/",
       "status": "partial",
       "items": 0,
       "error": null,
-      "fetched_at": "2026-04-04T09:02:33.044067+00:00",
-      "reliability": 2,
+      "fetched_at": "2026-04-04T09:33:44.637857+00:00",
+      "reliability": 3,
       "segments": [
-        "advanced_nuclear"
+        "battery_storage",
+        "grid_software",
+        "data_center_power"
       ]
     },
     {
@@ -4556,37 +4521,26 @@
       "status": "failed",
       "items": 0,
       "error": "HTTP 404",
-      "fetched_at": "2026-04-04T09:02:33.044067+00:00",
+      "fetched_at": "2026-04-04T09:33:44.637857+00:00",
       "reliability": 2,
       "segments": [
         "green_hydrogen"
       ]
     },
     {
-      "id": "cleantechnica",
-      "name": "CleanTechnica",
-      "url": "https://cleantechnica.com/feed/",
-      "status": "success",
-      "items": 1,
-      "error": null,
-      "fetched_at": "2026-04-04T09:02:33.044067+00:00",
-      "reliability": 3,
-      "segments": [
-        "battery_storage",
-        "grid_software",
-        "data_center_power"
-      ]
-    },
-    {
-      "id": "geothermalrisingbulletin",
-      "name": "Geothermal Rising",
-      "url": "https://geothermal.org/feed/",
+      "id": "azocleantech",
+      "name": "AZoCleantech",
+      "url": "https://www.azocleantech.com/rss/news.aspx",
       "status": "failed",
       "items": 0,
       "error": "HTTP 404",
-      "fetched_at": "2026-04-04T09:02:33.044067+00:00",
-      "reliability": 2,
+      "fetched_at": "2026-04-04T09:33:44.637857+00:00",
+      "reliability": 3,
       "segments": [
+        "battery_storage",
+        "green_hydrogen",
+        "other_cleantech",
+        "advanced_nuclear",
         "geothermal"
       ]
     },
@@ -4597,7 +4551,7 @@
       "status": "failed",
       "items": 0,
       "error": "HTTP 404",
-      "fetched_at": "2026-04-04T09:02:33.044067+00:00",
+      "fetched_at": "2026-04-04T09:33:44.637857+00:00",
       "reliability": 2,
       "segments": [
         "battery_storage",
@@ -4612,7 +4566,7 @@
       "status": "failed",
       "items": 0,
       "error": "Feed parse error: <unknown>:6:30: not well-formed (invalid token)",
-      "fetched_at": "2026-04-04T09:02:33.044067+00:00",
+      "fetched_at": "2026-04-04T09:33:44.637857+00:00",
       "reliability": 2,
       "segments": [
         "grid_software",
@@ -4627,7 +4581,7 @@
       "status": "failed",
       "items": 0,
       "error": "HTTP 404",
-      "fetched_at": "2026-04-04T09:02:33.044067+00:00",
+      "fetched_at": "2026-04-04T09:33:44.637857+00:00",
       "reliability": 2,
       "segments": [
         "green_hydrogen",
@@ -4642,7 +4596,7 @@
       "status": "failed",
       "items": 0,
       "error": "HTTP 404",
-      "fetched_at": "2026-04-04T09:02:33.044067+00:00",
+      "fetched_at": "2026-04-04T09:33:44.637857+00:00",
       "reliability": 1,
       "segments": [
         "green_hydrogen",
@@ -4964,11 +4918,11 @@
   },
   "reliability": {
     "sources_total": 23,
-    "sources_ok": 7,
-    "sources_partial": 3,
+    "sources_ok": 5,
+    "sources_partial": 5,
     "sources_failed": 13,
-    "new_events": 24,
-    "filtered_out": 59
+    "new_events": 23,
+    "filtered_out": 57
   },
   "_feature_stubs": {
     "analyst_notes": "⚠ PAID PILOT — stored in private DB, not in public JSON",

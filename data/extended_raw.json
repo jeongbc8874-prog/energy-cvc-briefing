@@ -1,17 +1,33 @@
 {
   "date": "2026-04-04",
-  "generated_at": "2026-04-04T09:02:33.044067+00:00",
-  "article_count": 3,
+  "generated_at": "2026-04-04T09:33:44.637857+00:00",
+  "article_count": 0,
   "source_count": 23,
   "source_logs": [
+    {
+      "id": "utilitydive",
+      "name": "Utility Dive",
+      "url": "https://www.utilitydive.com/feeds/news/",
+      "status": "partial",
+      "items": 0,
+      "error": null,
+      "fetched_at": "2026-04-04T09:33:44.637857+00:00",
+      "reliability": 2,
+      "segments": [
+        "grid_software",
+        "battery_storage",
+        "data_center_power",
+        "transmission"
+      ]
+    },
     {
       "id": "eia_todayinenergy",
       "name": "EIA Today in Energy",
       "url": "https://www.eia.gov/rss/todayinenergy.xml",
-      "status": "success",
-      "items": 2,
+      "status": "partial",
+      "items": 0,
       "error": null,
-      "fetched_at": "2026-04-04T09:02:33.044067+00:00",
+      "fetched_at": "2026-04-04T09:33:44.637857+00:00",
       "reliability": 1,
       "segments": [
         "battery_storage",
@@ -22,13 +38,27 @@
       ]
     },
     {
+      "id": "doe_fossil",
+      "name": "DOE Fossil Energy & Carbon Management",
+      "url": "https://www.energy.gov/fecm/articles/rss.xml",
+      "status": "failed",
+      "items": 0,
+      "error": "HTTP 404",
+      "fetched_at": "2026-04-04T09:33:44.637857+00:00",
+      "reliability": 1,
+      "segments": [
+        "green_hydrogen",
+        "other_cleantech"
+      ]
+    },
+    {
       "id": "doe_cleancities",
       "name": "DOE Clean Cities & Communities",
       "url": "https://www.energy.gov/scep/slsc/clean-cities-communities/articles/rss.xml",
       "status": "failed",
       "items": 0,
       "error": "HTTP 404",
-      "fetched_at": "2026-04-04T09:02:33.044067+00:00",
+      "fetched_at": "2026-04-04T09:33:44.637857+00:00",
       "reliability": 1,
       "segments": [
         "other_cleantech",
@@ -36,17 +66,20 @@
       ]
     },
     {
-      "id": "doe_fossil",
-      "name": "DOE Fossil Energy & Carbon Management",
-      "url": "https://www.energy.gov/fecm/articles/rss.xml",
+      "id": "doe_main",
+      "name": "DOE Energy.gov News",
+      "url": "https://www.energy.gov/articles/rss.xml",
       "status": "failed",
       "items": 0,
       "error": "HTTP 404",
-      "fetched_at": "2026-04-04T09:02:33.044067+00:00",
+      "fetched_at": "2026-04-04T09:33:44.637857+00:00",
       "reliability": 1,
       "segments": [
+        "battery_storage",
         "green_hydrogen",
-        "other_cleantech"
+        "grid_software",
+        "advanced_nuclear",
+        "offshore_wind"
       ]
     },
     {
@@ -56,7 +89,7 @@
       "status": "failed",
       "items": 0,
       "error": "HTTP 404",
-      "fetched_at": "2026-04-04T09:02:33.044067+00:00",
+      "fetched_at": "2026-04-04T09:33:44.637857+00:00",
       "reliability": 1,
       "segments": [
         "battery_storage",
@@ -74,7 +107,7 @@
       "status": "failed",
       "items": 0,
       "error": "HTTP 404",
-      "fetched_at": "2026-04-04T09:02:33.044067+00:00",
+      "fetched_at": "2026-04-04T09:33:44.637857+00:00",
       "reliability": 1,
       "segments": [
         "advanced_nuclear"
@@ -87,7 +120,7 @@
       "status": "partial",
       "items": 0,
       "error": null,
-      "fetched_at": "2026-04-04T09:02:33.044067+00:00",
+      "fetched_at": "2026-04-04T09:33:44.637857+00:00",
       "reliability": 2,
       "segments": [
         "battery_storage",
@@ -95,39 +128,6 @@
         "data_center_power",
         "green_hydrogen",
         "offshore_wind"
-      ]
-    },
-    {
-      "id": "doe_main",
-      "name": "DOE Energy.gov News",
-      "url": "https://www.energy.gov/articles/rss.xml",
-      "status": "failed",
-      "items": 0,
-      "error": "HTTP 404",
-      "fetched_at": "2026-04-04T09:02:33.044067+00:00",
-      "reliability": 1,
-      "segments": [
-        "battery_storage",
-        "green_hydrogen",
-        "grid_software",
-        "advanced_nuclear",
-        "offshore_wind"
-      ]
-    },
-    {
-      "id": "utilitydive",
-      "name": "Utility Dive",
-      "url": "https://www.utilitydive.com/feeds/news/",
-      "status": "partial",
-      "items": 0,
-      "error": null,
-      "fetched_at": "2026-04-04T09:02:33.044067+00:00",
-      "reliability": 2,
-      "segments": [
-        "grid_software",
-        "battery_storage",
-        "data_center_power",
-        "transmission"
       ]
     },
     {
@@ -137,25 +137,11 @@
       "status": "partial",
       "items": 0,
       "error": null,
-      "fetched_at": "2026-04-04T09:02:33.044067+00:00",
+      "fetched_at": "2026-04-04T09:33:44.637857+00:00",
       "reliability": 2,
       "segments": [
         "battery_storage",
         "long_duration_storage"
-      ]
-    },
-    {
-      "id": "offshorewind",
-      "name": "Offshore Wind Biz",
-      "url": "https://www.offshorewind.biz/feed/",
-      "status": "partial",
-      "items": 0,
-      "error": null,
-      "fetched_at": "2026-04-04T09:02:33.044067+00:00",
-      "reliability": 2,
-      "segments": [
-        "offshore_wind",
-        "transmission"
       ]
     },
     {
@@ -165,7 +151,7 @@
       "status": "partial",
       "items": 0,
       "error": null,
-      "fetched_at": "2026-04-04T09:02:33.044067+00:00",
+      "fetched_at": "2026-04-04T09:33:44.637857+00:00",
       "reliability": 2,
       "segments": [
         "battery_storage",
@@ -174,20 +160,43 @@
       ]
     },
     {
-      "id": "azocleantech",
-      "name": "AZoCleantech",
-      "url": "https://www.azocleantech.com/rss/news.aspx",
-      "status": "failed",
+      "id": "offshorewind",
+      "name": "Offshore Wind Biz",
+      "url": "https://www.offshorewind.biz/feed/",
+      "status": "partial",
       "items": 0,
-      "error": "HTTP 404",
-      "fetched_at": "2026-04-04T09:02:33.044067+00:00",
-      "reliability": 3,
+      "error": null,
+      "fetched_at": "2026-04-04T09:33:44.637857+00:00",
+      "reliability": 2,
       "segments": [
-        "battery_storage",
-        "green_hydrogen",
-        "other_cleantech",
-        "advanced_nuclear",
-        "geothermal"
+        "offshore_wind",
+        "transmission"
+      ]
+    },
+    {
+      "id": "nuclearengineer",
+      "name": "Nuclear Engineering International",
+      "url": "https://www.neimagazine.com/rss",
+      "status": "partial",
+      "items": 0,
+      "error": null,
+      "fetched_at": "2026-04-04T09:33:44.637857+00:00",
+      "reliability": 2,
+      "segments": [
+        "advanced_nuclear"
+      ]
+    },
+    {
+      "id": "h2view",
+      "name": "H2 View",
+      "url": "https://www.h2-view.com/feed/",
+      "status": "partial",
+      "items": 0,
+      "error": null,
+      "fetched_at": "2026-04-04T09:33:44.637857+00:00",
+      "reliability": 2,
+      "segments": [
+        "green_hydrogen"
       ]
     },
     {
@@ -197,7 +206,7 @@
       "status": "failed",
       "items": 0,
       "error": "HTTP 403",
-      "fetched_at": "2026-04-04T09:02:33.044067+00:00",
+      "fetched_at": "2026-04-04T09:33:44.637857+00:00",
       "reliability": 1,
       "segments": [
         "offshore_wind",
@@ -208,57 +217,16 @@
       ]
     },
     {
-      "id": "nuclearengineer",
-      "name": "Nuclear Engineering International",
-      "url": "https://www.neimagazine.com/rss",
-      "status": "partial",
-      "items": 0,
-      "error": null,
-      "fetched_at": "2026-04-04T09:02:33.044067+00:00",
-      "reliability": 2,
-      "segments": [
-        "advanced_nuclear"
-      ]
-    },
-    {
-      "id": "hydrogeninsight",
-      "name": "Hydrogen Insight",
-      "url": "https://www.hydrogeninsight.com/feed",
+      "id": "geothermalrisingbulletin",
+      "name": "Geothermal Rising",
+      "url": "https://geothermal.org/feed/",
       "status": "failed",
       "items": 0,
       "error": "HTTP 404",
-      "fetched_at": "2026-04-04T09:02:33.044067+00:00",
+      "fetched_at": "2026-04-04T09:33:44.637857+00:00",
       "reliability": 2,
       "segments": [
-        "green_hydrogen"
-      ]
-    },
-    {
-      "id": "cleantechnica",
-      "name": "CleanTechnica",
-      "url": "https://cleantechnica.com/feed/",
-      "status": "success",
-      "items": 1,
-      "error": null,
-      "fetched_at": "2026-04-04T09:02:33.044067+00:00",
-      "reliability": 3,
-      "segments": [
-        "battery_storage",
-        "grid_software",
-        "data_center_power"
-      ]
-    },
-    {
-      "id": "h2view",
-      "name": "H2 View",
-      "url": "https://www.h2-view.com/feed/",
-      "status": "partial",
-      "items": 0,
-      "error": null,
-      "fetched_at": "2026-04-04T09:02:33.044067+00:00",
-      "reliability": 2,
-      "segments": [
-        "green_hydrogen"
+        "geothermal"
       ]
     },
     {
@@ -268,7 +236,7 @@
       "status": "partial",
       "items": 0,
       "error": null,
-      "fetched_at": "2026-04-04T09:02:33.044067+00:00",
+      "fetched_at": "2026-04-04T09:33:44.637857+00:00",
       "reliability": 3,
       "segments": [
         "battery_storage",
@@ -277,15 +245,47 @@
       ]
     },
     {
-      "id": "geothermalrisingbulletin",
-      "name": "Geothermal Rising",
-      "url": "https://geothermal.org/feed/",
+      "id": "cleantechnica",
+      "name": "CleanTechnica",
+      "url": "https://cleantechnica.com/feed/",
+      "status": "partial",
+      "items": 0,
+      "error": null,
+      "fetched_at": "2026-04-04T09:33:44.637857+00:00",
+      "reliability": 3,
+      "segments": [
+        "battery_storage",
+        "grid_software",
+        "data_center_power"
+      ]
+    },
+    {
+      "id": "hydrogeninsight",
+      "name": "Hydrogen Insight",
+      "url": "https://www.hydrogeninsight.com/feed",
       "status": "failed",
       "items": 0,
       "error": "HTTP 404",
-      "fetched_at": "2026-04-04T09:02:33.044067+00:00",
+      "fetched_at": "2026-04-04T09:33:44.637857+00:00",
       "reliability": 2,
       "segments": [
+        "green_hydrogen"
+      ]
+    },
+    {
+      "id": "azocleantech",
+      "name": "AZoCleantech",
+      "url": "https://www.azocleantech.com/rss/news.aspx",
+      "status": "failed",
+      "items": 0,
+      "error": "HTTP 404",
+      "fetched_at": "2026-04-04T09:33:44.637857+00:00",
+      "reliability": 3,
+      "segments": [
+        "battery_storage",
+        "green_hydrogen",
+        "other_cleantech",
+        "advanced_nuclear",
         "geothermal"
       ]
     },
@@ -296,7 +296,7 @@
       "status": "failed",
       "items": 0,
       "error": "HTTP 404",
-      "fetched_at": "2026-04-04T09:02:33.044067+00:00",
+      "fetched_at": "2026-04-04T09:33:44.637857+00:00",
       "reliability": 2,
       "segments": [
         "battery_storage",
@@ -311,7 +311,7 @@
       "status": "failed",
       "items": 0,
       "error": "Feed parse error: <unknown>:6:30: not well-formed (invalid token)",
-      "fetched_at": "2026-04-04T09:02:33.044067+00:00",
+      "fetched_at": "2026-04-04T09:33:44.637857+00:00",
       "reliability": 2,
       "segments": [
         "grid_software",
@@ -326,7 +326,7 @@
       "status": "failed",
       "items": 0,
       "error": "HTTP 404",
-      "fetched_at": "2026-04-04T09:02:33.044067+00:00",
+      "fetched_at": "2026-04-04T09:33:44.637857+00:00",
       "reliability": 2,
       "segments": [
         "green_hydrogen",
@@ -341,7 +341,7 @@
       "status": "failed",
       "items": 0,
       "error": "HTTP 404",
-      "fetched_at": "2026-04-04T09:02:33.044067+00:00",
+      "fetched_at": "2026-04-04T09:33:44.637857+00:00",
       "reliability": 1,
       "segments": [
         "green_hydrogen",
@@ -352,61 +352,5 @@
       ]
     }
   ],
-  "articles": [
-    {
-      "article_id": "bbdab8b8c4c91463",
-      "source_id": "eia_todayinenergy",
-      "source_name": "EIA Today in Energy",
-      "source_url": "https://www.eia.gov/todayinenergy/detail.php?id=67406",
-      "source_segments": [
-        "battery_storage",
-        "green_hydrogen",
-        "grid_software",
-        "offshore_wind",
-        "other_cleantech"
-      ],
-      "reliability": 1,
-      "title": "Rooftop solar photovoltaic systems account for 20% of Puerto Rico's capacity mix",
-      "summary": "Rooftop solar generating capacity in Puerto Rico totaled 1,456 megawatts (MW) at the end of 2025, 20% of the overall capacity mix. Rooftop solar capacity has increased faster than other sources over the past decade. Between 2016 and 2025 rooftop solar installations accounted for 81% of the new generating capacity in Puerto Rico, according to data from our Electric Power Monthly and Puerto Rico Energy Bureau's (PREB) Quarterly Report on System Data. In 2025, rooftop solar became the second-largest capacity source, after petroleum liquids capacity (3,671 MW), and surpassed natural gas capacity (1,391 MW).",
-      "published_date": "2026-04-04",
-      "raw_text": "rooftop solar photovoltaic systems account for 20% of puerto rico's capacity mix rooftop solar generating capacity in puerto rico totaled 1,456 megawatts (mw) at the end of 2025, 20% of the overall capacity mix. rooftop solar capacity has increased faster than other sources over the past decade. between 2016 and 2025 rooftop solar installations accounted for 81% of the new generating capacity in puerto rico, according to data from our electric power monthly and puerto rico energy bureau's (preb) quarterly report on system data. in 2025, rooftop solar became the second-largest capacity source, after petroleum liquids capacity (3,671 mw), and surpassed natural gas capacity (1,391 mw).",
-      "fetched_at": "2026-04-04T09:02:33.044067+00:00"
-    },
-    {
-      "article_id": "c5a98abf689fc5a7",
-      "source_id": "eia_todayinenergy",
-      "source_name": "EIA Today in Energy",
-      "source_url": "https://www.eia.gov/todayinenergy/detail.php?id=67405",
-      "source_segments": [
-        "battery_storage",
-        "green_hydrogen",
-        "grid_software",
-        "offshore_wind",
-        "other_cleantech"
-      ],
-      "reliability": 1,
-      "title": "U.S. coal exports decreased in 2025 after four years of growth",
-      "summary": "After four years of growth, U.S. coal exports decreased by 16 million short tons (MMst) in 2025, according to data released by the U.S. Census Bureau. Exports totaled 93 MMst in 2025, compared with 108 MMst in 2024. Thermal coal exports fell by 18%, and metallurgical coal exports fell by 11%.",
-      "published_date": "2026-04-01",
-      "raw_text": "u.s. coal exports decreased in 2025 after four years of growth after four years of growth, u.s. coal exports decreased by 16 million short tons (mmst) in 2025, according to data released by the u.s. census bureau. exports totaled 93 mmst in 2025, compared with 108 mmst in 2024. thermal coal exports fell by 18%, and metallurgical coal exports fell by 11%.",
-      "fetched_at": "2026-04-04T09:02:33.044067+00:00"
-    },
-    {
-      "article_id": "85f0bc83feebdb80",
-      "source_id": "cleantechnica",
-      "source_name": "CleanTechnica",
-      "source_url": "https://cleantechnica.com/2026/04/03/nissan-leaf-ariya-sales-collapse-in-usa/",
-      "source_segments": [
-        "battery_storage",
-        "grid_software",
-        "data_center_power"
-      ],
-      "reliability": 3,
-      "title": "Nissan LEAF & ARIYA Sales Collapse in USA",
-      "summary": "<p>Continuing the trend for the US EV market, Nissan&#8217;s EV sales almost completely collapsed in the first quarter year over year. The Nissan LEAF, which should be selling like hotcakes given how much value for money it now offers, achieved only 668 US sales last quarter, down 71.2% from the   ... [continued]</p>\n<p>The post <a href=\"https://cleantechnica.com/2026/04/03/nissan-leaf-ariya-sales-collapse-in-usa/\">Nissan LEAF &#038; ARIYA Sales Collapse in USA</a> appeared first on <a href=\"https://cleantechnica.com\">CleanTechnica</a>.</p>",
-      "published_date": "2026-04-04",
-      "raw_text": "nissan leaf & ariya sales collapse in usa <p>continuing the trend for the us ev market, nissan&#8217;s ev sales almost completely collapsed in the first quarter year over year. the nissan leaf, which should be selling like hotcakes given how much value for money it now offers, achieved only 668 us sales last quarter, down 71.2% from the   ... [continued]</p>\n<p>the post <a href=\"https://cleantechnica.com/2026/04/03/nissan-leaf-ariya-sales-collapse-in-usa/\">nissan leaf &#038; ariya sales collapse in usa</a> appeared first on <a href=\"https://cleantechnica.com\">cleantechnica</a>.</p>",
-      "fetched_at": "2026-04-04T09:02:33.044067+00:00"
-    }
-  ]
+  "articles": []
 }
