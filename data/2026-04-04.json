@@ -1,8 +1,8 @@
 {
   "date": "2026-04-04",
   "dateKr": "2026년 04월 04일",
-  "generatedAt": "2026-04-04T08:22:43.077684+00:00",
-  "brief": "**Deal Flow Memo - April 4, 2026**\n\nEnerVenue's $300M Series B (Energy Storage News) signals continued institutional appetite for alternative battery chemistries, particularly those promising extreme cycle life like their 30,000-cycle nickel-hydrogen technology. This follows the broader pattern of investors backing non-lithium solutions as grid storage demands longer-duration, higher-cycle applications. Meanwhile, PV Magazine's BBDF 2026 coverage highlights that hybrid PPAs are seeing slower industrial adoption than anticipated, suggesting either pricing misalignment or complexity barriers in the commercial segment. The juxtaposition is notable—capital flowing into next-gen storage hardware while offtake structures for hybrid projects remain challenging. Watch for whether EnerVenue's manufacturing scale-up timelines align with any pivot toward simpler PPA structures that might accelerate industrial buyer adoption.",
+  "generatedAt": "2026-04-04T08:33:15.170420+00:00",
+  "brief": "**Deal Flow Memo - April 4, 2026**\n\nEnerVenue's $300M Series B (Energy Storage News) signals continued investor appetite for differentiated battery chemistries, particularly as the company's nickel-hydrogen technology promises 30,000 cycles versus traditional lithium's ~6,000. The timing aligns with growing industrial demand for ultra-long-duration storage as grid operators seek solutions beyond 4-8 hour lithium systems. However, PV Magazine's BBDF coverage highlights a concerning disconnect—hybrid PPAs are seeing \"slow uptake among industrial buyers,\" suggesting potential demand-side hesitation despite supply-side innovation momentum. \n\n**Watch**: Industrial offtake agreements for long-duration storage players and whether EnerVenue can convert this capital into meaningful commercial contracts. Also monitor if hybrid PPA adoption accelerates or if structural barriers persist, which could impact storage deployment timelines across our portfolio.",
   "stats": {
     "total": 23,
     "high": 2,
@@ -2184,7 +2184,7 @@
         "source_count": 1,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-04T08:22:36.315636+00:00"
+        "generated_at": "2026-04-04T08:33:06.832743+00:00"
       },
       "narrative": null,
       "generated_date": "2026-04-04"
@@ -4216,7 +4216,7 @@
       "status": "success",
       "error": null,
       "items": 10,
-      "fetched_at": "2026-04-04T08:22:35.002258+00:00",
+      "fetched_at": "2026-04-04T08:33:05.326427+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -4239,7 +4239,7 @@
       "status": "success",
       "error": null,
       "items": 20,
-      "fetched_at": "2026-04-04T08:22:35.121160+00:00",
+      "fetched_at": "2026-04-04T08:33:05.489036+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -4262,7 +4262,7 @@
       "status": "success",
       "error": null,
       "items": 20,
-      "fetched_at": "2026-04-04T08:22:35.466766+00:00",
+      "fetched_at": "2026-04-04T08:33:05.857630+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -4284,7 +4284,7 @@
       "status": "success",
       "error": null,
       "items": 10,
-      "fetched_at": "2026-04-04T08:22:35.608130+00:00",
+      "fetched_at": "2026-04-04T08:33:06.008191+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -4306,7 +4306,7 @@
       "status": "success",
       "error": null,
       "items": 20,
-      "fetched_at": "2026-04-04T08:22:35.780545+00:00",
+      "fetched_at": "2026-04-04T08:33:06.184155+00:00",
       "source_type": "industry",
       "reliability": 3,
       "topics": [
@@ -4328,7 +4328,7 @@
       "status": "partial",
       "error": "Feed returned 0 usable items",
       "items": 0,
-      "fetched_at": "2026-04-04T08:22:35.964506+00:00",
+      "fetched_at": "2026-04-04T08:33:06.353202+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
