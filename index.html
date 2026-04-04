@@ -912,90 +912,387 @@ function renderCompanies(){
 // ════════════════════════════════════════════════════════════════
 // PROJECTS
 // ════════════════════════════════════════════════════════════════
+// ════════════════════════════════════════════════════════════════
+// PROJECT PIPELINE VIEW
+// Data: D.projects[] — enriched by build_project_intel()
+// Signal log: analyst-curated, source-cited (no generated numbers)
+// Inbound signals: auto-matched from RSS (pending analyst review)
+// ════════════════════════════════════════════════════════════════
+
+var PROJ_TYPE_ICONS = {
+  port:"🏗", grid:"⚡", data_center:"🖥", industrial:"🏭",
+  terminal:"🏗", offshore:"🌊", onshore:"🏞", unknown:"📍",
+};
+
+var STAGE_PIPE_ORDER = [
+  "Deployed","Construction","Contract","Pilot","Partner","Announced","Unknown"
+];
+var STAGE_PIPE_COLORS = {
+  Deployed:    {bg:"#F0FDF4",border:"#16A34A",text:"#0A6640",bar:"#16A34A"},
+  Construction:{bg:"#EFF6FF",border:"#1A56DB",text:"#1A56DB",bar:"#1A56DB"},
+  Contract:    {bg:"#F0FDF4",border:"#0A6640",text:"#0A6640",bar:"#0A6640"},
+  Pilot:       {bg:"#FFFBEB",border:"#CA8A04",text:"#92400E",bar:"#CA8A04"},
+  Partner:     {bg:"#F5F3FF",border:"#5B21B6",text:"#5B21B6",bar:"#5B21B6"},
+  Announced:   {bg:"var(--bg)",border:"var(--b2)",text:"var(--ink4)",bar:"#6E6E6E"},
+  Unknown:     {bg:"var(--bg)",border:"var(--b2)",text:"var(--ink4)",bar:"#A8A8A8"},
+};
+
+var PARTY_ROLE_LABELS = {
+  developer:"Developer",offtaker:"Offtaker",epc:"EPC / Contractor",
+};
+
+var EVENT_TYPE_META = {
+  announcement:  {icon:"📣",color:"#1A56DB",label:"Announcement"},
+  pilot:         {icon:"🔬",color:"#7D4E00",label:"Pilot"},
+  partner:       {icon:"🤝",color:"#5B21B6",label:"Partner"},
+  certification: {icon:"✓", color:"#0A6640",label:"Certification"},
+  funding:       {icon:"💰",color:"#0A6640",label:"Funding"},
+  contract:      {icon:"📄",color:"#0A6640",label:"Contract"},
+  construction:  {icon:"🏗", color:"#1A56DB",label:"Construction"},
+  deployment:    {icon:"🚀",color:"#16A34A",label:"Deployment"},
+  delay:         {icon:"⏱", color:"#C0392B",label:"Delay"},
+  regulatory:    {icon:"🏛", color:"#6E6E6E",label:"Regulatory"},
+};
+
+// ════════════════════════════════════════════════════════════════
+// MAIN RENDERER
+// ════════════════════════════════════════════════════════════════
 function renderProjects(){
-  var el=document.getElementById("feed-col");
-  var projs=D&&D.projects||[];
-  if(!projs.length){el.innerHTML='<div class="empty">No project data</div>';return;}
-  var typeIcon={"announcement":"📣","pilot":"🔬","partner":"🤝","certification":"✓","funding":"💰","contract":"📄","construction":"🏗","deployment":"🚀","delay":"⏱","regulatory":"🏛"};
-  var typeColor={"announcement":"#1A56DB","pilot":"#7D4E00","partner":"#5B21B6","certification":"#0A6640","funding":"#0A6640","contract":"#0A6640","construction":"#1A56DB","deployment":"#16A34A","delay":"#C0392B","regulatory":"#6E6E6E"};
-  var typeLabel={"announcement":"Announcement","pilot":"Pilot","partner":"Partner","certification":"Certification","funding":"Funding","contract":"Contract","construction":"Construction","deployment":"Deployment","delay":"Delay","regulatory":"Regulatory"};
-  var h='<div style="padding:10px 16px;background:#FFF8F0;border-bottom:2px solid var(--amber);margin-bottom:0"><div style="font-family:var(--mono);font-size:9px;font-weight:700;color:var(--amber);letter-spacing:.08em;text-transform:uppercase;margin-bottom:3px">⚠ DATA INTEGRITY</div><div style="font-size:12px;color:var(--ink2);line-height:1.65">Signal log entries are <b>analyst-curated</b> with source citations. Do not cite unverified figures.</div></div>';
-  h+='<div class="card"><div class="chd">Projects <span style="font-weight:400;color:var(--ink4)">'+projs.length+'</span></div>';
+  var el   = document.getElementById("feed-col");
+  var projs = D && D.projects || [];
+  if(!projs.length){
+    el.innerHTML = '<div class="empty">No project data — run pipeline first</div>';
+    return;
+  }
+
+  // ── Summary pipeline bar ─────────────────────────────────────────
+  var stageCounts = {};
+  STAGE_PIPE_ORDER.forEach(function(s){ stageCounts[s]=0; });
   projs.forEach(function(p){
-    var sc=p.stage_color||"#6E6E6E", isOpen=PROJ_EXP.has(p.id);
-    var log=p.signal_log_sorted||p.signal_log||[];
-    var logAsc=log.slice().reverse();
-    var known=p.what_is_known||[], missing=p.what_is_missing||[];
-    var inbound=p.inbound_signals||[], negEvts=p.negative_events||[];
-    var pc=p.pattern_color||"var(--ink4)";
-    h+='<div class="card" style="margin:10px;border-left:4px solid '+sc+'">';
-    h+='<div style="padding:14px 16px 12px;cursor:pointer" onclick="toggleProj(\''+p.id+'\')">';
-    h+='<div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:6px"><span style="font-size:15px;font-weight:700;color:var(--ink)">'+esc(p.name||"")+'</span><span style="font-family:var(--mono);font-size:9px;font-weight:700;padding:3px 9px;background:'+sc+'18;color:'+sc+';border:1px solid '+sc+'40;white-space:nowrap">'+esc(p.current_stage||p.status||"Unknown")+'</span></div>';
-    h+='<div style="font-family:var(--mono);font-size:10px;color:var(--ink4);margin-bottom:7px">📍 '+esc(p.location||"")+" · "+esc(p.type||"")+'</div>';
-    h+='<div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:8px">';
-    [{l:"Developer",v:p.developer},{l:"Offtaker",v:p.offtaker},{l:"EPC",v:p.epc}].forEach(function(kv){
-      if(!kv.v) return;
-      var isUnk=kv.v.indexOf("unknown")>=0||kv.v.indexOf("TBD")>=0||kv.v.indexOf("not yet")>=0;
-      h+='<div style="padding:4px 9px;background:var(--bg);border:1px solid var(--b)"><div style="font-family:var(--mono);font-size:8px;color:var(--ink4);text-transform:uppercase;margin-bottom:1px">'+esc(kv.l)+'</div><div style="font-size:11px;font-weight:600;color:'+(isUnk?"var(--red)":"var(--ink)")+'">'+esc(kv.v)+'</div></div>';
+    var s = p.current_stage || "Unknown";
+    stageCounts[s] = (stageCounts[s]||0) + 1;
+  });
+
+  var inboundTotal = projs.reduce(function(n,p){ return n+(p.inbound_signals||[]).length; }, 0);
+  var delayCount   = projs.reduce(function(n,p){ return n+(p.negative_events||[]).length; }, 0);
+
+  var h = "";
+
+  // ── Data integrity banner ────────────────────────────────────────
+  h += '<div style="padding:10px 16px;background:#FFF8F0;border:1px solid var(--amber);border-left:4px solid var(--amber);margin-bottom:14px">';
+  h += '<div style="font-family:var(--mono);font-size:9px;font-weight:700;color:var(--amber);letter-spacing:.08em;text-transform:uppercase;margin-bottom:3px">⚠ DATA INTEGRITY</div>';
+  h += '<div style="font-size:12px;color:var(--ink2);line-height:1.65">All project data is <b>analyst-curated with source citations</b>. Fields marked <b style="color:var(--red)">not disclosed</b> or <b style="color:var(--amber)">to be confirmed</b> have no verified public source. Do not cite unverified figures. Inbound signals are auto-matched from RSS — pending analyst review before adding to the confirmed log.</div>';
+  h += '</div>';
+
+  // ── Pipeline summary bar ─────────────────────────────────────────
+  h += '<div style="background:var(--surface);border:1px solid var(--b);margin-bottom:14px">';
+  h += '<div style="padding:10px 16px;border-bottom:1px solid var(--b2);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">';
+  h += '<span style="font-family:var(--mono);font-size:10px;font-weight:700;color:var(--ink4);text-transform:uppercase;letter-spacing:.08em">Project Pipeline — '+projs.length+' tracked</span>';
+  h += '<div style="display:flex;gap:8px;font-family:var(--mono);font-size:10px;flex-wrap:wrap">';
+  if(inboundTotal>0) h += '<span style="color:var(--blue)">⚡ '+inboundTotal+' new inbound signals (pending review)</span>';
+  if(delayCount>0)   h += '<span style="color:var(--red)">⏱ '+delayCount+' delay flag'+(delayCount>1?"s":"")+'</span>';
+  h += '</div></div>';
+
+  // Pipeline stage swimlane
+  h += '<div style="display:flex;overflow-x:auto;padding:0">';
+  STAGE_PIPE_ORDER.forEach(function(stage){
+    var n = stageCounts[stage]||0;
+    if(!n) return;
+    var c = STAGE_PIPE_COLORS[stage] || STAGE_PIPE_COLORS.Unknown;
+    h += '<div style="flex:0 0 auto;min-width:100px;padding:8px 14px;border-right:1px solid var(--b2);text-align:center">';
+    h += '<div style="font-family:var(--mono);font-size:18px;font-weight:700;color:'+c.bar+'">'+n+'</div>';
+    h += '<div style="font-family:var(--mono);font-size:9px;color:var(--ink4);text-transform:uppercase;margin-top:2px">'+esc(stage)+'</div>';
+    h += '</div>';
+  });
+  h += '</div></div>';
+
+  // ── Project cards ────────────────────────────────────────────────
+  // Sort: by stage advancement (Deployed first), then by inbound signal activity
+  var stageRank = {};
+  STAGE_PIPE_ORDER.forEach(function(s,i){ stageRank[s]=i; });
+  var sorted = projs.slice().sort(function(a,b){
+    var ra = stageRank[a.current_stage||"Unknown"]||99;
+    var rb = stageRank[b.current_stage||"Unknown"]||99;
+    if(ra!==rb) return ra-rb;
+    return (b.inbound_signals||[]).length - (a.inbound_signals||[]).length;
+  });
+
+  sorted.forEach(function(p){
+    var stage   = p.current_stage || "Unknown";
+    var sc      = (STAGE_PIPE_COLORS[stage]||STAGE_PIPE_COLORS.Unknown);
+    var isOpen  = PROJ_EXP.has(p.id);
+    var log     = p.signal_log_sorted || p.signal_log || [];
+    var logAsc  = log.slice().reverse();
+    var known   = p.what_is_known  || [];
+    var missing = p.what_is_missing || [];
+    var inbound = p.inbound_signals || [];
+    var negEvts = p.negative_events || [];
+    var typeIcon = PROJ_TYPE_ICONS[p.type] || PROJ_TYPE_ICONS.unknown;
+    var pc      = p.pattern_color || "var(--ink4)";
+
+    h += '<div class="card" style="margin-bottom:10px;border-left:4px solid '+sc.bar+'">';
+
+    // ── Card header (always visible) ─────────────────────────────
+    h += '<div onclick="toggleProj(\''+p.id+'\')" style="cursor:pointer">';
+    h += '<div style="padding:12px 16px 10px">';
+
+    // Title row
+    h += '<div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:5px">';
+    h += '<div style="display:flex;align-items:center;gap:8px;min-width:0">';
+    h += '<span style="font-size:16px;flex-shrink:0">'+typeIcon+'</span>';
+    h += '<span style="font-size:14px;font-weight:700;color:var(--ink);line-height:1.3">'+esc(p.name||"")+'</span>';
+    h += '</div>';
+    h += '<div style="display:flex;gap:6px;flex-shrink:0;align-items:center">';
+    if(negEvts.length>0) h += '<span style="font-family:var(--mono);font-size:9px;font-weight:700;color:var(--red);padding:2px 7px;background:#FEE2E2;border:1px solid #FCA5A5">⏱ DELAY</span>';
+    h += '<span style="font-family:var(--mono);font-size:9px;font-weight:700;padding:3px 9px;background:'+sc.bg+';color:'+sc.text+';border:1px solid '+sc.border+'">'+esc(stage)+'</span>';
+    h += '</div></div>';
+
+    // Location + type
+    h += '<div style="font-family:var(--mono);font-size:10px;color:var(--ink4);margin-bottom:8px">📍 '+esc(p.location||"unknown")+'  ·  '+esc(p.type||"project")+'  ·  '+esc((p.segments||[]).join(", "))+'</div>';
+
+    // Parties row — confirmed only, unknown clearly marked
+    h += '<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px">';
+    [["Developer",p.developer],["Offtaker",p.offtaker],["EPC",p.epc]].forEach(function(pair){
+      var role=pair[0], val=pair[1];
+      if(!val) return;
+      var isUnk = val.indexOf("unknown")>=0||val.indexOf("TBD")>=0||val.indexOf("not yet")>=0||val.indexOf("미확인")>=0;
+      h += '<div style="padding:4px 9px;background:var(--bg);border:1px solid '+(isUnk?"var(--b)":"var(--b)")+'">';
+      h += '<div style="font-family:var(--mono);font-size:8px;color:var(--ink4);text-transform:uppercase;letter-spacing:.04em;margin-bottom:1px">'+esc(role)+'</div>';
+      h += '<div style="font-size:11px;font-weight:600;color:'+(isUnk?"var(--red)":"var(--ink)")+'">'+esc(val)+'</div>';
+      h += '</div>';
     });
-    h+='</div>';
-    if(p.pattern) h+='<div style="font-size:11px;font-weight:500;color:'+pc+';margin-bottom:7px">'+(negEvts.length?"⚠":"●")+" "+esc(p.pattern)+'</div>';
+    h += '</div>';
+
+    // Pattern line
+    if(p.pattern) h += '<div style="font-size:11px;font-weight:500;color:'+pc+';margin-bottom:6px">'+(negEvts.length?"⚠ ":"● ")+esc(p.pattern)+'</div>';
+
+    // Mini signal timeline (last 5 events as icons)
     if(log.length>0){
-      h+='<div style="display:flex;gap:0;align-items:center;margin-bottom:6px">';
-      logAsc.slice(-6).forEach(function(ev,i,arr){
-        var et=ev.event_type||"announcement",ec=typeColor[et]||"#6E6E6E",ei=typeIcon[et]||"●";
-        h+='<div style="display:flex;align-items:center"><span title="'+esc(typeLabel[et]||et)+" — "+esc(ev.date)+'" style="width:22px;height:22px;border-radius:50%;background:'+ec+'18;border:1.5px solid '+ec+';display:inline-flex;align-items:center;justify-content:center;font-size:11px;cursor:default">'+ei+'</span>'+(i<arr.length-1?'<span style="width:16px;height:1.5px;background:var(--b2);display:inline-block"></span>':"")+'</div>';
+      h += '<div style="display:flex;align-items:center;gap:0;margin-bottom:6px">';
+      logAsc.slice(-5).forEach(function(ev,i,arr){
+        var et  = ev.event_type||"announcement";
+        var etm = EVENT_TYPE_META[et]||{icon:"●",color:"#6E6E6E",label:et};
+        h += '<div style="display:flex;align-items:center">';
+        h += '<span title="'+esc(etm.label)+' — '+esc(ev.date||"")+'" style="width:20px;height:20px;border-radius:50%;background:'+etm.color+'18;border:1.5px solid '+etm.color+';display:inline-flex;align-items:center;justify-content:center;font-size:10px">'+etm.icon+'</span>';
+        if(i<arr.length-1) h += '<span style="width:12px;height:1.5px;background:var(--b2);display:inline-block"></span>';
+        h += '</div>';
       });
-      if(log.length>6) h+='<span style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-left:6px">+'+( log.length-6)+" more</span>";
-      h+='</div>';
+      if(log.length>5) h += '<span style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-left:5px">+'+( log.length-5)+'</span>';
+      h += '</div>';
     }
-    h+='<div style="display:flex;gap:10px;align-items:center"><span style="font-family:var(--mono);font-size:10px;color:var(--ink4)">'+log.length+' confirmed event'+(log.length!==1?"s":"")+'</span>';
-    if(p.recent_event_count>0) h+='<span style="font-family:var(--mono);font-size:10px;color:var(--blue)">'+p.recent_event_count+' in last 90d</span>';
-    if(negEvts.length>0) h+='<span style="font-family:var(--mono);font-size:10px;color:var(--red)">⚠ '+negEvts.length+' delay</span>';
-    if(inbound.length>0) h+='<span style="font-family:var(--mono);font-size:10px;color:var(--blue);padding:1px 7px;background:#EFF6FF;border:1px solid #BFDBFE">'+inbound.length+' pending review</span>';
-    h+='</div>';
-    if(!isOpen) h+='<div style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-top:6px;letter-spacing:.04em">▾ EXPAND SIGNAL HISTORY</div>';
-    h+='</div>';
+
+    // Stats strip
+    h += '<div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">';
+    h += '<span style="font-family:var(--mono);font-size:10px;color:var(--ink4)">'+log.length+' confirmed event'+(log.length!==1?"s":"")+'</span>';
+    if(p.recent_event_count>0) h += '<span style="font-family:var(--mono);font-size:10px;color:var(--blue)">'+p.recent_event_count+' recent (90d)</span>';
+    if(inbound.length>0) h += '<span style="font-family:var(--mono);font-size:10px;font-weight:700;color:var(--blue);padding:1px 7px;background:#EFF6FF;border:1px solid #BFDBFE">⚡ '+inbound.length+' new inbound</span>';
+    if(negEvts.length>0) h += '<span style="font-family:var(--mono);font-size:10px;color:var(--red)">⏱ '+negEvts.length+' delay event'+(negEvts.length>1?"s":"")+'</span>';
+    h += '</div>';
+
+    if(!isOpen) h += '<div style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-top:6px;letter-spacing:.04em">▾ EXPAND</div>';
+    h += '</div></div>'; // padding + click zone
+
     // Watch button
-    h+='<div style="padding:6px 14px 8px;display:flex;align-items:center;gap:8px" onclick="event.stopPropagation()">'+wlButtonHtml("project",p.id,p.name||"",{location:p.location,type:p.type})+'</div>';
+    h += '<div style="padding:5px 14px 8px;display:flex;align-items:center;gap:8px" onclick="event.stopPropagation()">'+wlButtonHtml("project",p.id,p.name||"",{location:p.location,type:p.type})+'</div>';
+
+    // ── Expanded detail ─────────────────────────────────────────
     if(isOpen){
-      h+='<div style="border-top:2px solid var(--ink)">';
-      if(p.investment_angle) h+='<div style="padding:10px 16px;background:#F0F5FF;border-bottom:1px solid var(--b2)"><div style="font-family:var(--mono);font-size:9px;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px">Investment Angle</div><div style="font-size:12px;color:var(--ink2);line-height:1.65">'+esc(p.investment_angle)+'</div></div>';
-      h+='<div style="padding:12px 16px 0"><div style="font-family:var(--mono);font-size:9px;font-weight:700;color:var(--ink4);letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px">Signal History <span style="font-weight:400">(analyst-curated)</span></div>';
-      if(!logAsc.length){h+='<div style="font-size:12px;color:var(--ink4);font-style:italic;padding:8px 0">No confirmed signals logged yet.</div>';}
-      else{
-        logAsc.forEach(function(ev,idx){
-          var et=ev.event_type||"announcement",ec=typeColor[et]||"#6E6E6E",ei=typeIcon[et]||"●",el2=typeLabel[et]||et;
-          var isLast=idx===logAsc.length-1;
-          h+='<div style="display:flex;gap:12px;padding-bottom:'+(isLast?16:0)+'px">';
-          h+='<div style="display:flex;flex-direction:column;align-items:center;flex-shrink:0"><span style="width:28px;height:28px;border-radius:50%;background:'+ec+'18;border:2px solid '+ec+';display:inline-flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0">'+ei+'</span>'+(isLast?"":'<div style="width:2px;flex:1;min-height:20px;background:var(--b2);margin:3px 0"></div>')+'</div>';
-          h+='<div style="flex:1;padding-bottom:'+(isLast?0:16)+'px">';
-          h+='<div style="display:flex;align-items:center;gap:7px;margin-bottom:4px;flex-wrap:wrap"><span style="font-family:var(--mono);font-size:9px;font-weight:700;padding:2px 7px;background:'+ec+'15;color:'+ec+';border:1px solid '+ec+'35;text-transform:uppercase;letter-spacing:.04em">'+esc(el2)+'</span><span style="font-family:var(--mono);font-size:10px;color:var(--ink4)">'+esc(ev.date||"")+'</span></div>';
-          h+='<div style="font-size:13px;font-weight:500;color:var(--ink);margin-bottom:4px;line-height:1.4">'+esc(ev.headline||"")+'</div>';
-          h+='<div style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-bottom:6px">📄 '+esc(ev.source_of_record||"source unknown")+(ev.source_url?' <a href="'+esc(ev.source_url)+'" target="_blank" rel="noopener" style="color:var(--blue);margin-left:4px" onclick="event.stopPropagation()">→</a>':"")+'</div>';
-          if((ev.confirmed_facts||[]).length){h+='<div style="margin-bottom:4px">';ev.confirmed_facts.forEach(function(f){h+='<div style="display:flex;gap:6px;font-size:11px;color:var(--ink2);padding:2px 0;line-height:1.5"><span style="color:var(--green);font-weight:700;flex-shrink:0">✓</span><span>'+esc(f)+'</span></div>';});h+='</div>';}
-          if((ev.what_is_unknown||[]).length){h+='<div style="background:#FFF8F8;border-left:2px solid var(--red);padding:5px 8px;margin-top:4px">';ev.what_is_unknown.forEach(function(u){h+='<div style="display:flex;gap:6px;font-size:10px;color:#7F1D1D;padding:1px 0;line-height:1.5"><span style="font-weight:700;flex-shrink:0">✗</span><span>'+esc(u)+'</span></div>';});h+='</div>';}
-          h+='</div></div>';
+      h += '<div style="border-top:2px solid var(--ink)">';
+
+      // Investment angle
+      if(p.investment_angle){
+        h += '<div style="padding:10px 16px;background:#F0F5FF;border-bottom:1px solid var(--b2)">';
+        h += '<div style="font-family:var(--mono);font-size:9px;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px">Investment Angle</div>';
+        h += '<div style="font-size:12px;color:var(--ink2);line-height:1.65">'+esc(p.investment_angle)+'</div>';
+        h += '</div>';
+      }
+
+      // ── TWO-COL: Known | Missing ─────────────────────────────
+      h += '<div style="display:grid;grid-template-columns:1fr 1fr">';
+
+      // Known
+      h += '<div style="padding:12px 14px;border-right:1px solid var(--b2)">';
+      h += '<div style="font-family:var(--mono);font-size:9px;font-weight:700;color:var(--green);letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px">✓ What Is Known</div>';
+      if(!known.length){
+        h += '<div style="font-size:11px;color:var(--ink4);font-style:italic">No confirmed facts on record.</div>';
+      } else {
+        known.forEach(function(k){
+          var fact   = typeof k==="string" ? k : (k.fact||"");
+          var source = typeof k==="string" ? "" : (k.source||"");
+          var date2  = typeof k==="string" ? "" : (k.date||"");
+          h += '<div style="display:flex;gap:7px;padding:4px 0;border-bottom:1px solid var(--b2)">';
+          h += '<span style="color:var(--green);font-weight:700;flex-shrink:0;margin-top:1px">✓</span>';
+          h += '<div><div style="font-size:11px;color:var(--ink2);line-height:1.5">'+esc(fact)+'</div>';
+          if(source||date2) h += '<div style="font-family:var(--mono);font-size:8px;color:var(--ink4);margin-top:1px">'+(date2?esc(date2)+" · ":"")+(source?esc(source):"")+'</div>';
+          h += '</div></div>';
         });
       }
-      h+='</div>';
-      h+='<div style="display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--b2)">';
-      h+='<div style="padding:12px 14px;border-right:1px solid var(--b2)"><div style="font-family:var(--mono);font-size:9px;font-weight:700;color:var(--green);letter-spacing:.08em;text-transform:uppercase;margin-bottom:7px">Known</div>';
-      if(!known.length){h+='<div style="font-size:11px;color:var(--ink4);font-style:italic">No confirmed facts.</div>';}
-      else{known.slice(-5).forEach(function(k){var fact=typeof k==="string"?k:(k.fact||""),src2=typeof k==="string"?"":( k.source||"");h+='<div style="display:flex;gap:6px;padding:3px 0;font-size:11px;color:var(--ink2);line-height:1.5"><span style="color:var(--green);font-weight:700;flex-shrink:0">✓</span><div><div>'+esc(fact)+'</div>'+(src2?'<div style="font-family:var(--mono);font-size:8px;color:var(--ink4)">'+esc(src2)+'</div>':"")+'</div></div>';});}
-      h+='</div>';
-      h+='<div style="padding:12px 14px;background:#FFF8F8"><div style="font-family:var(--mono);font-size:9px;font-weight:700;color:var(--red);letter-spacing:.08em;text-transform:uppercase;margin-bottom:7px">Missing</div>';
-      if(!missing.length){h+='<div style="font-size:11px;color:var(--ink4);font-style:italic">No gaps logged.</div>';}
-      else{missing.forEach(function(m2){var item=typeof m2==="string"?m2:(m2.item||"");h+='<div style="display:flex;gap:6px;padding:3px 0;font-size:11px;color:#7F1D1D;line-height:1.5"><span style="font-weight:700;flex-shrink:0">✗</span><div>'+esc(item)+'</div></div>';});}
-      h+='</div></div>';
-      if(inbound.length>0){h+='<div style="border-top:1px solid var(--b2);padding:12px 16px;background:#F8FBFF"><div style="font-family:var(--mono);font-size:9px;font-weight:700;color:var(--blue);letter-spacing:.08em;text-transform:uppercase;margin-bottom:7px">⚡ Inbound — Pending Review</div>';inbound.forEach(function(s){h+='<div style="display:flex;gap:8px;padding:5px 0;border-bottom:1px solid var(--b2);font-size:11px"><span style="font-family:var(--mono);font-size:10px;color:var(--ink4);min-width:80px;flex-shrink:0">'+esc(s.date||"")+'</span><div style="flex:1"><div style="font-weight:500;color:var(--ink)">'+esc(s.title||"")+'</div><div style="font-family:var(--mono);font-size:9px;color:var(--ink4)">'+esc(s.source_name||"")+" · score "+(s.score||0)+'</div></div>'+(s.source_url?'<a href="'+esc(s.source_url)+'" target="_blank" rel="noopener" style="font-family:var(--mono);font-size:9px;color:var(--blue);flex-shrink:0" onclick="event.stopPropagation()">→</a>':"")+'</div>';});h+='</div>';}
-      h+='</div>';
+      h += '</div>';
+
+      // Missing
+      h += '<div style="padding:12px 14px;background:#FFF8F8">';
+      h += '<div style="font-family:var(--mono);font-size:9px;font-weight:700;color:var(--red);letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px">✗ What Is Missing</div>';
+      if(!missing.length){
+        h += '<div style="font-size:11px;color:var(--ink4);font-style:italic">No gaps logged for latest entry.</div>';
+      } else {
+        missing.forEach(function(m2){
+          var item   = typeof m2==="string" ? m2 : (m2.item||"");
+          var as_of  = typeof m2==="string" ? "" : (m2.as_of||"");
+          h += '<div style="display:flex;gap:7px;padding:4px 0;border-bottom:1px solid var(--b2)">';
+          h += '<span style="color:var(--red);font-weight:700;flex-shrink:0;margin-top:1px">✗</span>';
+          h += '<div><div style="font-size:11px;color:#7F1D1D;line-height:1.5">'+esc(item)+'</div>';
+          if(as_of) h += '<div style="font-family:var(--mono);font-size:8px;color:var(--ink4);margin-top:1px">as of '+esc(as_of)+'</div>';
+          h += '</div></div>';
+        });
+      }
+      h += '</div>';
+      h += '</div>'; // two-col
+
+      // ── Capacity / CapEx (with source integrity) ─────────────
+      var hasMeta = p.capacity||p.capex;
+      if(hasMeta){
+        h += '<div style="display:flex;gap:0;border-top:1px solid var(--b2)">';
+        if(p.capacity){
+          var capIsKnown = p.capacity.indexOf("not disclosed")<0 && p.capacity.indexOf("unknown")<0 && p.capacity.indexOf("aspirational")<0 && p.capacity.indexOf("미공개")<0;
+          h += '<div style="flex:1;padding:10px 14px;border-right:1px solid var(--b2)">';
+          h += '<div style="font-family:var(--mono);font-size:9px;color:var(--ink4);text-transform:uppercase;letter-spacing:.04em;margin-bottom:3px">Capacity</div>';
+          h += '<div style="font-size:12px;font-weight:600;color:'+(capIsKnown?"var(--ink2)":"var(--red)")+'">'+esc(p.capacity)+'</div>';
+          if(p.capacity_source) h += '<div style="font-family:var(--mono);font-size:8px;color:var(--ink4);margin-top:2px">source: '+esc(p.capacity_source)+'</div>';
+          else if(!capIsKnown) h += '<div style="font-family:var(--mono);font-size:8px;color:var(--ink4);margin-top:2px">no public source</div>';
+          h += '</div>';
+        }
+        if(p.capex){
+          var cxIsKnown = p.capex.indexOf("not disclosed")<0 && p.capex.indexOf("unknown")<0 && p.capex.indexOf("aspirational")<0 && p.capex.indexOf("미공개")<0 && p.capex.indexOf("no official")<0;
+          h += '<div style="flex:1;padding:10px 14px">';
+          h += '<div style="font-family:var(--mono);font-size:9px;color:var(--ink4);text-transform:uppercase;letter-spacing:.04em;margin-bottom:3px">CapEx</div>';
+          h += '<div style="font-size:12px;font-weight:600;color:'+(cxIsKnown?"var(--ink2)":"var(--red)")+'">'+esc(p.capex)+'</div>';
+          if(p.capex_source) h += '<div style="font-family:var(--mono);font-size:8px;color:var(--ink4);margin-top:2px">source: '+esc(p.capex_source)+'</div>';
+          else if(!cxIsKnown) h += '<div style="font-family:var(--mono);font-size:8px;color:var(--ink4);margin-top:2px">no public source</div>';
+          h += '</div>';
+        }
+        h += '</div>';
+      }
+
+      // ── Signal log (full timeline) ───────────────────────────
+      h += '<div style="border-top:1px solid var(--b2);padding:12px 16px">';
+      h += '<div style="font-family:var(--mono);font-size:9px;font-weight:700;color:var(--ink4);letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px">Signal History <span style="font-weight:400">(analyst-curated · source-cited)</span></div>';
+      if(!logAsc.length){
+        h += '<div style="font-size:12px;color:var(--ink4);font-style:italic">No confirmed signals logged yet.</div>';
+      } else {
+        logAsc.forEach(function(ev,idx2,arr){
+          var et   = ev.event_type||"announcement";
+          var etm  = EVENT_TYPE_META[et]||{icon:"●",color:"#6E6E6E",label:et};
+          var last = idx2===arr.length-1;
+
+          h += '<div style="display:flex;gap:12px;padding-bottom:'+(last?0:16)+'px">';
+          // Spine
+          h += '<div style="display:flex;flex-direction:column;align-items:center;flex-shrink:0">';
+          h += '<span style="width:26px;height:26px;border-radius:50%;background:'+etm.color+'18;border:2px solid '+etm.color+';display:inline-flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0">'+etm.icon+'</span>';
+          if(!last) h += '<div style="width:2px;flex:1;min-height:16px;background:var(--b2);margin:3px 0"></div>';
+          h += '</div>';
+          // Content
+          h += '<div style="flex:1;padding-bottom:'+(last?0:16)+'px">';
+          h += '<div style="display:flex;align-items:center;gap:6px;margin-bottom:4px;flex-wrap:wrap">';
+          h += '<span style="font-family:var(--mono);font-size:9px;font-weight:700;padding:2px 6px;background:'+etm.color+'15;color:'+etm.color+';border:1px solid '+etm.color+'35;text-transform:uppercase">'+esc(etm.label)+'</span>';
+          h += '<span style="font-family:var(--mono);font-size:10px;color:var(--ink4)">'+esc(ev.date||"")+'</span>';
+          h += '</div>';
+          h += '<div style="font-size:12px;font-weight:500;color:var(--ink);margin-bottom:4px;line-height:1.4">'+esc(ev.headline||"")+'</div>';
+          h += '<div style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-bottom:6px">📄 '+esc(ev.source_of_record||"source unknown")+(ev.source_url?'  <a href="'+esc(ev.source_url)+'" target="_blank" rel="noopener" style="color:var(--blue)" onclick="event.stopPropagation()">→</a>':"")+'</div>';
+          // Confirmed facts
+          if((ev.confirmed_facts||[]).length){
+            ev.confirmed_facts.forEach(function(f){
+              h += '<div style="display:flex;gap:6px;font-size:11px;color:var(--ink2);padding:2px 0;line-height:1.5"><span style="color:var(--green);font-weight:700;flex-shrink:0">✓</span><span>'+esc(f)+'</span></div>';
+            });
+          }
+          // Unknowns at this point
+          if((ev.what_is_unknown||[]).length){
+            h += '<div style="background:#FFF8F8;border-left:2px solid var(--red);padding:5px 8px;margin-top:4px">';
+            ev.what_is_unknown.forEach(function(u){
+              h += '<div style="display:flex;gap:6px;font-size:10px;color:#7F1D1D;padding:1px 0;line-height:1.5"><span style="font-weight:700;flex-shrink:0">✗</span><span>'+esc(u)+'</span></div>';
+            });
+            h += '</div>';
+          }
+          h += '</div></div>'; // content + row
+        });
+      }
+      h += '</div>'; // signal log
+
+      // ── Inbound signals (pending review) ────────────────────
+      if(inbound.length>0){
+        h += '<div style="border-top:1px solid var(--b2);padding:12px 16px;background:#F8FBFF">';
+        h += '<div style="font-family:var(--mono);font-size:9px;font-weight:700;color:var(--blue);letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px">⚡ Inbound Signals — Pending Analyst Review ('+inbound.length+')</div>';
+        h += '<div style="font-size:11px;color:var(--blue);background:#EFF6FF;border:1px solid #BFDBFE;padding:5px 9px;margin-bottom:7px;line-height:1.5">Auto-matched by keyword from RSS. <b>Analyst review required</b> before adding to confirmed signal log.</div>';
+        inbound.forEach(function(s2){
+          h += '<div style="display:flex;gap:8px;padding:5px 0;border-bottom:1px solid var(--b2);font-size:11px">';
+          h += '<span style="font-family:var(--mono);font-size:10px;color:var(--ink4);min-width:80px;flex-shrink:0">'+esc(s2.date||"")+'</span>';
+          h += '<div style="flex:1">';
+          h += '<div style="font-weight:500;color:var(--ink)">'+esc(s2.title||"")+'</div>';
+          h += '<div style="font-family:var(--mono);font-size:9px;color:var(--ink4)">'+esc(s2.source_name||"")+" · score "+(s2.score||0)+" · "+esc(s2.event_type||"")+'</div>';
+          h += '<div style="font-family:var(--mono);font-size:9px;color:var(--amber);margin-top:1px">'+esc(s2.note||"Analyst review required")+'</div>';
+          h += '</div>';
+          if(s2.source_url) h += '<a href="'+esc(s2.source_url)+'" target="_blank" rel="noopener" style="font-family:var(--mono);font-size:9px;color:var(--blue);flex-shrink:0;align-self:flex-start" onclick="event.stopPropagation()">→</a>';
+          h += '</div>';
+        });
+        h += '</div>';
+      }
+
+      // ── Related signals from RSS (matched to project) ────────
+      // Also show any D.signals with this project in project_matches
+      var relatedSigs = [];
+      if(D && D.signals){
+        relatedSigs = D.signals.filter(function(ev){
+          return (ev.project_matches||[]).indexOf(p.id) >= 0;
+        }).slice(0,5);
+      }
+      if(relatedSigs.length){
+        h += '<div style="border-top:1px solid var(--b2);padding:12px 16px">';
+        h += '<div style="font-family:var(--mono);font-size:9px;font-weight:700;color:var(--ink4);letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px">Related Signals From Feed</div>';
+        relatedSigs.forEach(function(ev){
+          var sc2=ev.signal_strength>=60?"var(--green)":"var(--amber)";
+          h += '<div style="display:flex;gap:8px;padding:5px 0;border-bottom:1px solid var(--b2);align-items:flex-start">';
+          h += '<span style="font-family:var(--mono);font-size:10px;font-weight:700;color:'+sc2+';flex-shrink:0;min-width:28px">'+ev.signal_strength+'</span>';
+          h += tagFor(ev.event_type,ev.is_negative);
+          h += '<div style="flex:1"><div style="font-size:11px;font-weight:500;color:var(--ink)">'+(ev.source_url?'<a href="'+esc(ev.source_url)+'" target="_blank" rel="noopener" onclick="event.stopPropagation()">'+esc(ev.title)+'</a>':esc(ev.title))+'</div>';
+          h += '<div style="font-family:var(--mono);font-size:9px;color:var(--ink4)">'+esc(ev.source_name)+" · "+esc(ev.event_date)+'</div></div></div>';
+        });
+        h += '</div>';
+      }
+
+      // ── Linked companies + buyers ────────────────────────────
+      var cos = D && D.companies ? Object.values(D.companies).filter(function(c){ return (p.linked_companies||[]).indexOf(c.id)>=0; }) : [];
+      var buyers = D && D.strategic_buyers || [];
+      var linkedBuyers = buyers.filter(function(b){ return (p.linked_buyers||[]).indexOf(b.id)>=0; });
+
+      if(cos.length||linkedBuyers.length){
+        h += '<div style="padding:10px 16px;border-top:1px solid var(--b2);background:var(--bg);display:flex;gap:16px;flex-wrap:wrap">';
+        if(cos.length){
+          h += '<div><div style="font-family:var(--mono);font-size:9px;color:var(--ink4);text-transform:uppercase;letter-spacing:.06em;margin-bottom:5px">Tracked Companies</div>';
+          h += '<div style="display:flex;gap:5px;flex-wrap:wrap">';
+          cos.forEach(function(c){
+            h += '<span style="font-family:var(--mono);font-size:9px;padding:2px 8px;background:'+(c.stage_color||"var(--bg)")+'18;border:1px solid '+(c.stage_color||"var(--b)")+';color:'+(c.stage_color||"var(--ink4)")+';cursor:pointer" onclick="switchTabByName(\'companies\');CO_EXP.add(\''+c.id+'\');renderCompanies()">↗ '+esc(c.name)+'</span>';
+          });
+          h += '</div></div>';
+        }
+        if(linkedBuyers.length){
+          h += '<div><div style="font-family:var(--mono);font-size:9px;color:var(--ink4);text-transform:uppercase;letter-spacing:.06em;margin-bottom:5px">Strategic Buyers</div>';
+          h += '<div style="display:flex;gap:5px;flex-wrap:wrap">';
+          linkedBuyers.forEach(function(b){
+            var btc={"Utility":"#1A56DB","Shipyard":"#0A6640","Hyperscaler":"#5B21B6","EPC":"#7D4E00","EPC/OEM":"#7D4E00"}[b.type]||"#6E6E6E";
+            h += '<span style="font-family:var(--mono);font-size:9px;padding:2px 8px;background:'+btc+'10;color:'+btc+';border:1px solid '+btc+'25">'+esc(b.name)+' <span style="opacity:.6">('+esc(b.type)+')</span></span>';
+          });
+          h += '</div></div>';
+        }
+        h += '</div>';
+      }
+
+      h += '</div>'; // expanded
     }
-    h+='</div>';
+    h += '</div>'; // card
   });
-  h+='</div>';
-  el.innerHTML=h;
+
+  el.innerHTML = h;
 }
+
 
 // ════════════════════════════════════════════════════════════════
 // BUYERS
