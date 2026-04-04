@@ -1,5 +1,30 @@
 [
   {
+    "date": "2026-04-04",
+    "dateKr": "2026년 04월 04일",
+    "stats": {
+      "total": 23,
+      "high": 2,
+      "medium": 3,
+      "negative": 0,
+      "matched": 1,
+      "filtered_out": 57,
+      "companies_with_signals": 1,
+      "by_segment": {
+        "ess": 18,
+        "hvdc": 1,
+        "marine_fc": 2,
+        "grid_sw": 2
+      },
+      "by_type": {
+        "Financing": 1,
+        "Contract": 1,
+        "Partnership": 2,
+        "News": 19
+      }
+    }
+  },
+  {
     "date": "2026-04-03",
     "dateKr": "2026년 04월 03일",
     "stats": {
