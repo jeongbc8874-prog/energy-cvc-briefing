@@ -26,12 +26,12 @@ jobs:
       - name: Install dependencies
         run: pip install feedparser
 
-      - name: Fetch extended signals
-        run: python fetch_extended.py
+      - name: Collect signals
+        run: python collect_energy_signals.py
         env:
           EIA_API_KEY: ${{ secrets.EIA_API_KEY }}
         continue-on-error: true
-
+  
       - name: Run pipeline
         run: python generate-signals.py
         env:
