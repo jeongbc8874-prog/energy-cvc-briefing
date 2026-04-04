@@ -1,6 +1,6 @@
 {
   "date": "2026-04-04",
-  "generated_at": "2026-04-04T15:43:06.076652+00:00",
+  "generated_at": "2026-04-04T15:53:14.080628+00:00",
   "article_count": 0,
   "source_count": 9,
   "source_logs": [
@@ -11,7 +11,7 @@
       "status": "partial",
       "items": 0,
       "error": null,
-      "fetched_at": "2026-04-04T15:43:06.076652+00:00",
+      "fetched_at": "2026-04-04T15:53:14.080628+00:00",
       "tier": 1,
       "segments": [
         "battery_storage",
@@ -28,7 +28,7 @@
       "status": "partial",
       "items": 0,
       "error": null,
-      "fetched_at": "2026-04-04T15:43:06.076652+00:00",
+      "fetched_at": "2026-04-04T15:53:14.080628+00:00",
       "tier": 2,
       "segments": [
         "battery_storage",
@@ -45,7 +45,7 @@
       "status": "partial",
       "items": 0,
       "error": null,
-      "fetched_at": "2026-04-04T15:43:06.076652+00:00",
+      "fetched_at": "2026-04-04T15:53:14.080628+00:00",
       "tier": 2,
       "segments": [
         "battery_storage",
@@ -60,7 +60,7 @@
       "status": "partial",
       "items": 0,
       "error": null,
-      "fetched_at": "2026-04-04T15:43:06.076652+00:00",
+      "fetched_at": "2026-04-04T15:53:14.080628+00:00",
       "tier": 2,
       "segments": [
         "battery_storage",
@@ -74,7 +74,7 @@
       "status": "partial",
       "items": 0,
       "error": null,
-      "fetched_at": "2026-04-04T15:43:06.076652+00:00",
+      "fetched_at": "2026-04-04T15:53:14.080628+00:00",
       "tier": 2,
       "segments": [
         "grid_software",
@@ -90,7 +90,7 @@
       "status": "partial",
       "items": 0,
       "error": null,
-      "fetched_at": "2026-04-04T15:43:06.076652+00:00",
+      "fetched_at": "2026-04-04T15:53:14.080628+00:00",
       "tier": 2,
       "segments": [
         "offshore_wind",
@@ -104,7 +104,7 @@
       "status": "partial",
       "items": 0,
       "error": null,
-      "fetched_at": "2026-04-04T15:43:06.076652+00:00",
+      "fetched_at": "2026-04-04T15:53:14.080628+00:00",
       "tier": 3,
       "segments": [
         "battery_storage",
@@ -120,7 +120,7 @@
       "status": "partial",
       "items": 0,
       "error": null,
-      "fetched_at": "2026-04-04T15:43:06.076652+00:00",
+      "fetched_at": "2026-04-04T15:53:14.080628+00:00",
       "tier": 3,
       "segments": [
         "battery_storage",
@@ -135,7 +135,7 @@
       "status": "skipped",
       "items": 0,
       "error": "Skipped: 3 consecutive fails",
-      "fetched_at": "2026-04-04T15:43:06.076652+00:00"
+      "fetched_at": "2026-04-04T15:53:14.080628+00:00"
     }
   ],
   "articles": []
