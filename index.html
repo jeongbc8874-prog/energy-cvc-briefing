@@ -595,7 +595,7 @@ button{font-family:var(--mono);cursor:pointer;}
     <button class="tab"     onclick="switchTab('memo',this)">Memo Generator</button>
     <button class="tab"     onclick="switchTab('watchlist',this)">Watchlist<span class="tab-badge" id="wl-badge" style="display:none">0</span></button>
     <button class="tab"     onclick="switchTab('sectors',this)">Segments</button>
-    <button class="tab"     onclick="switchTab('rulebook',this)">Score Rules</button>
+    <button class="tab"     onclick="switchTab('rulebook',this)">Scoring</button>
     <button class="tab"     onclick="switchTab('history',this)">Archive</button>
   </div>
 </div>
@@ -1776,26 +1776,395 @@ function renderSegmentDetail(el, s, allIntel){
 // ════════════════════════════════════════════════════════════════
 // SCORE RULES
 // ════════════════════════════════════════════════════════════════
-function renderRulebook(){
-  var el=document.getElementById("feed-col");
-  var rb=D&&D.score_rulebook||[{group:"ALWAYS KEPT",color:"#16A34A",items:["Negative signals — exempt","Tier 1: Certification/Contract/Deployment — base 88-92"]},{group:"BOOST (+points)",color:"#1A56DB",items:["Tier-1 buyer (KEPCO, Microsoft, Google): +18","Major industrial/OEM: +12","Specific financial figure: +15","Specific capacity: +10","Concrete timeframe: +8","Tracked company: +10"]},{group:"NOISE (−points)",color:"#D97706",items:["Vague language: -35","Intent without action: -20","Generic PR: -40","Vision announcement: -30","Award/Gartner: -35","Conference: -30","Report: -25"]},{group:"VETO (always drop)",color:"#DC2626",items:["Opinion/commentary: -60","Market digest: -60","Generic job post: -50","Rebranding: -55"]},{group:"THRESHOLDS",color:"#6E6E6E",items:["≥ 60 → HIGH","35–59 → MEDIUM","20–34 → LOW (DB only)","< 20 → DROPPED","Negatives: exempt"]}];
-  var fo=D&&D.filteredOut||[];
-  var h='<div class="card"><div class="chd">Signal Scoring Rulebook</div><div style="padding:14px">';
-  h+='<div style="font-size:12px;color:var(--ink3);line-height:1.75;margin-bottom:16px;padding:10px 14px;background:var(--bg);border-left:3px solid var(--blue)">Every signal score is computed by this rulebook. Base score = event type (Tier 1–4). Modifiers add/subtract based on text patterns. Fully auditable — no black box.</div>';
-  rb.forEach(function(g){
-    h+='<div class="rb-group"><div class="rb-group-title" style="color:'+esc(g.color)+'">'+esc(g.group)+'</div>';
-    (g.items||[]).forEach(function(item){h+='<div class="rb-item"><span style="width:6px;height:6px;border-radius:50%;background:'+esc(g.color)+';flex-shrink:0;margin-top:5px;display:inline-block"></span><span>'+esc(item)+'</span></div>';});
-    h+='</div>';
+// ════════════════════════════════════════════════════════════════
+// SCORE RULES + COMPANY SCORECARDS
+// Two views: "Rulebook" (how scoring works) + "Scorecards" (per-company)
+// ════════════════════════════════════════════════════════════════
+
+var RB_VIEW = "scorecards";   // "scorecards" | "rulebook"
+
+// Investment score rules (mirrors Python INVESTMENT_SCORE_RULES)
+// Shown in rulebook; used to build on-the-fly scorecard fallback
+var INV_RULES = [
+  {id:"commercial_contract", label:"Commercial Contract",   icon:"📄", points:+3, color:"#0A6640",
+   rationale:"Named binding commercial agreement or deployment. Strongest single signal of revenue visibility."},
+  {id:"certification",       label:"Technical Certification",icon:"✓", points:+2, color:"#1A56DB",
+   rationale:"Independent third-party certification (DNV GL, KPX, UL, TÜV). Required gate for regulated procurement."},
+  {id:"pilot",               label:"Pilot / Demo",           icon:"🔬", points:+2, color:"#7D4E00",
+   rationale:"Confirmed field pilot with a named third-party. De-risks technical claims; precursor to cert or contract."},
+  {id:"strategic_partner",   label:"Named Strategic Partner",icon:"🤝", points:+1, color:"#5B21B6",
+   rationale:"Named strategic partnership (utility, shipyard, hyperscaler). Directional — value depends on binding terms."},
+  {id:"financing",           label:"Equity Financing",       icon:"💰", points:+1, color:"#0A6640",
+   rationale:"Confirmed equity round. External capital validation. Weight depends on investor type."},
+  {id:"cfo_bd_hire",         label:"CFO / BD Hire",          icon:"👤", points:+1, color:"#1A56DB",
+   rationale:"Finance or business development hire signals imminent fundraise or active contract pipeline."},
+  {id:"grant_only",          label:"Grant Only (no contract)",icon:"🏛", points:-1, color:"#D97706",
+   rationale:"Government grant without commercial anchor. Technology validation only, not market demand."},
+  {id:"pr_language",         label:"PR / Vague Language",    icon:"📢", points:-2, color:"#C0392B",
+   rationale:"Signals dominated by PR framing or vague exploratory language. No confirmable evidence."},
+  {id:"negative_signal",     label:"Negative Signal",        icon:"⚠",  points:-2, color:"#DC2626",
+   rationale:"Delay, funding risk, cancellation, or competitor win. Each negative event subtracts points."},
+];
+
+var INTERP = {
+  Strong:      {color:"#0A6640", bg:"#F0FDF4", border:"#A7F3D0", min:6},
+  Building:    {color:"#1A56DB", bg:"#EFF6FF", border:"#BFDBFE", min:4},
+  Early:       {color:"#7D4E00", bg:"#FFFBEB", border:"#FDE68A", min:2},
+  Insufficient:{color:"#6E6E6E", bg:"var(--bg)", border:"var(--b2)", min:0},
+  Concern:     {color:"#DC2626", bg:"#FEF2F2", border:"#FCA5A5", min:-99},
+};
+
+// Build on-the-fly scorecard from company + events if pipeline hasn't emitted scorecards
+function buildScorecardFromCompany(co){
+  var evs = co.events || [];
+  var components = [];
+  var total = 0;
+
+  // Map event types to rule IDs (simplified client-side version)
+  var typeMap = {
+    "Contract":   "commercial_contract",
+    "Deployment": "commercial_contract",
+    "Certification": "certification",
+    "Pilot":      "pilot",
+    "Partnership":"strategic_partner",
+    "Financing":  "financing",
+    "Hiring":     "cfo_bd_hire",
+    "Grant":      "grant_only",
+  };
+
+  var fired = {};
+  evs.forEach(function(ev){
+    if(ev.is_negative){
+      if(!fired["negative_signal"]) fired["negative_signal"]=[];
+      fired["negative_signal"].push(ev.event_type+": "+ev.title+" ("+ev.event_date+")");
+    } else {
+      var rid = typeMap[ev.event_type];
+      if(rid){ if(!fired[rid]) fired[rid]=[]; fired[rid].push(ev.event_type+": "+ev.title+" ("+ev.event_date+")"); }
+    }
   });
-  if(fo.length){
-    h+='<div class="rb-group" style="margin-top:20px"><div class="rb-group-title" style="color:var(--red)">DROPPED THIS RUN ('+fo.length+' events)</div>';
-    fo.slice(0,10).forEach(function(ev){h+='<div style="padding:7px 10px;border-bottom:1px solid var(--b2);display:flex;gap:10px;align-items:flex-start"><span style="font-family:var(--mono);font-size:10px;font-weight:700;color:var(--red);flex-shrink:0">'+(ev.signal_strength||0)+'</span><div style="flex:1"><div style="font-size:11px;color:var(--ink3)">'+esc(ev.title||"")+'</div><div style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-top:2px">'+esc(ev.source_name||"")+" · "+esc(ev.drop_reason||"score below threshold")+'</div></div></div>';});
-    if(fo.length>10) h+='<div style="padding:7px 10px;font-family:var(--mono);font-size:10px;color:var(--ink4)">…and '+(fo.length-10)+' more</div>';
-    h+='</div>';
+
+  // Grant-only check
+  if(fired["grant_only"] && !fired["commercial_contract"] && !fired["pilot"]){
+    // keep grant_only fired
+  } else {
+    delete fired["grant_only"];
   }
-  h+='</div></div>';
-  el.innerHTML=h;
+
+  // PR noise check (rough: if >half of evs are low-score)
+  var noisy = evs.filter(function(e){ return e.signal_strength<25&&!e.is_negative; }).length;
+  if(noisy>=3) fired["pr_language"] = [noisy+" signal(s) scored below 25 (noise threshold)"];
+
+  INV_RULES.forEach(function(rule){
+    var evidence = fired[rule.id] || [];
+    var earned = 0;
+    if(evidence.length){
+      if(rule.points < 0){
+        earned = rule.points * Math.min(evidence.length, 2);
+      } else {
+        earned = rule.points;
+      }
+      total += earned;
+    }
+    components.push({
+      rule_id:rule.id,label:rule.label,icon:rule.icon,
+      points:rule.points,earned:earned,
+      evidence:evidence.slice(0,3),
+      color:rule.color,rationale:rule.rationale,
+      fired:evidence.length>0,
+    });
+  });
+
+  var interp = total>=6?"Strong":total>=4?"Building":total>=2?"Early":total>=0?"Insufficient":"Concern";
+  var ic = INTERP[interp]||INTERP["Insufficient"];
+  return {
+    company_id:co.id,company_name:co.name||"",sector:co.sector||"",
+    stage_label:co.stage_label||"Lab",stage_color:co.stage_color||"#A8A8A8",
+    total_score:total,max_possible:10,
+    components:components,
+    interpretation:interp,interp_color:ic.color,
+    rationale:"Derived on-the-fly from enriched company data.",
+    note:"Score derived from public RSS signals only. Each point traceable to a source-cited event. No AI inference used.",
+    signal_count:evs.length,
+  };
 }
+
+function getScorecards(){
+  // Prefer pipeline-built scorecards; fall back to on-the-fly
+  if(D && D.scorecards && Object.keys(D.scorecards).length) return D.scorecards;
+  var cos = D && D.companies ? Object.values(D.companies) : [];
+  var out = {};
+  cos.forEach(function(co){ out[co.id]=buildScorecardFromCompany(co); });
+  return out;
+}
+
+// ════════════════════════════════════════════════════════════════
+// MAIN RENDERER
+// ════════════════════════════════════════════════════════════════
+function renderRulebook(){
+  var el = document.getElementById("feed-col");
+  var h = "";
+
+  // ── View toggle ───────────────────────────────────────────────
+  h += '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:8px">';
+  h += '<div><div style="font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink4);margin-bottom:3px">Signal Scoring</div>';
+  h += '<div style="font-size:13px;color:var(--ink2)">Transparent, auditable rules — no black-box AI</div></div>';
+  h += '<div style="display:flex;gap:0;border:1px solid var(--b);overflow:hidden">';
+  ["scorecards","rulebook"].forEach(function(v){
+    var active = RB_VIEW===v;
+    var lbl = v==="scorecards" ? "Company Scores" : "Scoring Rules";
+    h += '<button onclick="RB_VIEW=\''+v+'\';renderRulebook()" style="font-family:var(--mono);font-size:10px;font-weight:700;padding:6px 14px;border:none;cursor:pointer;background:'+(active?"var(--ink)":"var(--surface)")+';color:'+(active?"#FFF":"var(--ink4)")+'">'+lbl+'</button>';
+  });
+  h += '</div></div>';
+
+  if(RB_VIEW==="scorecards"){
+    h += renderScorecards();
+  } else {
+    h += renderRulebookView();
+  }
+
+  el.innerHTML = h;
+}
+
+// ════════════════════════════════════════════════════════════════
+// COMPANY SCORECARDS VIEW
+// ════════════════════════════════════════════════════════════════
+function renderScorecards(){
+  var scorecards = getScorecards();
+  var cards = Object.values(scorecards);
+  if(!cards.length) return '<div class="empty">No company data — run pipeline first</div>';
+
+  // Sort by total score desc
+  cards.sort(function(a,b){ return b.total_score - a.total_score; });
+
+  var maxScore = Math.max.apply(null, cards.map(function(c){ return c.max_possible; }).concat([10]));
+  var h = "";
+
+  // ── Score legend ──────────────────────────────────────────────
+  h += '<div style="background:var(--surface);border:1px solid var(--b);padding:12px 16px;margin-bottom:14px">';
+  h += '<div style="font-family:var(--mono);font-size:9px;font-weight:700;color:var(--ink4);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px">Score Interpretation</div>';
+  h += '<div style="display:flex;gap:10px;flex-wrap:wrap">';
+  [["Strong","≥ 6","Multiple independent signals — commercial traction confirmed"],
+   ["Building","4–5","Gates clearing — technical or commercial progress confirmed"],
+   ["Early","2–3","Early-stage signals. No commercial gate cleared yet"],
+   ["Insufficient","0–1","Insufficient evidence. Primary research required"],
+   ["Concern","< 0","Negatives outweigh positives. Reassess thesis"]
+  ].forEach(function(row){
+    var ic = INTERP[row[0]] || INTERP["Insufficient"];
+    h += '<div style="display:flex;align-items:center;gap:5px">';
+    h += '<span style="font-family:var(--mono);font-size:9px;font-weight:700;padding:2px 8px;background:'+ic.bg+';color:'+ic.color+';border:1px solid '+ic.border+'">'+row[0]+'</span>';
+    h += '<span style="font-family:var(--mono);font-size:9px;color:var(--ink4)">'+row[1]+'</span>';
+    h += '</div>';
+  });
+  h += '</div></div>';
+
+  // ── Scorecards ────────────────────────────────────────────────
+  cards.forEach(function(sc){
+    var ic = INTERP[sc.interpretation] || INTERP["Insufficient"];
+    var isOpen = CO_EXP.has("sc_"+sc.company_id);
+    var barPct = Math.max(0, Math.round((sc.total_score / maxScore) * 100));
+
+    h += '<div class="card" style="margin-bottom:10px;border-left:4px solid '+esc(sc.stage_color||"#A8A8A8")+'">';
+
+    // ── Card header ─────────────────────────────────────────────
+    h += '<div onclick="var k=\'sc_\'+\''+sc.company_id+'\';CO_EXP.has(k)?CO_EXP.delete(k):CO_EXP.add(k);renderRulebook()" style="cursor:pointer;padding:12px 16px 10px">';
+
+    h += '<div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:8px">';
+    // Name + sector
+    h += '<div style="flex:1;min-width:0">';
+    h += '<div style="font-size:14px;font-weight:700;color:var(--ink);margin-bottom:2px">'+esc(sc.company_name)+'</div>';
+    h += '<div style="font-family:var(--mono);font-size:10px;color:var(--ink4)">'+esc(sc.sector)+'  ·  '+esc(sc.stage_label)+'  ·  '+sc.signal_count+' signals</div>';
+    h += '</div>';
+    // Score badge + interpretation
+    h += '<div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px;flex-shrink:0">';
+    h += '<div style="font-family:var(--mono);font-size:26px;font-weight:700;color:'+esc(ic.color)+';line-height:1">'+(sc.total_score>0?"+":"")+sc.total_score+'</div>';
+    h += '<span style="font-family:var(--mono);font-size:9px;font-weight:700;padding:2px 9px;background:'+esc(ic.bg)+';color:'+esc(ic.color)+';border:1px solid '+esc(ic.border)+'">'+esc(sc.interpretation)+'</span>';
+    h += '</div></div>';
+
+    // Score bar
+    h += '<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">';
+    h += '<div style="flex:1;height:6px;background:var(--b2);border-radius:3px;overflow:hidden">';
+    if(sc.total_score > 0){
+      h += '<div style="width:'+barPct+'%;height:100%;background:'+esc(ic.color)+';border-radius:3px"></div>';
+    } else if(sc.total_score < 0) {
+      h += '<div style="width:'+Math.min(Math.abs(sc.total_score)*10,100)+'%;height:100%;background:#DC2626;border-radius:3px"></div>';
+    }
+    h += '</div>';
+    h += '<span style="font-family:var(--mono);font-size:9px;color:var(--ink4);white-space:nowrap">'+sc.total_score+' / '+sc.max_possible+'</span>';
+    h += '</div>';
+
+    // Fired rules summary row (icons only)
+    h += '<div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:6px">';
+    sc.components.forEach(function(comp){
+      if(!comp.fired) return;
+      var isPos = comp.earned > 0;
+      h += '<span title="'+esc(comp.label)+' ('+( isPos?"+":"")+comp.earned+')" style="font-family:var(--mono);font-size:10px;padding:2px 7px;background:'+esc(comp.color)+'18;color:'+esc(comp.color)+';border:1px solid '+esc(comp.color)+'35">'+comp.icon+' '+(isPos?"+":"")+comp.earned+'</span>';
+    });
+    h += '</div>';
+
+    // Rationale
+    h += '<div style="font-size:11px;color:var(--ink3);font-style:italic">'+esc(sc.rationale)+'</div>';
+
+    if(!isOpen) h += '<div style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-top:5px;letter-spacing:.04em">▾ EXPAND SCORE BREAKDOWN</div>';
+    h += '</div>'; // header
+
+    // ── Expanded: per-rule breakdown ──────────────────────────
+    if(isOpen){
+      h += '<div style="border-top:2px solid var(--ink)">';
+
+      // Rule-by-rule table
+      h += '<div style="padding:12px 16px">';
+      h += '<div style="font-family:var(--mono);font-size:9px;font-weight:700;color:var(--ink4);letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px">Score Breakdown — every point is traceable to a source-cited event</div>';
+
+      sc.components.forEach(function(comp){
+        var fired = comp.fired;
+        var isPos = comp.points > 0;
+        var rowBg = !fired ? "var(--surface)" : (isPos ? comp.color+"08" : comp.color+"06");
+        var opacity = fired ? "1" : "0.4";
+
+        h += '<div style="display:flex;align-items:flex-start;gap:12px;padding:8px 10px;border-bottom:1px solid var(--b2);background:'+rowBg+';opacity:'+opacity+'">';
+
+        // Rule icon + name
+        h += '<div style="flex:0 0 180px;min-width:0">';
+        h += '<div style="display:flex;align-items:center;gap:6px;margin-bottom:2px">';
+        h += '<span style="font-size:14px">'+comp.icon+'</span>';
+        h += '<span style="font-size:12px;font-weight:600;color:var(--ink)">'+esc(comp.label)+'</span>';
+        h += '</div>';
+        h += '<div style="font-family:var(--mono);font-size:9px;color:var(--ink4)">rule: '+esc(comp.rule_id)+'</div>';
+        h += '</div>';
+
+        // Points defined + earned
+        h += '<div style="flex:0 0 90px;text-align:right">';
+        h += '<div style="font-family:var(--mono);font-size:16px;font-weight:700;color:'+(fired?esc(comp.color):"var(--b2)")+'">'+( comp.earned!==0?(comp.earned>0?"+":"")+comp.earned:"—")+'</div>';
+        h += '<div style="font-family:var(--mono);font-size:9px;color:var(--ink4)">rule: '+(isPos?"+":"")+comp.points+' pts</div>';
+        h += '</div>';
+
+        // Evidence + rationale
+        h += '<div style="flex:1;min-width:0">';
+        if(fired && comp.evidence.length){
+          comp.evidence.forEach(function(ev2){
+            h += '<div style="display:flex;gap:5px;font-size:11px;color:var(--ink2);padding:2px 0;line-height:1.4">';
+            h += '<span style="color:'+esc(comp.color)+';font-weight:700;flex-shrink:0">'+(isPos?"✓":"✗")+'</span>';
+            h += '<span>'+esc(ev2)+'</span>';
+            h += '</div>';
+          });
+        } else if(!fired){
+          h += '<div style="font-size:11px;color:var(--ink4);font-style:italic">No matching events — rule did not fire</div>';
+        }
+        h += '<div style="font-size:10px;color:var(--ink4);margin-top:3px;line-height:1.5">'+esc(comp.rationale)+'</div>';
+        h += '</div>';
+        h += '</div>';
+      });
+
+      h += '</div>'; // padding
+
+      // Data quality note
+      h += '<div style="padding:8px 16px;background:var(--bg);border-top:1px solid var(--b2)">';
+      h += '<div style="font-family:var(--mono);font-size:9px;color:var(--ink4)">'+esc(sc.note)+'</div>';
+      h += '</div>';
+
+      // Link to full memo
+      h += '<div style="padding:8px 16px;border-top:1px solid var(--b2)">';
+      h += '<button class="gbtn" onclick="event.stopPropagation();openMemo(\''+esc(sc.company_id)+'\')">📄 Open Investment Memo →</button>';
+      h += '</div>';
+
+      h += '</div>'; // expanded
+    }
+
+    h += '</div>'; // card
+  });
+
+  return h;
+}
+
+// ════════════════════════════════════════════════════════════════
+// SCORING RULEBOOK VIEW
+// ════════════════════════════════════════════════════════════════
+function renderRulebookView(){
+  var rb = D && D.score_rulebook || [];
+  var fo = D && D.filteredOut || [];
+  var h = "";
+
+  // ── Investment scoring rules (simple point system) ────────────
+  h += '<div style="background:var(--surface);border:1px solid var(--b);margin-bottom:14px">';
+  h += '<div style="padding:10px 16px;border-bottom:2px solid var(--ink);display:flex;align-items:center;justify-content:space-between">';
+  h += '<span style="font-family:var(--mono);font-size:10px;font-weight:700;color:var(--ink4);letter-spacing:.08em;text-transform:uppercase">Investment Score Rules</span>';
+  h += '<span style="font-family:var(--mono);font-size:9px;color:var(--ink4)">per-company · additive · fully auditable</span>';
+  h += '</div>';
+
+  INV_RULES.forEach(function(rule,i){
+    var isPos = rule.points > 0;
+    var bc    = isPos ? rule.color : rule.color;
+    h += '<div style="display:flex;align-items:flex-start;gap:14px;padding:10px 16px;border-bottom:1px solid var(--b2)">';
+    // Points badge
+    h += '<div style="font-family:var(--mono);font-size:18px;font-weight:700;color:'+esc(bc)+';min-width:36px;text-align:center;flex-shrink:0">';
+    h += (isPos?"+":"")+rule.points;
+    h += '</div>';
+    // Icon + name
+    h += '<div style="flex:1">';
+    h += '<div style="display:flex;align-items:center;gap:7px;margin-bottom:3px">';
+    h += '<span style="font-size:16px">'+rule.icon+'</span>';
+    h += '<span style="font-size:13px;font-weight:700;color:var(--ink)">'+esc(rule.label)+'</span>';
+    h += '<span style="font-family:var(--mono);font-size:9px;padding:1px 6px;background:'+esc(rule.color)+'15;color:'+esc(rule.color)+';border:1px solid '+esc(rule.color)+'30">'+esc(rule.id)+'</span>';
+    h += '</div>';
+    h += '<div style="font-size:12px;color:var(--ink3);line-height:1.6">'+esc(rule.rationale)+'</div>';
+    h += '</div></div>';
+  });
+
+  // Scoring notes
+  h += '<div style="padding:10px 16px;background:#F9F7F3;border-top:1px solid var(--b2)">';
+  h += '<div style="font-family:var(--mono);font-size:9px;color:var(--ink4);line-height:1.7">';
+  h += '<b>How scoring works:</b><br>';
+  h += '① Every rule fires only if at least one source-cited event matches.<br>';
+  h += '② Positive rules award points once regardless of how many events match.<br>';
+  h += '③ Negative rules multiply by number of occurrences (max 2×).<br>';
+  h += '④ Total score = sum of all fired rules. No hidden weights or AI inference.<br>';
+  h += '⑤ Score is one input to the investment thesis — not a replacement for primary research.';
+  h += '</div></div></div>';
+
+  // ── Signal noise filter (RSS scoring) ────────────────────────
+  h += '<div style="background:var(--surface);border:1px solid var(--b);margin-bottom:14px">';
+  h += '<div style="padding:10px 16px;border-bottom:2px solid var(--ink)">';
+  h += '<span style="font-family:var(--mono);font-size:10px;font-weight:700;color:var(--ink4);letter-spacing:.08em;text-transform:uppercase">RSS Signal Noise Filter</span>';
+  h += '  <span style="font-family:var(--mono);font-size:9px;color:var(--ink4)">per-signal · additive · determines feed visibility</span>';
+  h += '</div>';
+
+  (rb.length ? rb : [
+    {group:"EVENT BASE SCORES",    color:"#1A56DB",items:["Certification / Contract / Deployment: 88–92 (Tier 1)","Pilot / Financing: 70–82 (Tier 2)","Partnership / Grant: 46–72 (Tier 3)","News / unmatched: 15 (Tier 5)"]},
+    {group:"BOOST (+points)",      color:"#0A6640",items:["Tier-1 buyer (KEPCO, Microsoft, Google): +18","Major industrial/OEM (Hyundai, Samsung): +12","Specific financial figure: +15","Specific capacity (MW/MWh): +10","Concrete timeframe: +8","Tracked company matched: +10"]},
+    {group:"NOISE (−points)",      color:"#D97706",items:["Vague language (exploring, potential): −35","Intent without action (aims to): −20","Speculative outcome (could, may): −25","Generic PR (proud to announce): −40","Vision/strategy statement: −30","Industry award/Gartner: −35","Conference appearance: −30","Report/whitepaper publication: −25"]},
+    {group:"VETO (always dropped)",color:"#DC2626",items:["Opinion/commentary: −60","Market wrap/digest: −60","Generic job posting: −50","Rebranding/marketing: −55"]},
+    {group:"THRESHOLDS",           color:"#6E6E6E",items:["≥ 60 → HIGH (shown in feed)","35–59 → MEDIUM (shown in feed)","20–34 → LOW (stored, not shown by default)","< 20 → DROPPED","Negative signals: exempt from threshold"]},
+  ]).forEach(function(g){
+    h += '<div style="padding:10px 16px;border-bottom:1px solid var(--b2)">';
+    h += '<div style="font-family:var(--mono);font-size:9px;font-weight:700;color:'+esc(g.color)+';text-transform:uppercase;letter-spacing:.07em;margin-bottom:6px">'+esc(g.group)+'</div>';
+    (g.items||[]).forEach(function(item){
+      h += '<div style="display:flex;gap:8px;font-size:12px;color:var(--ink2);padding:3px 0;line-height:1.5">';
+      h += '<span style="color:'+esc(g.color)+';flex-shrink:0;width:6px;height:6px;border-radius:50%;background:'+esc(g.color)+';margin-top:7px;display:inline-block"></span>';
+      h += '<span>'+esc(item)+'</span></div>';
+    });
+    h += '</div>';
+  });
+  h += '</div>';
+
+  // ── Dropped events log ────────────────────────────────────────
+  if(fo.length){
+    h += '<div style="background:var(--surface);border:1px solid var(--b)">';
+    h += '<div style="padding:10px 16px;border-bottom:1px solid var(--b2)">';
+    h += '<span style="font-family:var(--mono);font-size:10px;font-weight:700;color:var(--red);text-transform:uppercase;letter-spacing:.08em">Dropped This Run ('+fo.length+')</span>';
+    h += '</div>';
+    fo.slice(0,15).forEach(function(ev){
+      h += '<div style="padding:8px 16px;border-bottom:1px solid var(--b2);display:flex;gap:10px;align-items:flex-start">';
+      h += '<span style="font-family:var(--mono);font-size:11px;font-weight:700;color:var(--red);flex-shrink:0;min-width:28px">'+(ev.signal_strength||0)+'</span>';
+      h += '<div style="flex:1"><div style="font-size:11px;color:var(--ink3)">'+esc(ev.title||"")+'</div>';
+      h += '<div style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-top:2px">'+esc(ev.source_name||"")+"  ·  "+esc(ev.event_date||"")+"  ·  reason: "+esc(ev.drop_reason||"score below threshold")+'</div></div></div>';
+    });
+    if(fo.length>15) h += '<div style="padding:8px 16px;font-family:var(--mono);font-size:10px;color:var(--ink4)">…and '+(fo.length-15)+' more</div>';
+    h += '</div>';
+  }
+
+  return h;
+}
+
 
 // ════════════════════════════════════════════════════════════════
 // HISTORY
