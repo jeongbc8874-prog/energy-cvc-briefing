@@ -1,721 +1,878 @@
 #!/usr/bin/env python3
 """
-build_company_profile.py  —  Phase 2: Company-Centric Data Model
-══════════════════════════════════════════════════════════════════════
+build_company_profile.py  —  Phase 2: Company-Centric Data Model  v2.0
+══════════════════════════════════════════════════════════════════════════
 
-Phase 1 (collect + generate-signals.py)
-  → 단방향 일일 signals 목록
+입력:  data/latest.json            (generate-signals.py 출력)
+       └─ companies{}              {co_id: enrich_company() 출력}
+       └─ scorecards{}             {co_id: build_company_scorecard() 출력}
+       └─ signals[]                전체 RSS signal 이벤트
 
-Phase 2 (이 파일)
-  → 회사 중심 누적 프로필 (시계열 누적, gap 추적, 메모 구조화)
+입력:  data/company_profiles.json  (전날 누적 프로필, 없으면 신규)
 
-아키텍처:
-  입력: data/latest.json  (generate-signals.py 출력)
-  입력: data/company_profiles.json  (전날 프로필, 없으면 신규 생성)
-  출력: data/company_profiles.json  (누적 갱신)
-  출력: data/company_profiles_{DATE}.json  (일별 스냅샷)
+출력:  data/company_profiles.json  (갱신)
+       data/archive/profiles_YYYY-MM-DD.json
 
 실행 순서 (daily.yml):
-  1. python collect_energy_signals.py
+  1. python collect_energy_signals.py   (선택)
   2. python generate-signals.py
   3. python build_company_profile.py    ← 이 파일
+  4. git add data/ && git commit && git push
+
+구조 확인 (enrich_company() 반환값 키):
+  id, name, sector, country, hq, founded, description, tags,
+  known_investors, investor_type, aliases, stage (원본), watchlist_default
+  + events[]           : 최대 10개 signal 이벤트
+  + insight{}          : build_insight() 출력
+  + signal_count, high_count, neg_count, reinforcing, type_counts
+  + stage_label        : STAGE_LADDER 추론 결과
+  + stage_color, stage_desc
+  + pattern{}          : detect_pattern() 출력
+  + ttr, ttr_color     : TTR_RULES 추론 결과
+  + gaps[]             : [{rule_id, label, severity, memo}]  ← 주의: list
+  + critical_gaps (int): gaps 중 severity=="critical" 개수  ← 주의: int
+  + high_gaps (int)
+  + buyer_activity{}   : {buyer_id: {name, type, count, events[]}}
+  + linked_projects[]
+  + sector_rulebook{}
 
 데이터 정합성 원칙:
-  - 수치(funding amount, capacity)는 소스 명시된 것만 기록
-  - 없는 데이터는 null / "not disclosed" — 절대 추정하지 않음
-  - 기존 프로필의 analyst 입력(notes, overrides)은 덮어쓰지 않음
-  - signals 배열은 중복 없이 누적 (signal_id 기준 dedup)
-
-출력 스키마:
-  company_profiles.json → { "date": ..., "companies": { id: CompanyProfile } }
-
-CompanyProfile (요청 스키마 + 확장):
-  company_id, name, sector, stage, stage_label, country,
-  description, tags, known_investors,
-  funding_history[],        ← signals에서 추출 + 정적 레지스트리 병합
-  signals[],                ← 누적 (signal_id 배열)
-  signal_events[],          ← 최근 30개 이벤트 상세
-  critical_gaps[],          ← MISSING_RULES 기반 현재 gap 상태
-  buyer_activity[],         ← 매핑된 strategic buyer 활동
-  missing_evidence[],       ← gap label 배열 (UI용)
-  investment_score{},       ← scorecard 요약
-  stage_history[],          ← stage 변화 이력 (날짜 추적)
-  pattern{},                ← 최신 패턴 감지 결과
-  commercialization_path{}, ← 다음 단계 + 핵심 미싱
-  ttr, ttr_color,
-  last_updated, first_seen,
-  analyst_overrides{}       ← 수동 입력 필드 (pipeline이 덮어쓰지 않음)
-══════════════════════════════════════════════════════════════════════
+  - 수치(금액)는 소스 명시된 것만 기록. 없으면 "not disclosed".
+  - signals[]는 signal id 기준 dedup 누적.
+  - critical_gaps[].first_seen 절대 갱신 금지 (최초 감지일 보존).
+  - 오늘 signals 없는 회사도 이전 프로필 그대로 보존.
+  - funding_history verified=false 기본값. 원문 확인 후 analyst가 true로.
+══════════════════════════════════════════════════════════════════════════
 """
 
 from __future__ import annotations
 
+import difflib
 import json
 import logging
 import re
+import unicodedata
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any
+from typing import Optional
 
-log = logging.getLogger("build_company_profile")
+# ── rapidfuzz 선택적 import (없으면 difflib fallback) ─────────────
+try:
+    from rapidfuzz import fuzz as _fuzz
+    def _token_ratio(a: str, b: str) -> float:
+        return _fuzz.token_sort_ratio(a, b)
+    _FUZZY_ENGINE = "rapidfuzz"
+except ImportError:
+    def _token_ratio(a: str, b: str) -> float:
+        return difflib.SequenceMatcher(None, a.lower(), b.lower()).ratio() * 100
+    _FUZZY_ENGINE = "difflib"
+
 logging.basicConfig(
     level=logging.INFO,
-    format="%(asctime)s %(levelname)s  %(message)s",
+    format="%(asctime)s  %(message)s",
     datefmt="%H:%M:%S",
 )
+log = logging.getLogger("profile")
 
-TODAY    = datetime.now(timezone.utc).strftime("%Y-%m-%d")
-NOW_ISO  = datetime.now(timezone.utc).isoformat()
+TODAY   = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+NOW_ISO = datetime.now(timezone.utc).isoformat()
 
-DATA_DIR         = Path("data")
-LATEST_PATH      = DATA_DIR / "latest.json"
-PROFILES_PATH    = DATA_DIR / "company_profiles.json"
-ARCHIVE_DIR      = DATA_DIR / "profile_archive"
+DATA    = Path("data")
+LATEST  = DATA / "latest.json"
+DEST    = DATA / "company_profiles.json"
+ARCHIVE = DATA / "archive"
+
+FUZZY_THRESHOLD = 85   # 이 점수 이상이면 같은 회사로 간주
 
 
-# ════════════════════════════════════════════════════════════════════
-# 1. FUNDING EXTRACTOR
-#    signals에서 financing 이벤트를 추출 → funding_history 항목 생성
-#    수치가 없으면 amount = "not disclosed" (추정 금지)
-# ════════════════════════════════════════════════════════════════════
+# ══════════════════════════════════════════════════════════════════════════
+# 1. 회사 이름 정규화 + Fuzzy Matching
+#
+# 구조:
+#   co_intel 키는 이미 generate-signals.py가 매핑한 company_id.
+#   하지만 signals[]의 company_name은 자유 텍스트이므로
+#   프로필 보강 시 추가 매핑이 필요할 수 있음.
+#
+# resolve_company_id() 우선순위:
+#   1. 정확한 alias 일치 (_ALIAS_TO_ID 테이블)
+#   2. Fuzzy match vs. 등록된 모든 alias (threshold 85)
+#   3. None (레지스트리 미등록 → 무시)
+# ══════════════════════════════════════════════════════════════════════════
 
-# 라운드 단계 키워드
-_ROUND_KWS: list[tuple[str, str]] = [
-    ("series e", "Series E"),
-    ("series d", "Series D"),
-    ("series c", "Series C"),
-    ("series b", "Series B"),
-    ("series a", "Series A"),
-    ("seed round", "Seed"),
-    ("pre-seed", "Pre-Seed"),
-    ("pre-series a", "Pre-Series A"),
-    ("convertible note", "Convertible Note"),
-    ("bridge round", "Bridge"),
-    ("ipo", "IPO"),
-    ("spac", "SPAC"),
-    ("debt financing", "Debt"),
+def _norm(s: str) -> str:
+    """소문자 + 특수문자 제거 + 연속 공백 단일화."""
+    s = unicodedata.normalize("NFKC", s).lower()
+    s = re.sub(r"[,.\-_/()\[\]]", " ", s)
+    s = re.sub(r"\s+", " ", s).strip()
+    # 법인 접미사 제거 (Inc, LLC, Ltd, GmbH, Co. 등)
+    s = re.sub(r"\b(inc|llc|ltd|gmbh|co|corp|sa|bv|plc|ag|sas|oy|ab)\b\.?$", "", s).strip()
+    return s
+
+
+# ── 정확한 alias → company_id 매핑 테이블 ─────────────────────────
+# generate-signals.py COMPANIES 레지스트리와 동기화.
+# 새 회사를 COMPANIES에 추가하면 여기도 추가.
+_ALIAS_TO_ID: dict[str, str] = {
+
+    # ── Korean portfolio ───────────────────────────────────────────
+    "gridwiz":                      "c_gridwiz",
+    "grid wiz":                     "c_gridwiz",
+    "그리드위즈":                    "c_gridwiz",
+    "gridwiz inc":                  "c_gridwiz",
+    "sixty hertz":                  "c_sixtyhertz",
+    "60hz":                         "c_sixtyhertz",
+    "sixtyhertz":                   "c_sixtyhertz",
+    "식스티헤르츠":                  "c_sixtyhertz",
+    "vincen":                       "c_vincen",
+    "vinsen":                       "c_vincen",
+    "빈센":                          "c_vincen",
+    "vincen corp":                  "c_vincen",
+    "standard energy":              "c_standard_e",
+    "스탠다드에너지":                "c_standard_e",
+    "standard energy inc":          "c_standard_e",
+    "hylium":                       "c_hylium",
+    "하이리움":                      "c_hylium",
+    "하이리움산업":                  "c_hylium",
+    "hylium industries":            "c_hylium",
+    "cs energy":                    "c_cs_energy",
+    "씨에스에너지":                  "c_cs_energy",
+    "cs energy korea":              "c_cs_energy",
+
+    # ── Global benchmarks ─────────────────────────────────────────
+    "form energy":                  "c_form_energy",
+    "formenergy":                   "c_form_energy",
+    "form energy inc":              "c_form_energy",
+    "autogrid":                     "c_autogrid",
+    "auto grid":                    "c_autogrid",
+    "autogrid systems":             "c_autogrid",
+    "sunfire":                      "c_sunfire",
+    "sunfire gmbh":                 "c_sunfire",
+    "amogy":                        "c_amogy",
+    "amogy inc":                    "c_amogy",
+    "hysata":                       "c_hysata",
+    "hysata pty":                   "c_hysata",
+    "ceres power":                  "c_ceres",
+    "ceres":                        "c_ceres",
+    "invinity":                     "c_invinity",
+    "invinity energy":              "c_invinity",
+    "invinity energy systems":      "c_invinity",
+
+    # ── 에너지 스타트업 (레지스트리 미등록 — 추후 COMPANIES에 추가 가능) ──
+    # 아래는 fuzzy match용 보조 테이블. company_id가 없으면 None 반환.
+    # 실제 추가 시 generate-signals.py COMPANIES에 먼저 등록 필요.
+
+    # LDES / Battery
+    "ambri":                        None,   # 미등록
+    "eos energy":                   None,
+    "eos energy enterprises":       None,
+    "hydrostor":                    None,
+    "energy vault":                 None,
+    "enervenue":                    None,   # 미등록 — 예시 출력 참고
+    "enervenue inc":                None,
+    "form factor energy":           None,   # Form Energy 혼동 방지
+    "iron air battery":             "c_form_energy",  # 기술 명칭 매핑
+    "iron-air":                     "c_form_energy",
+
+    # Green Hydrogen / Electrolyzer
+    "electric hydrogen":            None,
+    "verdagy":                      None,
+    "ohmium":                       None,
+    "ohmium international":         None,
+    "plug power":                   None,
+    "bloom energy":                 None,
+    "electrochaea":                 None,
+    "h2pro":                        None,
+    "enapter":                      None,
+    "hysata capillary":             "c_hysata",
+
+    # Grid Software / VPP
+    "fluence":                      None,
+    "fluence energy":               None,
+    "stem":                         None,
+    "stem inc":                     None,
+    "voltus":                       None,
+    "leap energy":                  None,
+    "virtual peaker":               None,
+    "enbala":                       None,
+
+    # Advanced Nuclear
+    "kairos power":                 None,
+    "terrapower":                   None,
+    "x-energy":                     None,
+    "nuscale":                      None,
+    "nuscale power":                None,
+    "oklo":                         None,
+    "terrestrial energy":           None,
+
+    # Geothermal
+    "fervo energy":                 None,
+    "fervo":                        None,
+    "sage geosystems":              None,
+    "gradient geothermal":          None,
+    "eavor":                        None,
+
+    # Offshore Wind
+    "orsted":                       None,
+    "vestas":                       None,
+    "siemens gamesa":               None,
+    "equinor renewables":           None,
+
+    # Marine FC
+    "toyota fuel cell":             None,
+    "ballard power":                None,
+    "ballard power systems":        None,
+    "fuelcell energy":              None,
+}
+
+# 정규화된 alias → (canonical_alias, company_id) 역인덱스
+_NORM_INDEX: dict[str, tuple[str, Optional[str]]] = {
+    _norm(alias): (alias, cid)
+    for alias, cid in _ALIAS_TO_ID.items()
+}
+
+# Fuzzy 비교용 정규화된 alias 리스트 (None 제외 — 실제 등록 회사만)
+_REGISTERED_NORMS: list[tuple[str, str]] = [   # [(norm_alias, company_id)]
+    (_norm(alias), cid)
+    for alias, cid in _ALIAS_TO_ID.items()
+    if cid is not None
 ]
 
-# 금액 추출 패턴
-_AMOUNT_PATTERNS: list[str] = [
-    r"\$\s*([\d,]+(?:\.\d+)?)\s*[Bb]illion",   # $1.2 Billion
-    r"\$\s*([\d,]+(?:\.\d+)?)\s*[Mm]illion",   # $150 Million
-    r"\$\s*([\d,]+(?:\.\d+)?)[Bb]\b",           # $1.2B
-    r"\$\s*([\d,]+(?:\.\d+)?)[Mm]\b",           # $150M
-    r"€\s*([\d,]+(?:\.\d+)?)\s*[Mm]illion",
-    r"€\s*([\d,]+(?:\.\d+)?)[Mm]\b",
-    r"£\s*([\d,]+(?:\.\d+)?)\s*[Mm]illion",
-    r"₩\s*([\d,]+)억",
+
+def resolve_company_id(name: str) -> Optional[str]:
+    """
+    회사명 → company_id.
+
+    우선순위:
+      1. 정확한 alias 일치 (정규화 후)
+      2. Fuzzy token sort ratio ≥ FUZZY_THRESHOLD vs. 등록 aliases
+      3. None
+
+    Note:
+      co_intel 딕셔너리는 이미 company_id를 키로 갖고 있으므로
+      이 함수는 co_intel 외부(signals.company_name 등)에서만 사용.
+    """
+    if not name or not name.strip():
+        return None
+
+    normed = _norm(name)
+
+    # 1. 정확한 일치
+    if normed in _NORM_INDEX:
+        return _NORM_INDEX[normed][1]
+
+    # 2. Fuzzy match
+    best_score  = 0.0
+    best_cid: Optional[str] = None
+    for norm_alias, cid in _REGISTERED_NORMS:
+        score = _token_ratio(normed, norm_alias)
+        if score > best_score:
+            best_score = score
+            best_cid   = cid
+
+    if best_score >= FUZZY_THRESHOLD:
+        log.debug(
+            f"Fuzzy match: '{name}' → {best_cid} "
+            f"(score={best_score:.0f}, engine={_FUZZY_ENGINE})"
+        )
+        return best_cid
+
+    return None
+
+
+def _validate_co(co: dict) -> bool:
+    """enrich_company() 출력의 필수 키 존재 여부 확인."""
+    required = {"id", "name", "sector", "stage_label", "gaps", "ttr", "events"}
+    missing  = required - set(co.keys())
+    if missing:
+        log.warning(f"  co '{co.get('id','?')}' 필수 키 누락: {missing}")
+        return False
+    return True
+
+
+# ══════════════════════════════════════════════════════════════════════════
+# 2. Funding 추출기
+# ══════════════════════════════════════════════════════════════════════════
+
+_AMOUNT_RE = re.compile(
+    r"(\$|€|£|₩)\s*([\d,]+(?:\.\d+)?)\s*"
+    r"(billion|million|B(?=\b|\s)|M(?=\b|\s)|억)",
+    re.I,
+)
+_ROUND_MAP: list[tuple[str, str]] = [
+    ("series e",        "Series E"),
+    ("series d",        "Series D"),
+    ("series c",        "Series C"),
+    ("series b",        "Series B"),
+    ("series a",        "Series A"),
+    ("pre-series a",    "Pre-Series A"),
+    ("seed round",      "Seed"),
+    ("pre-seed",        "Pre-Seed"),
+    ("bridge round",    "Bridge"),
+    ("convertible note","Convertible Note"),
+    ("ipo",             "IPO"),
+    ("spac",            "SPAC"),
+    ("debt financing",  "Debt"),
 ]
+_LED_RE = re.compile(
+    r"(?:led by|lead investor[:\s]+)([\w\s&\-']+?)(?:\s+and\b|\s+with\b|\s*[,.]|$)",
+    re.I,
+)
 
 
-def _extract_amount(text: str) -> tuple[str, str]:
-    """
-    텍스트에서 금액과 통화 추출.
-    Returns (amount_str, currency). 없으면 ("not disclosed", "").
-    """
+def _parse_amount(text: str) -> str:
+    m = _AMOUNT_RE.search(text)
+    if not m:
+        return "not disclosed"
+    sym, raw, unit = m.group(1), m.group(2).replace(",", ""), m.group(3).upper()
+    try:
+        v = float(raw)
+    except ValueError:
+        return m.group(0).strip()
+    if unit in ("BILLION", "B"):
+        return f"{sym}{v * 1000:.0f}M"
+    if unit == "억":
+        return f"₩{v:.0f}억"
+    return f"{sym}{v:.0f}M"
+
+
+def _parse_round(text: str) -> str:
     t = text.lower()
-    for pattern in _AMOUNT_PATTERNS:
-        m = re.search(pattern, text, re.I)
-        if m:
-            raw = m.group(0).strip()
-            # 단위 정규화
-            n = m.group(1).replace(",", "")
-            try:
-                val = float(n)
-            except ValueError:
-                return raw, "USD"
-            if "billion" in t[max(0, m.start()-5):m.end()+10].lower() or raw.upper().endswith("B"):
-                currency = "EUR" if "€" in raw else "GBP" if "£" in raw else "USD"
-                return f"${val*1000:.0f}M" if currency == "USD" else f"{val*1000:.0f}M {currency}", currency
-            if "₩" in raw:
-                return raw, "KRW"
-            currency = "EUR" if "€" in raw else "GBP" if "£" in raw else "USD"
-            return f"{val:.0f}M", currency
-    return "not disclosed", ""
-
-
-def _extract_round(text: str) -> str:
-    t = text.lower()
-    for kw, label in _ROUND_KWS:
+    for kw, label in _ROUND_MAP:
         if kw in t:
             return label
-    if any(w in t for w in ["raises", "funding", "raised", "investment"]):
-        return "Unknown Round"
-    return ""
+    return "Unknown Round" if _AMOUNT_RE.search(text) else ""
 
 
-def _extract_lead_investor(text: str) -> str:
-    """
-    "led by X", "X led the round" 같은 패턴에서 리드 투자자 추출.
-    없으면 "not disclosed".
-    """
-    patterns = [
-        r"led by ([\w\s&,]+?)(?:\s+and|\s+with|\s*,|\.|$)",
-        r"([\w\s&]+?) led the (?:round|raise|investment)",
-        r"lead investor[:\s]+([\w\s&]+?)(?:\s+and|\s*,|\.|$)",
-    ]
-    for pat in patterns:
-        m = re.search(pat, text, re.I)
-        if m:
-            candidate = m.group(1).strip().rstrip(".,")
-            if 2 <= len(candidate.split()) <= 5:
-                return candidate
+def _parse_lead(text: str) -> str:
+    m = _LED_RE.search(text)
+    if m:
+        cand = m.group(1).strip().rstrip(".,")
+        if 1 <= len(cand.split()) <= 6:
+            return cand
     return "not disclosed"
 
 
 def extract_funding_events(signals: list[dict]) -> list[dict]:
     """
-    Financing 이벤트 signals에서 funding_history 항목 추출.
-    수치가 없으면 명시적으로 "not disclosed" 표기.
+    Financing 이벤트 → funding_history 항목.
+    (date[:7] + round) 기준 dedup.
+    금액 없으면 "not disclosed" — 추정하지 않음.
     """
-    events = []
-    seen   = set()
+    out:  list[dict] = []
+    seen: set[str]   = set()
 
     for ev in signals:
         if ev.get("event_type") not in ("Financing", "funding"):
             continue
-        title   = ev.get("title", "")
-        summary = ev.get("summary", "") or ev.get("raw_summary", "")
-        full    = f"{title} {summary}"
-        date    = ev.get("event_date") or ev.get("published_date", "")
-        key     = f"{date}:{title[:40]}"
+        date = ev.get("event_date") or ev.get("published_date", "")
+        text = (ev.get("title", "") + " " +
+                (ev.get("summary") or ev.get("raw_summary", "")))
+        rnd  = _parse_round(text)
+        if not rnd:
+            continue
+        key = f"{date[:7]}:{rnd}"
         if key in seen:
             continue
         seen.add(key)
-
-        amount, currency = _extract_amount(full)
-        round_stage      = _extract_round(full)
-        lead             = _extract_lead_investor(full)
-
-        events.append({
+        out.append({
             "date":          date,
-            "round":         round_stage or "Unknown Round",
-            "amount":        amount,
-            "currency":      currency or "USD",
-            "lead_investor": lead,
+            "round":         rnd,
+            "amount":        _parse_amount(text),
+            "lead_investors":[_parse_lead(text)],
             "source":        ev.get("source_name", ""),
             "source_url":    ev.get("source_url", ""),
             "signal_id":     ev.get("id", ""),
-            "verified":      False,   # analyst must verify against primary source
-            "notes":         "Extracted from RSS. Verify amount against company press release.",
+            "verified":      False,
+            "_note":         (
+                "RSS 자동 추출. 금액은 회사 공식 보도자료 또는 "
+                "DART/SEC 공시로 반드시 검증 필요."
+            ),
         })
 
-    return sorted(events, key=lambda x: x["date"], reverse=True)
+    return sorted(out, key=lambda x: x["date"], reverse=True)
 
 
-# ════════════════════════════════════════════════════════════════════
-# 2. GAP TRACKER
-#    오늘 gaps + 과거 gaps 비교 → 해결/신규/지속 구분
-# ════════════════════════════════════════════════════════════════════
+# ══════════════════════════════════════════════════════════════════════════
+# 3. Gap 병합
+#
+# 입력: today_raw_gaps = co["gaps"]  (enrich_company() 출력 — list of dict)
+#       주의: co["critical_gaps"]는 int(개수)이므로 사용하지 않음.
+# ══════════════════════════════════════════════════════════════════════════
 
-_GAP_SEVERITY_ORDER = {"critical": 0, "high": 1, "medium": 2, "low": 3}
+_SEV_ORDER = {"critical": 0, "high": 1, "medium": 2, "low": 3}
 
 
-def build_gap_history(today_gaps: list[dict], prev_gaps: list[dict]) -> list[dict]:
+def merge_gaps(
+    today_raw_gaps: list[dict],   # [{rule_id, label, severity, memo}]
+    prev_gaps:      list[dict],   # 전날 critical_gaps (status 포함)
+) -> list[dict]:
     """
-    오늘 gaps와 이전 gaps를 비교.
-    각 gap에 status: "new" | "persisting" | "resolved" 추가.
+    오늘 gaps + 이전 gaps 병합.
+      new:        오늘 새로 나타난 gap
+      persisting: 이전에도 있었고 오늘도 있는 gap (first_seen 보존)
+      resolved:   이전엔 있었는데 오늘 사라진 gap
     """
-    prev_ids = {g["rule_id"] for g in prev_gaps}
-    today_ids = {g["rule_id"] for g in today_gaps}
+    prev_active: dict[str, dict] = {
+        g["rule_id"]: g
+        for g in prev_gaps
+        if g.get("status") != "resolved"
+    }
+    today_ids: set[str] = {g["rule_id"] for g in today_raw_gaps}
+    merged: list[dict]  = []
 
-    enriched: list[dict] = []
-
-    for gap in today_gaps:
-        rid = gap["rule_id"]
-        prev = next((g for g in prev_gaps if g["rule_id"] == rid), None)
-        enriched.append({
-            **gap,
-            "status":    "persisting" if rid in prev_ids else "new",
-            "first_seen": prev.get("first_seen", TODAY) if prev else TODAY,
+    # 오늘 gaps 처리
+    for g in today_raw_gaps:
+        rid  = g["rule_id"]
+        prev = prev_active.get(rid, {})
+        merged.append({
+            "rule_id":    rid,
+            "gap_type":   g.get("label", rid),
+            "severity":   g["severity"],
+            "memo":       g["memo"],
+            "status":     "persisting" if rid in prev_active else "new",
+            "first_seen": prev.get("first_seen", TODAY),   # 최초 감지일 절대 갱신 금지
             "last_seen":  TODAY,
-            "days_open":  _days_since(prev.get("first_seen", TODAY)) if prev else 0,
         })
 
-    # Resolved gaps
-    for gap in prev_gaps:
-        if gap["rule_id"] not in today_ids:
-            enriched.append({
-                **gap,
-                "status":    "resolved",
-                "first_seen": gap.get("first_seen", "unknown"),
-                "last_seen":  gap.get("last_seen", "unknown"),
+    # resolved: 이전엔 있었지만 오늘 사라진 gap
+    for rid, g in prev_active.items():
+        if rid not in today_ids:
+            merged.append({
+                **g,
+                "status":      "resolved",
+                "last_seen":   g.get("last_seen", TODAY),
                 "resolved_on": TODAY,
             })
 
-    enriched.sort(key=lambda g: _GAP_SEVERITY_ORDER.get(g.get("severity", "low"), 9))
-    return enriched
+    merged.sort(key=lambda x: _SEV_ORDER.get(x.get("severity", "low"), 9))
+    return merged
 
 
-def _days_since(date_str: str) -> int:
-    try:
-        d = datetime.fromisoformat(date_str)
-        return (datetime.now(timezone.utc) - d.replace(tzinfo=timezone.utc)).days
-    except Exception:
-        return 0
+# ══════════════════════════════════════════════════════════════════════════
+# 4. Buyer Activity 포맷터
+# ══════════════════════════════════════════════════════════════════════════
 
-
-# ════════════════════════════════════════════════════════════════════
-# 3. STAGE HISTORY TRACKER
-#    stage 변화를 날짜와 함께 누적
-# ════════════════════════════════════════════════════════════════════
-
-def update_stage_history(
-    new_stage: str,
-    prev_history: list[dict],
-    prev_stage: str,
-) -> list[dict]:
+def format_buyer_activity(buyer_dict: dict) -> list[dict]:
     """
-    stage가 바뀌었으면 이력 추가. 동일하면 그대로.
+    {buyer_id: {name, type, count, events[]}} → 배열.
+    signal_strength 내림차순.
     """
-    history = list(prev_history)   # 복사
-    current_stage = history[-1]["stage"] if history else None
-
-    if new_stage and new_stage != current_stage:
-        history.append({
-            "stage":        new_stage,
-            "date":         TODAY,
-            "from_stage":   prev_stage or current_stage or "unknown",
-            "auto_detected": True,
-            "source":       "generate-signals.py STAGE_LADDER",
-        })
-
-    return history
-
-
-# ════════════════════════════════════════════════════════════════════
-# 4. COMMERCIALIZATION PATH
-#    현재 stage 기반으로 "다음 단계 + 핵심 미싱" 도출
-# ════════════════════════════════════════════════════════════════════
-
-_STAGE_NEXT: dict[str, dict] = {
-    "Lab": {
-        "next_stage":    "Pilot",
-        "required_gate": "Named third-party pilot commitment or government grant award",
-        "key_watch":     "Who is the first named technical partner?",
-        "typical_catalyst": "Government grant → named co-development partner",
-    },
-    "Pilot": {
-        "next_stage":    "Demo",
-        "required_gate": "Third-party certification (DNV GL / KPX / UL / TÜV) or major public pilot result",
-        "key_watch":     "Pilot KPI outcome + certification application status",
-        "typical_catalyst": "Certification award → first supply MOU with named buyer",
-    },
-    "Demo": {
-        "next_stage":    "First Commercial",
-        "required_gate": "Named commercial contract or deployment at reference site",
-        "key_watch":     "First binding contract ACV and counterparty type",
-        "typical_catalyst": "Contract announcement → Series C financing",
-    },
-    "First Commercial": {
-        "next_stage":    "Scaling",
-        "required_gate": "2+ named customers, ARR visibility, or project-finance structure",
-        "key_watch":     "Second buyer + international expansion",
-        "typical_catalyst": "Second major contract → Series D / infrastructure fund entry",
-    },
-    "Scaling": {
-        "next_stage":    "PF-Ready / Exit",
-        "required_gate": "Project-finance bankable structure or strategic M&A interest",
-        "key_watch":     "Buyer diversification + offtake concentration risk",
-        "typical_catalyst": "Project finance close / strategic acquisition",
-    },
-}
-
-_SECTOR_GATES: dict[str, str] = {
-    "marine_fc":          "DNV GL or ClassNK Type Approval Certificate",
-    "ess":                "UL 9540 / IEC 62619 + grid interconnection agreement",
-    "long_duration_storage": "Independent LCOS validation + grid interconnection",
-    "grid_sw":            "KPX / FERC / ENTSO-E market certification",
-    "hydrogen":           "Named industrial offtaker at contracted price",
-    "hvdc":               "TÜV / DNV component qualification",
-    "advanced_nuclear":   "NRC license approval",
-    "offshore_wind":      "CfD / PPA award + grid connection agreement",
-    "data_center_power":  "Hyperscaler framework PPA",
-    "geothermal":         "EGS thermal confirmation + grid connection permit",
-}
-
-
-def build_commercialization_path(co_enriched: dict) -> dict:
-    stage     = co_enriched.get("stage_label", "Lab")
-    sector    = co_enriched.get("sector", "")
-    gaps      = co_enriched.get("gaps", [])
-    scorecard = co_enriched.get("scorecard", {})
-
-    path = _STAGE_NEXT.get(stage, _STAGE_NEXT["Lab"]).copy()
-    path["current_stage"]  = stage
-    path["sector_gate"]    = _SECTOR_GATES.get(sector, "Sector-specific gate — see sector rulebook")
-    path["score"]          = scorecard.get("total_score", 0)
-    path["interpretation"] = scorecard.get("interpretation", "Insufficient")
-
-    # Top 2 critical/high gaps as blockers
-    blockers = [g for g in gaps if g.get("severity") in ("critical", "high")][:2]
-    path["current_blockers"] = [
-        {"gap": b["label"], "severity": b["severity"], "memo": b["memo"]}
-        for b in blockers
-    ]
-
-    return path
-
-
-# ════════════════════════════════════════════════════════════════════
-# 5. BUYER ACTIVITY FORMATTER
-#    enrich_company() buyer_activity dict → 요청 스키마 배열
-# ════════════════════════════════════════════════════════════════════
-
-def format_buyer_activity(buyer_act_dict: dict) -> list[dict]:
-    """
-    enrich_company()가 생성하는 buyer_activity 딕셔너리를
-    요청 스키마의 buyer_activity 배열로 변환.
-    """
-    result = []
-    for bid, b in buyer_act_dict.items():
-        evts = sorted(b.get("events", []), key=lambda e: e.get("date", ""), reverse=True)
+    out: list[dict] = []
+    for bid, b in buyer_dict.items():
+        evts = sorted(
+            b.get("events", []),
+            key=lambda e: e.get("date", ""),
+            reverse=True,
+        )
         if not evts:
             continue
         latest = evts[0]
-        result.append({
-            "buyer_id":       bid,
-            "buyer":          b.get("name", ""),
-            "type":           b.get("type", ""),
-            "interaction_count": b.get("count", 0),
-            "latest_date":    latest.get("date", ""),
-            "latest_event":   latest.get("event_type", ""),
-            "signal_strength": latest.get("score", 0),
-            "events":         evts[:3],   # 최근 3개만 상세 보존
+        out.append({
+            "buyer_id":         bid,
+            "buyer":            b.get("name", ""),
+            "type":             b.get("type", ""),
+            "interaction_count":b.get("count", 0),
+            "latest_date":      latest.get("date", ""),
+            "signal_strength":  latest.get("score", 0),
+            "recent_signals":   evts[:3],
         })
-    result.sort(key=lambda x: x.get("signal_strength", 0), reverse=True)
-    return result
+    return sorted(out, key=lambda x: -x["signal_strength"])
 
 
-# ════════════════════════════════════════════════════════════════════
-# 6. CORE BUILDER
-#    enrich_company() 출력 + 이전 프로필 → 갱신된 CompanyProfile
-# ════════════════════════════════════════════════════════════════════
+# ══════════════════════════════════════════════════════════════════════════
+# 5. Signal Events 병합 (id dedup, 최신순 30개)
+# ══════════════════════════════════════════════════════════════════════════
+
+def merge_signal_events(today_evs: list[dict], prev_evs: list[dict]) -> list[dict]:
+    prev_ids: set[str] = {e.get("id", "") for e in prev_evs}
+    new = [
+        {
+            "id":              ev.get("id", ""),
+            "date":            ev.get("event_date") or ev.get("published_date", ""),
+            "title":           ev.get("title", ""),
+            "event_type":      ev.get("event_type", ""),
+            "signal_tier":     ev.get("signal_tier", "low"),
+            "signal_strength": ev.get("signal_strength", 0),
+            "source_name":     ev.get("source_name", ""),
+            "source_url":      ev.get("source_url", ""),
+            "is_negative":     ev.get("is_negative", False),
+            "neg_subtype":     ev.get("neg_subtype"),
+            "observed_fact":   (
+                ev.get("evidence", {}).get("observed_fact")
+                or ev.get("title", "")
+            ),
+        }
+        for ev in today_evs
+        if ev.get("id", "") not in prev_ids
+    ]
+    combined = new + prev_evs
+    combined.sort(key=lambda e: e.get("date", ""), reverse=True)
+    return combined[:30]
+
+
+# ══════════════════════════════════════════════════════════════════════════
+# 6. Next Step 추론
+# ══════════════════════════════════════════════════════════════════════════
+
+_STAGE_NEXT: dict[str, dict] = {
+    "Lab":              {"next": "Pilot",
+                         "gate": "Named third-party pilot or government grant award"},
+    "Pilot":            {"next": "Demo / First Commercial",
+                         "gate": "Third-party certification (DNV GL / KPX / UL / TÜV)"},
+    "Demo":             {"next": "First Commercial",
+                         "gate": "Named commercial contract with binding terms"},
+    "First Commercial": {"next": "Scaling",
+                         "gate": "2+ named customers or project-finance structure"},
+    "Scaling":          {"next": "PF-Ready / Exit",
+                         "gate": "Project-finance close or strategic M&A"},
+    "PF-Ready":         {"next": "Exit / IPO",
+                         "gate": "Strategic acquisition or public listing"},
+}
+_SECTOR_GATE: dict[str, str] = {
+    "marine_fc":        "DNV GL or ClassNK Type Approval Certificate",
+    "ess":              "UL 9540 / IEC 62619 + grid interconnection agreement",
+    "grid_sw":          "KPX / FERC / ENTSO-E market certification + named contract",
+    "hydrogen":         "Named industrial offtaker at contracted price (not MOU)",
+    "hvdc":             "TÜV / DNV component qualification + OEM supply agreement",
+    "dc_power":         "Hyperscaler framework PPA",
+    "advanced_nuclear": "NRC license approval",
+    "offshore_wind":    "CfD or PPA award + grid connection agreement",
+    "geothermal":       "EGS thermal confirmation + grid connection permit",
+    "long_duration_storage": "UL 9540 + independent LCOS validation + offtake agreement",
+}
+
+
+def build_next_step(stage: str, sector: str, active_gaps: list[dict]) -> dict:
+    path = _STAGE_NEXT.get(stage, _STAGE_NEXT["Lab"]).copy()
+    path["current_stage"] = stage
+    path["sector_gate"]   = _SECTOR_GATE.get(sector, "Sector-specific gate — see rulebook")
+    path["top_blockers"]  = [
+        {"gap_type": g["gap_type"], "severity": g["severity"]}
+        for g in active_gaps
+        if g.get("severity") in ("critical", "high")
+        and g.get("status") != "resolved"
+    ][:3]
+    return path
+
+
+# ══════════════════════════════════════════════════════════════════════════
+# 7. 핵심 빌더
+# ══════════════════════════════════════════════════════════════════════════
 
 def build_profile(
-    co_enriched: dict,
-    prev_profile: dict | None,
-    scorecard: dict | None,
-) -> dict:
+    co:        dict,              # enrich_company() 출력 (오늘)
+    prev:      dict,              # 전날 CompanyProfile (없으면 {})
+    scorecard: dict,              # build_company_scorecard() 출력 (없으면 {})
+) -> Optional[dict]:
     """
-    하나의 enriched company dict에서 CompanyProfile 생성/갱신.
-
-    Args:
-        co_enriched:  generate-signals.py enrich_company() 출력
-        prev_profile: 전날 저장된 CompanyProfile (없으면 None)
-        scorecard:    build_company_scorecard() 출력
-
-    Returns:
-        갱신된 CompanyProfile dict
+    요청 스키마를 충족하는 CompanyProfile 생성.
+    필수 키 누락 시 None 반환.
     """
-    prev = prev_profile or {}
+    if not _validate_co(co):
+        return None
 
-    cid    = co_enriched["id"]
-    name   = co_enriched.get("name", "")
-    sector = co_enriched.get("sector", "")
-    stage  = co_enriched.get("stage_label", "Lab")
+    cid   = co["id"]
+    stage = co.get("stage_label", "Lab")
 
-    # ── Signal 누적 ──────────────────────────────────────────────────
-    today_evs   = co_enriched.get("events", [])
-    today_ids   = {e["id"] for e in today_evs if "id" in e}
-    prev_ids    = set(prev.get("signals", []))
-    all_sig_ids = sorted(prev_ids | today_ids)
+    # ── signals 누적 ──────────────────────────────────────────────
+    today_evs  = co.get("events", [])              # max 10 (enrich_company 제한)
+    today_ids  = {e["id"] for e in today_evs if "id" in e}
+    prev_ids   = set(prev.get("signals", []))
+    all_ids    = sorted(prev_ids | today_ids)      # 전체 누적 (날짜 무관)
 
-    # signal_events: 최근 30개 이벤트 상세 (중복 제거 후 날짜 역순)
-    prev_evs     = prev.get("signal_events", [])
-    prev_ev_ids  = {e.get("id", "") for e in prev_evs}
-    new_evs_full = [
-        {
-            "id":          e.get("id", ""),
-            "date":        e.get("event_date", e.get("published_date", "")),
-            "title":       e.get("title", ""),
-            "event_type":  e.get("event_type", ""),
-            "signal_tier": e.get("signal_tier", ""),
-            "signal_strength": e.get("signal_strength", 0),
-            "source_name": e.get("source_name", ""),
-            "source_url":  e.get("source_url", ""),
-            "is_negative": e.get("is_negative", False),
-            "neg_subtype": e.get("neg_subtype"),
-            "observed_fact": e.get("evidence", {}).get("observed_fact", e.get("title", "")),
-            "why_it_matters": e.get("evidence", {}).get("why_it_matters", ""),
-        }
-        for e in today_evs if e.get("id", "") not in prev_ev_ids
-    ]
-    combined_evs = new_evs_full + prev_evs
-    combined_evs.sort(key=lambda e: e.get("date", ""), reverse=True)
-    signal_events = combined_evs[:30]
+    # ── signal_events 병합 ────────────────────────────────────────
+    signal_events = merge_signal_events(today_evs, prev.get("signal_events", []))
 
-    # ── Funding history 누적 ────────────────────────────────────────
-    today_funding  = extract_funding_events(today_evs)
-    prev_funding   = prev.get("funding_history", [])
-    # 정적 레지스트리 funding (COMPANIES 내 known_investors 등은 별도 — 여기서는 signal 기반만)
-    merged_funding = _merge_funding(today_funding, prev_funding)
+    # ── funding_history ───────────────────────────────────────────
+    today_funding = extract_funding_events(today_evs)
+    prev_funding  = prev.get("funding_history", [])
+    seen_fkeys    = {f"{f['date'][:7]}:{f['round']}" for f in prev_funding}
+    merged_funding = list(prev_funding)
+    for f in today_funding:
+        k = f"{f['date'][:7]}:{f['round']}"
+        if k not in seen_fkeys:
+            merged_funding.append(f)
+            seen_fkeys.add(k)
+    merged_funding.sort(key=lambda x: x.get("date", ""), reverse=True)
 
-    # ── Gaps ─────────────────────────────────────────────────────────
-    today_gaps = co_enriched.get("gaps", [])
-    prev_gaps  = [g for g in prev.get("critical_gaps", []) if g.get("status") != "resolved"]
-    gap_history = build_gap_history(today_gaps, prev_gaps)
+    # ── critical_gaps (list) ──────────────────────────────────────
+    # 주의: co["gaps"]는 list, co["critical_gaps"]는 int
+    today_raw_gaps = co.get("gaps", [])
+    prev_gaps_list = prev.get("critical_gaps", [])
+    critical_gaps  = merge_gaps(today_raw_gaps, prev_gaps_list)
+    active_gaps    = [g for g in critical_gaps if g.get("status") != "resolved"]
+    missing_ev     = [g["gap_type"] for g in active_gaps]
 
-    # missing_evidence (UI용 간결한 레이블 배열)
-    missing_ev = [g["label"] for g in gap_history if g.get("status") != "resolved"]
+    # ── buyer_activity ─────────────────────────────────────────────
+    buyer_activity = format_buyer_activity(co.get("buyer_activity", {}))
 
-    # ── Stage history ─────────────────────────────────────────────────
-    prev_stage_hist  = prev.get("stage_history", [])
-    prev_stage       = prev.get("stage_label", "")
-    stage_history    = update_stage_history(stage, prev_stage_hist, prev_stage)
-
-    # ── Buyer activity ────────────────────────────────────────────────
-    buyer_act_raw  = co_enriched.get("buyer_activity", {})
-    buyer_activity = format_buyer_activity(buyer_act_raw)
-
-    # ── Commercialization path ────────────────────────────────────────
-    co_for_path = dict(co_enriched)
-    co_for_path["scorecard"] = scorecard or {}
-    comm_path = build_commercialization_path(co_for_path)
-
-    # ── Investment score summary ──────────────────────────────────────
-    inv_score_summary: dict = {}
+    # ── investment score ───────────────────────────────────────────
+    inv_score: dict = {}
     if scorecard:
-        inv_score_summary = {
-            "total_score":     scorecard.get("total_score", 0),
-            "max_possible":    scorecard.get("max_possible", 10),
-            "interpretation":  scorecard.get("interpretation", "Insufficient"),
-            "rationale":       scorecard.get("rationale", ""),
-            "as_of":           TODAY,
+        inv_score = {
+            "total_score":    scorecard.get("total_score", 0),
+            "max_possible":   scorecard.get("max_possible", 10),
+            "interpretation": scorecard.get("interpretation", "Insufficient"),
+            "rationale":      scorecard.get("rationale", ""),
+            "as_of":          TODAY,
         }
 
-    # ── analyst_overrides 보존 (pipeline이 절대 덮어쓰지 않음) ───────
-    analyst_overrides = prev.get("analyst_overrides", {
-        "stage_override":    None,   # 수동 stage 설정 시 사용
-        "ttr_override":      None,
-        "thesis_note":       None,   # 투자 테제 요약 (analyst 작성)
-        "watch_flag":        None,   # "high" | "medium" | "pass" | null
-        "last_reviewed":     None,
-        "reviewed_by":       None,
-    })
+    # ── ttr slug ──────────────────────────────────────────────────
+    ttr_raw  = co.get("ttr", "Long-term")
+    ttr_slug = ttr_raw.lower().replace("-", "_").replace(" ", "_")
+    # e.g. "Near-term" → "near_term"
 
     return {
-        # ── 기본 정보 ─────────────────────────────────────────────────
-        "company_id":    cid,
-        "name":          name,
-        "sector":        sector,
-        "stage":         stage,
-        "stage_label":   stage,
-        "country":       co_enriched.get("country", ""),
-        "description":   co_enriched.get("description", ""),
-        "founded":       co_enriched.get("founded"),
-        "hq":            co_enriched.get("hq", ""),
-        "tags":          co_enriched.get("tags", []),
-        "known_investors": co_enriched.get("known_investors", []),
-        "investor_type": co_enriched.get("investor_type", ""),
-
-        # ── Signal 누적 ───────────────────────────────────────────────
-        "signals":       all_sig_ids,
-        "signal_count":  len(all_sig_ids),
-        "signal_events": signal_events,
-        "high_count":    co_enriched.get("high_count", 0),
-        "neg_count":     co_enriched.get("neg_count", 0),
-        "type_counts":   co_enriched.get("type_counts", {}),
-
-        # ── Funding history ───────────────────────────────────────────
-        "funding_history": merged_funding,
-
-        # ── Gap tracking ──────────────────────────────────────────────
-        "critical_gaps":   gap_history,
+        # ══ 요청 스키마 필수 필드 ════════════════════════════════════
+        "company_id":       cid,
+        "name":             co.get("name", ""),
+        "sector":           co.get("sector", ""),
+        "stage":            stage.lower().replace(" ", "_"),
+        "stage_label":      stage,
+        "country":          co.get("country", ""),
+        "description":      co.get("description", ""),
+        "funding_history":  merged_funding,
+        "signals":          all_ids,
+        "critical_gaps":    critical_gaps,         # list (with status/first_seen)
+        "buyer_activity":   buyer_activity,
         "missing_evidence": missing_ev,
-        "gap_count":       len([g for g in gap_history if g.get("status") != "resolved"]),
-        "critical_gap_count": len([g for g in gap_history
-                                   if g.get("severity") == "critical"
-                                   and g.get("status") != "resolved"]),
-
-        # ── Buyer activity ────────────────────────────────────────────
-        "buyer_activity": buyer_activity,
-
-        # ── Stage ─────────────────────────────────────────────────────
-        "stage_history":  stage_history,
-        "stage_color":    co_enriched.get("stage_color", "#6E6E6E"),
-        "stage_desc":     co_enriched.get("stage_desc", ""),
-
-        # ── Pattern ───────────────────────────────────────────────────
-        "pattern":        co_enriched.get("pattern", {}),
-
-        # ── TTR ───────────────────────────────────────────────────────
-        "ttr":            co_enriched.get("ttr", "Long-term"),
-        "ttr_color":      co_enriched.get("ttr_color", "#6E6E6E"),
-
-        # ── Investment scoring ────────────────────────────────────────
-        "investment_score": inv_score_summary,
-
-        # ── Commercialization path ────────────────────────────────────
-        "commercialization_path": comm_path,
-
-        # ── Sector rulebook ───────────────────────────────────────────
-        "sector_rulebook": co_enriched.get("sector_rulebook", {}),
-
-        # ── Analyst 입력 (보존) ───────────────────────────────────────
-        "analyst_overrides": analyst_overrides,
-
-        # ── 메타 ──────────────────────────────────────────────────────
-        "last_updated":  TODAY,
-        "first_seen":    prev.get("first_seen", TODAY),
-        "data_note":     (
-            "All numerical values must have source citations. "
-            "Fields without sources are marked 'not disclosed'. "
-            "Do not cite unverified figures externally."
+        "ttr":              ttr_slug,
+        "last_updated":     TODAY,
+        # ══ 확장 필드 (Investment Memo Generator용) ══════════════════
+        "hq":               co.get("hq", ""),
+        "founded":          co.get("founded"),
+        "tags":             co.get("tags", []),
+        "known_investors":  co.get("known_investors", []),
+        "investor_type":    co.get("investor_type", ""),
+        "signal_count":     len(all_ids),
+        "signal_events":    signal_events,
+        "high_count":       co.get("high_count", 0),
+        "neg_count":        co.get("neg_count", 0),
+        "type_counts":      co.get("type_counts", {}),
+        "pattern":          co.get("pattern", {}),
+        "stage_color":      co.get("stage_color", "#6E6E6E"),
+        "stage_desc":       co.get("stage_desc", ""),
+        "ttr_color":        co.get("ttr_color", "#6E6E6E"),
+        "investment_score": inv_score,
+        "next_step":        build_next_step(stage, co.get("sector", ""), active_gaps),
+        "sector_rulebook":  co.get("sector_rulebook", {}),
+        "insight":          co.get("insight", {}),
+        "first_seen":       prev.get("first_seen", TODAY),
+        "_data_integrity": (
+            "수치(금액, 용량, 일정)는 출처 명시된 것만 기록. "
+            "'not disclosed'는 공개 정보 없음을 의미. "
+            "외부 인용 전 반드시 원문(보도자료/DART/SEC 공시) 검증 필요."
         ),
     }
 
 
-def _merge_funding(new_events: list[dict], prev_events: list[dict]) -> list[dict]:
-    """새 funding 이벤트를 이전 이력과 병합. (날짜+라운드) 기준 dedup."""
-    seen = {f"{e['date']}:{e['round']}" for e in prev_events}
-    merged = list(prev_events)
-    for ev in new_events:
-        key = f"{ev['date']}:{ev['round']}"
-        if key not in seen:
-            merged.append(ev)
-            seen.add(key)
-    merged.sort(key=lambda e: e.get("date", ""), reverse=True)
-    return merged
+# ══════════════════════════════════════════════════════════════════════════
+# 8. 포트폴리오 요약
+# ══════════════════════════════════════════════════════════════════════════
 
-
-# ════════════════════════════════════════════════════════════════════
-# 7. PORTFOLIO SUMMARY
-#    전체 포트폴리오 요약 (fund-level 대시보드용)
-# ════════════════════════════════════════════════════════════════════
-
-def build_portfolio_summary(profiles: dict[str, dict]) -> dict:
-    """
-    company_profiles 전체에서 포트폴리오 수준 요약 생성.
-    """
+def portfolio_summary(profiles: dict[str, dict]) -> dict:
     cos = list(profiles.values())
-
-    stage_dist: dict[str, int] = {}
+    stage_dist:  dict[str, int] = {}
     sector_dist: dict[str, int] = {}
-    ttr_dist: dict[str, int] = {}
+    ttr_dist:    dict[str, int] = {}
+    for c in cos:
+        sl = c.get("stage_label", "Lab");   stage_dist[sl]  = stage_dist.get(sl, 0) + 1
+        sc = c.get("sector", "other");      sector_dist[sc] = sector_dist.get(sc, 0) + 1
+        tt = c.get("ttr", "long_term");     ttr_dist[tt]    = ttr_dist.get(tt, 0) + 1
 
-    high_signal_cos  = []
-    concern_cos      = []
-    stage_changed    = []
-
-    for co in cos:
-        # 분포
-        sl = co.get("stage_label", "Lab")
-        stage_dist[sl] = stage_dist.get(sl, 0) + 1
-        sec = co.get("sector", "other")
-        sector_dist[sec] = sector_dist.get(sec, 0) + 1
-        ttr = co.get("ttr", "Long-term")
-        ttr_dist[ttr] = ttr_dist.get(ttr, 0) + 1
-
-        # High signal companies
-        if co.get("high_count", 0) >= 2:
-            high_signal_cos.append({
-                "company_id":  co["company_id"],
-                "name":        co["name"],
-                "high_count":  co["high_count"],
-                "stage":       co["stage_label"],
-                "score":       co.get("investment_score", {}).get("total_score", 0),
-            })
-
-        # Concern companies (net negative score or neg signals)
-        score = co.get("investment_score", {}).get("total_score", 0)
-        if score < 0 or co.get("neg_count", 0) >= 2:
-            concern_cos.append({
-                "company_id": co["company_id"],
-                "name":       co["name"],
-                "score":      score,
-                "neg_count":  co.get("neg_count", 0),
-            })
-
-        # Stage changes today
-        sh = co.get("stage_history", [])
-        if sh and sh[-1].get("date") == TODAY and len(sh) > 1:
-            stage_changed.append({
-                "company_id": co["company_id"],
-                "name":       co["name"],
-                "from":       sh[-1].get("from_stage", "?"),
-                "to":         sh[-1].get("stage", "?"),
-            })
-
-    high_signal_cos.sort(key=lambda x: -x["high_count"])
-    concern_cos.sort(key=lambda x: x["score"])
-
+    total_crit = sum(
+        sum(1 for g in c.get("critical_gaps", [])
+            if g.get("severity") == "critical" and g.get("status") != "resolved")
+        for c in cos
+    )
+    high_cos = sorted(
+        [c for c in cos if c.get("high_count", 0) >= 1],
+        key=lambda c: -(c.get("high_count", 0) * 3
+                        + c.get("investment_score", {}).get("total_score", 0)),
+    )[:5]
+    concern = [
+        {"company_id": c["company_id"], "name": c["name"],
+         "score": c.get("investment_score", {}).get("total_score", 0),
+         "neg_count": c.get("neg_count", 0)}
+        for c in cos
+        if (c.get("investment_score", {}).get("total_score", 0) < 0
+            or c.get("neg_count", 0) >= 2)
+    ]
     return {
-        "as_of":              TODAY,
-        "total_companies":    len(cos),
-        "stage_distribution": stage_dist,
-        "sector_distribution":sector_dist,
-        "ttr_distribution":   ttr_dist,
-        "high_signal_companies": high_signal_cos[:5],
-        "concern_companies":     concern_cos[:3],
-        "stage_changes_today":   stage_changed,
-        "total_critical_gaps":   sum(co.get("critical_gap_count", 0) for co in cos),
-        "companies_with_buyers": sum(1 for co in cos if co.get("buyer_activity")),
+        "as_of":               TODAY,
+        "total_companies":     len(cos),
+        "stage_distribution":  stage_dist,
+        "sector_distribution": sector_dist,
+        "ttr_distribution":    ttr_dist,
+        "total_critical_gaps": total_crit,
+        "fuzzy_engine":        _FUZZY_ENGINE,
+        "high_signal_companies": [
+            {"company_id": c["company_id"], "name": c["name"],
+             "high_count": c["high_count"], "stage": c["stage_label"],
+             "score": c.get("investment_score", {}).get("total_score", 0)}
+            for c in high_cos
+        ],
+        "concern_companies": concern,
     }
 
 
-# ════════════════════════════════════════════════════════════════════
-# 8. MAIN
-# ════════════════════════════════════════════════════════════════════
+# ══════════════════════════════════════════════════════════════════════════
+# 9. 예시 출력 (Form Energy & EnerVenue)
+#    main() 실행 후 콘솔에 두 회사 프로필 요약 출력.
+# ══════════════════════════════════════════════════════════════════════════
+
+def _print_profile_summary(label: str, profile: Optional[dict]) -> None:
+    """프로필 핵심 필드를 포맷해서 출력."""
+    print(f"\n{'─'*60}")
+    print(f"  {label}")
+    print(f"{'─'*60}")
+
+    if profile is None:
+        print("  ⚠ 레지스트리 미등록 — company_profiles.json에 없음")
+        print(f"  → generate-signals.py의 COMPANIES 배열에 먼저 추가 필요")
+        print(f"  → _ALIAS_TO_ID 테이블에 company_id 매핑도 추가 필요")
+        return
+
+    cid  = profile.get("company_id", "?")
+    name = profile.get("name", "?")
+    print(f"  company_id   : {cid}")
+    print(f"  name         : {name}")
+    print(f"  sector       : {profile.get('sector','?')}")
+    print(f"  stage_label  : {profile.get('stage_label','?')}")
+    print(f"  ttr          : {profile.get('ttr','?')}")
+    print(f"  signal_count : {profile.get('signal_count',0)}")
+    print(f"  high_count   : {profile.get('high_count',0)}")
+    print(f"  neg_count    : {profile.get('neg_count',0)}")
+    print(f"  first_seen   : {profile.get('first_seen','?')}")
+    print(f"  last_updated : {profile.get('last_updated','?')}")
+
+    score_d = profile.get("investment_score", {})
+    if score_d:
+        print(f"  inv_score    : {score_d.get('total_score','?')} / {score_d.get('max_possible','?')}"
+              f"  ({score_d.get('interpretation','?')})")
+
+    gaps   = profile.get("critical_gaps", [])
+    active = [g for g in gaps if g.get("status") != "resolved"]
+    print(f"\n  critical_gaps ({len(active)} active, {len(gaps)-len(active)} resolved):")
+    for g in gaps[:5]:
+        icon = "●" if g["status"] != "resolved" else "✓"
+        days = ""
+        if g["status"] == "persisting":
+            try:
+                d0 = datetime.fromisoformat(g["first_seen"])
+                days = f"  ({(datetime.now(timezone.utc)-d0.replace(tzinfo=timezone.utc)).days}d open)"
+            except Exception:
+                pass
+        print(f"    {icon} [{g['severity']:<8}] {g['gap_type']:<40} "
+              f"status={g['status']}{days}")
+
+    buyers = profile.get("buyer_activity", [])
+    if buyers:
+        print(f"\n  buyer_activity ({len(buyers)}):")
+        for b in buyers[:3]:
+            print(f"    · {b['buyer']:<20} type={b['type']:<12} "
+                  f"strength={b['signal_strength']:<3} "
+                  f"interactions={b['interaction_count']}")
+
+    funding = profile.get("funding_history", [])
+    if funding:
+        print(f"\n  funding_history ({len(funding)}):")
+        for f in funding[:3]:
+            ver = "✓ verified" if f.get("verified") else "⚠ unverified"
+            print(f"    · {f['date'][:7]}  {f['round']:<20} "
+                  f"{f['amount']:<12} {ver}")
+
+    ns = profile.get("next_step", {})
+    if ns:
+        print(f"\n  next_step:")
+        print(f"    current  : {ns.get('current_stage','?')}")
+        print(f"    next     : {ns.get('next','?')}")
+        print(f"    gate     : {ns.get('gate','?')}")
+        print(f"    blockers : {[b['gap_type'] for b in ns.get('top_blockers',[])]}")
+
+    missing = profile.get("missing_evidence", [])
+    if missing:
+        print(f"\n  missing_evidence:")
+        for m in missing:
+            print(f"    ✗ {m}")
+
+    print()
+
+
+# ══════════════════════════════════════════════════════════════════════════
+# 10. MAIN
+# ══════════════════════════════════════════════════════════════════════════
 
 def main():
-    log.info(f"build_company_profile.py — {TODAY}")
+    log.info(f"build_company_profile.py v2.0  —  {TODAY}")
+    log.info(f"Fuzzy engine: {_FUZZY_ENGINE} (threshold={FUZZY_THRESHOLD})")
 
-    # ── 입력 로드 ─────────────────────────────────────────────────
-    if not LATEST_PATH.exists():
-        log.error(f"latest.json not found at {LATEST_PATH}. Run generate-signals.py first.")
+    if not LATEST.exists():
+        log.error(f"{LATEST} 없음. generate-signals.py를 먼저 실행하세요.")
         return
 
-    latest = json.loads(LATEST_PATH.read_text())
-    co_intel: dict = latest.get("companies", {})
-    scorecards: dict = latest.get("scorecards", {})
+    # ── 입력 로드 ────────────────────────────────────────────────
+    latest     = json.loads(LATEST.read_text("utf-8"))
+    co_intel   = latest.get("companies", {})    # {co_id: enrich_company() 출력}
+    scorecards = latest.get("scorecards", {})   # {co_id: scorecard}
+    log.info(f"latest.json: 회사 {len(co_intel)}개, 스코어카드 {len(scorecards)}개")
 
-    if not co_intel:
-        log.warning("No company data in latest.json. Check signal coverage.")
-        return
-
-    # ── 이전 프로필 로드 ──────────────────────────────────────────
+    # ── 이전 프로필 로드 ─────────────────────────────────────────
     prev_profiles: dict[str, dict] = {}
-    if PROFILES_PATH.exists():
+    if DEST.exists():
         try:
-            saved = json.loads(PROFILES_PATH.read_text())
+            saved = json.loads(DEST.read_text("utf-8"))
             prev_profiles = saved.get("companies", {})
-            log.info(f"Loaded {len(prev_profiles)} previous profiles")
+            log.info(f"이전 프로필: {len(prev_profiles)}개")
         except Exception as ex:
-            log.warning(f"Could not load previous profiles: {ex} — starting fresh")
+            log.warning(f"이전 프로필 로드 실패 ({ex}) → 신규 시작")
 
-    # ── 프로필 빌드 ───────────────────────────────────────────────
+    # ── 프로필 빌드 ──────────────────────────────────────────────
     new_profiles: dict[str, dict] = {}
 
-    for cid, co_enriched in co_intel.items():
+    for cid, co in co_intel.items():
         try:
-            prev = prev_profiles.get(cid)
-            sc   = scorecards.get(cid)
-            profile = build_profile(co_enriched, prev, sc)
+            profile = build_profile(
+                co        = co,
+                prev      = prev_profiles.get(cid, {}),
+                scorecard = scorecards.get(cid, {}),
+            )
+            if profile is None:
+                log.warning(f"  ✗ {cid}: build_profile 실패 (필수 키 누락)")
+                continue
+
             new_profiles[cid] = profile
+
+            score  = profile.get("investment_score", {}).get("total_score", "—")
+            n_act  = sum(1 for g in profile["critical_gaps"] if g.get("status") != "resolved")
+            n_res  = sum(1 for g in profile["critical_gaps"] if g.get("status") == "resolved")
             log.info(
-                f"  {co_enriched.get('name','?'):<20} "
+                f"  ✓ {co.get('name','?'):<20} "
                 f"stage={profile['stage_label']:<16} "
-                f"signals={profile['signal_count']:<4} "
-                f"gaps={profile['gap_count']:<3} "
-                f"score={profile.get('investment_score',{}).get('total_score','?')}"
+                f"signals={profile['signal_count']:<3} "
+                f"gaps(active={n_act},res={n_res}) "
+                f"score={score}"
             )
         except Exception as ex:
-            log.error(f"  Failed to build profile for {cid}: {ex}")
+            log.error(f"  ✗ {cid} 빌드 실패: {ex}")
 
-    # analyst_overrides 보존: 오늘 signals가 없는 회사도 이전 프로필 유지
+    # ── 오늘 signals 없는 회사 → 이전 프로필 보존 ────────────────
+    retained = 0
     for cid, prev in prev_profiles.items():
         if cid not in new_profiles:
-            # 오늘 signals 없음 — 이전 프로필 그대로 보존 (last_updated는 갱신 안 함)
             new_profiles[cid] = prev
-            log.info(f"  {prev.get('name','?'):<20} → no signals today, previous profile retained")
+            retained += 1
+            log.info(
+                f"  · {prev.get('name','?'):<20} "
+                f"오늘 signal 없음 → 이전 프로필 유지 "
+                f"(last_updated={prev.get('last_updated','?')})"
+            )
+    if retained:
+        log.info(f"  → {retained}개 회사 이전 프로필 보존됨")
 
-    # ── 포트폴리오 요약 ───────────────────────────────────────────
-    summary = build_portfolio_summary(new_profiles)
-
-    # ── 저장 ──────────────────────────────────────────────────────
-    output = {
+    # ── 저장 ─────────────────────────────────────────────────────
+    summary = portfolio_summary(new_profiles)
+    output  = {
         "date":              TODAY,
         "generated_at":      NOW_ISO,
         "company_count":     len(new_profiles),
@@ -723,25 +880,51 @@ def main():
         "companies":         new_profiles,
     }
 
-    PROFILES_PATH.write_text(json.dumps(output, ensure_ascii=False, indent=2))
-    log.info(f"\nSaved {PROFILES_PATH} ({len(new_profiles)} companies)")
+    DATA.mkdir(exist_ok=True)
+    DEST.write_text(json.dumps(output, ensure_ascii=False, indent=2), "utf-8")
+    log.info(f"\n저장: {DEST}  ({len(new_profiles)}개 회사)")
 
-    # 일별 아카이브
-    ARCHIVE_DIR.mkdir(exist_ok=True)
-    archive_path = ARCHIVE_DIR / f"company_profiles_{TODAY}.json"
-    archive_path.write_text(json.dumps(output, ensure_ascii=False, indent=2))
-    log.info(f"Archived → {archive_path}")
+    ARCHIVE.mkdir(exist_ok=True)
+    arc = ARCHIVE / f"profiles_{TODAY}.json"
+    arc.write_text(json.dumps(output, ensure_ascii=False, indent=2), "utf-8")
+    log.info(f"아카이브: {arc}")
 
-    # 요약 출력
+    # ── 포트폴리오 요약 ───────────────────────────────────────────
+    s = summary
     print(f"\n{'═'*60}")
-    print(f"  Company Profiles  —  {TODAY}")
-    print(f"  {len(new_profiles)} companies | {summary['total_critical_gaps']} critical gaps")
-    print(f"  Stage dist: {summary['stage_distribution']}")
-    if summary["stage_changes_today"]:
-        print(f"  Stage changes today: {summary['stage_changes_today']}")
-    if summary["high_signal_companies"]:
-        top = summary["high_signal_companies"][0]
-        print(f"  Top signal: {top['name']} (HIGH ×{top['high_count']}, score {top['score']})")
+    print(f"  Phase 2 Company Profiles  —  {TODAY}")
+    print(f"  {s['total_companies']}개 회사  |  Critical gaps: {s['total_critical_gaps']}")
+    print(f"  Stage: {s['stage_distribution']}")
+    print(f"  TTR:   {s['ttr_distribution']}")
+    if s["high_signal_companies"]:
+        top = s["high_signal_companies"][0]
+        print(f"  Top:   {top['name']} (HIGH×{top['high_count']}, score={top['score']})")
+    if s["concern_companies"]:
+        print(f"  ⚠ Concern: {[c['name'] for c in s['concern_companies']]}")
+
+    # ── Form Energy 프로필 출력 ───────────────────────────────────
+    _print_profile_summary(
+        "Form Energy  (c_form_energy)  — 등록 회사 예시",
+        new_profiles.get("c_form_energy"),
+    )
+
+    # ── EnerVenue 프로필 출력 (미등록 예시) ──────────────────────
+    # EnerVenue는 현재 generate-signals.py COMPANIES에 없으므로
+    # co_intel에 포함되지 않음 → None 출력으로 미등록 안내
+    enervenue_id = resolve_company_id("EnerVenue")
+    _print_profile_summary(
+        "EnerVenue  — 미등록 회사 예시 (fuzzy match 결과 포함)",
+        new_profiles.get(enervenue_id) if enervenue_id else None,
+    )
+    log.info(
+        f"EnerVenue fuzzy match 결과: '{enervenue_id}' "
+        f"(None = 레지스트리 미등록)"
+    )
+    print("  EnerVenue를 등록하려면:")
+    print("  1. generate-signals.py COMPANIES 배열에 추가")
+    print("     {'id':'c_enervenue', 'name':'EnerVenue', "
+          "'aliases':['enervenue'], 'sector':'ess', ...}")
+    print("  2. _ALIAS_TO_ID['enervenue'] = 'c_enervenue'  로 변경")
     print(f"{'═'*60}\n")
 
 
