@@ -1,0 +1,1998 @@
+{
+  "date": "2026-04-04",
+  "generated_at": "2026-04-04T08:47:19.044946+00:00",
+  "article_count": 107,
+  "source_logs": [
+    {
+      "id": "utilitydive",
+      "name": "Utility Dive",
+      "url": "https://www.utilitydive.com/feeds/news/",
+      "status": "success",
+      "items": 10,
+      "error": null,
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00",
+      "reliability": 2,
+      "segments": [
+        "grid_sw",
+        "ess",
+        "dc_power"
+      ]
+    },
+    {
+      "id": "electrek",
+      "name": "Electrek",
+      "url": "https://electrek.co/feed/",
+      "status": "success",
+      "items": 20,
+      "error": null,
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00",
+      "reliability": 3,
+      "segments": [
+        "ess",
+        "dc_power"
+      ]
+    },
+    {
+      "id": "canarymedia",
+      "name": "Canary Media",
+      "url": "https://www.canarymedia.com/rss",
+      "status": "success",
+      "items": 8,
+      "error": null,
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00",
+      "reliability": 2,
+      "segments": [
+        "ess",
+        "grid_sw",
+        "dc_power",
+        "hydrogen"
+      ]
+    },
+    {
+      "id": "pvmagazine",
+      "name": "PV Magazine",
+      "url": "https://www.pv-magazine.com/feed/",
+      "status": "success",
+      "items": 25,
+      "error": null,
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00",
+      "reliability": 2,
+      "segments": [
+        "ess",
+        "hydrogen",
+        "forecasting"
+      ]
+    },
+    {
+      "id": "offshorewind",
+      "name": "Offshore Wind Biz",
+      "url": "https://www.offshorewind.biz/feed/",
+      "status": "success",
+      "items": 10,
+      "error": null,
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00",
+      "reliability": 2,
+      "segments": [
+        "hvdc",
+        "ess"
+      ]
+    },
+    {
+      "id": "energystoragenews",
+      "name": "Energy Storage News",
+      "url": "https://www.energy-storage.news/feed/",
+      "status": "success",
+      "items": 14,
+      "error": null,
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00",
+      "reliability": 2,
+      "segments": [
+        "ess"
+      ]
+    },
+    {
+      "id": "spglobal_platts_energy",
+      "name": "S&P Global Energy (free)",
+      "url": "https://www.spglobal.com/commodityinsights/en/rss-feed/energy",
+      "status": "failed",
+      "items": 0,
+      "error": "HTTP 403",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00",
+      "reliability": 2,
+      "segments": [
+        "hydrogen",
+        "ess",
+        "dc_power"
+      ]
+    },
+    {
+      "id": "h2view",
+      "name": "H2 View",
+      "url": "https://www.h2-view.com/feed/",
+      "status": "partial",
+      "items": 0,
+      "error": null,
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00",
+      "reliability": 2,
+      "segments": [
+        "hydrogen",
+        "marine_fc"
+      ]
+    },
+    {
+      "id": "cleantechnica",
+      "name": "CleanTechnica",
+      "url": "https://cleantechnica.com/feed/",
+      "status": "success",
+      "items": 20,
+      "error": null,
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00",
+      "reliability": 3,
+      "segments": [
+        "ess",
+        "dc_power",
+        "grid_sw"
+      ]
+    },
+    {
+      "id": "hydrogeninsight",
+      "name": "Hydrogen Insight",
+      "url": "https://www.hydrogeninsight.com/feed",
+      "status": "failed",
+      "items": 0,
+      "error": "HTTP 404",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00",
+      "reliability": 2,
+      "segments": [
+        "hydrogen"
+      ]
+    },
+    {
+      "id": "rechargenews",
+      "name": "Recharge News",
+      "url": "https://www.rechargenews.com/feed",
+      "status": "failed",
+      "items": 0,
+      "error": "HTTP 404",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00",
+      "reliability": 2,
+      "segments": [
+        "hydrogen",
+        "ess",
+        "hvdc"
+      ]
+    },
+    {
+      "id": "greentechmedia",
+      "name": "Wood Mackenzie (GTM)",
+      "url": "https://www.woodmac.com/feeds/rss/",
+      "status": "failed",
+      "items": 0,
+      "error": "HTTP 404",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00",
+      "reliability": 2,
+      "segments": [
+        "ess",
+        "grid_sw",
+        "hydrogen"
+      ]
+    },
+    {
+      "id": "renewablesnow",
+      "name": "Renewables Now",
+      "url": "https://renewablesnow.com/news/feed/",
+      "status": "failed",
+      "items": 0,
+      "error": "HTTP 404",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00",
+      "reliability": 2,
+      "segments": [
+        "ess",
+        "hvdc",
+        "hydrogen"
+      ]
+    },
+    {
+      "id": "energynewsnetwork",
+      "name": "Energy News Network",
+      "url": "https://energynews.us/feed/",
+      "status": "failed",
+      "items": 0,
+      "error": "Feed parse error: <unknown>:6:30: not well-formed (invalid token)",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00",
+      "reliability": 2,
+      "segments": [
+        "grid_sw",
+        "ess",
+        "dc_power"
+      ]
+    },
+    {
+      "id": "ieaenergy",
+      "name": "IEA News",
+      "url": "https://www.iea.org/api/rss",
+      "status": "failed",
+      "items": 0,
+      "error": "HTTP 404",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00",
+      "reliability": 1,
+      "segments": [
+        "hydrogen",
+        "ess",
+        "grid_sw",
+        "forecasting"
+      ]
+    }
+  ],
+  "articles": [
+    {
+      "article_id": "8bf8a1ae21d286f7",
+      "source_id": "utilitydive",
+      "source_name": "Utility Dive",
+      "source_url": "https://www.utilitydive.com/news/trump-steel-aluminum-copper-tariff-adjustments-grid-equipment-electric/816581/",
+      "source_segments": [
+        "grid_sw",
+        "ess",
+        "dc_power"
+      ],
+      "reliability": 2,
+      "title": "Trump adjusts metal tariffs, sets 15% rate for some electrical grid equipment",
+      "summary": "<figure><div><img src=\"https://imgproxy.divecdn.com/Gf49lOkkZRVI8xrgGXAZOJw8OWegw1cD7iM-oibTxe8/g:ce/rs:fill:1600:900:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9HZXR0eUltYWdlcy0yMjY4Njc4MzM0LmpwZw==.webp\" /></div></figure><p>Under the new rules, which go into effect April 6, goods made almost entirely of aluminum, steel or copper will still face a 50% tariff. Derivative products will be subject to 25%.&nbsp;</p>",
+      "published_date": "2026-04-03",
+      "raw_text": "trump adjusts metal tariffs, sets 15% rate for some electrical grid equipment <figure><div><img src=\"https://imgproxy.divecdn.com/gf49lokkzrvi8xrggxazojw8owegw1cd7im-oibtxe8/g:ce/rs:fill:1600:900:1/z3m6ly9kaxzlc2l0zs1zdg9yywdll2rpdmvpbwfnzs9hzxr0eultywdlcy0ymjy4njc4mzm0lmpwzw==.webp\" /></div></figure><p>under the new rules, which go into effect april 6, goods made almost entirely of aluminum, steel or copper will still face a 50% tariff. derivative products will be subject to 25%.&nbsp;</p>",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "1128da94883ba313",
+      "source_id": "utilitydive",
+      "source_name": "Utility Dive",
+      "source_url": "https://www.utilitydive.com/news/executing-trumps-ratepayer-protection-pledge/816109/",
+      "source_segments": [
+        "grid_sw",
+        "ess",
+        "dc_power"
+      ],
+      "reliability": 2,
+      "title": "State utility laws are the primary barrier to Trump’s AI ratepayer protection pledge",
+      "summary": "<figure><div><img src=\"https://imgproxy.divecdn.com/nQqH8RgvERFO7mCa4JPRBPrz1iDgonCr48lAOhF8JqY/g:ce/rs:fill:1600:900:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9yYXRlcGF5ZXJfcHJvdGVjdGlvbl9wbGVkZ2UuanBn.webp\" /></div></figure><p>The best way to leverage the pledge&rsquo;s supply commitment is to accelerate the nationwide momentum to give business customers retail choice, write Devin Hartman and Kent Chandler of the R Street Institute.</p>",
+      "published_date": "2026-04-03",
+      "raw_text": "state utility laws are the primary barrier to trump’s ai ratepayer protection pledge <figure><div><img src=\"https://imgproxy.divecdn.com/nqqh8rgverfo7mca4jprbprz1idgoncr48laohf8jqy/g:ce/rs:fill:1600:900:1/z3m6ly9kaxzlc2l0zs1zdg9yywdll2rpdmvpbwfnzs9yyxrlcgf5zxjfchjvdgvjdglvbl9wbgvkz2uuanbn.webp\" /></div></figure><p>the best way to leverage the pledge&rsquo;s supply commitment is to accelerate the nationwide momentum to give business customers retail choice, write devin hartman and kent chandler of the r street institute.</p>",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "891f2e4d8fdd0810",
+      "source_id": "utilitydive",
+      "source_name": "Utility Dive",
+      "source_url": "https://www.utilitydive.com/news/ferc-terawulf-morgantown-power-plant-google/816582/",
+      "source_segments": [
+        "grid_sw",
+        "ess",
+        "dc_power"
+      ],
+      "reliability": 2,
+      "title": "FERC urged to reject TeraWulf’s power plant purchase due to undisclosed Google ownership stake",
+      "summary": "<figure><div><img src=\"https://imgproxy.divecdn.com/4PrYNdC2G_gAdG4TdWpw6iObiBCE5stn29ganUPRNbU/g:ce/rs:fill:1600:900:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9HZXR0eUltYWdlcy00Nzg5OTg3NDQuanBn.webp\" /></div></figure><p>The purchase is part of&nbsp;TeraWulf&rsquo;s plan to develop a major data center at a power plant site in Maryland.</p>",
+      "published_date": "2026-04-03",
+      "raw_text": "ferc urged to reject terawulf’s power plant purchase due to undisclosed google ownership stake <figure><div><img src=\"https://imgproxy.divecdn.com/4pryndc2g_gadg4tdwpw6iobibce5stn29ganuprnbu/g:ce/rs:fill:1600:900:1/z3m6ly9kaxzlc2l0zs1zdg9yywdll2rpdmvpbwfnzs9hzxr0eultywdlcy00nzg5otg3ndquanbn.webp\" /></div></figure><p>the purchase is part of&nbsp;terawulf&rsquo;s plan to develop a major data center at a power plant site in maryland.</p>",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "f7b0f8a631313324",
+      "source_id": "utilitydive",
+      "source_name": "Utility Dive",
+      "source_url": "https://www.utilitydive.com/news/rooftop-solar-puerto-rico-generation-mix-eia/816499/",
+      "source_segments": [
+        "grid_sw",
+        "ess",
+        "dc_power"
+      ],
+      "reliability": 2,
+      "title": "Rooftop solar reaches 20% of Puerto Rico’s generation mix",
+      "summary": "<figure><div><img src=\"https://imgproxy.divecdn.com/diZiFXlU9u5AVG9A4MIgmvZc5pUOt9eNebBwawCCVAE/g:ce/rs:fill:1600:900:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9wb3dlcm9ucHIxLmpwZw==.webp\" /></div></figure><p>Rooftop solar capacity in Puerto Rico reached around 1.5 GW in 2025, passing natural gas and becoming the territory&rsquo;s second-largest generation source, according to the Energy Information Administration.</p>",
+      "published_date": "2026-04-02",
+      "raw_text": "rooftop solar reaches 20% of puerto rico’s generation mix <figure><div><img src=\"https://imgproxy.divecdn.com/dizifxlu9u5avg9a4migmvzc5puot9enebbwawccvae/g:ce/rs:fill:1600:900:1/z3m6ly9kaxzlc2l0zs1zdg9yywdll2rpdmvpbwfnzs9wb3dlcm9uchixlmpwzw==.webp\" /></div></figure><p>rooftop solar capacity in puerto rico reached around 1.5 gw in 2025, passing natural gas and becoming the territory&rsquo;s second-largest generation source, according to the energy information administration.</p>",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "97fb527df08aabbc",
+      "source_id": "utilitydive",
+      "source_name": "Utility Dive",
+      "source_url": "https://www.utilitydive.com/news/california-approved-a-gas-pipeline-solution-now-comes-the-hard-part/812087/",
+      "source_segments": [
+        "grid_sw",
+        "ess",
+        "dc_power"
+      ],
+      "reliability": 2,
+      "title": "California approved a gas pipeline solution. Now comes the hard part.",
+      "summary": "<figure><div><img src=\"https://imgproxy.divecdn.com/F8NJwx_0vy1IFLKLrl5XRP1b6IHkHoHRsFjgFp_kJ1Q/g:ce/rs:fill:1600:900:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9HZXR0eUltYWdlcy0xMzEyNDA1NjcwLmpwZw==.webp\" /></div></figure><p>SB 1221 offers a rare opportunity to align climate action with lower bills and prudent spending of ratepayer dollars, writes Jalal Awan at The Utility Reform Network.</p>",
+      "published_date": "2026-04-02",
+      "raw_text": "california approved a gas pipeline solution. now comes the hard part. <figure><div><img src=\"https://imgproxy.divecdn.com/f8njwx_0vy1iflklrl5xrp1b6ihkhohrsfjgfp_kj1q/g:ce/rs:fill:1600:900:1/z3m6ly9kaxzlc2l0zs1zdg9yywdll2rpdmvpbwfnzs9hzxr0eultywdlcy0xmzeynda1njcwlmpwzw==.webp\" /></div></figure><p>sb 1221 offers a rare opportunity to align climate action with lower bills and prudent spending of ratepayer dollars, writes jalal awan at the utility reform network.</p>",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "4028464de1a52c29",
+      "source_id": "utilitydive",
+      "source_name": "Utility Dive",
+      "source_url": "https://www.utilitydive.com/news/talen-energy-capital-power-pjm-ferc/816451/",
+      "source_segments": [
+        "grid_sw",
+        "ess",
+        "dc_power"
+      ],
+      "reliability": 2,
+      "title": "Reject Talen-Energy Capital power plant deal, PJM market monitor tells FERC",
+      "summary": "<p>Power plant owners are consolidating generation in the PJM Interconnection, which could drive up electricity and capacity prices, Monitoring Analytics told the Federal Energy Regulatory Commission.</p>",
+      "published_date": "2026-04-02",
+      "raw_text": "reject talen-energy capital power plant deal, pjm market monitor tells ferc <p>power plant owners are consolidating generation in the pjm interconnection, which could drive up electricity and capacity prices, monitoring analytics told the federal energy regulatory commission.</p>",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "7e6b260be3fd96c1",
+      "source_id": "utilitydive",
+      "source_name": "Utility Dive",
+      "source_url": "https://www.utilitydive.com/news/texas-opens-350m-advanced-nuclear-grant-program/816442/",
+      "source_segments": [
+        "grid_sw",
+        "ess",
+        "dc_power"
+      ],
+      "reliability": 2,
+      "title": "Texas opens $350M advanced nuclear grant program",
+      "summary": "<figure><div><img src=\"https://imgproxy.divecdn.com/CFaaZ_jDiFnwy5EbIdqaHjKdo6sMGC2Ijrd5HLlu8mA/g:ce/rs:fill:1600:900:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9HZXR0eUltYWdlcy0xNDk3MDA1NTk4LmpwZw==.webp\" /></div></figure><p>&quot;Texas is streamlining the nuclear regulatory environment and making investments to spur a flourishing nuclear energy ecosystem,&rdquo; said Gov. Greg Abbott.</p>",
+      "published_date": "2026-04-02",
+      "raw_text": "texas opens $350m advanced nuclear grant program <figure><div><img src=\"https://imgproxy.divecdn.com/cfaaz_jdifnwy5ebidqahjkdo6smgc2ijrd5hllu8ma/g:ce/rs:fill:1600:900:1/z3m6ly9kaxzlc2l0zs1zdg9yywdll2rpdmvpbwfnzs9hzxr0eultywdlcy0xndk3mda1ntk4lmpwzw==.webp\" /></div></figure><p>&quot;texas is streamlining the nuclear regulatory environment and making investments to spur a flourishing nuclear energy ecosystem,&rdquo; said gov. greg abbott.</p>",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "100a1c9727eb9b73",
+      "source_id": "utilitydive",
+      "source_name": "Utility Dive",
+      "source_url": "https://www.utilitydive.com/news/national-grid-gridcare-partnership-could-cut-time-to-power-for-large-loa/816344/",
+      "source_segments": [
+        "grid_sw",
+        "ess",
+        "dc_power"
+      ],
+      "reliability": 2,
+      "title": "National Grid, GridCARE partnership could cut ‘time to power’ for large loads in New York",
+      "summary": "<figure><div><img src=\"https://imgproxy.divecdn.com/PPCZaUcvUQikIr1yorDCYRmEdbZctbIjt5kp4FqgHsE/g:ce/rs:fill:1600:900:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9HZXR0eUltYWdlcy0yMjEyMzA0NTk1LmpwZw==.webp\" /></div></figure><p>The initiative aims to boost grid utilization and keep bills in check in a region that has drawn high-profile data center and advanced manufacturing projects.</p>",
+      "published_date": "2026-04-01",
+      "raw_text": "national grid, gridcare partnership could cut ‘time to power’ for large loads in new york <figure><div><img src=\"https://imgproxy.divecdn.com/ppczaucvuqikir1yordcyrmedbzctbijt5kp4fqghse/g:ce/rs:fill:1600:900:1/z3m6ly9kaxzlc2l0zs1zdg9yywdll2rpdmvpbwfnzs9hzxr0eultywdlcy0ymjeymza0ntk1lmpwzw==.webp\" /></div></figure><p>the initiative aims to boost grid utilization and keep bills in check in a region that has drawn high-profile data center and advanced manufacturing projects.</p>",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "d4a64dba87e4f862",
+      "source_id": "utilitydive",
+      "source_name": "Utility Dive",
+      "source_url": "https://www.utilitydive.com/news/a-few-very-inconvenient-facts-about-coal-power-plants/812924/",
+      "source_segments": [
+        "grid_sw",
+        "ess",
+        "dc_power"
+      ],
+      "reliability": 2,
+      "title": "Rebuttal: Coal plants are reliable and cost-competitive",
+      "summary": "<figure><div><img src=\"https://imgproxy.divecdn.com/u-dm7JU1eOb2lwmZL-WiD6grZP4F-bcrlNbfbiYyB5A/g:ce/rs:fill:1600:900:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9HZXR0eUltYWdlcy0yMjYxMjE2MjUzLmpwZw==.webp\" /></div></figure><p>Michelle Bloodworth, president and CEO of America's Power, which represents the U.S. coal fleet and its supply chain, pushes back on assertions that coal power should be replaced by renewables.</p>",
+      "published_date": "2026-04-01",
+      "raw_text": "rebuttal: coal plants are reliable and cost-competitive <figure><div><img src=\"https://imgproxy.divecdn.com/u-dm7ju1eob2lwmzl-wid6grzp4f-bcrlnbfbiyyb5a/g:ce/rs:fill:1600:900:1/z3m6ly9kaxzlc2l0zs1zdg9yywdll2rpdmvpbwfnzs9hzxr0eultywdlcy0ymjyxmje2mjuzlmpwzw==.webp\" /></div></figure><p>michelle bloodworth, president and ceo of america's power, which represents the u.s. coal fleet and its supply chain, pushes back on assertions that coal power should be replaced by renewables.</p>",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "ad5afdb376fec1e0",
+      "source_id": "utilitydive",
+      "source_name": "Utility Dive",
+      "source_url": "https://www.utilitydive.com/news/solar-installations-fell-2024-2025-ferc-wind-gas/816319/",
+      "source_segments": [
+        "grid_sw",
+        "ess",
+        "dc_power"
+      ],
+      "reliability": 2,
+      "title": "Solar installations fell 22% in 2025: FERC",
+      "summary": "<figure><div><img src=\"https://imgproxy.divecdn.com/yLh4YelIUdmDK-YS3a04wQS-1qHdQ_mynKYp7fiZm2U/g:ce/rs:fill:1600:900:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9DYWxpZm9ybmlhX3NvbGFyX1JpY2htb25kLmpwZw==.webp\" /></div></figure><p>&ldquo;As developers shifted their focus towards safe harbor strategies, there was less urgency to bring late-stage projects online by year end,&rdquo; the Solar Energy Industries Association said in a March report.</p>",
+      "published_date": "2026-04-01",
+      "raw_text": "solar installations fell 22% in 2025: ferc <figure><div><img src=\"https://imgproxy.divecdn.com/ylh4yeliudmdk-ys3a04wqs-1qhdq_mynkyp7fizm2u/g:ce/rs:fill:1600:900:1/z3m6ly9kaxzlc2l0zs1zdg9yywdll2rpdmvpbwfnzs9dywxpzm9ybmlhx3nvbgfyx1jpy2htb25klmpwzw==.webp\" /></div></figure><p>&ldquo;as developers shifted their focus towards safe harbor strategies, there was less urgency to bring late-stage projects online by year end,&rdquo; the solar energy industries association said in a march report.</p>",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "36fc22893f349032",
+      "source_id": "electrek",
+      "source_name": "Electrek",
+      "source_url": "https://electrek.co/2026/04/03/ohio-solar-farm-powered-by-ohio-made-panels/",
+      "source_segments": [
+        "ess",
+        "dc_power"
+      ],
+      "reliability": 3,
+      "title": "This new Ohio solar farm is powered by Ohio-made panels",
+      "summary": "<div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2026/04/Dodson-Creek-Solar-Geronimo-Power.jpg?quality=82&#038;strip=all&#038;w=1600\" /></div><p>A new utility-scale solar farm just came online in Ohio, and it’s generating power with panels manufactured in-state.</p>\n\n\n\n <a class=\"more-link\" href=\"https://electrek.co/2026/04/03/ohio-solar-farm-powered-by-ohio-made-panels/#more-462246\">more…</a>",
+      "published_date": "2026-04-03",
+      "raw_text": "this new ohio solar farm is powered by ohio-made panels <div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2026/04/dodson-creek-solar-geronimo-power.jpg?quality=82&#038;strip=all&#038;w=1600\" /></div><p>a new utility-scale solar farm just came online in ohio, and it’s generating power with panels manufactured in-state.</p>\n\n\n\n <a class=\"more-link\" href=\"https://electrek.co/2026/04/03/ohio-solar-farm-powered-by-ohio-made-panels/#more-462246\">more…</a>",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "9d801bf0a77b3efd",
+      "source_id": "electrek",
+      "source_name": "Electrek",
+      "source_url": "https://electrek.co/2026/04/03/xcharge-na-jojo-launch-ev-fast-chargers-in-illinois-first-sites-live/",
+      "source_segments": [
+        "ess",
+        "dc_power"
+      ],
+      "reliability": 3,
+      "title": "XCharge NA + JOJO launch EV fast chargers in Illinois – first sites live",
+      "summary": "<div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2026/04/XCharge-Menards-fast-chargers.jpg?quality=82&#038;strip=all&#038;w=1600\" /></div><p>XCharge North America and JOJO Superfast are rolling out a new EV fast-charging network across Illinois, starting with nine locations and more to come.</p>\n\n\n\n <a class=\"more-link\" href=\"https://electrek.co/2026/04/03/xcharge-na-jojo-launch-ev-fast-chargers-in-illinois-first-sites-live/#more-462231\">more…</a>",
+      "published_date": "2026-04-03",
+      "raw_text": "xcharge na + jojo launch ev fast chargers in illinois – first sites live <div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2026/04/xcharge-menards-fast-chargers.jpg?quality=82&#038;strip=all&#038;w=1600\" /></div><p>xcharge north america and jojo superfast are rolling out a new ev fast-charging network across illinois, starting with nine locations and more to come.</p>\n\n\n\n <a class=\"more-link\" href=\"https://electrek.co/2026/04/03/xcharge-na-jojo-launch-ev-fast-chargers-in-illinois-first-sites-live/#more-462231\">more…</a>",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "462e3aef821decef",
+      "source_id": "electrek",
+      "source_name": "Electrek",
+      "source_url": "https://electrek.co/2026/04/03/podcast-ev-deliveries-from-tesla-rivian-toyota-electric-pickup-truck-and-more/",
+      "source_segments": [
+        "ess",
+        "dc_power"
+      ],
+      "reliability": 3,
+      "title": "Podcast: EV deliveries from Tesla, Rivian, Toyota electric pickup truck, and more",
+      "summary": "<div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2017/12/business_card-1.jpg?quality=82&#038;strip=all&#038;w=1600\" /></div><p>In the <a href=\"https://electrek.co/guides/electrek-podcast/\">Electrek Podcast</a>, we discuss the most popular news in the world of sustainable transport and energy. In this week’s episode, we discuss EV deliveries from Tesla, Rivian, and others, Toyota’s electric pickup truck, and more.</p>\n\n\n\n <a class=\"more-link\" href=\"https://electrek.co/2026/04/03/podcast-ev-deliveries-from-tesla-rivian-toyota-electric-pickup-truck-and-more/#more-4",
+      "published_date": "2026-04-03",
+      "raw_text": "podcast: ev deliveries from tesla, rivian, toyota electric pickup truck, and more <div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2017/12/business_card-1.jpg?quality=82&#038;strip=all&#038;w=1600\" /></div><p>in the <a href=\"https://electrek.co/guides/electrek-podcast/\">electrek podcast</a>, we discuss the most popular news in the world of sustainable transport and energy. in this week’s episode, we discuss ev deliveries from tesla, rivian, and others, toyota’s electric pickup truck, and more.</p>\n\n\n\n <a class=\"more-link\" href=\"https://electrek.co/2026/04/03/podcast-ev-deliveries-from-tesla-rivian-toyota-electric-pickup-truck-and-more/#more-4",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "7ee0ec5a50127638",
+      "source_id": "electrek",
+      "source_name": "Electrek",
+      "source_url": "https://electrek.co/2026/04/03/lectric-april-showers-e-bike-sale-ecoflow-anker-solix-flash-sales-power-station-more/",
+      "source_segments": [
+        "ess",
+        "dc_power"
+      ],
+      "reliability": 3,
+      "title": "Lectric April Showers e-bike sale offers up to $720 savings, EcoFlow + Anker SOLIX flash sales with up to 67% power station savings, more",
+      "summary": "<div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2026/04/Lectric-EcoFlow-Anker-SOLIX-Worx-GDs-FI.jpg?quality=82&#038;strip=all&#038;w=1600\" /></div><p>We’re ending this week’s Green Deals with many sales, starting with the <a href=\"https://9to5toys.com/2026/04/03/694-e-bike-bundle-savings-200-price-cuts-lectric-april-showers-sale-from-799/\">newly launched Lectric April Showers e-bike sale</a> that is offering up to $720 savings, like the <a href=\"https://9to5toys.com/2026/04/03/694-e-bike-bundle-savings-200-price-cuts-lectric-april-showers-sale-from-799/\">XP Lit",
+      "published_date": "2026-04-03",
+      "raw_text": "lectric april showers e-bike sale offers up to $720 savings, ecoflow + anker solix flash sales with up to 67% power station savings, more <div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2026/04/lectric-ecoflow-anker-solix-worx-gds-fi.jpg?quality=82&#038;strip=all&#038;w=1600\" /></div><p>we’re ending this week’s green deals with many sales, starting with the <a href=\"https://9to5toys.com/2026/04/03/694-e-bike-bundle-savings-200-price-cuts-lectric-april-showers-sale-from-799/\">newly launched lectric april showers e-bike sale</a> that is offering up to $720 savings, like the <a href=\"https://9to5toys.com/2026/04/03/694-e-bike-bundle-savings-200-price-cuts-lectric-april-showers-sale-from-799/\">xp lit",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "bd34b520641b9658",
+      "source_id": "electrek",
+      "source_name": "Electrek",
+      "source_url": "https://electrek.co/2026/04/03/oil-crisis-ev-savings-cant-afford-not-to-drive-electric/",
+      "source_segments": [
+        "ess",
+        "dc_power"
+      ],
+      "reliability": 3,
+      "title": "The oil crisis is making drivers realize they can’t afford not to drive electric",
+      "summary": "<div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2025/06/gas-vs-electric.png?w=1600\" /></div><p>The national average gas price hit $4.09 per gallon this week — up 33% from a year ago — as yet another oil crisis hammers American drivers. But this time, the math on switching to electric is so overwhelmingly clear that millions of drivers are doing the calculation and reaching the same conclusion: they can’t afford <em>not</em> to drive electric.</p>\n\n\n\n<p>Electrified vehicle consideration jumped to 23.8% of all car shopper research activity in mid-March, the highe",
+      "published_date": "2026-04-03",
+      "raw_text": "the oil crisis is making drivers realize they can’t afford not to drive electric <div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2025/06/gas-vs-electric.png?w=1600\" /></div><p>the national average gas price hit $4.09 per gallon this week — up 33% from a year ago — as yet another oil crisis hammers american drivers. but this time, the math on switching to electric is so overwhelmingly clear that millions of drivers are doing the calculation and reaching the same conclusion: they can’t afford <em>not</em> to drive electric.</p>\n\n\n\n<p>electrified vehicle consideration jumped to 23.8% of all car shopper research activity in mid-march, the highe",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "b8c2abf0467ca768",
+      "source_id": "electrek",
+      "source_name": "Electrek",
+      "source_url": "https://electrek.co/2026/04/03/byds-new-ev-lures-buyers-with-5-min-charging-low-prices/",
+      "source_segments": [
+        "ess",
+        "dc_power"
+      ],
+      "reliability": 3,
+      "title": "BYD’s new EV is luring in buyers with 5 minute charging and prices starting at $22,000",
+      "summary": "<div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2026/03/BYD-Song-Ultra-EV-price-3.jpeg?quality=82&#038;strip=all&#038;w=1400\" /></div><p><a href=\"https://electrek.co/guides/byd/\">BYD</a> launched the Song Ultra EV in China, starting at just under $22,000. The new EV is one of the first to be equipped with its Blade Battery and Flash Charging, enabling recharge times in as little as 5 minutes. In less than a month, the electric SUV secured over 37,000 orders.</p>\n\n\n\n <a class=\"more-link\" href=\"https://electrek.co/2026/04/03/byds-new-ev-lures-buyers-with-5-min-ch",
+      "published_date": "2026-04-03",
+      "raw_text": "byd’s new ev is luring in buyers with 5 minute charging and prices starting at $22,000 <div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2026/03/byd-song-ultra-ev-price-3.jpeg?quality=82&#038;strip=all&#038;w=1400\" /></div><p><a href=\"https://electrek.co/guides/byd/\">byd</a> launched the song ultra ev in china, starting at just under $22,000. the new ev is one of the first to be equipped with its blade battery and flash charging, enabling recharge times in as little as 5 minutes. in less than a month, the electric suv secured over 37,000 orders.</p>\n\n\n\n <a class=\"more-link\" href=\"https://electrek.co/2026/04/03/byds-new-ev-lures-buyers-with-5-min-ch",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "ff652172c36af7c2",
+      "source_id": "electrek",
+      "source_name": "Electrek",
+      "source_url": "https://electrek.co/2026/04/03/home-solar-battery-ev-one-gmc-sierra-ev-driver-shares-their-experience/",
+      "source_segments": [
+        "ess",
+        "dc_power"
+      ],
+      "reliability": 3,
+      "title": "Home solar + battery + EV, one GMC Sierra EV driver shares their experience",
+      "summary": "<div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2026/04/gm-solar_MAIN.jpg?quality=82&#038;strip=all&#038;w=1498\" /></div><p>You’ve finally got the full trifecta – a rooftop solar panel system feeding a home backup battery that charges your EV. Heck, you’ve even got a bidirectional EV that can send power back to the house when you need it. Now the real question: are you actually saving any money?</p>\n\n\n\n <a class=\"more-link\" href=\"https://electrek.co/2026/04/03/home-solar-battery-ev-one-gmc-sierra-ev-driver-shares-their-experience/#more-462165\">more…</a>",
+      "published_date": "2026-04-03",
+      "raw_text": "home solar + battery + ev, one gmc sierra ev driver shares their experience <div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2026/04/gm-solar_main.jpg?quality=82&#038;strip=all&#038;w=1498\" /></div><p>you’ve finally got the full trifecta – a rooftop solar panel system feeding a home backup battery that charges your ev. heck, you’ve even got a bidirectional ev that can send power back to the house when you need it. now the real question: are you actually saving any money?</p>\n\n\n\n <a class=\"more-link\" href=\"https://electrek.co/2026/04/03/home-solar-battery-ev-one-gmc-sierra-ev-driver-shares-their-experience/#more-462165\">more…</a>",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "058cd069388728a3",
+      "source_id": "electrek",
+      "source_name": "Electrek",
+      "source_url": "https://electrek.co/2026/04/02/lectric-heads-north-canadians-get-access-to-the-uss-best-selling-e-bikes/",
+      "source_segments": [
+        "ess",
+        "dc_power"
+      ],
+      "reliability": 3,
+      "title": "Lectric heads north – Canadians get access to the US’s best-selling e-bikes",
+      "summary": "<div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2025/05/lectric-xp4-e-bike-header.jpg?quality=82&#038;strip=all&#038;w=1600\" /></div><p>Lectric eBikes is officially <a href=\"https://lectricebikes.sjv.io/5kk6G1\">rolling into Canada</a>, setting the stage to shape the future of cycling north of the border.</p>\n\n\n\n <a class=\"more-link\" href=\"https://electrek.co/2026/04/02/lectric-heads-north-canadians-get-access-to-the-uss-best-selling-e-bikes/#more-462163\">more…</a>",
+      "published_date": "2026-04-03",
+      "raw_text": "lectric heads north – canadians get access to the us’s best-selling e-bikes <div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2025/05/lectric-xp4-e-bike-header.jpg?quality=82&#038;strip=all&#038;w=1600\" /></div><p>lectric ebikes is officially <a href=\"https://lectricebikes.sjv.io/5kk6g1\">rolling into canada</a>, setting the stage to shape the future of cycling north of the border.</p>\n\n\n\n <a class=\"more-link\" href=\"https://electrek.co/2026/04/02/lectric-heads-north-canadians-get-access-to-the-uss-best-selling-e-bikes/#more-462163\">more…</a>",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "5a1c6a2f221c8811",
+      "source_id": "electrek",
+      "source_name": "Electrek",
+      "source_url": "https://electrek.co/2026/04/02/qcells-wants-solar-storage-built-into-every-new-home/",
+      "source_segments": [
+        "ess",
+        "dc_power"
+      ],
+      "reliability": 3,
+      "title": "Qcells wants solar + storage built into every new home",
+      "summary": "<div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2026/04/pexels-photo-12224996.jpeg?quality=82&#038;strip=all&#038;w=1500\" /></div><p>Solar giant Qcells is making a play to get solar and battery storage built into new homes in the US from day one.</p>\n\n\n\n <a class=\"more-link\" href=\"https://electrek.co/2026/04/02/qcells-wants-solar-storage-built-into-every-new-home/#more-462147\">more…</a>",
+      "published_date": "2026-04-02",
+      "raw_text": "qcells wants solar + storage built into every new home <div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2026/04/pexels-photo-12224996.jpeg?quality=82&#038;strip=all&#038;w=1500\" /></div><p>solar giant qcells is making a play to get solar and battery storage built into new homes in the us from day one.</p>\n\n\n\n <a class=\"more-link\" href=\"https://electrek.co/2026/04/02/qcells-wants-solar-storage-built-into-every-new-home/#more-462147\">more…</a>",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "53600989d76b3c73",
+      "source_id": "electrek",
+      "source_name": "Electrek",
+      "source_url": "https://electrek.co/2026/04/02/stellantis-leapmotor-chinese-evs-brampton-canada-plant/",
+      "source_segments": [
+        "ess",
+        "dc_power"
+      ],
+      "reliability": 3,
+      "title": "Stellantis wants to build Chinese Leapmotor EVs at its idled Canadian plant",
+      "summary": "<div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2026/02/Stellantis-EV-costs-China-2.jpeg?quality=82&#038;strip=all&#038;w=1400\" /></div><p>Stellantis is in early talks to assemble electric vehicles from its Chinese partner Leapmotor at the idled Brampton, Ontario plant, <a href=\"https://www.bloomberg.com/news/articles/2026-04-01/stellantis-in-talks-to-make-chinese-evs-at-idled-canadian-plant\">according to Bloomberg</a> — a factory that was supposed to be retooled for Jeep production with over $500 million in Canadian government subsidies.</p>\n\n\n\n<p>The proposal",
+      "published_date": "2026-04-02",
+      "raw_text": "stellantis wants to build chinese leapmotor evs at its idled canadian plant <div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2026/02/stellantis-ev-costs-china-2.jpeg?quality=82&#038;strip=all&#038;w=1400\" /></div><p>stellantis is in early talks to assemble electric vehicles from its chinese partner leapmotor at the idled brampton, ontario plant, <a href=\"https://www.bloomberg.com/news/articles/2026-04-01/stellantis-in-talks-to-make-chinese-evs-at-idled-canadian-plant\">according to bloomberg</a> — a factory that was supposed to be retooled for jeep production with over $500 million in canadian government subsidies.</p>\n\n\n\n<p>the proposal",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "d6d5ed189f615907",
+      "source_id": "electrek",
+      "source_name": "Electrek",
+      "source_url": "https://electrek.co/2026/04/02/ego-zero-turn-riding-mower-4800-low-segway-electric-scooter-anker-exclusive-more/",
+      "source_segments": [
+        "ess",
+        "dc_power"
+      ],
+      "reliability": 3,
+      "title": "EGO zero-turn riding mower + 6x batteries and wall charger new $4,800 low, Segway e-scooter Amazon deals, Anker exclusive, more",
+      "summary": "<div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2026/04/EGO-Z6-riding-mower-Segway-E3-Pro-Anker-F3800-eufy-E340-GDs.jpg?quality=82&#038;strip=all&#038;w=1600\" /></div><p>Our Thursday Green Deals are here, and leading the lineup is <a href=\"https://9to5toys.com/2026/04/02/ego-42-inch-z6-zero-turn-riding-mower-six-batteries-880w-charger-new-4800-low/\">EGO’s Z6 42-inch Cordless Electric Zero-Turn Riding Lawn Mower</a> with a fresh bundle of six 6.0Ah batteries and an 880W wall charger at a <a href=\"https://9to5toys.com/2026/04/02/ego-42-inch-z6-zero-turn-riding-mo",
+      "published_date": "2026-04-02",
+      "raw_text": "ego zero-turn riding mower + 6x batteries and wall charger new $4,800 low, segway e-scooter amazon deals, anker exclusive, more <div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2026/04/ego-z6-riding-mower-segway-e3-pro-anker-f3800-eufy-e340-gds.jpg?quality=82&#038;strip=all&#038;w=1600\" /></div><p>our thursday green deals are here, and leading the lineup is <a href=\"https://9to5toys.com/2026/04/02/ego-42-inch-z6-zero-turn-riding-mower-six-batteries-880w-charger-new-4800-low/\">ego’s z6 42-inch cordless electric zero-turn riding lawn mower</a> with a fresh bundle of six 6.0ah batteries and an 880w wall charger at a <a href=\"https://9to5toys.com/2026/04/02/ego-42-inch-z6-zero-turn-riding-mo",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "e6d84c75cff4d26c",
+      "source_id": "electrek",
+      "source_name": "Electrek",
+      "source_url": "https://electrek.co/2026/04/02/kia-unveils-first-of-its-kind-pv5-wav-new-york-ev-taxi/",
+      "source_segments": [
+        "ess",
+        "dc_power"
+      ],
+      "reliability": 3,
+      "title": "Kia unveils ‘first-of-its-kind’ PV5 WAV New York EV taxi",
+      "summary": "<div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2026/04/Kia-PV5-WAV-EV-New-York-taxi-1.jpeg?quality=82&#038;strip=all&#038;w=1400\" /></div><p>The <a href=\"https://electrek.co/guides/kia-pv5/\">PV5 WAV New York EV</a> is a new electric taxi and rideshare concept Kia introduced at the New York Auto Show.</p>\n\n\n\n <a class=\"more-link\" href=\"https://electrek.co/2026/04/02/kia-unveils-first-of-its-kind-pv5-wav-new-york-ev-taxi/#more-462115\">more…</a>",
+      "published_date": "2026-04-02",
+      "raw_text": "kia unveils ‘first-of-its-kind’ pv5 wav new york ev taxi <div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2026/04/kia-pv5-wav-ev-new-york-taxi-1.jpeg?quality=82&#038;strip=all&#038;w=1400\" /></div><p>the <a href=\"https://electrek.co/guides/kia-pv5/\">pv5 wav new york ev</a> is a new electric taxi and rideshare concept kia introduced at the new york auto show.</p>\n\n\n\n <a class=\"more-link\" href=\"https://electrek.co/2026/04/02/kia-unveils-first-of-its-kind-pv5-wav-new-york-ev-taxi/#more-462115\">more…</a>",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "f0a5afe206c10715",
+      "source_id": "electrek",
+      "source_name": "Electrek",
+      "source_url": "https://electrek.co/2026/04/02/mercedes-steer-by-wire-yoke-steering-wheel-eqs-2026/",
+      "source_segments": [
+        "ess",
+        "dc_power"
+      ],
+      "reliability": 3,
+      "title": "Mercedes confirms steer-by-wire for 2026 EQS with questionable steering wheel",
+      "summary": "<div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2026/04/Mercedes-Benzs-new-yoke-steering-wheel-for-the-steer-by-wire-EQS-ImageMercedes-Benz.jpg?quality=82&#038;strip=all&#038;w=1600\" /></div><p>Mercedes-Benz has confirmed it will introduce steer-by-wire technology in 2026, becoming the first German automaker to bring the system to production. The facelifted EQS electric sedan will be the first model to get it.</p>\n\n\n\n<p>Along with the new steering system, Mercedes is ditching the traditional round steering wheel for a flat-bottomed yoke design — and it’s a look",
+      "published_date": "2026-04-02",
+      "raw_text": "mercedes confirms steer-by-wire for 2026 eqs with questionable steering wheel <div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2026/04/mercedes-benzs-new-yoke-steering-wheel-for-the-steer-by-wire-eqs-imagemercedes-benz.jpg?quality=82&#038;strip=all&#038;w=1600\" /></div><p>mercedes-benz has confirmed it will introduce steer-by-wire technology in 2026, becoming the first german automaker to bring the system to production. the facelifted eqs electric sedan will be the first model to get it.</p>\n\n\n\n<p>along with the new steering system, mercedes is ditching the traditional round steering wheel for a flat-bottomed yoke design — and it’s a look",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "320ef7f5dc1527f4",
+      "source_id": "electrek",
+      "source_name": "Electrek",
+      "source_url": "https://electrek.co/2026/04/02/toyota-sold-more-evs-in-the-us-than-ford-q1-one-suv/",
+      "source_segments": [
+        "ess",
+        "dc_power"
+      ],
+      "reliability": 3,
+      "title": "Toyota sold more EVs in the US than Ford in Q1, with one electric SUV",
+      "summary": "<div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2025/05/2026-Toyota-bZ-EV.jpeg?quality=82&#038;strip=all&#038;w=1400\" /></div><p>After scaling back EV plans, <a href=\"https://electrek.co/guides/ford/\">Ford</a> (NYSE: F) is losing ground in the US. With fewer than 7,000 EVs sold in the first quarter, Toyota’s bZ electric SUV outsold Ford’s combined lineup.</p>\n\n\n\n <a class=\"more-link\" href=\"https://electrek.co/2026/04/02/toyota-sold-more-evs-in-the-us-than-ford-q1-one-suv/#more-462104\">more…</a>",
+      "published_date": "2026-04-02",
+      "raw_text": "toyota sold more evs in the us than ford in q1, with one electric suv <div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2025/05/2026-toyota-bz-ev.jpeg?quality=82&#038;strip=all&#038;w=1400\" /></div><p>after scaling back ev plans, <a href=\"https://electrek.co/guides/ford/\">ford</a> (nyse: f) is losing ground in the us. with fewer than 7,000 evs sold in the first quarter, toyota’s bz electric suv outsold ford’s combined lineup.</p>\n\n\n\n <a class=\"more-link\" href=\"https://electrek.co/2026/04/02/toyota-sold-more-evs-in-the-us-than-ford-q1-one-suv/#more-462104\">more…</a>",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "cdf0914dd72f7721",
+      "source_id": "electrek",
+      "source_name": "Electrek",
+      "source_url": "https://electrek.co/2026/04/02/hyundai-previews-two-new-ioniq-evs-cryptic-video/",
+      "source_segments": [
+        "ess",
+        "dc_power"
+      ],
+      "reliability": 3,
+      "title": "Hyundai previews two new IONIQ EVs in cryptic video",
+      "summary": "<div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2026/04/Hyundai-new-IONIQ-EVs-3.jpeg?quality=82&#038;strip=all&#038;w=1400\" /></div><p>Two new Hyundai IONIQ electric vehicles? In a cryptic teaser, <a href=\"https://electrek.co/guides/hyundai/\">Hyundai</a> offered the first look at “the new journey of IONIQ.”</p>\n\n\n\n <a class=\"more-link\" href=\"https://electrek.co/2026/04/02/hyundai-previews-two-new-ioniq-evs-cryptic-video/#more-462086\">more…</a>",
+      "published_date": "2026-04-02",
+      "raw_text": "hyundai previews two new ioniq evs in cryptic video <div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2026/04/hyundai-new-ioniq-evs-3.jpeg?quality=82&#038;strip=all&#038;w=1400\" /></div><p>two new hyundai ioniq electric vehicles? in a cryptic teaser, <a href=\"https://electrek.co/guides/hyundai/\">hyundai</a> offered the first look at “the new journey of ioniq.”</p>\n\n\n\n <a class=\"more-link\" href=\"https://electrek.co/2026/04/02/hyundai-previews-two-new-ioniq-evs-cryptic-video/#more-462086\">more…</a>",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "2a922aae9a13b820",
+      "source_id": "electrek",
+      "source_name": "Electrek",
+      "source_url": "https://electrek.co/2026/04/02/tesla-tsla-q1-2026-delivery-results-misses-expectations/",
+      "source_segments": [
+        "ess",
+        "dc_power"
+      ],
+      "reliability": 3,
+      "title": "Tesla (TSLA) Q1 2026 deliveries miss expectations at 358,000, builds 50,000 excess vehicles",
+      "summary": "<div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2025/04/Tesla-family-hero.png?w=1600\" /></div><p>Tesla released its Q1 2026 production and delivery results today, confirming 358,023 vehicle deliveries — about 7,600 units below the Wall Street consensus of 365,645 vehicles.</p>\n\n\n\n<p>More concerning than the miss itself is the gap between production and deliveries. Tesla produced 408,386 vehicles during the quarter but only delivered 358,023, adding over 50,000 vehicles to inventory in a single quarter.</p>\n\n\n\n <a class=\"more-link\" href=\"https://electrek.co/2026",
+      "published_date": "2026-04-02",
+      "raw_text": "tesla (tsla) q1 2026 deliveries miss expectations at 358,000, builds 50,000 excess vehicles <div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2025/04/tesla-family-hero.png?w=1600\" /></div><p>tesla released its q1 2026 production and delivery results today, confirming 358,023 vehicle deliveries — about 7,600 units below the wall street consensus of 365,645 vehicles.</p>\n\n\n\n<p>more concerning than the miss itself is the gap between production and deliveries. tesla produced 408,386 vehicles during the quarter but only delivered 358,023, adding over 50,000 vehicles to inventory in a single quarter.</p>\n\n\n\n <a class=\"more-link\" href=\"https://electrek.co/2026",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "bedd433efbceefee",
+      "source_id": "electrek",
+      "source_name": "Electrek",
+      "source_url": "https://electrek.co/2026/04/02/rivian-shares-production-delivery-numbers-q1-2026-financial-results/",
+      "source_segments": [
+        "ess",
+        "dc_power"
+      ],
+      "reliability": 3,
+      "title": "Rivian shares production and delivery numbers ahead of full Q1 2026 financial results",
+      "summary": "<div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2026/03/Rivian-R2-Pricing-R1-comparison.jpg?quality=82&#038;strip=all&#038;w=1400\" /></div><p>American automaker <a href=\"https://electrek.co/guides/rivian/\">Rivian</a> has posted its production and delivery figures for Q1 of 2026 and has set the date for its full financial report. </p>\n\n\n\n <a class=\"more-link\" href=\"https://electrek.co/2026/04/02/rivian-shares-production-delivery-numbers-q1-2026-financial-results/#more-462080\">more…</a>",
+      "published_date": "2026-04-02",
+      "raw_text": "rivian shares production and delivery numbers ahead of full q1 2026 financial results <div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2026/03/rivian-r2-pricing-r1-comparison.jpg?quality=82&#038;strip=all&#038;w=1400\" /></div><p>american automaker <a href=\"https://electrek.co/guides/rivian/\">rivian</a> has posted its production and delivery figures for q1 of 2026 and has set the date for its full financial report. </p>\n\n\n\n <a class=\"more-link\" href=\"https://electrek.co/2026/04/02/rivian-shares-production-delivery-numbers-q1-2026-financial-results/#more-462080\">more…</a>",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "a83c361b401f6681",
+      "source_id": "electrek",
+      "source_name": "Electrek",
+      "source_url": "https://electrek.co/2026/04/02/candelas-new-p-12-business-electric-ferry-is-luxury-soaring-just-above-the-waves/",
+      "source_segments": [
+        "ess",
+        "dc_power"
+      ],
+      "reliability": 3,
+      "title": "Candela’s new P-12 Business electric ferry is luxury soaring just above the waves",
+      "summary": "<div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2026/04/candela-p-12-business-header.jpg?quality=82&#038;strip=all&#038;w=1600\" /></div><p>Swedish electric boat maker <a href=\"http://candela.com\">Candela</a> has just unveiled its latest vessel, the P-12 Business, and it’s aiming to do something that’s long felt overdue: make getting to your destination on the water just as enjoyable as the destination itself.</p>\n\n\n\n<p>The new ferry builds on Candela’s already impressive P-12 platform, but adds a premium, business-class interior designed for high-end transport",
+      "published_date": "2026-04-02",
+      "raw_text": "candela’s new p-12 business electric ferry is luxury soaring just above the waves <div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2026/04/candela-p-12-business-header.jpg?quality=82&#038;strip=all&#038;w=1600\" /></div><p>swedish electric boat maker <a href=\"http://candela.com\">candela</a> has just unveiled its latest vessel, the p-12 business, and it’s aiming to do something that’s long felt overdue: make getting to your destination on the water just as enjoyable as the destination itself.</p>\n\n\n\n<p>the new ferry builds on candela’s already impressive p-12 platform, but adds a premium, business-class interior designed for high-end transport",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "7d9adb4eb6406088",
+      "source_id": "electrek",
+      "source_name": "Electrek",
+      "source_url": "https://electrek.co/2026/04/02/uber-expands-ev-grant-nationwide-driver-incentives/",
+      "source_segments": [
+        "ess",
+        "dc_power"
+      ],
+      "reliability": 3,
+      "title": "Uber expands EV grant nationwide, offering drivers up to $6,500 in incentives",
+      "summary": "<div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2025/10/Uber-electric-logo.jpg?quality=82&#038;strip=all&#038;w=1400\" /></div><p>Six months after transitioning one of its rideshare options to promote more electric rides and offer a grant to riders who switch to an EV, <a href=\"https://electrek.co/guides/uber/\">Uber Technologies</a> is expanding the program across the US and adding additional savings.</p>\n\n\n\n <a class=\"more-link\" href=\"https://electrek.co/2026/04/02/uber-expands-ev-grant-nationwide-driver-incentives/#more-461958\">more…</a>",
+      "published_date": "2026-04-02",
+      "raw_text": "uber expands ev grant nationwide, offering drivers up to $6,500 in incentives <div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2025/10/uber-electric-logo.jpg?quality=82&#038;strip=all&#038;w=1400\" /></div><p>six months after transitioning one of its rideshare options to promote more electric rides and offer a grant to riders who switch to an ev, <a href=\"https://electrek.co/guides/uber/\">uber technologies</a> is expanding the program across the us and adding additional savings.</p>\n\n\n\n <a class=\"more-link\" href=\"https://electrek.co/2026/04/02/uber-expands-ev-grant-nationwide-driver-incentives/#more-461958\">more…</a>",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "a42bd9bacbf90f56",
+      "source_id": "electrek",
+      "source_name": "Electrek",
+      "source_url": "https://electrek.co/2026/04/01/the-world-added-692-gw-of-renewables-in-2025-heres-what-it-means/",
+      "source_segments": [
+        "ess",
+        "dc_power"
+      ],
+      "reliability": 3,
+      "title": "The world added 692 GW of renewables in 2025 – here’s what it means",
+      "summary": "<div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2025/12/Shandong-HG14-Offshore-1-gigawatt-Photovoltaic-Project.jpg?quality=82&#038;strip=all&#038;w=1200\" /></div><p>The world added a massive 692 gigawatts (GW) of renewable power in 2025, pushing total global capacity to 5,149 GW, according to a <a href=\"https://www.irena.org/Publications/2026/Mar/Renewable-capacity-statistics-2026\" rel=\"noreferrer noopener\" target=\"_blank\">new report</a> from the International Renewable Energy Agency (IRENA).</p>\n\n\n\n <a class=\"more-link\" href=\"https://electrek.co/2026/04/01/the",
+      "published_date": "2026-04-01",
+      "raw_text": "the world added 692 gw of renewables in 2025 – here’s what it means <div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2025/12/shandong-hg14-offshore-1-gigawatt-photovoltaic-project.jpg?quality=82&#038;strip=all&#038;w=1200\" /></div><p>the world added a massive 692 gigawatts (gw) of renewable power in 2025, pushing total global capacity to 5,149 gw, according to a <a href=\"https://www.irena.org/publications/2026/mar/renewable-capacity-statistics-2026\" rel=\"noreferrer noopener\" target=\"_blank\">new report</a> from the international renewable energy agency (irena).</p>\n\n\n\n <a class=\"more-link\" href=\"https://electrek.co/2026/04/01/the",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "ea4f44ecb547dd48",
+      "source_id": "canarymedia",
+      "source_name": "Canary Media",
+      "source_url": "https://www.canarymedia.com/articles/clean-energy/renewable-power-wind-solar-spring-records",
+      "source_segments": [
+        "ess",
+        "grid_sw",
+        "dc_power",
+        "hydrogen"
+      ],
+      "reliability": 2,
+      "title": "This spring has been a record season for renewables",
+      "summary": "This analysis and news roundup come from the Canary Media Weekly newsletter.  Sign up to get it every Friday.   Renewable energy’s favorite season has arrived.  Spring is when everything comes together for clean power sources. Days get longer, boosting solar generation. Winter’s blustery winds keep blowing,…",
+      "published_date": "2026-04-03",
+      "raw_text": "this spring has been a record season for renewables this analysis and news roundup come from the canary media weekly newsletter.  sign up to get it every friday.   renewable energy’s favorite season has arrived.  spring is when everything comes together for clean power sources. days get longer, boosting solar generation. winter’s blustery winds keep blowing,…",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "d5023e93aced29d8",
+      "source_id": "canarymedia",
+      "source_name": "Canary Media",
+      "source_url": "https://www.canarymedia.com/articles/batteries/nations-largest-urban-battery-san-francisco",
+      "source_segments": [
+        "ess",
+        "grid_sw",
+        "dc_power",
+        "hydrogen"
+      ],
+      "reliability": 2,
+      "title": "Nation's largest urban battery to take center stage near San Francisco",
+      "summary": "The Cow Palace arena, just south of San Francisco, has hosted Dwight Eisenhower , the Beatles , the San Jose Sharks NHL team, and an annual rodeo since it opened in 1941. But an even bigger act is setting up next door: an enormous battery that will perform a starring role in the Bay Area’s energy ecosystem. …",
+      "published_date": "2026-04-03",
+      "raw_text": "nation's largest urban battery to take center stage near san francisco the cow palace arena, just south of san francisco, has hosted dwight eisenhower , the beatles , the san jose sharks nhl team, and an annual rodeo since it opened in 1941. but an even bigger act is setting up next door: an enormous battery that will perform a starring role in the bay area’s energy ecosystem. …",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "6e03fbd042dae856",
+      "source_id": "canarymedia",
+      "source_name": "Canary Media",
+      "source_url": "https://www.canarymedia.com/articles/clean-energy/iran-war-could-spur-europe-to-double-down-on-renewables-again",
+      "source_segments": [
+        "ess",
+        "grid_sw",
+        "dc_power",
+        "hydrogen"
+      ],
+      "reliability": 2,
+      "title": "Iran war could spur Europe to double down on renewables — again",
+      "summary": "See more from  Canary Media’s ​“Chart of the Week” column  .  The European Union is once again facing an energy crisis due to its reliance on imported fossil fuels — and is once again poised to lean into renewables to blunt the effects.  As the war in the Middle East upends global oil and gas markets, European Union…",
+      "published_date": "2026-04-03",
+      "raw_text": "iran war could spur europe to double down on renewables — again see more from  canary media’s ​“chart of the week” column  .  the european union is once again facing an energy crisis due to its reliance on imported fossil fuels — and is once again poised to lean into renewables to blunt the effects.  as the war in the middle east upends global oil and gas markets, european union…",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "dd9de5deae5b372d",
+      "source_id": "canarymedia",
+      "source_name": "Canary Media",
+      "source_url": "https://www.canarymedia.com/articles/green-steel/way-forward-indiana-steel",
+      "source_segments": [
+        "ess",
+        "grid_sw",
+        "dc_power",
+        "hydrogen"
+      ],
+      "reliability": 2,
+      "title": "Green steel is the way forward for Indiana, former steelworkers say",
+      "summary": "Remell Bryant fed steel coils into the “cold strip” as a way to support her daughter as a single mother.  Valerie Denney worked on the “pickle line,” removing impurities from hot steel, before shifting to a career in public relations.  Jack Weinberg tested metallurgical content until he was laid off, then went on to…",
+      "published_date": "2026-04-02",
+      "raw_text": "green steel is the way forward for indiana, former steelworkers say remell bryant fed steel coils into the “cold strip” as a way to support her daughter as a single mother.  valerie denney worked on the “pickle line,” removing impurities from hot steel, before shifting to a career in public relations.  jack weinberg tested metallurgical content until he was laid off, then went on to…",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "27e15bd998d73126",
+      "source_id": "canarymedia",
+      "source_name": "Canary Media",
+      "source_url": "https://www.canarymedia.com/articles/electric-vehicles/used-evs-are-bargain-buyers-noticing",
+      "source_segments": [
+        "ess",
+        "grid_sw",
+        "dc_power",
+        "hydrogen"
+      ],
+      "reliability": 2,
+      "title": "Used EVs are a bargain right now — and buyers are noticing",
+      "summary": "Chad Shepard has warm feelings about the all-electric Honda Prologue he bought recently. Unlike his first EV, a BMW i3, the SUV is big enough for his two teenage sons and his 80-pound sheepdog. Its 300-mile range is plenty to get him to the homes across the San Francisco Bay Area that he appraises for a living.  And…",
+      "published_date": "2026-04-02",
+      "raw_text": "used evs are a bargain right now — and buyers are noticing chad shepard has warm feelings about the all-electric honda prologue he bought recently. unlike his first ev, a bmw i3, the suv is big enough for his two teenage sons and his 80-pound sheepdog. its 300-mile range is plenty to get him to the homes across the san francisco bay area that he appraises for a living.  and…",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "b9e3a70c0f505e94",
+      "source_id": "canarymedia",
+      "source_name": "Canary Media",
+      "source_url": "https://www.canarymedia.com/articles/utilities/duke-energy-fuel-costs-burden",
+      "source_segments": [
+        "ess",
+        "grid_sw",
+        "dc_power",
+        "hydrogen"
+      ],
+      "reliability": 2,
+      "title": "What if Duke Energy shared the burden of fuel costs with its customers?",
+      "summary": "If the war in the Middle East has proved anything over the last month, it&#039;s that fossil fuel prices are extraordinarily unstable. But global conflict isn’t the only catalyst that can send the cost of oil and natural gas reeling. Factors such as extreme weather, policy changes, and pipeline outages can also set off a…",
+      "published_date": "2026-04-01",
+      "raw_text": "what if duke energy shared the burden of fuel costs with its customers? if the war in the middle east has proved anything over the last month, it&#039;s that fossil fuel prices are extraordinarily unstable. but global conflict isn’t the only catalyst that can send the cost of oil and natural gas reeling. factors such as extreme weather, policy changes, and pipeline outages can also set off a…",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "7eb96aa7d593634f",
+      "source_id": "canarymedia",
+      "source_name": "Canary Media",
+      "source_url": "https://www.canarymedia.com/articles/geothermal/next-generation-geothermal-technology-revolution",
+      "source_segments": [
+        "ess",
+        "grid_sw",
+        "dc_power",
+        "hydrogen"
+      ],
+      "reliability": 2,
+      "title": "Next-generation geothermal needs more than a technology revolution",
+      "summary": "Geothermal energy is on the cusp of a renaissance in the United States. But outdated and piecemeal rules could delay development of the around-the-clock, carbon-free energy source.  Next-generation geothermal is something of a golden child, backed by everyone from climate advocates to leaders in the drilling-obsessed…",
+      "published_date": "2026-04-01",
+      "raw_text": "next-generation geothermal needs more than a technology revolution geothermal energy is on the cusp of a renaissance in the united states. but outdated and piecemeal rules could delay development of the around-the-clock, carbon-free energy source.  next-generation geothermal is something of a golden child, backed by everyone from climate advocates to leaders in the drilling-obsessed…",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "1f338d6366a3fb8b",
+      "source_id": "canarymedia",
+      "source_name": "Canary Media",
+      "source_url": "https://www.canarymedia.com/articles/solar/alabama-power-charge-rooftop-solar-fee",
+      "source_segments": [
+        "ess",
+        "grid_sw",
+        "dc_power",
+        "hydrogen"
+      ],
+      "reliability": 2,
+      "title": "Alabama Power can keep charging steep rooftop solar fee, judge rules",
+      "summary": "This article originally appeared on  Inside Climate News  , a nonprofit, nonpartisan news organization that covers climate, energy, and the environment.  Sign up for their newsletter.   In Alabama, a yearslong battle over one of the nation’s highest backup fees for residential solar customers may have finally come to…",
+      "published_date": "2026-04-01",
+      "raw_text": "alabama power can keep charging steep rooftop solar fee, judge rules this article originally appeared on  inside climate news  , a nonprofit, nonpartisan news organization that covers climate, energy, and the environment.  sign up for their newsletter.   in alabama, a yearslong battle over one of the nation’s highest backup fees for residential solar customers may have finally come to…",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "e73595299f2918b0",
+      "source_id": "pvmagazine",
+      "source_name": "PV Magazine",
+      "source_url": "https://www.pv-magazine.com/2026/04/03/chinese-pv-industry-brief-sungrow-revenue-up-15-as-storage-surpasses-inverters/",
+      "source_segments": [
+        "ess",
+        "hydrogen",
+        "forecasting"
+      ],
+      "reliability": 2,
+      "title": "Chinese PV Industry Brief: Sungrow storage overtakes inverters in 2025",
+      "summary": "Sungrow says energy storage systems overtook PV inverters as its largest business segment in 2025, as the company posted double-digit revenue and profit growth.",
+      "published_date": "2026-04-03",
+      "raw_text": "chinese pv industry brief: sungrow storage overtakes inverters in 2025 sungrow says energy storage systems overtook pv inverters as its largest business segment in 2025, as the company posted double-digit revenue and profit growth.",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "763f3dbf8fdd89c7",
+      "source_id": "pvmagazine",
+      "source_name": "PV Magazine",
+      "source_url": "https://www.pv-magazine.com/2026/04/03/tcl-zhonghuan-to-acquire-control-of-das-solar-in-consolidation-move/",
+      "source_segments": [
+        "ess",
+        "hydrogen",
+        "forecasting"
+      ],
+      "reliability": 2,
+      "title": "TCL Zhonghuan to acquire control of DAS Solar in consolidation move",
+      "summary": "TCL Zhonghuan has agreed to take majority control of Chinese solar manufacturer DAS Solar, a producer of advanced n-type modules based on tunnel oxide passivated contact (TOPCon) and back-contact (BC) technologies.",
+      "published_date": "2026-04-03",
+      "raw_text": "tcl zhonghuan to acquire control of das solar in consolidation move tcl zhonghuan has agreed to take majority control of chinese solar manufacturer das solar, a producer of advanced n-type modules based on tunnel oxide passivated contact (topcon) and back-contact (bc) technologies.",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "01034e50c3df81e0",
+      "source_id": "pvmagazine",
+      "source_name": "PV Magazine",
+      "source_url": "https://www.pv-magazine.com/2026/04/03/malaysias-solar-capacity-surpasses-5-7-gw/",
+      "source_segments": [
+        "ess",
+        "hydrogen",
+        "forecasting"
+      ],
+      "reliability": 2,
+      "title": "Malaysia’s solar capacity surpasses 5.7 GW",
+      "summary": "Reports from the International Energy Agency's Photovoltaic Power Systems Programme (IEA-PVPS) indicate Malaysia added over 1.4 GW of solar in 2025, with more than 5.7 GW now deployed across multiple government schemes.",
+      "published_date": "2026-04-03",
+      "raw_text": "malaysia’s solar capacity surpasses 5.7 gw reports from the international energy agency's photovoltaic power systems programme (iea-pvps) indicate malaysia added over 1.4 gw of solar in 2025, with more than 5.7 gw now deployed across multiple government schemes.",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "543d3812a11992e3",
+      "source_id": "pvmagazine",
+      "source_name": "PV Magazine",
+      "source_url": "https://www.pv-magazine.com/2026/04/03/hydro-quebec-launches-grant-for-residential-commercial-solar/",
+      "source_segments": [
+        "ess",
+        "hydrogen",
+        "forecasting"
+      ],
+      "reliability": 2,
+      "title": "Hydro-Québec launches grant for residential, commercial solar",
+      "summary": "Hydro-Québec has introduced a grant offering up to CAD 1,000 ($718.40) per kilowatt installed, covering up to 40% of eligible costs to accelerate rooftop solar adoption and reduce payback periods for residential and business customers in the Canadian province of Québec.",
+      "published_date": "2026-04-03",
+      "raw_text": "hydro-québec launches grant for residential, commercial solar hydro-québec has introduced a grant offering up to cad 1,000 ($718.40) per kilowatt installed, covering up to 40% of eligible costs to accelerate rooftop solar adoption and reduce payback periods for residential and business customers in the canadian province of québec.",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "d01cd5235cb0b85f",
+      "source_id": "pvmagazine",
+      "source_name": "PV Magazine",
+      "source_url": "https://www.pv-magazine.com/2026/04/03/heat-dome-and-high-pressure-boost-southern-us-solar-as-polar-vortex-clouds-the-north/",
+      "source_segments": [
+        "ess",
+        "hydrogen",
+        "forecasting"
+      ],
+      "reliability": 2,
+      "title": "Heat dome and high pressure boost southern US solar as polar vortex clouds the north",
+      "summary": "In a new weekly update for <b>pv magazine</b>, Solcast, a DNV company, reports that last month North America saw a stark solar divide, with southern regions like northeastern Mexico, southeastern Texas, and much of California experiencing 20–25% above-average irradiance, while Canada, the Great Lakes, and the northeastern U.S. faced persistent cloudiness and below-normal solar conditions. This contrast was driven by high-pressure systems and a southwestern heat dome in the south versus a polar vortex bringing cold air and storms to the north.",
+      "published_date": "2026-04-03",
+      "raw_text": "heat dome and high pressure boost southern us solar as polar vortex clouds the north in a new weekly update for <b>pv magazine</b>, solcast, a dnv company, reports that last month north america saw a stark solar divide, with southern regions like northeastern mexico, southeastern texas, and much of california experiencing 20–25% above-average irradiance, while canada, the great lakes, and the northeastern u.s. faced persistent cloudiness and below-normal solar conditions. this contrast was driven by high-pressure systems and a southwestern heat dome in the south versus a polar vortex bringing cold air and storms to the north.",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "3d2f563984f87eb4",
+      "source_id": "pvmagazine",
+      "source_name": "PV Magazine",
+      "source_url": "https://www.pv-magazine.com/2026/04/03/agratas-advances-20-gwh-battery-plant-in-western-india/",
+      "source_segments": [
+        "ess",
+        "hydrogen",
+        "forecasting"
+      ],
+      "reliability": 2,
+      "title": "Agratas advances 20 GWh battery plant in western India",
+      "summary": "Agratas, the global battery business of the Tata Group, has completed the steel frame of its Sanand facility in India, with production expected to begin in 2027.",
+      "published_date": "2026-04-03",
+      "raw_text": "agratas advances 20 gwh battery plant in western india agratas, the global battery business of the tata group, has completed the steel frame of its sanand facility in india, with production expected to begin in 2027.",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "d1eaa96b5777beaa",
+      "source_id": "pvmagazine",
+      "source_name": "PV Magazine",
+      "source_url": "https://www.pv-magazine.com/2026/04/03/zambia-tenders-300-mw-of-solar-under-feed-in-premium-program/",
+      "source_segments": [
+        "ess",
+        "hydrogen",
+        "forecasting"
+      ],
+      "reliability": 2,
+      "title": "Zambia tenders 300 MW of solar",
+      "summary": "The first bid window of Zambia's new Carbon Feed In Premium Program plans to develop 300 MW of solar across projects that are connected to on-site battery energy storage systems. The deadline to submit expressions of interest is May 31.",
+      "published_date": "2026-04-03",
+      "raw_text": "zambia tenders 300 mw of solar the first bid window of zambia's new carbon feed in premium program plans to develop 300 mw of solar across projects that are connected to on-site battery energy storage systems. the deadline to submit expressions of interest is may 31.",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "087b21f2184438c7",
+      "source_id": "pvmagazine",
+      "source_name": "PV Magazine",
+      "source_url": "https://www.pv-magazine.com/2026/04/03/rooftop-solar-now-accounts-for-one-fifth-of-puerto-ricos-generation-capacity/",
+      "source_segments": [
+        "ess",
+        "hydrogen",
+        "forecasting"
+      ],
+      "reliability": 2,
+      "title": "Rooftop solar now accounts for one-fifth of Puerto Rico’s generation capacity",
+      "summary": "Distributed solar additions have vastly outpaced all other forms of generation as Puerto Rico’s overall power generation capacity continues to grow.",
+      "published_date": "2026-04-03",
+      "raw_text": "rooftop solar now accounts for one-fifth of puerto rico’s generation capacity distributed solar additions have vastly outpaced all other forms of generation as puerto rico’s overall power generation capacity continues to grow.",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "fa76302c6cf07351",
+      "source_id": "pvmagazine",
+      "source_name": "PV Magazine",
+      "source_url": "https://www.pv-magazine.com/2026/04/03/terabase-energy-advances-automated-pv-construction-with-robotics-ai-tools/",
+      "source_segments": [
+        "ess",
+        "hydrogen",
+        "forecasting"
+      ],
+      "reliability": 2,
+      "title": "Terabase Energy advances automated PV construction with robotics, AI tools",
+      "summary": "California-based Terabase Energy is scaling up its automated solar construction platform and expanding its engineering software ecosystem to improve project delivery and performance modeling.",
+      "published_date": "2026-04-03",
+      "raw_text": "terabase energy advances automated pv construction with robotics, ai tools california-based terabase energy is scaling up its automated solar construction platform and expanding its engineering software ecosystem to improve project delivery and performance modeling.",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "5a499f29e6359731",
+      "source_id": "pvmagazine",
+      "source_name": "PV Magazine",
+      "source_url": "https://www.pv-magazine.com/2026/04/03/motherhood-further-shaped-my-leadership-perspective/",
+      "source_segments": [
+        "ess",
+        "hydrogen",
+        "forecasting"
+      ],
+      "reliability": 2,
+      "title": "‘Motherhood further shaped my leadership perspective’",
+      "summary": "This week Women in Solar+ Europe gives voice to Margarita Licht, Product Manager BESS &#38; Charging at Germany's Goldbeck Solar. She says diverse perspectives and cognitive styles are essential in the solar and energy storage sector, enabling smarter solutions, effective problem-solving, and long-term planning. She also emphasizes that creating inclusive environments, fostering allyship, and choosing workplaces that value authentic strengths empower growth and drive meaningful impact.",
+      "published_date": "2026-04-03",
+      "raw_text": "‘motherhood further shaped my leadership perspective’ this week women in solar+ europe gives voice to margarita licht, product manager bess &#38; charging at germany's goldbeck solar. she says diverse perspectives and cognitive styles are essential in the solar and energy storage sector, enabling smarter solutions, effective problem-solving, and long-term planning. she also emphasizes that creating inclusive environments, fostering allyship, and choosing workplaces that value authentic strengths empower growth and drive meaningful impact.",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "818f85775780ab26",
+      "source_id": "pvmagazine",
+      "source_name": "PV Magazine",
+      "source_url": "https://www.pv-magazine.com/2026/04/03/bauer-solar-launches-490-w-back-contact-solar-module/",
+      "source_segments": [
+        "ess",
+        "hydrogen",
+        "forecasting"
+      ],
+      "reliability": 2,
+      "title": "Bauer Solar launches 480 W back-contact solar module",
+      "summary": "The German manufacturer said its new back-contact solar panel has a power conversion efficiency of up to 23.52%.",
+      "published_date": "2026-04-03",
+      "raw_text": "bauer solar launches 480 w back-contact solar module the german manufacturer said its new back-contact solar panel has a power conversion efficiency of up to 23.52%.",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "e62d4bf38175535f",
+      "source_id": "pvmagazine",
+      "source_name": "PV Magazine",
+      "source_url": "https://www.pv-magazine.com/2026/04/03/new-intrusion-detection-systems-boost-protection-of-scada-systems-against-cyber-threats/",
+      "source_segments": [
+        "ess",
+        "hydrogen",
+        "forecasting"
+      ],
+      "reliability": 2,
+      "title": "New intrusion detection systems boost protection of SCADA systems against cyber threats",
+      "summary": "An international reserch team developed two deep learning-based IDS models to enhance cybersecurity in SCADA systems. The hybrid approach reportedly improves detection of complex and novel cyber threats with high accuracy, adaptability, and efficiency, outperforming traditional methods across multiple datasets.",
+      "published_date": "2026-04-03",
+      "raw_text": "new intrusion detection systems boost protection of scada systems against cyber threats an international reserch team developed two deep learning-based ids models to enhance cybersecurity in scada systems. the hybrid approach reportedly improves detection of complex and novel cyber threats with high accuracy, adaptability, and efficiency, outperforming traditional methods across multiple datasets.",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "6d00bd6f51560349",
+      "source_id": "pvmagazine",
+      "source_name": "PV Magazine",
+      "source_url": "https://www.pv-magazine.com/2026/04/03/neuron-energy-plans-5-gwh-battery-storage-factory-in-india/",
+      "source_segments": [
+        "ess",
+        "hydrogen",
+        "forecasting"
+      ],
+      "reliability": 2,
+      "title": "Neuron Energy plans 5 GWh battery storage factory in India",
+      "summary": "India-based EV battery manufacturer Neuron Energy plans to enter the grid-scale storage market with a 5 GWh battery energy storage system (BESS) manufacturing facility in the Indian state of Maharashtra.",
+      "published_date": "2026-04-03",
+      "raw_text": "neuron energy plans 5 gwh battery storage factory in india india-based ev battery manufacturer neuron energy plans to enter the grid-scale storage market with a 5 gwh battery energy storage system (bess) manufacturing facility in the indian state of maharashtra.",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "9af8d2c4ed3fd558",
+      "source_id": "pvmagazine",
+      "source_name": "PV Magazine",
+      "source_url": "https://www.pv-magazine.com/2026/04/03/copper-indium-selenium-micro-islands-pave-the-way-for-next-gen-micro-concentrator-solar-cells/",
+      "source_segments": [
+        "ess",
+        "hydrogen",
+        "forecasting"
+      ],
+      "reliability": 2,
+      "title": "Copper, indium, selenium micro-islands pave the way for next-gen micro-concentrator solar cells",
+      "summary": "A German research team has developed CuInSe₂ micro-concentrator solar cells using laser-assisted metal-organic chemical vapor deposition to grow indium islands directly on molybdenum-coated glass, forming absorber arrays without masks or patterning. The not-yet-optimized micro-modules achieved up to 0.65% efficiency under one sun, with gains of up to 250% under concentrated illumination.",
+      "published_date": "2026-04-03",
+      "raw_text": "copper, indium, selenium micro-islands pave the way for next-gen micro-concentrator solar cells a german research team has developed cuinse₂ micro-concentrator solar cells using laser-assisted metal-organic chemical vapor deposition to grow indium islands directly on molybdenum-coated glass, forming absorber arrays without masks or patterning. the not-yet-optimized micro-modules achieved up to 0.65% efficiency under one sun, with gains of up to 250% under concentrated illumination.",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "b32d7e16cff408bd",
+      "source_id": "pvmagazine",
+      "source_name": "PV Magazine",
+      "source_url": "https://www.pv-magazine.com/2026/04/03/spin-flip-emitters-could-control-energy-pathways-in-singlet-fission-solar-cells/",
+      "source_segments": [
+        "ess",
+        "hydrogen",
+        "forecasting"
+      ],
+      "reliability": 2,
+      "title": "Spin-flip emitters could control energy pathways in singlet fission solar cells",
+      "summary": "Japanese researchers developed a molybdenum-based spin-flip emitter that efficiently harvests triplet excitons from singlet-fission tetracene dimers, producing strong near-infrared emission. This approach could boost solar cell efficiency and enable new quantum technologies by converting otherwise “dark” excitons into usable light.",
+      "published_date": "2026-04-03",
+      "raw_text": "spin-flip emitters could control energy pathways in singlet fission solar cells japanese researchers developed a molybdenum-based spin-flip emitter that efficiently harvests triplet excitons from singlet-fission tetracene dimers, producing strong near-infrared emission. this approach could boost solar cell efficiency and enable new quantum technologies by converting otherwise “dark” excitons into usable light.",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "fa623b284a0d150c",
+      "source_id": "pvmagazine",
+      "source_name": "PV Magazine",
+      "source_url": "https://www.pv-magazine.com/2026/04/03/bbdf-2026-hybrid-ppas-face-slow-uptake-among-industrial-buyers/",
+      "source_segments": [
+        "ess",
+        "hydrogen",
+        "forecasting"
+      ],
+      "reliability": 2,
+      "title": "BBDF 2026: Hybrid PPAs face slow uptake among industrial buyers",
+      "summary": "Hybrid power purchase agreements (PPAs) combining solar and storage are proving harder to close with industrial offtakers than standard solar deals, despite growing market interest.",
+      "published_date": "2026-04-03",
+      "raw_text": "bbdf 2026: hybrid ppas face slow uptake among industrial buyers hybrid power purchase agreements (ppas) combining solar and storage are proving harder to close with industrial offtakers than standard solar deals, despite growing market interest.",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "fbbae7b292dfa702",
+      "source_id": "pvmagazine",
+      "source_name": "PV Magazine",
+      "source_url": "https://www.pv-magazine.com/2026/04/03/swiss-startup-offers-lifetime-guarantee-for-second-life-batteries/",
+      "source_segments": [
+        "ess",
+        "hydrogen",
+        "forecasting"
+      ],
+      "reliability": 2,
+      "title": "Swiss startup offers lifetime guarantee for second-life batteries",
+      "summary": "Switzerland startup Evolium Technologies’ subscription-based business model offers residential battery owners a lifetime guarantee on second life batteries. The startup tests and remotely monitors each battery cell so it can alert customers when a cell is under-performing.",
+      "published_date": "2026-04-03",
+      "raw_text": "swiss startup offers lifetime guarantee for second-life batteries switzerland startup evolium technologies’ subscription-based business model offers residential battery owners a lifetime guarantee on second life batteries. the startup tests and remotely monitors each battery cell so it can alert customers when a cell is under-performing.",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "e1b5671b75bdad30",
+      "source_id": "pvmagazine",
+      "source_name": "PV Magazine",
+      "source_url": "https://www.pv-magazine.com/2026/04/02/tno-unveils-12-4-efficient-perovksite-solar-tile/",
+      "source_segments": [
+        "ess",
+        "hydrogen",
+        "forecasting"
+      ],
+      "reliability": 2,
+      "title": "TNO unveils 12.4%-efficient perovksite solar tile",
+      "summary": "The Dutch research institute has presented what it describes as the world’s first perovskite-based roof tile, achieving up to 13.8% efficiency on standalone modules and 12.4% when installed on a curved surface. The flexible modules were produced using TNO’s experimental roll-to-roll platform,",
+      "published_date": "2026-04-02",
+      "raw_text": "tno unveils 12.4%-efficient perovksite solar tile the dutch research institute has presented what it describes as the world’s first perovskite-based roof tile, achieving up to 13.8% efficiency on standalone modules and 12.4% when installed on a curved surface. the flexible modules were produced using tno’s experimental roll-to-roll platform,",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "43307b1ec7c42f3c",
+      "source_id": "pvmagazine",
+      "source_name": "PV Magazine",
+      "source_url": "https://www.pv-magazine.com/2026/04/02/france-introduces-cybersecurity-sustainability-requirements-in-solar-tenders/",
+      "source_segments": [
+        "ess",
+        "hydrogen",
+        "forecasting"
+      ],
+      "reliability": 2,
+      "title": "France introduces cybersecurity, sustainability requirements in solar tenders",
+      "summary": "The French authorities announced they will assign 288 MW of PV in the 2026 tender for projects ranging from 100 kW to 500 kW in size and 925 MW in the procurement exercise for PV systems exceeding 500 kW. The tenders will include cybersecurity requirements as well as provisions to support European manufacturing.",
+      "published_date": "2026-04-02",
+      "raw_text": "france introduces cybersecurity, sustainability requirements in solar tenders the french authorities announced they will assign 288 mw of pv in the 2026 tender for projects ranging from 100 kw to 500 kw in size and 925 mw in the procurement exercise for pv systems exceeding 500 kw. the tenders will include cybersecurity requirements as well as provisions to support european manufacturing.",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "8b05420600ccad92",
+      "source_id": "pvmagazine",
+      "source_name": "PV Magazine",
+      "source_url": "https://www.pv-magazine.com/2026/04/02/chinese-team-reports-hydrofluorocarbon-electrolyte-for-700-wh-kg-lithium-battery/",
+      "source_segments": [
+        "ess",
+        "hydrogen",
+        "forecasting"
+      ],
+      "reliability": 2,
+      "title": "Chinese researchers report 700 Wh/kg lithium-metal battery",
+      "summary": "A team from Nankai University and the Shanghai Institute of Space Power-Sources has developed a hydrofluorocarbon electrolyte enabling lithium-metal cells to operate at temperatures as low as -70 C.",
+      "published_date": "2026-04-02",
+      "raw_text": "chinese researchers report 700 wh/kg lithium-metal battery a team from nankai university and the shanghai institute of space power-sources has developed a hydrofluorocarbon electrolyte enabling lithium-metal cells to operate at temperatures as low as -70 c.",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "249f3083d6b4984b",
+      "source_id": "pvmagazine",
+      "source_name": "PV Magazine",
+      "source_url": "https://www.pv-magazine.com/2026/04/02/us-solar-faces-53000-worker-gap-ahead-of-2026-deadline/",
+      "source_segments": [
+        "ess",
+        "hydrogen",
+        "forecasting"
+      ],
+      "reliability": 2,
+      "title": "US solar faces 53,000-worker gap ahead of 2026 deadline",
+      "summary": "The US solar industry may fall short of workforce needs as developers race to meet July 4, 2026 construction deadlines tied to federal tax credits.",
+      "published_date": "2026-04-02",
+      "raw_text": "us solar faces 53,000-worker gap ahead of 2026 deadline the us solar industry may fall short of workforce needs as developers race to meet july 4, 2026 construction deadlines tied to federal tax credits.",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "20824f0d10418291",
+      "source_id": "pvmagazine",
+      "source_name": "PV Magazine",
+      "source_url": "https://www.pv-magazine.com/2026/04/02/sonnen-cuts-prices-for-large-residential-battery-products/",
+      "source_segments": [
+        "ess",
+        "hydrogen",
+        "forecasting"
+      ],
+      "reliability": 2,
+      "title": "Sonnen cuts prices for large residential battery products",
+      "summary": "German company Sonnen is set to offer its customers a 22 kWh battery energy storage system (BESS) for the price of an 11 kWh product. The offer will be valid until the end of June 2026.",
+      "published_date": "2026-04-02",
+      "raw_text": "sonnen cuts prices for large residential battery products german company sonnen is set to offer its customers a 22 kwh battery energy storage system (bess) for the price of an 11 kwh product. the offer will be valid until the end of june 2026.",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "27a23585fc0846e0",
+      "source_id": "pvmagazine",
+      "source_name": "PV Magazine",
+      "source_url": "https://www.pv-magazine.com/2026/04/02/global-solar-additions-reached-record-511-gw-in-2025-says-irena/",
+      "source_segments": [
+        "ess",
+        "hydrogen",
+        "forecasting"
+      ],
+      "reliability": 2,
+      "title": "Global solar additions reached record 511 GW in 2025, says IRENA",
+      "summary": "Latest figures from the International Renewable Energy Agency find solar contributed the majority of a record 692 GW of renewables capacity added worldwide last year.",
+      "published_date": "2026-04-02",
+      "raw_text": "global solar additions reached record 511 gw in 2025, says irena latest figures from the international renewable energy agency find solar contributed the majority of a record 692 gw of renewables capacity added worldwide last year.",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "68cf4146e63d1a53",
+      "source_id": "pvmagazine",
+      "source_name": "PV Magazine",
+      "source_url": "https://www.pv-magazine.com/2026/04/02/pexapark-logs-more-than-1-gwh-of-european-storage-ppas-in-march/",
+      "source_segments": [
+        "ess",
+        "hydrogen",
+        "forecasting"
+      ],
+      "reliability": 2,
+      "title": "Pexapark logs more than 1 GWh of European storage PPAs in March",
+      "summary": "War in the Middle East is putting pressure on energy markets and boosting the value of solar and storage power purchase agreements (PPAs), with Europe seeing a surge in activity in March, according to Swiss consultancy Pexapark.",
+      "published_date": "2026-04-02",
+      "raw_text": "pexapark logs more than 1 gwh of european storage ppas in march war in the middle east is putting pressure on energy markets and boosting the value of solar and storage power purchase agreements (ppas), with europe seeing a surge in activity in march, according to swiss consultancy pexapark.",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "27d3af59ed45a069",
+      "source_id": "pvmagazine",
+      "source_name": "PV Magazine",
+      "source_url": "https://www.pv-magazine.com/2026/04/02/south-africas-eskom-extends-small-scale-solar-registration-fee-waiver/",
+      "source_segments": [
+        "ess",
+        "hydrogen",
+        "forecasting"
+      ],
+      "reliability": 2,
+      "title": "South Africa’s Eskom extends small-scale solar registration fee waiver",
+      "summary": "The South African Photovoltaic Industry Association has welcomed the utility's decision to extend its registration fee waiver for solar systems until the end of September, as it calls for the country's municipal distributors to streamline their own processes for small-scale embedded generation systems.",
+      "published_date": "2026-04-02",
+      "raw_text": "south africa’s eskom extends small-scale solar registration fee waiver the south african photovoltaic industry association has welcomed the utility's decision to extend its registration fee waiver for solar systems until the end of september, as it calls for the country's municipal distributors to streamline their own processes for small-scale embedded generation systems.",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "b8d6e6a1e6f118cb",
+      "source_id": "offshorewind",
+      "source_name": "Offshore Wind Biz",
+      "source_url": "https://www.offshorewind.biz/2026/04/03/ocasio-cortez-markey-ask-trump-admin-to-explain-paying-totalenergies-usd-1-billion-in-taxpayer-money-to-drop-offshore-wind-projects/",
+      "source_segments": [
+        "hvdc",
+        "ess"
+      ],
+      "reliability": 2,
+      "title": "Ocasio-Cortez, Markey Ask Trump Admin to Explain Paying TotalEnergies USD 1 Billion ‘in Taxpayer Money’ to Drop Offshore Wind Projects",
+      "summary": "US lawmakers Alexandria Ocasio-Cortez and Ed Markey have sent a letter to Secretary of [&#8230;]",
+      "published_date": "2026-04-03",
+      "raw_text": "ocasio-cortez, markey ask trump admin to explain paying totalenergies usd 1 billion ‘in taxpayer money’ to drop offshore wind projects us lawmakers alexandria ocasio-cortez and ed markey have sent a letter to secretary of [&#8230;]",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "803474f54eb67a61",
+      "source_id": "offshorewind",
+      "source_name": "Offshore Wind Biz",
+      "source_url": "https://www.offshorewind.biz/2026/04/03/brazil-establishes-offshore-wind-guidelines-prepares-next-steps/",
+      "source_segments": [
+        "hvdc",
+        "ess"
+      ],
+      "reliability": 2,
+      "title": "Brazil Establishes Offshore Wind Guidelines, Prepares Next Steps",
+      "summary": "Brazil has established guidelines for the regulation of offshore wind development, which include rules [&#8230;]",
+      "published_date": "2026-04-03",
+      "raw_text": "brazil establishes offshore wind guidelines, prepares next steps brazil has established guidelines for the regulation of offshore wind development, which include rules [&#8230;]",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "da0a03707acb71bc",
+      "source_id": "offshorewind",
+      "source_name": "Offshore Wind Biz",
+      "source_url": "https://www.offshorewind.biz/2026/04/03/france-to-launch-massive-offshore-wind-tender-as-govt-bundles-ao9-and-ao10-into-single-round/",
+      "source_segments": [
+        "hvdc",
+        "ess"
+      ],
+      "reliability": 2,
+      "title": "France to Launch Massive Offshore Wind Tender as Gov’t Bundles AO9 and AO10 into Single Round",
+      "summary": "France plans to award around 10 GW of offshore wind capacity through the combined [&#8230;]",
+      "published_date": "2026-04-03",
+      "raw_text": "france to launch massive offshore wind tender as gov’t bundles ao9 and ao10 into single round france plans to award around 10 gw of offshore wind capacity through the combined [&#8230;]",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "ea24161b0c47250b",
+      "source_id": "offshorewind",
+      "source_name": "Offshore Wind Biz",
+      "source_url": "https://www.offshorewind.biz/2026/04/02/euroports-presents-detailed-plan-to-turn-finnish-port-into-next-gen-industrial-hub-for-offshore-wind/",
+      "source_segments": [
+        "hvdc",
+        "ess"
+      ],
+      "reliability": 2,
+      "title": "Euroports Presents Detailed Plan to Turn Finnish Port into Next-Gen Industrial Hub for Offshore Wind",
+      "summary": "Euroports has presented advanced plans for Koverhar, a large-scale offshore wind industrial hub in [&#8230;]",
+      "published_date": "2026-04-02",
+      "raw_text": "euroports presents detailed plan to turn finnish port into next-gen industrial hub for offshore wind euroports has presented advanced plans for koverhar, a large-scale offshore wind industrial hub in [&#8230;]",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "c29144a6d8443956",
+      "source_id": "offshorewind",
+      "source_name": "Offshore Wind Biz",
+      "source_url": "https://www.offshorewind.biz/2026/04/02/asml-returns-to-rwe-for-more-offshore-wind-power/",
+      "source_segments": [
+        "hvdc",
+        "ess"
+      ],
+      "reliability": 2,
+      "title": "ASML Returns to RWE for More Offshore Wind Power",
+      "summary": "RWE and ASML, the global supplier of lithography systems for the semiconductor industry, have [&#8230;]",
+      "published_date": "2026-04-02",
+      "raw_text": "asml returns to rwe for more offshore wind power rwe and asml, the global supplier of lithography systems for the semiconductor industry, have [&#8230;]",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "3607fa98e7bc6655",
+      "source_id": "offshorewind",
+      "source_name": "Offshore Wind Biz",
+      "source_url": "https://www.offshorewind.biz/2026/04/02/tennet-national-grid-ink-joint-development-agreement-for-lionlink-offshore-wind-interconnector/",
+      "source_segments": [
+        "hvdc",
+        "ess"
+      ],
+      "reliability": 2,
+      "title": "TenneT, National Grid Ink Joint Development Agreement for LionLink Offshore Wind Interconnector",
+      "summary": "Transmission system operators (TSOs) TenneT and National Grid Ventures (NGV) have signed a Joint [&#8230;]",
+      "published_date": "2026-04-02",
+      "raw_text": "tennet, national grid ink joint development agreement for lionlink offshore wind interconnector transmission system operators (tsos) tennet and national grid ventures (ngv) have signed a joint [&#8230;]",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "9844e128e839dc58",
+      "source_id": "offshorewind",
+      "source_name": "Offshore Wind Biz",
+      "source_url": "https://www.offshorewind.biz/2026/04/02/vietnams-ree-unveils-offshore-wind-ambitions-in-capacity-expansion-plan/",
+      "source_segments": [
+        "hvdc",
+        "ess"
+      ],
+      "reliability": 2,
+      "title": "Vietnam’s REE Unveils Offshore Wind Ambitions in Capacity Expansion Plan",
+      "summary": "Vietnam’s Refrigeration Electrical Engineering Corporation (REE) is planning a billion-US-dollar push into offshore wind [&#8230;]",
+      "published_date": "2026-04-02",
+      "raw_text": "vietnam’s ree unveils offshore wind ambitions in capacity expansion plan vietnam’s refrigeration electrical engineering corporation (ree) is planning a billion-us-dollar push into offshore wind [&#8230;]",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "ccdd3af0e5707492",
+      "source_id": "offshorewind",
+      "source_name": "Offshore Wind Biz",
+      "source_url": "https://www.offshorewind.biz/2026/04/01/japans-flowra-bureau-veritas-sign-floating-wind-mou/",
+      "source_segments": [
+        "hvdc",
+        "ess"
+      ],
+      "reliability": 2,
+      "title": "Japan’s FLOWRA, Bureau Veritas Sign Floating Wind MoU",
+      "summary": "Japan’s Floating Offshore Wind Power Technology Research Association (FLOWRA) and Bureau Veritas Marine &#38; [&#8230;]",
+      "published_date": "2026-04-01",
+      "raw_text": "japan’s flowra, bureau veritas sign floating wind mou japan’s floating offshore wind power technology research association (flowra) and bureau veritas marine &#38; [&#8230;]",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "8f15a2288188b421",
+      "source_id": "offshorewind",
+      "source_name": "Offshore Wind Biz",
+      "source_url": "https://www.offshorewind.biz/2026/04/01/foundation-installation-at-new-french-offshore-wind-farm-reaches-halfway-mark/",
+      "source_segments": [
+        "hvdc",
+        "ess"
+      ],
+      "reliability": 2,
+      "title": "Foundation Installation at New French Offshore Wind Farm Reaches Halfway Mark",
+      "summary": "Half of the 62 jacket foundations have been installed at the Dieppe-Le-Tréport offshore wind [&#8230;]",
+      "published_date": "2026-04-01",
+      "raw_text": "foundation installation at new french offshore wind farm reaches halfway mark half of the 62 jacket foundations have been installed at the dieppe-le-tréport offshore wind [&#8230;]",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "c20c174477412c70",
+      "source_id": "offshorewind",
+      "source_name": "Offshore Wind Biz",
+      "source_url": "https://www.offshorewind.biz/2026/04/01/classnk-grants-approval-for-high-corrosion-resistant-wire-cable-for-floating-wind-mooring/",
+      "source_segments": [
+        "hvdc",
+        "ess"
+      ],
+      "reliability": 2,
+      "title": "ClassNK Grants Approval for High-Corrosion-Resistant Wire Cable for Floating Wind Mooring",
+      "summary": "ClassNK has issued Approval of Manufacturing Procedure (AMP) and Type Approval certificates for a [&#8230;]",
+      "published_date": "2026-04-01",
+      "raw_text": "classnk grants approval for high-corrosion-resistant wire cable for floating wind mooring classnk has issued approval of manufacturing procedure (amp) and type approval certificates for a [&#8230;]",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "3ad9e018cceea68e",
+      "source_id": "energystoragenews",
+      "source_name": "Energy Storage News",
+      "source_url": "https://www.energy-storage.news/video-energy-storage-summit-2026-how-can-you-ensure-quality-and-performance-when-buying-bess/",
+      "source_segments": [
+        "ess"
+      ],
+      "reliability": 2,
+      "title": "VIDEO – Energy Storage Summit 2026: How can you ensure quality and performance when buying BESS?",
+      "summary": "How do you ensure quality and performance and mitigate risk when buying BESS equipment? Expert speakers from consultancies, analytics firms and independent power producers discussed the topic in a recent panel discussion. The &#8216;Product Selection, Quality, and Underperformance in Battery Storage Projects&#8217; discussion at the Energy Storage Summit 2026 in London in February included the following [&#8230;]",
+      "published_date": "2026-04-03",
+      "raw_text": "video – energy storage summit 2026: how can you ensure quality and performance when buying bess? how do you ensure quality and performance and mitigate risk when buying bess equipment? expert speakers from consultancies, analytics firms and independent power producers discussed the topic in a recent panel discussion. the &#8216;product selection, quality, and underperformance in battery storage projects&#8217; discussion at the energy storage summit 2026 in london in february included the following [&#8230;]",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "4393d588974ec90c",
+      "source_id": "energystoragenews",
+      "source_name": "Energy Storage News",
+      "source_url": "https://www.energy-storage.news/reno-planning-commission-approves-permit-for-200mw-trego-grid-bess-project/",
+      "source_segments": [
+        "ess"
+      ],
+      "reliability": 2,
+      "title": "Reno planning commission approves permit for 200MW Trego Grid BESS project",
+      "summary": "The Reno Planning Commission, in Nevada, US, recommended approval for a conditional-use permit for the 200MW Trego Grid energy storage project on 4 March.",
+      "published_date": "2026-04-02",
+      "raw_text": "reno planning commission approves permit for 200mw trego grid bess project the reno planning commission, in nevada, us, recommended approval for a conditional-use permit for the 200mw trego grid energy storage project on 4 march.",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "7ba6c7276fb505a2",
+      "source_id": "energystoragenews",
+      "source_name": "Energy Storage News",
+      "source_url": "https://www.energy-storage.news/roundup-aypas-us500-million-credit-facility-upsizing-georgia-power-begins-construction-on-260mw-bess-eolus-sells-506mwh-bess-to-desri/",
+      "source_segments": [
+        "ess"
+      ],
+      "reliability": 2,
+      "title": "ROUNDUP: Aypa’s US$500 million credit facility upsizing, Georgia Power begins construction on 260MW BESS, Eolus sells 506MWh BESS to DESRI",
+      "summary": "In this news roundup, Aypa power upsizes its credit facility, Georgia Power begins construction on a 260MW BESS, and IOWN Energy on behalf of Eolus sells a 506MWh BESS to DESRI",
+      "published_date": "2026-04-02",
+      "raw_text": "roundup: aypa’s us$500 million credit facility upsizing, georgia power begins construction on 260mw bess, eolus sells 506mwh bess to desri in this news roundup, aypa power upsizes its credit facility, georgia power begins construction on a 260mw bess, and iown energy on behalf of eolus sells a 506mwh bess to desri",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "b1420a92360f872d",
+      "source_id": "energystoragenews",
+      "source_name": "Energy Storage News",
+      "source_url": "https://www.energy-storage.news/video-energy-storage-summit-2026-assessing-germanys-unique-merchant-opportunities/",
+      "source_segments": [
+        "ess"
+      ],
+      "reliability": 2,
+      "title": "VIDEO – Energy Storage Summit 2026: Assessing Germany’s unique merchant opportunities",
+      "summary": "What are the merchant opportunities in Germany, where there are almost no capacity schemes or subsidies for energy storage? A panel of expert speakers discussed the opportunities in Europe's largest energy market on the panel at the Energy Storage Summit 2026 in London in February.",
+      "published_date": "2026-04-02",
+      "raw_text": "video – energy storage summit 2026: assessing germany’s unique merchant opportunities what are the merchant opportunities in germany, where there are almost no capacity schemes or subsidies for energy storage? a panel of expert speakers discussed the opportunities in europe's largest energy market on the panel at the energy storage summit 2026 in london in february.",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "dbdafeae0971bfdc",
+      "source_id": "energystoragenews",
+      "source_name": "Energy Storage News",
+      "source_url": "https://www.energy-storage.news/romanian-investment-platform-looks-to-open-up-bess-project-financing-to-retail-investors/",
+      "source_segments": [
+        "ess"
+      ],
+      "reliability": 2,
+      "title": "Romanian investment platform looks to open up BESS project financing to retail investors",
+      "summary": "MetaWealth COO Michael Topolinski IV discussed the firm’s first BESS project in Romania, which is partially financed with bonds marketed at retail investors.",
+      "published_date": "2026-04-02",
+      "raw_text": "romanian investment platform looks to open up bess project financing to retail investors metawealth coo michael topolinski iv discussed the firm’s first bess project in romania, which is partially financed with bonds marketed at retail investors.",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "ce52e9ce64353db2",
+      "source_id": "energystoragenews",
+      "source_name": "Energy Storage News",
+      "source_url": "https://www.energy-storage.news/uk-bess-roundup-sse-commissions-300mwh-unit-matrix-drax-and-voltaria-progress-projects/",
+      "source_segments": [
+        "ess"
+      ],
+      "reliability": 2,
+      "title": "UK BESS ROUNDUP: SSE commissions 300MWh unit, Matrix, Drax and Voltaria progress projects",
+      "summary": "SSE Renewables, Matrix Renewables, Drax and Voltaria have all progressed large-scale BESS projects in the UK, all-in-all totalling 1.8GWh of new capacity.",
+      "published_date": "2026-04-02",
+      "raw_text": "uk bess roundup: sse commissions 300mwh unit, matrix, drax and voltaria progress projects sse renewables, matrix renewables, drax and voltaria have all progressed large-scale bess projects in the uk, all-in-all totalling 1.8gwh of new capacity.",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "b31cd12598d7a25a",
+      "source_id": "energystoragenews",
+      "source_name": "Energy Storage News",
+      "source_url": "https://www.energy-storage.news/amid-europes-energy-storage-boom-residential-batteries-offer-new-trading-potential/",
+      "source_segments": [
+        "ess"
+      ],
+      "reliability": 2,
+      "title": "Amid Europe’s energy storage boom, residential batteries offer new trading potential",
+      "summary": "Opportunity is ahead for Europe's growing fleet of residential battery storage systems in electricity trading, writes Chris Bernkopf, CEO of flexibility and trading platform Podero.",
+      "published_date": "2026-04-02",
+      "raw_text": "amid europe’s energy storage boom, residential batteries offer new trading potential opportunity is ahead for europe's growing fleet of residential battery storage systems in electricity trading, writes chris bernkopf, ceo of flexibility and trading platform podero.",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "4acf481e93b624c8",
+      "source_id": "energystoragenews",
+      "source_name": "Energy Storage News",
+      "source_url": "https://www.energy-storage.news/new-vanadium-flow-battery-player-eora-energy-launches-in-australia-with-mining-and-date-centre-focus/",
+      "source_segments": [
+        "ess"
+      ],
+      "reliability": 2,
+      "title": "New vanadium flow battery player Eora Energy launches in Australia with mining and date centre focus",
+      "summary": "Eora Energy has officially launched in Australia and is positioning itself as a challenger in the vanadium redox flow battery market.",
+      "published_date": "2026-04-02",
+      "raw_text": "new vanadium flow battery player eora energy launches in australia with mining and date centre focus eora energy has officially launched in australia and is positioning itself as a challenger in the vanadium redox flow battery market.",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "a206eeddc22968ed",
+      "source_id": "energystoragenews",
+      "source_name": "Energy Storage News",
+      "source_url": "https://www.energy-storage.news/video-ess-2026-what-does-life-after-macse-look-like-in-italy/",
+      "source_segments": [
+        "ess"
+      ],
+      "reliability": 2,
+      "title": "VIDEO – Energy Storage Summit 2026: What does life after MACSE look like in Italy?",
+      "summary": "What is the future for the grid-scale energy storage market in Italy, now that the dust has settled from the country's long-awaited MACSE auction for BESS?",
+      "published_date": "2026-04-01",
+      "raw_text": "video – energy storage summit 2026: what does life after macse look like in italy? what is the future for the grid-scale energy storage market in italy, now that the dust has settled from the country's long-awaited macse auction for bess?",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "5b4244e49fd3429e",
+      "source_id": "energystoragenews",
+      "source_name": "Energy Storage News",
+      "source_url": "https://www.energy-storage.news/enervenue-closes-us300-million-series-b-for-30000-cycle-nickel-hydrogen-battery-manufacturing/",
+      "source_segments": [
+        "ess"
+      ],
+      "reliability": 2,
+      "title": "EnerVenue closes US$300 million Series B for 30,000-cycle nickel-hydrogen battery manufacturing",
+      "summary": "EnerVenue, the US company commercialising technology adapted from nickel-hydrogen batteries, has closed a US$300 million extension of its Series B preferred stock financing round.",
+      "published_date": "2026-04-01",
+      "raw_text": "enervenue closes us$300 million series b for 30,000-cycle nickel-hydrogen battery manufacturing enervenue, the us company commercialising technology adapted from nickel-hydrogen batteries, has closed a us$300 million extension of its series b preferred stock financing round.",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "c11602b2cc99c999",
+      "source_id": "energystoragenews",
+      "source_name": "Energy Storage News",
+      "source_url": "https://www.energy-storage.news/harmony-starts-building-third-100mw-200mwh-french-bess/",
+      "source_segments": [
+        "ess"
+      ],
+      "reliability": 2,
+      "title": "Harmony starts building third 100MW/200MWh French BESS",
+      "summary": "BESS developer-operator Harmony Energy has started construction on a 100MW/200MWh BESS in France, its third to reach that stage in the country.",
+      "published_date": "2026-04-01",
+      "raw_text": "harmony starts building third 100mw/200mwh french bess bess developer-operator harmony energy has started construction on a 100mw/200mwh bess in france, its third to reach that stage in the country.",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "046741bd3282edb5",
+      "source_id": "energystoragenews",
+      "source_name": "Energy Storage News",
+      "source_url": "https://www.energy-storage.news/ul9540a-shift-to-system-level-testing-defines-new-edition-of-key-bess-safety-standard/",
+      "source_segments": [
+        "ess"
+      ],
+      "reliability": 2,
+      "title": "UL9540A: Shift to system-level testing defines new edition of key BESS safety standard",
+      "summary": "ESN Premium discusses the sixth edition of the key industry safety standard, UL9540A, with Dana Parmenter of the standards organisation and NRTL, CSA Group.",
+      "published_date": "2026-04-01",
+      "raw_text": "ul9540a: shift to system-level testing defines new edition of key bess safety standard esn premium discusses the sixth edition of the key industry safety standard, ul9540a, with dana parmenter of the standards organisation and nrtl, csa group.",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "47ee727032ae75b0",
+      "source_id": "energystoragenews",
+      "source_name": "Energy Storage News",
+      "source_url": "https://www.energy-storage.news/japans-first-capacity-market-contracted-bess-brought-online-by-hexa-energy/",
+      "source_segments": [
+        "ess"
+      ],
+      "reliability": 2,
+      "title": "Japan’s first capacity market-contracted BESS brought online by Hexa Energy",
+      "summary": "Developer-investor Hexa Energy Services has inaugurated what is thought to be Japan’s first operational battery storage project with a capacity market contract.",
+      "published_date": "2026-04-01",
+      "raw_text": "japan’s first capacity market-contracted bess brought online by hexa energy developer-investor hexa energy services has inaugurated what is thought to be japan’s first operational battery storage project with a capacity market contract.",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "580dbbe57ac7e728",
+      "source_id": "energystoragenews",
+      "source_name": "Energy Storage News",
+      "source_url": "https://www.energy-storage.news/we-learned-more-in-the-past-six-months-than-the-past-six-years-australian-battery-storage-lenders-navigate-merchant-risk/",
+      "source_segments": [
+        "ess"
+      ],
+      "reliability": 2,
+      "title": "‘We learned more in the past six months than the past six years’: Australian battery storage lenders navigate merchant risk",
+      "summary": "Australian BESS face new financing reality as spreads halve to AU$100/MWh and lenders demand 50-70% contracting amid 15GW deployment surge.",
+      "published_date": "2026-04-01",
+      "raw_text": "‘we learned more in the past six months than the past six years’: australian battery storage lenders navigate merchant risk australian bess face new financing reality as spreads halve to au$100/mwh and lenders demand 50-70% contracting amid 15gw deployment surge.",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "80b708a467e0fd5f",
+      "source_id": "cleantechnica",
+      "source_name": "CleanTechnica",
+      "source_url": "https://cleantechnica.com/2026/04/03/ford-ev-sales-drop-off-a-cliff/",
+      "source_segments": [
+        "ess",
+        "dc_power",
+        "grid_sw"
+      ],
+      "reliability": 3,
+      "title": "Ford EV Sales Drop Off A Cliff",
+      "summary": "<p>Unsurprisingly, given what we&#8217;ve seen from the company in recent months, Ford&#8217;s EV business took a big hit in the first quarter year over year in the United States. The company&#8217;s best selling electric vehicle, the Mustang Mach-E, is still a great buy — but it&#8217;s harder getting consumers to   ... [continued]</p>\n<p>The post <a href=\"https://cleantechnica.com/2026/04/03/ford-ev-sales-drop-off-a-cliff/\">Ford EV Sales Drop Off A Cliff</a> appeared first on <a href=\"https://cleantechnica.com\">CleanTechnica</a>.</p>",
+      "published_date": "2026-04-04",
+      "raw_text": "ford ev sales drop off a cliff <p>unsurprisingly, given what we&#8217;ve seen from the company in recent months, ford&#8217;s ev business took a big hit in the first quarter year over year in the united states. the company&#8217;s best selling electric vehicle, the mustang mach-e, is still a great buy — but it&#8217;s harder getting consumers to   ... [continued]</p>\n<p>the post <a href=\"https://cleantechnica.com/2026/04/03/ford-ev-sales-drop-off-a-cliff/\">ford ev sales drop off a cliff</a> appeared first on <a href=\"https://cleantechnica.com\">cleantechnica</a>.</p>",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "62801cbee2f1466f",
+      "source_id": "cleantechnica",
+      "source_name": "CleanTechnica",
+      "source_url": "https://cleantechnica.com/2026/04/03/rooftop-solar-photovoltaic-systems-account-for-20-of-puerto-ricos-capacity-mix/",
+      "source_segments": [
+        "ess",
+        "dc_power",
+        "grid_sw"
+      ],
+      "reliability": 3,
+      "title": "Rooftop Solar Photovoltaic Systems Account for 20% of Puerto Rico’s Capacity Mix",
+      "summary": "<p>Rooftop solar generating capacity in Puerto Rico totaled 1,456 megawatts (MW) at the end of 2025, 20% of the overall capacity mix. Rooftop solar capacity has increased faster than other sources over the past decade. Between 2016 and 2025 rooftop solar installations accounted for 81% of the new generating capacity   ... [continued]</p>\n<p>The post <a href=\"https://cleantechnica.com/2026/04/03/rooftop-solar-photovoltaic-systems-account-for-20-of-puerto-ricos-capacity-mix/\">Rooftop Solar Photovoltaic Systems Account for 20% of Puerto Rico’s Capacity Mix</a> appeared first on <a href=\"https://c",
+      "published_date": "2026-04-04",
+      "raw_text": "rooftop solar photovoltaic systems account for 20% of puerto rico’s capacity mix <p>rooftop solar generating capacity in puerto rico totaled 1,456 megawatts (mw) at the end of 2025, 20% of the overall capacity mix. rooftop solar capacity has increased faster than other sources over the past decade. between 2016 and 2025 rooftop solar installations accounted for 81% of the new generating capacity   ... [continued]</p>\n<p>the post <a href=\"https://cleantechnica.com/2026/04/03/rooftop-solar-photovoltaic-systems-account-for-20-of-puerto-ricos-capacity-mix/\">rooftop solar photovoltaic systems account for 20% of puerto rico’s capacity mix</a> appeared first on <a href=\"https://c",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "bd3866f966eadee3",
+      "source_id": "cleantechnica",
+      "source_name": "CleanTechnica",
+      "source_url": "https://cleantechnica.com/2026/04/03/sierra-club-statement-on-donald-trumps-fy2027-budget-proposal/",
+      "source_segments": [
+        "ess",
+        "dc_power",
+        "grid_sw"
+      ],
+      "reliability": 3,
+      "title": "Sierra Club Statement on Donald Trump’s FY2027 Budget Proposal",
+      "summary": "<p>Washington, DC — Today, Donald Trump released his proposed budget for fiscal year 2027, which seeks to increase defense spending to a massive $1.5 trillion while slashing non-defense discretionary spending by more than $73 billion, including a 52 percent cut in funding for the Environmental Protection Agency and similarly drastic cuts across other critical   ... [continued]</p>\n<p>The post <a href=\"https://cleantechnica.com/2026/04/03/sierra-club-statement-on-donald-trumps-fy2027-budget-proposal/\">Sierra Club Statement on Donald Trump’s FY2027 Budget Proposal</a> appeared first on <a href=\"",
+      "published_date": "2026-04-04",
+      "raw_text": "sierra club statement on donald trump’s fy2027 budget proposal <p>washington, dc — today, donald trump released his proposed budget for fiscal year 2027, which seeks to increase defense spending to a massive $1.5 trillion while slashing non-defense discretionary spending by more than $73 billion, including a 52 percent cut in funding for the environmental protection agency and similarly drastic cuts across other critical   ... [continued]</p>\n<p>the post <a href=\"https://cleantechnica.com/2026/04/03/sierra-club-statement-on-donald-trumps-fy2027-budget-proposal/\">sierra club statement on donald trump’s fy2027 budget proposal</a> appeared first on <a href=\"",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "149bc7d62fceeb82",
+      "source_id": "cleantechnica",
+      "source_name": "CleanTechnica",
+      "source_url": "https://cleantechnica.com/2026/04/03/sierra-club-wisconsin-slams-we-energies-for-rate-increase-and-once-again-delaying-oak-creek-coal-plant-retirement/",
+      "source_segments": [
+        "ess",
+        "dc_power",
+        "grid_sw"
+      ],
+      "reliability": 3,
+      "title": "Sierra Club Wisconsin Slams We Energies for Rate Increase and Once Again Delaying Oak Creek Coal Plant Retirement",
+      "summary": "<p>This week, We Energies has announced that it will once again delay closing its Oak Creek coal plant and that it intends to raise residential and small business rates by 4.7% in 2027 and 4.5% in 2028. The Oak Creek power plant was originally scheduled to close in 2023, but   ... [continued]</p>\n<p>The post <a href=\"https://cleantechnica.com/2026/04/03/sierra-club-wisconsin-slams-we-energies-for-rate-increase-and-once-again-delaying-oak-creek-coal-plant-retirement/\">Sierra Club Wisconsin Slams We Energies for Rate Increase and Once Again Delaying Oak Creek Coal Plant Retirement</a> appeared f",
+      "published_date": "2026-04-04",
+      "raw_text": "sierra club wisconsin slams we energies for rate increase and once again delaying oak creek coal plant retirement <p>this week, we energies has announced that it will once again delay closing its oak creek coal plant and that it intends to raise residential and small business rates by 4.7% in 2027 and 4.5% in 2028. the oak creek power plant was originally scheduled to close in 2023, but   ... [continued]</p>\n<p>the post <a href=\"https://cleantechnica.com/2026/04/03/sierra-club-wisconsin-slams-we-energies-for-rate-increase-and-once-again-delaying-oak-creek-coal-plant-retirement/\">sierra club wisconsin slams we energies for rate increase and once again delaying oak creek coal plant retirement</a> appeared f",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "244d58eadc34b2af",
+      "source_id": "cleantechnica",
+      "source_name": "CleanTechnica",
+      "source_url": "https://cleantechnica.com/2026/04/03/top-selling-electric-vehicles-in-the-world-february-2026/",
+      "source_segments": [
+        "ess",
+        "dc_power",
+        "grid_sw"
+      ],
+      "reliability": 3,
+      "title": "Top Selling Electric Vehicles in the World — February 2026",
+      "summary": "<p>Plugin vehicle registrations were down 11% year over year (YoY) in February, ending the month close to 1.1 million units. Both BEVs (-8% YoY) and PHEVs (-16% YoY) had sales drops. This is the worst drop since the COVID-19 era, but there is one easy explanation for this — incentives.   ... [continued]</p>\n<p>The post <a href=\"https://cleantechnica.com/2026/04/03/top-selling-electric-vehicles-in-the-world-february-2026/\">Top Selling Electric Vehicles in the World — February 2026</a> appeared first on <a href=\"https://cleantechnica.com\">CleanTechnica</a>.</p>",
+      "published_date": "2026-04-04",
+      "raw_text": "top selling electric vehicles in the world — february 2026 <p>plugin vehicle registrations were down 11% year over year (yoy) in february, ending the month close to 1.1 million units. both bevs (-8% yoy) and phevs (-16% yoy) had sales drops. this is the worst drop since the covid-19 era, but there is one easy explanation for this — incentives.   ... [continued]</p>\n<p>the post <a href=\"https://cleantechnica.com/2026/04/03/top-selling-electric-vehicles-in-the-world-february-2026/\">top selling electric vehicles in the world — february 2026</a> appeared first on <a href=\"https://cleantechnica.com\">cleantechnica</a>.</p>",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "6d7ae3fdff1adf19",
+      "source_id": "cleantechnica",
+      "source_name": "CleanTechnica",
+      "source_url": "https://cleantechnica.com/2026/04/03/evs-sweep-2026-world-car-awards/",
+      "source_segments": [
+        "ess",
+        "dc_power",
+        "grid_sw"
+      ],
+      "reliability": 3,
+      "title": "EVs Sweep 2026 World Car Awards",
+      "summary": "<p>On Wednesday, April 1, the 22nd World Car Awards announced the winners for 2026. EVs swept every category. Every year, a panel of journalists from around the world votes on finalists and winners in each category. While the test drives happen in California in the fall, the vehicles come from around   ... [continued]</p>\n<p>The post <a href=\"https://cleantechnica.com/2026/04/03/evs-sweep-2026-world-car-awards/\">EVs Sweep 2026 World Car Awards</a> appeared first on <a href=\"https://cleantechnica.com\">CleanTechnica</a>.</p>",
+      "published_date": "2026-04-04",
+      "raw_text": "evs sweep 2026 world car awards <p>on wednesday, april 1, the 22nd world car awards announced the winners for 2026. evs swept every category. every year, a panel of journalists from around the world votes on finalists and winners in each category. while the test drives happen in california in the fall, the vehicles come from around   ... [continued]</p>\n<p>the post <a href=\"https://cleantechnica.com/2026/04/03/evs-sweep-2026-world-car-awards/\">evs sweep 2026 world car awards</a> appeared first on <a href=\"https://cleantechnica.com\">cleantechnica</a>.</p>",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "14dbd425fb55ec66",
+      "source_id": "cleantechnica",
+      "source_name": "CleanTechnica",
+      "source_url": "https://cleantechnica.com/2026/04/03/bevs-rise-16-yoy-in-february-in-europe/",
+      "source_segments": [
+        "ess",
+        "dc_power",
+        "grid_sw"
+      ],
+      "reliability": 3,
+      "title": "BEVs Rise 16% YoY in February in Europe!",
+      "summary": "<p>BEVs reach 20% market share! EVs are picking up in Europe, with some 295,000 plugin vehicles being registered in Europe in February, 196,000 of them being BEVs. Overall, plugin vehicles were up 22% YoY. The overall market also had a positive month in February, rising 2% YoY to one million   ... [continued]</p>\n<p>The post <a href=\"https://cleantechnica.com/2026/04/03/bevs-rise-16-yoy-in-february-in-europe/\">BEVs Rise 16% YoY in February in Europe!</a> appeared first on <a href=\"https://cleantechnica.com\">CleanTechnica</a>.</p>",
+      "published_date": "2026-04-03",
+      "raw_text": "bevs rise 16% yoy in february in europe! <p>bevs reach 20% market share! evs are picking up in europe, with some 295,000 plugin vehicles being registered in europe in february, 196,000 of them being bevs. overall, plugin vehicles were up 22% yoy. the overall market also had a positive month in february, rising 2% yoy to one million   ... [continued]</p>\n<p>the post <a href=\"https://cleantechnica.com/2026/04/03/bevs-rise-16-yoy-in-february-in-europe/\">bevs rise 16% yoy in february in europe!</a> appeared first on <a href=\"https://cleantechnica.com\">cleantechnica</a>.</p>",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "cad5662e98ab7880",
+      "source_id": "cleantechnica",
+      "source_name": "CleanTechnica",
+      "source_url": "https://cleantechnica.com/2026/04/03/google-ai-carbon-emissions-a-lesson-in-situational-ethics/",
+      "source_segments": [
+        "ess",
+        "dc_power",
+        "grid_sw"
+      ],
+      "reliability": 3,
+      "title": "Google, AI, & Carbon Emissions — A Lesson In Situational Ethics",
+      "summary": "<p>Google styles itself as a leader in the use of renewable energy, but it is backsliding on that commitment because of AI.</p>\n<p>The post <a href=\"https://cleantechnica.com/2026/04/03/google-ai-carbon-emissions-a-lesson-in-situational-ethics/\">Google, AI, &#038; Carbon Emissions &#8212; A Lesson In Situational Ethics</a> appeared first on <a href=\"https://cleantechnica.com\">CleanTechnica</a>.</p>",
+      "published_date": "2026-04-03",
+      "raw_text": "google, ai, & carbon emissions — a lesson in situational ethics <p>google styles itself as a leader in the use of renewable energy, but it is backsliding on that commitment because of ai.</p>\n<p>the post <a href=\"https://cleantechnica.com/2026/04/03/google-ai-carbon-emissions-a-lesson-in-situational-ethics/\">google, ai, &#038; carbon emissions &#8212; a lesson in situational ethics</a> appeared first on <a href=\"https://cleantechnica.com\">cleantechnica</a>.</p>",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "323c2800d80aa26d",
+      "source_id": "cleantechnica",
+      "source_name": "CleanTechnica",
+      "source_url": "https://cleantechnica.com/2026/04/03/balcony-solar-is-here-and-its-not-just-for-balconies/",
+      "source_segments": [
+        "ess",
+        "dc_power",
+        "grid_sw"
+      ],
+      "reliability": 3,
+      "title": "Balcony Solar Is Here, And It’s Not Just For Balconies",
+      "summary": "<p>Balcony solar kits can be placed anywhere sun is available, feeding clean electricity directly into household wiring while reducing monthly utility bills.</p>\n<p>The post <a href=\"https://cleantechnica.com/2026/04/03/balcony-solar-is-here-and-its-not-just-for-balconies/\">Balcony Solar Is Here, And It&#8217;s Not Just For Balconies</a> appeared first on <a href=\"https://cleantechnica.com\">CleanTechnica</a>.</p>",
+      "published_date": "2026-04-03",
+      "raw_text": "balcony solar is here, and it’s not just for balconies <p>balcony solar kits can be placed anywhere sun is available, feeding clean electricity directly into household wiring while reducing monthly utility bills.</p>\n<p>the post <a href=\"https://cleantechnica.com/2026/04/03/balcony-solar-is-here-and-its-not-just-for-balconies/\">balcony solar is here, and it&#8217;s not just for balconies</a> appeared first on <a href=\"https://cleantechnica.com\">cleantechnica</a>.</p>",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "24e6bf7846db1849",
+      "source_id": "cleantechnica",
+      "source_name": "CleanTechnica",
+      "source_url": "https://cleantechnica.com/2026/04/03/bisita-iglesia-in-the-age-of-energy-transition-three-ways-to-do-it-cleanly/",
+      "source_segments": [
+        "ess",
+        "dc_power",
+        "grid_sw"
+      ],
+      "reliability": 3,
+      "title": "Bisita Iglesia In The Age Of Energy Transition: Three Ways To Do It Cleanly",
+      "summary": "<p>Every Holy Week, millions of Filipinos (wherever they are in the world) take part in Bisita Iglesia (literally, visiting churches), moving across cities and provinces to visit seven churches in a single day. It is a tradition rooted in faith, but in 2026, it is also an unintentional stress test   ... [continued]</p>\n<p>The post <a href=\"https://cleantechnica.com/2026/04/03/bisita-iglesia-in-the-age-of-energy-transition-three-ways-to-do-it-cleanly/\">Bisita Iglesia In The Age Of Energy Transition: Three Ways To Do It Cleanly</a> appeared first on <a href=\"https://cleantechnica.com\">CleanTechn",
+      "published_date": "2026-04-03",
+      "raw_text": "bisita iglesia in the age of energy transition: three ways to do it cleanly <p>every holy week, millions of filipinos (wherever they are in the world) take part in bisita iglesia (literally, visiting churches), moving across cities and provinces to visit seven churches in a single day. it is a tradition rooted in faith, but in 2026, it is also an unintentional stress test   ... [continued]</p>\n<p>the post <a href=\"https://cleantechnica.com/2026/04/03/bisita-iglesia-in-the-age-of-energy-transition-three-ways-to-do-it-cleanly/\">bisita iglesia in the age of energy transition: three ways to do it cleanly</a> appeared first on <a href=\"https://cleantechnica.com\">cleantechn",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "d9bfccfe00c0a4f0",
+      "source_id": "cleantechnica",
+      "source_name": "CleanTechnica",
+      "source_url": "https://cleantechnica.com/2026/04/03/norway-faces-energy-shortage-as-lack-of-winter-snow-depletes-reservoirs/",
+      "source_segments": [
+        "ess",
+        "dc_power",
+        "grid_sw"
+      ],
+      "reliability": 3,
+      "title": "Norway Faces Energy Shortage As Lack Of Winter Snow Depletes Reservoirs",
+      "summary": "<p>Norway is heavily reliant on hydropower for its electricity needs, but what if the water to spin turbines just isn't available? </p>\n<p>The post <a href=\"https://cleantechnica.com/2026/04/03/norway-faces-energy-shortage-as-lack-of-winter-snow-depletes-reservoirs/\">Norway Faces Energy Shortage As Lack Of Winter Snow Depletes Reservoirs</a> appeared first on <a href=\"https://cleantechnica.com\">CleanTechnica</a>.</p>",
+      "published_date": "2026-04-03",
+      "raw_text": "norway faces energy shortage as lack of winter snow depletes reservoirs <p>norway is heavily reliant on hydropower for its electricity needs, but what if the water to spin turbines just isn't available? </p>\n<p>the post <a href=\"https://cleantechnica.com/2026/04/03/norway-faces-energy-shortage-as-lack-of-winter-snow-depletes-reservoirs/\">norway faces energy shortage as lack of winter snow depletes reservoirs</a> appeared first on <a href=\"https://cleantechnica.com\">cleantechnica</a>.</p>",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "e9100670cad9119c",
+      "source_id": "cleantechnica",
+      "source_name": "CleanTechnica",
+      "source_url": "https://cleantechnica.com/2026/04/03/were-elons-politics-a-significant-part-of-cruddy-q1-sales/",
+      "source_segments": [
+        "ess",
+        "dc_power",
+        "grid_sw"
+      ],
+      "reliability": 3,
+      "title": "Were Elon’s Politics A Significant Part of Cruddy Q1 Sales?",
+      "summary": "<p>Let&#8217;s start with the hard numbers on this one. The Q1 2026 delivery numbers are officially out, and Tesla managed to deliver 358,023 vehicles. If you&#8217;re keeping track at home, that&#8217;s a pretty rough drop compared to the 386,810 cars they moved back in Q1 of 2024. Zach already put   ... [continued]</p>\n<p>The post <a href=\"https://cleantechnica.com/2026/04/03/were-elons-politics-a-significant-part-of-cruddy-q1-sales/\">Were Elon&#8217;s Politics A Significant Part of Cruddy Q1 Sales?</a> appeared first on <a href=\"https://cleantechnica.com\">CleanTechnica</a>.</p>",
+      "published_date": "2026-04-03",
+      "raw_text": "were elon’s politics a significant part of cruddy q1 sales? <p>let&#8217;s start with the hard numbers on this one. the q1 2026 delivery numbers are officially out, and tesla managed to deliver 358,023 vehicles. if you&#8217;re keeping track at home, that&#8217;s a pretty rough drop compared to the 386,810 cars they moved back in q1 of 2024. zach already put   ... [continued]</p>\n<p>the post <a href=\"https://cleantechnica.com/2026/04/03/were-elons-politics-a-significant-part-of-cruddy-q1-sales/\">were elon&#8217;s politics a significant part of cruddy q1 sales?</a> appeared first on <a href=\"https://cleantechnica.com\">cleantechnica</a>.</p>",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "f7cd692efa613cb3",
+      "source_id": "cleantechnica",
+      "source_name": "CleanTechnica",
+      "source_url": "https://cleantechnica.com/2026/04/03/100-of-copenhagens-city-buses-are-now-electric/",
+      "source_segments": [
+        "ess",
+        "dc_power",
+        "grid_sw"
+      ],
+      "reliability": 3,
+      "title": "100% Of Copenhagen’s City Buses Are Now Electric",
+      "summary": "<p>Though there is much interest in the electric vehicles used for personal transportation, it just may be large fleet vehicles electrifying that signals the beginning of the end for gas and diesel. Fleet vehicles typically are driven far more miles and put through more demanding use situations. Additionally, electric motors   ... [continued]</p>\n<p>The post <a href=\"https://cleantechnica.com/2026/04/03/100-of-copenhagens-city-buses-are-now-electric/\">100% Of Copenhagen’s City Buses Are Now Electric</a> appeared first on <a href=\"https://cleantechnica.com\">CleanTechnica</a>.</p>",
+      "published_date": "2026-04-03",
+      "raw_text": "100% of copenhagen’s city buses are now electric <p>though there is much interest in the electric vehicles used for personal transportation, it just may be large fleet vehicles electrifying that signals the beginning of the end for gas and diesel. fleet vehicles typically are driven far more miles and put through more demanding use situations. additionally, electric motors   ... [continued]</p>\n<p>the post <a href=\"https://cleantechnica.com/2026/04/03/100-of-copenhagens-city-buses-are-now-electric/\">100% of copenhagen’s city buses are now electric</a> appeared first on <a href=\"https://cleantechnica.com\">cleantechnica</a>.</p>",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "3cdbd8c8ab7e986d",
+      "source_id": "cleantechnica",
+      "source_name": "CleanTechnica",
+      "source_url": "https://cleantechnica.com/2026/04/03/dominion-sc-irp-doubles-down-on-costly-fuels-sierra-club-analysis/",
+      "source_segments": [
+        "ess",
+        "dc_power",
+        "grid_sw"
+      ],
+      "reliability": 3,
+      "title": "Dominion SC IRP “Doubles Down on Costly Fuels” — Sierra Club Analysis",
+      "summary": "<p>COLUMBIA, S.C. — Dominion Energy South Carolina (DESC)’s proposed 2026 IRP doubles down on volatile fracked-gas while continuing to cling to expensive coal power, asserts Sierra Club’s analysis of the utility’s filing, which was made publicly available in the docket on Wednesday. “While South Carolina families feel the squeeze of energy costs like   ... [continued]</p>\n<p>The post <a href=\"https://cleantechnica.com/2026/04/03/dominion-sc-irp-doubles-down-on-costly-fuels-sierra-club-analysis/\">Dominion SC IRP “Doubles Down on Costly Fuels” — Sierra Club Analysis</a> appeared first on <a href",
+      "published_date": "2026-04-03",
+      "raw_text": "dominion sc irp “doubles down on costly fuels” — sierra club analysis <p>columbia, s.c. — dominion energy south carolina (desc)’s proposed 2026 irp doubles down on volatile fracked-gas while continuing to cling to expensive coal power, asserts sierra club’s analysis of the utility’s filing, which was made publicly available in the docket on wednesday. “while south carolina families feel the squeeze of energy costs like   ... [continued]</p>\n<p>the post <a href=\"https://cleantechnica.com/2026/04/03/dominion-sc-irp-doubles-down-on-costly-fuels-sierra-club-analysis/\">dominion sc irp “doubles down on costly fuels” — sierra club analysis</a> appeared first on <a href",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "69f49564d668bc18",
+      "source_id": "cleantechnica",
+      "source_name": "CleanTechnica",
+      "source_url": "https://cleantechnica.com/2026/04/02/the-trump-administrations-attempt-to-expand-drilling-at-chaco-canyon/",
+      "source_segments": [
+        "ess",
+        "dc_power",
+        "grid_sw"
+      ],
+      "reliability": 3,
+      "title": "The Trump Administration’s Attempt to Expand Drilling at Chaco Canyon",
+      "summary": "<p>ALBUQUERQUE — This week, the Trump administration advanced the process of increasing oil and gas drilling on a landscape considered sacred by Pueblos and Tribes. On Tuesday, the Trump administration began a 7-day Public Scoping period, the next step in its proposal to open the Greater Chaco Region to oil   ... [continued]</p>\n<p>The post <a href=\"https://cleantechnica.com/2026/04/02/the-trump-administrations-attempt-to-expand-drilling-at-chaco-canyon/\">The Trump Administration’s Attempt to Expand Drilling at Chaco Canyon</a> appeared first on <a href=\"https://cleantechnica.com\">CleanTechnic",
+      "published_date": "2026-04-03",
+      "raw_text": "the trump administration’s attempt to expand drilling at chaco canyon <p>albuquerque — this week, the trump administration advanced the process of increasing oil and gas drilling on a landscape considered sacred by pueblos and tribes. on tuesday, the trump administration began a 7-day public scoping period, the next step in its proposal to open the greater chaco region to oil   ... [continued]</p>\n<p>the post <a href=\"https://cleantechnica.com/2026/04/02/the-trump-administrations-attempt-to-expand-drilling-at-chaco-canyon/\">the trump administration’s attempt to expand drilling at chaco canyon</a> appeared first on <a href=\"https://cleantechnica.com\">cleantechnic",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "5222b66aa7b26b01",
+      "source_id": "cleantechnica",
+      "source_name": "CleanTechnica",
+      "source_url": "https://cleantechnica.com/2026/04/02/the-greenwashing-of-war/",
+      "source_segments": [
+        "ess",
+        "dc_power",
+        "grid_sw"
+      ],
+      "reliability": 3,
+      "title": "The Greenwashing of War",
+      "summary": "<p>Or 47 ways to say the &#8220;w-word&#8221; Over 13,000 kilometers (~8,500 miles) away from Washington and we here in the Philippines feel the effects of the White House&#8217;s war on Iran. Oh! It&#8217;s that word! It&#8217;s that deplorable word — a banned word, in the same league as woke, trans,   ... [continued]</p>\n<p>The post <a href=\"https://cleantechnica.com/2026/04/02/the-greenwashing-of-war/\">The Greenwashing of War</a> appeared first on <a href=\"https://cleantechnica.com\">CleanTechnica</a>.</p>",
+      "published_date": "2026-04-03",
+      "raw_text": "the greenwashing of war <p>or 47 ways to say the &#8220;w-word&#8221; over 13,000 kilometers (~8,500 miles) away from washington and we here in the philippines feel the effects of the white house&#8217;s war on iran. oh! it&#8217;s that word! it&#8217;s that deplorable word — a banned word, in the same league as woke, trans,   ... [continued]</p>\n<p>the post <a href=\"https://cleantechnica.com/2026/04/02/the-greenwashing-of-war/\">the greenwashing of war</a> appeared first on <a href=\"https://cleantechnica.com\">cleantechnica</a>.</p>",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "81b8768bd936035d",
+      "source_id": "cleantechnica",
+      "source_name": "CleanTechnica",
+      "source_url": "https://cleantechnica.com/2026/04/02/two-options-for-the-strait-of-hormuz-in-a-decarbonized-world/",
+      "source_segments": [
+        "ess",
+        "dc_power",
+        "grid_sw"
+      ],
+      "reliability": 3,
+      "title": "Two Options for the Strait of Hormuz in a Decarbonized World",
+      "summary": "<p>The most useful way to think about the Strait of Hormuz in a decarbonized future is not as an oil story that fades away as the energy transition advances. It is a systems story about where risk sits in the architecture of the economy. In the fossil era, Hormuz matters   ... [continued]</p>\n<p>The post <a href=\"https://cleantechnica.com/2026/04/02/two-options-for-the-strait-of-hormuz-in-a-decarbonized-world/\">Two Options for the Strait of Hormuz in a Decarbonized World</a> appeared first on <a href=\"https://cleantechnica.com\">CleanTechnica</a>.</p>",
+      "published_date": "2026-04-03",
+      "raw_text": "two options for the strait of hormuz in a decarbonized world <p>the most useful way to think about the strait of hormuz in a decarbonized future is not as an oil story that fades away as the energy transition advances. it is a systems story about where risk sits in the architecture of the economy. in the fossil era, hormuz matters   ... [continued]</p>\n<p>the post <a href=\"https://cleantechnica.com/2026/04/02/two-options-for-the-strait-of-hormuz-in-a-decarbonized-world/\">two options for the strait of hormuz in a decarbonized world</a> appeared first on <a href=\"https://cleantechnica.com\">cleantechnica</a>.</p>",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "3413ae8cacd86a85",
+      "source_id": "cleantechnica",
+      "source_name": "CleanTechnica",
+      "source_url": "https://cleantechnica.com/2026/04/02/rivian-beats-wall-street-sales-expectations-but-still-niche/",
+      "source_segments": [
+        "ess",
+        "dc_power",
+        "grid_sw"
+      ],
+      "reliability": 3,
+      "title": "Rivian Beats Wall Street Sales Expectations, But Still Niche",
+      "summary": "<p>Rivian ended up delivering 10,365 vehicles to customers in the first quarter of 2026. That was around 700 units above Wall Street estimates (9,678 according to Visible Alpha). Still, naturally, 10,365 vehicle sales in one quarter is very niche. For comparison, in a very down month for Tesla, one of   ... [continued]</p>\n<p>The post <a href=\"https://cleantechnica.com/2026/04/02/rivian-beats-wall-street-sales-expectations-but-still-niche/\">Rivian Beats Wall Street Sales Expectations, But Still Niche</a> appeared first on <a href=\"https://cleantechnica.com\">CleanTechnica</a>.</p>",
+      "published_date": "2026-04-03",
+      "raw_text": "rivian beats wall street sales expectations, but still niche <p>rivian ended up delivering 10,365 vehicles to customers in the first quarter of 2026. that was around 700 units above wall street estimates (9,678 according to visible alpha). still, naturally, 10,365 vehicle sales in one quarter is very niche. for comparison, in a very down month for tesla, one of   ... [continued]</p>\n<p>the post <a href=\"https://cleantechnica.com/2026/04/02/rivian-beats-wall-street-sales-expectations-but-still-niche/\">rivian beats wall street sales expectations, but still niche</a> appeared first on <a href=\"https://cleantechnica.com\">cleantechnica</a>.</p>",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "3ff89610af76358f",
+      "source_id": "cleantechnica",
+      "source_name": "CleanTechnica",
+      "source_url": "https://cleantechnica.com/2026/04/02/labor-unions-community-and-climate-groups-demand-hyundai-answers-on-louisiana-steel-mill/",
+      "source_segments": [
+        "ess",
+        "dc_power",
+        "grid_sw"
+      ],
+      "reliability": 3,
+      "title": "Labor Unions, Community, and Climate Groups Demand Hyundai Answers on Louisiana Steel Mill",
+      "summary": "<p>ASCENSION PARISH, LA — A coalition of labor unions, community and climate groups have written to the Hyundai CEO asking the company to ensure its proposed $5.8 billion steel mill in Donaldsonville meets strong health and environmental standards, while providing quality jobs. The letter follows a meeting in the Lemann   ... [continued]</p>\n<p>The post <a href=\"https://cleantechnica.com/2026/04/02/labor-unions-community-and-climate-groups-demand-hyundai-answers-on-louisiana-steel-mill/\">Labor Unions, Community, and Climate Groups Demand Hyundai Answers on Louisiana Steel Mill</a> appeared fir",
+      "published_date": "2026-04-03",
+      "raw_text": "labor unions, community, and climate groups demand hyundai answers on louisiana steel mill <p>ascension parish, la — a coalition of labor unions, community and climate groups have written to the hyundai ceo asking the company to ensure its proposed $5.8 billion steel mill in donaldsonville meets strong health and environmental standards, while providing quality jobs. the letter follows a meeting in the lemann   ... [continued]</p>\n<p>the post <a href=\"https://cleantechnica.com/2026/04/02/labor-unions-community-and-climate-groups-demand-hyundai-answers-on-louisiana-steel-mill/\">labor unions, community, and climate groups demand hyundai answers on louisiana steel mill</a> appeared fir",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "article_id": "afdda1a2ec7d12f7",
+      "source_id": "cleantechnica",
+      "source_name": "CleanTechnica",
+      "source_url": "https://cleantechnica.com/2026/04/02/advocacy-groups-sue-trump-administration-over-decision-to-exempt-all-oil-gas-activities-in-gulf-from-endangered-species-act/",
+      "source_segments": [
+        "ess",
+        "dc_power",
+        "grid_sw"
+      ],
+      "reliability": 3,
+      "title": "Advocacy Groups Sue Trump Administration Over Decision to Exempt All Oil & Gas Activities in Gulf from Endangered Species Act",
+      "summary": "<p>Lawsuit claims Trump&#8217;s use of &#8216;Extinction Committee&#8217; violates law in numerous ways. Washington D.C. — Gulf and environmental groups sued the Trump Administration today over its decision to strip Endangered Species Act protection from imperiled species threatened by oil-and-gas offshore drilling activities in the Gulf of Mexico. The unprecedented blanket-exemption would leave numerous Gulf species and   ... [continued]</p>\n<p>The post <a href=\"https://cleantechnica.com/2026/04/02/advocacy-groups-sue-trump-administration-over-decision-to-exempt-all-oil-gas-activities-in-gulf",
+      "published_date": "2026-04-03",
+      "raw_text": "advocacy groups sue trump administration over decision to exempt all oil & gas activities in gulf from endangered species act <p>lawsuit claims trump&#8217;s use of &#8216;extinction committee&#8217; violates law in numerous ways. washington d.c. — gulf and environmental groups sued the trump administration today over its decision to strip endangered species act protection from imperiled species threatened by oil-and-gas offshore drilling activities in the gulf of mexico. the unprecedented blanket-exemption would leave numerous gulf species and   ... [continued]</p>\n<p>the post <a href=\"https://cleantechnica.com/2026/04/02/advocacy-groups-sue-trump-administration-over-decision-to-exempt-all-oil-gas-activities-in-gulf",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    }
+  ]
+}

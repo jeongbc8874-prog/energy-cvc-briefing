@@ -1,0 +1,1187 @@
+{
+  "date": "2026-04-04",
+  "generated_at": "2026-04-04T08:47:19.044946+00:00",
+  "signal_count": 32,
+  "stats": {
+    "total": 32,
+    "high": 7,
+    "medium": 3,
+    "negative": 2,
+    "dropped_noise": 75,
+    "by_segment": {
+      "ess": 25,
+      "hvdc": 2,
+      "marine_fc": 3,
+      "grid_sw": 2
+    },
+    "by_type": {
+      "Negative": 2,
+      "Contract": 2,
+      "Financing": 2,
+      "Deployment": 2,
+      "Certification": 1,
+      "Partnership": 3,
+      "News": 20
+    }
+  },
+  "source_logs": [
+    {
+      "id": "utilitydive",
+      "name": "Utility Dive",
+      "url": "https://www.utilitydive.com/feeds/news/",
+      "status": "success",
+      "items": 10,
+      "error": null,
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00",
+      "reliability": 2,
+      "segments": [
+        "grid_sw",
+        "ess",
+        "dc_power"
+      ]
+    },
+    {
+      "id": "electrek",
+      "name": "Electrek",
+      "url": "https://electrek.co/feed/",
+      "status": "success",
+      "items": 20,
+      "error": null,
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00",
+      "reliability": 3,
+      "segments": [
+        "ess",
+        "dc_power"
+      ]
+    },
+    {
+      "id": "canarymedia",
+      "name": "Canary Media",
+      "url": "https://www.canarymedia.com/rss",
+      "status": "success",
+      "items": 8,
+      "error": null,
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00",
+      "reliability": 2,
+      "segments": [
+        "ess",
+        "grid_sw",
+        "dc_power",
+        "hydrogen"
+      ]
+    },
+    {
+      "id": "pvmagazine",
+      "name": "PV Magazine",
+      "url": "https://www.pv-magazine.com/feed/",
+      "status": "success",
+      "items": 25,
+      "error": null,
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00",
+      "reliability": 2,
+      "segments": [
+        "ess",
+        "hydrogen",
+        "forecasting"
+      ]
+    },
+    {
+      "id": "offshorewind",
+      "name": "Offshore Wind Biz",
+      "url": "https://www.offshorewind.biz/feed/",
+      "status": "success",
+      "items": 10,
+      "error": null,
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00",
+      "reliability": 2,
+      "segments": [
+        "hvdc",
+        "ess"
+      ]
+    },
+    {
+      "id": "energystoragenews",
+      "name": "Energy Storage News",
+      "url": "https://www.energy-storage.news/feed/",
+      "status": "success",
+      "items": 14,
+      "error": null,
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00",
+      "reliability": 2,
+      "segments": [
+        "ess"
+      ]
+    },
+    {
+      "id": "spglobal_platts_energy",
+      "name": "S&P Global Energy (free)",
+      "url": "https://www.spglobal.com/commodityinsights/en/rss-feed/energy",
+      "status": "failed",
+      "items": 0,
+      "error": "HTTP 403",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00",
+      "reliability": 2,
+      "segments": [
+        "hydrogen",
+        "ess",
+        "dc_power"
+      ]
+    },
+    {
+      "id": "h2view",
+      "name": "H2 View",
+      "url": "https://www.h2-view.com/feed/",
+      "status": "partial",
+      "items": 0,
+      "error": null,
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00",
+      "reliability": 2,
+      "segments": [
+        "hydrogen",
+        "marine_fc"
+      ]
+    },
+    {
+      "id": "cleantechnica",
+      "name": "CleanTechnica",
+      "url": "https://cleantechnica.com/feed/",
+      "status": "success",
+      "items": 20,
+      "error": null,
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00",
+      "reliability": 3,
+      "segments": [
+        "ess",
+        "dc_power",
+        "grid_sw"
+      ]
+    },
+    {
+      "id": "hydrogeninsight",
+      "name": "Hydrogen Insight",
+      "url": "https://www.hydrogeninsight.com/feed",
+      "status": "failed",
+      "items": 0,
+      "error": "HTTP 404",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00",
+      "reliability": 2,
+      "segments": [
+        "hydrogen"
+      ]
+    },
+    {
+      "id": "rechargenews",
+      "name": "Recharge News",
+      "url": "https://www.rechargenews.com/feed",
+      "status": "failed",
+      "items": 0,
+      "error": "HTTP 404",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00",
+      "reliability": 2,
+      "segments": [
+        "hydrogen",
+        "ess",
+        "hvdc"
+      ]
+    },
+    {
+      "id": "greentechmedia",
+      "name": "Wood Mackenzie (GTM)",
+      "url": "https://www.woodmac.com/feeds/rss/",
+      "status": "failed",
+      "items": 0,
+      "error": "HTTP 404",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00",
+      "reliability": 2,
+      "segments": [
+        "ess",
+        "grid_sw",
+        "hydrogen"
+      ]
+    },
+    {
+      "id": "renewablesnow",
+      "name": "Renewables Now",
+      "url": "https://renewablesnow.com/news/feed/",
+      "status": "failed",
+      "items": 0,
+      "error": "HTTP 404",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00",
+      "reliability": 2,
+      "segments": [
+        "ess",
+        "hvdc",
+        "hydrogen"
+      ]
+    },
+    {
+      "id": "energynewsnetwork",
+      "name": "Energy News Network",
+      "url": "https://energynews.us/feed/",
+      "status": "failed",
+      "items": 0,
+      "error": "Feed parse error: <unknown>:6:30: not well-formed (invalid token)",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00",
+      "reliability": 2,
+      "segments": [
+        "grid_sw",
+        "ess",
+        "dc_power"
+      ]
+    },
+    {
+      "id": "ieaenergy",
+      "name": "IEA News",
+      "url": "https://www.iea.org/api/rss",
+      "status": "failed",
+      "items": 0,
+      "error": "HTTP 404",
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00",
+      "reliability": 1,
+      "segments": [
+        "hydrogen",
+        "ess",
+        "grid_sw",
+        "forecasting"
+      ]
+    }
+  ],
+  "signals": [
+    {
+      "id": "7eb96aa7d593634f",
+      "title": "Next-generation geothermal needs more than a technology revolution",
+      "source_name": "Canary Media",
+      "source_url": "https://www.canarymedia.com/articles/geothermal/next-generation-geothermal-technology-revolution",
+      "published_date": "2026-04-01",
+      "observed_fact": "Geothermal energy is on the cusp of a renaissance in the United States",
+      "why_it_matters_investment": "Requires investment timeline reassessment. Determine if project-level or structural.",
+      "missing_evidence": [
+        "Root cause not confirmed",
+        "Management mitigation plan not public"
+      ],
+      "signal_tier": "noise",
+      "signal_strength": 0,
+      "sector": "ess",
+      "event_type": "Negative",
+      "neg_subtype": "delay",
+      "is_negative": true,
+      "companies_mentioned": [],
+      "raw_summary": "Geothermal energy is on the cusp of a renaissance in the United States. But outdated and piecemeal rules could delay development of the around-the-clock, carbon-free energy source.  Next-generation geothermal is something of a golden child, backed by everyone from climate advocates to leaders in the",
+      "score_breakdown": [],
+      "matched_keyword": "delay",
+      "source_reliability": 2,
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "id": "149bc7d62fceeb82",
+      "title": "Sierra Club Wisconsin Slams We Energies for Rate Increase and Once Again Delaying Oak Creek Coal Plant Retirement",
+      "source_name": "CleanTechnica",
+      "source_url": "https://cleantechnica.com/2026/04/03/sierra-club-wisconsin-slams-we-energies-for-rate-increase-and-once-again-delaying-oak-creek-coal-plant-retirement/",
+      "published_date": "2026-04-04",
+      "observed_fact": "<p>This week, We Energies has announced that it will once again delay closing its Oak Creek coal plant and that it intends to raise residential and small business rates by 4",
+      "why_it_matters_investment": "Requires investment timeline reassessment. Determine if project-level or structural.",
+      "missing_evidence": [
+        "Root cause not confirmed",
+        "Management mitigation plan not public"
+      ],
+      "signal_tier": "noise",
+      "signal_strength": 0,
+      "sector": "ess",
+      "event_type": "Negative",
+      "neg_subtype": "delay",
+      "is_negative": true,
+      "companies_mentioned": [],
+      "raw_summary": "<p>This week, We Energies has announced that it will once again delay closing its Oak Creek coal plant and that it intends to raise residential and small business rates by 4.7% in 2027 and 4.5% in 2028. The Oak Creek power plant was originally scheduled to close in 2023, but   ... [continued]</p>\n<p",
+      "score_breakdown": [
+        {
+          "delta": -20,
+          "reason": "Intent, no confirmed action",
+          "type": "noise"
+        }
+      ],
+      "matched_keyword": "delay",
+      "source_reliability": 3,
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "id": "68cf4146e63d1a53",
+      "title": "Pexapark logs more than 1 GWh of European storage PPAs in March",
+      "source_name": "PV Magazine",
+      "source_url": "https://www.pv-magazine.com/2026/04/02/pexapark-logs-more-than-1-gwh-of-european-storage-ppas-in-march/",
+      "published_date": "2026-04-02",
+      "observed_fact": "War in the Middle East is putting pressure on energy markets and boosting the value of solar and storage power purchase agreements (PPAs), with Europe seeing a surge in activity in March, according to Swiss consultancy Pexapark",
+      "why_it_matters_investment": "Offtake/supply agreement is the clearest commercial-stage signal.",
+      "missing_evidence": [
+        "Contract ACV not disclosed",
+        "Duration and renewal terms unknown",
+        "Exclusivity scope unknown"
+      ],
+      "signal_tier": "high",
+      "signal_strength": 100,
+      "sector": "ess",
+      "event_type": "Contract",
+      "neg_subtype": null,
+      "is_negative": false,
+      "companies_mentioned": [],
+      "raw_summary": "War in the Middle East is putting pressure on energy markets and boosting the value of solar and storage power purchase agreements (PPAs), with Europe seeing a surge in activity in March, according to Swiss consultancy Pexapark.",
+      "score_breakdown": [
+        {
+          "delta": 10,
+          "reason": "Specific capacity figure",
+          "type": "boost"
+        }
+      ],
+      "matched_keyword": "purchase agreement",
+      "source_reliability": 2,
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "id": "5b4244e49fd3429e",
+      "title": "EnerVenue closes US$300 million Series B for 30,000-cycle nickel-hydrogen battery manufacturing",
+      "source_name": "Energy Storage News",
+      "source_url": "https://www.energy-storage.news/enervenue-closes-us300-million-series-b-for-30000-cycle-nickel-hydrogen-battery-manufacturing/",
+      "published_date": "2026-04-01",
+      "observed_fact": "EnerVenue, the US company commercialising technology adapted from nickel-hydrogen batteries, has closed a US$300 million extension of its Series B preferred stock financing round",
+      "why_it_matters_investment": "External capital validation. Key variables: investor identity (strategic >> financial), round size vs. capex.",
+      "missing_evidence": [
+        "Post-money valuation not confirmed",
+        "Lead investor identity unknown",
+        "Use of proceeds not specified"
+      ],
+      "signal_tier": "high",
+      "signal_strength": 97,
+      "sector": "ess",
+      "event_type": "Financing",
+      "neg_subtype": null,
+      "is_negative": false,
+      "companies_mentioned": [],
+      "raw_summary": "EnerVenue, the US company commercialising technology adapted from nickel-hydrogen batteries, has closed a US$300 million extension of its Series B preferred stock financing round.",
+      "score_breakdown": [
+        {
+          "delta": 15,
+          "reason": "Specific financial figure",
+          "type": "boost"
+        }
+      ],
+      "matched_keyword": "series b",
+      "source_reliability": 2,
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "id": "fa623b284a0d150c",
+      "title": "BBDF 2026: Hybrid PPAs face slow uptake among industrial buyers",
+      "source_name": "PV Magazine",
+      "source_url": "https://www.pv-magazine.com/2026/04/03/bbdf-2026-hybrid-ppas-face-slow-uptake-among-industrial-buyers/",
+      "published_date": "2026-04-03",
+      "observed_fact": "Hybrid power purchase agreements (PPAs) combining solar and storage are proving harder to close with industrial offtakers than standard solar deals, despite growing market interest",
+      "why_it_matters_investment": "Offtake/supply agreement is the clearest commercial-stage signal.",
+      "missing_evidence": [
+        "Contract ACV not disclosed",
+        "Duration and renewal terms unknown",
+        "Exclusivity scope unknown"
+      ],
+      "signal_tier": "high",
+      "signal_strength": 92,
+      "sector": "ess",
+      "event_type": "Contract",
+      "neg_subtype": null,
+      "is_negative": false,
+      "companies_mentioned": [],
+      "raw_summary": "Hybrid power purchase agreements (PPAs) combining solar and storage are proving harder to close with industrial offtakers than standard solar deals, despite growing market interest.",
+      "score_breakdown": [],
+      "matched_keyword": "purchase agreement",
+      "source_reliability": 2,
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "id": "8f15a2288188b421",
+      "title": "Foundation Installation at New French Offshore Wind Farm Reaches Halfway Mark",
+      "source_name": "Offshore Wind Biz",
+      "source_url": "https://www.offshorewind.biz/2026/04/01/foundation-installation-at-new-french-offshore-wind-farm-reaches-halfway-mark/",
+      "published_date": "2026-04-01",
+      "observed_fact": "Half of the 62 jacket foundations have been installed at the Dieppe-Le-Tréport offshore wind [&#8230;]",
+      "why_it_matters_investment": "Signal type Deployment in hvdc segment — review evidence for investment relevance.",
+      "missing_evidence": [
+        "Commercial operation date confirmed but revenue terms unknown",
+        "Performance guarantee terms not public"
+      ],
+      "signal_tier": "high",
+      "signal_strength": 88,
+      "sector": "hvdc",
+      "event_type": "Deployment",
+      "neg_subtype": null,
+      "is_negative": false,
+      "companies_mentioned": [],
+      "raw_summary": "Half of the 62 jacket foundations have been installed at the Dieppe-Le-Tréport offshore wind [&#8230;]",
+      "score_breakdown": [],
+      "matched_keyword": "installed at",
+      "source_reliability": 2,
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "id": "c20c174477412c70",
+      "title": "ClassNK Grants Approval for High-Corrosion-Resistant Wire Cable for Floating Wind Mooring",
+      "source_name": "Offshore Wind Biz",
+      "source_url": "https://www.offshorewind.biz/2026/04/01/classnk-grants-approval-for-high-corrosion-resistant-wire-cable-for-floating-wind-mooring/",
+      "published_date": "2026-04-01",
+      "observed_fact": "ClassNK has issued Approval of Manufacturing Procedure (AMP) and Type Approval certificates for a [&#8230;]",
+      "why_it_matters_investment": "Signal type Certification in hvdc segment — review evidence for investment relevance.",
+      "missing_evidence": [
+        "Certification scope (geographic, product variant) not stated",
+        "Renewal terms unknown"
+      ],
+      "signal_tier": "high",
+      "signal_strength": 88,
+      "sector": "hvdc",
+      "event_type": "Certification",
+      "neg_subtype": null,
+      "is_negative": false,
+      "companies_mentioned": [],
+      "raw_summary": "ClassNK has issued Approval of Manufacturing Procedure (AMP) and Type Approval certificates for a [&#8230;]",
+      "score_breakdown": [],
+      "matched_keyword": "type approval",
+      "source_reliability": 2,
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "id": "47ee727032ae75b0",
+      "title": "Japan’s first capacity market-contracted BESS brought online by Hexa Energy",
+      "source_name": "Energy Storage News",
+      "source_url": "https://www.energy-storage.news/japans-first-capacity-market-contracted-bess-brought-online-by-hexa-energy/",
+      "published_date": "2026-04-01",
+      "observed_fact": "Developer-investor Hexa Energy Services has inaugurated what is thought to be Japan’s first operational battery storage project with a capacity market contract",
+      "why_it_matters_investment": "Signal type Deployment in ess segment — review evidence for investment relevance.",
+      "missing_evidence": [
+        "Commercial operation date confirmed but revenue terms unknown",
+        "Performance guarantee terms not public"
+      ],
+      "signal_tier": "high",
+      "signal_strength": 88,
+      "sector": "ess",
+      "event_type": "Deployment",
+      "neg_subtype": null,
+      "is_negative": false,
+      "companies_mentioned": [],
+      "raw_summary": "Developer-investor Hexa Energy Services has inaugurated what is thought to be Japan’s first operational battery storage project with a capacity market contract.",
+      "score_breakdown": [],
+      "matched_keyword": "operational",
+      "source_reliability": 2,
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "id": "27e15bd998d73126",
+      "title": "Used EVs are a bargain right now — and buyers are noticing",
+      "source_name": "Canary Media",
+      "source_url": "https://www.canarymedia.com/articles/electric-vehicles/used-evs-are-bargain-buyers-noticing",
+      "published_date": "2026-04-02",
+      "observed_fact": "Chad Shepard has warm feelings about the all-electric Honda Prologue he bought recently",
+      "why_it_matters_investment": "External capital validation. Key variables: investor identity (strategic >> financial), round size vs. capex.",
+      "missing_evidence": [
+        "Post-money valuation not confirmed",
+        "Lead investor identity unknown",
+        "Use of proceeds not specified"
+      ],
+      "signal_tier": "high",
+      "signal_strength": 82,
+      "sector": "ess",
+      "event_type": "Financing",
+      "neg_subtype": null,
+      "is_negative": false,
+      "companies_mentioned": [],
+      "raw_summary": "Chad Shepard has warm feelings about the all-electric Honda Prologue he bought recently. Unlike his first EV, a BMW i3, the SUV is big enough for his two teenage sons and his 80-pound sheepdog. Its 300-mile range is plenty to get him to the homes across the San Francisco Bay Area that he appraises f",
+      "score_breakdown": [],
+      "matched_keyword": "raises",
+      "source_reliability": 2,
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "id": "d5023e93aced29d8",
+      "title": "Nation's largest urban battery to take center stage near San Francisco",
+      "source_name": "Canary Media",
+      "source_url": "https://www.canarymedia.com/articles/batteries/nations-largest-urban-battery-san-francisco",
+      "published_date": "2026-04-03",
+      "observed_fact": "The Cow Palace arena, just south of San Francisco, has hosted Dwight Eisenhower , the Beatles , the San Jose Sharks NHL team, and an annual rodeo since it opened in 1941",
+      "why_it_matters_investment": "Named strategic partnership is directional. MOU alone does not confirm commercial intent.",
+      "missing_evidence": [
+        "Binding terms (exclusivity, volume) not confirmed",
+        "IP ownership unclear",
+        "MOU vs. binding contract distinction not stated"
+      ],
+      "signal_tier": "medium",
+      "signal_strength": 47,
+      "sector": "ess",
+      "event_type": "Partnership",
+      "neg_subtype": null,
+      "is_negative": false,
+      "companies_mentioned": [],
+      "raw_summary": "The Cow Palace arena, just south of San Francisco, has hosted Dwight Eisenhower , the Beatles , the San Jose Sharks NHL team, and an annual rodeo since it opened in 1941. But an even bigger act is setting up next door: an enormous battery that will perform a starring role in the Bay Area’s energy ec",
+      "score_breakdown": [],
+      "matched_keyword": "mou",
+      "source_reliability": 2,
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "id": "ccdd3af0e5707492",
+      "title": "Japan’s FLOWRA, Bureau Veritas Sign Floating Wind MoU",
+      "source_name": "Offshore Wind Biz",
+      "source_url": "https://www.offshorewind.biz/2026/04/01/japans-flowra-bureau-veritas-sign-floating-wind-mou/",
+      "published_date": "2026-04-01",
+      "observed_fact": "Japan’s Floating Offshore Wind Power Technology Research Association (FLOWRA) and Bureau Veritas Marine &#38; [&#8230;]",
+      "why_it_matters_investment": "Named strategic partnership is directional. MOU alone does not confirm commercial intent.",
+      "missing_evidence": [
+        "Binding terms (exclusivity, volume) not confirmed",
+        "IP ownership unclear",
+        "MOU vs. binding contract distinction not stated"
+      ],
+      "signal_tier": "medium",
+      "signal_strength": 47,
+      "sector": "marine_fc",
+      "event_type": "Partnership",
+      "neg_subtype": null,
+      "is_negative": false,
+      "companies_mentioned": [],
+      "raw_summary": "Japan’s Floating Offshore Wind Power Technology Research Association (FLOWRA) and Bureau Veritas Marine &#38; [&#8230;]",
+      "score_breakdown": [],
+      "matched_keyword": "mou",
+      "source_reliability": 2,
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "id": "7ba6c7276fb505a2",
+      "title": "ROUNDUP: Aypa’s US$500 million credit facility upsizing, Georgia Power begins construction on 260MW BESS, Eolus sells 506MWh BESS to DESRI",
+      "source_name": "Energy Storage News",
+      "source_url": "https://www.energy-storage.news/roundup-aypas-us500-million-credit-facility-upsizing-georgia-power-begins-construction-on-260mw-bess-eolus-sells-506mwh-bess-to-desri/",
+      "published_date": "2026-04-02",
+      "observed_fact": "In this news roundup, Aypa power upsizes its credit facility, Georgia Power begins construction on a 260MW BESS, and IOWN Energy on behalf of Eolus sells a 506MWh BESS to DESRI",
+      "why_it_matters_investment": "Signal type News in ess segment — review evidence for investment relevance.",
+      "missing_evidence": [
+        "No investment-specific gap analysis available"
+      ],
+      "signal_tier": "medium",
+      "signal_strength": 40,
+      "sector": "ess",
+      "event_type": "News",
+      "neg_subtype": null,
+      "is_negative": false,
+      "companies_mentioned": [],
+      "raw_summary": "In this news roundup, Aypa power upsizes its credit facility, Georgia Power begins construction on a 260MW BESS, and IOWN Energy on behalf of Eolus sells a 506MWh BESS to DESRI",
+      "score_breakdown": [
+        {
+          "delta": 15,
+          "reason": "Specific financial figure",
+          "type": "boost"
+        },
+        {
+          "delta": 10,
+          "reason": "Specific capacity figure",
+          "type": "boost"
+        }
+      ],
+      "matched_keyword": null,
+      "source_reliability": 2,
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "id": "891f2e4d8fdd0810",
+      "title": "FERC urged to reject TeraWulf’s power plant purchase due to undisclosed Google ownership stake",
+      "source_name": "Utility Dive",
+      "source_url": "https://www.utilitydive.com/news/ferc-terawulf-morgantown-power-plant-google/816582/",
+      "published_date": "2026-04-03",
+      "observed_fact": "<figure><div><img src=\"https://imgproxy",
+      "why_it_matters_investment": "Signal type News in marine_fc segment — review evidence for investment relevance.",
+      "missing_evidence": [
+        "No investment-specific gap analysis available"
+      ],
+      "signal_tier": "low",
+      "signal_strength": 33,
+      "sector": "marine_fc",
+      "event_type": "News",
+      "neg_subtype": null,
+      "is_negative": false,
+      "companies_mentioned": [],
+      "raw_summary": "<figure><div><img src=\"https://imgproxy.divecdn.com/4PrYNdC2G_gAdG4TdWpw6iObiBCE5stn29ganUPRNbU/g:ce/rs:fill:1600:900:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9HZXR0eUltYWdlcy00Nzg5OTg3NDQuanBn.webp\" /></div></figure><p>The purchase is part of&nbsp;TeraWulf&rsquo;s plan to develop a major data ce",
+      "score_breakdown": [
+        {
+          "delta": 18,
+          "reason": "Tier-1 strategic buyer",
+          "type": "boost"
+        }
+      ],
+      "matched_keyword": null,
+      "source_reliability": 2,
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "id": "d6d5ed189f615907",
+      "title": "EGO zero-turn riding mower + 6x batteries and wall charger new $4,800 low, Segway e-scooter Amazon deals, Anker exclusive, more",
+      "source_name": "Electrek",
+      "source_url": "https://electrek.co/2026/04/02/ego-zero-turn-riding-mower-4800-low-segway-electric-scooter-anker-exclusive-more/",
+      "published_date": "2026-04-02",
+      "observed_fact": "<div class=\"feat-image\"><img src=\"https://electrek",
+      "why_it_matters_investment": "Signal type News in ess segment — review evidence for investment relevance.",
+      "missing_evidence": [
+        "No investment-specific gap analysis available"
+      ],
+      "signal_tier": "low",
+      "signal_strength": 33,
+      "sector": "ess",
+      "event_type": "News",
+      "neg_subtype": null,
+      "is_negative": false,
+      "companies_mentioned": [],
+      "raw_summary": "<div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2026/04/EGO-Z6-riding-mower-Segway-E3-Pro-Anker-F3800-eufy-E340-GDs.jpg?quality=82&#038;strip=all&#038;w=1600\" /></div><p>Our Thursday Green Deals are here, and leading the lineup is <a href=\"https://9to5toys.com/2026/0",
+      "score_breakdown": [
+        {
+          "delta": 18,
+          "reason": "Tier-1 strategic buyer",
+          "type": "boost"
+        }
+      ],
+      "matched_keyword": null,
+      "source_reliability": 3,
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "id": "cad5662e98ab7880",
+      "title": "Google, AI, & Carbon Emissions — A Lesson In Situational Ethics",
+      "source_name": "CleanTechnica",
+      "source_url": "https://cleantechnica.com/2026/04/03/google-ai-carbon-emissions-a-lesson-in-situational-ethics/",
+      "published_date": "2026-04-03",
+      "observed_fact": "<p>Google styles itself as a leader in the use of renewable energy, but it is backsliding on that commitment because of AI",
+      "why_it_matters_investment": "Signal type News in ess segment — review evidence for investment relevance.",
+      "missing_evidence": [
+        "No investment-specific gap analysis available"
+      ],
+      "signal_tier": "low",
+      "signal_strength": 33,
+      "sector": "ess",
+      "event_type": "News",
+      "neg_subtype": null,
+      "is_negative": false,
+      "companies_mentioned": [],
+      "raw_summary": "<p>Google styles itself as a leader in the use of renewable energy, but it is backsliding on that commitment because of AI.</p>\n<p>The post <a href=\"https://cleantechnica.com/2026/04/03/google-ai-carbon-emissions-a-lesson-in-situational-ethics/\">Google, AI, &#038; Carbon Emissions &#8212; A Lesson I",
+      "score_breakdown": [
+        {
+          "delta": 18,
+          "reason": "Tier-1 strategic buyer",
+          "type": "boost"
+        }
+      ],
+      "matched_keyword": null,
+      "source_reliability": 3,
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "id": "7e6b260be3fd96c1",
+      "title": "Texas opens $350M advanced nuclear grant program",
+      "source_name": "Utility Dive",
+      "source_url": "https://www.utilitydive.com/news/texas-opens-350m-advanced-nuclear-grant-program/816442/",
+      "published_date": "2026-04-02",
+      "observed_fact": "<figure><div><img src=\"https://imgproxy",
+      "why_it_matters_investment": "Signal type News in grid_sw segment — review evidence for investment relevance.",
+      "missing_evidence": [
+        "No investment-specific gap analysis available"
+      ],
+      "signal_tier": "low",
+      "signal_strength": 30,
+      "sector": "grid_sw",
+      "event_type": "News",
+      "neg_subtype": null,
+      "is_negative": false,
+      "companies_mentioned": [],
+      "raw_summary": "<figure><div><img src=\"https://imgproxy.divecdn.com/CFaaZ_jDiFnwy5EbIdqaHjKdo6sMGC2Ijrd5HLlu8mA/g:ce/rs:fill:1600:900:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9HZXR0eUltYWdlcy0xNDk3MDA1NTk4LmpwZw==.webp\" /></div></figure><p>&quot;Texas is streamlining the nuclear regulatory environment and making",
+      "score_breakdown": [
+        {
+          "delta": 15,
+          "reason": "Specific financial figure",
+          "type": "boost"
+        }
+      ],
+      "matched_keyword": null,
+      "source_reliability": 2,
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "id": "53600989d76b3c73",
+      "title": "Stellantis wants to build Chinese Leapmotor EVs at its idled Canadian plant",
+      "source_name": "Electrek",
+      "source_url": "https://electrek.co/2026/04/02/stellantis-leapmotor-chinese-evs-brampton-canada-plant/",
+      "published_date": "2026-04-02",
+      "observed_fact": "<div class=\"feat-image\"><img src=\"https://electrek",
+      "why_it_matters_investment": "Signal type News in ess segment — review evidence for investment relevance.",
+      "missing_evidence": [
+        "No investment-specific gap analysis available"
+      ],
+      "signal_tier": "low",
+      "signal_strength": 30,
+      "sector": "ess",
+      "event_type": "News",
+      "neg_subtype": null,
+      "is_negative": false,
+      "companies_mentioned": [],
+      "raw_summary": "<div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2026/02/Stellantis-EV-costs-China-2.jpeg?quality=82&#038;strip=all&#038;w=1400\" /></div><p>Stellantis is in early talks to assemble electric vehicles from its Chinese partner Leapmotor at the idled Brampton, Ontario pla",
+      "score_breakdown": [
+        {
+          "delta": 15,
+          "reason": "Specific financial figure",
+          "type": "boost"
+        }
+      ],
+      "matched_keyword": null,
+      "source_reliability": 3,
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "id": "100a1c9727eb9b73",
+      "title": "National Grid, GridCARE partnership could cut ‘time to power’ for large loads in New York",
+      "source_name": "Utility Dive",
+      "source_url": "https://www.utilitydive.com/news/national-grid-gridcare-partnership-could-cut-time-to-power-for-large-loa/816344/",
+      "published_date": "2026-04-01",
+      "observed_fact": "<figure><div><img src=\"https://imgproxy",
+      "why_it_matters_investment": "Named strategic partnership is directional. MOU alone does not confirm commercial intent.",
+      "missing_evidence": [
+        "Binding terms (exclusivity, volume) not confirmed",
+        "IP ownership unclear",
+        "MOU vs. binding contract distinction not stated"
+      ],
+      "signal_tier": "low",
+      "signal_strength": 27,
+      "sector": "marine_fc",
+      "event_type": "Partnership",
+      "neg_subtype": null,
+      "is_negative": false,
+      "companies_mentioned": [],
+      "raw_summary": "<figure><div><img src=\"https://imgproxy.divecdn.com/PPCZaUcvUQikIr1yorDCYRmEdbZctbIjt5kp4FqgHsE/g:ce/rs:fill:1600:900:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9HZXR0eUltYWdlcy0yMjEyMzA0NTk1LmpwZw==.webp\" /></div></figure><p>The initiative aims to boost grid utilization and keep bills in check in ",
+      "score_breakdown": [
+        {
+          "delta": -20,
+          "reason": "Intent, no confirmed action",
+          "type": "noise"
+        }
+      ],
+      "matched_keyword": "partnership",
+      "source_reliability": 2,
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "id": "cdf0914dd72f7721",
+      "title": "Hyundai previews two new IONIQ EVs in cryptic video",
+      "source_name": "Electrek",
+      "source_url": "https://electrek.co/2026/04/02/hyundai-previews-two-new-ioniq-evs-cryptic-video/",
+      "published_date": "2026-04-02",
+      "observed_fact": "<div class=\"feat-image\"><img src=\"https://electrek",
+      "why_it_matters_investment": "Signal type News in ess segment — review evidence for investment relevance.",
+      "missing_evidence": [
+        "No investment-specific gap analysis available"
+      ],
+      "signal_tier": "low",
+      "signal_strength": 27,
+      "sector": "ess",
+      "event_type": "News",
+      "neg_subtype": null,
+      "is_negative": false,
+      "companies_mentioned": [],
+      "raw_summary": "<div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2026/04/Hyundai-new-IONIQ-EVs-3.jpeg?quality=82&#038;strip=all&#038;w=1400\" /></div><p>Two new Hyundai IONIQ electric vehicles? In a cryptic teaser, <a href=\"https://electrek.co/guides/hyundai/\">Hyundai</a> offered the ",
+      "score_breakdown": [
+        {
+          "delta": 12,
+          "reason": "Major industrial/OEM",
+          "type": "boost"
+        }
+      ],
+      "matched_keyword": null,
+      "source_reliability": 3,
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "id": "3ff89610af76358f",
+      "title": "Labor Unions, Community, and Climate Groups Demand Hyundai Answers on Louisiana Steel Mill",
+      "source_name": "CleanTechnica",
+      "source_url": "https://cleantechnica.com/2026/04/02/labor-unions-community-and-climate-groups-demand-hyundai-answers-on-louisiana-steel-mill/",
+      "published_date": "2026-04-03",
+      "observed_fact": "<p>ASCENSION PARISH, LA — A coalition of labor unions, community and climate groups have written to the Hyundai CEO asking the company to ensure its proposed $5",
+      "why_it_matters_investment": "Signal type News in ess segment — review evidence for investment relevance.",
+      "missing_evidence": [
+        "No investment-specific gap analysis available"
+      ],
+      "signal_tier": "low",
+      "signal_strength": 27,
+      "sector": "ess",
+      "event_type": "News",
+      "neg_subtype": null,
+      "is_negative": false,
+      "companies_mentioned": [],
+      "raw_summary": "<p>ASCENSION PARISH, LA — A coalition of labor unions, community and climate groups have written to the Hyundai CEO asking the company to ensure its proposed $5.8 billion steel mill in Donaldsonville meets strong health and environmental standards, while providing quality jobs. The letter follows a ",
+      "score_breakdown": [
+        {
+          "delta": 12,
+          "reason": "Major industrial/OEM",
+          "type": "boost"
+        }
+      ],
+      "matched_keyword": null,
+      "source_reliability": 3,
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "id": "f7b0f8a631313324",
+      "title": "Rooftop solar reaches 20% of Puerto Rico’s generation mix",
+      "source_name": "Utility Dive",
+      "source_url": "https://www.utilitydive.com/news/rooftop-solar-puerto-rico-generation-mix-eia/816499/",
+      "published_date": "2026-04-02",
+      "observed_fact": "<figure><div><img src=\"https://imgproxy",
+      "why_it_matters_investment": "Signal type News in grid_sw segment — review evidence for investment relevance.",
+      "missing_evidence": [
+        "No investment-specific gap analysis available"
+      ],
+      "signal_tier": "low",
+      "signal_strength": 25,
+      "sector": "grid_sw",
+      "event_type": "News",
+      "neg_subtype": null,
+      "is_negative": false,
+      "companies_mentioned": [],
+      "raw_summary": "<figure><div><img src=\"https://imgproxy.divecdn.com/diZiFXlU9u5AVG9A4MIgmvZc5pUOt9eNebBwawCCVAE/g:ce/rs:fill:1600:900:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9wb3dlcm9ucHIxLmpwZw==.webp\" /></div></figure><p>Rooftop solar capacity in Puerto Rico reached around 1.5 GW in 2025, passing natural gas ",
+      "score_breakdown": [
+        {
+          "delta": 10,
+          "reason": "Specific capacity figure",
+          "type": "boost"
+        }
+      ],
+      "matched_keyword": null,
+      "source_reliability": 2,
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "id": "01034e50c3df81e0",
+      "title": "Malaysia’s solar capacity surpasses 5.7 GW",
+      "source_name": "PV Magazine",
+      "source_url": "https://www.pv-magazine.com/2026/04/03/malaysias-solar-capacity-surpasses-5-7-gw/",
+      "published_date": "2026-04-03",
+      "observed_fact": "Reports from the International Energy Agency's Photovoltaic Power Systems Programme (IEA-PVPS) indicate Malaysia added over 1",
+      "why_it_matters_investment": "Signal type News in ess segment — review evidence for investment relevance.",
+      "missing_evidence": [
+        "No investment-specific gap analysis available"
+      ],
+      "signal_tier": "low",
+      "signal_strength": 25,
+      "sector": "ess",
+      "event_type": "News",
+      "neg_subtype": null,
+      "is_negative": false,
+      "companies_mentioned": [],
+      "raw_summary": "Reports from the International Energy Agency's Photovoltaic Power Systems Programme (IEA-PVPS) indicate Malaysia added over 1.4 GW of solar in 2025, with more than 5.7 GW now deployed across multiple government schemes.",
+      "score_breakdown": [
+        {
+          "delta": 10,
+          "reason": "Specific capacity figure",
+          "type": "boost"
+        }
+      ],
+      "matched_keyword": null,
+      "source_reliability": 2,
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "id": "3d2f563984f87eb4",
+      "title": "Agratas advances 20 GWh battery plant in western India",
+      "source_name": "PV Magazine",
+      "source_url": "https://www.pv-magazine.com/2026/04/03/agratas-advances-20-gwh-battery-plant-in-western-india/",
+      "published_date": "2026-04-03",
+      "observed_fact": "Agratas, the global battery business of the Tata Group, has completed the steel frame of its Sanand facility in India, with production expected to begin in 2027",
+      "why_it_matters_investment": "Signal type News in ess segment — review evidence for investment relevance.",
+      "missing_evidence": [
+        "No investment-specific gap analysis available"
+      ],
+      "signal_tier": "low",
+      "signal_strength": 25,
+      "sector": "ess",
+      "event_type": "News",
+      "neg_subtype": null,
+      "is_negative": false,
+      "companies_mentioned": [],
+      "raw_summary": "Agratas, the global battery business of the Tata Group, has completed the steel frame of its Sanand facility in India, with production expected to begin in 2027.",
+      "score_breakdown": [
+        {
+          "delta": 10,
+          "reason": "Specific capacity figure",
+          "type": "boost"
+        }
+      ],
+      "matched_keyword": null,
+      "source_reliability": 2,
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "id": "43307b1ec7c42f3c",
+      "title": "France introduces cybersecurity, sustainability requirements in solar tenders",
+      "source_name": "PV Magazine",
+      "source_url": "https://www.pv-magazine.com/2026/04/02/france-introduces-cybersecurity-sustainability-requirements-in-solar-tenders/",
+      "published_date": "2026-04-02",
+      "observed_fact": "The French authorities announced they will assign 288 MW of PV in the 2026 tender for projects ranging from 100 kW to 500 kW in size and 925 MW in the procurement exercise for PV systems exceeding 500 kW",
+      "why_it_matters_investment": "Signal type News in ess segment — review evidence for investment relevance.",
+      "missing_evidence": [
+        "No investment-specific gap analysis available"
+      ],
+      "signal_tier": "low",
+      "signal_strength": 25,
+      "sector": "ess",
+      "event_type": "News",
+      "neg_subtype": null,
+      "is_negative": false,
+      "companies_mentioned": [],
+      "raw_summary": "The French authorities announced they will assign 288 MW of PV in the 2026 tender for projects ranging from 100 kW to 500 kW in size and 925 MW in the procurement exercise for PV systems exceeding 500 kW. The tenders will include cybersecurity requirements as well as provisions to support European m",
+      "score_breakdown": [
+        {
+          "delta": 10,
+          "reason": "Specific capacity figure",
+          "type": "boost"
+        }
+      ],
+      "matched_keyword": null,
+      "source_reliability": 2,
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "id": "27a23585fc0846e0",
+      "title": "Global solar additions reached record 511 GW in 2025, says IRENA",
+      "source_name": "PV Magazine",
+      "source_url": "https://www.pv-magazine.com/2026/04/02/global-solar-additions-reached-record-511-gw-in-2025-says-irena/",
+      "published_date": "2026-04-02",
+      "observed_fact": "Latest figures from the International Renewable Energy Agency find solar contributed the majority of a record 692 GW of renewables capacity added worldwide last year",
+      "why_it_matters_investment": "Signal type News in ess segment — review evidence for investment relevance.",
+      "missing_evidence": [
+        "No investment-specific gap analysis available"
+      ],
+      "signal_tier": "low",
+      "signal_strength": 25,
+      "sector": "ess",
+      "event_type": "News",
+      "neg_subtype": null,
+      "is_negative": false,
+      "companies_mentioned": [],
+      "raw_summary": "Latest figures from the International Renewable Energy Agency find solar contributed the majority of a record 692 GW of renewables capacity added worldwide last year.",
+      "score_breakdown": [
+        {
+          "delta": 10,
+          "reason": "Specific capacity figure",
+          "type": "boost"
+        }
+      ],
+      "matched_keyword": null,
+      "source_reliability": 2,
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "id": "4393d588974ec90c",
+      "title": "Reno planning commission approves permit for 200MW Trego Grid BESS project",
+      "source_name": "Energy Storage News",
+      "source_url": "https://www.energy-storage.news/reno-planning-commission-approves-permit-for-200mw-trego-grid-bess-project/",
+      "published_date": "2026-04-02",
+      "observed_fact": "The Reno Planning Commission, in Nevada, US, recommended approval for a conditional-use permit for the 200MW Trego Grid energy storage project on 4 March",
+      "why_it_matters_investment": "Signal type News in ess segment — review evidence for investment relevance.",
+      "missing_evidence": [
+        "No investment-specific gap analysis available"
+      ],
+      "signal_tier": "low",
+      "signal_strength": 25,
+      "sector": "ess",
+      "event_type": "News",
+      "neg_subtype": null,
+      "is_negative": false,
+      "companies_mentioned": [],
+      "raw_summary": "The Reno Planning Commission, in Nevada, US, recommended approval for a conditional-use permit for the 200MW Trego Grid energy storage project on 4 March.",
+      "score_breakdown": [
+        {
+          "delta": 10,
+          "reason": "Specific capacity figure",
+          "type": "boost"
+        }
+      ],
+      "matched_keyword": null,
+      "source_reliability": 2,
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "id": "ce52e9ce64353db2",
+      "title": "UK BESS ROUNDUP: SSE commissions 300MWh unit, Matrix, Drax and Voltaria progress projects",
+      "source_name": "Energy Storage News",
+      "source_url": "https://www.energy-storage.news/uk-bess-roundup-sse-commissions-300mwh-unit-matrix-drax-and-voltaria-progress-projects/",
+      "published_date": "2026-04-02",
+      "observed_fact": "SSE Renewables, Matrix Renewables, Drax and Voltaria have all progressed large-scale BESS projects in the UK, all-in-all totalling 1",
+      "why_it_matters_investment": "Signal type News in ess segment — review evidence for investment relevance.",
+      "missing_evidence": [
+        "No investment-specific gap analysis available"
+      ],
+      "signal_tier": "low",
+      "signal_strength": 25,
+      "sector": "ess",
+      "event_type": "News",
+      "neg_subtype": null,
+      "is_negative": false,
+      "companies_mentioned": [],
+      "raw_summary": "SSE Renewables, Matrix Renewables, Drax and Voltaria have all progressed large-scale BESS projects in the UK, all-in-all totalling 1.8GWh of new capacity.",
+      "score_breakdown": [
+        {
+          "delta": 10,
+          "reason": "Specific capacity figure",
+          "type": "boost"
+        }
+      ],
+      "matched_keyword": null,
+      "source_reliability": 2,
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "id": "c11602b2cc99c999",
+      "title": "Harmony starts building third 100MW/200MWh French BESS",
+      "source_name": "Energy Storage News",
+      "source_url": "https://www.energy-storage.news/harmony-starts-building-third-100mw-200mwh-french-bess/",
+      "published_date": "2026-04-01",
+      "observed_fact": "BESS developer-operator Harmony Energy has started construction on a 100MW/200MWh BESS in France, its third to reach that stage in the country",
+      "why_it_matters_investment": "Signal type News in ess segment — review evidence for investment relevance.",
+      "missing_evidence": [
+        "No investment-specific gap analysis available"
+      ],
+      "signal_tier": "low",
+      "signal_strength": 25,
+      "sector": "ess",
+      "event_type": "News",
+      "neg_subtype": null,
+      "is_negative": false,
+      "companies_mentioned": [],
+      "raw_summary": "BESS developer-operator Harmony Energy has started construction on a 100MW/200MWh BESS in France, its third to reach that stage in the country.",
+      "score_breakdown": [
+        {
+          "delta": 10,
+          "reason": "Specific capacity figure",
+          "type": "boost"
+        }
+      ],
+      "matched_keyword": null,
+      "source_reliability": 2,
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "id": "580dbbe57ac7e728",
+      "title": "‘We learned more in the past six months than the past six years’: Australian battery storage lenders navigate merchant risk",
+      "source_name": "Energy Storage News",
+      "source_url": "https://www.energy-storage.news/we-learned-more-in-the-past-six-months-than-the-past-six-years-australian-battery-storage-lenders-navigate-merchant-risk/",
+      "published_date": "2026-04-01",
+      "observed_fact": "Australian BESS face new financing reality as spreads halve to AU$100/MWh and lenders demand 50-70% contracting amid 15GW deployment surge",
+      "why_it_matters_investment": "Signal type News in ess segment — review evidence for investment relevance.",
+      "missing_evidence": [
+        "No investment-specific gap analysis available"
+      ],
+      "signal_tier": "low",
+      "signal_strength": 25,
+      "sector": "ess",
+      "event_type": "News",
+      "neg_subtype": null,
+      "is_negative": false,
+      "companies_mentioned": [],
+      "raw_summary": "Australian BESS face new financing reality as spreads halve to AU$100/MWh and lenders demand 50-70% contracting amid 15GW deployment surge.",
+      "score_breakdown": [
+        {
+          "delta": 10,
+          "reason": "Specific capacity figure",
+          "type": "boost"
+        }
+      ],
+      "matched_keyword": null,
+      "source_reliability": 2,
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "id": "2a922aae9a13b820",
+      "title": "Tesla (TSLA) Q1 2026 deliveries miss expectations at 358,000, builds 50,000 excess vehicles",
+      "source_name": "Electrek",
+      "source_url": "https://electrek.co/2026/04/02/tesla-tsla-q1-2026-delivery-results-misses-expectations/",
+      "published_date": "2026-04-02",
+      "observed_fact": "<div class=\"feat-image\"><img src=\"https://electrek",
+      "why_it_matters_investment": "Signal type News in ess segment — review evidence for investment relevance.",
+      "missing_evidence": [
+        "No investment-specific gap analysis available"
+      ],
+      "signal_tier": "low",
+      "signal_strength": 23,
+      "sector": "ess",
+      "event_type": "News",
+      "neg_subtype": null,
+      "is_negative": false,
+      "companies_mentioned": [],
+      "raw_summary": "<div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2025/04/Tesla-family-hero.png?w=1600\" /></div><p>Tesla released its Q1 2026 production and delivery results today, confirming 358,023 vehicle deliveries — about 7,600 units below the Wall Street consensus of 365,645 veh",
+      "score_breakdown": [
+        {
+          "delta": 8,
+          "reason": "Concrete timeframe",
+          "type": "boost"
+        }
+      ],
+      "matched_keyword": null,
+      "source_reliability": 3,
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "id": "bedd433efbceefee",
+      "title": "Rivian shares production and delivery numbers ahead of full Q1 2026 financial results",
+      "source_name": "Electrek",
+      "source_url": "https://electrek.co/2026/04/02/rivian-shares-production-delivery-numbers-q1-2026-financial-results/",
+      "published_date": "2026-04-02",
+      "observed_fact": "<div class=\"feat-image\"><img src=\"https://electrek",
+      "why_it_matters_investment": "Signal type News in ess segment — review evidence for investment relevance.",
+      "missing_evidence": [
+        "No investment-specific gap analysis available"
+      ],
+      "signal_tier": "low",
+      "signal_strength": 23,
+      "sector": "ess",
+      "event_type": "News",
+      "neg_subtype": null,
+      "is_negative": false,
+      "companies_mentioned": [],
+      "raw_summary": "<div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2026/03/Rivian-R2-Pricing-R1-comparison.jpg?quality=82&#038;strip=all&#038;w=1400\" /></div><p>American automaker <a href=\"https://electrek.co/guides/rivian/\">Rivian</a> has posted its production and delivery figures for",
+      "score_breakdown": [
+        {
+          "delta": 8,
+          "reason": "Concrete timeframe",
+          "type": "boost"
+        }
+      ],
+      "matched_keyword": null,
+      "source_reliability": 3,
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    },
+    {
+      "id": "e9100670cad9119c",
+      "title": "Were Elon’s Politics A Significant Part of Cruddy Q1 Sales?",
+      "source_name": "CleanTechnica",
+      "source_url": "https://cleantechnica.com/2026/04/03/were-elons-politics-a-significant-part-of-cruddy-q1-sales/",
+      "published_date": "2026-04-03",
+      "observed_fact": "<p>Let&#8217;s start with the hard numbers on this one",
+      "why_it_matters_investment": "Signal type News in ess segment — review evidence for investment relevance.",
+      "missing_evidence": [
+        "No investment-specific gap analysis available"
+      ],
+      "signal_tier": "low",
+      "signal_strength": 23,
+      "sector": "ess",
+      "event_type": "News",
+      "neg_subtype": null,
+      "is_negative": false,
+      "companies_mentioned": [],
+      "raw_summary": "<p>Let&#8217;s start with the hard numbers on this one. The Q1 2026 delivery numbers are officially out, and Tesla managed to deliver 358,023 vehicles. If you&#8217;re keeping track at home, that&#8217;s a pretty rough drop compared to the 386,810 cars they moved back in Q1 of 2024. Zach already put",
+      "score_breakdown": [
+        {
+          "delta": 8,
+          "reason": "Concrete timeframe",
+          "type": "boost"
+        }
+      ],
+      "matched_keyword": null,
+      "source_reliability": 3,
+      "fetched_at": "2026-04-04T08:47:19.044946+00:00"
+    }
+  ]
+}
