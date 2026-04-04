@@ -1,15 +1,15 @@
 {
   "date": "2026-04-04",
-  "generated_at": "2026-04-04T14:58:21.064403+00:00",
+  "generated_at": "2026-04-04T15:06:58.549007+00:00",
   "signal_count": 0,
   "stats": {
     "total": 0,
     "high": 0,
     "medium": 0,
     "negative": 0,
-    "dropped_noise": 1,
-    "sources_ok": 1,
-    "sources_total": 9,
+    "dropped_noise": 0,
+    "sources_ok": 0,
+    "sources_total": 8,
     "fail_count": 8,
     "by_sector": {},
     "by_event_type": {}
@@ -22,7 +22,7 @@
       "status": "partial",
       "items": 0,
       "error": null,
-      "fetched_at": "2026-04-04T14:58:21.064403+00:00",
+      "fetched_at": "2026-04-04T15:06:58.549007+00:00",
       "tier": 1,
       "segments": [
         "battery_storage",
@@ -33,30 +33,13 @@
       ]
     },
     {
-      "id": "doe_main",
-      "name": "DOE Energy.gov",
-      "url": "https://www.energy.gov/articles/rss.xml",
-      "status": "failed",
-      "items": 0,
-      "error": "HTTP 404",
-      "fetched_at": "2026-04-04T14:58:21.064403+00:00",
-      "tier": 1,
-      "segments": [
-        "battery_storage",
-        "green_hydrogen",
-        "grid_software",
-        "advanced_nuclear",
-        "offshore_wind"
-      ]
-    },
-    {
       "id": "canarymedia",
       "name": "Canary Media",
       "url": "https://www.canarymedia.com/rss.rss",
       "status": "partial",
       "items": 0,
       "error": null,
-      "fetched_at": "2026-04-04T14:58:21.064403+00:00",
+      "fetched_at": "2026-04-04T15:06:58.549007+00:00",
       "tier": 2,
       "segments": [
         "battery_storage",
@@ -73,7 +56,7 @@
       "status": "partial",
       "items": 0,
       "error": null,
-      "fetched_at": "2026-04-04T14:58:21.064403+00:00",
+      "fetched_at": "2026-04-04T15:06:58.549007+00:00",
       "tier": 2,
       "segments": [
         "battery_storage",
@@ -88,7 +71,7 @@
       "status": "partial",
       "items": 0,
       "error": null,
-      "fetched_at": "2026-04-04T14:58:21.064403+00:00",
+      "fetched_at": "2026-04-04T15:06:58.549007+00:00",
       "tier": 2,
       "segments": [
         "battery_storage",
@@ -102,7 +85,7 @@
       "status": "partial",
       "items": 0,
       "error": null,
-      "fetched_at": "2026-04-04T14:58:21.064403+00:00",
+      "fetched_at": "2026-04-04T15:06:58.549007+00:00",
       "tier": 2,
       "segments": [
         "grid_software",
@@ -118,7 +101,7 @@
       "status": "partial",
       "items": 0,
       "error": null,
-      "fetched_at": "2026-04-04T14:58:21.064403+00:00",
+      "fetched_at": "2026-04-04T15:06:58.549007+00:00",
       "tier": 2,
       "segments": [
         "offshore_wind",
@@ -129,10 +112,10 @@
       "id": "cleantechnica",
       "name": "CleanTechnica",
       "url": "https://cleantechnica.com/feed/",
-      "status": "success",
-      "items": 1,
+      "status": "partial",
+      "items": 0,
       "error": null,
-      "fetched_at": "2026-04-04T14:58:21.064403+00:00",
+      "fetched_at": "2026-04-04T15:06:58.549007+00:00",
       "tier": 3,
       "segments": [
         "battery_storage",
@@ -148,13 +131,22 @@
       "status": "partial",
       "items": 0,
       "error": null,
-      "fetched_at": "2026-04-04T14:58:21.064403+00:00",
+      "fetched_at": "2026-04-04T15:06:58.549007+00:00",
       "tier": 3,
       "segments": [
         "battery_storage",
         "data_center_power",
         "other_cleantech"
       ]
+    },
+    {
+      "id": "doe_main",
+      "name": "DOE Energy.gov",
+      "url": "https://www.energy.gov/articles/rss.xml",
+      "status": "skipped",
+      "items": 0,
+      "error": "Skipped: 3 consecutive fails",
+      "fetched_at": "2026-04-04T15:06:58.549007+00:00"
     }
   ],
   "signals": []
