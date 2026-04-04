@@ -37,6 +37,10 @@ jobs:
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
 
+      - name: Build company profiles      ← 이것만 추가
+        run: python build_company_profile.py
+
+
       - name: Commit & push data
         run: |
           git config --local user.email "action@github.com"
