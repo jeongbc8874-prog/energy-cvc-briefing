@@ -1,8 +1,8 @@
 {
   "date": "2026-04-04",
   "dateKr": "2026년 04월 04일",
-  "generatedAt": "2026-04-04T15:36:40.049235+00:00",
-  "brief": "**Deal Flow Memo - April 4, 2026**\n\nEnerVenue's $300M Series B (Energy Storage News) signals continued investor appetite for differentiated battery chemistries, particularly as their 30,000-cycle nickel-hydrogen tech targets the ultra-long-duration storage market that lithium struggles to serve economically. The timing aligns with our thesis that 2026 would be the breakout year for alternative battery technologies as grid storage requirements extend beyond 4-8 hour lithium systems.\n\nMeanwhile, PV Magazine's BBDF coverage highlighting slow hybrid PPA uptake among industrial buyers suggests the market complexity we've been tracking—corporates remain hesitant on bundled renewable-plus-storage contracts despite compelling economics. This adoption lag creates opportunity for startups simplifying the procurement process or offering risk-mitigation tools.\n\nWatch for follow-on rounds in the nickel-hydrogen space and potential consolidation plays as storage OEMs seek differentiated chemistries, while monitoring whether hybrid PPA adoption accelerates through standardized contract structures or intermediary platforms.",
+  "generatedAt": "2026-04-04T15:43:15.710586+00:00",
+  "brief": "**Deal Flow Memo - April 4, 2026**\n\nEnerVenue's $300M Series B (Energy Storage News) signals continued investor appetite for differentiated battery chemistries, with their 30,000-cycle nickel-hydrogen positioning against traditional lithium-ion degradation concerns. The timing aligns with our thesis on long-duration storage demand as grid penetration increases, though we should monitor whether nickel-hydrogen can achieve cost parity at scale. \n\nSeparately, PV Magazine's BBDF coverage on slow hybrid PPA uptake among industrials suggests corporate buyers remain cautious about dual-technology risk allocation, despite theoretical benefits. This hesitancy could create opportunities in the financing/structuring layer, or indicate that hybrid projects need simpler contractual frameworks to achieve mainstream adoption.\n\nWatch for follow-on nickel-hydrogen entrants and whether EnerVenue's manufacturing scale drives competitive responses from incumbent battery players.",
   "stats": {
     "total": 24,
     "high": 2,
@@ -3505,7 +3505,7 @@
         "source_count": 0,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-04T15:36:32.133235+00:00"
+        "generated_at": "2026-04-04T15:43:08.553746+00:00"
       },
       "narrative": null,
       "generated_date": "2026-04-04"
@@ -3664,7 +3664,7 @@
         "source_count": 0,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-04T15:36:32.133279+00:00"
+        "generated_at": "2026-04-04T15:43:08.553778+00:00"
       },
       "narrative": null,
       "generated_date": "2026-04-04"
@@ -3834,7 +3834,7 @@
         "source_count": 0,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-04T15:36:32.133305+00:00"
+        "generated_at": "2026-04-04T15:43:08.553794+00:00"
       },
       "narrative": null,
       "generated_date": "2026-04-04"
@@ -4004,7 +4004,7 @@
         "source_count": 0,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-04T15:36:32.133330+00:00"
+        "generated_at": "2026-04-04T15:43:08.553806+00:00"
       },
       "narrative": null,
       "generated_date": "2026-04-04"
@@ -4156,7 +4156,7 @@
         "source_count": 0,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-04T15:36:32.133499+00:00"
+        "generated_at": "2026-04-04T15:43:08.553922+00:00"
       },
       "narrative": null,
       "generated_date": "2026-04-04"
@@ -4326,7 +4326,7 @@
         "source_count": 0,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-04T15:36:32.133529+00:00"
+        "generated_at": "2026-04-04T15:43:08.553936+00:00"
       },
       "narrative": null,
       "generated_date": "2026-04-04"
@@ -4489,7 +4489,7 @@
         "source_count": 1,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-04T15:36:32.133584+00:00"
+        "generated_at": "2026-04-04T15:43:08.553950+00:00"
       },
       "narrative": null,
       "generated_date": "2026-04-04"
@@ -4659,7 +4659,7 @@
         "source_count": 0,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-04T15:36:32.133613+00:00"
+        "generated_at": "2026-04-04T15:43:08.553962+00:00"
       },
       "narrative": null,
       "generated_date": "2026-04-04"
@@ -4793,7 +4793,7 @@
         "source_count": 0,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-04T15:36:32.133635+00:00"
+        "generated_at": "2026-04-04T15:43:08.553972+00:00"
       },
       "narrative": null,
       "generated_date": "2026-04-04"
@@ -4953,7 +4953,7 @@
         "source_count": 0,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-04T15:36:32.133660+00:00"
+        "generated_at": "2026-04-04T15:43:08.553984+00:00"
       },
       "narrative": null,
       "generated_date": "2026-04-04"
@@ -5086,7 +5086,7 @@
         "source_count": 0,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-04T15:36:32.133679+00:00"
+        "generated_at": "2026-04-04T15:43:08.553995+00:00"
       },
       "narrative": null,
       "generated_date": "2026-04-04"
@@ -5246,7 +5246,7 @@
         "source_count": 0,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-04T15:36:32.133699+00:00"
+        "generated_at": "2026-04-04T15:43:08.554007+00:00"
       },
       "narrative": null,
       "generated_date": "2026-04-04"
@@ -5406,7 +5406,7 @@
         "source_count": 0,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-04T15:36:32.133718+00:00"
+        "generated_at": "2026-04-04T15:43:08.554019+00:00"
       },
       "narrative": null,
       "generated_date": "2026-04-04"
@@ -9447,7 +9447,7 @@
       "status": "success",
       "error": null,
       "items": 10,
-      "fetched_at": "2026-04-04T15:36:30.823236+00:00",
+      "fetched_at": "2026-04-04T15:43:06.892661+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -9470,7 +9470,7 @@
       "status": "success",
       "error": null,
       "items": 20,
-      "fetched_at": "2026-04-04T15:36:30.887798+00:00",
+      "fetched_at": "2026-04-04T15:43:06.974809+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -9493,7 +9493,7 @@
       "status": "success",
       "error": null,
       "items": 20,
-      "fetched_at": "2026-04-04T15:36:31.138371+00:00",
+      "fetched_at": "2026-04-04T15:43:07.270830+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -9515,7 +9515,7 @@
       "status": "success",
       "error": null,
       "items": 10,
-      "fetched_at": "2026-04-04T15:36:31.290364+00:00",
+      "fetched_at": "2026-04-04T15:43:07.407319+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -9537,7 +9537,7 @@
       "status": "success",
       "error": null,
       "items": 20,
-      "fetched_at": "2026-04-04T15:36:31.431348+00:00",
+      "fetched_at": "2026-04-04T15:43:07.759798+00:00",
       "source_type": "industry",
       "reliability": 3,
       "topics": [
@@ -9559,7 +9559,7 @@
       "status": "partial",
       "error": "Feed returned 0 usable items",
       "items": 0,
-      "fetched_at": "2026-04-04T15:36:31.590014+00:00",
+      "fetched_at": "2026-04-04T15:43:07.954542+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
