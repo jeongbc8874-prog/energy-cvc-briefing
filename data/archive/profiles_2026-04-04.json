@@ -1,25 +1,870 @@
 {
   "date": "2026-04-04",
-  "generated_at": "2026-04-04T15:07:10.084540+00:00",
-  "company_count": 1,
+  "generated_at": "2026-04-04T15:21:08.410208+00:00",
+  "company_count": 13,
   "portfolio_summary": {
     "as_of": "2026-04-04",
-    "total_companies": 1,
+    "total_companies": 13,
     "stage_distribution": {
-      "Lab": 1
+      "Lab": 13
     },
     "sector_distribution": {
-      "ess": 1
+      "grid_sw": 3,
+      "marine_fc": 3,
+      "ess": 4,
+      "hydrogen": 3
     },
     "ttr_distribution": {
-      "long_term": 1
+      "long_term": 13
     },
-    "total_critical_gaps": 1,
+    "total_critical_gaps": 13,
     "fuzzy_engine": "difflib",
     "high_signal_companies": [],
     "concern_companies": []
   },
   "companies": {
+    "c_gridwiz": {
+      "company_id": "c_gridwiz",
+      "name": "그리드위즈",
+      "sector": "grid_sw",
+      "stage": "lab",
+      "stage_label": "Lab",
+      "country": "KR",
+      "description": "KPX-certified VPP/DR platform operator. First commercial contracts with KEPCO underway. CFO hired Q4 2025.",
+      "funding_history": [],
+      "signals": [],
+      "critical_gaps": [
+        {
+          "rule_id": "no_contract",
+          "gap_type": "No Commercial Contract",
+          "severity": "critical",
+          "memo": "No binding commercial agreement on record. All revenue is hypothetical.",
+          "status": "new",
+          "first_seen": "2026-04-04",
+          "last_seen": "2026-04-04"
+        },
+        {
+          "rule_id": "no_cert",
+          "gap_type": "No Third-Party Certification",
+          "severity": "high",
+          "memo": "No independent certification (DNV GL, TÜV, KPX, UL). Required for regulated procurement.",
+          "status": "new",
+          "first_seen": "2026-04-04",
+          "last_seen": "2026-04-04"
+        },
+        {
+          "rule_id": "no_buyer",
+          "gap_type": "No Named Strategic Buyer",
+          "severity": "high",
+          "memo": "No named strategic buyer in any signal. Demand-side validation absent.",
+          "status": "new",
+          "first_seen": "2026-04-04",
+          "last_seen": "2026-04-04"
+        },
+        {
+          "rule_id": "no_deploy",
+          "gap_type": "No Deployment / Go-Live",
+          "severity": "medium",
+          "memo": "No operational deployment confirmed. TRL-9 in commercial setting unverified.",
+          "status": "new",
+          "first_seen": "2026-04-04",
+          "last_seen": "2026-04-04"
+        }
+      ],
+      "buyer_activity": [],
+      "missing_evidence": [
+        "No Commercial Contract",
+        "No Third-Party Certification",
+        "No Named Strategic Buyer",
+        "No Deployment / Go-Live"
+      ],
+      "ttr": "long_term",
+      "last_updated": "2026-04-04",
+      "hq": "서울, KR",
+      "founded": 2016,
+      "tags": [
+        "비상장",
+        "VPP",
+        "KPX인증",
+        "Series-B"
+      ],
+      "known_investors": [
+        "한국투자파트너스",
+        "LS일렉트릭"
+      ],
+      "investor_type": "Strategic/CVC",
+      "signal_count": 0,
+      "signal_events": [],
+      "high_count": 0,
+      "neg_count": 0,
+      "type_counts": {},
+      "pattern": {
+        "id": "low_density",
+        "label": "Insufficient Signal",
+        "color": "#A8A8A8",
+        "memo": "Signal density insufficient for pattern recognition. Primary research required."
+      },
+      "stage_color": "#6E6E6E",
+      "stage_desc": "Limited public signal. Company at lab/early stage or undisclosed.",
+      "ttr_color": "#6E6E6E",
+      "investment_score": {
+        "total_score": 0,
+        "max_possible": 10,
+        "interpretation": "Insufficient",
+        "rationale": "Insufficient evidence to assess. Primary research required.",
+        "as_of": "2026-04-04"
+      },
+      "next_step": {
+        "next": "Pilot",
+        "gate": "Named third-party pilot or government grant award",
+        "current_stage": "Lab",
+        "sector_gate": "KPX / FERC / ENTSO-E market certification + named contract",
+        "top_blockers": [
+          {
+            "gap_type": "No Commercial Contract",
+            "severity": "critical"
+          },
+          {
+            "gap_type": "No Third-Party Certification",
+            "severity": "high"
+          },
+          {
+            "gap_type": "No Named Strategic Buyer",
+            "severity": "high"
+          }
+        ]
+      },
+      "sector_rulebook": {
+        "key_gate": "Grid operator certification (KPX, FERC, ENTSO-E) + first recurring revenue contract",
+        "commercial_threshold": "Multi-year framework contract with named utility/TSO",
+        "policy_driver": "FERC 2222 (US), EU Flexibility Markets, KPX 보조서비스 제도 개편",
+        "red_flags": [
+          "Single utility dependency",
+          "No API/integration layer",
+          "Vertical incumbent competition (Siemens, GE)"
+        ],
+        "positive_signals": [
+          "KPX/FERC certified",
+          "Multi-utility framework",
+          "CFO hire + international BD"
+        ]
+      },
+      "insight": {
+        "observed_facts": [],
+        "matched_pattern": "Insufficient signal. Primary research required.",
+        "may_indicate": [
+          "No pattern without events"
+        ],
+        "missing": [
+          "No public events ingested"
+        ],
+        "confidence": "Low",
+        "next_check": "Direct outreach recommended.",
+        "event_count": 0,
+        "high_signal": 0
+      },
+      "first_seen": "2026-04-04",
+      "_data_integrity": "수치(금액, 용량, 일정)는 출처 명시된 것만 기록. 'not disclosed'는 공개 정보 없음을 의미. 외부 인용 전 반드시 원문(보도자료/DART/SEC 공시) 검증 필요."
+    },
+    "c_sixtyhertz": {
+      "company_id": "c_sixtyhertz",
+      "name": "식스티헤르츠",
+      "sector": "grid_sw",
+      "stage": "lab",
+      "stage_label": "Lab",
+      "country": "KR",
+      "description": "AI-powered renewable energy forecasting. KEPCO 3-year contract. Kakao Ventures Series A. 98.3% accuracy claim.",
+      "funding_history": [],
+      "signals": [],
+      "critical_gaps": [
+        {
+          "rule_id": "no_contract",
+          "gap_type": "No Commercial Contract",
+          "severity": "critical",
+          "memo": "No binding commercial agreement on record. All revenue is hypothetical.",
+          "status": "new",
+          "first_seen": "2026-04-04",
+          "last_seen": "2026-04-04"
+        },
+        {
+          "rule_id": "no_cert",
+          "gap_type": "No Third-Party Certification",
+          "severity": "high",
+          "memo": "No independent certification (DNV GL, TÜV, KPX, UL). Required for regulated procurement.",
+          "status": "new",
+          "first_seen": "2026-04-04",
+          "last_seen": "2026-04-04"
+        },
+        {
+          "rule_id": "no_buyer",
+          "gap_type": "No Named Strategic Buyer",
+          "severity": "high",
+          "memo": "No named strategic buyer in any signal. Demand-side validation absent.",
+          "status": "new",
+          "first_seen": "2026-04-04",
+          "last_seen": "2026-04-04"
+        },
+        {
+          "rule_id": "no_deploy",
+          "gap_type": "No Deployment / Go-Live",
+          "severity": "medium",
+          "memo": "No operational deployment confirmed. TRL-9 in commercial setting unverified.",
+          "status": "new",
+          "first_seen": "2026-04-04",
+          "last_seen": "2026-04-04"
+        }
+      ],
+      "buyer_activity": [],
+      "missing_evidence": [
+        "No Commercial Contract",
+        "No Third-Party Certification",
+        "No Named Strategic Buyer",
+        "No Deployment / Go-Live"
+      ],
+      "ttr": "long_term",
+      "last_updated": "2026-04-04",
+      "hq": "서울, KR",
+      "founded": 2018,
+      "tags": [
+        "비상장",
+        "AI예측",
+        "Series-A"
+      ],
+      "known_investors": [
+        "카카오벤처스",
+        "소프트뱅크벤처스"
+      ],
+      "investor_type": "VC",
+      "signal_count": 0,
+      "signal_events": [],
+      "high_count": 0,
+      "neg_count": 0,
+      "type_counts": {},
+      "pattern": {
+        "id": "low_density",
+        "label": "Insufficient Signal",
+        "color": "#A8A8A8",
+        "memo": "Signal density insufficient for pattern recognition. Primary research required."
+      },
+      "stage_color": "#6E6E6E",
+      "stage_desc": "Limited public signal. Company at lab/early stage or undisclosed.",
+      "ttr_color": "#6E6E6E",
+      "investment_score": {
+        "total_score": 0,
+        "max_possible": 10,
+        "interpretation": "Insufficient",
+        "rationale": "Insufficient evidence to assess. Primary research required.",
+        "as_of": "2026-04-04"
+      },
+      "next_step": {
+        "next": "Pilot",
+        "gate": "Named third-party pilot or government grant award",
+        "current_stage": "Lab",
+        "sector_gate": "KPX / FERC / ENTSO-E market certification + named contract",
+        "top_blockers": [
+          {
+            "gap_type": "No Commercial Contract",
+            "severity": "critical"
+          },
+          {
+            "gap_type": "No Third-Party Certification",
+            "severity": "high"
+          },
+          {
+            "gap_type": "No Named Strategic Buyer",
+            "severity": "high"
+          }
+        ]
+      },
+      "sector_rulebook": {
+        "key_gate": "Grid operator certification (KPX, FERC, ENTSO-E) + first recurring revenue contract",
+        "commercial_threshold": "Multi-year framework contract with named utility/TSO",
+        "policy_driver": "FERC 2222 (US), EU Flexibility Markets, KPX 보조서비스 제도 개편",
+        "red_flags": [
+          "Single utility dependency",
+          "No API/integration layer",
+          "Vertical incumbent competition (Siemens, GE)"
+        ],
+        "positive_signals": [
+          "KPX/FERC certified",
+          "Multi-utility framework",
+          "CFO hire + international BD"
+        ]
+      },
+      "insight": {
+        "observed_facts": [],
+        "matched_pattern": "Insufficient signal. Primary research required.",
+        "may_indicate": [
+          "No pattern without events"
+        ],
+        "missing": [
+          "No public events ingested"
+        ],
+        "confidence": "Low",
+        "next_check": "Direct outreach recommended.",
+        "event_count": 0,
+        "high_signal": 0
+      },
+      "first_seen": "2026-04-04",
+      "_data_integrity": "수치(금액, 용량, 일정)는 출처 명시된 것만 기록. 'not disclosed'는 공개 정보 없음을 의미. 외부 인용 전 반드시 원문(보도자료/DART/SEC 공시) 검증 필요."
+    },
+    "c_vincen": {
+      "company_id": "c_vincen",
+      "name": "빈센",
+      "sector": "marine_fc",
+      "stage": "lab",
+      "stage_label": "Lab",
+      "country": "KR",
+      "description": "Marine hydrogen PEM fuel cell. HD HHI MOU. 1MW pilot aboard test vessel Busan port. Pre-DNV certification.",
+      "funding_history": [],
+      "signals": [],
+      "critical_gaps": [
+        {
+          "rule_id": "no_contract",
+          "gap_type": "No Commercial Contract",
+          "severity": "critical",
+          "memo": "No binding commercial agreement on record. All revenue is hypothetical.",
+          "status": "new",
+          "first_seen": "2026-04-04",
+          "last_seen": "2026-04-04"
+        },
+        {
+          "rule_id": "no_cert",
+          "gap_type": "No Third-Party Certification",
+          "severity": "high",
+          "memo": "No independent certification (DNV GL, TÜV, KPX, UL). Required for regulated procurement.",
+          "status": "new",
+          "first_seen": "2026-04-04",
+          "last_seen": "2026-04-04"
+        },
+        {
+          "rule_id": "no_buyer",
+          "gap_type": "No Named Strategic Buyer",
+          "severity": "high",
+          "memo": "No named strategic buyer in any signal. Demand-side validation absent.",
+          "status": "new",
+          "first_seen": "2026-04-04",
+          "last_seen": "2026-04-04"
+        },
+        {
+          "rule_id": "no_deploy",
+          "gap_type": "No Deployment / Go-Live",
+          "severity": "medium",
+          "memo": "No operational deployment confirmed. TRL-9 in commercial setting unverified.",
+          "status": "new",
+          "first_seen": "2026-04-04",
+          "last_seen": "2026-04-04"
+        }
+      ],
+      "buyer_activity": [],
+      "missing_evidence": [
+        "No Commercial Contract",
+        "No Third-Party Certification",
+        "No Named Strategic Buyer",
+        "No Deployment / Go-Live"
+      ],
+      "ttr": "long_term",
+      "last_updated": "2026-04-04",
+      "hq": "부산, KR",
+      "founded": 2019,
+      "tags": [
+        "비상장",
+        "IMO2030",
+        "PEM",
+        "Series-A"
+      ],
+      "known_investors": [
+        "산업부 R&D",
+        "HD한국조선해양"
+      ],
+      "investor_type": "Strategic/CVC",
+      "signal_count": 0,
+      "signal_events": [],
+      "high_count": 0,
+      "neg_count": 0,
+      "type_counts": {},
+      "pattern": {
+        "id": "low_density",
+        "label": "Insufficient Signal",
+        "color": "#A8A8A8",
+        "memo": "Signal density insufficient for pattern recognition. Primary research required."
+      },
+      "stage_color": "#6E6E6E",
+      "stage_desc": "Limited public signal. Company at lab/early stage or undisclosed.",
+      "ttr_color": "#6E6E6E",
+      "investment_score": {
+        "total_score": 0,
+        "max_possible": 10,
+        "interpretation": "Insufficient",
+        "rationale": "Insufficient evidence to assess. Primary research required.",
+        "as_of": "2026-04-04"
+      },
+      "next_step": {
+        "next": "Pilot",
+        "gate": "Named third-party pilot or government grant award",
+        "current_stage": "Lab",
+        "sector_gate": "DNV GL or ClassNK Type Approval Certificate",
+        "top_blockers": [
+          {
+            "gap_type": "No Commercial Contract",
+            "severity": "critical"
+          },
+          {
+            "gap_type": "No Third-Party Certification",
+            "severity": "high"
+          },
+          {
+            "gap_type": "No Named Strategic Buyer",
+            "severity": "high"
+          }
+        ]
+      },
+      "sector_rulebook": {
+        "key_gate": "DNV GL or ClassNK class approval (Type Approval Certificate)",
+        "commercial_threshold": "Named shipyard contract post-certification (newbuild or retrofit)",
+        "policy_driver": "IMO CII 2024, EU ETS Ships 2024, IMO 2030 GHG Strategy",
+        "red_flags": [
+          "No DNV GL path defined",
+          "Hydrogen supply chain unresolved",
+          "Single fuel-type dependency"
+        ],
+        "positive_signals": [
+          "DNV GL/ClassNK type approval",
+          "Shipyard newbuild specification",
+          "Port bunkering infrastructure co-development"
+        ]
+      },
+      "insight": {
+        "observed_facts": [],
+        "matched_pattern": "Insufficient signal. Primary research required.",
+        "may_indicate": [
+          "No pattern without events"
+        ],
+        "missing": [
+          "No public events ingested"
+        ],
+        "confidence": "Low",
+        "next_check": "Direct outreach recommended.",
+        "event_count": 0,
+        "high_signal": 0
+      },
+      "first_seen": "2026-04-04",
+      "_data_integrity": "수치(금액, 용량, 일정)는 출처 명시된 것만 기록. 'not disclosed'는 공개 정보 없음을 의미. 외부 인용 전 반드시 원문(보도자료/DART/SEC 공시) 검증 필요."
+    },
+    "c_standard_e": {
+      "company_id": "c_standard_e",
+      "name": "스탠다드에너지",
+      "sector": "ess",
+      "stage": "lab",
+      "stage_label": "Lab",
+      "country": "KR",
+      "description": "Vanadium redox flow battery. Hanwha Solutions Series B. DOE grant application pending. 100kWh 1,000h endurance test completed.",
+      "funding_history": [],
+      "signals": [],
+      "critical_gaps": [
+        {
+          "rule_id": "no_contract",
+          "gap_type": "No Commercial Contract",
+          "severity": "critical",
+          "memo": "No binding commercial agreement on record. All revenue is hypothetical.",
+          "status": "new",
+          "first_seen": "2026-04-04",
+          "last_seen": "2026-04-04"
+        },
+        {
+          "rule_id": "no_cert",
+          "gap_type": "No Third-Party Certification",
+          "severity": "high",
+          "memo": "No independent certification (DNV GL, TÜV, KPX, UL). Required for regulated procurement.",
+          "status": "new",
+          "first_seen": "2026-04-04",
+          "last_seen": "2026-04-04"
+        },
+        {
+          "rule_id": "no_buyer",
+          "gap_type": "No Named Strategic Buyer",
+          "severity": "high",
+          "memo": "No named strategic buyer in any signal. Demand-side validation absent.",
+          "status": "new",
+          "first_seen": "2026-04-04",
+          "last_seen": "2026-04-04"
+        },
+        {
+          "rule_id": "no_deploy",
+          "gap_type": "No Deployment / Go-Live",
+          "severity": "medium",
+          "memo": "No operational deployment confirmed. TRL-9 in commercial setting unverified.",
+          "status": "new",
+          "first_seen": "2026-04-04",
+          "last_seen": "2026-04-04"
+        }
+      ],
+      "buyer_activity": [],
+      "missing_evidence": [
+        "No Commercial Contract",
+        "No Third-Party Certification",
+        "No Named Strategic Buyer",
+        "No Deployment / Go-Live"
+      ],
+      "ttr": "long_term",
+      "last_updated": "2026-04-04",
+      "hq": "서울, KR",
+      "founded": 2015,
+      "tags": [
+        "비상장",
+        "VRFB",
+        "Series-B"
+      ],
+      "known_investors": [
+        "한화솔루션",
+        "KDB산업은행"
+      ],
+      "investor_type": "Strategic/CVC",
+      "signal_count": 0,
+      "signal_events": [],
+      "high_count": 0,
+      "neg_count": 0,
+      "type_counts": {},
+      "pattern": {
+        "id": "low_density",
+        "label": "Insufficient Signal",
+        "color": "#A8A8A8",
+        "memo": "Signal density insufficient for pattern recognition. Primary research required."
+      },
+      "stage_color": "#6E6E6E",
+      "stage_desc": "Limited public signal. Company at lab/early stage or undisclosed.",
+      "ttr_color": "#6E6E6E",
+      "investment_score": {
+        "total_score": 0,
+        "max_possible": 10,
+        "interpretation": "Insufficient",
+        "rationale": "Insufficient evidence to assess. Primary research required.",
+        "as_of": "2026-04-04"
+      },
+      "next_step": {
+        "next": "Pilot",
+        "gate": "Named third-party pilot or government grant award",
+        "current_stage": "Lab",
+        "sector_gate": "UL 9540 / IEC 62619 + grid interconnection agreement",
+        "top_blockers": [
+          {
+            "gap_type": "No Commercial Contract",
+            "severity": "critical"
+          },
+          {
+            "gap_type": "No Third-Party Certification",
+            "severity": "high"
+          },
+          {
+            "gap_type": "No Named Strategic Buyer",
+            "severity": "high"
+          }
+        ]
+      },
+      "sector_rulebook": {
+        "key_gate": "Third-party certification (UL 9540, IEC 62619) + grid interconnection agreement",
+        "commercial_threshold": "First offtake or supply agreement with named utility/industrial",
+        "policy_driver": "IRA Storage ITC (US), EU Battery Regulation, KR RPS ESS 가중치",
+        "red_flags": [
+          "Grant-only (no offtaker)",
+          "Li-ion commodity competition",
+          "Single geography exposure"
+        ],
+        "positive_signals": [
+          "Utility framework contract",
+          "Hyperscaler pilot with CFE mandate",
+          "Co-location with offshore wind",
+          "DOE grant + offtaker co-investment"
+        ]
+      },
+      "insight": {
+        "observed_facts": [],
+        "matched_pattern": "Insufficient signal. Primary research required.",
+        "may_indicate": [
+          "No pattern without events"
+        ],
+        "missing": [
+          "No public events ingested"
+        ],
+        "confidence": "Low",
+        "next_check": "Direct outreach recommended.",
+        "event_count": 0,
+        "high_signal": 0
+      },
+      "first_seen": "2026-04-04",
+      "_data_integrity": "수치(금액, 용량, 일정)는 출처 명시된 것만 기록. 'not disclosed'는 공개 정보 없음을 의미. 외부 인용 전 반드시 원문(보도자료/DART/SEC 공시) 검증 필요."
+    },
+    "c_hylium": {
+      "company_id": "c_hylium",
+      "name": "하이리움산업",
+      "sector": "hydrogen",
+      "stage": "lab",
+      "stage_label": "Lab",
+      "country": "KR",
+      "description": "First domestic liquid hydrogen plant operational. Hyundai Motor supply chain registration complete. Ministry of Industry core company designation.",
+      "funding_history": [],
+      "signals": [],
+      "critical_gaps": [
+        {
+          "rule_id": "no_contract",
+          "gap_type": "No Commercial Contract",
+          "severity": "critical",
+          "memo": "No binding commercial agreement on record. All revenue is hypothetical.",
+          "status": "new",
+          "first_seen": "2026-04-04",
+          "last_seen": "2026-04-04"
+        },
+        {
+          "rule_id": "no_buyer",
+          "gap_type": "No Named Strategic Buyer",
+          "severity": "high",
+          "memo": "No named strategic buyer in any signal. Demand-side validation absent.",
+          "status": "new",
+          "first_seen": "2026-04-04",
+          "last_seen": "2026-04-04"
+        },
+        {
+          "rule_id": "no_deploy",
+          "gap_type": "No Deployment / Go-Live",
+          "severity": "medium",
+          "memo": "No operational deployment confirmed. TRL-9 in commercial setting unverified.",
+          "status": "new",
+          "first_seen": "2026-04-04",
+          "last_seen": "2026-04-04"
+        }
+      ],
+      "buyer_activity": [],
+      "missing_evidence": [
+        "No Commercial Contract",
+        "No Named Strategic Buyer",
+        "No Deployment / Go-Live"
+      ],
+      "ttr": "long_term",
+      "last_updated": "2026-04-04",
+      "hq": "경기, KR",
+      "founded": 2014,
+      "tags": [
+        "비상장",
+        "LH2",
+        "Series-B"
+      ],
+      "known_investors": [
+        "현대기술투자",
+        "산업부"
+      ],
+      "investor_type": "Strategic/CVC",
+      "signal_count": 0,
+      "signal_events": [],
+      "high_count": 0,
+      "neg_count": 0,
+      "type_counts": {},
+      "pattern": {
+        "id": "low_density",
+        "label": "Insufficient Signal",
+        "color": "#A8A8A8",
+        "memo": "Signal density insufficient for pattern recognition. Primary research required."
+      },
+      "stage_color": "#6E6E6E",
+      "stage_desc": "Limited public signal. Company at lab/early stage or undisclosed.",
+      "ttr_color": "#6E6E6E",
+      "investment_score": {
+        "total_score": 0,
+        "max_possible": 10,
+        "interpretation": "Insufficient",
+        "rationale": "Insufficient evidence to assess. Primary research required.",
+        "as_of": "2026-04-04"
+      },
+      "next_step": {
+        "next": "Pilot",
+        "gate": "Named third-party pilot or government grant award",
+        "current_stage": "Lab",
+        "sector_gate": "Named industrial offtaker at contracted price (not MOU)",
+        "top_blockers": [
+          {
+            "gap_type": "No Commercial Contract",
+            "severity": "critical"
+          },
+          {
+            "gap_type": "No Named Strategic Buyer",
+            "severity": "high"
+          }
+        ]
+      },
+      "sector_rulebook": {
+        "key_gate": "Named offtaker at contracted price (not MOU) + permits",
+        "commercial_threshold": "First commercial delivery or long-term supply agreement (>3 years)",
+        "policy_driver": "EU Green Hydrogen Standard, US Inflation Reduction Act §45V, MOTIE 수소경제 로드맵",
+        "red_flags": [
+          "Grant-only (no offtaker)",
+          "LCOH without credible cost-down pathway to offtaker-viable price",
+          "No offtake contract"
+        ],
+        "positive_signals": [
+          "Named industrial offtaker + contracted price",
+          "Port/bunkering infrastructure connection",
+          "EU H2 Bank award"
+        ]
+      },
+      "insight": {
+        "observed_facts": [],
+        "matched_pattern": "Insufficient signal. Primary research required.",
+        "may_indicate": [
+          "No pattern without events"
+        ],
+        "missing": [
+          "No public events ingested"
+        ],
+        "confidence": "Low",
+        "next_check": "Direct outreach recommended.",
+        "event_count": 0,
+        "high_signal": 0
+      },
+      "first_seen": "2026-04-04",
+      "_data_integrity": "수치(금액, 용량, 일정)는 출처 명시된 것만 기록. 'not disclosed'는 공개 정보 없음을 의미. 외부 인용 전 반드시 원문(보도자료/DART/SEC 공시) 검증 필요."
+    },
+    "c_cs_energy": {
+      "company_id": "c_cs_energy",
+      "name": "씨에스에너지",
+      "sector": "ess",
+      "stage": "lab",
+      "stage_label": "Lab",
+      "country": "KR",
+      "description": "ESS system integrator. SK Innovation supply chain. Ulsan 100MWh reference. ISO 9001 certified.",
+      "funding_history": [],
+      "signals": [],
+      "critical_gaps": [
+        {
+          "rule_id": "no_contract",
+          "gap_type": "No Commercial Contract",
+          "severity": "critical",
+          "memo": "No binding commercial agreement on record. All revenue is hypothetical.",
+          "status": "new",
+          "first_seen": "2026-04-04",
+          "last_seen": "2026-04-04"
+        },
+        {
+          "rule_id": "no_cert",
+          "gap_type": "No Third-Party Certification",
+          "severity": "high",
+          "memo": "No independent certification (DNV GL, TÜV, KPX, UL). Required for regulated procurement.",
+          "status": "new",
+          "first_seen": "2026-04-04",
+          "last_seen": "2026-04-04"
+        },
+        {
+          "rule_id": "no_buyer",
+          "gap_type": "No Named Strategic Buyer",
+          "severity": "high",
+          "memo": "No named strategic buyer in any signal. Demand-side validation absent.",
+          "status": "new",
+          "first_seen": "2026-04-04",
+          "last_seen": "2026-04-04"
+        },
+        {
+          "rule_id": "no_deploy",
+          "gap_type": "No Deployment / Go-Live",
+          "severity": "medium",
+          "memo": "No operational deployment confirmed. TRL-9 in commercial setting unverified.",
+          "status": "new",
+          "first_seen": "2026-04-04",
+          "last_seen": "2026-04-04"
+        }
+      ],
+      "buyer_activity": [],
+      "missing_evidence": [
+        "No Commercial Contract",
+        "No Third-Party Certification",
+        "No Named Strategic Buyer",
+        "No Deployment / Go-Live"
+      ],
+      "ttr": "long_term",
+      "last_updated": "2026-04-04",
+      "hq": "울산, KR",
+      "founded": 2013,
+      "tags": [
+        "비상장",
+        "ESS-SI",
+        "Series-A"
+      ],
+      "known_investors": [
+        "SK이노베이션",
+        "중소기업은행"
+      ],
+      "investor_type": "Strategic/CVC",
+      "signal_count": 0,
+      "signal_events": [],
+      "high_count": 0,
+      "neg_count": 0,
+      "type_counts": {},
+      "pattern": {
+        "id": "low_density",
+        "label": "Insufficient Signal",
+        "color": "#A8A8A8",
+        "memo": "Signal density insufficient for pattern recognition. Primary research required."
+      },
+      "stage_color": "#6E6E6E",
+      "stage_desc": "Limited public signal. Company at lab/early stage or undisclosed.",
+      "ttr_color": "#6E6E6E",
+      "investment_score": {
+        "total_score": 0,
+        "max_possible": 10,
+        "interpretation": "Insufficient",
+        "rationale": "Insufficient evidence to assess. Primary research required.",
+        "as_of": "2026-04-04"
+      },
+      "next_step": {
+        "next": "Pilot",
+        "gate": "Named third-party pilot or government grant award",
+        "current_stage": "Lab",
+        "sector_gate": "UL 9540 / IEC 62619 + grid interconnection agreement",
+        "top_blockers": [
+          {
+            "gap_type": "No Commercial Contract",
+            "severity": "critical"
+          },
+          {
+            "gap_type": "No Third-Party Certification",
+            "severity": "high"
+          },
+          {
+            "gap_type": "No Named Strategic Buyer",
+            "severity": "high"
+          }
+        ]
+      },
+      "sector_rulebook": {
+        "key_gate": "Third-party certification (UL 9540, IEC 62619) + grid interconnection agreement",
+        "commercial_threshold": "First offtake or supply agreement with named utility/industrial",
+        "policy_driver": "IRA Storage ITC (US), EU Battery Regulation, KR RPS ESS 가중치",
+        "red_flags": [
+          "Grant-only (no offtaker)",
+          "Li-ion commodity competition",
+          "Single geography exposure"
+        ],
+        "positive_signals": [
+          "Utility framework contract",
+          "Hyperscaler pilot with CFE mandate",
+          "Co-location with offshore wind",
+          "DOE grant + offtaker co-investment"
+        ]
+      },
+      "insight": {
+        "observed_facts": [],
+        "matched_pattern": "Insufficient signal. Primary research required.",
+        "may_indicate": [
+          "No pattern without events"
+        ],
+        "missing": [
+          "No public events ingested"
+        ],
+        "confidence": "Low",
+        "next_check": "Direct outreach recommended.",
+        "event_count": 0,
+        "high_signal": 0
+      },
+      "first_seen": "2026-04-04",
+      "_data_integrity": "수치(금액, 용량, 일정)는 출처 명시된 것만 기록. 'not disclosed'는 공개 정보 없음을 의미. 외부 인용 전 반드시 원문(보도자료/DART/SEC 공시) 검증 필요."
+    },
     "c_form_energy": {
       "company_id": "c_form_energy",
       "name": "Form Energy",
@@ -183,6 +1028,835 @@
         "event_count": 1,
         "high_signal": 0,
         "note": "Generated from existing events only. No data invented."
+      },
+      "first_seen": "2026-04-04",
+      "_data_integrity": "수치(금액, 용량, 일정)는 출처 명시된 것만 기록. 'not disclosed'는 공개 정보 없음을 의미. 외부 인용 전 반드시 원문(보도자료/DART/SEC 공시) 검증 필요."
+    },
+    "c_autogrid": {
+      "company_id": "c_autogrid",
+      "name": "AutoGrid",
+      "sector": "grid_sw",
+      "stage": "lab",
+      "stage_label": "Lab",
+      "country": "US",
+      "description": "VPP/Energy Intelligence Platform. Engie/E.ON/Shell investors. Commercial in 20+ countries. Singapore DC pilot underway.",
+      "funding_history": [],
+      "signals": [],
+      "critical_gaps": [
+        {
+          "rule_id": "no_contract",
+          "gap_type": "No Commercial Contract",
+          "severity": "critical",
+          "memo": "No binding commercial agreement on record. All revenue is hypothetical.",
+          "status": "new",
+          "first_seen": "2026-04-04",
+          "last_seen": "2026-04-04"
+        },
+        {
+          "rule_id": "no_cert",
+          "gap_type": "No Third-Party Certification",
+          "severity": "high",
+          "memo": "No independent certification (DNV GL, TÜV, KPX, UL). Required for regulated procurement.",
+          "status": "new",
+          "first_seen": "2026-04-04",
+          "last_seen": "2026-04-04"
+        },
+        {
+          "rule_id": "no_buyer",
+          "gap_type": "No Named Strategic Buyer",
+          "severity": "high",
+          "memo": "No named strategic buyer in any signal. Demand-side validation absent.",
+          "status": "new",
+          "first_seen": "2026-04-04",
+          "last_seen": "2026-04-04"
+        },
+        {
+          "rule_id": "no_deploy",
+          "gap_type": "No Deployment / Go-Live",
+          "severity": "medium",
+          "memo": "No operational deployment confirmed. TRL-9 in commercial setting unverified.",
+          "status": "new",
+          "first_seen": "2026-04-04",
+          "last_seen": "2026-04-04"
+        }
+      ],
+      "buyer_activity": [],
+      "missing_evidence": [
+        "No Commercial Contract",
+        "No Third-Party Certification",
+        "No Named Strategic Buyer",
+        "No Deployment / Go-Live"
+      ],
+      "ttr": "long_term",
+      "last_updated": "2026-04-04",
+      "hq": "Redwood City CA, US",
+      "founded": 2011,
+      "tags": [
+        "비상장",
+        "VPP",
+        "Series-D"
+      ],
+      "known_investors": [
+        "Engie",
+        "E.ON",
+        "Shell"
+      ],
+      "investor_type": "Growth",
+      "signal_count": 0,
+      "signal_events": [],
+      "high_count": 0,
+      "neg_count": 0,
+      "type_counts": {},
+      "pattern": {
+        "id": "low_density",
+        "label": "Insufficient Signal",
+        "color": "#A8A8A8",
+        "memo": "Signal density insufficient for pattern recognition. Primary research required."
+      },
+      "stage_color": "#6E6E6E",
+      "stage_desc": "Limited public signal. Company at lab/early stage or undisclosed.",
+      "ttr_color": "#6E6E6E",
+      "investment_score": {
+        "total_score": 0,
+        "max_possible": 10,
+        "interpretation": "Insufficient",
+        "rationale": "Insufficient evidence to assess. Primary research required.",
+        "as_of": "2026-04-04"
+      },
+      "next_step": {
+        "next": "Pilot",
+        "gate": "Named third-party pilot or government grant award",
+        "current_stage": "Lab",
+        "sector_gate": "KPX / FERC / ENTSO-E market certification + named contract",
+        "top_blockers": [
+          {
+            "gap_type": "No Commercial Contract",
+            "severity": "critical"
+          },
+          {
+            "gap_type": "No Third-Party Certification",
+            "severity": "high"
+          },
+          {
+            "gap_type": "No Named Strategic Buyer",
+            "severity": "high"
+          }
+        ]
+      },
+      "sector_rulebook": {
+        "key_gate": "Grid operator certification (KPX, FERC, ENTSO-E) + first recurring revenue contract",
+        "commercial_threshold": "Multi-year framework contract with named utility/TSO",
+        "policy_driver": "FERC 2222 (US), EU Flexibility Markets, KPX 보조서비스 제도 개편",
+        "red_flags": [
+          "Single utility dependency",
+          "No API/integration layer",
+          "Vertical incumbent competition (Siemens, GE)"
+        ],
+        "positive_signals": [
+          "KPX/FERC certified",
+          "Multi-utility framework",
+          "CFO hire + international BD"
+        ]
+      },
+      "insight": {
+        "observed_facts": [],
+        "matched_pattern": "Insufficient signal. Primary research required.",
+        "may_indicate": [
+          "No pattern without events"
+        ],
+        "missing": [
+          "No public events ingested"
+        ],
+        "confidence": "Low",
+        "next_check": "Direct outreach recommended.",
+        "event_count": 0,
+        "high_signal": 0
+      },
+      "first_seen": "2026-04-04",
+      "_data_integrity": "수치(금액, 용량, 일정)는 출처 명시된 것만 기록. 'not disclosed'는 공개 정보 없음을 의미. 외부 인용 전 반드시 원문(보도자료/DART/SEC 공시) 검증 필요."
+    },
+    "c_sunfire": {
+      "company_id": "c_sunfire",
+      "name": "Sunfire",
+      "sector": "hydrogen",
+      "stage": "lab",
+      "stage_label": "Lab",
+      "country": "DE",
+      "description": "SOEC electrolyzer. €215M raised. Carbon Direct capital management strategic. Supply agreements with multiple EU hydrogen projects.",
+      "funding_history": [],
+      "signals": [],
+      "critical_gaps": [
+        {
+          "rule_id": "no_contract",
+          "gap_type": "No Commercial Contract",
+          "severity": "critical",
+          "memo": "No binding commercial agreement on record. All revenue is hypothetical.",
+          "status": "new",
+          "first_seen": "2026-04-04",
+          "last_seen": "2026-04-04"
+        },
+        {
+          "rule_id": "no_buyer",
+          "gap_type": "No Named Strategic Buyer",
+          "severity": "high",
+          "memo": "No named strategic buyer in any signal. Demand-side validation absent.",
+          "status": "new",
+          "first_seen": "2026-04-04",
+          "last_seen": "2026-04-04"
+        },
+        {
+          "rule_id": "no_deploy",
+          "gap_type": "No Deployment / Go-Live",
+          "severity": "medium",
+          "memo": "No operational deployment confirmed. TRL-9 in commercial setting unverified.",
+          "status": "new",
+          "first_seen": "2026-04-04",
+          "last_seen": "2026-04-04"
+        }
+      ],
+      "buyer_activity": [],
+      "missing_evidence": [
+        "No Commercial Contract",
+        "No Named Strategic Buyer",
+        "No Deployment / Go-Live"
+      ],
+      "ttr": "long_term",
+      "last_updated": "2026-04-04",
+      "hq": "Dresden, DE",
+      "founded": 2010,
+      "tags": [
+        "비상장",
+        "SOEC",
+        "Series-E"
+      ],
+      "known_investors": [
+        "Carbon Direct",
+        "SMS Group",
+        "Neste"
+      ],
+      "investor_type": "Infrastructure/PF",
+      "signal_count": 0,
+      "signal_events": [],
+      "high_count": 0,
+      "neg_count": 0,
+      "type_counts": {},
+      "pattern": {
+        "id": "low_density",
+        "label": "Insufficient Signal",
+        "color": "#A8A8A8",
+        "memo": "Signal density insufficient for pattern recognition. Primary research required."
+      },
+      "stage_color": "#6E6E6E",
+      "stage_desc": "Limited public signal. Company at lab/early stage or undisclosed.",
+      "ttr_color": "#6E6E6E",
+      "investment_score": {
+        "total_score": 0,
+        "max_possible": 10,
+        "interpretation": "Insufficient",
+        "rationale": "Insufficient evidence to assess. Primary research required.",
+        "as_of": "2026-04-04"
+      },
+      "next_step": {
+        "next": "Pilot",
+        "gate": "Named third-party pilot or government grant award",
+        "current_stage": "Lab",
+        "sector_gate": "Named industrial offtaker at contracted price (not MOU)",
+        "top_blockers": [
+          {
+            "gap_type": "No Commercial Contract",
+            "severity": "critical"
+          },
+          {
+            "gap_type": "No Named Strategic Buyer",
+            "severity": "high"
+          }
+        ]
+      },
+      "sector_rulebook": {
+        "key_gate": "Named offtaker at contracted price (not MOU) + permits",
+        "commercial_threshold": "First commercial delivery or long-term supply agreement (>3 years)",
+        "policy_driver": "EU Green Hydrogen Standard, US Inflation Reduction Act §45V, MOTIE 수소경제 로드맵",
+        "red_flags": [
+          "Grant-only (no offtaker)",
+          "LCOH without credible cost-down pathway to offtaker-viable price",
+          "No offtake contract"
+        ],
+        "positive_signals": [
+          "Named industrial offtaker + contracted price",
+          "Port/bunkering infrastructure connection",
+          "EU H2 Bank award"
+        ]
+      },
+      "insight": {
+        "observed_facts": [],
+        "matched_pattern": "Insufficient signal. Primary research required.",
+        "may_indicate": [
+          "No pattern without events"
+        ],
+        "missing": [
+          "No public events ingested"
+        ],
+        "confidence": "Low",
+        "next_check": "Direct outreach recommended.",
+        "event_count": 0,
+        "high_signal": 0
+      },
+      "first_seen": "2026-04-04",
+      "_data_integrity": "수치(금액, 용량, 일정)는 출처 명시된 것만 기록. 'not disclosed'는 공개 정보 없음을 의미. 외부 인용 전 반드시 원문(보도자료/DART/SEC 공시) 검증 필요."
+    },
+    "c_amogy": {
+      "company_id": "c_amogy",
+      "name": "Amogy",
+      "sector": "marine_fc",
+      "stage": "lab",
+      "stage_label": "Lab",
+      "country": "US",
+      "description": "Ammonia-to-power marine fuel cell. Tug boat 1MW demo completed. Samsung Heavy Industries investor.",
+      "funding_history": [],
+      "signals": [],
+      "critical_gaps": [
+        {
+          "rule_id": "no_contract",
+          "gap_type": "No Commercial Contract",
+          "severity": "critical",
+          "memo": "No binding commercial agreement on record. All revenue is hypothetical.",
+          "status": "new",
+          "first_seen": "2026-04-04",
+          "last_seen": "2026-04-04"
+        },
+        {
+          "rule_id": "no_cert",
+          "gap_type": "No Third-Party Certification",
+          "severity": "high",
+          "memo": "No independent certification (DNV GL, TÜV, KPX, UL). Required for regulated procurement.",
+          "status": "new",
+          "first_seen": "2026-04-04",
+          "last_seen": "2026-04-04"
+        },
+        {
+          "rule_id": "no_buyer",
+          "gap_type": "No Named Strategic Buyer",
+          "severity": "high",
+          "memo": "No named strategic buyer in any signal. Demand-side validation absent.",
+          "status": "new",
+          "first_seen": "2026-04-04",
+          "last_seen": "2026-04-04"
+        },
+        {
+          "rule_id": "no_deploy",
+          "gap_type": "No Deployment / Go-Live",
+          "severity": "medium",
+          "memo": "No operational deployment confirmed. TRL-9 in commercial setting unverified.",
+          "status": "new",
+          "first_seen": "2026-04-04",
+          "last_seen": "2026-04-04"
+        }
+      ],
+      "buyer_activity": [],
+      "missing_evidence": [
+        "No Commercial Contract",
+        "No Third-Party Certification",
+        "No Named Strategic Buyer",
+        "No Deployment / Go-Live"
+      ],
+      "ttr": "long_term",
+      "last_updated": "2026-04-04",
+      "hq": "Brooklyn NY, US",
+      "founded": 2020,
+      "tags": [
+        "비상장",
+        "Ammonia-FC",
+        "Series-B"
+      ],
+      "known_investors": [
+        "Samsung Heavy Industries",
+        "SK Innovation",
+        "Aramco Ventures"
+      ],
+      "investor_type": "Strategic/CVC",
+      "signal_count": 0,
+      "signal_events": [],
+      "high_count": 0,
+      "neg_count": 0,
+      "type_counts": {},
+      "pattern": {
+        "id": "low_density",
+        "label": "Insufficient Signal",
+        "color": "#A8A8A8",
+        "memo": "Signal density insufficient for pattern recognition. Primary research required."
+      },
+      "stage_color": "#6E6E6E",
+      "stage_desc": "Limited public signal. Company at lab/early stage or undisclosed.",
+      "ttr_color": "#6E6E6E",
+      "investment_score": {
+        "total_score": 0,
+        "max_possible": 10,
+        "interpretation": "Insufficient",
+        "rationale": "Insufficient evidence to assess. Primary research required.",
+        "as_of": "2026-04-04"
+      },
+      "next_step": {
+        "next": "Pilot",
+        "gate": "Named third-party pilot or government grant award",
+        "current_stage": "Lab",
+        "sector_gate": "DNV GL or ClassNK Type Approval Certificate",
+        "top_blockers": [
+          {
+            "gap_type": "No Commercial Contract",
+            "severity": "critical"
+          },
+          {
+            "gap_type": "No Third-Party Certification",
+            "severity": "high"
+          },
+          {
+            "gap_type": "No Named Strategic Buyer",
+            "severity": "high"
+          }
+        ]
+      },
+      "sector_rulebook": {
+        "key_gate": "DNV GL or ClassNK class approval (Type Approval Certificate)",
+        "commercial_threshold": "Named shipyard contract post-certification (newbuild or retrofit)",
+        "policy_driver": "IMO CII 2024, EU ETS Ships 2024, IMO 2030 GHG Strategy",
+        "red_flags": [
+          "No DNV GL path defined",
+          "Hydrogen supply chain unresolved",
+          "Single fuel-type dependency"
+        ],
+        "positive_signals": [
+          "DNV GL/ClassNK type approval",
+          "Shipyard newbuild specification",
+          "Port bunkering infrastructure co-development"
+        ]
+      },
+      "insight": {
+        "observed_facts": [],
+        "matched_pattern": "Insufficient signal. Primary research required.",
+        "may_indicate": [
+          "No pattern without events"
+        ],
+        "missing": [
+          "No public events ingested"
+        ],
+        "confidence": "Low",
+        "next_check": "Direct outreach recommended.",
+        "event_count": 0,
+        "high_signal": 0
+      },
+      "first_seen": "2026-04-04",
+      "_data_integrity": "수치(금액, 용량, 일정)는 출처 명시된 것만 기록. 'not disclosed'는 공개 정보 없음을 의미. 외부 인용 전 반드시 원문(보도자료/DART/SEC 공시) 검증 필요."
+    },
+    "c_hysata": {
+      "company_id": "c_hysata",
+      "name": "Hysata",
+      "sector": "hydrogen",
+      "stage": "lab",
+      "stage_label": "Lab",
+      "country": "AU",
+      "description": "Capillary-fed electrolyzer. Claims lowest LCOH path to date. Fortescue Future Industries backed.",
+      "funding_history": [],
+      "signals": [],
+      "critical_gaps": [
+        {
+          "rule_id": "no_contract",
+          "gap_type": "No Commercial Contract",
+          "severity": "critical",
+          "memo": "No binding commercial agreement on record. All revenue is hypothetical.",
+          "status": "new",
+          "first_seen": "2026-04-04",
+          "last_seen": "2026-04-04"
+        },
+        {
+          "rule_id": "no_buyer",
+          "gap_type": "No Named Strategic Buyer",
+          "severity": "high",
+          "memo": "No named strategic buyer in any signal. Demand-side validation absent.",
+          "status": "new",
+          "first_seen": "2026-04-04",
+          "last_seen": "2026-04-04"
+        },
+        {
+          "rule_id": "no_deploy",
+          "gap_type": "No Deployment / Go-Live",
+          "severity": "medium",
+          "memo": "No operational deployment confirmed. TRL-9 in commercial setting unverified.",
+          "status": "new",
+          "first_seen": "2026-04-04",
+          "last_seen": "2026-04-04"
+        }
+      ],
+      "buyer_activity": [],
+      "missing_evidence": [
+        "No Commercial Contract",
+        "No Named Strategic Buyer",
+        "No Deployment / Go-Live"
+      ],
+      "ttr": "long_term",
+      "last_updated": "2026-04-04",
+      "hq": "Wollongong, AU",
+      "founded": 2021,
+      "tags": [
+        "비상장",
+        "Electrolyzer",
+        "Series-B"
+      ],
+      "known_investors": [
+        "Fortescue Future Industries",
+        "IP Group"
+      ],
+      "investor_type": "Strategic/CVC",
+      "signal_count": 0,
+      "signal_events": [],
+      "high_count": 0,
+      "neg_count": 0,
+      "type_counts": {},
+      "pattern": {
+        "id": "low_density",
+        "label": "Insufficient Signal",
+        "color": "#A8A8A8",
+        "memo": "Signal density insufficient for pattern recognition. Primary research required."
+      },
+      "stage_color": "#6E6E6E",
+      "stage_desc": "Limited public signal. Company at lab/early stage or undisclosed.",
+      "ttr_color": "#6E6E6E",
+      "investment_score": {
+        "total_score": 0,
+        "max_possible": 10,
+        "interpretation": "Insufficient",
+        "rationale": "Insufficient evidence to assess. Primary research required.",
+        "as_of": "2026-04-04"
+      },
+      "next_step": {
+        "next": "Pilot",
+        "gate": "Named third-party pilot or government grant award",
+        "current_stage": "Lab",
+        "sector_gate": "Named industrial offtaker at contracted price (not MOU)",
+        "top_blockers": [
+          {
+            "gap_type": "No Commercial Contract",
+            "severity": "critical"
+          },
+          {
+            "gap_type": "No Named Strategic Buyer",
+            "severity": "high"
+          }
+        ]
+      },
+      "sector_rulebook": {
+        "key_gate": "Named offtaker at contracted price (not MOU) + permits",
+        "commercial_threshold": "First commercial delivery or long-term supply agreement (>3 years)",
+        "policy_driver": "EU Green Hydrogen Standard, US Inflation Reduction Act §45V, MOTIE 수소경제 로드맵",
+        "red_flags": [
+          "Grant-only (no offtaker)",
+          "LCOH without credible cost-down pathway to offtaker-viable price",
+          "No offtake contract"
+        ],
+        "positive_signals": [
+          "Named industrial offtaker + contracted price",
+          "Port/bunkering infrastructure connection",
+          "EU H2 Bank award"
+        ]
+      },
+      "insight": {
+        "observed_facts": [],
+        "matched_pattern": "Insufficient signal. Primary research required.",
+        "may_indicate": [
+          "No pattern without events"
+        ],
+        "missing": [
+          "No public events ingested"
+        ],
+        "confidence": "Low",
+        "next_check": "Direct outreach recommended.",
+        "event_count": 0,
+        "high_signal": 0
+      },
+      "first_seen": "2026-04-04",
+      "_data_integrity": "수치(금액, 용량, 일정)는 출처 명시된 것만 기록. 'not disclosed'는 공개 정보 없음을 의미. 외부 인용 전 반드시 원문(보도자료/DART/SEC 공시) 검증 필요."
+    },
+    "c_ceres": {
+      "company_id": "c_ceres",
+      "name": "Ceres Power",
+      "sector": "marine_fc",
+      "stage": "lab",
+      "stage_label": "Lab",
+      "country": "UK",
+      "description": "SOFC platform licensor. Bosch/Doosan/Delta strategic partners. LSE listed. Licensing model = asset-light commercial.",
+      "funding_history": [],
+      "signals": [],
+      "critical_gaps": [
+        {
+          "rule_id": "no_contract",
+          "gap_type": "No Commercial Contract",
+          "severity": "critical",
+          "memo": "No binding commercial agreement on record. All revenue is hypothetical.",
+          "status": "new",
+          "first_seen": "2026-04-04",
+          "last_seen": "2026-04-04"
+        },
+        {
+          "rule_id": "no_cert",
+          "gap_type": "No Third-Party Certification",
+          "severity": "high",
+          "memo": "No independent certification (DNV GL, TÜV, KPX, UL). Required for regulated procurement.",
+          "status": "new",
+          "first_seen": "2026-04-04",
+          "last_seen": "2026-04-04"
+        },
+        {
+          "rule_id": "no_buyer",
+          "gap_type": "No Named Strategic Buyer",
+          "severity": "high",
+          "memo": "No named strategic buyer in any signal. Demand-side validation absent.",
+          "status": "new",
+          "first_seen": "2026-04-04",
+          "last_seen": "2026-04-04"
+        },
+        {
+          "rule_id": "no_deploy",
+          "gap_type": "No Deployment / Go-Live",
+          "severity": "medium",
+          "memo": "No operational deployment confirmed. TRL-9 in commercial setting unverified.",
+          "status": "new",
+          "first_seen": "2026-04-04",
+          "last_seen": "2026-04-04"
+        }
+      ],
+      "buyer_activity": [],
+      "missing_evidence": [
+        "No Commercial Contract",
+        "No Third-Party Certification",
+        "No Named Strategic Buyer",
+        "No Deployment / Go-Live"
+      ],
+      "ttr": "long_term",
+      "last_updated": "2026-04-04",
+      "hq": "Horsham, UK",
+      "founded": 2001,
+      "tags": [
+        "상장",
+        "SOFC",
+        "Licensed"
+      ],
+      "known_investors": [
+        "Bosch",
+        "Doosan",
+        "Delta Electronics"
+      ],
+      "investor_type": "Strategic/CVC",
+      "signal_count": 0,
+      "signal_events": [],
+      "high_count": 0,
+      "neg_count": 0,
+      "type_counts": {},
+      "pattern": {
+        "id": "low_density",
+        "label": "Insufficient Signal",
+        "color": "#A8A8A8",
+        "memo": "Signal density insufficient for pattern recognition. Primary research required."
+      },
+      "stage_color": "#6E6E6E",
+      "stage_desc": "Limited public signal. Company at lab/early stage or undisclosed.",
+      "ttr_color": "#6E6E6E",
+      "investment_score": {
+        "total_score": 0,
+        "max_possible": 10,
+        "interpretation": "Insufficient",
+        "rationale": "Insufficient evidence to assess. Primary research required.",
+        "as_of": "2026-04-04"
+      },
+      "next_step": {
+        "next": "Pilot",
+        "gate": "Named third-party pilot or government grant award",
+        "current_stage": "Lab",
+        "sector_gate": "DNV GL or ClassNK Type Approval Certificate",
+        "top_blockers": [
+          {
+            "gap_type": "No Commercial Contract",
+            "severity": "critical"
+          },
+          {
+            "gap_type": "No Third-Party Certification",
+            "severity": "high"
+          },
+          {
+            "gap_type": "No Named Strategic Buyer",
+            "severity": "high"
+          }
+        ]
+      },
+      "sector_rulebook": {
+        "key_gate": "DNV GL or ClassNK class approval (Type Approval Certificate)",
+        "commercial_threshold": "Named shipyard contract post-certification (newbuild or retrofit)",
+        "policy_driver": "IMO CII 2024, EU ETS Ships 2024, IMO 2030 GHG Strategy",
+        "red_flags": [
+          "No DNV GL path defined",
+          "Hydrogen supply chain unresolved",
+          "Single fuel-type dependency"
+        ],
+        "positive_signals": [
+          "DNV GL/ClassNK type approval",
+          "Shipyard newbuild specification",
+          "Port bunkering infrastructure co-development"
+        ]
+      },
+      "insight": {
+        "observed_facts": [],
+        "matched_pattern": "Insufficient signal. Primary research required.",
+        "may_indicate": [
+          "No pattern without events"
+        ],
+        "missing": [
+          "No public events ingested"
+        ],
+        "confidence": "Low",
+        "next_check": "Direct outreach recommended.",
+        "event_count": 0,
+        "high_signal": 0
+      },
+      "first_seen": "2026-04-04",
+      "_data_integrity": "수치(금액, 용량, 일정)는 출처 명시된 것만 기록. 'not disclosed'는 공개 정보 없음을 의미. 외부 인용 전 반드시 원문(보도자료/DART/SEC 공시) 검증 필요."
+    },
+    "c_invinity": {
+      "company_id": "c_invinity",
+      "name": "Invinity Energy",
+      "sector": "ess",
+      "stage": "lab",
+      "stage_label": "Lab",
+      "country": "UK",
+      "description": "Vanadium flow battery manufacturer. Listed. UK/US/Australia commercial deployments.",
+      "funding_history": [],
+      "signals": [],
+      "critical_gaps": [
+        {
+          "rule_id": "no_contract",
+          "gap_type": "No Commercial Contract",
+          "severity": "critical",
+          "memo": "No binding commercial agreement on record. All revenue is hypothetical.",
+          "status": "new",
+          "first_seen": "2026-04-04",
+          "last_seen": "2026-04-04"
+        },
+        {
+          "rule_id": "no_cert",
+          "gap_type": "No Third-Party Certification",
+          "severity": "high",
+          "memo": "No independent certification (DNV GL, TÜV, KPX, UL). Required for regulated procurement.",
+          "status": "new",
+          "first_seen": "2026-04-04",
+          "last_seen": "2026-04-04"
+        },
+        {
+          "rule_id": "no_buyer",
+          "gap_type": "No Named Strategic Buyer",
+          "severity": "high",
+          "memo": "No named strategic buyer in any signal. Demand-side validation absent.",
+          "status": "new",
+          "first_seen": "2026-04-04",
+          "last_seen": "2026-04-04"
+        },
+        {
+          "rule_id": "no_deploy",
+          "gap_type": "No Deployment / Go-Live",
+          "severity": "medium",
+          "memo": "No operational deployment confirmed. TRL-9 in commercial setting unverified.",
+          "status": "new",
+          "first_seen": "2026-04-04",
+          "last_seen": "2026-04-04"
+        }
+      ],
+      "buyer_activity": [],
+      "missing_evidence": [
+        "No Commercial Contract",
+        "No Third-Party Certification",
+        "No Named Strategic Buyer",
+        "No Deployment / Go-Live"
+      ],
+      "ttr": "long_term",
+      "last_updated": "2026-04-04",
+      "hq": "Edinburgh, UK",
+      "founded": 2019,
+      "tags": [
+        "상장",
+        "VRFB",
+        "Commercial"
+      ],
+      "known_investors": [
+        "Public",
+        "British Columbia Investment"
+      ],
+      "investor_type": "Growth",
+      "signal_count": 0,
+      "signal_events": [],
+      "high_count": 0,
+      "neg_count": 0,
+      "type_counts": {},
+      "pattern": {
+        "id": "low_density",
+        "label": "Insufficient Signal",
+        "color": "#A8A8A8",
+        "memo": "Signal density insufficient for pattern recognition. Primary research required."
+      },
+      "stage_color": "#6E6E6E",
+      "stage_desc": "Limited public signal. Company at lab/early stage or undisclosed.",
+      "ttr_color": "#6E6E6E",
+      "investment_score": {
+        "total_score": 0,
+        "max_possible": 10,
+        "interpretation": "Insufficient",
+        "rationale": "Insufficient evidence to assess. Primary research required.",
+        "as_of": "2026-04-04"
+      },
+      "next_step": {
+        "next": "Pilot",
+        "gate": "Named third-party pilot or government grant award",
+        "current_stage": "Lab",
+        "sector_gate": "UL 9540 / IEC 62619 + grid interconnection agreement",
+        "top_blockers": [
+          {
+            "gap_type": "No Commercial Contract",
+            "severity": "critical"
+          },
+          {
+            "gap_type": "No Third-Party Certification",
+            "severity": "high"
+          },
+          {
+            "gap_type": "No Named Strategic Buyer",
+            "severity": "high"
+          }
+        ]
+      },
+      "sector_rulebook": {
+        "key_gate": "Third-party certification (UL 9540, IEC 62619) + grid interconnection agreement",
+        "commercial_threshold": "First offtake or supply agreement with named utility/industrial",
+        "policy_driver": "IRA Storage ITC (US), EU Battery Regulation, KR RPS ESS 가중치",
+        "red_flags": [
+          "Grant-only (no offtaker)",
+          "Li-ion commodity competition",
+          "Single geography exposure"
+        ],
+        "positive_signals": [
+          "Utility framework contract",
+          "Hyperscaler pilot with CFE mandate",
+          "Co-location with offshore wind",
+          "DOE grant + offtaker co-investment"
+        ]
+      },
+      "insight": {
+        "observed_facts": [],
+        "matched_pattern": "Insufficient signal. Primary research required.",
+        "may_indicate": [
+          "No pattern without events"
+        ],
+        "missing": [
+          "No public events ingested"
+        ],
+        "confidence": "Low",
+        "next_check": "Direct outreach recommended.",
+        "event_count": 0,
+        "high_signal": 0
       },
       "first_seen": "2026-04-04",
       "_data_integrity": "수치(금액, 용량, 일정)는 출처 명시된 것만 기록. 'not disclosed'는 공개 정보 없음을 의미. 외부 인용 전 반드시 원문(보도자료/DART/SEC 공시) 검증 필요."

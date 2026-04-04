@@ -1,6 +1,6 @@
 {
   "date": "2026-04-04",
-  "generated_at": "2026-04-04T15:06:58.549007+00:00",
+  "generated_at": "2026-04-04T15:20:59.423209+00:00",
   "signal_count": 0,
   "stats": {
     "total": 0,
@@ -22,7 +22,7 @@
       "status": "partial",
       "items": 0,
       "error": null,
-      "fetched_at": "2026-04-04T15:06:58.549007+00:00",
+      "fetched_at": "2026-04-04T15:20:59.423209+00:00",
       "tier": 1,
       "segments": [
         "battery_storage",
@@ -39,7 +39,7 @@
       "status": "partial",
       "items": 0,
       "error": null,
-      "fetched_at": "2026-04-04T15:06:58.549007+00:00",
+      "fetched_at": "2026-04-04T15:20:59.423209+00:00",
       "tier": 2,
       "segments": [
         "battery_storage",
@@ -56,7 +56,7 @@
       "status": "partial",
       "items": 0,
       "error": null,
-      "fetched_at": "2026-04-04T15:06:58.549007+00:00",
+      "fetched_at": "2026-04-04T15:20:59.423209+00:00",
       "tier": 2,
       "segments": [
         "battery_storage",
@@ -71,7 +71,7 @@
       "status": "partial",
       "items": 0,
       "error": null,
-      "fetched_at": "2026-04-04T15:06:58.549007+00:00",
+      "fetched_at": "2026-04-04T15:20:59.423209+00:00",
       "tier": 2,
       "segments": [
         "battery_storage",
@@ -85,7 +85,7 @@
       "status": "partial",
       "items": 0,
       "error": null,
-      "fetched_at": "2026-04-04T15:06:58.549007+00:00",
+      "fetched_at": "2026-04-04T15:20:59.423209+00:00",
       "tier": 2,
       "segments": [
         "grid_software",
@@ -98,10 +98,10 @@
       "id": "offshorewind",
       "name": "Offshore Wind Biz",
       "url": "https://www.offshorewind.biz/feed/",
-      "status": "partial",
+      "status": "failed",
       "items": 0,
-      "error": null,
-      "fetched_at": "2026-04-04T15:06:58.549007+00:00",
+      "error": "HTTP 403",
+      "fetched_at": "2026-04-04T15:20:59.423209+00:00",
       "tier": 2,
       "segments": [
         "offshore_wind",
@@ -115,7 +115,7 @@
       "status": "partial",
       "items": 0,
       "error": null,
-      "fetched_at": "2026-04-04T15:06:58.549007+00:00",
+      "fetched_at": "2026-04-04T15:20:59.423209+00:00",
       "tier": 3,
       "segments": [
         "battery_storage",
@@ -131,7 +131,7 @@
       "status": "partial",
       "items": 0,
       "error": null,
-      "fetched_at": "2026-04-04T15:06:58.549007+00:00",
+      "fetched_at": "2026-04-04T15:20:59.423209+00:00",
       "tier": 3,
       "segments": [
         "battery_storage",
@@ -146,7 +146,7 @@
       "status": "skipped",
       "items": 0,
       "error": "Skipped: 3 consecutive fails",
-      "fetched_at": "2026-04-04T15:06:58.549007+00:00"
+      "fetched_at": "2026-04-04T15:20:59.423209+00:00"
     }
   ],
   "signals": []

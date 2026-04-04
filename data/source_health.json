@@ -15,9 +15,11 @@
     "skip_until": ""
   },
   "offshorewind": {
-    "consecutive_fails": 0,
+    "consecutive_fails": 1,
     "last_success": "2026-04-04",
-    "skip_until": ""
+    "skip_until": "",
+    "last_error": "HTTP 403",
+    "last_fail": "2026-04-04"
   },
   "canarymedia": {
     "consecutive_fails": 0,
