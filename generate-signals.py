@@ -2579,8 +2579,10 @@ def main():
     co_evs = {}
     for e in kept:
         if e["company_id"]: co_evs.setdefault(e["company_id"],[]).append(e)
-    co_intel = {co["id"]:enrich_company(co,co_evs.get(co["id"],[])) for co in COMPANIES if co_evs.get(co["id"])}
-    print(f"  {len(co_intel)} companies enriched")
+    # 모든 등록 회사 포함 — 오늘 signal 없는 회사도 Lab/Insufficient로 표시
+    co_intel = {co["id"]:enrich_company(co,co_evs.get(co["id"],[])) for co in COMPANIES}
+    with_sigs = sum(1 for c in co_intel.values() if c["signal_count"]>0)
+    print(f"  {len(co_intel)} companies enriched ({with_sigs} with signals today)")
     print()
 
     print("③b Investment memos...")
