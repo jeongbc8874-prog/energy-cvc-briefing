@@ -37,8 +37,9 @@ jobs:
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
 
-      - name: Build company profiles      ← 이것만 추가
+      - name: Build company profiles      
         run: python build_company_profile.py
+        continue-on-error: true
 
 
       - name: Commit & push data
