@@ -1,8 +1,8 @@
 {
   "date": "2026-04-04",
   "dateKr": "2026년 04월 04일",
-  "generatedAt": "2026-04-04T03:48:52.627367+00:00",
-  "brief": "**Deal Flow Memo - April 4, 2026**\n\nEnerVenue's $300M Series B (Energy Storage News) signals continued investor appetite for long-duration storage technologies, with their 30,000-cycle nickel-hydrogen chemistry positioning against traditional lithium-ion degradation concerns. The timing aligns with utility-scale storage procurement cycles ramping for 2027-2028 grid interconnection deadlines. \n\nMeanwhile, PV Magazine's BBDF coverage highlights industrial buyers' hesitation around hybrid PPAs, likely driven by complexity in forecasting mixed solar-storage output profiles and pricing structures. This creates an opening for more sophisticated energy management software plays and standardized hybrid PPA products.\n\n**Watch:** EnerVenue's manufacturing timeline and potential utility offtake announcements; emerging hybrid PPA structuring solutions from energy trading platforms.",
+  "generatedAt": "2026-04-04T03:55:09.400226+00:00",
+  "brief": "**Deal Flow Memo - April 4, 2026**\n\nEnerVenue's $300M Series B (Energy Storage News) signals continued investor appetite for differentiated battery chemistries, particularly as the 30,000-cycle nickel-hydrogen technology addresses the long-duration storage gap that lithium struggles to fill economically. The timing aligns with increasing grid-scale storage deployments where cycle life trumps energy density concerns. Meanwhile, PV Magazine's BBDF coverage highlights industrial buyers' hesitancy around hybrid PPAs, suggesting corporates remain conservative on complex renewable structures despite potential cost savings. \n\n**Watch:** Other nickel-hydrogen players raising follow-on rounds and whether industrial PPA complexity creates opportunities for simplified renewable procurement platforms. Track if EnerVenue's manufacturing scale-up hits technical milestones that could validate the broader long-duration storage thesis for our pipeline companies.",
   "stats": {
     "total": 23,
     "high": 2,
@@ -2184,7 +2184,7 @@
         "source_count": 1,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-04T03:48:46.025488+00:00"
+        "generated_at": "2026-04-04T03:54:58.796115+00:00"
       },
       "narrative": null,
       "generated_date": "2026-04-04"
@@ -4099,7 +4099,7 @@
       "status": "success",
       "error": null,
       "items": 10,
-      "fetched_at": "2026-04-04T03:48:44.332082+00:00",
+      "fetched_at": "2026-04-04T03:54:56.774551+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -4122,7 +4122,7 @@
       "status": "success",
       "error": null,
       "items": 20,
-      "fetched_at": "2026-04-04T03:48:44.460468+00:00",
+      "fetched_at": "2026-04-04T03:54:56.993166+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -4145,7 +4145,7 @@
       "status": "success",
       "error": null,
       "items": 20,
-      "fetched_at": "2026-04-04T03:48:44.802026+00:00",
+      "fetched_at": "2026-04-04T03:54:57.335082+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -4167,7 +4167,7 @@
       "status": "success",
       "error": null,
       "items": 10,
-      "fetched_at": "2026-04-04T03:48:45.325246+00:00",
+      "fetched_at": "2026-04-04T03:54:57.470473+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -4189,7 +4189,7 @@
       "status": "success",
       "error": null,
       "items": 20,
-      "fetched_at": "2026-04-04T03:48:45.515498+00:00",
+      "fetched_at": "2026-04-04T03:54:57.976013+00:00",
       "source_type": "industry",
       "reliability": 3,
       "topics": [
@@ -4211,7 +4211,7 @@
       "status": "partial",
       "error": "Feed returned 0 usable items",
       "items": 0,
-      "fetched_at": "2026-04-04T03:48:45.708718+00:00",
+      "fetched_at": "2026-04-04T03:54:58.172186+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
