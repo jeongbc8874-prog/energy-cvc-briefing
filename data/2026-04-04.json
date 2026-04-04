@@ -1,8 +1,8 @@
 {
   "date": "2026-04-04",
   "dateKr": "2026년 04월 04일",
-  "generatedAt": "2026-04-04T03:36:14.070650+00:00",
-  "brief": "**Deal Flow Memo - April 4, 2026**\n\nEnerVenue's $300M Series B (Energy Storage News) signals continued institutional appetite for differentiated battery chemistries, particularly given their 30,000-cycle nickel-hydrogen positioning against traditional lithium-ion degradation curves. The timing aligns with industrial decarbonization mandates driving demand for ultra-long-duration storage solutions beyond the 4-hour lithium threshold. \n\nMeanwhile, PV Magazine's BBDF coverage on hybrid PPA hesitancy among industrial buyers suggests a maturation gap between storage technology funding and actual procurement adoption. This disconnect typically creates 12-18 month lag opportunities where well-capitalized storage companies can build manufacturing scale before demand acceleration.\n\n**Watch**: Q2 industrial PPA announcement volumes and whether EnerVenue's manufacturing timeline can capture the hybrid market inflection when it materializes.",
+  "generatedAt": "2026-04-04T03:48:52.627367+00:00",
+  "brief": "**Deal Flow Memo - April 4, 2026**\n\nEnerVenue's $300M Series B (Energy Storage News) signals continued investor appetite for long-duration storage technologies, with their 30,000-cycle nickel-hydrogen chemistry positioning against traditional lithium-ion degradation concerns. The timing aligns with utility-scale storage procurement cycles ramping for 2027-2028 grid interconnection deadlines. \n\nMeanwhile, PV Magazine's BBDF coverage highlights industrial buyers' hesitation around hybrid PPAs, likely driven by complexity in forecasting mixed solar-storage output profiles and pricing structures. This creates an opening for more sophisticated energy management software plays and standardized hybrid PPA products.\n\n**Watch:** EnerVenue's manufacturing timeline and potential utility offtake announcements; emerging hybrid PPA structuring solutions from energy trading platforms.",
   "stats": {
     "total": 23,
     "high": 2,
@@ -2184,7 +2184,7 @@
         "source_count": 1,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-04T03:36:07.437675+00:00"
+        "generated_at": "2026-04-04T03:48:46.025488+00:00"
       },
       "narrative": null,
       "generated_date": "2026-04-04"
@@ -3304,6 +3304,644 @@
       ]
     }
   },
+  "segment_intel": {
+    "ess": {
+      "id": "ess",
+      "label": "Long-Duration Energy Storage",
+      "short": "ESS / LDES",
+      "icon": "⚡",
+      "color": "#1A56DB",
+      "signal_count": 18,
+      "high_count": 2,
+      "neg_count": 0,
+      "share_of_total": 0.783,
+      "capital_signal": "Building",
+      "top_events": [
+        {
+          "id": "fa2f1a4cc31d",
+          "title": "EnerVenue closes US$300 million Series B for 30,000-cycle nickel-hydrogen battery manufacturing",
+          "event_type": "Financing",
+          "score": 97,
+          "date": "2026-04-01",
+          "source": "Energy Storage News",
+          "source_url": "https://www.energy-storage.news/enervenue-closes-us300-million-series-b-for-30000-cycle-nickel-hydrogen-battery-manufacturing/",
+          "company": "Unassigned",
+          "confidence": "Medium-Low"
+        },
+        {
+          "id": "21e3fc61fe36",
+          "title": "BBDF 2026: Hybrid PPAs face slow uptake among industrial buyers",
+          "event_type": "Contract",
+          "score": 92,
+          "date": "2026-04-03",
+          "source": "PV Magazine",
+          "source_url": "https://www.pv-magazine.com/2026/04/03/bbdf-2026-hybrid-ppas-face-slow-uptake-among-industrial-buyers/",
+          "company": "Unassigned",
+          "confidence": "Medium"
+        },
+        {
+          "id": "a9b8727bb1d6",
+          "title": "ROUNDUP: Aypa’s US$500 million credit facility upsizing, Georgia Power begins construction on 260MW BESS, Eolus sells 506MWh BESS to DESRI",
+          "event_type": "News",
+          "score": 40,
+          "date": "2026-04-02",
+          "source": "Energy Storage News",
+          "source_url": "https://www.energy-storage.news/roundup-aypas-us500-million-credit-facility-upsizing-georgia-power-begins-construction-on-260mw-bess-eolus-sells-506mwh-bess-to-desri/",
+          "company": "Unassigned",
+          "confidence": "Low"
+        }
+      ],
+      "companies": [
+        {
+          "id": "c_form_energy",
+          "name": "Form Energy",
+          "stage_label": "Lab",
+          "stage_color": "#6E6E6E",
+          "ttr": "Long-term",
+          "ttr_color": "#6E6E6E",
+          "pattern": "Insufficient Signal",
+          "pattern_color": "#A8A8A8",
+          "high_count": 0,
+          "neg_count": 0,
+          "signal_count": 1,
+          "critical_gaps": 1,
+          "investor_type": "Infrastructure/PF",
+          "country": "US"
+        }
+      ],
+      "company_count": 1,
+      "stage_distribution": {
+        "PF-Ready": 0,
+        "Scaling": 0,
+        "First Commercial": 0,
+        "Demo": 0,
+        "Pilot": 0,
+        "Lab": 1
+      },
+      "buyers": [
+        {
+          "id": "b_google",
+          "name": "Google",
+          "type": "Hyperscaler",
+          "region": "US",
+          "procurement_notes": "24/7 CFE 100% 목표. 새로운 ESS 기술 파일럿 적극적.",
+          "signal_count": 1,
+          "recent_events": [
+            {
+              "date": "2026-04-03",
+              "title": "FERC urged to reject TeraWulf’s power plant purchase due to undisclosed Google ownership stake",
+              "event_type": "News",
+              "source": "Utility Dive",
+              "score": 33
+            }
+          ]
+        },
+        {
+          "id": "b_kepco",
+          "name": "KEPCO",
+          "type": "Utility",
+          "region": "KR",
+          "procurement_notes": "VPP 실증사업 RFP 발주. DR·보조서비스 시장 참여기업 수요.",
+          "signal_count": 0,
+          "recent_events": []
+        },
+        {
+          "id": "b_microsoft",
+          "name": "Microsoft",
+          "type": "Hyperscaler",
+          "region": "US",
+          "procurement_notes": "Nuclear PPA. 24/7 CFE 목표. DC power 파일럿 확대.",
+          "signal_count": 0,
+          "recent_events": []
+        },
+        {
+          "id": "b_ls_elec",
+          "name": "LS일렉트릭",
+          "type": "EPC/OEM",
+          "region": "KR",
+          "procurement_notes": "VPP 플랫폼 내재화 전략 추진. ESS 턴키 계약 확대.",
+          "signal_count": 0,
+          "recent_events": []
+        },
+        {
+          "id": "b_engie",
+          "name": "Engie",
+          "type": "Utility",
+          "region": "EU",
+          "procurement_notes": "유럽 ESS 입찰 활성화. VPP 플랫폼 투자자이자 고객.",
+          "signal_count": 0,
+          "recent_events": []
+        },
+        {
+          "id": "b_sk_eco",
+          "name": "SK에코플랜트",
+          "type": "EPC",
+          "region": "KR",
+          "procurement_notes": "바이오가스→수소 전환. EPC로서 에너지 신기술 도입.",
+          "signal_count": 0,
+          "recent_events": []
+        }
+      ],
+      "drivers": {
+        "policy": "IRA Storage ITC (US), EU Battery Regulation, KR RPS ESS 가중치",
+        "demand": "Utility-scale renewables integration, hyperscaler 24/7 CFE mandates, industrial C&I",
+        "infra": "Grid interconnection capacity, BESS site permitting, vanadium / iron supply chains"
+      },
+      "key_gate": "Third-party certification (UL 9540, IEC 62619) + grid interconnection agreement",
+      "commercial_threshold": "First offtake or supply agreement with named utility/industrial",
+      "red_flags": [
+        "Grant-only (no offtaker)",
+        "Li-ion commodity competition",
+        "Single geography exposure"
+      ],
+      "positive_signals": [
+        "Utility framework contract",
+        "Hyperscaler pilot with CFE mandate",
+        "Co-location with offshore wind",
+        "DOE grant + offtaker co-investment"
+      ]
+    },
+    "marine_fc": {
+      "id": "marine_fc",
+      "label": "Marine Fuel Cells",
+      "short": "Marine FC",
+      "icon": "🚢",
+      "color": "#0A6640",
+      "signal_count": 2,
+      "high_count": 0,
+      "neg_count": 0,
+      "share_of_total": 0.087,
+      "capital_signal": "Quiet",
+      "top_events": [
+        {
+          "id": "dd8b48eaab0d",
+          "title": "Japan’s FLOWRA, Bureau Veritas Sign Floating Wind MoU",
+          "event_type": "Partnership",
+          "score": 36,
+          "date": "2026-04-01",
+          "source": "Offshore Wind Biz",
+          "source_url": "https://www.offshorewind.biz/2026/04/01/japans-flowra-bureau-veritas-sign-floating-wind-mou/",
+          "company": "Unassigned",
+          "confidence": "Low"
+        },
+        {
+          "id": "8ccdbedecfe0",
+          "title": "FERC urged to reject TeraWulf’s power plant purchase due to undisclosed Google ownership stake",
+          "event_type": "News",
+          "score": 33,
+          "date": "2026-04-03",
+          "source": "Utility Dive",
+          "source_url": "https://www.utilitydive.com/news/ferc-terawulf-morgantown-power-plant-google/816582/",
+          "company": "Unassigned",
+          "confidence": "Low"
+        }
+      ],
+      "companies": [],
+      "company_count": 0,
+      "stage_distribution": {
+        "PF-Ready": 0,
+        "Scaling": 0,
+        "First Commercial": 0,
+        "Demo": 0,
+        "Pilot": 0,
+        "Lab": 0
+      },
+      "buyers": [
+        {
+          "id": "b_hd_hhi",
+          "name": "HD한국조선해양",
+          "type": "Shipyard",
+          "region": "KR",
+          "procurement_notes": "암모니아 이중연료 선박 수주 확대. 연료전지 기술 내재화 검토.",
+          "signal_count": 0,
+          "recent_events": []
+        },
+        {
+          "id": "b_samsung_hvy",
+          "name": "삼성중공업",
+          "type": "Shipyard",
+          "region": "KR",
+          "procurement_notes": "선박 연료전지 파일럿 프로그램. HVDC 해상풍력 연계.",
+          "signal_count": 0,
+          "recent_events": []
+        }
+      ],
+      "drivers": {
+        "policy": "IMO CII 2024 ratings, EU ETS Ships 2024, IMO 2030 GHG Strategy",
+        "demand": "Shipyard newbuild specs, shipping company decarbonization commitments, port incentives",
+        "infra": "Hydrogen bunkering infrastructure, DNV GL certification pipeline, ammonia supply chain"
+      },
+      "key_gate": "DNV GL or ClassNK class approval (Type Approval Certificate)",
+      "commercial_threshold": "Named shipyard contract post-certification (newbuild or retrofit)",
+      "red_flags": [
+        "No DNV GL path defined",
+        "Hydrogen supply chain unresolved",
+        "Single fuel-type dependency"
+      ],
+      "positive_signals": [
+        "DNV GL/ClassNK type approval",
+        "Shipyard newbuild specification",
+        "Port bunkering infrastructure co-development"
+      ]
+    },
+    "grid_sw": {
+      "id": "grid_sw",
+      "label": "Grid Software / VPP",
+      "short": "Grid SW",
+      "icon": "🔌",
+      "color": "#0050B3",
+      "signal_count": 2,
+      "high_count": 0,
+      "neg_count": 0,
+      "share_of_total": 0.087,
+      "capital_signal": "Quiet",
+      "top_events": [
+        {
+          "id": "213ef4d38071",
+          "title": "Texas opens $350M advanced nuclear grant program",
+          "event_type": "News",
+          "score": 30,
+          "date": "2026-04-02",
+          "source": "Utility Dive",
+          "source_url": "https://www.utilitydive.com/news/texas-opens-350m-advanced-nuclear-grant-program/816442/",
+          "company": "Unassigned",
+          "confidence": "Low"
+        },
+        {
+          "id": "3462b55b60b5",
+          "title": "Rooftop solar reaches 20% of Puerto Rico’s generation mix",
+          "event_type": "News",
+          "score": 25,
+          "date": "2026-04-02",
+          "source": "Utility Dive",
+          "source_url": "https://www.utilitydive.com/news/rooftop-solar-puerto-rico-generation-mix-eia/816499/",
+          "company": "Unassigned",
+          "confidence": "Low"
+        }
+      ],
+      "companies": [],
+      "company_count": 0,
+      "stage_distribution": {
+        "PF-Ready": 0,
+        "Scaling": 0,
+        "First Commercial": 0,
+        "Demo": 0,
+        "Pilot": 0,
+        "Lab": 0
+      },
+      "buyers": [
+        {
+          "id": "b_kepco",
+          "name": "KEPCO",
+          "type": "Utility",
+          "region": "KR",
+          "procurement_notes": "VPP 실증사업 RFP 발주. DR·보조서비스 시장 참여기업 수요.",
+          "signal_count": 0,
+          "recent_events": []
+        },
+        {
+          "id": "b_ls_elec",
+          "name": "LS일렉트릭",
+          "type": "EPC/OEM",
+          "region": "KR",
+          "procurement_notes": "VPP 플랫폼 내재화 전략 추진. ESS 턴키 계약 확대.",
+          "signal_count": 0,
+          "recent_events": []
+        },
+        {
+          "id": "b_engie",
+          "name": "Engie",
+          "type": "Utility",
+          "region": "EU",
+          "procurement_notes": "유럽 ESS 입찰 활성화. VPP 플랫폼 투자자이자 고객.",
+          "signal_count": 0,
+          "recent_events": []
+        }
+      ],
+      "drivers": {
+        "policy": "FERC Order 2222 (US), EU Flexibility Markets, KPX 보조서비스 제도 개편",
+        "demand": "Utility VPP mandates, C&I aggregators, hyperscaler DC power optimization",
+        "infra": "Smart meter rollouts, grid edge device penetration, API/SCADA integration layers"
+      },
+      "key_gate": "Grid operator certification (KPX, FERC, ENTSO-E) + first recurring revenue contract",
+      "commercial_threshold": "Multi-year framework contract with named utility/TSO",
+      "red_flags": [
+        "Single utility dependency",
+        "No API/integration layer",
+        "Vertical incumbent competition (Siemens, GE)"
+      ],
+      "positive_signals": [
+        "KPX/FERC certified",
+        "Multi-utility framework",
+        "CFO hire + international BD"
+      ]
+    },
+    "hydrogen": {
+      "id": "hydrogen",
+      "label": "Hydrogen Infrastructure",
+      "short": "Hydrogen",
+      "icon": "💧",
+      "color": "#7D4E00",
+      "signal_count": 0,
+      "high_count": 0,
+      "neg_count": 0,
+      "share_of_total": 0.0,
+      "capital_signal": "Quiet",
+      "top_events": [],
+      "companies": [],
+      "company_count": 0,
+      "stage_distribution": {
+        "PF-Ready": 0,
+        "Scaling": 0,
+        "First Commercial": 0,
+        "Demo": 0,
+        "Pilot": 0,
+        "Lab": 0
+      },
+      "buyers": [
+        {
+          "id": "b_kepco",
+          "name": "KEPCO",
+          "type": "Utility",
+          "region": "KR",
+          "procurement_notes": "VPP 실증사업 RFP 발주. DR·보조서비스 시장 참여기업 수요.",
+          "signal_count": 0,
+          "recent_events": []
+        },
+        {
+          "id": "b_hd_hhi",
+          "name": "HD한국조선해양",
+          "type": "Shipyard",
+          "region": "KR",
+          "procurement_notes": "암모니아 이중연료 선박 수주 확대. 연료전지 기술 내재화 검토.",
+          "signal_count": 0,
+          "recent_events": []
+        },
+        {
+          "id": "b_engie",
+          "name": "Engie",
+          "type": "Utility",
+          "region": "EU",
+          "procurement_notes": "유럽 ESS 입찰 활성화. VPP 플랫폼 투자자이자 고객.",
+          "signal_count": 0,
+          "recent_events": []
+        },
+        {
+          "id": "b_sk_eco",
+          "name": "SK에코플랜트",
+          "type": "EPC",
+          "region": "KR",
+          "procurement_notes": "바이오가스→수소 전환. EPC로서 에너지 신기술 도입.",
+          "signal_count": 0,
+          "recent_events": []
+        }
+      ],
+      "drivers": {
+        "policy": "EU Green Hydrogen Standard, US IRA §45V ($3/kg credit), MOTIE 수소경제 로드맵",
+        "demand": "Industrial decarbonization (refineries, steel, ammonia), port bunkering, power-to-X",
+        "infra": "Electrolyzer manufacturing scale-up, H2 transport pipelines, import terminal construction"
+      },
+      "key_gate": "Named offtaker at contracted price (not MOU) + permits",
+      "commercial_threshold": "First commercial delivery or long-term supply agreement (>3 years)",
+      "red_flags": [
+        "Grant-only (no offtaker)",
+        "LCOH without credible cost-down pathway to offtaker-viable price",
+        "No offtake contract"
+      ],
+      "positive_signals": [
+        "Named industrial offtaker + contracted price",
+        "Port/bunkering infrastructure connection",
+        "EU H2 Bank award"
+      ]
+    },
+    "hvdc": {
+      "id": "hvdc",
+      "label": "HVDC Transmission",
+      "short": "HVDC",
+      "icon": "🔋",
+      "color": "#5B21B6",
+      "signal_count": 1,
+      "high_count": 0,
+      "neg_count": 0,
+      "share_of_total": 0.043,
+      "capital_signal": "Quiet",
+      "top_events": [
+        {
+          "id": "cffbf246ae62",
+          "title": "TenneT, National Grid Ink Joint Development Agreement for LionLink Offshore Wind Interconnector",
+          "event_type": "Partnership",
+          "score": 58,
+          "date": "2026-04-02",
+          "source": "Offshore Wind Biz",
+          "source_url": "https://www.offshorewind.biz/2026/04/02/tennet-national-grid-ink-joint-development-agreement-for-lionlink-offshore-wind-interconnector/",
+          "company": "Unassigned",
+          "confidence": "Low"
+        }
+      ],
+      "companies": [],
+      "company_count": 0,
+      "stage_distribution": {
+        "PF-Ready": 0,
+        "Scaling": 0,
+        "First Commercial": 0,
+        "Demo": 0,
+        "Pilot": 0,
+        "Lab": 0
+      },
+      "buyers": [
+        {
+          "id": "b_ls_elec",
+          "name": "LS일렉트릭",
+          "type": "EPC/OEM",
+          "region": "KR",
+          "procurement_notes": "VPP 플랫폼 내재화 전략 추진. ESS 턴키 계약 확대.",
+          "signal_count": 0,
+          "recent_events": []
+        },
+        {
+          "id": "b_samsung_hvy",
+          "name": "삼성중공업",
+          "type": "Shipyard",
+          "region": "KR",
+          "procurement_notes": "선박 연료전지 파일럿 프로그램. HVDC 해상풍력 연계.",
+          "signal_count": 0,
+          "recent_events": []
+        }
+      ],
+      "drivers": {
+        "policy": "EU offshore wind targets, KR 재생에너지 3020, US DOE Grid Deployment",
+        "demand": "Offshore wind grid connection (EU North Sea, KR Jeju), long-distance transmission",
+        "infra": "Subsea cable manufacturing capacity (Prysmian, Nexans), converter station siting"
+      },
+      "key_gate": "—",
+      "commercial_threshold": "—",
+      "red_flags": [],
+      "positive_signals": []
+    },
+    "dc_power": {
+      "id": "dc_power",
+      "label": "Data Center Power",
+      "short": "DC Power",
+      "icon": "🖥",
+      "color": "#9E1068",
+      "signal_count": 0,
+      "high_count": 0,
+      "neg_count": 0,
+      "share_of_total": 0.0,
+      "capital_signal": "Quiet",
+      "top_events": [],
+      "companies": [],
+      "company_count": 0,
+      "stage_distribution": {
+        "PF-Ready": 0,
+        "Scaling": 0,
+        "First Commercial": 0,
+        "Demo": 0,
+        "Pilot": 0,
+        "Lab": 0
+      },
+      "buyers": [
+        {
+          "id": "b_google",
+          "name": "Google",
+          "type": "Hyperscaler",
+          "region": "US",
+          "procurement_notes": "24/7 CFE 100% 목표. 새로운 ESS 기술 파일럿 적극적.",
+          "signal_count": 1,
+          "recent_events": [
+            {
+              "date": "2026-04-03",
+              "title": "FERC urged to reject TeraWulf’s power plant purchase due to undisclosed Google ownership stake",
+              "event_type": "News",
+              "source": "Utility Dive",
+              "score": 33
+            }
+          ]
+        },
+        {
+          "id": "b_microsoft",
+          "name": "Microsoft",
+          "type": "Hyperscaler",
+          "region": "US",
+          "procurement_notes": "Nuclear PPA. 24/7 CFE 목표. DC power 파일럿 확대.",
+          "signal_count": 0,
+          "recent_events": []
+        }
+      ],
+      "drivers": {
+        "policy": "EU Data Act, Singapore DC moratorium, US Executive Order on AI infrastructure",
+        "demand": "AI compute expansion (hyperscalers), 24/7 CFE commitments, UPS / backup power",
+        "infra": "Power electronics supply chains, cooling technology, grid interconnection queue"
+      },
+      "key_gate": "—",
+      "commercial_threshold": "—",
+      "red_flags": [],
+      "positive_signals": []
+    },
+    "forecasting": {
+      "id": "forecasting",
+      "label": "Grid Forecasting / AI",
+      "short": "Forecasting",
+      "icon": "📈",
+      "color": "#6E6E6E",
+      "signal_count": 0,
+      "high_count": 0,
+      "neg_count": 0,
+      "share_of_total": 0.0,
+      "capital_signal": "Quiet",
+      "top_events": [],
+      "companies": [],
+      "company_count": 0,
+      "stage_distribution": {
+        "PF-Ready": 0,
+        "Scaling": 0,
+        "First Commercial": 0,
+        "Demo": 0,
+        "Pilot": 0,
+        "Lab": 0
+      },
+      "buyers": [
+        {
+          "id": "b_microsoft",
+          "name": "Microsoft",
+          "type": "Hyperscaler",
+          "region": "US",
+          "procurement_notes": "Nuclear PPA. 24/7 CFE 목표. DC power 파일럿 확대.",
+          "signal_count": 0,
+          "recent_events": []
+        }
+      ],
+      "drivers": {
+        "policy": "FERC transparency rules, EU ENTSO-E forecasting standards",
+        "demand": "VPP operators, TSOs / DSOs, renewable curtailment reduction",
+        "infra": "Smart meter data availability, SCADA integration, ML infrastructure"
+      },
+      "key_gate": "—",
+      "commercial_threshold": "—",
+      "red_flags": [],
+      "positive_signals": []
+    },
+    "wte": {
+      "id": "wte",
+      "label": "Waste-to-Energy",
+      "short": "WtE",
+      "icon": "♻",
+      "color": "#166534",
+      "signal_count": 0,
+      "high_count": 0,
+      "neg_count": 0,
+      "share_of_total": 0.0,
+      "capital_signal": "Quiet",
+      "top_events": [],
+      "companies": [],
+      "company_count": 0,
+      "stage_distribution": {
+        "PF-Ready": 0,
+        "Scaling": 0,
+        "First Commercial": 0,
+        "Demo": 0,
+        "Pilot": 0,
+        "Lab": 0
+      },
+      "buyers": [
+        {
+          "id": "b_google",
+          "name": "Google",
+          "type": "Hyperscaler",
+          "region": "US",
+          "procurement_notes": "24/7 CFE 100% 목표. 새로운 ESS 기술 파일럿 적극적.",
+          "signal_count": 1,
+          "recent_events": [
+            {
+              "date": "2026-04-03",
+              "title": "FERC urged to reject TeraWulf’s power plant purchase due to undisclosed Google ownership stake",
+              "event_type": "News",
+              "source": "Utility Dive",
+              "score": 33
+            }
+          ]
+        },
+        {
+          "id": "b_sk_eco",
+          "name": "SK에코플랜트",
+          "type": "EPC",
+          "region": "KR",
+          "procurement_notes": "바이오가스→수소 전환. EPC로서 에너지 신기술 도입.",
+          "signal_count": 0,
+          "recent_events": []
+        }
+      ],
+      "drivers": {
+        "policy": "EU Circular Economy Action Plan, KR 폐자원 에너지화, carbon credit frameworks",
+        "demand": "Municipal solid waste management, industrial biogas, landfill gas capture",
+        "infra": "Incineration plant permitting, biogas upgrading to RNG, grid connection"
+      },
+      "key_gate": "—",
+      "commercial_threshold": "—",
+      "red_flags": [],
+      "positive_signals": []
+    }
+  },
   "panels": {
     "negative_signals": [],
     "missing_evidence": [
@@ -3461,7 +4099,7 @@
       "status": "success",
       "error": null,
       "items": 10,
-      "fetched_at": "2026-04-04T03:36:04.404038+00:00",
+      "fetched_at": "2026-04-04T03:48:44.332082+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -3484,7 +4122,7 @@
       "status": "success",
       "error": null,
       "items": 20,
-      "fetched_at": "2026-04-04T03:36:04.677954+00:00",
+      "fetched_at": "2026-04-04T03:48:44.460468+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -3507,7 +4145,7 @@
       "status": "success",
       "error": null,
       "items": 20,
-      "fetched_at": "2026-04-04T03:36:05.607208+00:00",
+      "fetched_at": "2026-04-04T03:48:44.802026+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -3529,7 +4167,7 @@
       "status": "success",
       "error": null,
       "items": 10,
-      "fetched_at": "2026-04-04T03:36:05.807352+00:00",
+      "fetched_at": "2026-04-04T03:48:45.325246+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -3551,7 +4189,7 @@
       "status": "success",
       "error": null,
       "items": 20,
-      "fetched_at": "2026-04-04T03:36:06.377710+00:00",
+      "fetched_at": "2026-04-04T03:48:45.515498+00:00",
       "source_type": "industry",
       "reliability": 3,
       "topics": [
@@ -3573,7 +4211,7 @@
       "status": "partial",
       "error": "Feed returned 0 usable items",
       "items": 0,
-      "fetched_at": "2026-04-04T03:36:06.599339+00:00",
+      "fetched_at": "2026-04-04T03:48:45.708718+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
