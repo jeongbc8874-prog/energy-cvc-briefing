@@ -1375,10 +1375,17 @@ def make_id(sid, title, date):
     return hashlib.sha256(f"{sid}:{title}:{date}".encode()).hexdigest()[:12]
 
 def fetch_sources():
+    """
+    Fetch RSS sources. If fetch_extended.py has already run today and written
+    data/extended_raw.json, merge those articles in (deduped by title+date).
+    This gives 100–200 signals/day instead of 20–30.
+    """
     raw, source_log = [], []
     if not HAS_FEEDPARSER:
         return raw, [{"id":s["id"],"name":s["name"],"url":s["url"],"status":"failed",
                        "error":"feedparser not installed","items":0,"fetched_at":datetime.now(timezone.utc).isoformat()} for s in RSS_SOURCES]
+
+    # ── Step 1: Fetch base RSS sources ────────────────────────────
     for s in RSS_SOURCES:
         ts = datetime.now(timezone.utc).isoformat()
         try:
@@ -1402,7 +1409,6 @@ def fetch_sources():
                                 "status":"success" if count>0 else "partial",
                                 "error":errors[0] if errors else None,
                                 "items":count,"fetched_at":ts,
-                                # registry metadata — passed through for UI
                                 "source_type":  s.get("source_type","industry"),
                                 "reliability":  s.get("reliability",3),
                                 "topics":       s.get("topics",[]),
@@ -1423,6 +1429,49 @@ def fetch_sources():
                                 "approved_date":s.get("approved_date","unknown"),
                             })
             print(f"  ✗ {s['name']}: {ex}")
+
+    # ── Step 2: Merge fetch_extended.py output (if available) ─────
+    extended_path = Path("data/extended_raw.json")
+    if extended_path.exists():
+        try:
+            ext = json.loads(extended_path.read_text())
+            ext_articles = ext.get("articles", [])
+            ext_date     = ext.get("date","")
+            if ext_date == TODAY:
+                # Build dedup set from already-loaded raw items
+                seen_keys = {(r["title"].lower().strip(), r["published_date"]) for r in raw}
+                merged = 0
+                for art in ext_articles:
+                    key = (art.get("title","").lower().strip(), art.get("published_date",""))
+                    if key in seen_keys:
+                        continue
+                    seen_keys.add(key)
+                    # Convert fetch_extended article format → normalize() input format
+                    raw.append({
+                        "source_id":       art.get("source_id","extended"),
+                        "source_name":     art.get("source_name",""),
+                        "source_url":      art.get("source_url",""),
+                        "source_segments": art.get("source_segments",[]),
+                        "title":           art.get("title",""),
+                        "summary":         art.get("summary",""),
+                        "published_date":  art.get("published_date",TODAY),
+                        "raw_text":        art.get("raw_text",""),
+                    })
+                    merged += 1
+                # Add extended pipeline as a phantom source in the log
+                ext_logs = ext.get("source_logs", [])
+                for el in ext_logs:
+                    # Only add sources not already in source_log
+                    if not any(sl["id"] == el["id"] for sl in source_log):
+                        source_log.append(el)
+                print(f"  ✓ extended pipeline: +{merged} articles merged (from {len(ext_articles)} in cache)")
+            else:
+                print(f"  ⚠ extended_raw.json is from {ext_date} (not today) — skipping merge")
+        except Exception as ex:
+            print(f"  ⚠ Could not merge extended_raw.json: {ex}")
+    else:
+        print("  ℹ fetch_extended.py not yet run today — running with base sources only")
+
     return raw, source_log
 
 def normalize(raw_items):
