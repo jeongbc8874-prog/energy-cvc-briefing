@@ -1,8 +1,8 @@
 {
   "date": "2026-04-04",
   "dateKr": "2026년 04월 04일",
-  "generatedAt": "2026-04-04T10:32:58.324488+00:00",
-  "brief": "**Deal Flow Memo - April 4, 2026**\n\nEnerVenue's $300M Series B (Energy Storage News) signals continued institutional appetite for differentiated battery chemistries, particularly their nickel-hydrogen technology promising 30,000 cycles versus typical lithium-ion's 3,000-6,000 range. The timing aligns with growing industrial demand for ultra-long-duration storage as grid operators seek alternatives to traditional peaking plants. \n\nMeanwhile, PV Magazine's BBDF 2026 coverage highlights that hybrid PPAs remain stuck in early adopter phase among industrial buyers, suggesting procurement complexity still outweighs cost benefits for most corporates. \n\n**Watch next:** Industrial storage offtakers who might bridge these trends—companies evaluating both hybrid PPA structures and premium storage technologies like EnerVenue's for behind-the-meter applications where cycle durability justifies higher capex.",
+  "generatedAt": "2026-04-04T14:12:42.723651+00:00",
+  "brief": "**Deal Flow Memo - April 4, 2026**\n\nEnerVenue's $300M Series B (Energy Storage News) signals continued investor appetite for differentiated battery chemistries, particularly their nickel-hydrogen tech promising 30,000 cycles—a clear play for the ultra-long duration storage market that lithium-ion can't address cost-effectively. The timing aligns with growing utility demand for 8+ hour storage assets as renewables penetration accelerates. Meanwhile, BBDF 2026 highlighted industrial buyers' hesitancy around hybrid PPAs (PV Magazine), suggesting complexity and risk allocation issues are still limiting commercial adoption despite strong developer interest. \n\n**Watch**: Follow-on manufacturing partnerships for EnerVenue as they scale production, and whether other long-duration storage startups can close similar rounds. On hybrid PPAs, monitor standardization efforts and whether utilities step in to simplify structures for industrial offtakers.",
   "stats": {
     "total": 24,
     "high": 2,
@@ -2230,7 +2230,7 @@
         "source_count": 1,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-04T10:32:52.424247+00:00"
+        "generated_at": "2026-04-04T14:12:34.871442+00:00"
       },
       "narrative": null,
       "generated_date": "2026-04-04"
@@ -4262,7 +4262,7 @@
       "status": "success",
       "error": null,
       "items": 10,
-      "fetched_at": "2026-04-04T10:32:51.159571+00:00",
+      "fetched_at": "2026-04-04T14:12:33.466198+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -4285,7 +4285,7 @@
       "status": "success",
       "error": null,
       "items": 20,
-      "fetched_at": "2026-04-04T10:32:51.226504+00:00",
+      "fetched_at": "2026-04-04T14:12:33.662294+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -4308,7 +4308,7 @@
       "status": "success",
       "error": null,
       "items": 20,
-      "fetched_at": "2026-04-04T10:32:51.453580+00:00",
+      "fetched_at": "2026-04-04T14:12:33.958335+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -4330,7 +4330,7 @@
       "status": "success",
       "error": null,
       "items": 10,
-      "fetched_at": "2026-04-04T10:32:51.585713+00:00",
+      "fetched_at": "2026-04-04T14:12:34.079161+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -4352,7 +4352,7 @@
       "status": "success",
       "error": null,
       "items": 20,
-      "fetched_at": "2026-04-04T10:32:51.910235+00:00",
+      "fetched_at": "2026-04-04T14:12:34.278263+00:00",
       "source_type": "industry",
       "reliability": 3,
       "topics": [
@@ -4374,7 +4374,7 @@
       "status": "partial",
       "error": "Feed returned 0 usable items",
       "items": 0,
-      "fetched_at": "2026-04-04T10:32:52.074370+00:00",
+      "fetched_at": "2026-04-04T14:12:34.468023+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [

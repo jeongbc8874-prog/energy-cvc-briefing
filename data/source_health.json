@@ -30,7 +30,7 @@
     "skip_until": ""
   },
   "doe_main": {
-    "consecutive_fails": 1,
+    "consecutive_fails": 2,
     "last_error": "HTTP 404",
     "last_fail": "2026-04-04"
   },

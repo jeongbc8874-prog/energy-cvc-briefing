@@ -1,0 +1,199 @@
+{
+  "date": "2026-04-04",
+  "generated_at": "2026-04-04T14:12:42.793416+00:00",
+  "company_count": 1,
+  "portfolio_summary": {
+    "as_of": "2026-04-04",
+    "total_companies": 1,
+    "stage_distribution": {
+      "Lab": 1
+    },
+    "sector_distribution": {
+      "ess": 1
+    },
+    "ttr_distribution": {
+      "Long-term": 1
+    },
+    "high_signal_companies": [],
+    "concern_companies": [],
+    "stage_changes_today": [],
+    "total_critical_gaps": 1,
+    "companies_with_buyers": 0
+  },
+  "companies": {
+    "c_form_energy": {
+      "company_id": "c_form_energy",
+      "name": "Form Energy",
+      "sector": "ess",
+      "stage": "Lab",
+      "stage_label": "Lab",
+      "country": "US",
+      "description": "Iron-air 100h+ LDES. ArcelorMittal $100M strategic. Georgia gigafactory under construction. Three US utility contracts.",
+      "founded": 2017,
+      "hq": "Somerville MA, US",
+      "tags": [
+        "비상장",
+        "Iron-Air",
+        "Series-E"
+      ],
+      "known_investors": [
+        "ArcelorMittal",
+        "GS Energy",
+        "Breakthrough Energy"
+      ],
+      "investor_type": "Infrastructure/PF",
+      "signals": [
+        "530820391617"
+      ],
+      "signal_count": 1,
+      "signal_events": [
+        {
+          "id": "530820391617",
+          "date": "2026-03-31",
+          "title": "100-hour LDES battery technologies from Form, Noon and Ore: how do they compare?",
+          "event_type": "News",
+          "signal_tier": "low",
+          "signal_strength": 25,
+          "source_name": "Energy Storage News",
+          "source_url": "https://www.energy-storage.news/100-hour-ldes-battery-technologies-from-form-noon-and-ore-how-do-they-compare/",
+          "is_negative": false,
+          "neg_subtype": null,
+          "observed_fact": "100-hour LDES battery technologies from Form, Noon and Ore: how do they compare?",
+          "why_it_matters": "No specific investment pattern matched. Context only — not weighted without corroboration."
+        }
+      ],
+      "high_count": 0,
+      "neg_count": 0,
+      "type_counts": {
+        "News": 1
+      },
+      "funding_history": [],
+      "critical_gaps": [
+        {
+          "rule_id": "no_contract",
+          "label": "No Commercial Contract",
+          "severity": "critical",
+          "memo": "No binding commercial agreement on record. All revenue is hypothetical.",
+          "status": "new",
+          "first_seen": "2026-04-04",
+          "last_seen": "2026-04-04",
+          "days_open": 0
+        },
+        {
+          "rule_id": "no_cert",
+          "label": "No Third-Party Certification",
+          "severity": "high",
+          "memo": "No independent certification (DNV GL, TÜV, KPX, UL). Required for regulated procurement.",
+          "status": "new",
+          "first_seen": "2026-04-04",
+          "last_seen": "2026-04-04",
+          "days_open": 0
+        },
+        {
+          "rule_id": "no_buyer",
+          "label": "No Named Strategic Buyer",
+          "severity": "high",
+          "memo": "No named strategic buyer in any signal. Demand-side validation absent.",
+          "status": "new",
+          "first_seen": "2026-04-04",
+          "last_seen": "2026-04-04",
+          "days_open": 0
+        },
+        {
+          "rule_id": "no_deploy",
+          "label": "No Deployment / Go-Live",
+          "severity": "medium",
+          "memo": "No operational deployment confirmed. TRL-9 in commercial setting unverified.",
+          "status": "new",
+          "first_seen": "2026-04-04",
+          "last_seen": "2026-04-04",
+          "days_open": 0
+        }
+      ],
+      "missing_evidence": [
+        "No Commercial Contract",
+        "No Third-Party Certification",
+        "No Named Strategic Buyer",
+        "No Deployment / Go-Live"
+      ],
+      "gap_count": 4,
+      "critical_gap_count": 1,
+      "buyer_activity": [],
+      "stage_history": [
+        {
+          "stage": "Lab",
+          "date": "2026-04-04",
+          "from_stage": "unknown",
+          "auto_detected": true,
+          "source": "generate-signals.py STAGE_LADDER"
+        }
+      ],
+      "stage_color": "#6E6E6E",
+      "stage_desc": "Limited public signal. Company at lab/early stage or undisclosed.",
+      "pattern": {
+        "id": "low_density",
+        "label": "Insufficient Signal",
+        "color": "#A8A8A8",
+        "memo": "Signal density insufficient for pattern recognition. Primary research required."
+      },
+      "ttr": "Long-term",
+      "ttr_color": "#6E6E6E",
+      "investment_score": {
+        "total_score": 0,
+        "max_possible": 10,
+        "interpretation": "Insufficient",
+        "rationale": "Insufficient evidence to assess. Primary research required.",
+        "as_of": "2026-04-04"
+      },
+      "commercialization_path": {
+        "next_stage": "Pilot",
+        "required_gate": "Named third-party pilot commitment or government grant award",
+        "key_watch": "Who is the first named technical partner?",
+        "typical_catalyst": "Government grant → named co-development partner",
+        "current_stage": "Lab",
+        "sector_gate": "UL 9540 / IEC 62619 + grid interconnection agreement",
+        "score": 0,
+        "interpretation": "Insufficient",
+        "current_blockers": [
+          {
+            "gap": "No Commercial Contract",
+            "severity": "critical",
+            "memo": "No binding commercial agreement on record. All revenue is hypothetical."
+          },
+          {
+            "gap": "No Third-Party Certification",
+            "severity": "high",
+            "memo": "No independent certification (DNV GL, TÜV, KPX, UL). Required for regulated procurement."
+          }
+        ]
+      },
+      "sector_rulebook": {
+        "key_gate": "Third-party certification (UL 9540, IEC 62619) + grid interconnection agreement",
+        "commercial_threshold": "First offtake or supply agreement with named utility/industrial",
+        "policy_driver": "IRA Storage ITC (US), EU Battery Regulation, KR RPS ESS 가중치",
+        "red_flags": [
+          "Grant-only (no offtaker)",
+          "Li-ion commodity competition",
+          "Single geography exposure"
+        ],
+        "positive_signals": [
+          "Utility framework contract",
+          "Hyperscaler pilot with CFE mandate",
+          "Co-location with offshore wind",
+          "DOE grant + offtaker co-investment"
+        ]
+      },
+      "analyst_overrides": {
+        "stage_override": null,
+        "ttr_override": null,
+        "thesis_note": null,
+        "watch_flag": null,
+        "last_reviewed": null,
+        "reviewed_by": null
+      },
+      "last_updated": "2026-04-04",
+      "first_seen": "2026-04-04",
+      "data_note": "All numerical values must have source citations. Fields without sources are marked 'not disclosed'. Do not cite unverified figures externally."
+    }
+  }
+}
