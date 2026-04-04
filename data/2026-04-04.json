@@ -1,8 +1,8 @@
 {
   "date": "2026-04-04",
   "dateKr": "2026년 04월 04일",
-  "generatedAt": "2026-04-04T03:13:50.429623+00:00",
-  "brief": "**Deal Flow Memo - April 4, 2026**\n\nEnerVenue's $300M Series B (Energy Storage News) signals continued institutional appetite for alternative battery chemistries beyond lithium-ion, particularly as their 30,000-cycle nickel-hydrogen tech addresses the duration storage gap that pure-play lithium still struggles with at scale. The timing aligns with our thesis that 2026 would be the inflection year for non-lithium technologies reaching commercial viability, though we should monitor whether EnerVenue can execute on manufacturing promises given the sector's history of production delays. \n\nMeanwhile, PV Magazine's BBDF 2026 coverage highlighting slow hybrid PPA uptake among industrials suggests the offtake market remains more conservative than the technology development pace—a persistent gap we're seeing across our portfolio companies. Watch for EnerVenue's manufacturing timeline announcements and any pivot in hybrid PPA structuring that might accelerate industrial adoption, as both trends will impact our storage and solar co-investment opportunities through Q2.",
+  "generatedAt": "2026-04-04T03:36:14.070650+00:00",
+  "brief": "**Deal Flow Memo - April 4, 2026**\n\nEnerVenue's $300M Series B (Energy Storage News) signals continued institutional appetite for differentiated battery chemistries, particularly given their 30,000-cycle nickel-hydrogen positioning against traditional lithium-ion degradation curves. The timing aligns with industrial decarbonization mandates driving demand for ultra-long-duration storage solutions beyond the 4-hour lithium threshold. \n\nMeanwhile, PV Magazine's BBDF coverage on hybrid PPA hesitancy among industrial buyers suggests a maturation gap between storage technology funding and actual procurement adoption. This disconnect typically creates 12-18 month lag opportunities where well-capitalized storage companies can build manufacturing scale before demand acceleration.\n\n**Watch**: Q2 industrial PPA announcement volumes and whether EnerVenue's manufacturing timeline can capture the hybrid market inflection when it materializes.",
   "stats": {
     "total": 23,
     "high": 2,
@@ -2184,7 +2184,7 @@
         "source_count": 1,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-04T03:13:41.841888+00:00"
+        "generated_at": "2026-04-04T03:36:07.437675+00:00"
       },
       "narrative": null,
       "generated_date": "2026-04-04"
@@ -3461,7 +3461,7 @@
       "status": "success",
       "error": null,
       "items": 10,
-      "fetched_at": "2026-04-04T03:13:40.081023+00:00",
+      "fetched_at": "2026-04-04T03:36:04.404038+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -3484,7 +3484,7 @@
       "status": "success",
       "error": null,
       "items": 20,
-      "fetched_at": "2026-04-04T03:13:40.325140+00:00",
+      "fetched_at": "2026-04-04T03:36:04.677954+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -3507,7 +3507,7 @@
       "status": "success",
       "error": null,
       "items": 20,
-      "fetched_at": "2026-04-04T03:13:40.689215+00:00",
+      "fetched_at": "2026-04-04T03:36:05.607208+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -3529,7 +3529,7 @@
       "status": "success",
       "error": null,
       "items": 10,
-      "fetched_at": "2026-04-04T03:13:40.848596+00:00",
+      "fetched_at": "2026-04-04T03:36:05.807352+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -3551,7 +3551,7 @@
       "status": "success",
       "error": null,
       "items": 20,
-      "fetched_at": "2026-04-04T03:13:41.046619+00:00",
+      "fetched_at": "2026-04-04T03:36:06.377710+00:00",
       "source_type": "industry",
       "reliability": 3,
       "topics": [
@@ -3573,7 +3573,7 @@
       "status": "partial",
       "error": "Feed returned 0 usable items",
       "items": 0,
-      "fetched_at": "2026-04-04T03:13:41.226626+00:00",
+      "fetched_at": "2026-04-04T03:36:06.599339+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
