@@ -1,6 +1,6 @@
 {
   "date": "2026-04-04",
-  "generated_at": "2026-04-04T14:12:32.610849+00:00",
+  "generated_at": "2026-04-04T14:58:21.064403+00:00",
   "article_count": 1,
   "source_count": 9,
   "source_logs": [
@@ -11,7 +11,7 @@
       "status": "partial",
       "items": 0,
       "error": null,
-      "fetched_at": "2026-04-04T14:12:32.610849+00:00",
+      "fetched_at": "2026-04-04T14:58:21.064403+00:00",
       "tier": 1,
       "segments": [
         "battery_storage",
@@ -28,7 +28,7 @@
       "status": "failed",
       "items": 0,
       "error": "HTTP 404",
-      "fetched_at": "2026-04-04T14:12:32.610849+00:00",
+      "fetched_at": "2026-04-04T14:58:21.064403+00:00",
       "tier": 1,
       "segments": [
         "battery_storage",
@@ -45,7 +45,7 @@
       "status": "partial",
       "items": 0,
       "error": null,
-      "fetched_at": "2026-04-04T14:12:32.610849+00:00",
+      "fetched_at": "2026-04-04T14:58:21.064403+00:00",
       "tier": 2,
       "segments": [
         "battery_storage",
@@ -62,7 +62,7 @@
       "status": "partial",
       "items": 0,
       "error": null,
-      "fetched_at": "2026-04-04T14:12:32.610849+00:00",
+      "fetched_at": "2026-04-04T14:58:21.064403+00:00",
       "tier": 2,
       "segments": [
         "battery_storage",
@@ -77,7 +77,7 @@
       "status": "partial",
       "items": 0,
       "error": null,
-      "fetched_at": "2026-04-04T14:12:32.610849+00:00",
+      "fetched_at": "2026-04-04T14:58:21.064403+00:00",
       "tier": 2,
       "segments": [
         "battery_storage",
@@ -91,7 +91,7 @@
       "status": "partial",
       "items": 0,
       "error": null,
-      "fetched_at": "2026-04-04T14:12:32.610849+00:00",
+      "fetched_at": "2026-04-04T14:58:21.064403+00:00",
       "tier": 2,
       "segments": [
         "grid_software",
@@ -107,7 +107,7 @@
       "status": "partial",
       "items": 0,
       "error": null,
-      "fetched_at": "2026-04-04T14:12:32.610849+00:00",
+      "fetched_at": "2026-04-04T14:58:21.064403+00:00",
       "tier": 2,
       "segments": [
         "offshore_wind",
@@ -118,10 +118,10 @@
       "id": "cleantechnica",
       "name": "CleanTechnica",
       "url": "https://cleantechnica.com/feed/",
-      "status": "partial",
-      "items": 0,
+      "status": "success",
+      "items": 1,
       "error": null,
-      "fetched_at": "2026-04-04T14:12:32.610849+00:00",
+      "fetched_at": "2026-04-04T14:58:21.064403+00:00",
       "tier": 3,
       "segments": [
         "battery_storage",
@@ -134,10 +134,10 @@
       "id": "electrek",
       "name": "Electrek",
       "url": "https://electrek.co/feed/",
-      "status": "success",
-      "items": 1,
+      "status": "partial",
+      "items": 0,
       "error": null,
-      "fetched_at": "2026-04-04T14:12:32.610849+00:00",
+      "fetched_at": "2026-04-04T14:58:21.064403+00:00",
       "tier": 3,
       "segments": [
         "battery_storage",
@@ -148,22 +148,23 @@
   ],
   "articles": [
     {
-      "article_id": "4b2f7f8261e268bd",
-      "source_id": "electrek",
-      "source_name": "Electrek",
-      "source_url": "https://electrek.co/2026/04/04/biggest-ever-komatsu-pc9000-12-electric-excavator-goes-global/",
+      "article_id": "7f4e999e076134ce",
+      "source_id": "cleantechnica",
+      "source_name": "CleanTechnica",
+      "source_url": "https://cleantechnica.com/2026/04/04/are-landfills-the-wrong-place-to-dispose-of-food-waste/",
       "source_segments": [
         "battery_storage",
+        "grid_software",
         "data_center_power",
         "other_cleantech"
       ],
       "reliability": "★★★",
       "tier": 3,
-      "title": "Biggest ever Komatsu PC9000-12 electric excavator goes global",
-      "summary": "The new electric-drive Komatsu PC9000-12 is the largest hydraulic excavator in the brand’s storied history, capable of moving a massive, 80 tons of material, per pass – at a rate of more than 8,000 tons per hour of operation. more…",
+      "title": "Are Landfills The Wrong Place To Dispose Of Food Waste?",
+      "summary": "Landfills are not designed for food waste, which is organic and can decompose naturally. While it&#8217;s easy to throw out dinner scraps with the garbage, it&#8217;s not the most environmentally-sound method to discard unwanted food. In fact, the US Environmental Protection Agency admits that, while total emissions from municipal solid waste ... [continued] The post Are Landfills The Wrong Place To Dispose Of Food Waste? appeared first on CleanTechnica .",
       "published_date": "2026-04-04",
-      "raw_text": "biggest ever komatsu pc9000-12 electric excavator goes global the new electric-drive komatsu pc9000-12 is the largest hydraulic excavator in the brand’s storied history, capable of moving a massive, 80 tons of material, per pass – at a rate of more than 8,000 tons per hour of operation. more…",
-      "fetched_at": "2026-04-04T14:12:32.610849+00:00"
+      "raw_text": "are landfills the wrong place to dispose of food waste? landfills are not designed for food waste, which is organic and can decompose naturally. while it&#8217;s easy to throw out dinner scraps with the garbage, it&#8217;s not the most environmentally-sound method to discard unwanted food. in fact, the us environmental protection agency admits that, while total emissions from municipal solid waste ... [continued] the post are landfills the wrong place to dispose of food waste? appeared first on cleantechnica .",
+      "fetched_at": "2026-04-04T14:58:21.064403+00:00"
     }
   ]
 }

@@ -30,9 +30,10 @@
     "skip_until": ""
   },
   "doe_main": {
-    "consecutive_fails": 2,
+    "consecutive_fails": 3,
     "last_error": "HTTP 404",
-    "last_fail": "2026-04-04"
+    "last_fail": "2026-04-04",
+    "skip_until": "2026-04-05"
   },
   "energystoragenews": {
     "consecutive_fails": 0,

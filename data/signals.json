@@ -1,6 +1,6 @@
 {
   "date": "2026-04-04",
-  "generated_at": "2026-04-04T14:12:32.610849+00:00",
+  "generated_at": "2026-04-04T14:58:21.064403+00:00",
   "signal_count": 0,
   "stats": {
     "total": 0,
@@ -22,7 +22,7 @@
       "status": "partial",
       "items": 0,
       "error": null,
-      "fetched_at": "2026-04-04T14:12:32.610849+00:00",
+      "fetched_at": "2026-04-04T14:58:21.064403+00:00",
       "tier": 1,
       "segments": [
         "battery_storage",
@@ -39,7 +39,7 @@
       "status": "failed",
       "items": 0,
       "error": "HTTP 404",
-      "fetched_at": "2026-04-04T14:12:32.610849+00:00",
+      "fetched_at": "2026-04-04T14:58:21.064403+00:00",
       "tier": 1,
       "segments": [
         "battery_storage",
@@ -56,7 +56,7 @@
       "status": "partial",
       "items": 0,
       "error": null,
-      "fetched_at": "2026-04-04T14:12:32.610849+00:00",
+      "fetched_at": "2026-04-04T14:58:21.064403+00:00",
       "tier": 2,
       "segments": [
         "battery_storage",
@@ -73,7 +73,7 @@
       "status": "partial",
       "items": 0,
       "error": null,
-      "fetched_at": "2026-04-04T14:12:32.610849+00:00",
+      "fetched_at": "2026-04-04T14:58:21.064403+00:00",
       "tier": 2,
       "segments": [
         "battery_storage",
@@ -88,7 +88,7 @@
       "status": "partial",
       "items": 0,
       "error": null,
-      "fetched_at": "2026-04-04T14:12:32.610849+00:00",
+      "fetched_at": "2026-04-04T14:58:21.064403+00:00",
       "tier": 2,
       "segments": [
         "battery_storage",
@@ -102,7 +102,7 @@
       "status": "partial",
       "items": 0,
       "error": null,
-      "fetched_at": "2026-04-04T14:12:32.610849+00:00",
+      "fetched_at": "2026-04-04T14:58:21.064403+00:00",
       "tier": 2,
       "segments": [
         "grid_software",
@@ -118,7 +118,7 @@
       "status": "partial",
       "items": 0,
       "error": null,
-      "fetched_at": "2026-04-04T14:12:32.610849+00:00",
+      "fetched_at": "2026-04-04T14:58:21.064403+00:00",
       "tier": 2,
       "segments": [
         "offshore_wind",
@@ -129,10 +129,10 @@
       "id": "cleantechnica",
       "name": "CleanTechnica",
       "url": "https://cleantechnica.com/feed/",
-      "status": "partial",
-      "items": 0,
+      "status": "success",
+      "items": 1,
       "error": null,
-      "fetched_at": "2026-04-04T14:12:32.610849+00:00",
+      "fetched_at": "2026-04-04T14:58:21.064403+00:00",
       "tier": 3,
       "segments": [
         "battery_storage",
@@ -145,10 +145,10 @@
       "id": "electrek",
       "name": "Electrek",
       "url": "https://electrek.co/feed/",
-      "status": "success",
-      "items": 1,
+      "status": "partial",
+      "items": 0,
       "error": null,
-      "fetched_at": "2026-04-04T14:12:32.610849+00:00",
+      "fetched_at": "2026-04-04T14:58:21.064403+00:00",
       "tier": 3,
       "segments": [
         "battery_storage",
