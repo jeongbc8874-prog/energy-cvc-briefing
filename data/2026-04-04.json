@@ -1,8 +1,8 @@
 {
   "date": "2026-04-04",
   "dateKr": "2026년 04월 04일",
-  "generatedAt": "2026-04-04T03:55:09.400226+00:00",
-  "brief": "**Deal Flow Memo - April 4, 2026**\n\nEnerVenue's $300M Series B (Energy Storage News) signals continued investor appetite for differentiated battery chemistries, particularly as the 30,000-cycle nickel-hydrogen technology addresses the long-duration storage gap that lithium struggles to fill economically. The timing aligns with increasing grid-scale storage deployments where cycle life trumps energy density concerns. Meanwhile, PV Magazine's BBDF coverage highlights industrial buyers' hesitancy around hybrid PPAs, suggesting corporates remain conservative on complex renewable structures despite potential cost savings. \n\n**Watch:** Other nickel-hydrogen players raising follow-on rounds and whether industrial PPA complexity creates opportunities for simplified renewable procurement platforms. Track if EnerVenue's manufacturing scale-up hits technical milestones that could validate the broader long-duration storage thesis for our pipeline companies.",
+  "generatedAt": "2026-04-04T08:22:43.077684+00:00",
+  "brief": "**Deal Flow Memo - April 4, 2026**\n\nEnerVenue's $300M Series B (Energy Storage News) signals continued institutional appetite for alternative battery chemistries, particularly those promising extreme cycle life like their 30,000-cycle nickel-hydrogen technology. This follows the broader pattern of investors backing non-lithium solutions as grid storage demands longer-duration, higher-cycle applications. Meanwhile, PV Magazine's BBDF 2026 coverage highlights that hybrid PPAs are seeing slower industrial adoption than anticipated, suggesting either pricing misalignment or complexity barriers in the commercial segment. The juxtaposition is notable—capital flowing into next-gen storage hardware while offtake structures for hybrid projects remain challenging. Watch for whether EnerVenue's manufacturing scale-up timelines align with any pivot toward simpler PPA structures that might accelerate industrial buyer adoption.",
   "stats": {
     "total": 23,
     "high": 2,
@@ -2184,10 +2184,127 @@
         "source_count": 1,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-04T03:54:58.796115+00:00"
+        "generated_at": "2026-04-04T08:22:36.315636+00:00"
       },
       "narrative": null,
       "generated_date": "2026-04-04"
+    }
+  },
+  "scorecards": {
+    "c_form_energy": {
+      "company_id": "c_form_energy",
+      "company_name": "Form Energy",
+      "sector": "ess",
+      "stage_label": "Lab",
+      "stage_color": "#6E6E6E",
+      "total_score": 0,
+      "max_possible": 10,
+      "components": [
+        {
+          "rule_id": "commercial_contract",
+          "label": "Commercial Contract",
+          "icon": "📄",
+          "points": 3,
+          "earned": 0,
+          "evidence": [],
+          "color": "#0A6640",
+          "rationale": "Named binding commercial agreement or deployment. Strongest single signal of revenue visibility.",
+          "fired": false
+        },
+        {
+          "rule_id": "certification",
+          "label": "Technical Certification",
+          "icon": "✓",
+          "points": 2,
+          "earned": 0,
+          "evidence": [],
+          "color": "#1A56DB",
+          "rationale": "Independent third-party certification (DNV GL, KPX, UL, TÜV). Required gate for regulated procurement.",
+          "fired": false
+        },
+        {
+          "rule_id": "pilot",
+          "label": "Pilot / Demo",
+          "icon": "🔬",
+          "points": 2,
+          "earned": 0,
+          "evidence": [],
+          "color": "#7D4E00",
+          "rationale": "Confirmed field pilot with a named third-party. De-risks technical claims; precursor to certification or contract.",
+          "fired": false
+        },
+        {
+          "rule_id": "strategic_partner",
+          "label": "Named Strategic Partner",
+          "icon": "🤝",
+          "points": 1,
+          "earned": 0,
+          "evidence": [],
+          "color": "#5B21B6",
+          "rationale": "Named strategic partnership (utility, shipyard, hyperscaler). Directional — value depends on binding terms.",
+          "fired": false
+        },
+        {
+          "rule_id": "financing",
+          "label": "Equity Financing",
+          "icon": "💰",
+          "points": 1,
+          "earned": 0,
+          "evidence": [],
+          "color": "#0A6640",
+          "rationale": "Confirmed equity round. External capital validation. Weight depends on investor type (strategic >> financial).",
+          "fired": false
+        },
+        {
+          "rule_id": "cfo_bd_hire",
+          "label": "CFO / BD Hire",
+          "icon": "👤",
+          "points": 1,
+          "earned": 0,
+          "evidence": [],
+          "color": "#1A56DB",
+          "rationale": "Finance or business development hire signals imminent fundraise or active contract pipeline.",
+          "fired": false
+        },
+        {
+          "rule_id": "grant_only",
+          "label": "Grant Only (no contract)",
+          "icon": "🏛",
+          "points": -1,
+          "earned": 0,
+          "evidence": [],
+          "color": "#D97706",
+          "rationale": "Government grant without commercial anchor. Validates technology direction but not market demand.",
+          "fired": false
+        },
+        {
+          "rule_id": "pr_language",
+          "label": "PR / Vague Language",
+          "icon": "📢",
+          "points": -2,
+          "earned": 0,
+          "evidence": [],
+          "color": "#C0392B",
+          "rationale": "Signals dominated by PR framing, vision statements, or vague exploratory language. No confirmable evidence.",
+          "fired": false
+        },
+        {
+          "rule_id": "negative_signal",
+          "label": "Negative Signal",
+          "icon": "⚠",
+          "points": -2,
+          "earned": 0,
+          "evidence": [],
+          "color": "#DC2626",
+          "rationale": "Delay, funding risk, cancellation, or competitor win. Each negative event subtracts points.",
+          "fired": false
+        }
+      ],
+      "interpretation": "Insufficient",
+      "interp_color": "#6E6E6E",
+      "rationale": "Insufficient evidence to assess. Primary research required.",
+      "note": "Score derived from public RSS signals only. Each point traceable to a source-cited event. No AI inference used.",
+      "signal_count": 1
     }
   },
   "projects": [
@@ -4099,7 +4216,7 @@
       "status": "success",
       "error": null,
       "items": 10,
-      "fetched_at": "2026-04-04T03:54:56.774551+00:00",
+      "fetched_at": "2026-04-04T08:22:35.002258+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -4122,7 +4239,7 @@
       "status": "success",
       "error": null,
       "items": 20,
-      "fetched_at": "2026-04-04T03:54:56.993166+00:00",
+      "fetched_at": "2026-04-04T08:22:35.121160+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -4145,7 +4262,7 @@
       "status": "success",
       "error": null,
       "items": 20,
-      "fetched_at": "2026-04-04T03:54:57.335082+00:00",
+      "fetched_at": "2026-04-04T08:22:35.466766+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -4167,7 +4284,7 @@
       "status": "success",
       "error": null,
       "items": 10,
-      "fetched_at": "2026-04-04T03:54:57.470473+00:00",
+      "fetched_at": "2026-04-04T08:22:35.608130+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -4189,7 +4306,7 @@
       "status": "success",
       "error": null,
       "items": 20,
-      "fetched_at": "2026-04-04T03:54:57.976013+00:00",
+      "fetched_at": "2026-04-04T08:22:35.780545+00:00",
       "source_type": "industry",
       "reliability": 3,
       "topics": [
@@ -4211,7 +4328,7 @@
       "status": "partial",
       "error": "Feed returned 0 usable items",
       "items": 0,
-      "fetched_at": "2026-04-04T03:54:58.172186+00:00",
+      "fetched_at": "2026-04-04T08:22:35.964506+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
