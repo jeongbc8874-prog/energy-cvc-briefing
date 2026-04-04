@@ -69,7 +69,8 @@ ARCHIVE  = DATA / "archive"
 FUZZY_THRESHOLD = 85
 
 # Gap 고도화 임계값
-GAP_ESCALATE_DAYS  = 7    # 7일+ persisting → severity 상향
+GAP_ESCALATE_DAYS  = 7    # 7일+  persisting → severity 한 단계 상향
+GAP_CRITICAL_DAYS  = 14   # 14일+ persisting → severity 강제 critical
 GAP_LONGTERM_DAYS  = 30   # 30일+ → long_term_risk 태그
 
 
@@ -170,24 +171,39 @@ def _days_since(date_str: str) -> int:
 #    - resolved: 오늘 없어진 gap
 # ══════════════════════════════════════════════════════════════════
 
-_SEV_UP = {"medium": "high", "high": "critical", "critical": "critical"}
+_SEV_UP  = {"medium": "high", "high": "critical", "critical": "critical"}
 _SEV_ORD = {"critical": 0, "high": 1, "medium": 2, "low": 3}
 
 
 def _escalate_gap(gap: dict) -> dict:
-    """days_open 기반 severity 상향 + long_term_risk 태그."""
+    """
+    days_open 기반 severity 자동 상향 규칙:
+      7일+  → severity 한 단계 상향 (medium→high, high→critical)
+      14일+ → severity 강제 critical (rule ID 무관)
+      30일+ → long_term_risk: true 태그
+    original_severity는 최초 감지 시 severity를 보존 (상향 이전 값).
+    """
     g = dict(gap)
     days = _days_since(g.get("first_seen", TODAY))
     g["days_open"] = days
 
-    original_sev = g.get("original_severity", g["severity"])
-    g["original_severity"] = original_sev
+    # 최초 severity 보존 (한 번만 기록, 이후 덮어쓰지 않음)
+    g["original_severity"] = g.get("original_severity", g["severity"])
+    original_sev = g["original_severity"]
 
-    if days >= GAP_ESCALATE_DAYS and g["severity"] != "critical":
-        g["severity"] = _SEV_UP.get(original_sev, original_sev)
+    if days >= GAP_CRITICAL_DAYS:
+        # 14일+ → 무조건 critical
+        g["severity"]  = "critical"
         g["escalated"] = True
+        g["escalation_reason"] = f"{days}d persisting → forced critical (≥{GAP_CRITICAL_DAYS}d)"
+    elif days >= GAP_ESCALATE_DAYS and g["severity"] != "critical":
+        # 7일+ → 한 단계 상향
+        g["severity"]  = _SEV_UP.get(original_sev, original_sev)
+        g["escalated"] = True
+        g["escalation_reason"] = f"{days}d persisting → {g['severity']} (≥{GAP_ESCALATE_DAYS}d)"
     else:
         g["escalated"] = False
+        g["escalation_reason"] = None
 
     g["long_term_risk"] = days >= GAP_LONGTERM_DAYS
     return g
@@ -273,13 +289,47 @@ _PATTERN_RULES = [
 
 
 def _infer_stage_from_events(all_events: list[dict]) -> tuple[str, str]:
-    """누적 이벤트 전체 타입으로 stage/color 추론."""
-    types = {e.get("event_type", "") for e in all_events}
+    """
+    누적 이벤트 전체 타입 + high signal 개수로 stage/color 추론.
+
+    추가 규칙 (high signal 자동 승급):
+      high >= 3  AND  현재 stage가 Lab  → 최소 Pilot으로 승급
+      high >= 5  AND  현재 stage가 Pilot → 최소 Demo으로 승급
+    이 규칙은 type-based 추론 결과에 추가로 적용되며,
+    이미 더 높은 stage가 추론된 경우에는 적용하지 않음.
+    """
+    types      = {e.get("event_type", "") for e in all_events}
+    high_count = sum(1 for e in all_events if e.get("signal_tier") == "high")
+
+    # 1단계: event type 기반 STAGE_LADDER 추론
+    inferred_label  = "Lab"
+    inferred_color  = "#6E6E6E"
     for label, color, req, _ in _STAGE_LADDER:
         if req and not (req & types):
             continue
-        return label, color
-    return "Lab", "#6E6E6E"
+        inferred_label = label
+        inferred_color = color
+        break
+
+    # 2단계: high signal 개수 기반 자동 승급
+    _rank = {"Lab":0,"Pilot":1,"Demo":2,"First Commercial":3,"Scaling":4,"PF-Ready":5}
+    _by_rank = {v:k for k,v in _rank.items()}
+    _colors  = {"Lab":"#6E6E6E","Pilot":"#7D4E00","Demo":"#5B21B6",
+                "First Commercial":"#1A56DB","Scaling":"#0A6640","PF-Ready":"#0F4C75"}
+
+    current_rank = _rank.get(inferred_label, 0)
+    min_rank     = current_rank
+
+    if high_count >= 3:
+        min_rank = max(min_rank, _rank["Pilot"])    # Lab → 최소 Pilot
+    if high_count >= 5:
+        min_rank = max(min_rank, _rank["Demo"])     # Pilot → 최소 Demo
+
+    if min_rank > current_rank:
+        inferred_label = _by_rank[min_rank]
+        inferred_color = _colors[inferred_label]
+
+    return inferred_label, inferred_color
 
 
 def _infer_pattern(all_events: list[dict]) -> str:
@@ -292,11 +342,58 @@ def _infer_pattern(all_events: list[dict]) -> str:
     return "low_density"
 
 
-def _infer_ttr(stage: str, pattern: str, high_count: int) -> tuple[str, str]:
+def _infer_ttr(
+    stage:       str,
+    pattern:     str,
+    high_count:  int,
+    active_gaps: list[dict] | None = None,
+    first_seen:  str               = "",
+) -> tuple[str, str]:
+    """
+    TTR을 stage + pattern + high_count + gap 압박 + 누적 기간으로 종합 계산.
+
+    기본 규칙 (_TTR_RULES):
+      near_term : PF-Ready / Scaling,
+                  또는 First Commercial + 강한 패턴 + high >= 2
+      mid_term  : First Commercial / Demo / Pilot + 긍정적 패턴
+      long_term : 나머지
+
+    패널티 조정:
+      active critical gap >= 2   → TTR 한 단계 하향 (near→mid, mid→long)
+      long_term_risk gap 존재     → TTR 한 단계 하향
+      누적 기간 < 14일            → long_term 강제 (데이터 부족)
+    """
+    gaps = active_gaps or []
+
+    # 기본 TTR
+    base_ttr = "long_term"
     for slug, color, fn in _TTR_RULES:
         if fn(stage, pattern, high_count):
-            return slug, color
-    return "long_term", "#6E6E6E"
+            base_ttr = slug
+            break
+
+    # 패널티 계산
+    penalty = 0
+    crit_gaps    = sum(1 for g in gaps if g.get("severity") == "critical" and g.get("status") != "resolved")
+    has_ltr      = any(g.get("long_term_risk") for g in gaps if g.get("status") != "resolved")
+    tracking_days = _days_since(first_seen) if first_seen else 0
+
+    if tracking_days < 14:
+        return "long_term", "#6E6E6E"   # 데이터 부족 → 판단 유보
+
+    if crit_gaps >= 2:
+        penalty += 1
+    if has_ltr:
+        penalty += 1
+
+    _ttr_order  = ["near_term", "mid_term", "long_term"]
+    _ttr_colors = {"near_term": "#C0392B", "mid_term": "#7D4E00", "long_term": "#6E6E6E"}
+
+    idx = _ttr_order.index(base_ttr) if base_ttr in _ttr_order else 2
+    idx = min(idx + penalty, len(_ttr_order) - 1)
+
+    final = _ttr_order[idx]
+    return final, _ttr_colors[final]
 
 
 # ══════════════════════════════════════════════════════════════════
@@ -540,16 +637,44 @@ _SECTOR_GATE = {
 
 
 def build_next_step(stage: str, sector: str, active_gaps: list[dict]) -> dict:
+    """
+    top_blockers 선택 기준 (severity + persisting 기간 복합 점수):
+      score = sev_weight + persistence_bonus + ltr_bonus
+      sev_weight      : critical=100, high=50, medium=20
+      persistence_bonus: days_open * 0.5  (오래된 gap일수록 우선)
+      ltr_bonus       : long_term_risk이면 +30
+    상위 3개만 포함.
+    """
+    def _blocker_score(g: dict) -> float:
+        sev_w = {"critical": 100, "high": 50, "medium": 20}.get(g.get("severity", "low"), 0)
+        days  = g.get("days_open", 0)
+        ltr   = 30 if g.get("long_term_risk") else 0
+        return sev_w + days * 0.5 + ltr
+
     path = _STAGE_NEXT.get(stage, _STAGE_NEXT["Lab"]).copy()
     path["current_stage"] = stage
     path["sector_gate"]   = _SECTOR_GATE.get(sector, "Sector-specific gate — see rulebook")
-    path["top_blockers"]  = [
-        {"gap_type": g["gap_type"], "severity": g["severity"],
-         "days_open": g.get("days_open", 0),
-         "long_term_risk": g.get("long_term_risk", False)}
-        for g in active_gaps
-        if g.get("severity") in ("critical", "high") and g.get("status") != "resolved"
-    ][:3]
+
+    candidates = [
+        g for g in active_gaps
+        if g.get("severity") in ("critical", "high", "medium")
+        and g.get("status") != "resolved"
+    ]
+    candidates.sort(key=_blocker_score, reverse=True)
+
+    path["top_blockers"] = [
+        {
+            "gap_type":        g["gap_type"],
+            "severity":        g["severity"],
+            "original_severity": g.get("original_severity", g["severity"]),
+            "days_open":       g.get("days_open", 0),
+            "long_term_risk":  g.get("long_term_risk", False),
+            "escalated":       g.get("escalated", False),
+            "escalation_reason": g.get("escalation_reason"),
+            "blocker_score":   round(_blocker_score(g), 1),
+        }
+        for g in candidates[:3]
+    ]
     return path
 
 
@@ -582,15 +707,14 @@ def build_profile(co: dict, prev: dict, scorecard: dict) -> Optional[dict]:
     # ── 2. 누적 통계 ──────────────────────────────────────────
     stats = _calc_cumulative_stats(all_evs)
 
-    # ── 3. Stage 동적 재추론 (누적 이벤트 기준) ───────────────
+    # ── 3. Stage 동적 재추론 (누적 이벤트 + high signal 승급) ──
     cum_stage, cum_stage_color = _infer_stage_from_events(all_evs)
     cum_pattern_id = _infer_pattern(all_evs)
-    cum_ttr, cum_ttr_color = _infer_ttr(cum_stage, cum_pattern_id, stats["high"])
 
     # 오늘 enrich_company()의 stage_label도 참고 (더 높으면 채택)
     today_stage = co.get("stage_label", "Lab")
-    stage_rank  = {"Lab":0,"Pilot":1,"Demo":2,"First Commercial":3,"Scaling":4,"PF-Ready":5}
-    if stage_rank.get(today_stage, 0) > stage_rank.get(cum_stage, 0):
+    _rank = {"Lab":0,"Pilot":1,"Demo":2,"First Commercial":3,"Scaling":4,"PF-Ready":5}
+    if _rank.get(today_stage, 0) > _rank.get(cum_stage, 0):
         cum_stage, cum_stage_color = today_stage, co.get("stage_color", cum_stage_color)
 
     # stage 변화 이력
@@ -602,6 +726,7 @@ def build_profile(co: dict, prev: dict, scorecard: dict) -> Optional[dict]:
             "date":        TODAY,
             "from_stage":  last_stage or "unknown",
             "auto":        True,
+            "trigger":     f"high_signals={stats['high']}, types={list({e.get('event_type','') for e in all_evs[:5]})}",
         })
 
     # ── 4. Gaps 고도화 병합 ───────────────────────────────────
@@ -618,7 +743,19 @@ def build_profile(co: dict, prev: dict, scorecard: dict) -> Optional[dict]:
         "high":            sum(1 for g in active_gaps if g.get("severity") == "high"),
         "escalated":       sum(1 for g in active_gaps if g.get("escalated")),
         "long_term_risks": sum(1 for g in active_gaps if g.get("long_term_risk")),
+        "forced_critical": sum(1 for g in active_gaps
+                               if g.get("days_open", 0) >= GAP_CRITICAL_DAYS
+                               and g.get("original_severity") != "critical"),
     }
+
+    # ── 5b. TTR — gap 압박 + 누적 기간 반영 ─────────────────
+    cum_ttr, cum_ttr_color = _infer_ttr(
+        stage       = cum_stage,
+        pattern     = cum_pattern_id,
+        high_count  = stats["high"],
+        active_gaps = active_gaps,
+        first_seen  = prev.get("first_seen", TODAY),
+    )
 
     # ── 5. Buyer Activity 누적 ────────────────────────────────
     buyer_activity = merge_buyer_activity(
