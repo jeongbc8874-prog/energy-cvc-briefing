@@ -1207,6 +1207,36 @@ _resolver = CompanyResolver()
 def match_company(raw_text):
     """SEED aliases 직접 매칭 (normalize 분류기용)."""
     return _resolver.resolve_from_raw_text(raw_text)
+
+
+# ── NER 기반 회사명 감지 (SEED 매칭 실패시 fallback) ─────────────────────
+_SIGNAL_NER_PATTERNS = [
+    r'\bForm Energy\b', r'\bEnerVenue\b', r'\bInvinity\b', r'\bNorthvolt\b',
+    r'\bFreyr\b', r'\bEnergy Dome\b', r'\bGravitricity\b', r'\bMalta Inc\b',
+    r'\bRedwood Materials\b', r'\bLi-Cycle\b', r'\bAscend Elements\b',
+    r'\bPlug Power\b', r'\bNel(?:\s+ASA)?\b', r'\bITM Power\b',
+    r'\bHysata\b', r'\bH2 Green Steel\b', r'\bHystar\b',
+    r'\bBloom Energy\b', r'\bFuelCell Energy\b', r'\bBallard Power\b',
+    r'\bKrakenFlex\b', r'\bVirta\b', r'\bEnerNOC\b',
+    r'\bNuScale\b', r'\bTerraPower\b', r'\bKairos Power\b', r'\bOklo\b',
+    r'\bX-energy\b', r'\bCommonwealth Fusion\b', r'\bHelion\b',
+    r'\bEnphase\b', r'\bFirst Solar\b', r'\bSunrun\b', r'\bSolarEdge\b',
+    r'\bQCells\b', r'\bArray Technologies\b',
+    r'\bAmogy\b', r'\bSunfire\b', r'\bCeres Power\b',
+    r'\b그리드위즈\b', r'\b식스티헤르츠\b', r'\b빈센\b',
+    r'\b스탠다드에너지\b', r'\b하이리움\b', r'\b씨에스에너지\b',
+]
+_SIGNAL_NER_RE = re.compile('|'.join(_SIGNAL_NER_PATTERNS), re.IGNORECASE)
+
+
+def _ner_resolve(title: str, segment: str) -> tuple:
+    """title에서 NER로 회사명 추출 → resolver 매칭. (co_id, co_name) or (None, None)."""
+    for m in _SIGNAL_NER_RE.finditer(title):
+        name = m.group().strip()
+        cid, cnm, _ = _resolver.resolve(name, segment)
+        if cid:
+            return cid, cnm
+    return None, None
 def match_buyers(raw_text):
     return [{"id":b["id"],"name":b["name"],"type":b["type"]}
             for b in STRATEGIC_BUYERS if any(a.lower() in raw_text for a in b["aliases"])]
@@ -1484,6 +1514,9 @@ def normalize(raw_items):
         clf       = classify(item["raw_text"])
         segment   = infer_segment(item["raw_text"], item["source_segments"])
         co_id, co_nm = match_company(item["raw_text"])
+        # SEED 미매칭 → NER fallback으로 신규 회사 자동 감지
+        if not co_id:
+            co_id, co_nm = _ner_resolve(item.get("title",""), item.get("source_segments",[""])[0] if item.get("source_segments") else "")
         buyers    = match_buyers(item["raw_text"])
         project_matches = match_project(item["raw_text"])
         strength  = score_event(item["raw_text"], clf["base_score"], co_id is not None)
