@@ -1,15 +1,15 @@
 {
   "date": "2026-04-05",
   "dateKr": "2026년 04월 05일",
-  "generatedAt": "2026-04-05T12:44:02.500691+00:00",
-  "brief": "**Deal Flow Memo - Energy Storage Sector Update**\n\nThe convergence of massive AI data center power demands and utility-scale storage deployment is creating unprecedented offtake visibility, with Form Energy's 12GWh iron-air agreement and American Battery Factory's 4.5GWh LFP contracts (Energy Storage News) signaling institutional confidence in long-duration storage economics. EnerVenue's $300M Series B for nickel-hydrogen manufacturing demonstrates that alternative chemistries beyond lithium are attracting serious growth capital, particularly those promising 30,000+ cycle durability for grid applications. The European market is showing strong momentum with Pexapark logging over 1GWh of storage PPAs in March alone, while the €55M raised by route-to-market optimizers Entrix and GridBeyond (Energy Storage News) highlights the critical need for software layers that can monetize storage assets across multiple revenue streams. \n\n**Watch next**: Industrial buyer adoption of hybrid PPAs remains sluggish per BBDF 2026 data (PV Magazine), suggesting the next inflection point will be corporate procurement teams getting comfortable with storage-coupled renewables contracts—likely creating opportunities for standardization platforms or risk management tools in this space.",
+  "generatedAt": "2026-04-05T16:01:57.128481+00:00",
+  "brief": "**Deal Flow Memo - April 5, 2026**\n\nThe battery storage sector is showing clear acceleration across the value chain, with significant offtake commitments emerging from AI data center demand alongside traditional grid applications. Form Energy's 12GWh iron-air battery agreement with US data centers (Energy Storage News) represents a notable shift toward long-duration storage for power-hungry AI infrastructure, while American Battery Factory's 4.5GWh LFP offtake deals (Energy Storage News) indicate continued momentum in the established lithium segment. EnerVenue's $300M Series B for nickel-hydrogen manufacturing (Energy Storage News) suggests investors are backing alternative chemistries that promise superior cycle life, positioning for the industrial/commercial market requiring frequent cycling.\n\nEuropean markets are maturing rapidly on the software/optimization side, with route-to-market players Entrix and GridBeyond raising €55M combined (Energy Storage News) and Pexapark logging over 1GWh in storage PPAs in March alone (PV Magazine). Watch for more corporate offtake announcements as AI companies secure dedicated clean energy capacity, and monitor whether the hybrid PPA market gains traction among industrial buyers given current slow uptake noted by PV Magazine.",
   "stats": {
     "total": 71,
     "high": 6,
     "medium": 13,
     "negative": 2,
     "matched": 5,
-    "filtered_out": 157,
+    "filtered_out": 161,
     "companies_with_signals": 15,
     "auto_companies": 2,
     "by_segment": {
@@ -3031,51 +3031,6 @@
       }
     },
     {
-      "id": "bbe5f14ef843",
-      "title": "Rivian shares production and delivery numbers ahead of full Q1 2026 financial results",
-      "summary": "<div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2026/03/Rivian-R2-Pricing-R1-comparison.jpg?quality=82&#038;strip=all&#038;w=1400\" /></div><p>American automaker <a href=\"https://electrek.co/guides/rivian/\">Rivian</a> has posted its production and delivery figures for Q1 of 2026 and has set the date for its full financial report. </p>\n\n\n\n <a class=\"more-link\" href=\"https://electrek.co/2026/04/02/rivian-shares-production-delivery-numbers-q1-2026-financial-results/#",
-      "event_date": "2026-04-02",
-      "source_name": "Electrek",
-      "source_url": "https://electrek.co/2026/04/02/rivian-shares-production-delivery-numbers-q1-2026-financial-results/",
-      "event_type": "News",
-      "impact_type": "Informational",
-      "matched_rule": null,
-      "tier": 5,
-      "signal_stage": "strategic",
-      "signal_strength": 23,
-      "signal_tier": "low",
-      "score_breakdown": [
-        {
-          "id": "timeframe",
-          "delta": 8,
-          "reason": "Concrete timeframe stated",
-          "group": "boost"
-        }
-      ],
-      "segment": "ess",
-      "company_id": null,
-      "company_name": "Unassigned",
-      "buyer_matches": [],
-      "project_matches": [],
-      "is_negative": false,
-      "neg_subtype": null,
-      "is_noise": false,
-      "evidence": {
-        "observed_fact": "Rivian shares production and delivery numbers ahead of full Q1 2026 financial results",
-        "observed_fact_detail": "<div class=\"feat-image\"><img src=\"https://electrek.",
-        "source_label": "Electrek · 2026-04-02",
-        "matched_rule_name": "no rule matched",
-        "matched_rule_tier": "Tier 5 — News",
-        "why_it_matters": "No specific investment pattern matched. Context only — not weighted without corroboration.",
-        "missing_evidence": [
-          "No investment-relevant pattern matched",
-          "Primary research required"
-        ],
-        "confidence": "Low",
-        "confidence_rationale": "Score below threshold. Context only."
-      }
-    },
-    {
       "id": "48c0b10216d9",
       "title": "Tesla Delivers 358,023 Vehicles in 1st Quarter — CHARTS & GRAPHS",
       "summary": "Tesla delivered just 358,023 vehicles in the 1st quarter, which was a 6.3% increase over Q1 2025, but was also the second worst quarter for the company since Q3 2022. Meanwhile, the company produced 408,386 vehicles. Let’s take a little closer look at the vehicle deliveries, including some estimates on ... [continued] The post Tesla Delivers 358,023 Vehicles in 1st Quarter — CHARTS & GRAPHS appeared first on CleanTechnica .",
@@ -3109,6 +3064,51 @@
         "observed_fact": "Tesla Delivers 358,023 Vehicles in 1st Quarter — CHARTS & GRAPHS",
         "observed_fact_detail": "Tesla delivered just 358,023 vehicles in the 1st quarter, which was a 6.",
         "source_label": "CleanTechnica · 2026-04-02",
+        "matched_rule_name": "no rule matched",
+        "matched_rule_tier": "Tier 5 — News",
+        "why_it_matters": "No specific investment pattern matched. Context only — not weighted without corroboration.",
+        "missing_evidence": [
+          "No investment-relevant pattern matched",
+          "Primary research required"
+        ],
+        "confidence": "Low",
+        "confidence_rationale": "Score below threshold. Context only."
+      }
+    },
+    {
+      "id": "bbe5f14ef843",
+      "title": "Rivian shares production and delivery numbers ahead of full Q1 2026 financial results",
+      "summary": "American automaker Rivian has posted its production and delivery figures for Q1 of 2026 and has set the date for its full financial report. more…",
+      "event_date": "2026-04-02",
+      "source_name": "Electrek",
+      "source_url": "https://electrek.co/2026/04/02/rivian-shares-production-delivery-numbers-q1-2026-financial-results/",
+      "event_type": "News",
+      "impact_type": "Informational",
+      "matched_rule": null,
+      "tier": 5,
+      "signal_stage": "strategic",
+      "signal_strength": 23,
+      "signal_tier": "low",
+      "score_breakdown": [
+        {
+          "id": "timeframe",
+          "delta": 8,
+          "reason": "Concrete timeframe stated",
+          "group": "boost"
+        }
+      ],
+      "segment": "ess",
+      "company_id": null,
+      "company_name": "Unassigned",
+      "buyer_matches": [],
+      "project_matches": [],
+      "is_negative": false,
+      "neg_subtype": null,
+      "is_noise": false,
+      "evidence": {
+        "observed_fact": "Rivian shares production and delivery numbers ahead of full Q1 2026 financial results",
+        "observed_fact_detail": "American automaker Rivian has posted its production and delivery figures for Q1 of 2026 and has set the date for its full financial report.",
+        "source_label": "Electrek · 2026-04-02",
         "matched_rule_name": "no rule matched",
         "matched_rule_tier": "Tier 5 — News",
         "why_it_matters": "No specific investment pattern matched. Context only — not weighted without corroboration.",
@@ -5707,7 +5707,7 @@
       "name": "EnerVenue",
       "sector": "ess",
       "country": "",
-      "stage": "Lab",
+      "stage": "Pilot",
       "source": "auto",
       "aliases": [
         "enervenue",
@@ -6196,7 +6196,7 @@
         "source_count": 0,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-05T12:43:49.280815+00:00"
+        "generated_at": "2026-04-05T16:01:44.418568+00:00"
       },
       "narrative": null,
       "generated_date": "2026-04-05"
@@ -6355,7 +6355,7 @@
         "source_count": 0,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-05T12:43:49.280844+00:00"
+        "generated_at": "2026-04-05T16:01:44.418599+00:00"
       },
       "narrative": null,
       "generated_date": "2026-04-05"
@@ -6525,7 +6525,7 @@
         "source_count": 0,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-05T12:43:49.280859+00:00"
+        "generated_at": "2026-04-05T16:01:44.418614+00:00"
       },
       "narrative": null,
       "generated_date": "2026-04-05"
@@ -6695,7 +6695,7 @@
         "source_count": 0,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-05T12:43:49.280872+00:00"
+        "generated_at": "2026-04-05T16:01:44.418628+00:00"
       },
       "narrative": null,
       "generated_date": "2026-04-05"
@@ -6847,7 +6847,7 @@
         "source_count": 0,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-05T12:43:49.280887+00:00"
+        "generated_at": "2026-04-05T16:01:44.418638+00:00"
       },
       "narrative": null,
       "generated_date": "2026-04-05"
@@ -7017,7 +7017,7 @@
         "source_count": 0,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-05T12:43:49.280899+00:00"
+        "generated_at": "2026-04-05T16:01:44.418649+00:00"
       },
       "narrative": null,
       "generated_date": "2026-04-05"
@@ -7174,9 +7174,9 @@
         "source_count": 2,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-05T12:43:49.280913+00:00"
+        "generated_at": "2026-04-05T16:01:44.418689+00:00"
       },
-      "narrative": "Form Energy has secured a significant 12GWh supply agreement for iron-air batteries targeting AI data center applications, demonstrating commercial traction in the multi-day storage market. However, critical validation gaps remain: no third-party certifications from recognized bodies (DNV GL, TÜV, KPX, UL), no named strategic buyers providing demand-side validation, and no confirmed operational deployments to verify commercial-scale technical readiness. The anonymous nature of the AI data center customer and absence of independent technical validation raises questions about deal certainty and technology maturity for regulated procurement processes.\n\n**Next verification priority:** Identify the specific AI data center customer(s) and confirm their commitment structure and timeline requirements.",
+      "narrative": "Form Energy has secured a substantial 12GWh supply agreement for iron-air batteries targeting AI data centers, demonstrating meaningful commercial traction in the multi-day storage market. However, critical validation gaps remain: no third-party certifications from recognized bodies (DNV GL, TÜV, etc.), no named strategic buyers for demand-side validation, and no confirmed operational deployments to verify commercial-scale technical readiness. The contract represents significant revenue potential but lacks the de-risking milestones typically required for regulated procurement processes.\n\n**Next verification priority:** Identify the unnamed AI data center buyer(s) and confirm their procurement timeline/requirements.",
       "generated_date": "2026-04-05"
     },
     "c_autogrid": {
@@ -7344,7 +7344,7 @@
         "source_count": 0,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-05T12:43:54.137894+00:00"
+        "generated_at": "2026-04-05T16:01:49.323909+00:00"
       },
       "narrative": null,
       "generated_date": "2026-04-05"
@@ -7478,7 +7478,7 @@
         "source_count": 0,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-05T12:43:54.137928+00:00"
+        "generated_at": "2026-04-05T16:01:49.323938+00:00"
       },
       "narrative": null,
       "generated_date": "2026-04-05"
@@ -7638,7 +7638,7 @@
         "source_count": 0,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-05T12:43:54.137944+00:00"
+        "generated_at": "2026-04-05T16:01:49.323954+00:00"
       },
       "narrative": null,
       "generated_date": "2026-04-05"
@@ -7771,7 +7771,7 @@
         "source_count": 0,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-05T12:43:54.137957+00:00"
+        "generated_at": "2026-04-05T16:01:49.323967+00:00"
       },
       "narrative": null,
       "generated_date": "2026-04-05"
@@ -7931,7 +7931,7 @@
         "source_count": 0,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-05T12:43:54.137971+00:00"
+        "generated_at": "2026-04-05T16:01:49.323984+00:00"
       },
       "narrative": null,
       "generated_date": "2026-04-05"
@@ -8091,7 +8091,7 @@
         "source_count": 0,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-05T12:43:54.137982+00:00"
+        "generated_at": "2026-04-05T16:01:49.323996+00:00"
       },
       "narrative": null,
       "generated_date": "2026-04-05"
@@ -8266,7 +8266,7 @@
         "source_count": 1,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-05T12:43:54.138002+00:00"
+        "generated_at": "2026-04-05T16:01:49.324014+00:00"
       },
       "narrative": null,
       "generated_date": "2026-04-05"
@@ -8423,7 +8423,7 @@
         "source_count": 1,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-05T12:43:54.138017+00:00"
+        "generated_at": "2026-04-05T16:01:49.324027+00:00"
       },
       "narrative": null,
       "generated_date": "2026-04-05"
@@ -13289,7 +13289,7 @@
       "status": "success",
       "error": null,
       "items": 10,
-      "fetched_at": "2026-04-05T12:43:47.848551+00:00",
+      "fetched_at": "2026-04-05T16:01:40.600531+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -13312,7 +13312,7 @@
       "status": "success",
       "error": null,
       "items": 20,
-      "fetched_at": "2026-04-05T12:43:47.924811+00:00",
+      "fetched_at": "2026-04-05T16:01:40.681191+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -13335,7 +13335,7 @@
       "status": "success",
       "error": null,
       "items": 20,
-      "fetched_at": "2026-04-05T12:43:48.193833+00:00",
+      "fetched_at": "2026-04-05T16:01:40.958828+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -13357,7 +13357,7 @@
       "status": "success",
       "error": null,
       "items": 10,
-      "fetched_at": "2026-04-05T12:43:48.340173+00:00",
+      "fetched_at": "2026-04-05T16:01:43.485141+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -13379,7 +13379,7 @@
       "status": "success",
       "error": null,
       "items": 20,
-      "fetched_at": "2026-04-05T12:43:48.678964+00:00",
+      "fetched_at": "2026-04-05T16:01:43.640386+00:00",
       "source_type": "industry",
       "reliability": 3,
       "topics": [
@@ -13401,7 +13401,7 @@
       "status": "partial",
       "error": "Feed returned 0 usable items",
       "items": 0,
-      "fetched_at": "2026-04-05T12:43:48.860100+00:00",
+      "fetched_at": "2026-04-05T16:01:43.824165+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -13426,7 +13426,7 @@
       "status": "partial",
       "error": null,
       "items": 0,
-      "fetched_at": "2026-04-05T12:43:46.944030+00:00",
+      "fetched_at": "2026-04-05T16:01:40.103205+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -13447,7 +13447,7 @@
       "status": "partial",
       "error": null,
       "items": 0,
-      "fetched_at": "2026-04-05T12:43:46.867560+00:00",
+      "fetched_at": "2026-04-05T16:01:39.984823+00:00",
       "source_type": "government",
       "reliability": 1,
       "topics": [
@@ -13464,10 +13464,10 @@
       "id": "cleantechnica",
       "name": "CleanTechnica",
       "url": "https://cleantechnica.com/feed/",
-      "status": "partial",
+      "status": "success",
       "error": null,
-      "items": 0,
-      "fetched_at": "2026-04-05T12:43:46.996823+00:00",
+      "items": 2,
+      "fetched_at": "2026-04-05T16:01:40.168372+00:00",
       "source_type": "industry",
       "reliability": 3,
       "topics": [
@@ -13508,7 +13508,7 @@
       "status": "partial",
       "error": null,
       "items": 0,
-      "fetched_at": "2026-04-05T12:43:47.425488+00:00",
+      "fetched_at": "2026-04-05T16:01:40.364469+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -13893,11 +13893,11 @@
   },
   "reliability": {
     "sources_total": 14,
-    "sources_ok": 5,
-    "sources_partial": 7,
+    "sources_ok": 6,
+    "sources_partial": 6,
     "sources_failed": 2,
     "new_events": 71,
-    "filtered_out": 157
+    "filtered_out": 161
   },
   "_feature_stubs": {
     "analyst_notes": "⚠ PAID PILOT — stored in private DB, not in public JSON",

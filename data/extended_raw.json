@@ -3154,6 +3154,64 @@
       "summary": "WBS Power is set to develop a 3.2GW hyperscale data centre campus in Lublewo, in Poland’s Pomerania region.",
       "published_date": "2026-03-25",
       "raw_text": "wbs power to develop 3.2gw data centre campus in poland wbs power is set to develop a 3.2gw hyperscale data centre campus in lublewo, in poland’s pomerania region."
+    },
+    {
+      "source_id": "cleantechnica",
+      "source_name": "CleanTechnica",
+      "source_url": "https://cleantechnica.com/2026/04/05/malaysias-long-running-serena-enters-e-power-era-with-solid-early-demand/",
+      "source_segments": [
+        "ess",
+        "dc_power",
+        "forecasting",
+        "grid_sw"
+      ],
+      "title": "Malaysia’s Long-Running Serena Enters e-POWER Era with Solid Early Demand",
+      "summary": "Within the first month of release, the Nissan Serena e-POWER recorded over 1,300 bookings and around 250 deliveries nationwide, indicating solid initial demand for a midsized MPV in this price range. April deliveries are now approaching 1,000 units. Nissan assembler and distributor Edaran Tan Chong Motor introduced the sixth-generation version ... [continued] The post Malaysia’s Long-Running Serena Enters e-POWER Era with Solid Early Demand appeared first on CleanTechnica .",
+      "published_date": "2026-04-05",
+      "raw_text": "malaysia’s long-running serena enters e-power era with solid early demand within the first month of release, the nissan serena e-power recorded over 1,300 bookings and around 250 deliveries nationwide, indicating solid initial demand for a midsized mpv in this price range. april deliveries are now approaching 1,000 units. nissan assembler and distributor edaran tan chong motor introduced the sixth-generation version ... [continued] the post malaysia’s long-running serena enters e-power era with solid early demand appeared first on cleantechnica ."
+    },
+    {
+      "source_id": "cleantechnica",
+      "source_name": "CleanTechnica",
+      "source_url": "https://cleantechnica.com/2026/04/05/how-should-progressive-us-midterm-candidates-frame-their-arguments-about-climate-change/",
+      "source_segments": [
+        "ess",
+        "dc_power",
+        "forecasting",
+        "grid_sw"
+      ],
+      "title": "How Should Progressive US Midterm Candidates Frame Their Arguments About Climate Change?",
+      "summary": "Progressives are already working hard to win back the US House of Representatives in 2026 as a fundamental piece of the “Stop Trump” strategy. The politicalization of climate change means that there is much at stake for climate activists in the upcoming election, as its results will help to shape ... [continued] The post How Should Progressive US Midterm Candidates Frame Their Arguments About Climate Change? appeared first on CleanTechnica .",
+      "published_date": "2026-04-05",
+      "raw_text": "how should progressive us midterm candidates frame their arguments about climate change? progressives are already working hard to win back the us house of representatives in 2026 as a fundamental piece of the “stop trump” strategy. the politicalization of climate change means that there is much at stake for climate activists in the upcoming election, as its results will help to shape ... [continued] the post how should progressive us midterm candidates frame their arguments about climate change? appeared first on cleantechnica ."
+    },
+    {
+      "source_id": "electrek",
+      "source_name": "Electrek",
+      "source_url": "https://electrek.co/2026/04/05/vinfast-prepares-to-enter-the-worlds-largest-motorcycle-market/",
+      "source_segments": [
+        "ess",
+        "dc_power",
+        "forecasting"
+      ],
+      "title": "VinFast prepares to enter the world’s largest motorcycle market",
+      "summary": "Vietnamese EV maker VinFast is setting its sights on a major new frontier: India’s massive two-wheeler market. After already laying groundwork for its electric car business in the country, the company is now preparing to launch a lineup of electric scooters as part of a broader push into India’s fast-growing EV sector. more…",
+      "published_date": "2026-04-05",
+      "raw_text": "vinfast prepares to enter the world’s largest motorcycle market vietnamese ev maker vinfast is setting its sights on a major new frontier: india’s massive two-wheeler market. after already laying groundwork for its electric car business in the country, the company is now preparing to launch a lineup of electric scooters as part of a broader push into india’s fast-growing ev sector. more…"
+    },
+    {
+      "source_id": "electrek",
+      "source_name": "Electrek",
+      "source_url": "https://electrek.co/2026/04/05/here-are-the-best-electric-bikes-you-can-buy-at-every-price-level/",
+      "source_segments": [
+        "ess",
+        "dc_power",
+        "forecasting"
+      ],
+      "title": "Here are the best electric bikes you can buy at every price level in April 2026",
+      "summary": "I’ve spent countless hours here at Electrek doing detailed hands-on testing of hundreds of electric bikes. Through thousands of miles of riding, I’ve been fortunate to learn these e-bikes inside and out, top to bottom and front to back. That long-term experience with real-world e-bike testing has helped me find the best electric bicycles on the market for just about any budget. Below are some of the top e-bikes I’ve hand-tested for every price range, current as of April 2026. Spring is finally h",
+      "published_date": "2026-04-05",
+      "raw_text": "here are the best electric bikes you can buy at every price level in april 2026 i’ve spent countless hours here at electrek doing detailed hands-on testing of hundreds of electric bikes. through thousands of miles of riding, i’ve been fortunate to learn these e-bikes inside and out, top to bottom and front to back. that long-term experience with real-world e-bike testing has helped me find the best electric bicycles on the market for just about any budget. below are some of the top e-bikes i’ve hand-tested for every price range, current as of april 2026. spring is finally here, and that means it’s time to get back in the saddle! check out the awesome e-bikes below, any one of which could become your next electric bike. more…"
     }
   ],
   "source_logs": [
@@ -3164,7 +3222,7 @@
       "status": "partial",
       "error": null,
       "items": 0,
-      "fetched_at": "2026-04-05T12:43:46.944030+00:00",
+      "fetched_at": "2026-04-05T16:01:40.103205+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -3185,7 +3243,7 @@
       "status": "partial",
       "error": null,
       "items": 0,
-      "fetched_at": "2026-04-05T12:43:46.867560+00:00",
+      "fetched_at": "2026-04-05T16:01:39.984823+00:00",
       "source_type": "government",
       "reliability": 1,
       "topics": [
@@ -3205,7 +3263,7 @@
       "status": "partial",
       "error": null,
       "items": 0,
-      "fetched_at": "2026-04-05T12:43:47.239706+00:00",
+      "fetched_at": "2026-04-05T16:01:40.251388+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -3225,7 +3283,7 @@
       "status": "partial",
       "error": null,
       "items": 0,
-      "fetched_at": "2026-04-05T12:43:46.878886+00:00",
+      "fetched_at": "2026-04-05T16:01:40.051544+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -3242,10 +3300,10 @@
       "id": "cleantechnica",
       "name": "CleanTechnica",
       "url": "https://cleantechnica.com/feed/",
-      "status": "partial",
+      "status": "success",
       "error": null,
-      "items": 0,
-      "fetched_at": "2026-04-05T12:43:46.996823+00:00",
+      "items": 2,
+      "fetched_at": "2026-04-05T16:01:40.168372+00:00",
       "source_type": "industry",
       "reliability": 3,
       "topics": [
@@ -3263,10 +3321,10 @@
       "id": "electrek",
       "name": "Electrek",
       "url": "https://electrek.co/feed/",
-      "status": "partial",
+      "status": "success",
       "error": null,
-      "items": 0,
-      "fetched_at": "2026-04-05T12:43:47.289315+00:00",
+      "items": 2,
+      "fetched_at": "2026-04-05T16:01:40.178855+00:00",
       "source_type": "industry",
       "reliability": 3,
       "topics": [
@@ -3286,7 +3344,7 @@
       "status": "partial",
       "error": null,
       "items": 0,
-      "fetched_at": "2026-04-05T12:43:47.488067+00:00",
+      "fetched_at": "2026-04-05T16:01:40.376751+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -3327,7 +3385,7 @@
       "status": "partial",
       "error": null,
       "items": 0,
-      "fetched_at": "2026-04-05T12:43:47.700498+00:00",
+      "fetched_at": "2026-04-05T16:01:40.463416+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -3367,7 +3425,7 @@
       "status": "partial",
       "error": null,
       "items": 0,
-      "fetched_at": "2026-04-05T12:43:47.425488+00:00",
+      "fetched_at": "2026-04-05T16:01:40.364469+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
