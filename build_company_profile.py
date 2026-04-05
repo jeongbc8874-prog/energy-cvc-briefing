@@ -238,6 +238,9 @@ def fuzzy_match_company(
     name_lower = name.lower().strip()
 
     for cid, prof in profiles.items():
+        # 스키마 불일치 방어 (이전 버전 company_profiles.json이 str 등을 포함할 수 있음)
+        if not isinstance(prof, dict):
+            continue
         # alias 직접 매칭
         aliases = prof.get("aliases", [])
         if name_lower in aliases or norm_input in aliases:
@@ -250,6 +253,8 @@ def fuzzy_match_company(
     # difflib ratio 비교
     best_id, best_score = None, 0.0
     for cid, prof in profiles.items():
+        if not isinstance(prof, dict):
+            continue
         norm_known = normalize_name(prof.get("name", ""))
         score = difflib.SequenceMatcher(None, norm_input, norm_known).ratio()
         # 부분 포함 보너스
@@ -279,11 +284,23 @@ def load_profiles() -> dict[str, dict]:
     """
     company_profiles.json 로드.
     없으면 SEED_COMPANIES 13개로 초기화.
+    이전 버전 스키마(값이 dict 아닌 경우) 자동 필터링.
     """
     if PROFILES_PATH.exists():
         try:
-            data = json.loads(PROFILES_PATH.read_text(encoding="utf-8"))
+            raw = json.loads(PROFILES_PATH.read_text(encoding="utf-8"))
+            # 값이 dict인 항목만 유지 (이전 버전 호환)
+            data = {k: v for k, v in raw.items() if isinstance(v, dict)}
+            skipped = len(raw) - len(data)
+            if skipped:
+                print(f"[PROFILES] 경고: {skipped}개 항목이 잘못된 형식 → 제외")
             print(f"[PROFILES] 로드: {PROFILES_PATH} ({len(data)}개 회사)")
+            # 시드 회사 중 누락된 것 보충
+            for seed in SEED_COMPANIES:
+                cid = seed["company_id"]
+                if cid not in data:
+                    data[cid] = _make_profile_from_seed(seed)
+                    print(f"[PROFILES] 시드 보충: {cid}")
             return data
         except Exception as e:
             print(f"[PROFILES] 로드 실패({e}) — 시드 데이터로 초기화")
