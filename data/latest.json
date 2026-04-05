@@ -1,19 +1,19 @@
 {
   "date": "2026-04-05",
   "dateKr": "2026년 04월 05일",
-  "generatedAt": "2026-04-05T12:08:15.313240+00:00",
-  "brief": "**Deal Flow Memo - April 5, 2026**\n\nToday's signals point to accelerating maturation in the energy storage market, with three distinct trends emerging. **Demand diversification** is evident as Form Energy's 12GWh AI data center agreement (Energy Storage News) demonstrates storage moving beyond traditional grid applications, while American Battery Factory's 4.5GWh Arizona offtake (Energy Storage News) suggests industrial-scale LFP deployment is gaining momentum. **Technology differentiation** is intensifying, with EnerVenue's $300M Series B (Energy Storage News) highlighting investor appetite for alternative chemistries like nickel-hydrogen that promise 30,000+ cycles. The **European optimization layer** is attracting significant capital, as evidenced by Entrix and GridBeyond's €55M raise (Energy Storage News) and Pexapark's 1GWh+ of March PPAs (PV Magazine), though PV Magazine notes hybrid PPA uptake among industrial buyers remains sluggish at BBDF 2026. \n\nWatch for potential supply chain constraints as these offtake volumes compound, and whether the AI data center storage thesis spreads to other hyperscalers beyond Form Energy's initial customer.",
+  "generatedAt": "2026-04-05T12:16:31.707713+00:00",
+  "brief": "**Deal Flow Memo - April 5, 2026**\n\nThe storage sector is showing strong momentum across multiple vectors today, with significant offtake agreements signaling sustained demand confidence. American Battery Factory's 4.5GWh Arizona LFP deal and Form Energy's massive 12GWh iron-air agreement for AI data centers (Energy Storage News) highlight how different storage technologies are finding distinct market fit - traditional LFP for general grid applications and long-duration storage specifically targeting the power-hungry AI infrastructure buildout. EnerVenue's $300M Series B (Energy Storage News) for nickel-hydrogen manufacturing suggests investors are backing alternative chemistries beyond the lithium dominant narrative, particularly those promising extended cycle life. \n\nThe European market is also heating up with Pexapark logging over 1GWh in storage PPAs just in March and the €55M raise across BESS optimizers Entrix and GridBeyond (PV Magazine, Energy Storage News), indicating route-to-market software is becoming as critical as the hardware itself. Watch for more data center-specific storage deals as AI infrastructure demands create a new high-value customer segment willing to pay premiums for reliable, long-duration backup power.",
   "stats": {
-    "total": 70,
+    "total": 71,
     "high": 6,
     "medium": 13,
     "negative": 2,
-    "matched": 3,
-    "filtered_out": 158,
-    "companies_with_signals": 13,
-    "auto_companies": 1,
+    "matched": 5,
+    "filtered_out": 157,
+    "companies_with_signals": 15,
+    "auto_companies": 2,
     "by_segment": {
-      "ess": 65,
+      "ess": 66,
       "hvdc": 1,
       "marine_fc": 2,
       "grid_sw": 2
@@ -22,7 +22,7 @@
       "Contract": 4,
       "Financing": 2,
       "Partnership": 6,
-      "News": 56,
+      "News": 57,
       "Negative": 2
     }
   },
@@ -126,6 +126,57 @@
       }
     },
     {
+      "id": "fa2f1a4cc31d",
+      "title": "EnerVenue closes US$300 million Series B for 30,000-cycle nickel-hydrogen battery manufacturing",
+      "summary": "EnerVenue, the US company commercialising technology adapted from nickel-hydrogen batteries, has closed a US$300 million extension of its Series B preferred stock financing round.",
+      "event_date": "2026-04-01",
+      "source_name": "Energy Storage News",
+      "source_url": "https://www.energy-storage.news/enervenue-closes-us300-million-series-b-for-30000-cycle-nickel-hydrogen-battery-manufacturing/",
+      "event_type": "Financing",
+      "impact_type": "Financing",
+      "matched_rule": "series b",
+      "tier": 2,
+      "signal_stage": "strategic",
+      "signal_strength": 100,
+      "signal_tier": "high",
+      "score_breakdown": [
+        {
+          "id": "co_match",
+          "delta": 10,
+          "reason": "Event matched to tracked company",
+          "group": "boost"
+        },
+        {
+          "id": "fig_money",
+          "delta": 15,
+          "reason": "Specific financial figure",
+          "group": "boost"
+        }
+      ],
+      "segment": "ess",
+      "company_id": "enervenue",
+      "company_name": "EnerVenue",
+      "buyer_matches": [],
+      "project_matches": [],
+      "is_negative": false,
+      "neg_subtype": null,
+      "is_noise": false,
+      "evidence": {
+        "observed_fact": "EnerVenue closes US$300 million Series B for 30,000-cycle nickel-hydrogen battery manufacturing",
+        "observed_fact_detail": "EnerVenue, the US company commercialising technology adapted from nickel-hydrogen batteries, has closed a US$300 million extension of its Series B preferred stock financing round.",
+        "source_label": "Energy Storage News · 2026-04-01",
+        "matched_rule_name": "series b",
+        "matched_rule_tier": "Tier 2 — Financing",
+        "why_it_matters": "Equity round confirms external capital validation. Key variables: investor identity (strategic vs. financial), round size vs. capex needs.",
+        "missing_evidence": [
+          "Post-money valuation not confirmed",
+          "Use of proceeds not specified"
+        ],
+        "confidence": "Medium",
+        "confidence_rationale": "Tier-2 event with company match."
+      }
+    },
+    {
       "id": "713b5b7a1cbf",
       "title": "Pexapark logs more than 1 GWh of European storage PPAs in March",
       "summary": "War in the Middle East is putting pressure on energy markets and boosting the value of solar and storage power purchase agreements (PPAs), with Europe seeing a surge in activity in March, according to Swiss consultancy Pexapark.",
@@ -206,51 +257,6 @@
         "observed_fact_detail": "European battery storage optimisers Entrix and GridBeyond, have between them raised €55 million (US$63.",
         "source_label": "Energy Storage News · 2026-03-30",
         "matched_rule_name": "raised €",
-        "matched_rule_tier": "Tier 2 — Financing",
-        "why_it_matters": "Equity round confirms external capital validation. Key variables: investor identity (strategic vs. financial), round size vs. capex needs.",
-        "missing_evidence": [
-          "Post-money valuation not confirmed",
-          "Use of proceeds not specified"
-        ],
-        "confidence": "Medium-Low",
-        "confidence_rationale": "Tier-2 directional — not confirmatory."
-      }
-    },
-    {
-      "id": "fa2f1a4cc31d",
-      "title": "EnerVenue closes US$300 million Series B for 30,000-cycle nickel-hydrogen battery manufacturing",
-      "summary": "EnerVenue, the US company commercialising technology adapted from nickel-hydrogen batteries, has closed a US$300 million extension of its Series B preferred stock financing round.",
-      "event_date": "2026-04-01",
-      "source_name": "Energy Storage News",
-      "source_url": "https://www.energy-storage.news/enervenue-closes-us300-million-series-b-for-30000-cycle-nickel-hydrogen-battery-manufacturing/",
-      "event_type": "Financing",
-      "impact_type": "Financing",
-      "matched_rule": "series b",
-      "tier": 2,
-      "signal_stage": "strategic",
-      "signal_strength": 97,
-      "signal_tier": "high",
-      "score_breakdown": [
-        {
-          "id": "fig_money",
-          "delta": 15,
-          "reason": "Specific financial figure",
-          "group": "boost"
-        }
-      ],
-      "segment": "ess",
-      "company_id": null,
-      "company_name": "Unassigned",
-      "buyer_matches": [],
-      "project_matches": [],
-      "is_negative": false,
-      "neg_subtype": null,
-      "is_noise": false,
-      "evidence": {
-        "observed_fact": "EnerVenue closes US$300 million Series B for 30,000-cycle nickel-hydrogen battery manufacturing",
-        "observed_fact_detail": "EnerVenue, the US company commercialising technology adapted from nickel-hydrogen batteries, has closed a US$300 million extension of its Series B preferred stock financing round.",
-        "source_label": "Energy Storage News · 2026-04-01",
-        "matched_rule_name": "series b",
         "matched_rule_tier": "Tier 2 — Financing",
         "why_it_matters": "Equity round confirms external capital validation. Key variables: investor identity (strategic vs. financial), round size vs. capex needs.",
         "missing_evidence": [
@@ -2710,6 +2716,51 @@
       }
     },
     {
+      "id": "99892f15c272",
+      "title": "Qcells wants solar + storage built into every new home",
+      "summary": "<div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2026/04/pexels-photo-12224996.jpeg?quality=82&#038;strip=all&#038;w=1500\" /></div><p>Solar giant Qcells is making a play to get solar and battery storage built into new homes in the US from day one.</p>\n\n\n\n <a class=\"more-link\" href=\"https://electrek.co/2026/04/02/qcells-wants-solar-storage-built-into-every-new-home/#more-462147\">more…</a>",
+      "event_date": "2026-04-02",
+      "source_name": "Electrek",
+      "source_url": "https://electrek.co/2026/04/02/qcells-wants-solar-storage-built-into-every-new-home/",
+      "event_type": "News",
+      "impact_type": "Informational",
+      "matched_rule": null,
+      "tier": 5,
+      "signal_stage": "strategic",
+      "signal_strength": 25,
+      "signal_tier": "low",
+      "score_breakdown": [
+        {
+          "id": "co_match",
+          "delta": 10,
+          "reason": "Event matched to tracked company",
+          "group": "boost"
+        }
+      ],
+      "segment": "ess",
+      "company_id": "qcells",
+      "company_name": "Qcells",
+      "buyer_matches": [],
+      "project_matches": [],
+      "is_negative": false,
+      "neg_subtype": null,
+      "is_noise": false,
+      "evidence": {
+        "observed_fact": "Qcells wants solar + storage built into every new home",
+        "observed_fact_detail": "<div class=\"feat-image\"><img src=\"https://electrek.",
+        "source_label": "Electrek · 2026-04-02",
+        "matched_rule_name": "no rule matched",
+        "matched_rule_tier": "Tier 5 — News",
+        "why_it_matters": "No specific investment pattern matched. Context only — not weighted without corroboration.",
+        "missing_evidence": [
+          "No investment-relevant pattern matched",
+          "Primary research required"
+        ],
+        "confidence": "Low",
+        "confidence_rationale": "Score below threshold. Context only."
+      }
+    },
+    {
       "id": "496769f08849",
       "title": "Global solar additions reached record 511 GW in 2025, says IRENA",
       "summary": "Latest figures from the International Renewable Energy Agency find solar contributed the majority of a record 692 GW of renewables capacity added worldwide last year.",
@@ -4284,16 +4335,351 @@
       "id": "enervenue",
       "name": "EnerVenue",
       "sector": "ess",
+      "country": "",
+      "stage": "Lab",
+      "source": "auto",
+      "aliases": [
+        "enervenue",
+        "enervenue"
+      ],
+      "watchlist_default": false,
+      "description": "Auto-registered from signal. Analyst review recommended.",
+      "tags": [
+        "auto-registered"
+      ],
+      "known_investors": [],
+      "investor_type": "Unknown",
+      "founded": null,
+      "hq": "",
+      "events": [
+        {
+          "id": "fa2f1a4cc31d",
+          "title": "EnerVenue closes US$300 million Series B for 30,000-cycle nickel-hydrogen battery manufacturing",
+          "summary": "EnerVenue, the US company commercialising technology adapted from nickel-hydrogen batteries, has closed a US$300 million extension of its Series B preferred stock financing round.",
+          "event_date": "2026-04-01",
+          "source_name": "Energy Storage News",
+          "source_url": "https://www.energy-storage.news/enervenue-closes-us300-million-series-b-for-30000-cycle-nickel-hydrogen-battery-manufacturing/",
+          "event_type": "Financing",
+          "impact_type": "Financing",
+          "matched_rule": "series b",
+          "tier": 2,
+          "signal_stage": "strategic",
+          "signal_strength": 100,
+          "signal_tier": "high",
+          "score_breakdown": [
+            {
+              "id": "co_match",
+              "delta": 10,
+              "reason": "Event matched to tracked company",
+              "group": "boost"
+            },
+            {
+              "id": "fig_money",
+              "delta": 15,
+              "reason": "Specific financial figure",
+              "group": "boost"
+            }
+          ],
+          "segment": "ess",
+          "company_id": "enervenue",
+          "company_name": "EnerVenue",
+          "buyer_matches": [],
+          "project_matches": [],
+          "is_negative": false,
+          "neg_subtype": null,
+          "is_noise": false,
+          "evidence": {
+            "observed_fact": "EnerVenue closes US$300 million Series B for 30,000-cycle nickel-hydrogen battery manufacturing",
+            "observed_fact_detail": "EnerVenue, the US company commercialising technology adapted from nickel-hydrogen batteries, has closed a US$300 million extension of its Series B preferred stock financing round.",
+            "source_label": "Energy Storage News · 2026-04-01",
+            "matched_rule_name": "series b",
+            "matched_rule_tier": "Tier 2 — Financing",
+            "why_it_matters": "Equity round confirms external capital validation. Key variables: investor identity (strategic vs. financial), round size vs. capex needs.",
+            "missing_evidence": [
+              "Post-money valuation not confirmed",
+              "Use of proceeds not specified"
+            ],
+            "confidence": "Medium",
+            "confidence_rationale": "Tier-2 event with company match."
+          }
+        }
+      ],
+      "insight": {
+        "observed_facts": [
+          "[Financing] EnerVenue closes US$300 million Series B for 30,000-cycle nickel-hydrogen battery manufacturing — Energy Storage News (2026-04-01)"
+        ],
+        "matched_pattern": "1 event(s) from 1 source(s). Signal density insufficient to confirm a pattern. Primary research recommended.",
+        "pattern_id": "low_density",
+        "may_indicate": [
+          "Early stage or limited public disclosure"
+        ],
+        "missing": [
+          "No commercial contract — all revenue hypothetical until confirmed",
+          "No third-party certification — procurement prerequisite in this sector"
+        ],
+        "confidence": "Low",
+        "next_check": "Direct outreach recommended.",
+        "event_count": 1,
+        "high_signal": 1,
+        "note": "Generated from existing events only. No data invented."
+      },
+      "signal_count": 1,
+      "high_count": 1,
+      "neg_count": 0,
+      "reinforcing": 1,
+      "type_counts": {
+        "Financing": 1
+      },
       "stage_label": "Lab",
+      "stage_color": "#6E6E6E",
+      "stage_desc": "Limited public signal. Company at lab/early stage or undisclosed.",
+      "pattern": {
+        "id": "low_density",
+        "label": "Insufficient Signal",
+        "color": "#A8A8A8",
+        "memo": "Signal density insufficient for pattern recognition. Primary research required."
+      },
+      "ttr": "Long-term",
+      "ttr_color": "#6E6E6E",
+      "gaps": [
+        {
+          "rule_id": "no_contract",
+          "label": "No Commercial Contract",
+          "severity": "critical",
+          "memo": "No binding commercial agreement on record. All revenue is hypothetical.",
+          "tags": [],
+          "escalation_days": 0,
+          "escalation_tier": null,
+          "first_seen": "2026-04-05"
+        },
+        {
+          "rule_id": "no_cert",
+          "label": "No Third-Party Certification",
+          "severity": "high",
+          "memo": "No independent certification (DNV GL, TÜV, KPX, UL). Required for regulated procurement.",
+          "tags": [],
+          "escalation_days": 0,
+          "escalation_tier": null,
+          "first_seen": "2026-04-05"
+        },
+        {
+          "rule_id": "no_buyer",
+          "label": "No Named Strategic Buyer",
+          "severity": "high",
+          "memo": "No named strategic buyer in any signal. Demand-side validation absent.",
+          "tags": [],
+          "escalation_days": 0,
+          "escalation_tier": null,
+          "first_seen": "2026-04-05"
+        },
+        {
+          "rule_id": "no_deploy",
+          "label": "No Deployment / Go-Live",
+          "severity": "medium",
+          "memo": "No operational deployment confirmed. TRL-9 in commercial setting unverified.",
+          "tags": [],
+          "escalation_days": 0,
+          "escalation_tier": null,
+          "first_seen": "2026-04-05"
+        }
+      ],
+      "critical_gaps": 1,
+      "high_gaps": 2,
+      "buyer_activity": {},
+      "linked_projects": [],
+      "sector_rulebook": {
+        "key_gate": "Third-party certification (UL 9540, IEC 62619) + grid interconnection agreement",
+        "commercial_threshold": "First offtake or supply agreement with named utility/industrial",
+        "policy_driver": "IRA Storage ITC (US), EU Battery Regulation, KR RPS ESS 가중치",
+        "red_flags": [
+          "Grant-only (no offtaker)",
+          "Li-ion commodity competition",
+          "Single geography exposure"
+        ],
+        "positive_signals": [
+          "Utility framework contract",
+          "Hyperscaler pilot with CFE mandate",
+          "Co-location with offshore wind",
+          "DOE grant + offtaker co-investment"
+        ]
+      },
       "stage_previous": "Lab",
       "stage_score": 1.5,
-      "gaps": [],
-      "blocker_score": 0,
-      "critical_gaps": 0,
+      "blocker_score": 18,
       "structural_tags": [],
-      "signal_count": 1,
       "last_signal_date": "2026-04-01",
+      "profile_version": "8.0"
+    },
+    "qcells": {
+      "id": "qcells",
+      "name": "Qcells",
+      "sector": "ess",
+      "country": "",
+      "stage": "Lab",
       "source": "auto",
+      "aliases": [
+        "qcells",
+        "qcells"
+      ],
+      "watchlist_default": false,
+      "description": "Auto-registered from signal. Analyst review recommended.",
+      "tags": [
+        "auto-registered"
+      ],
+      "known_investors": [],
+      "investor_type": "Unknown",
+      "founded": null,
+      "hq": "",
+      "events": [
+        {
+          "id": "99892f15c272",
+          "title": "Qcells wants solar + storage built into every new home",
+          "summary": "<div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2026/04/pexels-photo-12224996.jpeg?quality=82&#038;strip=all&#038;w=1500\" /></div><p>Solar giant Qcells is making a play to get solar and battery storage built into new homes in the US from day one.</p>\n\n\n\n <a class=\"more-link\" href=\"https://electrek.co/2026/04/02/qcells-wants-solar-storage-built-into-every-new-home/#more-462147\">more…</a>",
+          "event_date": "2026-04-02",
+          "source_name": "Electrek",
+          "source_url": "https://electrek.co/2026/04/02/qcells-wants-solar-storage-built-into-every-new-home/",
+          "event_type": "News",
+          "impact_type": "Informational",
+          "matched_rule": null,
+          "tier": 5,
+          "signal_stage": "strategic",
+          "signal_strength": 25,
+          "signal_tier": "low",
+          "score_breakdown": [
+            {
+              "id": "co_match",
+              "delta": 10,
+              "reason": "Event matched to tracked company",
+              "group": "boost"
+            }
+          ],
+          "segment": "ess",
+          "company_id": "qcells",
+          "company_name": "Qcells",
+          "buyer_matches": [],
+          "project_matches": [],
+          "is_negative": false,
+          "neg_subtype": null,
+          "is_noise": false,
+          "evidence": {
+            "observed_fact": "Qcells wants solar + storage built into every new home",
+            "observed_fact_detail": "<div class=\"feat-image\"><img src=\"https://electrek.",
+            "source_label": "Electrek · 2026-04-02",
+            "matched_rule_name": "no rule matched",
+            "matched_rule_tier": "Tier 5 — News",
+            "why_it_matters": "No specific investment pattern matched. Context only — not weighted without corroboration.",
+            "missing_evidence": [
+              "No investment-relevant pattern matched",
+              "Primary research required"
+            ],
+            "confidence": "Low",
+            "confidence_rationale": "Score below threshold. Context only."
+          }
+        }
+      ],
+      "insight": {
+        "observed_facts": [],
+        "matched_pattern": "1 event(s) from 1 source(s). Signal density insufficient to confirm a pattern. Primary research recommended.",
+        "pattern_id": "low_density",
+        "may_indicate": [
+          "Early stage or limited public disclosure"
+        ],
+        "missing": [
+          "No commercial contract — all revenue hypothetical until confirmed",
+          "No third-party certification — procurement prerequisite in this sector",
+          "No high-confidence signals — current events are directional only"
+        ],
+        "confidence": "Low",
+        "next_check": "Direct outreach recommended.",
+        "event_count": 1,
+        "high_signal": 0,
+        "note": "Generated from existing events only. No data invented."
+      },
+      "signal_count": 1,
+      "high_count": 0,
+      "neg_count": 0,
+      "reinforcing": 0,
+      "type_counts": {
+        "News": 1
+      },
+      "stage_label": "Lab",
+      "stage_color": "#6E6E6E",
+      "stage_desc": "Limited public signal. Company at lab/early stage or undisclosed.",
+      "pattern": {
+        "id": "low_density",
+        "label": "Insufficient Signal",
+        "color": "#A8A8A8",
+        "memo": "Signal density insufficient for pattern recognition. Primary research required."
+      },
+      "ttr": "Long-term",
+      "ttr_color": "#6E6E6E",
+      "gaps": [
+        {
+          "rule_id": "no_contract",
+          "label": "No Commercial Contract",
+          "severity": "critical",
+          "memo": "No binding commercial agreement on record. All revenue is hypothetical.",
+          "tags": [],
+          "escalation_days": 0,
+          "escalation_tier": null,
+          "first_seen": "2026-04-05"
+        },
+        {
+          "rule_id": "no_cert",
+          "label": "No Third-Party Certification",
+          "severity": "high",
+          "memo": "No independent certification (DNV GL, TÜV, KPX, UL). Required for regulated procurement.",
+          "tags": [],
+          "escalation_days": 0,
+          "escalation_tier": null,
+          "first_seen": "2026-04-05"
+        },
+        {
+          "rule_id": "no_buyer",
+          "label": "No Named Strategic Buyer",
+          "severity": "high",
+          "memo": "No named strategic buyer in any signal. Demand-side validation absent.",
+          "tags": [],
+          "escalation_days": 0,
+          "escalation_tier": null,
+          "first_seen": "2026-04-05"
+        },
+        {
+          "rule_id": "no_deploy",
+          "label": "No Deployment / Go-Live",
+          "severity": "medium",
+          "memo": "No operational deployment confirmed. TRL-9 in commercial setting unverified.",
+          "tags": [],
+          "escalation_days": 0,
+          "escalation_tier": null,
+          "first_seen": "2026-04-05"
+        }
+      ],
+      "critical_gaps": 1,
+      "high_gaps": 2,
+      "buyer_activity": {},
+      "linked_projects": [],
+      "sector_rulebook": {
+        "key_gate": "Third-party certification (UL 9540, IEC 62619) + grid interconnection agreement",
+        "commercial_threshold": "First offtake or supply agreement with named utility/industrial",
+        "policy_driver": "IRA Storage ITC (US), EU Battery Regulation, KR RPS ESS 가중치",
+        "red_flags": [
+          "Grant-only (no offtaker)",
+          "Li-ion commodity competition",
+          "Single geography exposure"
+        ],
+        "positive_signals": [
+          "Utility framework contract",
+          "Hyperscaler pilot with CFE mandate",
+          "Co-location with offshore wind",
+          "DOE grant + offtaker co-investment"
+        ]
+      },
+      "stage_previous": "Lab",
+      "stage_score": 0.09,
+      "blocker_score": 18,
+      "structural_tags": [],
+      "last_signal_date": "2026-04-02",
       "profile_version": "8.0"
     },
     "portfolio_summary": {
@@ -6011,7 +6397,7 @@
         "source_count": 0,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-05T12:08:02.998549+00:00"
+        "generated_at": "2026-04-05T12:16:18.464573+00:00"
       },
       "narrative": null,
       "generated_date": "2026-04-05"
@@ -6170,7 +6556,7 @@
         "source_count": 0,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-05T12:08:02.998579+00:00"
+        "generated_at": "2026-04-05T12:16:18.464609+00:00"
       },
       "narrative": null,
       "generated_date": "2026-04-05"
@@ -6340,7 +6726,7 @@
         "source_count": 0,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-05T12:08:02.998595+00:00"
+        "generated_at": "2026-04-05T12:16:18.464625+00:00"
       },
       "narrative": null,
       "generated_date": "2026-04-05"
@@ -6510,7 +6896,7 @@
         "source_count": 0,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-05T12:08:02.998607+00:00"
+        "generated_at": "2026-04-05T12:16:18.464637+00:00"
       },
       "narrative": null,
       "generated_date": "2026-04-05"
@@ -6662,7 +7048,7 @@
         "source_count": 0,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-05T12:08:02.998619+00:00"
+        "generated_at": "2026-04-05T12:16:18.464650+00:00"
       },
       "narrative": null,
       "generated_date": "2026-04-05"
@@ -6832,7 +7218,7 @@
         "source_count": 0,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-05T12:08:02.998630+00:00"
+        "generated_at": "2026-04-05T12:16:18.464661+00:00"
       },
       "narrative": null,
       "generated_date": "2026-04-05"
@@ -6983,15 +7369,15 @@
         "high_signals": 1,
         "negative_signals": 0,
         "sources": [
-          "Canary Media",
-          "Energy Storage News"
+          "Energy Storage News",
+          "Canary Media"
         ],
         "source_count": 2,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-05T12:08:02.998646+00:00"
+        "generated_at": "2026-04-05T12:16:18.464678+00:00"
       },
-      "narrative": "Form Energy secured a significant 12GWh supply agreement for iron-air batteries targeting AI data centers, demonstrating substantial market traction in the multi-day storage segment. However, critical validation gaps remain: no independent third-party certification from recognized bodies (DNV GL, TÜV, KPX, UL), no named strategic buyers for demand-side validation, and no confirmed operational deployments to verify commercial-scale technical readiness. The deal size suggests strong market positioning, but regulatory procurement readiness and proven commercial performance remain unverified.\n\n**Next verification priority:** Confirm current third-party certification status and timeline, as this is typically required for utility-scale and regulated procurement processes.",
+      "narrative": "Form Energy has secured a significant 12GWh iron-air battery supply agreement for US AI data centers, demonstrating strong commercial traction in the high-demand AI infrastructure market. However, critical gaps remain around third-party certification status, named strategic partnerships for demand validation, and confirmed operational deployments to verify commercial-scale technical readiness. **Next step: Verify current third-party certification progress with DNV GL, TÜV, or UL, as this is mandatory for regulated utility procurement and represents the clearest path to de-risking technical execution.**",
       "generated_date": "2026-04-05"
     },
     "c_autogrid": {
@@ -7159,7 +7545,7 @@
         "source_count": 0,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-05T12:08:07.741346+00:00"
+        "generated_at": "2026-04-05T12:16:22.815626+00:00"
       },
       "narrative": null,
       "generated_date": "2026-04-05"
@@ -7293,7 +7679,7 @@
         "source_count": 0,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-05T12:08:07.741432+00:00"
+        "generated_at": "2026-04-05T12:16:22.815655+00:00"
       },
       "narrative": null,
       "generated_date": "2026-04-05"
@@ -7453,7 +7839,7 @@
         "source_count": 0,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-05T12:08:07.741459+00:00"
+        "generated_at": "2026-04-05T12:16:22.815672+00:00"
       },
       "narrative": null,
       "generated_date": "2026-04-05"
@@ -7586,7 +7972,7 @@
         "source_count": 0,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-05T12:08:07.741484+00:00"
+        "generated_at": "2026-04-05T12:16:22.815684+00:00"
       },
       "narrative": null,
       "generated_date": "2026-04-05"
@@ -7746,7 +8132,7 @@
         "source_count": 0,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-05T12:08:07.741507+00:00"
+        "generated_at": "2026-04-05T12:16:22.815705+00:00"
       },
       "narrative": null,
       "generated_date": "2026-04-05"
@@ -7906,7 +8292,339 @@
         "source_count": 0,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-05T12:08:07.741526+00:00"
+        "generated_at": "2026-04-05T12:16:22.815718+00:00"
+      },
+      "narrative": null,
+      "generated_date": "2026-04-05"
+    },
+    "enervenue": {
+      "company_id": "enervenue",
+      "company_name": "EnerVenue",
+      "sector": "ess",
+      "country": "",
+      "stage_label": "Lab",
+      "stage_desc": "Limited public signal. Company at lab/early stage or undisclosed.",
+      "ttr": "Long-term",
+      "ttr_color": "#6E6E6E",
+      "investor_type": "Unknown",
+      "description": "Auto-registered from signal. Analyst review recommended.",
+      "tags": [
+        "auto-registered"
+      ],
+      "known_investors": [],
+      "pattern": {
+        "id": "low_density",
+        "label": "Insufficient Signal",
+        "color": "#A8A8A8",
+        "memo": "Signal density insufficient for pattern recognition. Primary research required."
+      },
+      "observed_facts": [
+        "[Financing] EnerVenue closes US$300 million Series B for 30,000-cycle nickel-hydrogen battery manufacturing — Energy Storage News (2026-04-01)"
+      ],
+      "key_signals": [
+        {
+          "headline": "EnerVenue closes US$300 million Series B for 30,000-cycle nickel-hydrogen battery manufacturing",
+          "event_type": "Financing",
+          "score": 100,
+          "date": "2026-04-01",
+          "source": "Energy Storage News",
+          "source_url": "https://www.energy-storage.news/enervenue-closes-us300-million-series-b-for-30000-cycle-nickel-hydrogen-battery-manufacturing/",
+          "observed_fact": "EnerVenue closes US$300 million Series B for 30,000-cycle nickel-hydrogen battery manufacturing",
+          "why_it_matters": "Equity round confirms external capital validation. Key variables: investor identity (strategic vs. financial), round size vs. capex needs.",
+          "confidence": "Medium",
+          "missing_for_this": [
+            "Post-money valuation not confirmed",
+            "Use of proceeds not specified"
+          ]
+        }
+      ],
+      "why_it_matters": {
+        "key_gate": "Third-party certification (UL 9540, IEC 62619) + grid interconnection agreement",
+        "commercial_threshold": "First offtake or supply agreement with named utility/industrial",
+        "policy_driver": "IRA Storage ITC (US), EU Battery Regulation, KR RPS ESS 가중치",
+        "positive_signals": [
+          "Utility framework contract",
+          "Hyperscaler pilot with CFE mandate",
+          "Co-location with offshore wind",
+          "DOE grant + offtaker co-investment"
+        ]
+      },
+      "risks": [
+        {
+          "type": "structural_gap",
+          "subtype": "no_contract",
+          "headline": "No Commercial Contract",
+          "source": "Rule-based gap detection",
+          "date": "2026-04-05",
+          "framing": "No binding commercial agreement on record. All revenue is hypothetical."
+        },
+        {
+          "type": "structural_gap",
+          "subtype": "no_cert",
+          "headline": "No Third-Party Certification",
+          "source": "Rule-based gap detection",
+          "date": "2026-04-05",
+          "framing": "No independent certification (DNV GL, TÜV, KPX, UL). Required for regulated procurement."
+        },
+        {
+          "type": "structural_gap",
+          "subtype": "no_buyer",
+          "headline": "No Named Strategic Buyer",
+          "source": "Rule-based gap detection",
+          "date": "2026-04-05",
+          "framing": "No named strategic buyer in any signal. Demand-side validation absent."
+        }
+      ],
+      "missing_evidence": [
+        {
+          "label": "No Commercial Contract",
+          "severity": "critical",
+          "memo": "No binding commercial agreement on record. All revenue is hypothetical.",
+          "questions": [
+            "Is there a named customer in active commercial discussions? If yes, what is the expected close timeline?",
+            "What is preventing contract conversion from the current pilot or partnership stage?",
+            "Has management disclosed ARR or revenue run-rate in any investor update?"
+          ]
+        },
+        {
+          "label": "No Third-Party Certification",
+          "severity": "high",
+          "memo": "No independent certification (DNV GL, TÜV, KPX, UL). Required for regulated procurement.",
+          "questions": [
+            "Has a certification application been formally submitted to DNV GL / KPX / TÜV?",
+            "If submitted, what is the expected certification timeline and are there known blockers?",
+            "Is there a named test partner co-sponsoring the certification process?"
+          ]
+        },
+        {
+          "label": "No Named Strategic Buyer",
+          "severity": "high",
+          "memo": "No named strategic buyer in any signal. Demand-side validation absent.",
+          "questions": [
+            "Is there a named utility, shipyard, or industrial customer in the pipeline — even if undisclosed publicly?",
+            "What is the current BD funnel — how many active RFP responses are in progress?",
+            "Has any strategic buyer taken an equity position or signed an MOU?"
+          ]
+        },
+        {
+          "label": "No Deployment / Go-Live",
+          "severity": "medium",
+          "memo": "No operational deployment confirmed. TRL-9 in commercial setting unverified.",
+          "questions": [
+            "What is the next planned field deployment date and location?",
+            "Has any customer committed capex to a deployment (vs. pilot)?",
+            "Are there any reference deployments at comparable scale in adjacent markets?"
+          ]
+        }
+      ],
+      "next_questions": [
+        {
+          "question": "Is there a named customer in active commercial discussions? If yes, what is the expected close timeline?",
+          "from_gap": "No Commercial Contract"
+        },
+        {
+          "question": "What is preventing contract conversion from the current pilot or partnership stage?",
+          "from_gap": "No Commercial Contract"
+        },
+        {
+          "question": "Has a certification application been formally submitted to DNV GL / KPX / TÜV?",
+          "from_gap": "No Third-Party Certification"
+        },
+        {
+          "question": "If submitted, what is the expected certification timeline and are there known blockers?",
+          "from_gap": "No Third-Party Certification"
+        },
+        {
+          "question": "Is there a named utility, shipyard, or industrial customer in the pipeline — even if undisclosed publicly?",
+          "from_gap": "No Named Strategic Buyer"
+        },
+        {
+          "question": "What is the current BD funnel — how many active RFP responses are in progress?",
+          "from_gap": "No Named Strategic Buyer"
+        },
+        {
+          "question": "What is the next planned field deployment date and location?",
+          "from_gap": "No Deployment / Go-Live"
+        },
+        {
+          "question": "Has any customer committed capex to a deployment (vs. pilot)?",
+          "from_gap": "No Deployment / Go-Live"
+        },
+        {
+          "question": "Direct outreach recommended.",
+          "from_gap": "Pattern analysis"
+        }
+      ],
+      "buyer_context": [],
+      "linked_projects": [],
+      "data_quality": {
+        "total_signals": 1,
+        "high_signals": 1,
+        "negative_signals": 0,
+        "sources": [
+          "Energy Storage News"
+        ],
+        "source_count": 1,
+        "confidence": "Low",
+        "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
+        "generated_at": "2026-04-05T12:16:22.815738+00:00"
+      },
+      "narrative": null,
+      "generated_date": "2026-04-05"
+    },
+    "qcells": {
+      "company_id": "qcells",
+      "company_name": "Qcells",
+      "sector": "ess",
+      "country": "",
+      "stage_label": "Lab",
+      "stage_desc": "Limited public signal. Company at lab/early stage or undisclosed.",
+      "ttr": "Long-term",
+      "ttr_color": "#6E6E6E",
+      "investor_type": "Unknown",
+      "description": "Auto-registered from signal. Analyst review recommended.",
+      "tags": [
+        "auto-registered"
+      ],
+      "known_investors": [],
+      "pattern": {
+        "id": "low_density",
+        "label": "Insufficient Signal",
+        "color": "#A8A8A8",
+        "memo": "Signal density insufficient for pattern recognition. Primary research required."
+      },
+      "observed_facts": [],
+      "key_signals": [],
+      "why_it_matters": {
+        "key_gate": "Third-party certification (UL 9540, IEC 62619) + grid interconnection agreement",
+        "commercial_threshold": "First offtake or supply agreement with named utility/industrial",
+        "policy_driver": "IRA Storage ITC (US), EU Battery Regulation, KR RPS ESS 가중치",
+        "positive_signals": [
+          "Utility framework contract",
+          "Hyperscaler pilot with CFE mandate",
+          "Co-location with offshore wind",
+          "DOE grant + offtaker co-investment"
+        ]
+      },
+      "risks": [
+        {
+          "type": "structural_gap",
+          "subtype": "no_contract",
+          "headline": "No Commercial Contract",
+          "source": "Rule-based gap detection",
+          "date": "2026-04-05",
+          "framing": "No binding commercial agreement on record. All revenue is hypothetical."
+        },
+        {
+          "type": "structural_gap",
+          "subtype": "no_cert",
+          "headline": "No Third-Party Certification",
+          "source": "Rule-based gap detection",
+          "date": "2026-04-05",
+          "framing": "No independent certification (DNV GL, TÜV, KPX, UL). Required for regulated procurement."
+        },
+        {
+          "type": "structural_gap",
+          "subtype": "no_buyer",
+          "headline": "No Named Strategic Buyer",
+          "source": "Rule-based gap detection",
+          "date": "2026-04-05",
+          "framing": "No named strategic buyer in any signal. Demand-side validation absent."
+        }
+      ],
+      "missing_evidence": [
+        {
+          "label": "No Commercial Contract",
+          "severity": "critical",
+          "memo": "No binding commercial agreement on record. All revenue is hypothetical.",
+          "questions": [
+            "Is there a named customer in active commercial discussions? If yes, what is the expected close timeline?",
+            "What is preventing contract conversion from the current pilot or partnership stage?",
+            "Has management disclosed ARR or revenue run-rate in any investor update?"
+          ]
+        },
+        {
+          "label": "No Third-Party Certification",
+          "severity": "high",
+          "memo": "No independent certification (DNV GL, TÜV, KPX, UL). Required for regulated procurement.",
+          "questions": [
+            "Has a certification application been formally submitted to DNV GL / KPX / TÜV?",
+            "If submitted, what is the expected certification timeline and are there known blockers?",
+            "Is there a named test partner co-sponsoring the certification process?"
+          ]
+        },
+        {
+          "label": "No Named Strategic Buyer",
+          "severity": "high",
+          "memo": "No named strategic buyer in any signal. Demand-side validation absent.",
+          "questions": [
+            "Is there a named utility, shipyard, or industrial customer in the pipeline — even if undisclosed publicly?",
+            "What is the current BD funnel — how many active RFP responses are in progress?",
+            "Has any strategic buyer taken an equity position or signed an MOU?"
+          ]
+        },
+        {
+          "label": "No Deployment / Go-Live",
+          "severity": "medium",
+          "memo": "No operational deployment confirmed. TRL-9 in commercial setting unverified.",
+          "questions": [
+            "What is the next planned field deployment date and location?",
+            "Has any customer committed capex to a deployment (vs. pilot)?",
+            "Are there any reference deployments at comparable scale in adjacent markets?"
+          ]
+        }
+      ],
+      "next_questions": [
+        {
+          "question": "Is there a named customer in active commercial discussions? If yes, what is the expected close timeline?",
+          "from_gap": "No Commercial Contract"
+        },
+        {
+          "question": "What is preventing contract conversion from the current pilot or partnership stage?",
+          "from_gap": "No Commercial Contract"
+        },
+        {
+          "question": "Has a certification application been formally submitted to DNV GL / KPX / TÜV?",
+          "from_gap": "No Third-Party Certification"
+        },
+        {
+          "question": "If submitted, what is the expected certification timeline and are there known blockers?",
+          "from_gap": "No Third-Party Certification"
+        },
+        {
+          "question": "Is there a named utility, shipyard, or industrial customer in the pipeline — even if undisclosed publicly?",
+          "from_gap": "No Named Strategic Buyer"
+        },
+        {
+          "question": "What is the current BD funnel — how many active RFP responses are in progress?",
+          "from_gap": "No Named Strategic Buyer"
+        },
+        {
+          "question": "What is the next planned field deployment date and location?",
+          "from_gap": "No Deployment / Go-Live"
+        },
+        {
+          "question": "Has any customer committed capex to a deployment (vs. pilot)?",
+          "from_gap": "No Deployment / Go-Live"
+        },
+        {
+          "question": "Direct outreach recommended.",
+          "from_gap": "Pattern analysis"
+        }
+      ],
+      "buyer_context": [],
+      "linked_projects": [],
+      "data_quality": {
+        "total_signals": 1,
+        "high_signals": 0,
+        "negative_signals": 0,
+        "sources": [
+          "Electrek"
+        ],
+        "source_count": 1,
+        "confidence": "Low",
+        "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
+        "generated_at": "2026-04-05T12:16:22.815753+00:00"
       },
       "narrative": null,
       "generated_date": "2026-04-05"
@@ -9409,6 +10127,238 @@
       "rationale": "Insufficient evidence to assess. Primary research required.",
       "note": "Score derived from public RSS signals only. Each point traceable to a source-cited event. No AI inference used.",
       "signal_count": 0
+    },
+    "enervenue": {
+      "company_id": "enervenue",
+      "company_name": "EnerVenue",
+      "sector": "ess",
+      "stage_label": "Lab",
+      "stage_color": "#6E6E6E",
+      "total_score": 1,
+      "max_possible": 10,
+      "components": [
+        {
+          "rule_id": "commercial_contract",
+          "label": "Commercial Contract",
+          "icon": "📄",
+          "points": 3,
+          "earned": 0,
+          "evidence": [],
+          "color": "#0A6640",
+          "rationale": "Named binding commercial agreement or deployment. Strongest single signal of revenue visibility.",
+          "fired": false
+        },
+        {
+          "rule_id": "certification",
+          "label": "Technical Certification",
+          "icon": "✓",
+          "points": 2,
+          "earned": 0,
+          "evidence": [],
+          "color": "#1A56DB",
+          "rationale": "Independent third-party certification (DNV GL, KPX, UL, TÜV). Required gate for regulated procurement.",
+          "fired": false
+        },
+        {
+          "rule_id": "pilot",
+          "label": "Pilot / Demo",
+          "icon": "🔬",
+          "points": 2,
+          "earned": 0,
+          "evidence": [],
+          "color": "#7D4E00",
+          "rationale": "Confirmed field pilot with a named third-party. De-risks technical claims; precursor to certification or contract.",
+          "fired": false
+        },
+        {
+          "rule_id": "strategic_partner",
+          "label": "Named Strategic Partner",
+          "icon": "🤝",
+          "points": 1,
+          "earned": 0,
+          "evidence": [],
+          "color": "#5B21B6",
+          "rationale": "Named strategic partnership (utility, shipyard, hyperscaler). Directional — value depends on binding terms.",
+          "fired": false
+        },
+        {
+          "rule_id": "financing",
+          "label": "Equity Financing",
+          "icon": "💰",
+          "points": 1,
+          "earned": 1,
+          "evidence": [
+            "Financing: EnerVenue closes US$300 million Series B for 30,000-cycle nickel-hydrogen battery manufacturing (2026-04-01)"
+          ],
+          "color": "#0A6640",
+          "rationale": "Confirmed equity round. External capital validation. Weight depends on investor type (strategic >> financial).",
+          "fired": true
+        },
+        {
+          "rule_id": "cfo_bd_hire",
+          "label": "CFO / BD Hire",
+          "icon": "👤",
+          "points": 1,
+          "earned": 0,
+          "evidence": [],
+          "color": "#1A56DB",
+          "rationale": "Finance or business development hire signals imminent fundraise or active contract pipeline.",
+          "fired": false
+        },
+        {
+          "rule_id": "grant_only",
+          "label": "Grant Only (no contract)",
+          "icon": "🏛",
+          "points": -1,
+          "earned": 0,
+          "evidence": [],
+          "color": "#D97706",
+          "rationale": "Government grant without commercial anchor. Validates technology direction but not market demand.",
+          "fired": false
+        },
+        {
+          "rule_id": "pr_language",
+          "label": "PR / Vague Language",
+          "icon": "📢",
+          "points": -2,
+          "earned": 0,
+          "evidence": [],
+          "color": "#C0392B",
+          "rationale": "Signals dominated by PR framing, vision statements, or vague exploratory language. No confirmable evidence.",
+          "fired": false
+        },
+        {
+          "rule_id": "negative_signal",
+          "label": "Negative Signal",
+          "icon": "⚠",
+          "points": -2,
+          "earned": 0,
+          "evidence": [],
+          "color": "#DC2626",
+          "rationale": "Delay, funding risk, cancellation, or competitor win. Each negative event subtracts points.",
+          "fired": false
+        }
+      ],
+      "interpretation": "Insufficient",
+      "interp_color": "#6E6E6E",
+      "rationale": "Insufficient evidence to assess. Primary research required.",
+      "note": "Score derived from public RSS signals only. Each point traceable to a source-cited event. No AI inference used.",
+      "signal_count": 1
+    },
+    "qcells": {
+      "company_id": "qcells",
+      "company_name": "Qcells",
+      "sector": "ess",
+      "stage_label": "Lab",
+      "stage_color": "#6E6E6E",
+      "total_score": 0,
+      "max_possible": 10,
+      "components": [
+        {
+          "rule_id": "commercial_contract",
+          "label": "Commercial Contract",
+          "icon": "📄",
+          "points": 3,
+          "earned": 0,
+          "evidence": [],
+          "color": "#0A6640",
+          "rationale": "Named binding commercial agreement or deployment. Strongest single signal of revenue visibility.",
+          "fired": false
+        },
+        {
+          "rule_id": "certification",
+          "label": "Technical Certification",
+          "icon": "✓",
+          "points": 2,
+          "earned": 0,
+          "evidence": [],
+          "color": "#1A56DB",
+          "rationale": "Independent third-party certification (DNV GL, KPX, UL, TÜV). Required gate for regulated procurement.",
+          "fired": false
+        },
+        {
+          "rule_id": "pilot",
+          "label": "Pilot / Demo",
+          "icon": "🔬",
+          "points": 2,
+          "earned": 0,
+          "evidence": [],
+          "color": "#7D4E00",
+          "rationale": "Confirmed field pilot with a named third-party. De-risks technical claims; precursor to certification or contract.",
+          "fired": false
+        },
+        {
+          "rule_id": "strategic_partner",
+          "label": "Named Strategic Partner",
+          "icon": "🤝",
+          "points": 1,
+          "earned": 0,
+          "evidence": [],
+          "color": "#5B21B6",
+          "rationale": "Named strategic partnership (utility, shipyard, hyperscaler). Directional — value depends on binding terms.",
+          "fired": false
+        },
+        {
+          "rule_id": "financing",
+          "label": "Equity Financing",
+          "icon": "💰",
+          "points": 1,
+          "earned": 0,
+          "evidence": [],
+          "color": "#0A6640",
+          "rationale": "Confirmed equity round. External capital validation. Weight depends on investor type (strategic >> financial).",
+          "fired": false
+        },
+        {
+          "rule_id": "cfo_bd_hire",
+          "label": "CFO / BD Hire",
+          "icon": "👤",
+          "points": 1,
+          "earned": 0,
+          "evidence": [],
+          "color": "#1A56DB",
+          "rationale": "Finance or business development hire signals imminent fundraise or active contract pipeline.",
+          "fired": false
+        },
+        {
+          "rule_id": "grant_only",
+          "label": "Grant Only (no contract)",
+          "icon": "🏛",
+          "points": -1,
+          "earned": 0,
+          "evidence": [],
+          "color": "#D97706",
+          "rationale": "Government grant without commercial anchor. Validates technology direction but not market demand.",
+          "fired": false
+        },
+        {
+          "rule_id": "pr_language",
+          "label": "PR / Vague Language",
+          "icon": "📢",
+          "points": -2,
+          "earned": 0,
+          "evidence": [],
+          "color": "#C0392B",
+          "rationale": "Signals dominated by PR framing, vision statements, or vague exploratory language. No confirmable evidence.",
+          "fired": false
+        },
+        {
+          "rule_id": "negative_signal",
+          "label": "Negative Signal",
+          "icon": "⚠",
+          "points": -2,
+          "earned": 0,
+          "evidence": [],
+          "color": "#DC2626",
+          "rationale": "Delay, funding risk, cancellation, or competitor win. Each negative event subtracts points.",
+          "fired": false
+        }
+      ],
+      "interpretation": "Insufficient",
+      "interp_color": "#6E6E6E",
+      "rationale": "Insufficient evidence to assess. Primary research required.",
+      "note": "Score derived from public RSS signals only. Each point traceable to a source-cited event. No AI inference used.",
+      "signal_count": 1
     }
   },
   "projects": [
@@ -10553,10 +11503,10 @@
       "short": "ESS / LDES",
       "icon": "⚡",
       "color": "#1A56DB",
-      "signal_count": 65,
+      "signal_count": 66,
       "high_count": 6,
       "neg_count": 2,
-      "share_of_total": 0.929,
+      "share_of_total": 0.93,
       "capital_signal": "Building",
       "top_events": [
         {
@@ -10582,14 +11532,14 @@
           "confidence": "Medium-High"
         },
         {
-          "id": "713b5b7a1cbf",
-          "title": "Pexapark logs more than 1 GWh of European storage PPAs in March",
-          "event_type": "Contract",
+          "id": "fa2f1a4cc31d",
+          "title": "EnerVenue closes US$300 million Series B for 30,000-cycle nickel-hydrogen battery manufacturing",
+          "event_type": "Financing",
           "score": 100,
-          "date": "2026-04-02",
-          "source": "PV Magazine",
-          "source_url": "https://www.pv-magazine.com/2026/04/02/pexapark-logs-more-than-1-gwh-of-european-storage-ppas-in-march/",
-          "company": "Unassigned",
+          "date": "2026-04-01",
+          "source": "Energy Storage News",
+          "source_url": "https://www.energy-storage.news/enervenue-closes-us300-million-series-b-for-30000-cycle-nickel-hydrogen-battery-manufacturing/",
+          "company": "EnerVenue",
           "confidence": "Medium"
         }
       ],
@@ -10609,6 +11559,38 @@
           "critical_gaps": 0,
           "investor_type": "Infrastructure/PF",
           "country": "US"
+        },
+        {
+          "id": "enervenue",
+          "name": "EnerVenue",
+          "stage_label": "Lab",
+          "stage_color": "#6E6E6E",
+          "ttr": "Long-term",
+          "ttr_color": "#6E6E6E",
+          "pattern": "Insufficient Signal",
+          "pattern_color": "#A8A8A8",
+          "high_count": 1,
+          "neg_count": 0,
+          "signal_count": 1,
+          "critical_gaps": 1,
+          "investor_type": "Unknown",
+          "country": ""
+        },
+        {
+          "id": "qcells",
+          "name": "Qcells",
+          "stage_label": "Lab",
+          "stage_color": "#6E6E6E",
+          "ttr": "Long-term",
+          "ttr_color": "#6E6E6E",
+          "pattern": "Insufficient Signal",
+          "pattern_color": "#A8A8A8",
+          "high_count": 0,
+          "neg_count": 0,
+          "signal_count": 1,
+          "critical_gaps": 1,
+          "investor_type": "Unknown",
+          "country": ""
         },
         {
           "id": "c_standard_e",
@@ -10659,14 +11641,14 @@
           "country": "UK"
         }
       ],
-      "company_count": 4,
+      "company_count": 6,
       "stage_distribution": {
         "PF-Ready": 1,
         "Scaling": 0,
         "First Commercial": 0,
         "Demo": 0,
         "Pilot": 0,
-        "Lab": 3
+        "Lab": 5
       },
       "buyers": [
         {
@@ -10775,7 +11757,7 @@
       "signal_count": 2,
       "high_count": 0,
       "neg_count": 0,
-      "share_of_total": 0.029,
+      "share_of_total": 0.028,
       "capital_signal": "Quiet",
       "top_events": [
         {
@@ -10907,7 +11889,7 @@
       "signal_count": 2,
       "high_count": 0,
       "neg_count": 0,
-      "share_of_total": 0.029,
+      "share_of_total": 0.028,
       "capital_signal": "Quiet",
       "top_events": [
         {
@@ -11564,8 +12546,78 @@
         "high_gaps": 2
       },
       {
+        "company_id": "enervenue",
+        "company_name": "EnerVenue",
+        "sector": "ess",
+        "stage": "Lab",
+        "gaps": [
+          {
+            "rule_id": "no_contract",
+            "label": "No Commercial Contract",
+            "severity": "critical",
+            "memo": "No binding commercial agreement on record. All revenue is hypothetical."
+          },
+          {
+            "rule_id": "no_cert",
+            "label": "No Third-Party Certification",
+            "severity": "high",
+            "memo": "No independent certification (DNV GL, TÜV, KPX, UL). Required for regulated procurement."
+          },
+          {
+            "rule_id": "no_buyer",
+            "label": "No Named Strategic Buyer",
+            "severity": "high",
+            "memo": "No named strategic buyer in any signal. Demand-side validation absent."
+          },
+          {
+            "rule_id": "no_deploy",
+            "label": "No Deployment / Go-Live",
+            "severity": "medium",
+            "memo": "No operational deployment confirmed. TRL-9 in commercial setting unverified."
+          }
+        ],
+        "gap_count": 4,
+        "critical_gaps": 1,
+        "high_gaps": 2
+      },
+      {
         "company_id": "c_invinity",
         "company_name": "Invinity Energy",
+        "sector": "ess",
+        "stage": "Lab",
+        "gaps": [
+          {
+            "rule_id": "no_contract",
+            "label": "No Commercial Contract",
+            "severity": "critical",
+            "memo": "No binding commercial agreement on record. All revenue is hypothetical."
+          },
+          {
+            "rule_id": "no_cert",
+            "label": "No Third-Party Certification",
+            "severity": "high",
+            "memo": "No independent certification (DNV GL, TÜV, KPX, UL). Required for regulated procurement."
+          },
+          {
+            "rule_id": "no_buyer",
+            "label": "No Named Strategic Buyer",
+            "severity": "high",
+            "memo": "No named strategic buyer in any signal. Demand-side validation absent."
+          },
+          {
+            "rule_id": "no_deploy",
+            "label": "No Deployment / Go-Live",
+            "severity": "medium",
+            "memo": "No operational deployment confirmed. TRL-9 in commercial setting unverified."
+          }
+        ],
+        "gap_count": 4,
+        "critical_gaps": 1,
+        "high_gaps": 2
+      },
+      {
+        "company_id": "qcells",
+        "company_name": "Qcells",
         "sector": "ess",
         "stage": "Lab",
         "gaps": [
@@ -11935,8 +12987,8 @@
     "panel_stats": {
       "negative_count": 2,
       "critical_neg": 0,
-      "companies_with_gaps": 13,
-      "total_critical_gaps": 12,
+      "companies_with_gaps": 15,
+      "total_critical_gaps": 14,
       "watchlist_count": 5
     }
   },
@@ -12032,6 +13084,42 @@
       "pattern": ""
     },
     {
+      "signal_id": "fa2f1a4cc31d",
+      "alert_type": "high_signal",
+      "event_type": "Financing",
+      "headline": "EnerVenue closes US$300 million Series B for 30,000-cycle nickel-hydrogen battery manufacturing",
+      "why_it_matters": "Equity round confirms external capital validation. Key variables: investor identity (strategic vs. financial), round size vs. capex needs.",
+      "confidence": "Medium",
+      "score": 100,
+      "date": "2026-04-01",
+      "source": "Energy Storage News",
+      "source_url": "https://www.energy-storage.news/enervenue-closes-us300-million-series-b-for-30000-cycle-nickel-hydrogen-battery-manufacturing/",
+      "segment": "ess",
+      "entity_type": "company",
+      "entity_id": "enervenue",
+      "entity_name": "EnerVenue",
+      "stage": "Lab",
+      "pattern": "Insufficient Signal"
+    },
+    {
+      "signal_id": "fa2f1a4cc31d",
+      "alert_type": "high_signal",
+      "event_type": "Financing",
+      "headline": "EnerVenue closes US$300 million Series B for 30,000-cycle nickel-hydrogen battery manufacturing",
+      "why_it_matters": "Equity round confirms external capital validation. Key variables: investor identity (strategic vs. financial), round size vs. capex needs.",
+      "confidence": "Medium",
+      "score": 100,
+      "date": "2026-04-01",
+      "source": "Energy Storage News",
+      "source_url": "https://www.energy-storage.news/enervenue-closes-us300-million-series-b-for-30000-cycle-nickel-hydrogen-battery-manufacturing/",
+      "segment": "ess",
+      "entity_type": "segment",
+      "entity_id": "ess",
+      "entity_name": "ess",
+      "stage": "",
+      "pattern": ""
+    },
+    {
       "signal_id": "713b5b7a1cbf",
       "alert_type": "high_signal",
       "event_type": "Contract",
@@ -12060,24 +13148,6 @@
       "date": "2026-03-30",
       "source": "Energy Storage News",
       "source_url": "https://www.energy-storage.news/european-bess-route-to-market-optimisers-entrix-gridbeyond-raise-e55-million/",
-      "segment": "ess",
-      "entity_type": "segment",
-      "entity_id": "ess",
-      "entity_name": "ess",
-      "stage": "",
-      "pattern": ""
-    },
-    {
-      "signal_id": "fa2f1a4cc31d",
-      "alert_type": "high_signal",
-      "event_type": "Financing",
-      "headline": "EnerVenue closes US$300 million Series B for 30,000-cycle nickel-hydrogen battery manufacturing",
-      "why_it_matters": "Equity round confirms external capital validation. Key variables: investor identity (strategic vs. financial), round size vs. capex needs.",
-      "confidence": "Medium-Low",
-      "score": 97,
-      "date": "2026-04-01",
-      "source": "Energy Storage News",
-      "source_url": "https://www.energy-storage.news/enervenue-closes-us300-million-series-b-for-30000-cycle-nickel-hydrogen-battery-manufacturing/",
       "segment": "ess",
       "entity_type": "segment",
       "entity_id": "ess",
@@ -12364,7 +13434,7 @@
       "status": "success",
       "error": null,
       "items": 10,
-      "fetched_at": "2026-04-05T12:08:01.269323+00:00",
+      "fetched_at": "2026-04-05T12:16:17.275193+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -12387,7 +13457,7 @@
       "status": "success",
       "error": null,
       "items": 20,
-      "fetched_at": "2026-04-05T12:08:01.460148+00:00",
+      "fetched_at": "2026-04-05T12:16:17.364961+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -12410,7 +13480,7 @@
       "status": "success",
       "error": null,
       "items": 20,
-      "fetched_at": "2026-04-05T12:08:01.747886+00:00",
+      "fetched_at": "2026-04-05T12:16:17.586807+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -12432,7 +13502,7 @@
       "status": "success",
       "error": null,
       "items": 10,
-      "fetched_at": "2026-04-05T12:08:01.867336+00:00",
+      "fetched_at": "2026-04-05T12:16:17.730894+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -12454,7 +13524,7 @@
       "status": "success",
       "error": null,
       "items": 20,
-      "fetched_at": "2026-04-05T12:08:02.062045+00:00",
+      "fetched_at": "2026-04-05T12:16:17.878168+00:00",
       "source_type": "industry",
       "reliability": 3,
       "topics": [
@@ -12476,7 +13546,7 @@
       "status": "partial",
       "error": "Feed returned 0 usable items",
       "items": 0,
-      "fetched_at": "2026-04-05T12:08:02.298989+00:00",
+      "fetched_at": "2026-04-05T12:16:18.039347+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -12501,7 +13571,7 @@
       "status": "partial",
       "error": null,
       "items": 0,
-      "fetched_at": "2026-04-05T12:08:00.334103+00:00",
+      "fetched_at": "2026-04-05T12:16:16.624548+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -12522,7 +13592,7 @@
       "status": "partial",
       "error": null,
       "items": 0,
-      "fetched_at": "2026-04-05T12:08:00.290261+00:00",
+      "fetched_at": "2026-04-05T12:16:16.862066+00:00",
       "source_type": "government",
       "reliability": 1,
       "topics": [
@@ -12542,7 +13612,7 @@
       "status": "partial",
       "error": null,
       "items": 0,
-      "fetched_at": "2026-04-05T12:08:00.531390+00:00",
+      "fetched_at": "2026-04-05T12:16:16.790602+00:00",
       "source_type": "industry",
       "reliability": 3,
       "topics": [
@@ -12583,7 +13653,7 @@
       "status": "partial",
       "error": null,
       "items": 0,
-      "fetched_at": "2026-04-05T12:08:00.692527+00:00",
+      "fetched_at": "2026-04-05T12:16:17.092242+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -12971,8 +14041,8 @@
     "sources_ok": 5,
     "sources_partial": 7,
     "sources_failed": 2,
-    "new_events": 70,
-    "filtered_out": 158
+    "new_events": 71,
+    "filtered_out": 157
   },
   "_feature_stubs": {
     "analyst_notes": "⚠ PAID PILOT — stored in private DB, not in public JSON",
@@ -12984,8 +14054,8 @@
     "comparables_db": "⚠ SCALE — proprietary deal terms and round history",
     "api_access": "⚠ SCALE — GET /api/company/{id}/card + webhooks"
   },
-  "profile_built_at": "2026-04-05T12:08:15.414844+00:00",
+  "profile_built_at": "2026-04-05T12:16:35.202260+00:00",
   "profile_version": "8.0",
-  "company_count_total": 16,
-  "company_count_auto": 1
+  "company_count_total": 17,
+  "company_count_auto": 2
 }

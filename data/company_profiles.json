@@ -3877,11 +3877,81 @@
     "stage_label": "Lab",
     "stage_score": 1.5,
     "stage_reason": "score=1.5 cd=0 types={'Financing': 1} score_stage=Lab hard_floor=Lab prev=Lab",
-    "gap_log": {},
-    "active_gaps": [],
+    "gap_log": {
+      "no_contract": {
+        "first_seen": "2026-04-05",
+        "last_seen": "2026-04-05",
+        "absent_streak": 0,
+        "resolved": false,
+        "resolved_date": null
+      },
+      "no_cert": {
+        "first_seen": "2026-04-05",
+        "last_seen": "2026-04-05",
+        "absent_streak": 0,
+        "resolved": false,
+        "resolved_date": null
+      },
+      "no_buyer": {
+        "first_seen": "2026-04-05",
+        "last_seen": "2026-04-05",
+        "absent_streak": 0,
+        "resolved": false,
+        "resolved_date": null
+      },
+      "no_deploy": {
+        "first_seen": "2026-04-05",
+        "last_seen": "2026-04-05",
+        "absent_streak": 0,
+        "resolved": false,
+        "resolved_date": null
+      }
+    },
+    "active_gaps": [
+      {
+        "rule_id": "no_contract",
+        "label": "No Commercial Contract",
+        "severity": "critical",
+        "memo": "No binding commercial agreement on record. All revenue is hypothetical.",
+        "tags": [],
+        "escalation_days": 0,
+        "escalation_tier": null,
+        "first_seen": "2026-04-05"
+      },
+      {
+        "rule_id": "no_cert",
+        "label": "No Third-Party Certification",
+        "severity": "high",
+        "memo": "No independent certification (DNV GL, TÜV, KPX, UL). Required for regulated procurement.",
+        "tags": [],
+        "escalation_days": 0,
+        "escalation_tier": null,
+        "first_seen": "2026-04-05"
+      },
+      {
+        "rule_id": "no_buyer",
+        "label": "No Named Strategic Buyer",
+        "severity": "high",
+        "memo": "No named strategic buyer in any signal. Demand-side validation absent.",
+        "tags": [],
+        "escalation_days": 0,
+        "escalation_tier": null,
+        "first_seen": "2026-04-05"
+      },
+      {
+        "rule_id": "no_deploy",
+        "label": "No Deployment / Go-Live",
+        "severity": "medium",
+        "memo": "No operational deployment confirmed. TRL-9 in commercial setting unverified.",
+        "tags": [],
+        "escalation_days": 0,
+        "escalation_tier": null,
+        "first_seen": "2026-04-05"
+      }
+    ],
     "structural_tags": [],
-    "blocker_score": 0,
-    "critical_gaps": 0,
+    "blocker_score": 18,
+    "critical_gaps": 1,
     "all_events": [
       {
         "id": "fa2f1a4cc31d",
@@ -3931,6 +4001,152 @@
     ],
     "signal_count": 1,
     "last_signal_date": "2026-04-01",
+    "profile_date": "2026-04-05",
+    "profile_version": "8.0",
+    "stage_previous": "Lab"
+  },
+  "qcells": {
+    "company_id": "qcells",
+    "name": "Qcells",
+    "sector": "ess",
+    "country": "",
+    "hq": "",
+    "founded": null,
+    "description": "Auto-registered from signal. Analyst review recommended.",
+    "source": "auto",
+    "registered_date": "2026-04-05",
+    "aliases": [
+      "qcells",
+      "qcells"
+    ],
+    "stage": "Lab",
+    "stage_label": "Lab",
+    "stage_score": 0.09,
+    "stage_reason": "score=0.1 cd=0 types={'News': 1} score_stage=Lab hard_floor=Lab prev=Lab",
+    "gap_log": {
+      "no_contract": {
+        "first_seen": "2026-04-05",
+        "last_seen": "2026-04-05",
+        "absent_streak": 0,
+        "resolved": false,
+        "resolved_date": null
+      },
+      "no_cert": {
+        "first_seen": "2026-04-05",
+        "last_seen": "2026-04-05",
+        "absent_streak": 0,
+        "resolved": false,
+        "resolved_date": null
+      },
+      "no_buyer": {
+        "first_seen": "2026-04-05",
+        "last_seen": "2026-04-05",
+        "absent_streak": 0,
+        "resolved": false,
+        "resolved_date": null
+      },
+      "no_deploy": {
+        "first_seen": "2026-04-05",
+        "last_seen": "2026-04-05",
+        "absent_streak": 0,
+        "resolved": false,
+        "resolved_date": null
+      }
+    },
+    "active_gaps": [
+      {
+        "rule_id": "no_contract",
+        "label": "No Commercial Contract",
+        "severity": "critical",
+        "memo": "No binding commercial agreement on record. All revenue is hypothetical.",
+        "tags": [],
+        "escalation_days": 0,
+        "escalation_tier": null,
+        "first_seen": "2026-04-05"
+      },
+      {
+        "rule_id": "no_cert",
+        "label": "No Third-Party Certification",
+        "severity": "high",
+        "memo": "No independent certification (DNV GL, TÜV, KPX, UL). Required for regulated procurement.",
+        "tags": [],
+        "escalation_days": 0,
+        "escalation_tier": null,
+        "first_seen": "2026-04-05"
+      },
+      {
+        "rule_id": "no_buyer",
+        "label": "No Named Strategic Buyer",
+        "severity": "high",
+        "memo": "No named strategic buyer in any signal. Demand-side validation absent.",
+        "tags": [],
+        "escalation_days": 0,
+        "escalation_tier": null,
+        "first_seen": "2026-04-05"
+      },
+      {
+        "rule_id": "no_deploy",
+        "label": "No Deployment / Go-Live",
+        "severity": "medium",
+        "memo": "No operational deployment confirmed. TRL-9 in commercial setting unverified.",
+        "tags": [],
+        "escalation_days": 0,
+        "escalation_tier": null,
+        "first_seen": "2026-04-05"
+      }
+    ],
+    "structural_tags": [],
+    "blocker_score": 18,
+    "critical_gaps": 1,
+    "all_events": [
+      {
+        "id": "99892f15c272",
+        "title": "Qcells wants solar + storage built into every new home",
+        "summary": "<div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2026/04/pexels-photo-12224996.jpeg?quality=82&#038;strip=all&#038;w=1500\" /></div><p>Solar giant Qcells is making a play to get solar and battery storage built into new homes in the US from day one.</p>\n\n\n\n <a class=\"more-link\" href=\"https://electrek.co/2026/04/02/qcells-wants-solar-storage-built-into-every-new-home/#more-462147\">more…</a>",
+        "event_date": "2026-04-02",
+        "source_name": "Electrek",
+        "source_url": "https://electrek.co/2026/04/02/qcells-wants-solar-storage-built-into-every-new-home/",
+        "event_type": "News",
+        "impact_type": "Informational",
+        "matched_rule": null,
+        "tier": 5,
+        "signal_stage": "strategic",
+        "signal_strength": 25,
+        "signal_tier": "low",
+        "score_breakdown": [
+          {
+            "id": "co_match",
+            "delta": 10,
+            "reason": "Event matched to tracked company",
+            "group": "boost"
+          }
+        ],
+        "segment": "ess",
+        "company_id": "qcells",
+        "company_name": "Qcells",
+        "buyer_matches": [],
+        "project_matches": [],
+        "is_negative": false,
+        "neg_subtype": null,
+        "is_noise": false,
+        "evidence": {
+          "observed_fact": "Qcells wants solar + storage built into every new home",
+          "observed_fact_detail": "<div class=\"feat-image\"><img src=\"https://electrek.",
+          "source_label": "Electrek · 2026-04-02",
+          "matched_rule_name": "no rule matched",
+          "matched_rule_tier": "Tier 5 — News",
+          "why_it_matters": "No specific investment pattern matched. Context only — not weighted without corroboration.",
+          "missing_evidence": [
+            "No investment-relevant pattern matched",
+            "Primary research required"
+          ],
+          "confidence": "Low",
+          "confidence_rationale": "Score below threshold. Context only."
+        }
+      }
+    ],
+    "signal_count": 1,
+    "last_signal_date": "2026-04-02",
     "profile_date": "2026-04-05",
     "profile_version": "8.0",
     "stage_previous": "Lab"
