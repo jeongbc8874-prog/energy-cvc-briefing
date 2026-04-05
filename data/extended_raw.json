@@ -3222,7 +3222,7 @@
       "status": "partial",
       "error": null,
       "items": 0,
-      "fetched_at": "2026-04-05T16:01:40.103205+00:00",
+      "fetched_at": "2026-04-05T16:02:16.534273+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -3243,7 +3243,7 @@
       "status": "partial",
       "error": null,
       "items": 0,
-      "fetched_at": "2026-04-05T16:01:39.984823+00:00",
+      "fetched_at": "2026-04-05T16:02:16.596190+00:00",
       "source_type": "government",
       "reliability": 1,
       "topics": [
@@ -3263,7 +3263,7 @@
       "status": "partial",
       "error": null,
       "items": 0,
-      "fetched_at": "2026-04-05T16:01:40.251388+00:00",
+      "fetched_at": "2026-04-05T16:02:16.836160+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -3283,7 +3283,7 @@
       "status": "partial",
       "error": null,
       "items": 0,
-      "fetched_at": "2026-04-05T16:01:40.051544+00:00",
+      "fetched_at": "2026-04-05T16:02:16.804584+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -3300,10 +3300,10 @@
       "id": "cleantechnica",
       "name": "CleanTechnica",
       "url": "https://cleantechnica.com/feed/",
-      "status": "success",
+      "status": "partial",
       "error": null,
-      "items": 2,
-      "fetched_at": "2026-04-05T16:01:40.168372+00:00",
+      "items": 0,
+      "fetched_at": "2026-04-05T16:02:16.833562+00:00",
       "source_type": "industry",
       "reliability": 3,
       "topics": [
@@ -3321,10 +3321,10 @@
       "id": "electrek",
       "name": "Electrek",
       "url": "https://electrek.co/feed/",
-      "status": "success",
+      "status": "partial",
       "error": null,
-      "items": 2,
-      "fetched_at": "2026-04-05T16:01:40.178855+00:00",
+      "items": 0,
+      "fetched_at": "2026-04-05T16:02:16.873744+00:00",
       "source_type": "industry",
       "reliability": 3,
       "topics": [
@@ -3344,7 +3344,7 @@
       "status": "partial",
       "error": null,
       "items": 0,
-      "fetched_at": "2026-04-05T16:01:40.376751+00:00",
+      "fetched_at": "2026-04-05T16:02:17.034196+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -3365,7 +3365,7 @@
       "status": "partial",
       "error": "0개 기사 반환",
       "items": 0,
-      "fetched_at": "2026-04-05T06:45:13.299824+00:00",
+      "fetched_at": "2026-04-05T16:02:17.248130+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -3385,7 +3385,7 @@
       "status": "partial",
       "error": null,
       "items": 0,
-      "fetched_at": "2026-04-05T16:01:40.463416+00:00",
+      "fetched_at": "2026-04-05T16:02:17.091365+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -3405,7 +3405,7 @@
       "status": "failed",
       "error": "Exception: HTTP 404",
       "items": 0,
-      "fetched_at": "2026-04-05T06:45:13.335625+00:00",
+      "fetched_at": "2026-04-05T16:02:17.336434+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -3425,7 +3425,7 @@
       "status": "partial",
       "error": null,
       "items": 0,
-      "fetched_at": "2026-04-05T16:01:40.364469+00:00",
+      "fetched_at": "2026-04-05T16:02:17.101213+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -3445,7 +3445,7 @@
       "status": "partial",
       "error": "0개 기사 반환",
       "items": 0,
-      "fetched_at": "2026-04-05T06:45:13.722250+00:00",
+      "fetched_at": "2026-04-05T16:02:17.984277+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -3465,7 +3465,7 @@
       "status": "failed",
       "error": "Exception: HTTP 404",
       "items": 0,
-      "fetched_at": "2026-04-05T06:45:14.215910+00:00",
+      "fetched_at": "2026-04-05T16:02:18.519827+00:00",
       "source_type": "industry",
       "reliability": 3,
       "topics": [
@@ -3485,7 +3485,7 @@
       "status": "partial",
       "error": "0개 기사 반환",
       "items": 0,
-      "fetched_at": "2026-04-05T06:45:14.354680+00:00",
+      "fetched_at": "2026-04-05T16:02:18.514838+00:00",
       "source_type": "industry",
       "reliability": 3,
       "topics": [
