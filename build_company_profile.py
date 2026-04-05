@@ -1,765 +1,515 @@
 """
-build_company_profile.py  v6.0
-Energy CVC Intelligence Platform — Phase 2 (Production-grade)
+build_company_profile.py  v7.0
+Energy CVC Intelligence Platform — Gap Escalation + Stage Promotion Engine
 
-━━━ v5.0 대비 핵심 버그 수정 ━━━
+동작 방식:
+  1. data/latest.json (generate-signals.py 출력) 읽기
+  2. data/gap_log.json (누적 이력) 읽기 — 없으면 신규 생성
+  3. 각 회사별:
+     - Gap escalation (7/14/21/30일 누적 기준)
+     - Stage 승급 (event_type 가중치 기반)
+     - blocker_score 계산
+  4. data/latest.json의 companies 섹션을 in-place 업데이트
+  5. data/gap_log.json 저장
 
-[BUG 1] escalate_gap: highest 단일 적용 → 모든 threshold 누적 적용으로 변경
-  - 34일 경과 시 21d(STRUCTURAL_RISK) + 30d(LONG_TERM_RISK) 동시 부착
-  - 7d 이상: severity +1  /  14d 이상: severity forced critical (누적)
-  - memo_flag도 해당되는 모든 tier 문구 순차 추가
-
-[BUG 2] escalate_gap threshold: highest만 보던 것 → sorted ladder 전체 순회로 변경
-
-[BUG 3] gap_log first_seen 소실 문제
-  - gap_log.json 없는 첫 실행 시 모든 first_seen = today → escalation 0d → 미적용
-  - 해결: gaps 파일 자체에 first_seen 필드 포함 가능
-  - GapLog.update()에서 우선순위: ① 기존 gap_log entry ② gap 파일 first_seen ③ today
-
-[BUG 4] stage threshold: cumulative while loop 오류
-  - "steps_needed = new_idx+1" 방식 → 직관적인 절대 score threshold 맵으로 교체
-  - Stage: Lab(0) → Demo(5.0) → Pilot(12.0) → First Commercial(22.0) → Scale(35.0)
-  - hard rule: Contract/Deployment ≥ 2개 → 최소 Pilot 보장
-
-━━━ 추가 개선 ━━━
-  • blocker_score: 장기 미해결 gap에 escalation_tier 기반 추가 가중
-  • absent_streak: 3일 연속 absent만 resolved (유지)
-  • structural_tags: 회사 레벨에서 모든 gap의 태그 집합
-  • Funding / Buyer Activity 추출 (유지)
-  • 콘솔 로그: 각 단계별 상세 진단 출력
+실행:
+  python build_company_profile.py
+  BASE_DIR=data python build_company_profile.py
 """
 
-from __future__ import annotations
-
 import json
-import logging
 import os
+import re
 import sys
-from datetime import date, timedelta
+from datetime import date, datetime, timezone
 from pathlib import Path
-from typing import Any
 
-# ─────────────────────────────────────────────────────────
-# Logging
-# ─────────────────────────────────────────────────────────
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s [%(levelname)s] %(message)s",
-    datefmt="%Y-%m-%d %H:%M:%S",
-)
-log = logging.getLogger("build_company_profile")
+# ── 경로 ──────────────────────────────────────────────────────────────────
+BASE_DIR    = Path(os.environ.get("BASE_DIR", "data"))
+LATEST_PATH = BASE_DIR / "latest.json"
+GAP_LOG     = BASE_DIR / "gap_log.json"
+TODAY       = date.today().isoformat()
 
-# ─────────────────────────────────────────────────────────
-# Constants
-# ─────────────────────────────────────────────────────────
-TODAY = date.today()
+# ── Stage 정의 (낮은 인덱스 = 낮은 단계) ──────────────────────────────────
+STAGE_ORDER = ["Lab", "Pilot", "Demo", "First Commercial", "Scaling", "PF-Ready"]
+STAGE_IDX   = {s: i for i, s in enumerate(STAGE_ORDER)}
 
-# ── Stage ladder ──────────────────────────────────────────
-STAGES = ["Lab", "Demo", "Pilot", "First Commercial", "Scale"]
-STAGE_INDEX = {s: i for i, s in enumerate(STAGES)}
+# ── Event type 가중치 (stage 승급 점수용) ────────────────────────────────
+EVENT_WEIGHT = {
+    "Contract":     3.0,
+    "Deployment":   3.0,
+    "Certification":2.5,
+    "Pilot":        2.0,
+    "Partnership":  1.5,
+    "Financing":    1.5,
+    "Grant":        1.0,
+    "Hiring":       0.5,
+    "Milestone":    0.5,
+}
 
-# Absolute weighted-score thresholds to reach each stage
-# (score = sum of EVENT_WEIGHTS for all high-confidence signals)
-STAGE_THRESHOLDS: dict[str, float] = {
+# Stage별 필요 누적 점수
+STAGE_SCORE_THRESHOLD = {
     "Lab":             0.0,
-    "Demo":            5.0,
-    "Pilot":          12.0,
-    "First Commercial": 22.0,
-    "Scale":          35.0,
+    "Pilot":           2.0,   # Pilot 1개 이상
+    "Demo":            5.0,   # Pilot + Certification 등
+    "First Commercial":8.0,   # Contract 또는 Deployment 포함
+    "Scaling":        16.0,   # Contract/Deployment 복수
+    "PF-Ready":       24.0,
 }
 
-# Hard rule: Contract OR Deployment ≥ N → minimum stage enforced
-CONTRACT_DEPLOY_HARD_RULE: dict[int, str] = {
-    2: "Pilot",            # ≥2 → at least Pilot
-    4: "First Commercial", # ≥4 → at least First Commercial
+# Hard rule: Contract/Deployment 개수 → 최소 보장 stage
+CD_HARD_RULE = {
+    1: "First Commercial",
+    3: "Scaling",
+    5: "PF-Ready",
 }
 
-# Event-type weights (applied only to high-confidence signals)
-EVENT_WEIGHTS: dict[str, float] = {
-    "Contract":         3.0,
-    "Deployment":       3.0,
-    "Certification":    2.5,
-    "Pilot":            2.0,
-    "Partnership":      1.5,
-    "Grant":            1.5,
-    "Funding":          1.5,
-    "Product_Launch":   1.5,
-    "Patent":           1.0,
-    "Publication":      0.5,
-    "Conference":       0.5,
-    "Hiring":           0.5,
-}
-
-# ── Severity ──────────────────────────────────────────────
-SEVERITY_ORDER = ["low", "medium", "high", "critical"]
-SEVERITY_INDEX = {s: i for i, s in enumerate(SEVERITY_ORDER)}
-
-# ── Gap escalation ladder (cumulative — ALL matching tiers applied) ──
-# Each tier applies its rule IN ADDITION to all lower tiers.
-ESCALATION_LADDER: list[tuple[int, dict]] = [
+# ── Gap Escalation 누적 래더 ─────────────────────────────────────────────
+# days >= threshold 인 모든 tier 누적 적용
+ESCALATION_LADDER = [
     (7,  {
-        "severity_bump": 1,        # +1 step (low→medium, medium→high, high→critical)
-        "force_severity": None,
+        "severity_bump": 1,       # severity +1 단계
+        "force_critical": False,
         "tags": [],
-        "memo_flag": "[7d+ PERSISTING]",
+        "memo_flag": "[7d+ 미해결]",
     }),
     (14, {
         "severity_bump": 0,
-        "force_severity": "critical",
+        "force_critical": True,   # critical 강제
         "tags": [],
-        "memo_flag": "[14d+ UNRESOLVED → CRITICAL]",
+        "memo_flag": "[14d+ → CRITICAL 강제]",
     }),
     (21, {
         "severity_bump": 0,
-        "force_severity": "critical",
+        "force_critical": True,
         "tags": ["STRUCTURAL_RISK"],
-        "memo_flag": "[21d+ Long-term structural issue]",
+        "memo_flag": "[21d+ 구조적 리스크]",
     }),
     (30, {
         "severity_bump": 0,
-        "force_severity": "critical",
+        "force_critical": True,
         "tags": ["STRUCTURAL_RISK", "LONG_TERM_RISK"],
-        "memo_flag": "[30d+ LONG-TERM RISK — escalated to blocker]",
+        "memo_flag": "[30d+ 장기 미해결 — 투자 블로커]",
     }),
 ]
 
-# blocker_score weights
-BLOCKER_SEVERITY_WEIGHT = {
-    "low":      1,
-    "medium":   2,
-    "high":     4,
-    "critical": 8,
-}
-BLOCKER_TIER_BONUS = {
-    7:  1,
-    14: 3,
-    21: 6,
-    30: 12,
-}
+SEVERITY_ORDER = ["low", "medium", "high", "critical"]
+SEVERITY_IDX   = {s: i for i, s in enumerate(SEVERITY_ORDER)}
 
-# Resolved only after N consecutive absent days
-RESOLVED_CONSECUTIVE_DAYS = 3
+# blocker_score 가중치
+BLOCKER_SEV = {"low": 1, "medium": 2, "high": 4, "critical": 8}
+BLOCKER_TIER_BONUS = {7: 1, 14: 3, 21: 6, 30: 12}
 
-# ─────────────────────────────────────────────────────────
-# Paths  (override via env-var in CI)
-# ─────────────────────────────────────────────────────────
-BASE_DIR     = Path(os.environ.get("BASE_DIR", "data"))
-SIGNALS_DIR  = BASE_DIR / "signals"
-GAPS_DIR     = BASE_DIR / "gaps"
-PROFILES_DIR = BASE_DIR / "profiles"
-GAP_LOG_PATH = BASE_DIR / "gap_log.json"
-
-PROFILES_DIR.mkdir(parents=True, exist_ok=True)
+# resolved: 3일 연속 absent
+RESOLVED_DAYS = 3
 
 
-# ═════════════════════════════════════════════════════════
-# Helpers
-# ═════════════════════════════════════════════════════════
+# ═════════════════════════════════════════════════════════════════════════
+# 유틸
+# ═════════════════════════════════════════════════════════════════════════
 
-def _date_str(d: date) -> str:
-    return d.isoformat()
-
-
-def _days_since(iso_date: str) -> int:
-    """Inclusive calendar days from iso_date to TODAY. Returns 0 on error."""
+def days_since(iso: str) -> int:
     try:
-        return max(0, (TODAY - date.fromisoformat(iso_date)).days)
-    except (ValueError, TypeError):
+        return max(0, (date.today() - date.fromisoformat(iso)).days)
+    except Exception:
         return 0
 
 
-def _bump_severity(current: str, bump: int) -> str:
-    idx = SEVERITY_INDEX.get(current, 0)
-    return SEVERITY_ORDER[min(idx + bump, len(SEVERITY_ORDER) - 1)]
+def bump_severity(current: str, n: int) -> str:
+    idx = SEVERITY_IDX.get(current, 0)
+    return SEVERITY_ORDER[min(idx + n, len(SEVERITY_ORDER) - 1)]
 
 
-def _min_severity(current: str, floor: str) -> str:
-    """Ensure severity is at least `floor`."""
-    if SEVERITY_INDEX.get(current, 0) < SEVERITY_INDEX.get(floor, 0):
+def floor_severity(current: str, floor: str) -> str:
+    if SEVERITY_IDX.get(current, 0) < SEVERITY_IDX.get(floor, 0):
         return floor
     return current
 
 
-# ═════════════════════════════════════════════════════════
-# GapLog — persistent history across daily runs
-# ═════════════════════════════════════════════════════════
+# ═════════════════════════════════════════════════════════════════════════
+# Gap Log (persistent)
+# ═════════════════════════════════════════════════════════════════════════
 
-class GapLog:
+def load_gap_log() -> dict:
+    if GAP_LOG.exists():
+        try:
+            data = json.loads(GAP_LOG.read_text())
+            print(f"[GAP_LOG] 로드: {GAP_LOG} ({len(data)} 회사)")
+            return data
+        except Exception as e:
+            print(f"[GAP_LOG] 로드 실패 ({e}) — 새로 시작")
+    else:
+        print("[GAP_LOG] 파일 없음 — 새로 생성")
+    return {}
+
+
+def save_gap_log(log: dict) -> None:
+    GAP_LOG.write_text(json.dumps(log, indent=2, ensure_ascii=False))
+    print(f"[GAP_LOG] 저장 완료: {GAP_LOG}")
+
+
+def update_gap_log(log: dict, company_id: str, today_gaps: list[dict]) -> None:
     """
-    gap_log.json schema:
-    {
-      "<company_id>": {
-        "<rule_id>": {
-          "first_seen":    "YYYY-MM-DD",   ← never overwritten once set
-          "last_seen":     "YYYY-MM-DD",
-          "absent_streak": int,
-          "resolved":      bool,
-          "resolved_date": "YYYY-MM-DD" | null
-        }
-      }
-    }
-
-    first_seen priority on initial creation:
-      1. Existing gap_log entry (preserved across runs)
-      2. gap["first_seen"] field in today's gaps file  ← allows backfill
-      3. TODAY  (genuinely new gap)
+    오늘 감지된 gaps으로 gap_log 업데이트.
+    - 오늘 있는 rule_id: first_seen 보존, absent_streak=0
+    - 오늘 없는 rule_id: absent_streak+1, 3일 이상이면 resolved
+    - first_seen 우선순위: ① 기존 log ② gap의 first_seen 필드 ③ 오늘
     """
+    company_log = log.setdefault(company_id, {})
+    today_ids   = {g["rule_id"] for g in today_gaps if "rule_id" in g}
 
-    def __init__(self, path: Path):
-        self.path = path
-        self.data: dict[str, dict[str, dict]] = {}
-        if path.exists():
-            try:
-                self.data = json.loads(path.read_text())
-                log.info(
-                    "  [GAP_LOG] Loaded %s — %d companies tracked",
-                    path, len(self.data)
-                )
-            except json.JSONDecodeError:
-                log.warning("  [GAP_LOG] Corrupt gap_log.json — starting fresh")
+    # 오늘 있는 gaps
+    for gap in today_gaps:
+        rid = gap.get("rule_id")
+        if not rid:
+            continue
+        existing = company_log.get(rid)
+        if existing is None:
+            first_seen = gap.get("first_seen") or TODAY
+            company_log[rid] = {
+                "first_seen":    first_seen,
+                "last_seen":     TODAY,
+                "absent_streak": 0,
+                "resolved":      False,
+                "resolved_date": None,
+            }
+            age = days_since(first_seen)
+            print(f"  [GAP NEW]      {company_id:18s} rule={rid:20s} first_seen={first_seen} (age={age}d)")
         else:
-            log.info("  [GAP_LOG] No existing gap_log.json — will create fresh")
+            if existing.get("resolved"):
+                # 재오픈
+                existing["resolved"]      = False
+                existing["resolved_date"] = None
+                print(f"  [GAP REOPEN]   {company_id:18s} rule={rid:20s}")
+            existing["last_seen"]     = TODAY
+            existing["absent_streak"] = 0
 
-    # ── daily update ─────────────────────────────────────
-
-    def update(self, company_id: str, today_gaps: list[dict]) -> None:
-        """
-        Call once per company per run with today's raw gap list.
-        Mutates self.data in place.
-        """
-        company_log = self.data.setdefault(company_id, {})
-        today_str   = _date_str(TODAY)
-        today_ids   = {g["rule_id"] for g in today_gaps if "rule_id" in g}
-
-        # ── gaps present today ────────────────────────────
-        for gap in today_gaps:
-            rid = gap.get("rule_id")
-            if not rid:
-                continue
-
-            existing = company_log.get(rid)
-            if existing is None:
-                # New gap — use backfill first_seen if provided in gaps file
-                backfill_fs = gap.get("first_seen") or today_str
-                company_log[rid] = {
-                    "first_seen":    backfill_fs,
-                    "last_seen":     today_str,
-                    "absent_streak": 0,
-                    "resolved":      False,
-                    "resolved_date": None,
-                }
-                age = _days_since(backfill_fs)
-                log.info(
-                    "  [GAP NEW]     company=%-20s rule=%-20s first_seen=%s (age=%dd)",
-                    company_id, rid, backfill_fs, age
-                )
-            else:
-                existing["last_seen"]     = today_str
-                existing["absent_streak"] = 0
-                if existing.get("resolved"):
-                    existing["resolved"]      = False
-                    existing["resolved_date"] = None
-                    log.info(
-                        "  [GAP REOPEN]  company=%-20s rule=%-20s (was resolved, now active again)",
-                        company_id, rid
-                    )
-
-        # ── gaps absent today ─────────────────────────────
-        for rid, entry in company_log.items():
-            if rid in today_ids or entry.get("resolved"):
-                continue
-            entry["absent_streak"] = entry.get("absent_streak", 0) + 1
-            streak = entry["absent_streak"]
-            if streak >= RESOLVED_CONSECUTIVE_DAYS:
-                entry["resolved"]      = True
-                entry["resolved_date"] = today_str
-                log.info(
-                    "  [GAP RESOLVED] company=%-20s rule=%-20s (absent %dd ≥ %d → resolved)",
-                    company_id, rid, streak, RESOLVED_CONSECUTIVE_DAYS
-                )
-            else:
-                log.info(
-                    "  [GAP ABSENT]   company=%-20s rule=%-20s (absent_streak=%d/%d)",
-                    company_id, rid, streak, RESOLVED_CONSECUTIVE_DAYS
-                )
-
-    # ── accessors ────────────────────────────────────────
-
-    def get_entry(self, company_id: str, rule_id: str) -> dict | None:
-        return self.data.get(company_id, {}).get(rule_id)
-
-    def active_entries(self, company_id: str) -> dict[str, dict]:
-        return {
-            rid: e
-            for rid, e in self.data.get(company_id, {}).items()
-            if not e.get("resolved")
-        }
-
-    def save(self) -> None:
-        self.path.write_text(json.dumps(self.data, indent=2, default=str))
-        log.info("  [GAP_LOG] Saved → %s", self.path)
+    # 오늘 없는 gaps
+    for rid, entry in company_log.items():
+        if rid in today_ids or entry.get("resolved"):
+            continue
+        entry["absent_streak"] = entry.get("absent_streak", 0) + 1
+        streak = entry["absent_streak"]
+        if streak >= RESOLVED_DAYS:
+            entry["resolved"]      = True
+            entry["resolved_date"] = TODAY
+            print(f"  [GAP RESOLVED] {company_id:18s} rule={rid:20s} (absent {streak}일 >= {RESOLVED_DAYS}일 → resolved)")
+        else:
+            print(f"  [GAP ABSENT]   {company_id:18s} rule={rid:20s} (absent_streak={streak}/{RESOLVED_DAYS})")
 
 
-# ═════════════════════════════════════════════════════════
-# Gap Escalation Engine
-# ═════════════════════════════════════════════════════════
+# ═════════════════════════════════════════════════════════════════════════
+# Gap Escalation
+# ═════════════════════════════════════════════════════════════════════════
 
 def escalate_gap(gap: dict, first_seen: str, company_id: str) -> dict:
     """
-    Apply the FULL escalation ladder (all matching tiers, cumulative).
-    Returns a new dict — original is not mutated.
-
-    Escalation rules:
-      ≥7d   : severity +1 step
-      ≥14d  : severity forced to critical; memo += [14d+ UNRESOLVED → CRITICAL]
-      ≥21d  : STRUCTURAL_RISK tag; memo += [21d+ Long-term structural issue]
-      ≥30d  : LONG_TERM_RISK tag; memo += [30d+ LONG-TERM RISK]; blocker bonus ×2
-    All tag/memo additions are cumulative across tiers.
+    모든 matching tier를 누적 적용.
+    - severity: 7d+이면 +1, 14d+이면 critical 강제
+    - tags: STRUCTURAL_RISK(21d+), LONG_TERM_RISK(30d+) 누적
+    - memo: 각 tier memo_flag 순차 추가
+    Returns new dict (원본 불변).
     """
-    gap = dict(gap)  # shallow copy
-    days = _days_since(first_seen)
+    gap  = dict(gap)
+    days = days_since(first_seen)
 
-    original_severity = gap.get("severity", "medium")
-    current_severity  = original_severity
-    accumulated_tags  = list(gap.get("tags", []))
-    memo_flags: list[str] = []
-    highest_tier: int | None = None
+    orig_sev    = gap.get("severity", "medium")
+    current_sev = orig_sev
+    all_tags    = list(gap.get("tags", []))
+    memo_flags  = []
+    top_tier    = None
 
     for threshold, rule in ESCALATION_LADDER:
         if days < threshold:
             break
-        highest_tier = threshold
-
-        # severity
+        top_tier = threshold
         if rule["severity_bump"]:
-            current_severity = _bump_severity(current_severity, rule["severity_bump"])
-        if rule["force_severity"]:
-            current_severity = _min_severity(current_severity, rule["force_severity"])
-
-        # tags (accumulate, no duplicates)
+            current_sev = bump_severity(current_sev, rule["severity_bump"])
+        if rule["force_critical"]:
+            current_sev = floor_severity(current_sev, "critical")
         for tag in rule["tags"]:
-            if tag not in accumulated_tags:
-                accumulated_tags.append(tag)
-
-        # memo flag
-        if rule["memo_flag"] and rule["memo_flag"] not in memo_flags:
+            if tag not in all_tags:
+                all_tags.append(tag)
+        if rule["memo_flag"] not in memo_flags:
             memo_flags.append(rule["memo_flag"])
 
-    # Apply to gap
-    gap["severity"]        = current_severity
-    gap["tags"]            = accumulated_tags
+    gap["severity"]        = current_sev
+    gap["tags"]            = all_tags
     gap["escalation_days"] = days
-    gap["escalation_tier"] = highest_tier
+    gap["escalation_tier"] = top_tier
     gap["first_seen"]      = first_seen
 
     if memo_flags:
-        gap["memo"] = (gap.get("memo") or "").rstrip() + "  " + "  ".join(memo_flags)
+        base = (gap.get("memo") or "").rstrip()
+        gap["memo"] = base + ("  " if base else "") + "  ".join(memo_flags)
 
-    # Console log
-    if highest_tier is not None:
-        severity_changed = (current_severity != original_severity)
-        tag_str = str(accumulated_tags) if accumulated_tags else "—"
-        if severity_changed or accumulated_tags:
-            log.info(
-                "  [ESCALATED]   company=%-20s rule=%-20s "
-                "days=%2dd  tier=%2d  %s→%s  tags=%s",
-                company_id,
-                gap.get("rule_id", "?"),
-                days,
-                highest_tier,
-                original_severity,
-                current_severity,
-                tag_str,
-            )
-        else:
-            log.info(
-                "  [ESCALATION]  company=%-20s rule=%-20s "
-                "days=%2dd  tier=%2d  severity=%s (no change)",
-                company_id,
-                gap.get("rule_id", "?"),
-                days,
-                highest_tier,
-                current_severity,
-            )
-    else:
-        log.info(
-            "  [NO ESCALATION] company=%-20s rule=%-20s days=%2dd (<7d threshold)",
-            company_id, gap.get("rule_id", "?"), days
+    # 콘솔 로그
+    if top_tier is not None:
+        changed = (current_sev != orig_sev) or bool(all_tags)
+        verb    = "ESCALATED" if changed else "escalation"
+        print(
+            f"  [{verb:10s}] {company_id:18s} rule={gap.get('rule_id','?'):20s} "
+            f"days={days:2d}d  tier={top_tier:2d}  "
+            f"sev: {orig_sev}→{current_sev}  tags={all_tags or '—'}"
         )
+    else:
+        if days > 0:
+            print(
+                f"  [no-esc      ] {company_id:18s} rule={gap.get('rule_id','?'):20s} "
+                f"days={days:2d}d (<7d threshold)"
+            )
 
     return gap
 
 
-# ═════════════════════════════════════════════════════════
-# Stage Promotion Engine
-# ═════════════════════════════════════════════════════════
+# ═════════════════════════════════════════════════════════════════════════
+# Stage Promotion
+# ═════════════════════════════════════════════════════════════════════════
 
-def compute_stage(
-    company_id: str,
-    current_stage: str,
-    signals: list[dict],
-) -> tuple[str, float, str]:
+def compute_stage(company_id: str, current_stage: str, events: list[dict]) -> tuple[str, float, str]:
     """
-    Compute the promoted stage using:
-      1. Weighted score of high-confidence signals vs STAGE_THRESHOLDS
-      2. Hard rule: Contract/Deployment count → minimum stage floor
-
-    Returns: (new_stage, weighted_score, reason_string)
+    high-confidence 이벤트의 가중치 합산으로 stage 결정.
+    hard rule: Contract/Deployment 개수 → 최소 보장 stage.
+    절대 강등하지 않음 (no demotion).
+    Returns (new_stage, score, reason).
     """
-    score      = 0.0
-    high_count = 0
-    cd_count   = 0
+    score    = 0.0
+    cd_count = 0
     type_tally: dict[str, int] = {}
 
-    for sig in signals:
-        if sig.get("confidence") != "high":
-            continue
-        etype  = sig.get("event_type", "Unknown")
-        weight = EVENT_WEIGHTS.get(etype, 0.5)
-        score += weight
-        high_count += 1
+    for ev in events:
+        # high 또는 medium confidence 모두 반영 (low는 0.3배)
+        tier   = ev.get("signal_tier", "low")
+        mult   = 1.0 if tier == "high" else 0.6 if tier == "medium" else 0.3
+        etype  = ev.get("event_type", "")
+        weight = EVENT_WEIGHT.get(etype, 0.3)
+        score += weight * mult
         type_tally[etype] = type_tally.get(etype, 0) + 1
-        if etype in ("Contract", "Deployment"):
+        if etype in ("Contract", "Deployment") and not ev.get("is_negative", False):
             cd_count += 1
 
-    # ── Score-based stage ─────────────────────────────────
+    # 점수 기반 stage
     score_stage = "Lab"
-    for stage in STAGES:
-        if score >= STAGE_THRESHOLDS[stage]:
+    for stage in STAGE_ORDER:
+        if score >= STAGE_SCORE_THRESHOLD[stage]:
             score_stage = stage
-        else:
-            break
 
-    # ── Hard rule floor ───────────────────────────────────
-    hard_floor   = current_stage  # never demote
-    hard_reason  = ""
-    for min_cd, floor_stage in sorted(CONTRACT_DEPLOY_HARD_RULE.items(), reverse=True):
+    # hard rule (Contract/Deployment 개수)
+    hard_floor  = "Lab"
+    hard_reason = ""
+    for min_cd, floor_stage in sorted(CD_HARD_RULE.items(), reverse=True):
         if cd_count >= min_cd:
             hard_floor  = floor_stage
-            hard_reason = f"[hard-rule: {cd_count}× contract/deploy ≥{min_cd} → ≥{floor_stage}]"
+            hard_reason = f"hard-rule: {cd_count}×CD≥{min_cd}→≥{floor_stage}"
             break
 
-    # Final: highest of score_stage, hard_floor, current_stage (no demotion)
-    candidates  = [score_stage, hard_floor, current_stage]
-    new_stage   = max(candidates, key=lambda s: STAGE_INDEX.get(s, 0))
+    # 최종: score_stage, hard_floor, current_stage 중 최대 (강등 없음)
+    new_stage = max(
+        [score_stage, hard_floor, current_stage],
+        key=lambda s: STAGE_IDX.get(s, 0),
+    )
 
     reason = (
-        f"score={score:.1f}  high_signals={high_count}  cd_signals={cd_count}  "
-        f"types={type_tally}  "
-        f"score_stage={score_stage}  hard_floor={hard_floor}  "
-        f"prev={current_stage}  {hard_reason}"
+        f"score={score:.1f}  cd={cd_count}  types={type_tally}  "
+        f"score_stage={score_stage}  hard_floor={hard_floor}  prev={current_stage}  {hard_reason}"
     ).strip()
 
-    # Console log
     if new_stage != current_stage:
-        log.info(
-            "  [STAGE UP]    company=%-20s %s → %s  (score=%.1f  cd=%d)",
-            company_id, current_stage, new_stage, score, cd_count
+        print(
+            f"  [STAGE UP ▲  ] {company_id:18s}  "
+            f"{current_stage} → {new_stage}  (score={score:.1f}  cd={cd_count})"
         )
-        log.info("  [STAGE UP]    reason: %s", reason)
     else:
-        log.info(
-            "  [STAGE HOLD]  company=%-20s %s  (score=%.1f  cd=%d  need=%.1f for next)",
-            company_id,
-            current_stage,
-            score,
-            cd_count,
-            STAGE_THRESHOLDS.get(STAGES[min(STAGE_INDEX[current_stage]+1, len(STAGES)-1)], 999),
+        # 다음 stage까지 필요 점수 표시
+        cur_idx  = STAGE_IDX.get(current_stage, 0)
+        next_s   = STAGE_ORDER[min(cur_idx + 1, len(STAGE_ORDER) - 1)]
+        need     = STAGE_SCORE_THRESHOLD.get(next_s, 999)
+        print(
+            f"  [STAGE HOLD  ] {company_id:18s}  {current_stage:18s}  "
+            f"score={score:.1f}  need {need:.1f} for {next_s}  cd={cd_count}"
         )
 
-    return new_stage, score, reason
+    return new_stage, round(score, 2), reason
 
 
-# ═════════════════════════════════════════════════════════
-# Funding History & Buyer Activity
-# ═════════════════════════════════════════════════════════
-
-def extract_funding_history(signals: list[dict]) -> list[dict]:
-    rounds = []
-    for sig in signals:
-        if sig.get("event_type") != "Funding":
-            continue
-        rounds.append({
-            "date":       sig.get("signal_date") or sig.get("date", ""),
-            "amount_usd": sig.get("amount_usd"),        # None = unverified
-            "round_type": sig.get("round_type", "Unknown"),
-            "investors":  sig.get("investors", []),
-            "source":     sig.get("source_name", ""),
-            "source_url": sig.get("source_url", ""),
-            "verified":   sig.get("verified", False),
-        })
-    rounds.sort(key=lambda r: r["date"], reverse=True)
-    return rounds
-
-
-def extract_buyer_activity(signals: list[dict]) -> list[dict]:
-    activities = []
-    for sig in signals:
-        if sig.get("event_type") not in ("Contract", "Deployment", "Partnership"):
-            continue
-        activities.append({
-            "date":         sig.get("signal_date") or sig.get("date", ""),
-            "event_type":   sig.get("event_type"),
-            "counterparty": sig.get("counterparty") or sig.get("entity_name", "Unknown"),
-            "sector":       sig.get("sector", ""),
-            "geography":    sig.get("geography", ""),
-            "source":       sig.get("source_name", ""),
-            "source_url":   sig.get("source_url", ""),
-            "confidence":   sig.get("confidence", "medium"),
-        })
-    activities.sort(key=lambda a: a["date"], reverse=True)
-    return activities
-
-
-# ═════════════════════════════════════════════════════════
+# ═════════════════════════════════════════════════════════════════════════
 # blocker_score
-# ═════════════════════════════════════════════════════════
+# ═════════════════════════════════════════════════════════════════════════
 
-def compute_blocker_score(enriched_gaps: list[dict]) -> int:
-    """
-    Weighted score reflecting investment risk from unresolved gaps.
-
-    Per gap:
-      base   = BLOCKER_SEVERITY_WEIGHT[severity]
-      bonus  = BLOCKER_TIER_BONUS[escalation_tier]  (if escalated)
-      total += base + bonus
-    """
+def compute_blocker_score(gaps: list[dict]) -> int:
     total = 0
-    for gap in enriched_gaps:
-        sev   = gap.get("severity", "low")
-        tier  = gap.get("escalation_tier")
-        base  = BLOCKER_SEVERITY_WEIGHT.get(sev, 1)
-        bonus = BLOCKER_TIER_BONUS.get(tier, 0) if tier else 0
-        total += base + bonus
+    for g in gaps:
+        sev   = g.get("severity", "low")
+        tier  = g.get("escalation_tier")
+        total += BLOCKER_SEV.get(sev, 1) + BLOCKER_TIER_BONUS.get(tier, 0)
     return total
 
 
-# ═════════════════════════════════════════════════════════
-# Core Profile Builder
-# ═════════════════════════════════════════════════════════
+# ═════════════════════════════════════════════════════════════════════════
+# 핵심 처리: 회사 1개
+# ═════════════════════════════════════════════════════════════════════════
 
-def build_profile(
-    company_id: str,
-    raw_meta:   dict,
-    signals:    list[dict],
-    raw_gaps:   list[dict],
-    gap_log:    GapLog,
+def process_company(
+    company_id:  str,
+    co_data:     dict,
+    gap_log:     dict,
 ) -> dict:
-    log.info("")
-    log.info("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
-    log.info("  COMPANY: %s", company_id)
-    log.info("  signals=%d  raw_gaps=%d", len(signals), len(raw_gaps))
-    log.info("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
+    """
+    co_data: generate-signals.py가 생성한 enriched company dict
+    gap_log: 전체 gap 이력 dict (mutated in-place)
+    Returns: 업데이트된 co_data
+    """
+    print(f"\n┌── {company_id} ──────────────────────────────────")
 
-    # ── 1. Update gap log ─────────────────────────────────
-    log.info("  ── [1/5] Updating GapLog ──")
-    gap_log.update(company_id, raw_gaps)
+    events      = co_data.get("events", [])
+    raw_gaps    = co_data.get("gaps",   [])
+    cur_stage   = co_data.get("stage_label") or co_data.get("stage", "Lab")
 
-    # ── 2. Stage promotion ────────────────────────────────
-    log.info("  ── [2/5] Stage Promotion ──")
-    current_stage               = raw_meta.get("stage", "Lab")
-    new_stage, score, stage_rsn = compute_stage(company_id, current_stage, signals)
+    # ── 1. Gap log 업데이트 ────────────────────────────────────────────
+    print(f"│ [1/4] Gap log 업데이트 (오늘 gaps={len(raw_gaps)})")
+    update_gap_log(gap_log, company_id, raw_gaps)
 
-    # ── 3. Gap escalation ─────────────────────────────────
-    log.info("  ── [3/5] Gap Escalation ──")
-    active_entries = gap_log.active_entries(company_id)
-    enriched_gaps: list[dict] = []
+    # ── 2. Gap escalation ─────────────────────────────────────────────
+    print(f"│ [2/4] Gap escalation")
+    company_log    = gap_log.get(company_id, {})
+    enriched_gaps  = []
 
     for gap in raw_gaps:
         rid   = gap.get("rule_id")
-        entry = active_entries.get(rid) if rid else None
-        fs    = entry["first_seen"] if entry else (gap.get("first_seen") or _date_str(TODAY))
+        entry = company_log.get(rid) if rid else None
+        fs    = (
+            entry["first_seen"]
+            if entry and not entry.get("resolved")
+            else gap.get("first_seen") or TODAY
+        )
         enriched_gaps.append(escalate_gap(gap, fs, company_id))
 
-    # Sort: critical first, then by escalation_days desc
+    # critical 먼저, 그 다음 escalation_days 내림차순
     enriched_gaps.sort(key=lambda g: (
-        -SEVERITY_INDEX.get(g.get("severity", "low"), 0),
+        -SEVERITY_IDX.get(g.get("severity", "low"), 0),
         -(g.get("escalation_days") or 0),
     ))
 
-    # ── 4. Aggregate risk metrics ─────────────────────────
-    log.info("  ── [4/5] Risk Aggregation ──")
-    critical_count  = sum(1 for g in enriched_gaps if g.get("severity") == "critical")
+    # ── 3. Stage 승급 ─────────────────────────────────────────────────
+    print(f"│ [3/4] Stage 승급 (current={cur_stage}  events={len(events)})")
+    new_stage, stage_score, stage_reason = compute_stage(company_id, cur_stage, events)
+
+    # ── 4. blocker_score + structural_tags ────────────────────────────
+    print(f"│ [4/4] Risk 집계")
+    critical_cnt   = sum(1 for g in enriched_gaps if g.get("severity") == "critical")
     structural_tags = sorted({
         tag
         for g in enriched_gaps
         for tag in g.get("tags", [])
     })
-    blocker_score = compute_blocker_score(enriched_gaps)
+    blocker_score  = compute_blocker_score(enriched_gaps)
 
-    log.info(
-        "  [RISK]  blocker_score=%-4d  critical_gaps=%d  structural_tags=%s",
-        blocker_score, critical_count, structural_tags or "none"
+    print(
+        f"│      blocker={blocker_score}  critical_gaps={critical_cnt}  "
+        f"struct_tags={structural_tags or 'none'}"
     )
 
-    # ── 5. Funding + Buyer Activity ───────────────────────
-    log.info("  ── [5/5] Enrichment (Funding / Buyer) ──")
-    funding_history = extract_funding_history(signals)
-    buyer_activity  = extract_buyer_activity(signals)
-    log.info(
-        "  [ENRICH] funding_rounds=%d  buyer_events=%d",
-        len(funding_history), len(buyer_activity)
+    # ── co_data 업데이트 ──────────────────────────────────────────────
+    co_data["gaps"]             = enriched_gaps
+    co_data["stage_label"]      = new_stage
+    co_data["stage_previous"]   = cur_stage
+    co_data["stage_score"]      = stage_score
+    co_data["stage_reason"]     = stage_reason
+    co_data["blocker_score"]    = blocker_score
+    co_data["critical_gaps"]    = critical_cnt
+    co_data["structural_tags"]  = structural_tags
+    co_data["profile_date"]     = TODAY
+    co_data["profile_version"]  = "7.0"
+
+    print(
+        f"└── DONE: stage={new_stage} (prev={cur_stage})  "
+        f"blocker={blocker_score}  crit={critical_cnt}  tags={structural_tags or 'none'}"
     )
-
-    # ── Assemble profile ──────────────────────────────────
-    profile = {
-        # Identity
-        "company_id":   company_id,
-        "name":         raw_meta.get("name", company_id),
-        "sector":       raw_meta.get("sector", ""),
-        "sub_sector":   raw_meta.get("sub_sector", ""),
-        "hq":           raw_meta.get("hq", ""),
-        "founded":      raw_meta.get("founded"),
-        "website":      raw_meta.get("website", ""),
-
-        # Stage
-        "stage":          new_stage,
-        "stage_previous": current_stage,
-        "stage_score":    round(score, 2),
-        "stage_reason":   stage_rsn,
-
-        # Signals
-        "signal_count":     len(signals),
-        "high_signals":     sum(1 for s in signals if s.get("confidence") == "high"),
-        "last_signal_date": max(
-            (s.get("signal_date", "") for s in signals), default=""
-        ),
-
-        # Gaps
-        "active_gap_count":   len(enriched_gaps),
-        "critical_gap_count": critical_count,
-        "blocker_score":      blocker_score,
-        "structural_tags":    structural_tags,
-        "gaps":               enriched_gaps,
-
-        # Enrichment
-        "funding_history": funding_history,
-        "buyer_activity":  buyer_activity,
-
-        # Meta
-        "profile_date":    _date_str(TODAY),
-        "profile_version": "6.0",
-    }
-
-    log.info(
-        "  [DONE]  stage=%s (prev=%s)  gaps=%d(crit=%d)  "
-        "blocker=%d  struct_tags=%s",
-        new_stage, current_stage,
-        len(enriched_gaps), critical_count,
-        blocker_score,
-        structural_tags or "none",
-    )
-    return profile
+    return co_data
 
 
-# ═════════════════════════════════════════════════════════
-# File I/O
-# ═════════════════════════════════════════════════════════
+# ═════════════════════════════════════════════════════════════════════════
+# 메인 파이프라인
+# ═════════════════════════════════════════════════════════════════════════
 
-def load_json(path: Path) -> Any:
-    if not path.exists():
-        return None
+def main() -> None:
+    print(f"\n{'═'*62}")
+    print(f"  build_company_profile.py  v7.0   {TODAY}")
+    print(f"{'═'*62}\n")
+
+    # ── latest.json 로드 ──────────────────────────────────────────────
+    if not LATEST_PATH.exists():
+        print(f"[ERROR] {LATEST_PATH} 없음 — generate-signals.py를 먼저 실행하세요.")
+        sys.exit(1)
+
     try:
-        return json.loads(path.read_text())
-    except json.JSONDecodeError as exc:
-        log.error("JSON parse error in %s: %s", path, exc)
-        return None
+        payload = json.loads(LATEST_PATH.read_text(encoding="utf-8"))
+    except Exception as e:
+        print(f"[ERROR] latest.json 파싱 실패: {e}")
+        sys.exit(1)
 
+    companies: dict = payload.get("companies", {})
+    if not companies:
+        print("[WARN] companies 섹션이 비어있음 — 처리할 항목 없음")
+        sys.exit(0)
 
-def save_profile(profile: dict) -> None:
-    path = PROFILES_DIR / f"{profile['company_id']}.json"
-    path.write_text(json.dumps(profile, indent=2, default=str))
-    log.info("  Profile saved → %s", path)
+    print(f"[LOAD] {LATEST_PATH}  →  {len(companies)} 회사\n")
 
+    # ── gap_log 로드 ──────────────────────────────────────────────────
+    gap_log = load_gap_log()
+    print()
 
-# ═════════════════════════════════════════════════════════
-# Pipeline entry point
-# ═════════════════════════════════════════════════════════
+    # ── 회사별 처리 ───────────────────────────────────────────────────
+    summary_rows = []
 
-def run_pipeline(company_ids: list[str] | None = None) -> None:
-    """
-    Daily pipeline entry point.
-
-    Directory layout expected:
-      data/signals/<company_id>.json   → list of signal dicts
-      data/gaps/<company_id>_gaps.json → list of gap dicts (may include first_seen)
-      data/profiles/<company_id>_meta.json → {stage, name, sector, ...}
-      data/gap_log.json                → auto-managed
-
-    CLI usage:
-      python build_company_profile.py                        # all companies
-      python build_company_profile.py form_energy amogy      # specific
-    """
-    log.info("═══ build_company_profile.py v6.0 ═══  date=%s", _date_str(TODAY))
-
-    gap_log = GapLog(GAP_LOG_PATH)
-
-    if company_ids is None:
-        company_ids = sorted(p.stem for p in SIGNALS_DIR.glob("*.json"))
-
-    if not company_ids:
-        log.warning("No company signal files found in %s", SIGNALS_DIR)
-        return
-
-    log.info("Pipeline start — %d companies: %s", len(company_ids), company_ids)
-
-    summary_rows: list[dict] = []
-    processed = 0
-
-    for cid in company_ids:
-        signals  = load_json(SIGNALS_DIR  / f"{cid}.json")          or []
-        raw_gaps = load_json(GAPS_DIR     / f"{cid}_gaps.json")      or []
-        raw_meta = load_json(PROFILES_DIR / f"{cid}_meta.json")      or {"stage": "Lab"}
-
-        if not signals and not raw_gaps:
-            log.warning("  SKIP %s — no data files", cid)
-            continue
-
-        profile = build_profile(cid, raw_meta, signals, raw_gaps, gap_log)
-        save_profile(profile)
-        processed += 1
-
+    for company_id, co_data in companies.items():
+        updated = process_company(company_id, co_data, gap_log)
+        companies[company_id] = updated
         summary_rows.append({
-            "company":       cid,
-            "stage":         profile["stage"],
-            "prev_stage":    profile["stage_previous"],
-            "promoted":      profile["stage"] != profile["stage_previous"],
-            "blocker":       profile["blocker_score"],
-            "critical_gaps": profile["critical_gap_count"],
-            "struct_tags":   profile["structural_tags"],
+            "id":      company_id,
+            "name":    co_data.get("name", company_id),
+            "stage":   updated["stage_label"],
+            "prev":    updated.get("stage_previous", "—"),
+            "up":      updated["stage_label"] != updated.get("stage_previous", updated["stage_label"]),
+            "blocker": updated["blocker_score"],
+            "crit":    updated["critical_gaps"],
+            "tags":    updated["structural_tags"],
         })
 
-    gap_log.save()
+    # ── latest.json 덮어쓰기 ─────────────────────────────────────────
+    payload["companies"]         = companies
+    payload["profile_built_at"]  = datetime.now(timezone.utc).isoformat()
+    payload["profile_version"]   = "7.0"
 
-    # ── Summary table ──────────────────────────────────────
-    log.info("")
-    log.info("═══ PIPELINE SUMMARY ═════════════════════════════════════════════")
-    log.info(
-        "  %-20s %-18s %-8s %-8s %-20s",
-        "company", "stage (prev→new)", "blocker", "crit_g", "struct_tags"
+    LATEST_PATH.write_text(
+        json.dumps(payload, indent=2, ensure_ascii=False),
+        encoding="utf-8",
     )
-    log.info("  " + "─" * 78)
-    for row in summary_rows:
-        arrow = f"{row['prev_stage']}→{row['stage']}" if row["promoted"] else row["stage"]
-        log.info(
-            "  %-20s %-18s %-8d %-8d %s",
-            row["company"],
-            arrow,
-            row["blocker"],
-            row["critical_gaps"],
-            ", ".join(row["struct_tags"]) or "—",
-        )
-    promotions = [r for r in summary_rows if r["promoted"]]
-    log.info("  " + "─" * 78)
-    log.info(
-        "  Processed: %d/%d  |  Promotions: %d  |  High-risk (blocker≥20): %d",
-        processed, len(company_ids),
-        len(promotions),
-        sum(1 for r in summary_rows if r["blocker"] >= 20),
+    print(f"\n[SAVE] {LATEST_PATH} 업데이트 완료")
+
+    # ── gap_log 저장 ──────────────────────────────────────────────────
+    save_gap_log(gap_log)
+
+    # ── 요약 테이블 ───────────────────────────────────────────────────
+    print(f"\n{'═'*72}")
+    print(f"  {'회사':20s} {'stage (prev→new)':22s} {'blocker':>8} {'crit':>6}  struct_tags")
+    print(f"  {'─'*68}")
+    for r in summary_rows:
+        arrow = f"{r['prev']}→{r['stage']}" if r["up"] else r["stage"]
+        tags  = ", ".join(r["tags"]) if r["tags"] else "—"
+        print(f"  {r['name']:20s} {arrow:22s} {r['blocker']:>8d} {r['crit']:>6d}  {tags}")
+    print(f"  {'─'*68}")
+
+    promotions  = sum(1 for r in summary_rows if r["up"])
+    high_risk   = sum(1 for r in summary_rows if r["blocker"] >= 20)
+    struct_risk = sum(1 for r in summary_rows if "STRUCTURAL_RISK" in r["tags"])
+
+    print(
+        f"  처리={len(summary_rows)}  승급={promotions}  "
+        f"high-risk(≥20)={high_risk}  STRUCTURAL_RISK={struct_risk}"
     )
-    log.info("═══════════════════════════════════════════════════════════════════")
+    print(f"{'═'*72}\n")
 
 
 if __name__ == "__main__":
-    target = sys.argv[1:] or None
-    run_pipeline(target)
+    main()
