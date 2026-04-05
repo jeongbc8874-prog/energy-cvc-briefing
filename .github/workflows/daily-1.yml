@@ -2,8 +2,9 @@ name: Daily Energy CVC Signals
 
 on:
   schedule:
-    - cron: '0 22 * * *'    # 매일 KST 07:00 (UTC 22:00)
-    - cron: '0 22 * * 0'    # 매주 일요일 동일 시간 — reset 트리거용
+    - cron: '0 15 * * *'     # 매일 KST 00:00 (UTC 15:00)
+    - cron: '0 3 * * *'      # 매일 KST 12:00 (UTC 03:00)
+    - cron: '0 15 * * 0'     # 매주 일요일 KST 00:00 — reset 트리거용
   workflow_dispatch:
 
 permissions:
@@ -25,10 +26,10 @@ jobs:
           python-version: '3.11'
 
       - name: Install dependencies
-        run: pip install feedparser anthropic
+        run: pip install feedparser anthropic rapidfuzz
 
       - name: Reset disabled feeds (weekly, Sunday)
-        if: github.event.schedule == '0 22 * * 0'
+        if: github.event.schedule == '0 15 * * 0'
         run: BASE_DIR=data python collect_energy_signals.py --reset-health
 
       - name: Collect signals
@@ -50,5 +51,5 @@ jobs:
           git config --local user.name "CVC AI Agent"
           git add data/
           git diff --quiet && git diff --staged --quiet || \
-            git commit -m "Daily signals: $(date '+%Y-%m-%d')"
+            git commit -m "Daily signals: $(date '+%Y-%m-%d %H:%M KST')"
           git push
