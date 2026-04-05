@@ -3886,10 +3886,10 @@
       "enervenue",
       "enervenue"
     ],
-    "stage": "Lab",
-    "stage_label": "Lab",
+    "stage": "Pilot",
+    "stage_label": "Pilot",
     "stage_score": 1.5,
-    "stage_reason": "score=1.5 cd=0 types={'Financing': 1} score_stage=Lab hard_floor=Lab prev=Lab",
+    "stage_reason": "score=1.5 cd=0 types={'Financing': 1} score_stage=Lab hard_floor=Lab prev=Pilot",
     "gap_log": {
       "no_contract": {
         "first_seen": "2026-04-05",
@@ -4016,8 +4016,8 @@
     "last_signal_date": "2026-04-01",
     "profile_date": "2026-04-05",
     "profile_version": "8.0",
-    "stage_previous": "Lab",
-    "_gen_stage_label": "Lab"
+    "stage_previous": "Pilot",
+    "_gen_stage_label": "Pilot"
   },
   "qcells": {
     "company_id": "qcells",

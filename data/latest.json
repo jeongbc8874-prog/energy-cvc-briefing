@@ -1,8 +1,8 @@
 {
   "date": "2026-04-05",
   "dateKr": "2026년 04월 05일",
-  "generatedAt": "2026-04-05T12:26:33.624314+00:00",
-  "brief": "**Deal Flow Memo - Energy Storage Sector**\n\nToday's signals point to accelerating maturation in the energy storage market, with clear delineation between established technologies scaling rapidly and emerging chemistries finding specific niches. American Battery Factory's 4.5GWh LFP offtake agreements (Energy Storage News) and EnerVenue's $300M Series B for nickel-hydrogen manufacturing signal that non-lithium chemistries are gaining serious commercial traction, while Form Energy's massive 12GWh iron-air agreement with AI data centers (Energy Storage News) shows how power-hungry compute infrastructure is becoming a key demand driver for long-duration storage. The geographic spread is notable—strong activity across US manufacturing, European optimization software (Entrix/GridBeyond's €55M raise per Energy Storage News), and European PPA markets (Pexapark's 1GWh+ in March per PV Magazine). \n\nWatch for: (1) whether other long-duration storage chemistries can replicate Form's AI data center penetration, (2) if American Battery's LFP momentum pressures other domestic manufacturers, and (3) how the slow hybrid PPA uptake among industrial buyers (BBDF 2026, PV Magazine) impacts storage project economics in the near term.",
+  "generatedAt": "2026-04-05T12:44:02.500691+00:00",
+  "brief": "**Deal Flow Memo - Energy Storage Sector Update**\n\nThe convergence of massive AI data center power demands and utility-scale storage deployment is creating unprecedented offtake visibility, with Form Energy's 12GWh iron-air agreement and American Battery Factory's 4.5GWh LFP contracts (Energy Storage News) signaling institutional confidence in long-duration storage economics. EnerVenue's $300M Series B for nickel-hydrogen manufacturing demonstrates that alternative chemistries beyond lithium are attracting serious growth capital, particularly those promising 30,000+ cycle durability for grid applications. The European market is showing strong momentum with Pexapark logging over 1GWh of storage PPAs in March alone, while the €55M raised by route-to-market optimizers Entrix and GridBeyond (Energy Storage News) highlights the critical need for software layers that can monetize storage assets across multiple revenue streams. \n\n**Watch next**: Industrial buyer adoption of hybrid PPAs remains sluggish per BBDF 2026 data (PV Magazine), suggesting the next inflection point will be corporate procurement teams getting comfortable with storage-coupled renewables contracts—likely creating opportunities for standardization platforms or risk management tools in this space.",
   "stats": {
     "total": 71,
     "high": 6,
@@ -4441,9 +4441,9 @@
       "type_counts": {
         "Financing": 1
       },
-      "stage_label": "Lab",
-      "stage_color": "#6E6E6E",
-      "stage_desc": "Limited public signal. Company at lab/early stage or undisclosed.",
+      "stage_label": "Pilot",
+      "stage_color": "#7D4E00",
+      "stage_desc": "Third-party validation or financing in progress. Commercial gate not yet cleared.",
       "pattern": {
         "id": "low_density",
         "label": "Insufficient Signal",
@@ -4514,7 +4514,7 @@
           "DOE grant + offtaker co-investment"
         ]
       },
-      "stage_previous": "Lab",
+      "stage_previous": "Pilot",
       "stage_score": 1.5,
       "blocker_score": 18,
       "structural_tags": [],
@@ -6483,7 +6483,7 @@
         "source_count": 0,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-05T12:26:17.855300+00:00"
+        "generated_at": "2026-04-05T12:43:49.280815+00:00"
       },
       "narrative": null,
       "generated_date": "2026-04-05"
@@ -6642,7 +6642,7 @@
         "source_count": 0,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-05T12:26:17.855330+00:00"
+        "generated_at": "2026-04-05T12:43:49.280844+00:00"
       },
       "narrative": null,
       "generated_date": "2026-04-05"
@@ -6812,7 +6812,7 @@
         "source_count": 0,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-05T12:26:17.855344+00:00"
+        "generated_at": "2026-04-05T12:43:49.280859+00:00"
       },
       "narrative": null,
       "generated_date": "2026-04-05"
@@ -6982,7 +6982,7 @@
         "source_count": 0,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-05T12:26:17.855356+00:00"
+        "generated_at": "2026-04-05T12:43:49.280872+00:00"
       },
       "narrative": null,
       "generated_date": "2026-04-05"
@@ -7134,7 +7134,7 @@
         "source_count": 0,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-05T12:26:17.855370+00:00"
+        "generated_at": "2026-04-05T12:43:49.280887+00:00"
       },
       "narrative": null,
       "generated_date": "2026-04-05"
@@ -7304,7 +7304,7 @@
         "source_count": 0,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-05T12:26:17.855382+00:00"
+        "generated_at": "2026-04-05T12:43:49.280899+00:00"
       },
       "narrative": null,
       "generated_date": "2026-04-05"
@@ -7461,9 +7461,9 @@
         "source_count": 2,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-05T12:26:17.855395+00:00"
+        "generated_at": "2026-04-05T12:43:49.280913+00:00"
       },
-      "narrative": "Form Energy has secured a significant 12GWh supply agreement for iron-air batteries targeting AI data centers, representing substantial commercial traction in the multi-day storage market. However, critical validation gaps remain: no third-party certifications from DNV GL/TÜV/UL that regulated buyers typically require, no named strategic purchasers for demand-side validation, and no confirmed operational deployments to verify commercial-scale technical readiness. The unnamed nature of the AI data center buyer(s) and absence of deployment milestones raise questions about deal firmness and execution timeline.\n\n**Next verification priority:** Identify the specific AI data center buyer(s) and confirm binding contract terms versus LOI/MOU status.",
+      "narrative": "Form Energy has secured a significant 12GWh supply agreement for iron-air batteries targeting AI data center applications, demonstrating commercial traction in the multi-day storage market. However, critical validation gaps remain: no third-party certifications from recognized bodies (DNV GL, TÜV, KPX, UL), no named strategic buyers providing demand-side validation, and no confirmed operational deployments to verify commercial-scale technical readiness. The anonymous nature of the AI data center customer and absence of independent technical validation raises questions about deal certainty and technology maturity for regulated procurement processes.\n\n**Next verification priority:** Identify the specific AI data center customer(s) and confirm their commitment structure and timeline requirements.",
       "generated_date": "2026-04-05"
     },
     "c_autogrid": {
@@ -7631,7 +7631,7 @@
         "source_count": 0,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-05T12:26:23.474675+00:00"
+        "generated_at": "2026-04-05T12:43:54.137894+00:00"
       },
       "narrative": null,
       "generated_date": "2026-04-05"
@@ -7765,7 +7765,7 @@
         "source_count": 0,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-05T12:26:23.474711+00:00"
+        "generated_at": "2026-04-05T12:43:54.137928+00:00"
       },
       "narrative": null,
       "generated_date": "2026-04-05"
@@ -7925,7 +7925,7 @@
         "source_count": 0,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-05T12:26:23.474728+00:00"
+        "generated_at": "2026-04-05T12:43:54.137944+00:00"
       },
       "narrative": null,
       "generated_date": "2026-04-05"
@@ -8058,7 +8058,7 @@
         "source_count": 0,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-05T12:26:23.474741+00:00"
+        "generated_at": "2026-04-05T12:43:54.137957+00:00"
       },
       "narrative": null,
       "generated_date": "2026-04-05"
@@ -8218,7 +8218,7 @@
         "source_count": 0,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-05T12:26:23.474754+00:00"
+        "generated_at": "2026-04-05T12:43:54.137971+00:00"
       },
       "narrative": null,
       "generated_date": "2026-04-05"
@@ -8378,7 +8378,7 @@
         "source_count": 0,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-05T12:26:23.474766+00:00"
+        "generated_at": "2026-04-05T12:43:54.137982+00:00"
       },
       "narrative": null,
       "generated_date": "2026-04-05"
@@ -8388,8 +8388,8 @@
       "company_name": "EnerVenue",
       "sector": "ess",
       "country": "",
-      "stage_label": "Lab",
-      "stage_desc": "Limited public signal. Company at lab/early stage or undisclosed.",
+      "stage_label": "Pilot",
+      "stage_desc": "Third-party validation or financing in progress. Commercial gate not yet cleared.",
       "ttr": "Long-term",
       "ttr_color": "#6E6E6E",
       "investor_type": "Unknown",
@@ -8553,7 +8553,7 @@
         "source_count": 1,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-05T12:26:23.474784+00:00"
+        "generated_at": "2026-04-05T12:43:54.138002+00:00"
       },
       "narrative": null,
       "generated_date": "2026-04-05"
@@ -8710,7 +8710,7 @@
         "source_count": 1,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-05T12:26:23.474819+00:00"
+        "generated_at": "2026-04-05T12:43:54.138017+00:00"
       },
       "narrative": null,
       "generated_date": "2026-04-05"
@@ -10218,8 +10218,8 @@
       "company_id": "enervenue",
       "company_name": "EnerVenue",
       "sector": "ess",
-      "stage_label": "Lab",
-      "stage_color": "#6E6E6E",
+      "stage_label": "Pilot",
+      "stage_color": "#7D4E00",
       "total_score": 1,
       "max_possible": 10,
       "components": [
@@ -11649,8 +11649,8 @@
         {
           "id": "enervenue",
           "name": "EnerVenue",
-          "stage_label": "Lab",
-          "stage_color": "#6E6E6E",
+          "stage_label": "Pilot",
+          "stage_color": "#7D4E00",
           "ttr": "Long-term",
           "ttr_color": "#6E6E6E",
           "pattern": "Insufficient Signal",
@@ -11733,8 +11733,8 @@
         "Scaling": 0,
         "First Commercial": 0,
         "Demo": 0,
-        "Pilot": 0,
-        "Lab": 5
+        "Pilot": 1,
+        "Lab": 4
       },
       "buyers": [
         {
@@ -12537,33 +12537,48 @@
             "label": "No Commercial Contract",
             "severity": "critical",
             "memo": "No binding commercial agreement on record. All revenue is hypothetical.",
-            "first_seen": "2026-04-05"
+            "first_seen": "2026-04-05",
+            "tags": [],
+            "escalation_days": 0,
+            "escalation_tier": null
           },
           {
             "rule_id": "no_cert",
             "label": "No Third-Party Certification",
             "severity": "high",
             "memo": "No independent certification (DNV GL, TÜV, KPX, UL). Required for regulated procurement.",
-            "first_seen": "2026-04-05"
+            "first_seen": "2026-04-05",
+            "tags": [],
+            "escalation_days": 0,
+            "escalation_tier": null
           },
           {
             "rule_id": "no_buyer",
             "label": "No Named Strategic Buyer",
             "severity": "high",
             "memo": "No named strategic buyer in any signal. Demand-side validation absent.",
-            "first_seen": "2026-04-05"
+            "first_seen": "2026-04-05",
+            "tags": [],
+            "escalation_days": 0,
+            "escalation_tier": null
           },
           {
             "rule_id": "no_deploy",
             "label": "No Deployment / Go-Live",
             "severity": "medium",
             "memo": "No operational deployment confirmed. TRL-9 in commercial setting unverified.",
-            "first_seen": "2026-04-05"
+            "first_seen": "2026-04-05",
+            "tags": [],
+            "escalation_days": 0,
+            "escalation_tier": null
           }
         ],
         "gap_count": 4,
         "critical_gaps": 1,
-        "high_gaps": 2
+        "high_gaps": 2,
+        "structural_tags": [],
+        "blocker_score": 18,
+        "source": "registered"
       },
       {
         "company_id": "c_autogrid",
@@ -12576,33 +12591,48 @@
             "label": "No Commercial Contract",
             "severity": "critical",
             "memo": "No binding commercial agreement on record. All revenue is hypothetical.",
-            "first_seen": "2026-04-05"
+            "first_seen": "2026-04-05",
+            "tags": [],
+            "escalation_days": 0,
+            "escalation_tier": null
           },
           {
             "rule_id": "no_cert",
             "label": "No Third-Party Certification",
             "severity": "high",
             "memo": "No independent certification (DNV GL, TÜV, KPX, UL). Required for regulated procurement.",
-            "first_seen": "2026-04-05"
+            "first_seen": "2026-04-05",
+            "tags": [],
+            "escalation_days": 0,
+            "escalation_tier": null
           },
           {
             "rule_id": "no_buyer",
             "label": "No Named Strategic Buyer",
             "severity": "high",
             "memo": "No named strategic buyer in any signal. Demand-side validation absent.",
-            "first_seen": "2026-04-05"
+            "first_seen": "2026-04-05",
+            "tags": [],
+            "escalation_days": 0,
+            "escalation_tier": null
           },
           {
             "rule_id": "no_deploy",
             "label": "No Deployment / Go-Live",
             "severity": "medium",
             "memo": "No operational deployment confirmed. TRL-9 in commercial setting unverified.",
-            "first_seen": "2026-04-05"
+            "first_seen": "2026-04-05",
+            "tags": [],
+            "escalation_days": 0,
+            "escalation_tier": null
           }
         ],
         "gap_count": 4,
         "critical_gaps": 1,
-        "high_gaps": 2
+        "high_gaps": 2,
+        "structural_tags": [],
+        "blocker_score": 18,
+        "source": "registered"
       },
       {
         "company_id": "c_ceres",
@@ -12615,72 +12645,102 @@
             "label": "No Commercial Contract",
             "severity": "critical",
             "memo": "No binding commercial agreement on record. All revenue is hypothetical.",
-            "first_seen": "2026-04-05"
+            "first_seen": "2026-04-05",
+            "tags": [],
+            "escalation_days": 0,
+            "escalation_tier": null
           },
           {
             "rule_id": "no_cert",
             "label": "No Third-Party Certification",
             "severity": "high",
             "memo": "No independent certification (DNV GL, TÜV, KPX, UL). Required for regulated procurement.",
-            "first_seen": "2026-04-05"
+            "first_seen": "2026-04-05",
+            "tags": [],
+            "escalation_days": 0,
+            "escalation_tier": null
           },
           {
             "rule_id": "no_buyer",
             "label": "No Named Strategic Buyer",
             "severity": "high",
             "memo": "No named strategic buyer in any signal. Demand-side validation absent.",
-            "first_seen": "2026-04-05"
+            "first_seen": "2026-04-05",
+            "tags": [],
+            "escalation_days": 0,
+            "escalation_tier": null
           },
           {
             "rule_id": "no_deploy",
             "label": "No Deployment / Go-Live",
             "severity": "medium",
             "memo": "No operational deployment confirmed. TRL-9 in commercial setting unverified.",
-            "first_seen": "2026-04-05"
+            "first_seen": "2026-04-05",
+            "tags": [],
+            "escalation_days": 0,
+            "escalation_tier": null
           }
         ],
         "gap_count": 4,
         "critical_gaps": 1,
-        "high_gaps": 2
+        "high_gaps": 2,
+        "structural_tags": [],
+        "blocker_score": 18,
+        "source": "registered"
       },
       {
         "company_id": "enervenue",
         "company_name": "EnerVenue",
         "sector": "ess",
-        "stage": "Lab",
+        "stage": "Pilot",
         "gaps": [
           {
             "rule_id": "no_contract",
             "label": "No Commercial Contract",
             "severity": "critical",
             "memo": "No binding commercial agreement on record. All revenue is hypothetical.",
-            "first_seen": "2026-04-05"
+            "first_seen": "2026-04-05",
+            "tags": [],
+            "escalation_days": 0,
+            "escalation_tier": null
           },
           {
             "rule_id": "no_cert",
             "label": "No Third-Party Certification",
             "severity": "high",
             "memo": "No independent certification (DNV GL, TÜV, KPX, UL). Required for regulated procurement.",
-            "first_seen": "2026-04-05"
+            "first_seen": "2026-04-05",
+            "tags": [],
+            "escalation_days": 0,
+            "escalation_tier": null
           },
           {
             "rule_id": "no_buyer",
             "label": "No Named Strategic Buyer",
             "severity": "high",
             "memo": "No named strategic buyer in any signal. Demand-side validation absent.",
-            "first_seen": "2026-04-05"
+            "first_seen": "2026-04-05",
+            "tags": [],
+            "escalation_days": 0,
+            "escalation_tier": null
           },
           {
             "rule_id": "no_deploy",
             "label": "No Deployment / Go-Live",
             "severity": "medium",
             "memo": "No operational deployment confirmed. TRL-9 in commercial setting unverified.",
-            "first_seen": "2026-04-05"
+            "first_seen": "2026-04-05",
+            "tags": [],
+            "escalation_days": 0,
+            "escalation_tier": null
           }
         ],
         "gap_count": 4,
         "critical_gaps": 1,
-        "high_gaps": 2
+        "high_gaps": 2,
+        "structural_tags": [],
+        "blocker_score": 18,
+        "source": "auto"
       },
       {
         "company_id": "c_invinity",
@@ -12693,33 +12753,48 @@
             "label": "No Commercial Contract",
             "severity": "critical",
             "memo": "No binding commercial agreement on record. All revenue is hypothetical.",
-            "first_seen": "2026-04-05"
+            "first_seen": "2026-04-05",
+            "tags": [],
+            "escalation_days": 0,
+            "escalation_tier": null
           },
           {
             "rule_id": "no_cert",
             "label": "No Third-Party Certification",
             "severity": "high",
             "memo": "No independent certification (DNV GL, TÜV, KPX, UL). Required for regulated procurement.",
-            "first_seen": "2026-04-05"
+            "first_seen": "2026-04-05",
+            "tags": [],
+            "escalation_days": 0,
+            "escalation_tier": null
           },
           {
             "rule_id": "no_buyer",
             "label": "No Named Strategic Buyer",
             "severity": "high",
             "memo": "No named strategic buyer in any signal. Demand-side validation absent.",
-            "first_seen": "2026-04-05"
+            "first_seen": "2026-04-05",
+            "tags": [],
+            "escalation_days": 0,
+            "escalation_tier": null
           },
           {
             "rule_id": "no_deploy",
             "label": "No Deployment / Go-Live",
             "severity": "medium",
             "memo": "No operational deployment confirmed. TRL-9 in commercial setting unverified.",
-            "first_seen": "2026-04-05"
+            "first_seen": "2026-04-05",
+            "tags": [],
+            "escalation_days": 0,
+            "escalation_tier": null
           }
         ],
         "gap_count": 4,
         "critical_gaps": 1,
-        "high_gaps": 2
+        "high_gaps": 2,
+        "structural_tags": [],
+        "blocker_score": 18,
+        "source": "registered"
       },
       {
         "company_id": "qcells",
@@ -12732,33 +12807,48 @@
             "label": "No Commercial Contract",
             "severity": "critical",
             "memo": "No binding commercial agreement on record. All revenue is hypothetical.",
-            "first_seen": "2026-04-05"
+            "first_seen": "2026-04-05",
+            "tags": [],
+            "escalation_days": 0,
+            "escalation_tier": null
           },
           {
             "rule_id": "no_cert",
             "label": "No Third-Party Certification",
             "severity": "high",
             "memo": "No independent certification (DNV GL, TÜV, KPX, UL). Required for regulated procurement.",
-            "first_seen": "2026-04-05"
+            "first_seen": "2026-04-05",
+            "tags": [],
+            "escalation_days": 0,
+            "escalation_tier": null
           },
           {
             "rule_id": "no_buyer",
             "label": "No Named Strategic Buyer",
             "severity": "high",
             "memo": "No named strategic buyer in any signal. Demand-side validation absent.",
-            "first_seen": "2026-04-05"
+            "first_seen": "2026-04-05",
+            "tags": [],
+            "escalation_days": 0,
+            "escalation_tier": null
           },
           {
             "rule_id": "no_deploy",
             "label": "No Deployment / Go-Live",
             "severity": "medium",
             "memo": "No operational deployment confirmed. TRL-9 in commercial setting unverified.",
-            "first_seen": "2026-04-05"
+            "first_seen": "2026-04-05",
+            "tags": [],
+            "escalation_days": 0,
+            "escalation_tier": null
           }
         ],
         "gap_count": 4,
         "critical_gaps": 1,
-        "high_gaps": 2
+        "high_gaps": 2,
+        "structural_tags": [],
+        "blocker_score": 18,
+        "source": "auto"
       },
       {
         "company_id": "c_gridwiz",
@@ -12771,33 +12861,48 @@
             "label": "No Commercial Contract",
             "severity": "critical",
             "memo": "No binding commercial agreement on record. All revenue is hypothetical.",
-            "first_seen": "2026-04-05"
+            "first_seen": "2026-04-05",
+            "tags": [],
+            "escalation_days": 0,
+            "escalation_tier": null
           },
           {
             "rule_id": "no_cert",
             "label": "No Third-Party Certification",
             "severity": "high",
             "memo": "No independent certification (DNV GL, TÜV, KPX, UL). Required for regulated procurement.",
-            "first_seen": "2026-04-05"
+            "first_seen": "2026-04-05",
+            "tags": [],
+            "escalation_days": 0,
+            "escalation_tier": null
           },
           {
             "rule_id": "no_buyer",
             "label": "No Named Strategic Buyer",
             "severity": "high",
             "memo": "No named strategic buyer in any signal. Demand-side validation absent.",
-            "first_seen": "2026-04-05"
+            "first_seen": "2026-04-05",
+            "tags": [],
+            "escalation_days": 0,
+            "escalation_tier": null
           },
           {
             "rule_id": "no_deploy",
             "label": "No Deployment / Go-Live",
             "severity": "medium",
             "memo": "No operational deployment confirmed. TRL-9 in commercial setting unverified.",
-            "first_seen": "2026-04-05"
+            "first_seen": "2026-04-05",
+            "tags": [],
+            "escalation_days": 0,
+            "escalation_tier": null
           }
         ],
         "gap_count": 4,
         "critical_gaps": 1,
-        "high_gaps": 2
+        "high_gaps": 2,
+        "structural_tags": [],
+        "blocker_score": 18,
+        "source": "registered"
       },
       {
         "company_id": "c_vincen",
@@ -12810,33 +12915,48 @@
             "label": "No Commercial Contract",
             "severity": "critical",
             "memo": "No binding commercial agreement on record. All revenue is hypothetical.",
-            "first_seen": "2026-04-05"
+            "first_seen": "2026-04-05",
+            "tags": [],
+            "escalation_days": 0,
+            "escalation_tier": null
           },
           {
             "rule_id": "no_cert",
             "label": "No Third-Party Certification",
             "severity": "high",
             "memo": "No independent certification (DNV GL, TÜV, KPX, UL). Required for regulated procurement.",
-            "first_seen": "2026-04-05"
+            "first_seen": "2026-04-05",
+            "tags": [],
+            "escalation_days": 0,
+            "escalation_tier": null
           },
           {
             "rule_id": "no_buyer",
             "label": "No Named Strategic Buyer",
             "severity": "high",
             "memo": "No named strategic buyer in any signal. Demand-side validation absent.",
-            "first_seen": "2026-04-05"
+            "first_seen": "2026-04-05",
+            "tags": [],
+            "escalation_days": 0,
+            "escalation_tier": null
           },
           {
             "rule_id": "no_deploy",
             "label": "No Deployment / Go-Live",
             "severity": "medium",
             "memo": "No operational deployment confirmed. TRL-9 in commercial setting unverified.",
-            "first_seen": "2026-04-05"
+            "first_seen": "2026-04-05",
+            "tags": [],
+            "escalation_days": 0,
+            "escalation_tier": null
           }
         ],
         "gap_count": 4,
         "critical_gaps": 1,
-        "high_gaps": 2
+        "high_gaps": 2,
+        "structural_tags": [],
+        "blocker_score": 18,
+        "source": "registered"
       },
       {
         "company_id": "c_standard_e",
@@ -12849,33 +12969,48 @@
             "label": "No Commercial Contract",
             "severity": "critical",
             "memo": "No binding commercial agreement on record. All revenue is hypothetical.",
-            "first_seen": "2026-04-05"
+            "first_seen": "2026-04-05",
+            "tags": [],
+            "escalation_days": 0,
+            "escalation_tier": null
           },
           {
             "rule_id": "no_cert",
             "label": "No Third-Party Certification",
             "severity": "high",
             "memo": "No independent certification (DNV GL, TÜV, KPX, UL). Required for regulated procurement.",
-            "first_seen": "2026-04-05"
+            "first_seen": "2026-04-05",
+            "tags": [],
+            "escalation_days": 0,
+            "escalation_tier": null
           },
           {
             "rule_id": "no_buyer",
             "label": "No Named Strategic Buyer",
             "severity": "high",
             "memo": "No named strategic buyer in any signal. Demand-side validation absent.",
-            "first_seen": "2026-04-05"
+            "first_seen": "2026-04-05",
+            "tags": [],
+            "escalation_days": 0,
+            "escalation_tier": null
           },
           {
             "rule_id": "no_deploy",
             "label": "No Deployment / Go-Live",
             "severity": "medium",
             "memo": "No operational deployment confirmed. TRL-9 in commercial setting unverified.",
-            "first_seen": "2026-04-05"
+            "first_seen": "2026-04-05",
+            "tags": [],
+            "escalation_days": 0,
+            "escalation_tier": null
           }
         ],
         "gap_count": 4,
         "critical_gaps": 1,
-        "high_gaps": 2
+        "high_gaps": 2,
+        "structural_tags": [],
+        "blocker_score": 18,
+        "source": "registered"
       },
       {
         "company_id": "c_sixtyhertz",
@@ -12888,33 +13023,48 @@
             "label": "No Commercial Contract",
             "severity": "critical",
             "memo": "No binding commercial agreement on record. All revenue is hypothetical.",
-            "first_seen": "2026-04-05"
+            "first_seen": "2026-04-05",
+            "tags": [],
+            "escalation_days": 0,
+            "escalation_tier": null
           },
           {
             "rule_id": "no_cert",
             "label": "No Third-Party Certification",
             "severity": "high",
             "memo": "No independent certification (DNV GL, TÜV, KPX, UL). Required for regulated procurement.",
-            "first_seen": "2026-04-05"
+            "first_seen": "2026-04-05",
+            "tags": [],
+            "escalation_days": 0,
+            "escalation_tier": null
           },
           {
             "rule_id": "no_buyer",
             "label": "No Named Strategic Buyer",
             "severity": "high",
             "memo": "No named strategic buyer in any signal. Demand-side validation absent.",
-            "first_seen": "2026-04-05"
+            "first_seen": "2026-04-05",
+            "tags": [],
+            "escalation_days": 0,
+            "escalation_tier": null
           },
           {
             "rule_id": "no_deploy",
             "label": "No Deployment / Go-Live",
             "severity": "medium",
             "memo": "No operational deployment confirmed. TRL-9 in commercial setting unverified.",
-            "first_seen": "2026-04-05"
+            "first_seen": "2026-04-05",
+            "tags": [],
+            "escalation_days": 0,
+            "escalation_tier": null
           }
         ],
         "gap_count": 4,
         "critical_gaps": 1,
-        "high_gaps": 2
+        "high_gaps": 2,
+        "structural_tags": [],
+        "blocker_score": 18,
+        "source": "registered"
       },
       {
         "company_id": "c_cs_energy",
@@ -12927,33 +13077,48 @@
             "label": "No Commercial Contract",
             "severity": "critical",
             "memo": "No binding commercial agreement on record. All revenue is hypothetical.",
-            "first_seen": "2026-04-05"
+            "first_seen": "2026-04-05",
+            "tags": [],
+            "escalation_days": 0,
+            "escalation_tier": null
           },
           {
             "rule_id": "no_cert",
             "label": "No Third-Party Certification",
             "severity": "high",
             "memo": "No independent certification (DNV GL, TÜV, KPX, UL). Required for regulated procurement.",
-            "first_seen": "2026-04-05"
+            "first_seen": "2026-04-05",
+            "tags": [],
+            "escalation_days": 0,
+            "escalation_tier": null
           },
           {
             "rule_id": "no_buyer",
             "label": "No Named Strategic Buyer",
             "severity": "high",
             "memo": "No named strategic buyer in any signal. Demand-side validation absent.",
-            "first_seen": "2026-04-05"
+            "first_seen": "2026-04-05",
+            "tags": [],
+            "escalation_days": 0,
+            "escalation_tier": null
           },
           {
             "rule_id": "no_deploy",
             "label": "No Deployment / Go-Live",
             "severity": "medium",
             "memo": "No operational deployment confirmed. TRL-9 in commercial setting unverified.",
-            "first_seen": "2026-04-05"
+            "first_seen": "2026-04-05",
+            "tags": [],
+            "escalation_days": 0,
+            "escalation_tier": null
           }
         ],
         "gap_count": 4,
         "critical_gaps": 1,
-        "high_gaps": 2
+        "high_gaps": 2,
+        "structural_tags": [],
+        "blocker_score": 18,
+        "source": "registered"
       },
       {
         "company_id": "c_hysata",
@@ -12966,26 +13131,38 @@
             "label": "No Commercial Contract",
             "severity": "critical",
             "memo": "No binding commercial agreement on record. All revenue is hypothetical.",
-            "first_seen": "2026-04-05"
+            "first_seen": "2026-04-05",
+            "tags": [],
+            "escalation_days": 0,
+            "escalation_tier": null
           },
           {
             "rule_id": "no_buyer",
             "label": "No Named Strategic Buyer",
             "severity": "high",
             "memo": "No named strategic buyer in any signal. Demand-side validation absent.",
-            "first_seen": "2026-04-05"
+            "first_seen": "2026-04-05",
+            "tags": [],
+            "escalation_days": 0,
+            "escalation_tier": null
           },
           {
             "rule_id": "no_deploy",
             "label": "No Deployment / Go-Live",
             "severity": "medium",
             "memo": "No operational deployment confirmed. TRL-9 in commercial setting unverified.",
-            "first_seen": "2026-04-05"
+            "first_seen": "2026-04-05",
+            "tags": [],
+            "escalation_days": 0,
+            "escalation_tier": null
           }
         ],
         "gap_count": 3,
         "critical_gaps": 1,
-        "high_gaps": 1
+        "high_gaps": 1,
+        "structural_tags": [],
+        "blocker_score": 14,
+        "source": "registered"
       },
       {
         "company_id": "c_sunfire",
@@ -12998,26 +13175,38 @@
             "label": "No Commercial Contract",
             "severity": "critical",
             "memo": "No binding commercial agreement on record. All revenue is hypothetical.",
-            "first_seen": "2026-04-05"
+            "first_seen": "2026-04-05",
+            "tags": [],
+            "escalation_days": 0,
+            "escalation_tier": null
           },
           {
             "rule_id": "no_buyer",
             "label": "No Named Strategic Buyer",
             "severity": "high",
             "memo": "No named strategic buyer in any signal. Demand-side validation absent.",
-            "first_seen": "2026-04-05"
+            "first_seen": "2026-04-05",
+            "tags": [],
+            "escalation_days": 0,
+            "escalation_tier": null
           },
           {
             "rule_id": "no_deploy",
             "label": "No Deployment / Go-Live",
             "severity": "medium",
             "memo": "No operational deployment confirmed. TRL-9 in commercial setting unverified.",
-            "first_seen": "2026-04-05"
+            "first_seen": "2026-04-05",
+            "tags": [],
+            "escalation_days": 0,
+            "escalation_tier": null
           }
         ],
         "gap_count": 3,
         "critical_gaps": 1,
-        "high_gaps": 1
+        "high_gaps": 1,
+        "structural_tags": [],
+        "blocker_score": 14,
+        "source": "registered"
       },
       {
         "company_id": "c_hylium",
@@ -13030,26 +13219,38 @@
             "label": "No Commercial Contract",
             "severity": "critical",
             "memo": "No binding commercial agreement on record. All revenue is hypothetical.",
-            "first_seen": "2026-04-05"
+            "first_seen": "2026-04-05",
+            "tags": [],
+            "escalation_days": 0,
+            "escalation_tier": null
           },
           {
             "rule_id": "no_buyer",
             "label": "No Named Strategic Buyer",
             "severity": "high",
             "memo": "No named strategic buyer in any signal. Demand-side validation absent.",
-            "first_seen": "2026-04-05"
+            "first_seen": "2026-04-05",
+            "tags": [],
+            "escalation_days": 0,
+            "escalation_tier": null
           },
           {
             "rule_id": "no_deploy",
             "label": "No Deployment / Go-Live",
             "severity": "medium",
             "memo": "No operational deployment confirmed. TRL-9 in commercial setting unverified.",
-            "first_seen": "2026-04-05"
+            "first_seen": "2026-04-05",
+            "tags": [],
+            "escalation_days": 0,
+            "escalation_tier": null
           }
         ],
         "gap_count": 3,
         "critical_gaps": 1,
-        "high_gaps": 1
+        "high_gaps": 1,
+        "structural_tags": [],
+        "blocker_score": 14,
+        "source": "registered"
       },
       {
         "company_id": "c_form_energy",
@@ -13062,26 +13263,38 @@
             "label": "No Third-Party Certification",
             "severity": "high",
             "memo": "No independent certification (DNV GL, TÜV, KPX, UL). Required for regulated procurement.",
-            "first_seen": "2026-04-05"
+            "first_seen": "2026-04-05",
+            "tags": [],
+            "escalation_days": 0,
+            "escalation_tier": null
           },
           {
             "rule_id": "no_buyer",
             "label": "No Named Strategic Buyer",
             "severity": "high",
             "memo": "No named strategic buyer in any signal. Demand-side validation absent.",
-            "first_seen": "2026-04-05"
+            "first_seen": "2026-04-05",
+            "tags": [],
+            "escalation_days": 0,
+            "escalation_tier": null
           },
           {
             "rule_id": "no_deploy",
             "label": "No Deployment / Go-Live",
             "severity": "medium",
             "memo": "No operational deployment confirmed. TRL-9 in commercial setting unverified.",
-            "first_seen": "2026-04-05"
+            "first_seen": "2026-04-05",
+            "tags": [],
+            "escalation_days": 0,
+            "escalation_tier": null
           }
         ],
         "gap_count": 3,
         "critical_gaps": 0,
-        "high_gaps": 2
+        "high_gaps": 2,
+        "structural_tags": [],
+        "blocker_score": 10,
+        "source": "registered"
       }
     ],
     "watchlist": [
@@ -13131,7 +13344,8 @@
       "critical_neg": 0,
       "companies_with_gaps": 15,
       "total_critical_gaps": 14,
-      "watchlist_count": 5
+      "watchlist_count": 5,
+      "profile_built_at": "2026-04-05T12:44:06.020554+00:00"
     }
   },
   "alert_candidates": [
@@ -13240,7 +13454,7 @@
       "entity_type": "company",
       "entity_id": "enervenue",
       "entity_name": "EnerVenue",
-      "stage": "Lab",
+      "stage": "Pilot",
       "pattern": "Insufficient Signal"
     },
     {
@@ -13576,7 +13790,7 @@
       "status": "success",
       "error": null,
       "items": 10,
-      "fetched_at": "2026-04-05T12:26:15.593134+00:00",
+      "fetched_at": "2026-04-05T12:43:47.848551+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -13599,7 +13813,7 @@
       "status": "success",
       "error": null,
       "items": 20,
-      "fetched_at": "2026-04-05T12:26:15.802917+00:00",
+      "fetched_at": "2026-04-05T12:43:47.924811+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -13622,7 +13836,7 @@
       "status": "success",
       "error": null,
       "items": 20,
-      "fetched_at": "2026-04-05T12:26:16.099586+00:00",
+      "fetched_at": "2026-04-05T12:43:48.193833+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -13644,7 +13858,7 @@
       "status": "success",
       "error": null,
       "items": 10,
-      "fetched_at": "2026-04-05T12:26:16.256751+00:00",
+      "fetched_at": "2026-04-05T12:43:48.340173+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -13666,7 +13880,7 @@
       "status": "success",
       "error": null,
       "items": 20,
-      "fetched_at": "2026-04-05T12:26:16.796329+00:00",
+      "fetched_at": "2026-04-05T12:43:48.678964+00:00",
       "source_type": "industry",
       "reliability": 3,
       "topics": [
@@ -13688,7 +13902,7 @@
       "status": "partial",
       "error": "Feed returned 0 usable items",
       "items": 0,
-      "fetched_at": "2026-04-05T12:26:16.980059+00:00",
+      "fetched_at": "2026-04-05T12:43:48.860100+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -13713,7 +13927,7 @@
       "status": "partial",
       "error": null,
       "items": 0,
-      "fetched_at": "2026-04-05T12:26:14.488486+00:00",
+      "fetched_at": "2026-04-05T12:43:46.944030+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -13734,7 +13948,7 @@
       "status": "partial",
       "error": null,
       "items": 0,
-      "fetched_at": "2026-04-05T12:26:14.590419+00:00",
+      "fetched_at": "2026-04-05T12:43:46.867560+00:00",
       "source_type": "government",
       "reliability": 1,
       "topics": [
@@ -13754,7 +13968,7 @@
       "status": "partial",
       "error": null,
       "items": 0,
-      "fetched_at": "2026-04-05T12:26:14.770839+00:00",
+      "fetched_at": "2026-04-05T12:43:46.996823+00:00",
       "source_type": "industry",
       "reliability": 3,
       "topics": [
@@ -13795,7 +14009,7 @@
       "status": "partial",
       "error": null,
       "items": 0,
-      "fetched_at": "2026-04-05T12:26:15.064024+00:00",
+      "fetched_at": "2026-04-05T12:43:47.425488+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -14196,7 +14410,7 @@
     "comparables_db": "⚠ SCALE — proprietary deal terms and round history",
     "api_access": "⚠ SCALE — GET /api/company/{id}/card + webhooks"
   },
-  "profile_built_at": "2026-04-05T12:26:37.166541+00:00",
+  "profile_built_at": "2026-04-05T12:44:06.020554+00:00",
   "profile_version": "8.0",
   "company_count_total": 17,
   "company_count_auto": 2
