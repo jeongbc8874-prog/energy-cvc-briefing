@@ -796,52 +796,74 @@ def main() -> None:
 
     for company_id in process_order:
         profile = profiles.get(company_id)
-        if profile is None:
+        if not isinstance(profile, dict):
             continue
 
-        print(f"\n┌ {profile['name']} ({company_id})")
+        try:
+            pname = profile.get("name") or company_id
+            print(f"\n\u250c {pname} ({company_id})")
 
-        # 오늘 이벤트
-        events_today = company_events.get(company_id, [])
+            # 오늘 이벤트
+            events_today = company_events.get(company_id, [])
+            if not isinstance(events_today, list):
+                events_today = []
 
-        # gaps: generate-signals.py 계산값 or 빈 리스트
-        existing_co = existing_companies.get(company_id, {})
-        raw_gaps    = existing_co.get("gaps", [])
+            # gaps: generate-signals.py 계산값 or 빈 리스트
+            # existing_co / raw_gaps 타입 방어 (이전 버전 호환)
+            existing_co = existing_companies.get(company_id, {})
+            if not isinstance(existing_co, dict):
+                existing_co = {}
+            raw_gaps = [g for g in (existing_co.get("gaps") or []) if isinstance(g, dict)]
 
-        updated = process_company(profile, events_today, raw_gaps)
-        profiles[company_id] = updated
+            updated = process_company(profile, events_today, raw_gaps)
+            profiles[company_id] = updated
 
-        # latest.json용 enriched company dict 생성
-        enriched = {**existing_co, **{
-            "id":             company_id,
-            "name":           updated["name"],
-            "sector":         updated.get("sector", ""),
-            "stage_label":    updated["stage_label"],
-            "stage_previous": updated.get("stage_previous", ""),
-            "stage_score":    updated["stage_score"],
-            "gaps":           updated["active_gaps"],
-            "blocker_score":  updated["blocker_score"],
-            "critical_gaps":  updated["critical_gaps"],
-            "structural_tags":updated["structural_tags"],
-            "signal_count":   updated["signal_count"],
-            "last_signal_date":updated["last_signal_date"],
-            "source":         updated.get("source", "auto"),
-            "profile_version":"8.0",
-        }}
-        processed_companies[company_id] = enriched
+            # latest.json용 enriched company dict 생성
+            enriched = {**existing_co, **{
+                "id":              company_id,
+                "name":            updated.get("name", company_id),
+                "sector":          updated.get("sector", ""),
+                "stage_label":     updated.get("stage_label", "Lab"),
+                "stage_previous":  updated.get("stage_previous", ""),
+                "stage_score":     updated.get("stage_score", 0.0),
+                "gaps":            updated.get("active_gaps", []),
+                "blocker_score":   updated.get("blocker_score", 0),
+                "critical_gaps":   updated.get("critical_gaps", 0),
+                "structural_tags": updated.get("structural_tags", []),
+                "signal_count":    updated.get("signal_count", 0),
+                "last_signal_date":updated.get("last_signal_date", ""),
+                "source":          updated.get("source", "auto"),
+                "profile_version": "8.0",
+            }}
+            processed_companies[company_id] = enriched
 
-        summary_rows.append({
-            "id":      company_id,
-            "name":    updated["name"],
-            "source":  updated.get("source", "auto"),
-            "stage":   updated["stage_label"],
-            "prev":    updated.get("stage_previous", ""),
-            "up":      updated["stage_label"] != updated.get("stage_previous", updated["stage_label"]),
-            "blocker": updated["blocker_score"],
-            "crit":    updated["critical_gaps"],
-            "tags":    updated["structural_tags"],
-            "events":  len(events_today),
-        })
+            summary_rows.append({
+                "id":      company_id,
+                "name":    updated.get("name", company_id),
+                "source":  updated.get("source", "auto"),
+                "stage":   updated.get("stage_label", "Lab"),
+                "prev":    updated.get("stage_previous", ""),
+                "up":      updated.get("stage_label") != updated.get("stage_previous",
+                           updated.get("stage_label")),
+                "blocker": updated.get("blocker_score", 0),
+                "crit":    updated.get("critical_gaps", 0),
+                "tags":    updated.get("structural_tags", []),
+                "events":  len(events_today),
+            })
+
+        except Exception as exc:
+            import traceback
+            print(f"  [ERROR] {company_id}: {type(exc).__name__}: {exc}")
+            traceback.print_exc()
+            # 에러 나도 빈 결과로 계속 진행 (파이프라인 전체 중단 방지)
+            processed_companies[company_id] = {
+                "id":            company_id,
+                "name":          profile.get("name", company_id),
+                "stage_label":   profile.get("stage_label", "Lab"),
+                "source":        profile.get("source", "auto"),
+                "profile_version":"8.0",
+                "error":         str(exc),
+            }
 
     # ── latest.json 업데이트 ─────────────────────────────────────
     payload["companies"]          = processed_companies
