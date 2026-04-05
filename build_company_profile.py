@@ -198,7 +198,7 @@ def _make_profile_from_seed(seed: dict) -> dict:
         "founded":        seed.get("founded"),
         "description":    seed.get("description", ""),
         "source":         seed.get("source", "registered"),
-        "registered_date":TODAY,
+        "registered_date":seed.get("registered_date") or "2026-03-06",
         "aliases":        seed.get("aliases", [seed["name"].lower()]),
         # Stage
         "stage":          seed.get("stage", "Lab"),
@@ -429,7 +429,15 @@ def update_gap_log(profile: dict, raw_gaps: list[dict]) -> None:
         if not rid:
             continue
         if rid not in gap_log:
-            first_seen = gap.get("first_seen") or TODAY
+            # first_seen 우선순위:
+            # 1. generate-signals.py가 주입한 company_profiles.json 기존 값
+            # 2. profile의 registered_date (이 회사를 처음 본 날짜)
+            # 3. TODAY
+            first_seen = (
+                gap.get("first_seen")
+                or profile.get("registered_date")
+                or TODAY
+            )
             gap_log[rid] = {
                 "first_seen":    first_seen,
                 "last_seen":     TODAY,
@@ -785,6 +793,38 @@ def main() -> None:
     payload["company_count_auto"] = sum(
         1 for p in profiles.values() if p.get("source") == "auto"
     )
+
+    # ── panels.missing_evidence 재생성 (companies 기반) ──────────────
+    sev_ord = {"critical":0,"high":1,"medium":2,"low":3}
+    miss = []
+    for co_id, co in processed_companies.items():
+        co_gaps = co.get("gaps") or co.get("active_gaps") or []
+        if not co_gaps:
+            continue
+        miss.append({
+            "company_id":    co_id,
+            "company_name":  co.get("name",""),
+            "sector":        co.get("sector",""),
+            "stage":         co.get("stage_label","Lab"),
+            "gaps":          co_gaps,
+            "gap_count":     len(co_gaps),
+            "critical_gaps": co.get("critical_gaps",0),
+            "high_gaps":     sum(1 for g in co_gaps if g.get("severity")=="high"),
+            "structural_tags":co.get("structural_tags",[]),
+            "blocker_score": co.get("blocker_score",0),
+            "source":        co.get("source","registered"),
+        })
+    miss.sort(key=lambda x: (-(x["critical_gaps"]*10+x["high_gaps"]), x["company_name"]))
+
+    existing_panels = payload.get("panels", {})
+    existing_panels["missing_evidence"] = miss
+    existing_panels["panel_stats"] = {
+        **existing_panels.get("panel_stats", {}),
+        "companies_with_gaps":    len(miss),
+        "total_critical_gaps":    sum(c["critical_gaps"] for c in miss),
+        "profile_built_at":       payload["profile_built_at"],
+    }
+    payload["panels"] = existing_panels
 
     LATEST_PATH.write_text(
         json.dumps(payload, indent=2, ensure_ascii=False),
