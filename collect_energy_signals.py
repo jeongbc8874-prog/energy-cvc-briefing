@@ -883,12 +883,25 @@ async def run_collection(dry_run: bool = False) -> list[dict]:
             seen_global.add(key)
             unique_signals.append(sig)
 
-    # Sort: high tier first, then by date desc
+    # Sort: high tier first, then by published_date desc (newer first)
+    # NOTE: published_date is "YYYY-MM-DD" string — ISO format sorts correctly
+    # as a plain string; we negate tier_order and reverse=True for date desc.
     tier_order = {"high": 0, "medium": 1, "low": 2}
-    unique_signals.sort(key=lambda s: (
-        tier_order.get(s["signal_tier"], 9),
-        -(s.get("published_date") or "").replace("-", ""),
-    ))
+    unique_signals.sort(
+        key=lambda s: (
+            tier_order.get(s.get("signal_tier", "low"), 9),
+            s.get("published_date") or "",
+        ),
+        reverse=False,          # tier ascending (0=high first)
+    )
+    # Secondary: within same tier, sort by date descending
+    from itertools import groupby
+    sorted_signals: list[dict] = []
+    for _, group in groupby(unique_signals, key=lambda s: tier_order.get(s.get("signal_tier", "low"), 9)):
+        sorted_signals.extend(
+            sorted(group, key=lambda s: s.get("published_date") or "", reverse=True)
+        )
+    unique_signals = sorted_signals
 
     log.info("")
     log.info("═══ COLLECTION SUMMARY ════════════════════════════════════════════")
