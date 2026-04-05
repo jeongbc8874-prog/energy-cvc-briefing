@@ -1563,8 +1563,8 @@ STAGE_LADDER = [
      "First binding commercial agreement or live deployment confirmed. Revenue visibility emerging."),
     ("Demo",            "#5B21B6",{"Certification"},
      "Technical gate cleared (certification or strategic pilot). Commercial conversion not yet confirmed."),
-    ("Pilot",           "#7D4E00",{"Pilot","Partnership"},
-     "Third-party validation in progress. No commercial gate cleared."),
+    ("Pilot",           "#7D4E00",{"Pilot","Partnership","Financing","Grant","Hiring","Expansion"},
+     "Third-party validation or financing in progress. Commercial gate not yet cleared."),
     ("Lab",             "#6E6E6E",set(),
      "Limited public signal. Company at lab/early stage or undisclosed."),
 ]
@@ -1607,6 +1607,9 @@ def infer_stage(co, evs):
     for label, color, req_types, desc in STAGE_LADDER:
         if req_types and not (req_types & types): continue
         return label, color, desc
+    # 이벤트가 있으면 최소 Pilot (신호는 있으나 분류 불가)
+    if evs:
+        return "Pilot","#7D4E00","Signal detected. Stage requires analyst confirmation."
     return "Lab","#6E6E6E","Limited public signal. Primary research required."
 
 def detect_pattern(types, high_ct, neg_ct):
