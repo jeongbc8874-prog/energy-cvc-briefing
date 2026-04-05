@@ -1197,126 +1197,16 @@ def infer_segment(raw_text, src_segs):
         if any(kw in raw_text for kw in kws): return seg
     return src_segs[0] if src_segs else "unknown"
 
-# ── Auto company registry ────────────────────────────────────────────────
-# normalize_name: "Form Energy Inc." → "form_energy"
-import difflib as _difflib
+# ── Company resolution (company_resolver.py로 중앙 집중) ─────────────────
+from company_resolver import CompanyResolver, normalize_name, is_buyer
 
-def normalize_name(name: str) -> str:
-    import re as _re
-    n = _re.sub(r'(?i)\b(inc|corp|ltd|llc|gmbh|co|company|group|holding|holdings'
-                r'|plc|se|ag|bv|sas|sarl|ab|as|oy|nv|spa|srl|asa)\b\.?', '', name)
-    n = _re.sub(r'[^\w\s]', ' ', n)
-    n = _re.sub(r'\s+', '_', n.strip().lower())
-    return _re.sub(r'_+', '_', n).strip('_')
-
-# 바이어 / 대형 전략 파트너 → 회사 프로필 생성 제외
-_BUYER_SKIP = {
-    "kepco","georgia power","pge","pacific gas","national grid","nationalgrid",
-    "engie","e.on","eon","edf","rwe","iberdrola","vattenfall","xcel energy",
-    "great river energy","microsoft","google","amazon","apple","meta",
-    "shell","bp","chevron","exxon","totalenergies","equinor",
-    "samsung","hyundai","hanwha","lg","sk","posco","ls electric","ls일렉트릭",
-    "siemens energy","abb","schneider","hitachi","ge vernova","vestas",
-    "siemens gamesa","orsted","unassigned",
-}
-
-def _is_buyer(name: str) -> bool:
-    n = name.lower().strip()
-    return any(skip in n for skip in _BUYER_SKIP) or not n
-
-def _fuzzy_match_company(name: str, companies: list) -> tuple:
-    """
-    Returns (co_id, co_name) from COMPANIES or auto-registry,
-    or (None, None) if no match.
-    """
-    name_l = name.lower().strip()
-    norm   = normalize_name(name)
-
-    # 1. alias 직접 매칭
-    for co in companies:
-        if any(a.lower() == name_l or normalize_name(a) == norm
-               for a in co.get("aliases", [])):
-            return co["id"], co["name"]
-        if normalize_name(co.get("name","")) == norm:
-            return co["id"], co["name"]
-
-    # 2. difflib ratio
-    best_id, best_name, best_score = None, None, 0.0
-    for co in companies:
-        norm_known = normalize_name(co.get("name",""))
-        score = _difflib.SequenceMatcher(None, norm, norm_known).ratio()
-        short, long_ = sorted([norm, norm_known], key=len)
-        if short and len(short) >= 4 and short in long_:
-            score = max(score, 0.87)
-        if score > best_score:
-            best_score, best_id, best_name = score, co["id"], co["name"]
-
-    if best_score >= 0.82:
-        return best_id, best_name
-    return None, None
-
-# _AUTO_COMPANIES: 런타임 자동 등록 회사 목록 (COMPANIES 외)
-_AUTO_COMPANIES: list = []
-
-def _get_or_register(name: str, segment: str = "") -> tuple:
-    """
-    name → (co_id, co_name, is_new)
-    COMPANIES → _AUTO_COMPANIES → 신규 등록 순으로 탐색.
-    """
-    if not name or _is_buyer(name):
-        return None, None, False
-
-    # COMPANIES 탐색
-    cid, cname = _fuzzy_match_company(name, COMPANIES)
-    if cid:
-        return cid, cname, False
-
-    # _AUTO_COMPANIES 탐색
-    cid, cname = _fuzzy_match_company(name, _AUTO_COMPANIES)
-    if cid:
-        return cid, cname, False
-
-    # 신규 등록
-    new_id = normalize_name(name)
-    if not new_id:
-        return None, None, False
-    # ID 충돌 방지
-    existing_ids = {c["id"] for c in COMPANIES} | {c["id"] for c in _AUTO_COMPANIES}
-    if new_id in existing_ids:
-        # 이름이 같으면 이미 등록된 것 — 재탐색
-        all_cos = COMPANIES + _AUTO_COMPANIES
-        for co in all_cos:
-            if co["id"] == new_id:
-                return co["id"], co["name"], False
-        new_id = new_id + "_x"
-
-    new_co = {
-        "id":          new_id,
-        "name":        name,
-        "aliases":     [name.lower(), new_id],
-        "sector":      segment or "other",
-        "country":     "",
-        "stage":       "Lab",
-        "investor_type":"Unknown",
-        "founded":     None,
-        "hq":          "",
-        "description": f"Auto-registered from signal. Analyst review recommended.",
-        "tags":        ["auto-registered"],
-        "known_investors": [],
-        "watchlist_default": False,
-        "_source": "auto",
-    }
-    _AUTO_COMPANIES.append(new_co)
-    print(f"  [AUTO-REGISTER] '{name}' → company_id='{new_id}'")
-    return new_id, name, True
+# 전역 resolver — main() 시작 시 기존 auto 회사 로드
+_resolver = CompanyResolver()
 
 
 def match_company(raw_text):
-    for co in COMPANIES:
-        if any(a.lower() in raw_text for a in co["aliases"]):
-            return co["id"], co["name"]
-    return None, None
-
+    """SEED aliases 직접 매칭 (normalize 분류기용)."""
+    return _resolver.resolve_from_raw_text(raw_text)
 def match_buyers(raw_text):
     return [{"id":b["id"],"name":b["name"],"type":b["type"]}
             for b in STRATEGIC_BUYERS if any(a.lower() in raw_text for a in b["aliases"])]
@@ -2687,6 +2577,16 @@ def main():
     print(f"\n{'═'*60}\nEnergy Capital Intelligence  v3.0\n{TODAY_KR}\n{'═'*60}\n")
     Path("data").mkdir(exist_ok=True)
 
+    # 기존 auto 회사 복원 (company_profiles.json → resolver)
+    _cp = Path("data/company_profiles.json")
+    if _cp.exists():
+        try:
+            import json as _j
+            n = _resolver.load_auto_from_profiles(_j.loads(_cp.read_text(encoding="utf-8")))
+            if n: print(f"  [resolver] auto 회사 {n}개 복원")
+        except Exception as _e:
+            print(f"  [resolver] 복원 실패: {_e}")
+
     print("① Fetch..."); raw, source_log = fetch_sources(); print(f"  {len(raw)} raw\n")
     print("② Classify + score + filter..."); kept, filtered = normalize(raw); print(f"  Kept: {len(kept)} | Filtered: {len(filtered)}\n")
     print("③ Company enrichment...")
@@ -2702,7 +2602,7 @@ def main():
             co_evs.setdefault(co_id,[]).append(e)
         # company_name은 있지만 co_id=None → auto 탐색/등록
         elif co_nm and co_nm.lower() not in ("unassigned",""):
-            auto_id, auto_nm, is_new = _get_or_register(co_nm, seg)
+            auto_id, auto_nm, is_new = _resolver.resolve(co_nm, seg)
             if auto_id:
                 e["company_id"]   = auto_id
                 e["company_name"] = auto_nm
@@ -2712,7 +2612,7 @@ def main():
     co_intel = {co["id"]:enrich_company(co,co_evs.get(co["id"],[])) for co in COMPANIES}
 
     # ── 3. 자동 등록 회사 enrichment (신규 발견 회사) ──────────────
-    for auto_co in _AUTO_COMPANIES:
+    for auto_co in _resolver.auto_companies():
         aid = auto_co["id"]
         if aid in co_intel:
             continue
@@ -2722,13 +2622,13 @@ def main():
         co_intel[aid] = enrich_company(auto_co, evs_for_auto)
 
     with_sigs = sum(1 for c in co_intel.values() if c["signal_count"]>0)
-    auto_cnt  = len(_AUTO_COMPANIES)
+    auto_cnt  = len(_resolver.auto_companies())
     print(f"  {len(co_intel)} companies enriched ({with_sigs} with signals today, {auto_cnt} auto-registered)")
     print()
 
     print("③b Investment memos...")
     # 등록 회사는 AI memo 사용, auto 회사는 rule-based만
-    _auto_ids = {c["id"] for c in _AUTO_COMPANIES}
+    _auto_ids = {c["id"] for c in _resolver.auto_companies()}
     memos = {
         co_id: build_investment_memo(co_data, call_ai=(co_id not in _auto_ids))
         for co_id, co_data in co_intel.items()
@@ -2778,7 +2678,7 @@ def main():
     print("⑦ Brief..."); brief = generate_brief(kept)
     stats = {"total":len(kept),"high":sum(1 for e in kept if e["signal_tier"]=="high"),"medium":sum(1 for e in kept if e["signal_tier"]=="medium"),
              "negative":sum(1 for e in kept if e["is_negative"]),"matched":sum(1 for e in kept if e["company_id"]),"filtered_out":len(filtered),
-             "companies_with_signals":len(co_intel),"auto_companies":len(_AUTO_COMPANIES),"by_segment":{},"by_type":{}}
+             "companies_with_signals":len(co_intel),"auto_companies":len(_resolver.auto_companies()),"by_segment":{},"by_type":{}}
     for e in kept:
         stats["by_segment"][e["segment"]] = stats["by_segment"].get(e["segment"],0)+1
         stats["by_type"][e["event_type"]]  = stats["by_type"].get(e["event_type"],0)+1
