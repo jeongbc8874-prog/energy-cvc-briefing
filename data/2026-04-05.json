@@ -1,8 +1,8 @@
 {
   "date": "2026-04-05",
   "dateKr": "2026년 04월 05일",
-  "generatedAt": "2026-04-05T06:25:31.805826+00:00",
-  "brief": "**Deal Flow Memo - Energy Storage Sector**\n\nThe storage market is showing clear bifurcation with mega-scale contracts driving momentum across different chemistries and applications. Form Energy's 12GWh AI data center deal signals the sector's pivot toward long-duration storage for high-demand compute infrastructure, while American Battery Factory's 4.5GWh Arizona agreements demonstrate continued LFP scaling for traditional grid applications. European software optimization plays are attracting significant capital (Entrix/GridBeyond's €55M raise) as BESS assets require increasingly sophisticated revenue stacking, evidenced by Pexapark's 1GWh+ of March PPA activity. EnerVenue's $300M Series B for nickel-hydrogen manufacturing suggests investors are betting on alternative chemistries for ultra-long cycle applications. Watch for more AI/hyperscale partnerships and whether industrial PPA uptake accelerates beyond the current slow adoption noted at BBDF 2026.",
+  "generatedAt": "2026-04-05T06:45:29.808306+00:00",
+  "brief": "**Deal Flow Memo - Energy Storage Sector**\n\nThe storage market is showing clear bifurcation between conventional grid applications and emerging AI/data center demand, with Form Energy's 12GWh iron-air battery agreement highlighting how hyperscale infrastructure needs are driving multi-day duration requirements beyond traditional 2-4 hour BESS deployments. European optimization software plays are attracting significant capital (Entrix and GridBeyond's €55M raise per Energy Storage News) as storage assets require increasingly sophisticated revenue stacking across multiple grid services markets. American Battery Factory's 4.5GWh Arizona LFP offtake and EnerVenue's $300M Series B for nickel-hydrogen manufacturing signal continued supply chain localization efforts, though we should monitor whether these domestic capacity commitments can compete on cost with established Asian suppliers. \n\nThe PPA market remains fragmented, with Pexapark logging >1GWh of European storage PPAs in March while PV Magazine notes industrial buyers are still hesitant on hybrid PPAs, suggesting corporate procurement strategies haven't fully adapted to co-located assets. **Watch for:** data center developers increasingly bypassing traditional utilities for direct storage partnerships, and whether the iron-air chemistry gains traction beyond Form Energy as duration requirements extend.",
   "stats": {
     "total": 70,
     "high": 6,
@@ -5695,7 +5695,7 @@
         "source_count": 0,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-05T06:25:20.336986+00:00"
+        "generated_at": "2026-04-05T06:45:15.541361+00:00"
       },
       "narrative": null,
       "generated_date": "2026-04-05"
@@ -5854,7 +5854,7 @@
         "source_count": 0,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-05T06:25:20.337024+00:00"
+        "generated_at": "2026-04-05T06:45:15.541395+00:00"
       },
       "narrative": null,
       "generated_date": "2026-04-05"
@@ -6024,7 +6024,7 @@
         "source_count": 0,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-05T06:25:20.337039+00:00"
+        "generated_at": "2026-04-05T06:45:15.541411+00:00"
       },
       "narrative": null,
       "generated_date": "2026-04-05"
@@ -6194,7 +6194,7 @@
         "source_count": 0,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-05T06:25:20.337053+00:00"
+        "generated_at": "2026-04-05T06:45:15.541423+00:00"
       },
       "narrative": null,
       "generated_date": "2026-04-05"
@@ -6346,7 +6346,7 @@
         "source_count": 0,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-05T06:25:20.337063+00:00"
+        "generated_at": "2026-04-05T06:45:15.541434+00:00"
       },
       "narrative": null,
       "generated_date": "2026-04-05"
@@ -6516,7 +6516,7 @@
         "source_count": 0,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-05T06:25:20.337073+00:00"
+        "generated_at": "2026-04-05T06:45:15.541448+00:00"
       },
       "narrative": null,
       "generated_date": "2026-04-05"
@@ -6673,9 +6673,9 @@
         "source_count": 2,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-05T06:25:20.337093+00:00"
+        "generated_at": "2026-04-05T06:45:15.541465+00:00"
       },
-      "narrative": "Form Energy has secured a significant 12GWh supply agreement for iron-air batteries targeting AI data centers, demonstrating substantial commercial traction in the multi-day storage market. However, critical validation gaps remain: no third-party certifications from recognized bodies (DNV GL, TÜV, KPX, UL) which are typically required for regulated procurement, no named strategic buyers providing demand-side validation, and no confirmed operational deployments to verify commercial-scale technical readiness. \n\n**Next step: Verify current third-party certification status and timeline, as this is likely a gating factor for the AI data center deployment.**",
+      "narrative": "Form Energy has secured a significant 12GWh commercial agreement for iron-air batteries targeting AI data center applications, demonstrating substantial market demand for their multi-day storage technology. However, critical validation gaps remain absent from public record: no third-party certifications from established bodies (DNV GL, TÜV, KPX, UL), no named strategic buyers providing demand-side validation, and no confirmed operational deployments to verify commercial-scale technical readiness. The 2026 contract timeline suggests near-term commercialization claims, but actual deployment status and regulatory compliance pathway remain unverified.\n\n**Next verification priority:** Confirm current deployment status and identify any ongoing third-party certification processes through direct management discussion.",
       "generated_date": "2026-04-05"
     },
     "c_autogrid": {
@@ -6843,7 +6843,7 @@
         "source_count": 0,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-05T06:25:24.659527+00:00"
+        "generated_at": "2026-04-05T06:45:21.101143+00:00"
       },
       "narrative": null,
       "generated_date": "2026-04-05"
@@ -6977,7 +6977,7 @@
         "source_count": 0,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-05T06:25:24.659556+00:00"
+        "generated_at": "2026-04-05T06:45:21.101174+00:00"
       },
       "narrative": null,
       "generated_date": "2026-04-05"
@@ -7137,7 +7137,7 @@
         "source_count": 0,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-05T06:25:24.659571+00:00"
+        "generated_at": "2026-04-05T06:45:21.101190+00:00"
       },
       "narrative": null,
       "generated_date": "2026-04-05"
@@ -7270,7 +7270,7 @@
         "source_count": 0,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-05T06:25:24.659590+00:00"
+        "generated_at": "2026-04-05T06:45:21.101210+00:00"
       },
       "narrative": null,
       "generated_date": "2026-04-05"
@@ -7430,7 +7430,7 @@
         "source_count": 0,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-05T06:25:24.659603+00:00"
+        "generated_at": "2026-04-05T06:45:21.101223+00:00"
       },
       "narrative": null,
       "generated_date": "2026-04-05"
@@ -7590,7 +7590,7 @@
         "source_count": 0,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-05T06:25:24.659618+00:00"
+        "generated_at": "2026-04-05T06:45:21.101238+00:00"
       },
       "narrative": null,
       "generated_date": "2026-04-05"
@@ -12048,7 +12048,7 @@
       "status": "success",
       "error": null,
       "items": 10,
-      "fetched_at": "2026-04-05T06:25:18.856521+00:00",
+      "fetched_at": "2026-04-05T06:45:14.483660+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -12071,7 +12071,7 @@
       "status": "success",
       "error": null,
       "items": 20,
-      "fetched_at": "2026-04-05T06:25:18.969947+00:00",
+      "fetched_at": "2026-04-05T06:45:14.544645+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -12094,7 +12094,7 @@
       "status": "success",
       "error": null,
       "items": 20,
-      "fetched_at": "2026-04-05T06:25:19.216226+00:00",
+      "fetched_at": "2026-04-05T06:45:14.788892+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -12116,7 +12116,7 @@
       "status": "success",
       "error": null,
       "items": 10,
-      "fetched_at": "2026-04-05T06:25:19.387783+00:00",
+      "fetched_at": "2026-04-05T06:45:14.907811+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -12138,7 +12138,7 @@
       "status": "success",
       "error": null,
       "items": 20,
-      "fetched_at": "2026-04-05T06:25:19.789922+00:00",
+      "fetched_at": "2026-04-05T06:45:15.045508+00:00",
       "source_type": "industry",
       "reliability": 3,
       "topics": [
@@ -12160,7 +12160,7 @@
       "status": "partial",
       "error": "Feed returned 0 usable items",
       "items": 0,
-      "fetched_at": "2026-04-05T06:25:19.973148+00:00",
+      "fetched_at": "2026-04-05T06:45:15.209482+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -12185,7 +12185,7 @@
       "status": "partial",
       "error": null,
       "items": 0,
-      "fetched_at": "2026-04-05T06:25:16.638997+00:00",
+      "fetched_at": "2026-04-05T06:45:12.842614+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -12206,7 +12206,7 @@
       "status": "partial",
       "error": null,
       "items": 0,
-      "fetched_at": "2026-04-05T06:25:16.585322+00:00",
+      "fetched_at": "2026-04-05T06:45:12.465058+00:00",
       "source_type": "government",
       "reliability": 1,
       "topics": [
@@ -12226,7 +12226,7 @@
       "status": "partial",
       "error": null,
       "items": 0,
-      "fetched_at": "2026-04-05T06:25:16.826889+00:00",
+      "fetched_at": "2026-04-05T06:45:12.934780+00:00",
       "source_type": "industry",
       "reliability": 3,
       "topics": [
@@ -12247,7 +12247,7 @@
       "status": "failed",
       "error": "Exception: HTTP 404",
       "items": 0,
-      "fetched_at": "2026-04-05T06:25:17.261010+00:00",
+      "fetched_at": "2026-04-05T06:45:13.335625+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -12267,7 +12267,7 @@
       "status": "partial",
       "error": null,
       "items": 0,
-      "fetched_at": "2026-04-05T06:25:16.995763+00:00",
+      "fetched_at": "2026-04-05T06:45:13.113819+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -12287,7 +12287,7 @@
       "status": "partial",
       "error": "0개 기사 반환",
       "items": 0,
-      "fetched_at": "2026-04-05T06:25:17.539638+00:00",
+      "fetched_at": "2026-04-05T06:45:13.722250+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -12307,7 +12307,7 @@
       "status": "failed",
       "error": "Exception: HTTP 404",
       "items": 0,
-      "fetched_at": "2026-04-05T06:25:18.729457+00:00",
+      "fetched_at": "2026-04-05T06:45:14.215910+00:00",
       "source_type": "industry",
       "reliability": 3,
       "topics": [
@@ -12327,7 +12327,7 @@
       "status": "partial",
       "error": "0개 기사 반환",
       "items": 0,
-      "fetched_at": "2026-04-05T06:25:18.167322+00:00",
+      "fetched_at": "2026-04-05T06:45:14.354680+00:00",
       "source_type": "industry",
       "reliability": 3,
       "topics": [

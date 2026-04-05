@@ -176,82 +176,92 @@
     "disabled_reason": "Auto-disabled after 3 consecutive failures. Last error: HTTP 403 Forbidden"
   },
   "eia": {
-    "total_runs": 2,
-    "total_successes": 2,
+    "total_runs": 3,
+    "total_successes": 3,
     "consecutive_failures": 0,
     "last_success": "2026-04-05"
   },
   "canarymedia": {
-    "total_runs": 2,
-    "total_successes": 2,
+    "total_runs": 3,
+    "total_successes": 3,
     "consecutive_failures": 0,
     "last_success": "2026-04-05"
   },
   "energystoragenews": {
-    "total_runs": 2,
-    "total_successes": 2,
+    "total_runs": 3,
+    "total_successes": 3,
     "consecutive_failures": 0,
     "last_success": "2026-04-05"
   },
   "cleantechnica": {
-    "total_runs": 2,
-    "total_successes": 2,
+    "total_runs": 3,
+    "total_successes": 3,
     "consecutive_failures": 0,
     "last_success": "2026-04-05"
   },
   "pvmagazine": {
-    "total_runs": 2,
-    "total_successes": 2,
+    "total_runs": 3,
+    "total_successes": 3,
     "consecutive_failures": 0,
     "last_success": "2026-04-05"
   },
   "electrek": {
-    "total_runs": 2,
-    "total_successes": 2,
+    "total_runs": 3,
+    "total_successes": 3,
     "consecutive_failures": 0,
     "last_success": "2026-04-05"
   },
   "utilitydive": {
-    "total_runs": 2,
-    "total_successes": 2,
+    "total_runs": 3,
+    "total_successes": 3,
     "consecutive_failures": 0,
     "last_success": "2026-04-05"
   },
   "offshorewind": {
-    "total_runs": 2,
-    "total_successes": 2,
+    "total_runs": 3,
+    "total_successes": 3,
     "consecutive_failures": 0,
     "last_success": "2026-04-05"
   },
   "energymonitor": {
-    "total_runs": 2,
-    "total_successes": 2,
+    "total_runs": 3,
+    "total_successes": 3,
     "consecutive_failures": 0,
     "last_success": "2026-04-05"
   },
   "h2view": {
-    "total_runs": 2,
-    "consecutive_failures": 2,
-    "last_failure_reason": "0개 기사 반환"
+    "total_runs": 3,
+    "consecutive_failures": 3,
+    "last_failure_reason": "0개 기사 반환",
+    "disabled": true,
+    "disabled_reason": "연속 3회 실패. 최근: 0개 기사 반환"
   },
   "greentechmedia": {
-    "total_runs": 2,
-    "consecutive_failures": 2,
-    "last_failure_reason": "0개 기사 반환"
+    "total_runs": 3,
+    "consecutive_failures": 3,
+    "last_failure_reason": "0개 기사 반환",
+    "disabled": true,
+    "disabled_reason": "연속 3회 실패. 최근: 0개 기사 반환"
   },
   "rechargenews": {
-    "total_runs": 2,
-    "consecutive_failures": 2,
-    "last_failure_reason": "Exception: HTTP 404"
+    "total_runs": 3,
+    "consecutive_failures": 3,
+    "last_failure_reason": "Exception: HTTP 404",
+    "disabled": true,
+    "disabled_reason": "연속 3회 실패. 최근: Exception: HTTP 404"
   },
   "newatlas_energy": {
-    "total_runs": 2,
-    "consecutive_failures": 2,
-    "last_failure_reason": "Exception: HTTP 404"
+    "total_runs": 3,
+    "consecutive_failures": 3,
+    "last_failure_reason": "Exception: HTTP 404",
+    "disabled": true,
+    "disabled_reason": "연속 3회 실패. 최근: Exception: HTTP 404"
   },
   "azocleantech": {
-    "total_runs": 2,
-    "consecutive_failures": 2,
-    "last_failure_reason": "0개 기사 반환"
+    "total_runs": 3,
+    "consecutive_failures": 3,
+    "last_failure_reason": "0개 기사 반환",
+    "disabled": true,
+    "disabled_reason": "연속 3회 실패. 최근: 0개 기사 반환"
   }
 }

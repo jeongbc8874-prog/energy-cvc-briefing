@@ -3164,7 +3164,7 @@
       "status": "partial",
       "error": null,
       "items": 0,
-      "fetched_at": "2026-04-05T06:25:16.638997+00:00",
+      "fetched_at": "2026-04-05T06:45:12.842614+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -3185,7 +3185,7 @@
       "status": "partial",
       "error": null,
       "items": 0,
-      "fetched_at": "2026-04-05T06:25:16.585322+00:00",
+      "fetched_at": "2026-04-05T06:45:12.465058+00:00",
       "source_type": "government",
       "reliability": 1,
       "topics": [
@@ -3205,7 +3205,7 @@
       "status": "partial",
       "error": null,
       "items": 0,
-      "fetched_at": "2026-04-05T06:25:16.714485+00:00",
+      "fetched_at": "2026-04-05T06:45:12.940187+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -3225,7 +3225,7 @@
       "status": "partial",
       "error": null,
       "items": 0,
-      "fetched_at": "2026-04-05T06:25:16.812066+00:00",
+      "fetched_at": "2026-04-05T06:45:12.902458+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -3245,7 +3245,7 @@
       "status": "partial",
       "error": null,
       "items": 0,
-      "fetched_at": "2026-04-05T06:25:16.826889+00:00",
+      "fetched_at": "2026-04-05T06:45:12.934780+00:00",
       "source_type": "industry",
       "reliability": 3,
       "topics": [
@@ -3266,7 +3266,7 @@
       "status": "partial",
       "error": null,
       "items": 0,
-      "fetched_at": "2026-04-05T06:25:16.584941+00:00",
+      "fetched_at": "2026-04-05T06:45:12.936473+00:00",
       "source_type": "industry",
       "reliability": 3,
       "topics": [
@@ -3286,7 +3286,7 @@
       "status": "partial",
       "error": null,
       "items": 0,
-      "fetched_at": "2026-04-05T06:25:17.137834+00:00",
+      "fetched_at": "2026-04-05T06:45:13.132484+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -3307,7 +3307,7 @@
       "status": "partial",
       "error": "0개 기사 반환",
       "items": 0,
-      "fetched_at": "2026-04-05T06:25:17.304346+00:00",
+      "fetched_at": "2026-04-05T06:45:13.299824+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -3327,7 +3327,7 @@
       "status": "partial",
       "error": null,
       "items": 0,
-      "fetched_at": "2026-04-05T06:25:17.331513+00:00",
+      "fetched_at": "2026-04-05T06:45:13.194203+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -3347,7 +3347,7 @@
       "status": "failed",
       "error": "Exception: HTTP 404",
       "items": 0,
-      "fetched_at": "2026-04-05T06:25:17.261010+00:00",
+      "fetched_at": "2026-04-05T06:45:13.335625+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -3367,7 +3367,7 @@
       "status": "partial",
       "error": null,
       "items": 0,
-      "fetched_at": "2026-04-05T06:25:16.995763+00:00",
+      "fetched_at": "2026-04-05T06:45:13.113819+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -3387,7 +3387,7 @@
       "status": "partial",
       "error": "0개 기사 반환",
       "items": 0,
-      "fetched_at": "2026-04-05T06:25:17.539638+00:00",
+      "fetched_at": "2026-04-05T06:45:13.722250+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -3407,7 +3407,7 @@
       "status": "failed",
       "error": "Exception: HTTP 404",
       "items": 0,
-      "fetched_at": "2026-04-05T06:25:18.729457+00:00",
+      "fetched_at": "2026-04-05T06:45:14.215910+00:00",
       "source_type": "industry",
       "reliability": 3,
       "topics": [
@@ -3427,7 +3427,7 @@
       "status": "partial",
       "error": "0개 기사 반환",
       "items": 0,
-      "fetched_at": "2026-04-05T06:25:18.167322+00:00",
+      "fetched_at": "2026-04-05T06:45:14.354680+00:00",
       "source_type": "industry",
       "reliability": 3,
       "topics": [
