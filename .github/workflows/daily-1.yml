@@ -2,8 +2,9 @@ name: Daily Energy CVC Signals
 
 on:
   schedule:
-    - cron: '0 22 * * *'   # 매일 오전 7시 KST (UTC 22:00)
-  workflow_dispatch:         # 수동 실행 가능
+    - cron: '0 22 * * *'    # 매일 KST 07:00 (UTC 22:00)
+    - cron: '0 22 * * 0'    # 매주 일요일 동일 시간 — reset 트리거용
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -23,29 +24,33 @@ jobs:
         with:
           python-version: '3.11'
 
+      # feedparser 불필요 (stdlib만 사용) — 다른 deps만 설치
       - name: Install dependencies
-        run: pip install feedparser
+        run: pip install anthropic
+
+      # 주간 reset을 collect보다 먼저 실행
+      - name: Reset disabled feeds (weekly, Sunday)
+        if: github.event.schedule == '0 22 * * 0'
+        run: BASE_DIR=data python collect_energy_signals.py --reset-health
 
       - name: Collect signals
-        run: python collect_energy_signals.py
-        env:
-          EIA_API_KEY: ${{ secrets.EIA_API_KEY }}
-        continue-on-error: true
-  
-      - name: Run pipeline
+        run: BASE_DIR=data python collect_energy_signals.py
+
+      - name: Run signal pipeline
         run: python generate-signals.py
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
 
-      - name: Build company profiles      
+      - name: Build company profiles
         run: python build_company_profile.py
-        continue-on-error: true
-
+        env:
+          BASE_DIR: data
 
       - name: Commit & push data
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "CVC AI Agent"
           git add data/
-          git diff --quiet && git diff --staged --quiet || git commit -m "Daily signals: $(date '+%Y-%m-%d')"
+          git diff --quiet && git diff --staged --quiet || \
+            git commit -m "Daily signals: $(date '+%Y-%m-%d')"
           git push
