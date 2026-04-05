@@ -1664,7 +1664,16 @@ def enrich_company(co, evs):
         secs = rule["sectors"]
         if secs!="all" and co.get("sector") not in secs: continue
         try:
-            if rule["check"](evs): gaps.append({"rule_id":rule["id"],"label":rule["label"],"severity":rule["severity"],"memo":rule["memo"]})
+            if rule["check"](evs):
+                # first_seen: 기존 company gap_log에서 가져오거나 TODAY
+                existing_first_seen = co.get("_gap_first_seen", {}).get(rule["id"])
+                gaps.append({
+                    "rule_id":    rule["id"],
+                    "label":      rule["label"],
+                    "severity":   rule["severity"],
+                    "memo":       rule["memo"],
+                    "first_seen": existing_first_seen,  # None이면 build_company_profile이 TODAY로 설정
+                })
         except: pass
     gaps.sort(key=lambda x:sev_ord.get(x["severity"],9))
     buyer_act = {}
@@ -2641,10 +2650,31 @@ def main():
                 e["company_name"] = auto_nm
                 co_evs.setdefault(auto_id,[]).append(e)
 
-    # ── 2. 등록 회사 13개 enrichment ──────────────────────────────
-    co_intel = {co["id"]:enrich_company(co,co_evs.get(co["id"],[])) for co in COMPANIES}
+    # ── 2. company_profiles.json의 gap_log first_seen 로드 ───────────
+    _gap_first_seen_map: dict[str, dict] = {}
+    _cp_path = Path("data/company_profiles.json")
+    if _cp_path.exists():
+        try:
+            import json as _jj
+            _cp_data = _jj.loads(_cp_path.read_text(encoding="utf-8"))
+            for _cid, _prof in _cp_data.items():
+                if isinstance(_prof, dict) and _prof.get("gap_log"):
+                    _gap_first_seen_map[_cid] = {
+                        rid: entry.get("first_seen")
+                        for rid, entry in _prof["gap_log"].items()
+                        if isinstance(entry, dict) and entry.get("first_seen")
+                    }
+        except Exception: pass
 
-    # ── 3. 자동 등록 회사 enrichment (신규 발견 회사) ──────────────
+    def _co_with_gap_dates(co: dict) -> dict:
+        """enrich_company에 gap first_seen 전달용."""
+        gfs = _gap_first_seen_map.get(co.get("id",""), {})
+        return {**co, "_gap_first_seen": gfs}
+
+    # ── 3. 등록 회사 13개 enrichment ──────────────────────────────
+    co_intel = {co["id"]:enrich_company(_co_with_gap_dates(co),co_evs.get(co["id"],[])) for co in COMPANIES}
+
+    # ── 4. 자동 등록 회사 enrichment (신규 발견 회사) ──────────────
     for auto_co in _resolver.auto_companies():
         aid = auto_co["id"]
         if aid in co_intel:
@@ -2652,7 +2682,7 @@ def main():
         evs_for_auto = co_evs.get(aid,[])
         if not evs_for_auto:
             continue  # 이벤트 없는 auto 회사는 스킵
-        co_intel[aid] = enrich_company(auto_co, evs_for_auto)
+        co_intel[aid] = enrich_company(_co_with_gap_dates(auto_co), evs_for_auto)
 
     with_sigs = sum(1 for c in co_intel.values() if c["signal_count"]>0)
     auto_cnt  = len(_resolver.auto_companies())
