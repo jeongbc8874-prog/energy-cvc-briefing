@@ -340,13 +340,30 @@ def scan_signals(signals: list[dict], profiles: dict[str, dict], _resolver=None)
         text = sig.get("title", "") + " " + sig.get("summary", "")
         for match in NER_RE.finditer(text):
             found_name = match.group().strip()
-            if found_name.lower() == co_name.lower():
-                continue  # 이미 처리됨
+            if not found_name or found_name.lower() == co_name.lower():
+                continue
             if is_buyer_skip(found_name):
                 continue
             extra_id = resolve_and_register(found_name, None, sector, profiles, _resolver)
             if extra_id and extra_id != resolved:
                 company_events.setdefault(extra_id, []).append(sig)
+
+        # ── 3. title에서 resolver로 직접 탐색 (NER 미포함 신규 회사) ─────
+        if _resolver and not resolved:
+            title_text = sig.get("title", "")
+            # 단어 단위로 쪼개서 2단어 이상 조합 탐색
+            words = title_text.split()
+            for length in range(4, 1, -1):
+                for start_i in range(len(words) - length + 1):
+                    candidate = " ".join(words[start_i:start_i+length])
+                    if len(candidate) < 4:
+                        continue
+                    if is_buyer_skip(candidate):
+                        continue
+                    cid, _, _ = _resolver.resolve(candidate, sector)
+                    if cid and cid not in company_events:
+                        company_events.setdefault(cid, []).append(sig)
+                        break
 
     # 이벤트 중복 제거 (같은 sig가 NER로 두 번 들어올 수 있음)
     for cid in company_events:
