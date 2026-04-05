@@ -588,7 +588,10 @@ def process_company(
     Returns updated profile (in-place도 적용됨)
     """
     company_id    = profile["company_id"]
-    current_stage = profile.get("stage_label") or profile.get("stage", "Lab")
+    # existing_co의 stage_label (generate-signals.py enrich_company 결과) 우선
+    # profile은 누적 DB, existing_co는 오늘 generate 결과
+    _gen_stage = profile.get("_gen_stage_label")  # main()에서 주입
+    current_stage = _gen_stage or profile.get("stage_label") or profile.get("stage", "Lab")
 
     # 1. 이벤트 누적
     profile = merge_events_to_profile(profile, events)
@@ -720,6 +723,9 @@ def main() -> None:
             if not isinstance(existing_co, dict):
                 existing_co = {}
             raw_gaps = [g for g in (existing_co.get("gaps") or []) if isinstance(g, dict)]
+            # generate-signals.py가 계산한 stage_label을 profile에 주입
+            if existing_co.get("stage_label"):
+                profile["_gen_stage_label"] = existing_co["stage_label"]
 
             updated = process_company(profile, events_today, raw_gaps)
             profiles[company_id] = updated
