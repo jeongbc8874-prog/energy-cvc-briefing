@@ -1,23 +1,18 @@
 {
-  "date": "2026-04-04",
-  "generated_at": "2026-04-04T23:01:49.982793+00:00",
-  "signal_count": 2,
+  "date": "2026-04-05",
+  "generated_at": "2026-04-05T00:46:06.568454+00:00",
+  "signal_count": 0,
   "stats": {
-    "total": 2,
-    "high": 1,
-    "medium": 1,
+    "total": 0,
+    "high": 0,
+    "medium": 0,
     "negative": 0,
-    "dropped_noise": 4,
-    "sources_ok": 2,
-    "sources_total": 8,
-    "fail_count": 6,
-    "by_sector": {
-      "other_cleantech": 2
-    },
-    "by_event_type": {
-      "policy": 1,
-      "other": 1
-    }
+    "dropped_noise": 0,
+    "sources_ok": 0,
+    "sources_total": 9,
+    "fail_count": 9,
+    "by_sector": {},
+    "by_event_type": {}
   },
   "source_logs": [
     {
@@ -27,7 +22,7 @@
       "status": "partial",
       "items": 0,
       "error": null,
-      "fetched_at": "2026-04-04T23:01:49.982793+00:00",
+      "fetched_at": "2026-04-05T00:46:06.568454+00:00",
       "tier": 1,
       "segments": [
         "battery_storage",
@@ -38,13 +33,30 @@
       ]
     },
     {
+      "id": "doe_main",
+      "name": "DOE Energy.gov",
+      "url": "https://www.energy.gov/articles/rss.xml",
+      "status": "failed",
+      "items": 0,
+      "error": "HTTP 404",
+      "fetched_at": "2026-04-05T00:46:06.568454+00:00",
+      "tier": 1,
+      "segments": [
+        "battery_storage",
+        "green_hydrogen",
+        "grid_software",
+        "advanced_nuclear",
+        "offshore_wind"
+      ]
+    },
+    {
       "id": "canarymedia",
       "name": "Canary Media",
       "url": "https://www.canarymedia.com/rss.rss",
       "status": "partial",
       "items": 0,
       "error": null,
-      "fetched_at": "2026-04-04T23:01:49.982793+00:00",
+      "fetched_at": "2026-04-05T00:46:06.568454+00:00",
       "tier": 2,
       "segments": [
         "battery_storage",
@@ -61,7 +73,7 @@
       "status": "partial",
       "items": 0,
       "error": null,
-      "fetched_at": "2026-04-04T23:01:49.982793+00:00",
+      "fetched_at": "2026-04-05T00:46:06.568454+00:00",
       "tier": 2,
       "segments": [
         "battery_storage",
@@ -76,7 +88,7 @@
       "status": "partial",
       "items": 0,
       "error": null,
-      "fetched_at": "2026-04-04T23:01:49.982793+00:00",
+      "fetched_at": "2026-04-05T00:46:06.568454+00:00",
       "tier": 2,
       "segments": [
         "battery_storage",
@@ -90,7 +102,7 @@
       "status": "partial",
       "items": 0,
       "error": null,
-      "fetched_at": "2026-04-04T23:01:49.982793+00:00",
+      "fetched_at": "2026-04-05T00:46:06.568454+00:00",
       "tier": 2,
       "segments": [
         "grid_software",
@@ -106,7 +118,7 @@
       "status": "partial",
       "items": 0,
       "error": null,
-      "fetched_at": "2026-04-04T23:01:49.982793+00:00",
+      "fetched_at": "2026-04-05T00:46:06.568454+00:00",
       "tier": 2,
       "segments": [
         "offshore_wind",
@@ -117,10 +129,10 @@
       "id": "cleantechnica",
       "name": "CleanTechnica",
       "url": "https://cleantechnica.com/feed/",
-      "status": "success",
-      "items": 5,
+      "status": "partial",
+      "items": 0,
       "error": null,
-      "fetched_at": "2026-04-04T23:01:49.982793+00:00",
+      "fetched_at": "2026-04-05T00:46:06.568454+00:00",
       "tier": 3,
       "segments": [
         "battery_storage",
@@ -133,99 +145,17 @@
       "id": "electrek",
       "name": "Electrek",
       "url": "https://electrek.co/feed/",
-      "status": "success",
-      "items": 1,
+      "status": "partial",
+      "items": 0,
       "error": null,
-      "fetched_at": "2026-04-04T23:01:49.982793+00:00",
+      "fetched_at": "2026-04-05T00:46:06.568454+00:00",
       "tier": 3,
       "segments": [
         "battery_storage",
         "data_center_power",
         "other_cleantech"
       ]
-    },
-    {
-      "id": "doe_main",
-      "name": "DOE Energy.gov",
-      "url": "https://www.energy.gov/articles/rss.xml",
-      "status": "skipped",
-      "items": 0,
-      "error": "Skipped: 3 consecutive fails",
-      "fetched_at": "2026-04-04T23:01:49.982793+00:00"
     }
   ],
-  "signals": [
-    {
-      "id": "6b1d50ea5b6f3f75",
-      "title": "Hyundai IONIQ 5 Sales Actually Up This Year!",
-      "source_name": "CleanTechnica",
-      "source_url": "https://cleantechnica.com/2026/04/04/hyundai-ioniq-5-sales-actually-up-this-year/",
-      "published_date": "2026-04-04",
-      "observed_fact": "Last night, I wrote about how Ford and Nissan EV sales collapsed in the US in 2025.",
-      "why_it_matters_investment": "Policy event in other cleantech sector. Assess binding terms, named counterparties, and capital efficiency.",
-      "missing_evidence": [
-        "Implementation regulations not yet issued",
-        "Budget appropriation certainty unknown"
-      ],
-      "signal_tier": "high",
-      "signal_strength": 75,
-      "sector": "other_cleantech",
-      "event_type": "policy",
-      "companies_mentioned": [],
-      "is_negative": false,
-      "matched_keyword": "tax credit",
-      "score_breakdown": [
-        {
-          "delta": 12,
-          "reason": "Major industrial / OEM buyer named",
-          "type": "boost"
-        },
-        {
-          "delta": 8,
-          "reason": "Concrete timeframe stated",
-          "type": "boost"
-        }
-      ],
-      "source_reliability": "★★★",
-      "source_tier": 3,
-      "raw_summary": "Last night, I wrote about how Ford and Nissan EV sales collapsed in the US in 2025. Tesla sales also weren&#8217;t good, and the overall US EV market is clearly down following the ending if the $7,500 US EV tax credit. So, I was quite surprised to see that the ... [continued] The post Hyundai IONIQ 5 Sales Actually Up This Year! appeared first on CleanTechnica .",
-      "fetched_at": "2026-04-04T23:01:49.982793+00:00"
-    },
-    {
-      "id": "1056d98abdd2afbe",
-      "title": "What’s Going On With Hyundai? Ask Mary?",
-      "source_name": "CleanTechnica",
-      "source_url": "https://cleantechnica.com/2026/04/04/whats-going-on-with-hyundai-ask-mary/",
-      "published_date": "2026-04-04",
-      "observed_fact": "At the New York Auto Show on Wednesday, Hyundai announced a strategic departure on its vehicles.",
-      "why_it_matters_investment": "Other event in other cleantech sector. Assess binding terms, named counterparties, and capital efficiency.",
-      "missing_evidence": [
-        "No investment-specific gap analysis available",
-        "Primary research required"
-      ],
-      "signal_tier": "medium",
-      "signal_strength": 42,
-      "sector": "other_cleantech",
-      "event_type": "other",
-      "companies_mentioned": [],
-      "is_negative": false,
-      "matched_keyword": null,
-      "score_breakdown": [
-        {
-          "delta": 12,
-          "reason": "Major industrial / OEM buyer named",
-          "type": "boost"
-        },
-        {
-          "delta": 15,
-          "reason": "Specific financial figure",
-          "type": "boost"
-        }
-      ],
-      "source_reliability": "★★★",
-      "source_tier": 3,
-      "raw_summary": "At the New York Auto Show on Wednesday, Hyundai announced a strategic departure on its vehicles. CEO Jose Munos announced that they are adding focus to the US market, which is Hyundai’s largest market. They are investing $26 billion in the US and building a steel plant, while planning for ... [continued] The post What’s Going On With Hyundai? Ask Mary? appeared first on CleanTechnica .",
-      "fetched_at": "2026-04-04T23:01:49.982793+00:00"
-    }
-  ]
+  "signals": []
 }
