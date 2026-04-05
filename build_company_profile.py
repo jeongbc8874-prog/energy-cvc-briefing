@@ -30,7 +30,6 @@ Energy CVC Intelligence Platform — Dynamic Company Registry
 
 from __future__ import annotations
 
-import difflib
 import json
 import os
 import re
@@ -38,6 +37,8 @@ import sys
 from datetime import date, datetime, timezone
 from pathlib import Path
 from typing import Optional
+
+from company_resolver import CompanyResolver, SEED_COMPANIES, normalize_name, is_buyer
 
 # ─────────────────────────────────────────────────────────────────────────
 # 경로
@@ -104,88 +105,8 @@ BLOCKER_TIER_BONUS = {7: 1, 14: 3, 21: 6, 30: 12}
 RESOLVED_DAYS      = 3
 
 # ─────────────────────────────────────────────────────────────────────────
-# 기등록 회사 시드 데이터 (company_profiles.json 최초 생성 시 사용)
-# generate-signals.py COMPANIES 리스트와 동기화
-# ─────────────────────────────────────────────────────────────────────────
-SEED_COMPANIES = [
-    {"company_id":"c_gridwiz",    "name":"그리드위즈",        "sector":"grid_sw",   "country":"KR","stage":"First Commercial","source":"registered",
-     "aliases":["gridwiz","grid wiz","그리드위즈"]},
-    {"company_id":"c_sixtyhertz", "name":"식스티헤르츠",      "sector":"grid_sw",   "country":"KR","stage":"First Commercial","source":"registered",
-     "aliases":["sixty hertz","60hz","sixtyhertz","식스티헤르츠"]},
-    {"company_id":"c_vincen",     "name":"빈센",             "sector":"marine_fc", "country":"KR","stage":"Pilot",           "source":"registered",
-     "aliases":["vincen","vinsen","빈센"]},
-    {"company_id":"c_standard_e", "name":"스탠다드에너지",    "sector":"ess",       "country":"KR","stage":"Demo",            "source":"registered",
-     "aliases":["standard energy","스탠다드에너지"]},
-    {"company_id":"c_hylium",     "name":"하이리움산업",      "sector":"hydrogen",  "country":"KR","stage":"Demo",            "source":"registered",
-     "aliases":["hylium","하이리움","하이리움산업"]},
-    {"company_id":"c_cs_energy",  "name":"씨에스에너지",      "sector":"ess",       "country":"KR","stage":"First Commercial","source":"registered",
-     "aliases":["cs energy","씨에스에너지"]},
-    {"company_id":"c_form_energy","name":"Form Energy",       "sector":"ess",       "country":"US","stage":"Scaling",          "source":"registered",
-     "aliases":["form energy","formenergy"]},
-    {"company_id":"c_autogrid",   "name":"AutoGrid",          "sector":"grid_sw",   "country":"US","stage":"Scaling",          "source":"registered",
-     "aliases":["autogrid","auto grid"]},
-    {"company_id":"c_sunfire",    "name":"Sunfire",           "sector":"hydrogen",  "country":"DE","stage":"First Commercial","source":"registered",
-     "aliases":["sunfire"]},
-    {"company_id":"c_amogy",      "name":"Amogy",             "sector":"marine_fc", "country":"US","stage":"Pilot",           "source":"registered",
-     "aliases":["amogy"]},
-    {"company_id":"c_hysata",     "name":"Hysata",            "sector":"hydrogen",  "country":"AU","stage":"Pilot",           "source":"registered",
-     "aliases":["hysata"]},
-    {"company_id":"c_ceres",      "name":"Ceres Power",       "sector":"marine_fc", "country":"UK","stage":"First Commercial","source":"registered",
-     "aliases":["ceres power","ceres"]},
-    {"company_id":"c_invinity",   "name":"Invinity Energy",   "sector":"ess",       "country":"UK","stage":"First Commercial","source":"registered",
-     "aliases":["invinity","invinity energy"]},
-]
 
-# ─────────────────────────────────────────────────────────────────────────
-# NER 패턴: 제목/요약에서 회사명 추출
-# ─────────────────────────────────────────────────────────────────────────
-_NER_PATTERNS = [
-    # ESS / Battery
-    r'\bForm Energy\b', r'\bEnerVenue\b', r'\bInvinity\b', r'\bFluence\b',
-    r'\bAmbri\b', r'\bCuberg\b', r'\bQuantumScape\b', r'\bEnovix\b',
-    r'\bNorthvolt\b', r'\bFreyr\b', r'\bEnergy Dome\b', r'\bGravitricity\b',
-    r'\bMalta Inc\b', r'\bRheenergise\b', r'\bStem Inc\b', r'\bAES(?:\s+Energy)?\b',
-    r'\bRedwood Materials\b', r'\bLi-Cycle\b', r'\bAscend Elements\b',
-    r'\bSolidEnergy\b', r'\bNANO One\b',
-    # Hydrogen / Fuel Cell
-    r'\bPlug Power\b', r'\bNel(?:\s+ASA)?\b', r'\bITM Power\b', r'\bSunfire\b',
-    r'\bHysata\b', r'\bAmogy\b', r'\bH2 Green Steel\b', r'\bHystar\b',
-    r'\bCeres Power\b', r'\bBloom Energy\b', r'\bFuelCell Energy\b',
-    r'\bBallard Power\b', r'\bHydrogen Optimized\b', r'\bGiner\b',
-    # Grid Software / VPP
-    r'\bAutoGrid\b', r'\bKrakenFlex\b', r'\bOpower\b', r'\bVirta\b',
-    r'\bEnerNOC\b', r'\bItron\b', r'\bLandis\+Gyr\b', r'\bSiemens Energy\b',
-    r'\bSchneider Electric\b', r'\bABB\b(?!\s*[a-z])',
-    # Nuclear
-    r'\bNuScale\b', r'\bTerraPower\b', r'\bKairos Power\b', r'\bOklo\b',
-    r'\bX-energy\b', r'\bCommonwealth Fusion\b', r'\bHelion\b', r'\bTAE Technologies\b',
-    r'\bLastEnergy\b', r'\bUltraSafe Nuclear\b',
-    # Solar
-    r'\bEnphase\b', r'\bSunPower\b', r'\bFirst Solar\b', r'\bSunrun\b',
-    r'\bArray Technologies\b', r'\bSolarEdge\b', r'\bQCells\b',
-    # Wind / Offshore
-    r'\bVestas\b', r'\bSiemens Gamesa\b', r'\bGE Vernova\b', r'\bOrsted\b',
-    r'\bRWE\b(?!\s+AG\b)', r'\bIberdrola\b', r'\bVattenfall\b',
-    # Korean
-    r'\b그리드위즈\b', r'\b식스티헤르츠\b', r'\b빈센\b',
-    r'\b스탠다드에너지\b', r'\b하이리움\b', r'\b씨에스에너지\b',
-    r'\b한화솔루션\b', r'\bLS일렉트릭\b', r'\bSK이노베이션\b',
-    # Utilities / Strategic buyers (기사에 자주 등장하지만 투자 대상은 아님 → 바이어로만)
-    # 이것들은 NER에서 감지하되 신규 등록 시 source='buyer'로 표시
-]
-NER_RE = re.compile("|".join(_NER_PATTERNS), re.IGNORECASE)
-
-# 유틸리티/바이어 (회사 프로필 생성 제외)
-_BUYER_SKIP = {
-    "kepco","georgia power","pge","pacific gas","national grid","nationalgrid",
-    "engie","e.on","eon","edf","rwe","iberdrola","vattenfall","xcel energy",
-    "great river energy","microsoft","google","amazon","apple","meta",
-    "shell","bp","chevron","exxon","totalenergies","equinor",
-    "samsung","hyundai","hanwha","lg","sk","posco","ls electric",
-    "siemens energy","abb","schneider","hitachi","ge vernova","vestas",
-    "siemens gamesa","orsted",
-}
-
+# SEED_COMPANIES, normalize_name, is_buyer 등은 company_resolver.py에서 import됨
 
 # ═════════════════════════════════════════════════════════════════════════
 # 유틸 함수
@@ -205,76 +126,8 @@ def floor_severity(current: str, floor: str) -> str:
     return floor if SEVERITY_IDX.get(current, 0) < SEVERITY_IDX.get(floor, 0) else current
 
 
-# ═════════════════════════════════════════════════════════════════════════
-# 회사명 정규화 + Fuzzy Match
-# ═════════════════════════════════════════════════════════════════════════
 
-def normalize_name(name: str) -> str:
-    """
-    'Form Energy Inc.' → 'form_energy'
-    'H2 Green Steel AB' → 'h2_green_steel'
-    """
-    # 법인 접미사 제거
-    name = re.sub(
-        r'(?i)\b(inc|corp|ltd|llc|gmbh|co|company|group|holding|holdings'
-        r'|plc|se|ag|bv|sas|sarl|ab|as|oy|nv|spa|srl|asa)\b\.?',
-        "", name,
-    )
-    name = re.sub(r"[^\w\s]", " ", name)
-    name = re.sub(r"\s+", "_", name.strip().lower())
-    return re.sub(r"_+", "_", name).strip("_")
-
-
-def fuzzy_match_company(
-    name: str,
-    profiles: dict[str, dict],
-    threshold: float = 0.82,
-) -> tuple[Optional[str], float]:
-    """
-    name → (company_id, score) or (None, score)
-    profiles: {company_id: profile_dict}
-    """
-    norm_input = normalize_name(name)
-    name_lower = name.lower().strip()
-
-    for cid, prof in profiles.items():
-        # 스키마 불일치 방어 (이전 버전 company_profiles.json이 str 등을 포함할 수 있음)
-        if not isinstance(prof, dict):
-            continue
-        # alias 직접 매칭
-        aliases = prof.get("aliases", [])
-        if name_lower in aliases or norm_input in aliases:
-            return cid, 1.0
-        # normalize된 name 비교
-        norm_known = normalize_name(prof.get("name", ""))
-        if norm_input == norm_known:
-            return cid, 1.0
-
-    # difflib ratio 비교
-    best_id, best_score = None, 0.0
-    for cid, prof in profiles.items():
-        if not isinstance(prof, dict):
-            continue
-        norm_known = normalize_name(prof.get("name", ""))
-        score = difflib.SequenceMatcher(None, norm_input, norm_known).ratio()
-        # 부분 포함 보너스
-        short, long_ = sorted([norm_input, norm_known], key=len)
-        if short and len(short) >= 4 and short in long_:
-            score = max(score, 0.87)
-        if score > best_score:
-            best_score = score
-            best_id = cid
-
-    if best_score >= threshold:
-        return best_id, best_score
-    return None, best_score
-
-
-def is_buyer_skip(name: str) -> bool:
-    """유틸리티/대형 바이어는 회사 프로필 생성 제외"""
-    norm = name.lower().strip()
-    return any(skip in norm for skip in _BUYER_SKIP)
-
+# normalize_name, fuzzy_match_company, is_buyer 등은 company_resolver.py에서 import됨
 
 # ═════════════════════════════════════════════════════════════════════════
 # Company Profiles DB
@@ -297,7 +150,7 @@ def load_profiles() -> dict[str, dict]:
             print(f"[PROFILES] 로드: {PROFILES_PATH} ({len(data)}개 회사)")
             # 시드 회사 중 누락된 것 보충
             for seed in SEED_COMPANIES:
-                cid = seed["company_id"]
+                cid = seed.get("company_id") or seed.get("id")
                 if cid not in data:
                     data[cid] = _make_profile_from_seed(seed)
                     print(f"[PROFILES] 시드 보충: {cid}")
@@ -308,14 +161,14 @@ def load_profiles() -> dict[str, dict]:
     print("[PROFILES] 신규 생성 — 시드 13개로 초기화")
     profiles: dict[str, dict] = {}
     for seed in SEED_COMPANIES:
-        cid = seed["company_id"]
+        cid = seed.get("company_id") or seed.get("id")
         profiles[cid] = _make_profile_from_seed(seed)
     return profiles
 
 
 def _make_profile_from_seed(seed: dict) -> dict:
     return {
-        "company_id":     seed["company_id"],
+        "company_id":     seed.get("company_id") or seed.get("id"),
         "name":           seed["name"],
         "sector":         seed.get("sector", ""),
         "country":        seed.get("country", ""),
@@ -393,42 +246,53 @@ def save_profiles(profiles: dict[str, dict]) -> None:
 
 def resolve_and_register(
     company_name: str,
-    company_id_hint: Optional[str],  # generate-signals.py가 매칭한 ID
+    company_id_hint: Optional[str],
     sector: str,
     profiles: dict[str, dict],
+    _res: "CompanyResolver | None" = None,
 ) -> Optional[str]:
     """
-    회사명을 profiles에서 찾거나 신규 등록.
-    Returns company_id or None (바이어 skip 등)
+    회사명 → company_id. company_resolver 우선, 없으면 profiles dict fallback.
+    Returns company_id or None.
     """
     if not company_name or company_name.lower() in ("unassigned", "", "none"):
         return None
-    if is_buyer_skip(company_name):
+    if is_buyer(company_name):
         return None
 
-    # generate-signals.py가 이미 매칭한 ID가 있으면 우선 사용
+    # generate-signals.py가 이미 매칭한 ID
     if company_id_hint and company_id_hint in profiles:
         return company_id_hint
 
-    # fuzzy match
-    matched_id, score = fuzzy_match_company(company_name, profiles)
-    if matched_id:
-        return matched_id
+    # company_resolver 사용 (SEED + auto 통합 탐색 + 신규 등록)
+    if _res is not None:
+        cid, _, _ = _res.resolve(company_name, sector)
+        if cid:
+            # 새로 등록된 경우 profiles에도 반영
+            if cid not in profiles:
+                new_prof = _make_auto_profile(company_name, sector)
+                new_prof["company_id"] = cid
+                profiles[cid] = new_prof
+            return cid
 
-    # 신규 등록
+    # fallback: profiles dict에서 직접 탐색 (resolver 없을 때)
+    norm = normalize_name(company_name)
+    for cid, prof in profiles.items():
+        if not isinstance(prof, dict): continue
+        if normalize_name(prof.get("name","")) == norm: return cid
+        if company_name.lower() in [a.lower() for a in prof.get("aliases", [])]: return cid
+
+    # 완전 신규 등록
     new_prof = _make_auto_profile(company_name, sector)
     new_id   = new_prof["company_id"]
-
-    # ID 충돌 처리 (다른 회사가 같은 ID를 가질 경우)
-    if new_id in profiles and profiles[new_id]["name"].lower() != company_name.lower():
-        new_id = new_id + "_2"
+    if new_id in profiles and profiles[new_id].get("name","").lower() != company_name.lower():
+        new_id += "_2"
         new_prof["company_id"] = new_id
-
     profiles[new_id] = new_prof
     return new_id
 
 
-def scan_signals(signals: list[dict], profiles: dict[str, dict]) -> dict[str, list[dict]]:
+def scan_signals(signals: list[dict], profiles: dict[str, dict], _resolver=None) -> dict[str, list[dict]]:
     """
     signals 전체 스캔:
     1. company_id/company_name 필드로 회사 감지
@@ -444,7 +308,7 @@ def scan_signals(signals: list[dict], profiles: dict[str, dict]) -> dict[str, li
         co_name = sig.get("company_name", "")
         sector  = sig.get("segment", "")
 
-        resolved = resolve_and_register(co_name, co_id, sector, profiles)
+        resolved = resolve_and_register(co_name, co_id, sector, profiles, _resolver)
         if resolved:
             if resolved not in profiles:
                 new_company_count += 1
@@ -458,7 +322,7 @@ def scan_signals(signals: list[dict], profiles: dict[str, dict]) -> dict[str, li
                 continue  # 이미 처리됨
             if is_buyer_skip(found_name):
                 continue
-            extra_id = resolve_and_register(found_name, None, sector, profiles)
+            extra_id = resolve_and_register(found_name, None, sector, profiles, _resolver)
             if extra_id and extra_id != resolved:
                 company_events.setdefault(extra_id, []).append(sig)
 
@@ -768,7 +632,10 @@ def main() -> None:
 
     # ── signals 스캔 → 회사 감지 + 이벤트 분류 ───────────────────
     print("[SCAN] signals 스캔 — 회사 감지 + 이벤트 분류")
-    company_events = scan_signals(signals, profiles)
+    # resolver에 기존 auto 회사 로드
+    _resolver = CompanyResolver()
+    _resolver.load_auto_from_profiles(profiles)
+    company_events = scan_signals(signals, profiles, _resolver)
     after_count    = len(profiles)
     new_discovered = after_count - before_count
     print(
