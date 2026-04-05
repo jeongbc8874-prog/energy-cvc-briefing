@@ -40,6 +40,28 @@ from typing import Optional
 
 from company_resolver import CompanyResolver, SEED_COMPANIES, normalize_name, is_buyer
 
+# ── is_buyer_skip: is_buyer의 alias (하위 호환) ──────────────────────────
+is_buyer_skip = is_buyer
+
+# ── NER_RE: 제목/요약에서 회사명 추출용 패턴 ────────────────────────────
+_NER_PATTERNS = [
+    r'\bForm Energy\b', r'\bEnerVenue\b', r'\bInvinity\b', r'\bFluence\b',
+    r'\bAmbri\b', r'\bQuantumScape\b', r'\bEnovix\b', r'\bNorthvolt\b',
+    r'\bFreyr\b', r'\bEnergy Dome\b', r'\bGravitricity\b', r'\bMalta Inc\b',
+    r'\bRedwood Materials\b', r'\bLi-Cycle\b', r'\bSolidEnergy\b',
+    r'\bPlug Power\b', r'\bNel(?:\s+ASA)?\b', r'\bITM Power\b',
+    r'\bSunfire\b', r'\bHysata\b', r'\bAmogy\b', r'\bH2 Green Steel\b',
+    r'\bCeres Power\b', r'\bBloom Energy\b', r'\bFuelCell Energy\b',
+    r'\bBallard Power\b', r'\bAutoGrid\b', r'\bKrakenFlex\b', r'\bVirta\b',
+    r'\bNuScale\b', r'\bTerraPower\b', r'\bKairos Power\b', r'\bOklo\b',
+    r'\bX-energy\b', r'\bCommonwealth Fusion\b', r'\bHelion\b',
+    r'\bEnphase\b', r'\bSunPower\b', r'\bFirst Solar\b', r'\bSunrun\b',
+    r'\bSolarEdge\b', r'\bQCells\b', r'\bArray Technologies\b',
+    r'\b그리드위즈\b', r'\b식스티헤르츠\b', r'\b빈센\b',
+    r'\b스탠다드에너지\b', r'\b하이리움\b', r'\b씨에스에너지\b',
+]
+NER_RE = re.compile("|".join(_NER_PATTERNS), re.IGNORECASE)
+
 # ─────────────────────────────────────────────────────────────────────────
 # 경로
 # ─────────────────────────────────────────────────────────────────────────
