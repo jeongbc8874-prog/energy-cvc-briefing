@@ -1,5 +1,33 @@
 [
   {
+    "date": "2026-04-06",
+    "dateKr": "2026년 04월 06일",
+    "stats": {
+      "total": 70,
+      "high": 5,
+      "medium": 13,
+      "negative": 3,
+      "matched": 5,
+      "filtered_out": 161,
+      "companies_with_signals": 15,
+      "auto_companies": 2,
+      "by_segment": {
+        "ess": 64,
+        "hvdc": 1,
+        "marine_fc": 2,
+        "grid_sw": 2,
+        "hydrogen": 1
+      },
+      "by_type": {
+        "Contract": 3,
+        "Financing": 2,
+        "Partnership": 6,
+        "News": 56,
+        "Negative": 3
+      }
+    }
+  },
+  {
     "date": "2026-04-05",
     "dateKr": "2026년 04월 05일",
     "stats": {

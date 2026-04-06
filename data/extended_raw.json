@@ -1,6 +1,51 @@
 {
-  "date": "2026-04-05",
+  "date": "2026-04-06",
   "articles": [
+    {
+      "source_id": "canarymedia",
+      "source_name": "Canary Media",
+      "source_url": "https://www.canarymedia.com/articles/transmission/community-solar-breakthrough-illinois",
+      "source_segments": [
+        "ess",
+        "grid_sw",
+        "hydrogen",
+        "dc_power"
+      ],
+      "title": "How a community solar breakthrough took shape in Illinois",
+      "summary": "In western Illinois, ComEd is tapping a rarely used technique to fast-track community solar installations — working with, not against, environmental groups and solar project developers. For years, utilities have explored the concept of flexible interconnection, in which solar projects are allowed to come online even…",
+      "published_date": "2026-04-06",
+      "raw_text": "how a community solar breakthrough took shape in illinois in western illinois, comed is tapping a rarely used technique to fast-track community solar installations — working with, not against, environmental groups and solar project developers. for years, utilities have explored the concept of flexible interconnection, in which solar projects are allowed to come online even…"
+    },
+    {
+      "source_id": "canarymedia",
+      "source_name": "Canary Media",
+      "source_url": "https://www.canarymedia.com/articles/electrification/palo-alto-kids-induction-stoves",
+      "source_segments": [
+        "ess",
+        "grid_sw",
+        "hydrogen",
+        "dc_power"
+      ],
+      "title": "These Palo Alto kids are pushing the city to promote induction stoves",
+      "summary": "At a recent city council meeting in Palo Alto, California, Erin Pei stepped up to the podium. Clad in an Arctic Circle sweatshirt, the 11th grader presented hair-raising facts about the health impacts of gas stoves and other appliances that burn fossil fuels. The Bay Area Air District has found that gas water…",
+      "published_date": "2026-04-06",
+      "raw_text": "these palo alto kids are pushing the city to promote induction stoves at a recent city council meeting in palo alto, california, erin pei stepped up to the podium. clad in an arctic circle sweatshirt, the 11th grader presented hair-raising facts about the health impacts of gas stoves and other appliances that burn fossil fuels. the bay area air district has found that gas water…"
+    },
+    {
+      "source_id": "canarymedia",
+      "source_name": "Canary Media",
+      "source_url": "https://www.canarymedia.com/articles/canary-media/canary-media-is-turning-5",
+      "source_segments": [
+        "ess",
+        "grid_sw",
+        "hydrogen",
+        "dc_power"
+      ],
+      "title": "Canary Media is turning 5!",
+      "summary": "Five years ago, we launched Canary Media on a simple premise: that the energy transition, the greatest economic and industrial transformation of our lifetimes, deserved a newsroom entirely dedicated to covering it. We've spent every day since reporting on the most central, urgent, complicated, hopeful, and contested…",
+      "published_date": "2026-04-06",
+      "raw_text": "canary media is turning 5! five years ago, we launched canary media on a simple premise: that the energy transition, the greatest economic and industrial transformation of our lifetimes, deserved a newsroom entirely dedicated to covering it. we've spent every day since reporting on the most central, urgent, complicated, hopeful, and contested…"
+    },
     {
       "source_id": "canarymedia",
       "source_name": "Canary Media",
@@ -417,8 +462,78 @@
       ],
       "title": "Rooftop solar photovoltaic systems account for 20% of Puerto Rico's capacity mix",
       "summary": "Rooftop solar generating capacity in Puerto Rico totaled 1,456 megawatts (MW) at the end of 2025, 20% of the overall capacity mix. Rooftop solar capacity has increased faster than other sources over the past decade. Between 2016 and 2025 rooftop solar installations accounted for 81% of the new generating capacity in Puerto Rico, according to data from our Electric Power Monthly and Puerto Rico Energy Bureau's (PREB) Quarterly Report on System Data. In 2025, rooftop solar became the second-larges",
-      "published_date": "2026-04-05",
+      "published_date": "2026-04-06",
       "raw_text": "rooftop solar photovoltaic systems account for 20% of puerto rico's capacity mix rooftop solar generating capacity in puerto rico totaled 1,456 megawatts (mw) at the end of 2025, 20% of the overall capacity mix. rooftop solar capacity has increased faster than other sources over the past decade. between 2016 and 2025 rooftop solar installations accounted for 81% of the new generating capacity in puerto rico, according to data from our electric power monthly and puerto rico energy bureau's (preb) quarterly report on system data. in 2025, rooftop solar became the second-largest capacity source, after petroleum liquids capacity (3,671 mw), and surpassed natural gas capacity (1,391 mw)."
+    },
+    {
+      "source_id": "pvmagazine",
+      "source_name": "PV Magazine",
+      "source_url": "https://www.pv-magazine.com/2026/04/06/all-emerging-cyber-threats-targeting-power-infrastructure-at-a-glance/",
+      "source_segments": [
+        "ess",
+        "hydrogen",
+        "forecasting"
+      ],
+      "title": "All emerging cyber threats targeting power infrastructure at a glance",
+      "summary": "Researchers in Moroco analyzed cybersecurity challenges in smart grids, highlighting AI-driven detection and defense strategies against threats like distributed denial-of-service, false data injection replay, and IoT-based attacks. They recommend multi-layered protections, real-time anomaly detection, secure IoT devices, and staff training to enhance resilience and safeguard power system operations.",
+      "published_date": "2026-04-06",
+      "raw_text": "all emerging cyber threats targeting power infrastructure at a glance researchers in moroco analyzed cybersecurity challenges in smart grids, highlighting ai-driven detection and defense strategies against threats like distributed denial-of-service, false data injection replay, and iot-based attacks. they recommend multi-layered protections, real-time anomaly detection, secure iot devices, and staff training to enhance resilience and safeguard power system operations."
+    },
+    {
+      "source_id": "pvmagazine",
+      "source_name": "PV Magazine",
+      "source_url": "https://www.pv-magazine.com/2026/04/06/the-impact-of-annealing-on-copper-plated-contacts-in-heterojunction-solar-cells/",
+      "source_segments": [
+        "ess",
+        "hydrogen",
+        "forecasting"
+      ],
+      "title": "The impact of annealing on copper-plated heterojunction solar cells",
+      "summary": "A UNSW-led team found that annealing conditions significantly affect stress, strain, and microstructure in copper-plated heterojunction solar cell contacts, with fast annealing increasing microstrain in both copper and indium tin oxide.",
+      "published_date": "2026-04-06",
+      "raw_text": "the impact of annealing on copper-plated heterojunction solar cells a unsw-led team found that annealing conditions significantly affect stress, strain, and microstructure in copper-plated heterojunction solar cell contacts, with fast annealing increasing microstrain in both copper and indium tin oxide."
+    },
+    {
+      "source_id": "pvmagazine",
+      "source_name": "PV Magazine",
+      "source_url": "https://www.pv-magazine.com/2026/04/06/new-time-targets-large-scale-perovskite-production-in-italy/",
+      "source_segments": [
+        "ess",
+        "hydrogen",
+        "forecasting"
+      ],
+      "title": "New Time targets large-scale perovskite production in Italy",
+      "summary": "New Time has outlined a four-year roadmap to industrialize perovskite solar cells in Italy, with pilot production planned within three years and full-scale output to follow.",
+      "published_date": "2026-04-06",
+      "raw_text": "new time targets large-scale perovskite production in italy new time has outlined a four-year roadmap to industrialize perovskite solar cells in italy, with pilot production planned within three years and full-scale output to follow."
+    },
+    {
+      "source_id": "pvmagazine",
+      "source_name": "PV Magazine",
+      "source_url": "https://www.pv-magazine.com/2026/04/06/how-much-shading-do-agrivoltaics-really-need/",
+      "source_segments": [
+        "ess",
+        "hydrogen",
+        "forecasting"
+      ],
+      "title": "How much agrivoltaic shading is enough",
+      "summary": "Spanish researchers found that semi-transparent silicon PV greenhouses boosted tomato fruit weight by 25% while generating 726.8 kWh over two seasons, outperforming cadmium telluride PV and shaded controls. The PV-Si system balanced sunlight, temperature, and energy, showing strong agrivoltaic potential.",
+      "published_date": "2026-04-06",
+      "raw_text": "how much agrivoltaic shading is enough spanish researchers found that semi-transparent silicon pv greenhouses boosted tomato fruit weight by 25% while generating 726.8 kwh over two seasons, outperforming cadmium telluride pv and shaded controls. the pv-si system balanced sunlight, temperature, and energy, showing strong agrivoltaic potential."
+    },
+    {
+      "source_id": "pvmagazine",
+      "source_name": "PV Magazine",
+      "source_url": "https://www.pv-magazine.com/2026/04/06/neoen-unveils-large-scale-battery-projects-in-france-japan/",
+      "source_segments": [
+        "ess",
+        "hydrogen",
+        "forecasting"
+      ],
+      "title": "Neoen unveils large-scale battery projects in France, Japan",
+      "summary": "Neoen has announced two battery energy storage system (BESS) projects in France and Japan, expanding its footprint in both markets with installations totaling 348 MW and 896 MWh.",
+      "published_date": "2026-04-06",
+      "raw_text": "neoen unveils large-scale battery projects in france, japan neoen has announced two battery energy storage system (bess) projects in france and japan, expanding its footprint in both markets with installations totaling 348 mw and 896 mwh."
     },
     {
       "source_id": "pvmagazine",
@@ -699,76 +814,6 @@
       "summary": "A team from Nankai University and the Shanghai Institute of Space Power-Sources has developed a hydrofluorocarbon electrolyte enabling lithium-metal cells to operate at temperatures as low as -70 C.",
       "published_date": "2026-04-02",
       "raw_text": "chinese researchers report 700 wh/kg lithium-metal battery a team from nankai university and the shanghai institute of space power-sources has developed a hydrofluorocarbon electrolyte enabling lithium-metal cells to operate at temperatures as low as -70 c."
-    },
-    {
-      "source_id": "pvmagazine",
-      "source_name": "PV Magazine",
-      "source_url": "https://www.pv-magazine.com/2026/04/02/us-solar-faces-53000-worker-gap-ahead-of-2026-deadline/",
-      "source_segments": [
-        "ess",
-        "hydrogen",
-        "forecasting"
-      ],
-      "title": "US solar faces 53,000-worker gap ahead of 2026 deadline",
-      "summary": "The US solar industry may fall short of workforce needs as developers race to meet July 4, 2026 construction deadlines tied to federal tax credits.",
-      "published_date": "2026-04-02",
-      "raw_text": "us solar faces 53,000-worker gap ahead of 2026 deadline the us solar industry may fall short of workforce needs as developers race to meet july 4, 2026 construction deadlines tied to federal tax credits."
-    },
-    {
-      "source_id": "pvmagazine",
-      "source_name": "PV Magazine",
-      "source_url": "https://www.pv-magazine.com/2026/04/02/sonnen-cuts-prices-for-large-residential-battery-products/",
-      "source_segments": [
-        "ess",
-        "hydrogen",
-        "forecasting"
-      ],
-      "title": "Sonnen cuts prices for large residential battery products",
-      "summary": "German company Sonnen is set to offer its customers a 22 kWh battery energy storage system (BESS) for the price of an 11 kWh product. The offer will be valid until the end of June 2026.",
-      "published_date": "2026-04-02",
-      "raw_text": "sonnen cuts prices for large residential battery products german company sonnen is set to offer its customers a 22 kwh battery energy storage system (bess) for the price of an 11 kwh product. the offer will be valid until the end of june 2026."
-    },
-    {
-      "source_id": "pvmagazine",
-      "source_name": "PV Magazine",
-      "source_url": "https://www.pv-magazine.com/2026/04/02/global-solar-additions-reached-record-511-gw-in-2025-says-irena/",
-      "source_segments": [
-        "ess",
-        "hydrogen",
-        "forecasting"
-      ],
-      "title": "Global solar additions reached record 511 GW in 2025, says IRENA",
-      "summary": "Latest figures from the International Renewable Energy Agency find solar contributed the majority of a record 692 GW of renewables capacity added worldwide last year.",
-      "published_date": "2026-04-02",
-      "raw_text": "global solar additions reached record 511 gw in 2025, says irena latest figures from the international renewable energy agency find solar contributed the majority of a record 692 gw of renewables capacity added worldwide last year."
-    },
-    {
-      "source_id": "pvmagazine",
-      "source_name": "PV Magazine",
-      "source_url": "https://www.pv-magazine.com/2026/04/02/pexapark-logs-more-than-1-gwh-of-european-storage-ppas-in-march/",
-      "source_segments": [
-        "ess",
-        "hydrogen",
-        "forecasting"
-      ],
-      "title": "Pexapark logs more than 1 GWh of European storage PPAs in March",
-      "summary": "War in the Middle East is putting pressure on energy markets and boosting the value of solar and storage power purchase agreements (PPAs), with Europe seeing a surge in activity in March, according to Swiss consultancy Pexapark.",
-      "published_date": "2026-04-02",
-      "raw_text": "pexapark logs more than 1 gwh of european storage ppas in march war in the middle east is putting pressure on energy markets and boosting the value of solar and storage power purchase agreements (ppas), with europe seeing a surge in activity in march, according to swiss consultancy pexapark."
-    },
-    {
-      "source_id": "pvmagazine",
-      "source_name": "PV Magazine",
-      "source_url": "https://www.pv-magazine.com/2026/04/02/south-africas-eskom-extends-small-scale-solar-registration-fee-waiver/",
-      "source_segments": [
-        "ess",
-        "hydrogen",
-        "forecasting"
-      ],
-      "title": "South Africa’s Eskom extends small-scale solar registration fee waiver",
-      "summary": "The South African Photovoltaic Industry Association has welcomed the utility's decision to extend its registration fee waiver for solar systems until the end of September, as it calls for the country's municipal distributors to streamline their own processes for small-scale embedded generation systems.",
-      "published_date": "2026-04-02",
-      "raw_text": "south africa’s eskom extends small-scale solar registration fee waiver the south african photovoltaic industry association has welcomed the utility's decision to extend its registration fee waiver for solar systems until the end of september, as it calls for the country's municipal distributors to streamline their own processes for small-scale embedded generation systems."
     },
     {
       "source_id": "energystoragenews",
@@ -1373,6 +1418,141 @@
     {
       "source_id": "cleantechnica",
       "source_name": "CleanTechnica",
+      "source_url": "https://cleantechnica.com/2026/04/06/new-zealand-car-yards-empty-as-electric-vehicle-sales-surge/",
+      "source_segments": [
+        "ess",
+        "dc_power",
+        "forecasting",
+        "grid_sw"
+      ],
+      "title": "New Zealand Car Yards Empty As Electric Vehicle Sales Surge",
+      "summary": "I recently reported to CleanTechnica readers about the surge in EV sales in Australia. It appears the same thing is happening in New Zealand, with second-hand and demo EVs being snapped up and car yards emptying out. Here is one revealing photo: Car yards are advertising for second-hand stock. Thanks ... [continued] The post New Zealand Car Yards Empty As Electric Vehicle Sales Surge appeared first on CleanTechnica .",
+      "published_date": "2026-04-06",
+      "raw_text": "new zealand car yards empty as electric vehicle sales surge i recently reported to cleantechnica readers about the surge in ev sales in australia. it appears the same thing is happening in new zealand, with second-hand and demo evs being snapped up and car yards emptying out. here is one revealing photo: car yards are advertising for second-hand stock. thanks ... [continued] the post new zealand car yards empty as electric vehicle sales surge appeared first on cleantechnica ."
+    },
+    {
+      "source_id": "cleantechnica",
+      "source_name": "CleanTechnica",
+      "source_url": "https://cleantechnica.com/2026/04/05/the-scottish-home-hydrogen-trial-and-the-ethics-of-delay/",
+      "source_segments": [
+        "ess",
+        "dc_power",
+        "forecasting",
+        "grid_sw"
+      ],
+      "title": "The Scottish Home Hydrogen Trial And The Ethics Of Delay",
+      "summary": "The Fife, Scotland, hydrogen trial is moving forward at Easter 2026, and that timing matters more than it might seem. Easter is a season associated with renewal, honesty, sacrifice, and the choice to leave behind what no longer serves the common good. Against that backdrop, SGN is advancing a project ... [continued] The post The Scottish Home Hydrogen Trial And The Ethics Of Delay appeared first on CleanTechnica .",
+      "published_date": "2026-04-06",
+      "raw_text": "the scottish home hydrogen trial and the ethics of delay the fife, scotland, hydrogen trial is moving forward at easter 2026, and that timing matters more than it might seem. easter is a season associated with renewal, honesty, sacrifice, and the choice to leave behind what no longer serves the common good. against that backdrop, sgn is advancing a project ... [continued] the post the scottish home hydrogen trial and the ethics of delay appeared first on cleantechnica ."
+    },
+    {
+      "source_id": "cleantechnica",
+      "source_name": "CleanTechnica",
+      "source_url": "https://cleantechnica.com/2026/04/05/agrivoltaics-can-save-us-farmers-in-more-ways-than-one/",
+      "source_segments": [
+        "ess",
+        "dc_power",
+        "forecasting",
+        "grid_sw"
+      ],
+      "title": "Agrivoltaics Can Save US Farmers In More Ways Than One",
+      "summary": "A new study deploys computational fluid dynamic models to describe how the solar panels in agrivoltaic systems can reduce wind damage and soil loss, outperforming natural windbreaks. The post Agrivoltaics Can Save US Farmers In More Ways Than One appeared first on CleanTechnica .",
+      "published_date": "2026-04-05",
+      "raw_text": "agrivoltaics can save us farmers in more ways than one a new study deploys computational fluid dynamic models to describe how the solar panels in agrivoltaic systems can reduce wind damage and soil loss, outperforming natural windbreaks. the post agrivoltaics can save us farmers in more ways than one appeared first on cleantechnica ."
+    },
+    {
+      "source_id": "cleantechnica",
+      "source_name": "CleanTechnica",
+      "source_url": "https://cleantechnica.com/2026/04/05/proton-evs-sell-well-in-malaysia-where-fuel-is-subsidized-cheap/",
+      "source_segments": [
+        "ess",
+        "dc_power",
+        "forecasting",
+        "grid_sw"
+      ],
+      "title": "Proton EVs Sell Well In Malaysia, Where Fuel Is Subsidized & Cheap",
+      "summary": "Malaysian national carmaker Proton achieved its highest quarterly sales volume since 2004 by delivering 49,140 units in the first three months of the year. This meant 40.1 percent year-on-year growth, a feat made more impressive by the fact that the broader Malaysian automotive market actually contracted by 4.9 percent during ... [continued] The post Proton EVs Sell Well In Malaysia, Where Fuel Is Subsidized & Cheap appeared first on CleanTechnica .",
+      "published_date": "2026-04-05",
+      "raw_text": "proton evs sell well in malaysia, where fuel is subsidized & cheap malaysian national carmaker proton achieved its highest quarterly sales volume since 2004 by delivering 49,140 units in the first three months of the year. this meant 40.1 percent year-on-year growth, a feat made more impressive by the fact that the broader malaysian automotive market actually contracted by 4.9 percent during ... [continued] the post proton evs sell well in malaysia, where fuel is subsidized & cheap appeared first on cleantechnica ."
+    },
+    {
+      "source_id": "cleantechnica",
+      "source_name": "CleanTechnica",
+      "source_url": "https://cleantechnica.com/2026/04/05/1500-new-ev-chargers-coming-to-the-isle-of-wight/",
+      "source_segments": [
+        "ess",
+        "dc_power",
+        "forecasting",
+        "grid_sw"
+      ],
+      "title": "1,500 New EV Chargers Coming To the Isle Of Wight",
+      "summary": "The Isle of Wight is where Charles Dickens wrote some of David Copperfield, a novel that may have been his most autobiographical. The opening could also serve as a meaningful observation and guidance for our own times: “WHETHER I shall turn out to be the hero of my own life, ... [continued] The post 1,500 New EV Chargers Coming To the Isle Of Wight appeared first on CleanTechnica .",
+      "published_date": "2026-04-05",
+      "raw_text": "1,500 new ev chargers coming to the isle of wight the isle of wight is where charles dickens wrote some of david copperfield, a novel that may have been his most autobiographical. the opening could also serve as a meaningful observation and guidance for our own times: “whether i shall turn out to be the hero of my own life, ... [continued] the post 1,500 new ev chargers coming to the isle of wight appeared first on cleantechnica ."
+    },
+    {
+      "source_id": "cleantechnica",
+      "source_name": "CleanTechnica",
+      "source_url": "https://cleantechnica.com/2026/04/05/72-new-ev-fast-chargers-now-operating-in-or-coming-to-illinois/",
+      "source_segments": [
+        "ess",
+        "dc_power",
+        "forecasting",
+        "grid_sw"
+      ],
+      "title": "72 New EV Fast Chargers Now Operating In Or Coming To Illinois",
+      "summary": "In the last six months or so, there have been a number of news articles about Illinois EV charger expansion: 10 in Decatur 40 fast chargers near Chicago. 40 in Springfield A new hub of fast chargers Here comes another 72 public fast charger ports for the same state. The ... [continued] The post 72 New EV Fast Chargers Now Operating In Or Coming To Illinois appeared first on CleanTechnica .",
+      "published_date": "2026-04-05",
+      "raw_text": "72 new ev fast chargers now operating in or coming to illinois in the last six months or so, there have been a number of news articles about illinois ev charger expansion: 10 in decatur 40 fast chargers near chicago. 40 in springfield a new hub of fast chargers here comes another 72 public fast charger ports for the same state. the ... [continued] the post 72 new ev fast chargers now operating in or coming to illinois appeared first on cleantechnica ."
+    },
+    {
+      "source_id": "cleantechnica",
+      "source_name": "CleanTechnica",
+      "source_url": "https://cleantechnica.com/2026/04/05/fossil-fuel-fud-is-targeting-your-children/",
+      "source_segments": [
+        "ess",
+        "dc_power",
+        "forecasting",
+        "grid_sw"
+      ],
+      "title": "Fossil Fuel FUD Is Targeting Your Children",
+      "summary": "A children's book in Sweden about fossil fuels has created controversy, with critics saying it is propaganda for the oil and gas industry. The post Fossil Fuel FUD Is Targeting Your Children appeared first on CleanTechnica .",
+      "published_date": "2026-04-05",
+      "raw_text": "fossil fuel fud is targeting your children a children's book in sweden about fossil fuels has created controversy, with critics saying it is propaganda for the oil and gas industry. the post fossil fuel fud is targeting your children appeared first on cleantechnica ."
+    },
+    {
+      "source_id": "cleantechnica",
+      "source_name": "CleanTechnica",
+      "source_url": "https://cleantechnica.com/2026/04/05/malaysias-long-running-serena-enters-e-power-era-with-solid-early-demand/",
+      "source_segments": [
+        "ess",
+        "dc_power",
+        "forecasting",
+        "grid_sw"
+      ],
+      "title": "Malaysia’s Long-Running Serena Enters e-POWER Era with Solid Early Demand",
+      "summary": "Within the first month of release, the Nissan Serena e-POWER recorded over 1,300 bookings and around 250 deliveries nationwide, indicating solid initial demand for a midsized MPV in this price range. April deliveries are now approaching 1,000 units. Nissan assembler and distributor Edaran Tan Chong Motor introduced the sixth-generation version ... [continued] The post Malaysia’s Long-Running Serena Enters e-POWER Era with Solid Early Demand appeared first on CleanTechnica .",
+      "published_date": "2026-04-05",
+      "raw_text": "malaysia’s long-running serena enters e-power era with solid early demand within the first month of release, the nissan serena e-power recorded over 1,300 bookings and around 250 deliveries nationwide, indicating solid initial demand for a midsized mpv in this price range. april deliveries are now approaching 1,000 units. nissan assembler and distributor edaran tan chong motor introduced the sixth-generation version ... [continued] the post malaysia’s long-running serena enters e-power era with solid early demand appeared first on cleantechnica ."
+    },
+    {
+      "source_id": "cleantechnica",
+      "source_name": "CleanTechnica",
+      "source_url": "https://cleantechnica.com/2026/04/05/how-should-progressive-us-midterm-candidates-frame-their-arguments-about-climate-change/",
+      "source_segments": [
+        "ess",
+        "dc_power",
+        "forecasting",
+        "grid_sw"
+      ],
+      "title": "How Should Progressive US Midterm Candidates Frame Their Arguments About Climate Change?",
+      "summary": "Progressives are already working hard to win back the US House of Representatives in 2026 as a fundamental piece of the “Stop Trump” strategy. The politicalization of climate change means that there is much at stake for climate activists in the upcoming election, as its results will help to shape ... [continued] The post How Should Progressive US Midterm Candidates Frame Their Arguments About Climate Change? appeared first on CleanTechnica .",
+      "published_date": "2026-04-05",
+      "raw_text": "how should progressive us midterm candidates frame their arguments about climate change? progressives are already working hard to win back the us house of representatives in 2026 as a fundamental piece of the “stop trump” strategy. the politicalization of climate change means that there is much at stake for climate activists in the upcoming election, as its results will help to shape ... [continued] the post how should progressive us midterm candidates frame their arguments about climate change? appeared first on cleantechnica ."
+    },
+    {
+      "source_id": "cleantechnica",
+      "source_name": "CleanTechnica",
       "source_url": "https://cleantechnica.com/2026/04/04/car-yards-empty-as-ev-sales-surge-in-australia/",
       "source_segments": [
         "ess",
@@ -1411,9 +1591,9 @@
         "grid_sw"
       ],
       "title": "What’s Going On With Hyundai? Ask Mary?",
-      "summary": "At the New York Auto Show on Wednesday, Hyundai announced a strategic departure on its vehicles. CEO Jose Munos announced that they are adding focus to the US market, which is Hyundai’s largest market. They are investing $26 billion in the US and building a steel plant, while planning for ... [continued] The post What’s Going On With Hyundai? Ask Mary? appeared first on CleanTechnica .",
+      "summary": "At the New York Auto Show on Wednesday, Hyundai announced a strategic departure on its vehicles. CEO José Muñoz announced that they are adding focus to the US market, which is Hyundai’s largest market. They are investing $26 billion in the US and building a steel plant, while planning for ... [continued] The post What’s Going On With Hyundai? Ask Mary? appeared first on CleanTechnica .",
       "published_date": "2026-04-04",
-      "raw_text": "what’s going on with hyundai? ask mary? at the new york auto show on wednesday, hyundai announced a strategic departure on its vehicles. ceo jose munos announced that they are adding focus to the us market, which is hyundai’s largest market. they are investing $26 billion in the us and building a steel plant, while planning for ... [continued] the post what’s going on with hyundai? ask mary? appeared first on cleantechnica ."
+      "raw_text": "what’s going on with hyundai? ask mary? at the new york auto show on wednesday, hyundai announced a strategic departure on its vehicles. ceo josé muñoz announced that they are adding focus to the us market, which is hyundai’s largest market. they are investing $26 billion in the us and building a steel plant, while planning for ... [continued] the post what’s going on with hyundai? ask mary? appeared first on cleantechnica ."
     },
     {
       "source_id": "cleantechnica",
@@ -1911,139 +2091,32 @@
       "raw_text": "kia determined to juice ev sales in the us with new ev3, trump or no trump kia america is confident that its forthcoming compact 2027 kia ev3 crossover will revive flagging ev sales, regardless of the loss of the federal tax credit. the post kia determined to juice ev sales in the us with new ev3, trump or no trump appeared first on cleantechnica ."
     },
     {
-      "source_id": "cleantechnica",
-      "source_name": "CleanTechnica",
-      "source_url": "https://cleantechnica.com/2026/04/02/tesla-delivers-358023-vehicles-in-1st-quarter-charts-graphs/",
+      "source_id": "electrek",
+      "source_name": "Electrek",
+      "source_url": "https://electrek.co/2026/04/05/vinfast-prepares-to-enter-the-worlds-largest-motorcycle-market/",
       "source_segments": [
         "ess",
         "dc_power",
-        "forecasting",
-        "grid_sw"
+        "forecasting"
       ],
-      "title": "Tesla Delivers 358,023 Vehicles in 1st Quarter — CHARTS & GRAPHS",
-      "summary": "Tesla delivered just 358,023 vehicles in the 1st quarter, which was a 6.3% increase over Q1 2025, but was also the second worst quarter for the company since Q3 2022. Meanwhile, the company produced 408,386 vehicles. Let’s take a little closer look at the vehicle deliveries, including some estimates on ... [continued] The post Tesla Delivers 358,023 Vehicles in 1st Quarter — CHARTS & GRAPHS appeared first on CleanTechnica .",
-      "published_date": "2026-04-02",
-      "raw_text": "tesla delivers 358,023 vehicles in 1st quarter — charts & graphs tesla delivered just 358,023 vehicles in the 1st quarter, which was a 6.3% increase over q1 2025, but was also the second worst quarter for the company since q3 2022. meanwhile, the company produced 408,386 vehicles. let’s take a little closer look at the vehicle deliveries, including some estimates on ... [continued] the post tesla delivers 358,023 vehicles in 1st quarter — charts & graphs appeared first on cleantechnica ."
+      "title": "VinFast prepares to enter the world’s largest motorcycle market",
+      "summary": "Vietnamese EV maker VinFast is setting its sights on a major new frontier: India’s massive two-wheeler market. After already laying groundwork for its electric car business in the country, the company is now preparing to launch a lineup of electric scooters as part of a broader push into India’s fast-growing EV sector. more…",
+      "published_date": "2026-04-05",
+      "raw_text": "vinfast prepares to enter the world’s largest motorcycle market vietnamese ev maker vinfast is setting its sights on a major new frontier: india’s massive two-wheeler market. after already laying groundwork for its electric car business in the country, the company is now preparing to launch a lineup of electric scooters as part of a broader push into india’s fast-growing ev sector. more…"
     },
     {
-      "source_id": "cleantechnica",
-      "source_name": "CleanTechnica",
-      "source_url": "https://cleantechnica.com/2026/04/02/over-60-new-fast-ev-chargers-to-be-operating-in-nyc/",
+      "source_id": "electrek",
+      "source_name": "Electrek",
+      "source_url": "https://electrek.co/2026/04/05/here-are-the-best-electric-bikes-you-can-buy-at-every-price-level/",
       "source_segments": [
         "ess",
         "dc_power",
-        "forecasting",
-        "grid_sw"
+        "forecasting"
       ],
-      "title": "Over 60 New Fast EV Chargers To Be Operating In NYC",
-      "summary": "Just a bit after hearing about 28 new EV fast chargers in San Diego, here comes a new story about over 60 fast chargers for NYC. These “small” EV charger installations are examples of how, little by little, EV public infrastructure is expanding in some areas. (There are also much ... [continued] The post Over 60 New Fast EV Chargers To Be Operating In NYC appeared first on CleanTechnica .",
-      "published_date": "2026-04-02",
-      "raw_text": "over 60 new fast ev chargers to be operating in nyc just a bit after hearing about 28 new ev fast chargers in san diego, here comes a new story about over 60 fast chargers for nyc. these “small” ev charger installations are examples of how, little by little, ev public infrastructure is expanding in some areas. (there are also much ... [continued] the post over 60 new fast ev chargers to be operating in nyc appeared first on cleantechnica ."
-    },
-    {
-      "source_id": "cleantechnica",
-      "source_name": "CleanTechnica",
-      "source_url": "https://cleantechnica.com/2026/04/01/volkswagen-rivian-software-defined-vehicles-joint-venture-rv-tech-successfully-completes-winter-testing/",
-      "source_segments": [
-        "ess",
-        "dc_power",
-        "forecasting",
-        "grid_sw"
-      ],
-      "title": "Volkswagen–Rivian Software‑Defined Vehicles: Joint Venture RV Tech Successfully Completes Winter Testing",
-      "summary": "The joint venture “Rivian and Volkswagen Group Technologies” (RV Tech) has successfully completed the winter tests of its production-intent zonal architecture for the first generation of software‑defined vehicles (SDVs). Over the course of several months of testing in Phoenix (USA) and Arjeplog (Sweden), a joint team from Volkswagen, Audi, Scout, ... [continued] The post Volkswagen–Rivian Software‑Defined Vehicles: Joint Venture RV Tech Successfully Completes Winter Testing appeared first on Cle",
-      "published_date": "2026-04-02",
-      "raw_text": "volkswagen–rivian software‑defined vehicles: joint venture rv tech successfully completes winter testing the joint venture “rivian and volkswagen group technologies” (rv tech) has successfully completed the winter tests of its production-intent zonal architecture for the first generation of software‑defined vehicles (sdvs). over the course of several months of testing in phoenix (usa) and arjeplog (sweden), a joint team from volkswagen, audi, scout, ... [continued] the post volkswagen–rivian software‑defined vehicles: joint venture rv tech successfully completes winter testing appeared first on cleantechnica ."
-    },
-    {
-      "source_id": "cleantechnica",
-      "source_name": "CleanTechnica",
-      "source_url": "https://cleantechnica.com/2026/04/01/u-s-coal-exports-decreased-in-2025-after-4-years-of-growth/",
-      "source_segments": [
-        "ess",
-        "dc_power",
-        "forecasting",
-        "grid_sw"
-      ],
-      "title": "U.S. Coal Exports Decreased in 2025 after 4 Years of Growth",
-      "summary": "After four years of growth, U.S. coal exports decreased by 16 million short tons (MMst) in 2025, according to data released by the U.S. Census Bureau. Exports totaled 93 MMst in 2025, compared with 108 MMst in 2024. Thermal coal exports fell by 18%, and metallurgical coal exports fell by 11%. The ... [continued] The post U.S. Coal Exports Decreased in 2025 after 4 Years of Growth appeared first on CleanTechnica .",
-      "published_date": "2026-04-02",
-      "raw_text": "u.s. coal exports decreased in 2025 after 4 years of growth after four years of growth, u.s. coal exports decreased by 16 million short tons (mmst) in 2025, according to data released by the u.s. census bureau. exports totaled 93 mmst in 2025, compared with 108 mmst in 2024. thermal coal exports fell by 18%, and metallurgical coal exports fell by 11%. the ... [continued] the post u.s. coal exports decreased in 2025 after 4 years of growth appeared first on cleantechnica ."
-    },
-    {
-      "source_id": "cleantechnica",
-      "source_name": "CleanTechnica",
-      "source_url": "https://cleantechnica.com/2026/04/01/electric-bus-deliveries-in-australia-continue-in-2026/",
-      "source_segments": [
-        "ess",
-        "dc_power",
-        "forecasting",
-        "grid_sw"
-      ],
-      "title": "Electric Bus Deliveries in Australia Continue in 2026",
-      "summary": "In the midst of a fuel crisis in Australia, caused by Middle East war miscalculations, I would expect that many transport companies are wishing they had ordered more battery electric buses. Diesel is over $AU 3 per litre, while electricity prices remain the same. Fleets are still converting slowly, though. ... [continued] The post Electric Bus Deliveries in Australia Continue in 2026 appeared first on CleanTechnica .",
-      "published_date": "2026-04-02",
-      "raw_text": "electric bus deliveries in australia continue in 2026 in the midst of a fuel crisis in australia, caused by middle east war miscalculations, i would expect that many transport companies are wishing they had ordered more battery electric buses. diesel is over $au 3 per litre, while electricity prices remain the same. fleets are still converting slowly, though. ... [continued] the post electric bus deliveries in australia continue in 2026 appeared first on cleantechnica ."
-    },
-    {
-      "source_id": "cleantechnica",
-      "source_name": "CleanTechnica",
-      "source_url": "https://cleantechnica.com/2026/04/01/general-motors-slaps-down-trumps-war-on-evs/",
-      "source_segments": [
-        "ess",
-        "dc_power",
-        "forecasting",
-        "grid_sw"
-      ],
-      "title": "General Motors Slaps Down Trump’s War On EVs",
-      "summary": "General Motors has an EV trick or two up its sleeve as US President Donald Trump makes the case for vehicle electrification stronger than ever before. The post General Motors Slaps Down Trump’s War On EVs appeared first on CleanTechnica .",
-      "published_date": "2026-04-02",
-      "raw_text": "general motors slaps down trump’s war on evs general motors has an ev trick or two up its sleeve as us president donald trump makes the case for vehicle electrification stronger than ever before. the post general motors slaps down trump’s war on evs appeared first on cleantechnica ."
-    },
-    {
-      "source_id": "cleantechnica",
-      "source_name": "CleanTechnica",
-      "source_url": "https://cleantechnica.com/2026/04/01/tesla-robotaxis-will-be-covering-70-of-us-population-in-2-weeks/",
-      "source_segments": [
-        "ess",
-        "dc_power",
-        "forecasting",
-        "grid_sw"
-      ],
-      "title": "BREAKING: Tesla Robotaxis Will Be Covering 70% of US Population in 2 Weeks",
-      "summary": "If you’ve been following Tesla for a fairly long time, you’re probably familiar with the “two weeks” meme. Several years ago, Elon Musk kept promising that a notable Full Self Driving update would be coming in two weeks, and then kept not delivering and saying again that it was just ... [continued] The post BREAKING: Tesla Robotaxis Will Be Covering 70% of US Population in 2 Weeks appeared first on CleanTechnica .",
-      "published_date": "2026-04-02",
-      "raw_text": "breaking: tesla robotaxis will be covering 70% of us population in 2 weeks if you’ve been following tesla for a fairly long time, you’re probably familiar with the “two weeks” meme. several years ago, elon musk kept promising that a notable full self driving update would be coming in two weeks, and then kept not delivering and saying again that it was just ... [continued] the post breaking: tesla robotaxis will be covering 70% of us population in 2 weeks appeared first on cleantechnica ."
-    },
-    {
-      "source_id": "cleantechnica",
-      "source_name": "CleanTechnica",
-      "source_url": "https://cleantechnica.com/2026/04/01/waymo-hallo-konnichiwa-annyeonghaseyo-and-bonjour/",
-      "source_segments": [
-        "ess",
-        "dc_power",
-        "forecasting",
-        "grid_sw"
-      ],
-      "title": "Waymo: “Hallo, Konnichiwa, Annyeonghaseyo, and Bonjour!”",
-      "summary": "Hallo, Konnichiwa, Annyeonghaseyo, and Bonjour! No matter how you say it, the Waymo Driver can now too. We’re thrilled to announce that the Waymo experience is now localized for Japanese, Korean, Polish, Italian, French, German, and British English. Waymo is for everyone, and that means meeting you where you are. ... [continued] The post Waymo: “Hallo, Konnichiwa, Annyeonghaseyo, and Bonjour!” appeared first on CleanTechnica .",
-      "published_date": "2026-04-02",
-      "raw_text": "waymo: “hallo, konnichiwa, annyeonghaseyo, and bonjour!” hallo, konnichiwa, annyeonghaseyo, and bonjour! no matter how you say it, the waymo driver can now too. we’re thrilled to announce that the waymo experience is now localized for japanese, korean, polish, italian, french, german, and british english. waymo is for everyone, and that means meeting you where you are. ... [continued] the post waymo: “hallo, konnichiwa, annyeonghaseyo, and bonjour!” appeared first on cleantechnica ."
-    },
-    {
-      "source_id": "cleantechnica",
-      "source_name": "CleanTechnica",
-      "source_url": "https://cleantechnica.com/2026/04/01/major-spp-western-expansion-opens-clean-energy-opportunities-across-region/",
-      "source_segments": [
-        "ess",
-        "dc_power",
-        "forecasting",
-        "grid_sw"
-      ],
-      "title": "Major SPP Western Expansion Opens Clean Energy Opportunities Across Region",
-      "summary": "DENVER — Today the Southwest Power Pool (SPP) officially expanded, connecting western and eastern electric grids and providing increased access to clean energy for major utilities across the West and Great Plains in Colorado, Wyoming, Nebraska, Utah, and Arizona. Regional Transmission Organizations (RTOs) like SPP allow states and regions to share ... [continued] The post Major SPP Western Expansion Opens Clean Energy Opportunities Across Region appeared first on CleanTechnica .",
-      "published_date": "2026-04-02",
-      "raw_text": "major spp western expansion opens clean energy opportunities across region denver — today the southwest power pool (spp) officially expanded, connecting western and eastern electric grids and providing increased access to clean energy for major utilities across the west and great plains in colorado, wyoming, nebraska, utah, and arizona. regional transmission organizations (rtos) like spp allow states and regions to share ... [continued] the post major spp western expansion opens clean energy opportunities across region appeared first on cleantechnica ."
+      "title": "Here are the best electric bikes you can buy at every price level in April 2026",
+      "summary": "I’ve spent countless hours here at Electrek doing detailed hands-on testing of hundreds of electric bikes. Through thousands of miles of riding, I’ve been fortunate to learn these e-bikes inside and out, top to bottom and front to back. That long-term experience with real-world e-bike testing has helped me find the best electric bicycles on the market for just about any budget. Below are some of the top e-bikes I’ve hand-tested for every price range, current as of April 2026. Spring is finally h",
+      "published_date": "2026-04-05",
+      "raw_text": "here are the best electric bikes you can buy at every price level in april 2026 i’ve spent countless hours here at electrek doing detailed hands-on testing of hundreds of electric bikes. through thousands of miles of riding, i’ve been fortunate to learn these e-bikes inside and out, top to bottom and front to back. that long-term experience with real-world e-bike testing has helped me find the best electric bicycles on the market for just about any budget. below are some of the top e-bikes i’ve hand-tested for every price range, current as of april 2026. spring is finally here, and that means it’s time to get back in the saddle! check out the awesome e-bikes below, any one of which could become your next electric bike. more…"
     },
     {
       "source_id": "electrek",
@@ -2718,34 +2791,6 @@
       "raw_text": "gm idles factory zero again, lays off 1,300 ev workers for a month general motors has shut down production at factory zero in detroit for the second time in less than three months, temporarily laying off 1,300 workers. the plant won’t restart until mid-april. the idling, which began on march 16, marks the latest in a string of production cuts at the facility gm once positioned as the flagship of its electric vehicle future — a $2.2 billion showcase that has become a symbol of the company’s rapid ev retreat. more…"
     },
     {
-      "source_id": "electrek",
-      "source_name": "Electrek",
-      "source_url": "https://electrek.co/2026/03/31/freelander-suv-reborn-sharp-off-road-ev-images/",
-      "source_segments": [
-        "ess",
-        "dc_power",
-        "forecasting"
-      ],
-      "title": "The Freelander SUV is reborn as a sharp off-road EV, and it’s going global [Images]",
-      "summary": "The Freelander SUV was the best-selling 4WD off-roader in Europe for years. Now, it’s back with an electric powertrain and a sleek new style. Here’s our first look at the Freelander EV. more…",
-      "published_date": "2026-03-31",
-      "raw_text": "the freelander suv is reborn as a sharp off-road ev, and it’s going global [images] the freelander suv was the best-selling 4wd off-roader in europe for years. now, it’s back with an electric powertrain and a sleek new style. here’s our first look at the freelander ev. more…"
-    },
-    {
-      "source_id": "electrek",
-      "source_name": "Electrek",
-      "source_url": "https://electrek.co/2026/03/31/tesla-parramatta-showroom-fire-arson-suspected-3-vehicles-destroyed/",
-      "source_segments": [
-        "ess",
-        "dc_power",
-        "forecasting"
-      ],
-      "title": "Tesla showroom in Sydney torched in suspected arson, 3 vehicles destroyed",
-      "summary": "A Tesla showroom in Parramatta, a suburb of Sydney, Australia, was set ablaze in an overnight attack that destroyed three vehicles and damaged the building. Jerrycan lids were found at the scene. The fire is being investigated as a suspected arson — the latest in a global wave of attacks on Tesla facilities that has been going on for over a year now. more…",
-      "published_date": "2026-03-31",
-      "raw_text": "tesla showroom in sydney torched in suspected arson, 3 vehicles destroyed a tesla showroom in parramatta, a suburb of sydney, australia, was set ablaze in an overnight attack that destroyed three vehicles and damaged the building. jerrycan lids were found at the scene. the fire is being investigated as a suspected arson — the latest in a global wave of attacks on tesla facilities that has been going on for over a year now. more…"
-    },
-    {
       "source_id": "utilitydive",
       "source_name": "Utility Dive",
       "source_url": "https://www.utilitydive.com/news/trump-steel-aluminum-copper-tariff-adjustments-grid-equipment-electric/816581/",
@@ -2888,6 +2933,19 @@
     {
       "source_id": "offshorewind",
       "source_name": "Offshore Wind Biz",
+      "source_url": "https://www.offshorewind.biz/2026/04/06/dutch-govt-adds-second-site-to-2026-offshore-wind-tender/",
+      "source_segments": [
+        "hvdc",
+        "ess"
+      ],
+      "title": "Dutch Gov’t Adds Second Site to 2026 Offshore Wind Tender",
+      "summary": "The Dutch Ministry of Economic Affairs and Climate Policy said on 3 April that, […]",
+      "published_date": "2026-04-06",
+      "raw_text": "dutch gov’t adds second site to 2026 offshore wind tender the dutch ministry of economic affairs and climate policy said on 3 april that, […]"
+    },
+    {
+      "source_id": "offshorewind",
+      "source_name": "Offshore Wind Biz",
       "source_url": "https://www.offshorewind.biz/2026/04/03/ocasio-cortez-markey-ask-trump-admin-to-explain-paying-totalenergies-usd-1-billion-in-taxpayer-money-to-drop-offshore-wind-projects/",
       "source_segments": [
         "hvdc",
@@ -3001,19 +3059,6 @@
       "summary": "Half of the 62 jacket foundations have been installed at the Dieppe-Le-Tréport offshore wind […]",
       "published_date": "2026-04-01",
       "raw_text": "foundation installation at new french offshore wind farm reaches halfway mark half of the 62 jacket foundations have been installed at the dieppe-le-tréport offshore wind […]"
-    },
-    {
-      "source_id": "offshorewind",
-      "source_name": "Offshore Wind Biz",
-      "source_url": "https://www.offshorewind.biz/2026/04/01/classnk-grants-approval-for-high-corrosion-resistant-wire-cable-for-floating-wind-mooring/",
-      "source_segments": [
-        "hvdc",
-        "ess"
-      ],
-      "title": "ClassNK Grants Approval for High-Corrosion-Resistant Wire Cable for Floating Wind Mooring",
-      "summary": "ClassNK has issued Approval of Manufacturing Procedure (AMP) and Type Approval certificates for a […]",
-      "published_date": "2026-04-01",
-      "raw_text": "classnk grants approval for high-corrosion-resistant wire cable for floating wind mooring classnk has issued approval of manufacturing procedure (amp) and type approval certificates for a […]"
     },
     {
       "source_id": "energymonitor",
@@ -3154,64 +3199,6 @@
       "summary": "WBS Power is set to develop a 3.2GW hyperscale data centre campus in Lublewo, in Poland’s Pomerania region.",
       "published_date": "2026-03-25",
       "raw_text": "wbs power to develop 3.2gw data centre campus in poland wbs power is set to develop a 3.2gw hyperscale data centre campus in lublewo, in poland’s pomerania region."
-    },
-    {
-      "source_id": "cleantechnica",
-      "source_name": "CleanTechnica",
-      "source_url": "https://cleantechnica.com/2026/04/05/malaysias-long-running-serena-enters-e-power-era-with-solid-early-demand/",
-      "source_segments": [
-        "ess",
-        "dc_power",
-        "forecasting",
-        "grid_sw"
-      ],
-      "title": "Malaysia’s Long-Running Serena Enters e-POWER Era with Solid Early Demand",
-      "summary": "Within the first month of release, the Nissan Serena e-POWER recorded over 1,300 bookings and around 250 deliveries nationwide, indicating solid initial demand for a midsized MPV in this price range. April deliveries are now approaching 1,000 units. Nissan assembler and distributor Edaran Tan Chong Motor introduced the sixth-generation version ... [continued] The post Malaysia’s Long-Running Serena Enters e-POWER Era with Solid Early Demand appeared first on CleanTechnica .",
-      "published_date": "2026-04-05",
-      "raw_text": "malaysia’s long-running serena enters e-power era with solid early demand within the first month of release, the nissan serena e-power recorded over 1,300 bookings and around 250 deliveries nationwide, indicating solid initial demand for a midsized mpv in this price range. april deliveries are now approaching 1,000 units. nissan assembler and distributor edaran tan chong motor introduced the sixth-generation version ... [continued] the post malaysia’s long-running serena enters e-power era with solid early demand appeared first on cleantechnica ."
-    },
-    {
-      "source_id": "cleantechnica",
-      "source_name": "CleanTechnica",
-      "source_url": "https://cleantechnica.com/2026/04/05/how-should-progressive-us-midterm-candidates-frame-their-arguments-about-climate-change/",
-      "source_segments": [
-        "ess",
-        "dc_power",
-        "forecasting",
-        "grid_sw"
-      ],
-      "title": "How Should Progressive US Midterm Candidates Frame Their Arguments About Climate Change?",
-      "summary": "Progressives are already working hard to win back the US House of Representatives in 2026 as a fundamental piece of the “Stop Trump” strategy. The politicalization of climate change means that there is much at stake for climate activists in the upcoming election, as its results will help to shape ... [continued] The post How Should Progressive US Midterm Candidates Frame Their Arguments About Climate Change? appeared first on CleanTechnica .",
-      "published_date": "2026-04-05",
-      "raw_text": "how should progressive us midterm candidates frame their arguments about climate change? progressives are already working hard to win back the us house of representatives in 2026 as a fundamental piece of the “stop trump” strategy. the politicalization of climate change means that there is much at stake for climate activists in the upcoming election, as its results will help to shape ... [continued] the post how should progressive us midterm candidates frame their arguments about climate change? appeared first on cleantechnica ."
-    },
-    {
-      "source_id": "electrek",
-      "source_name": "Electrek",
-      "source_url": "https://electrek.co/2026/04/05/vinfast-prepares-to-enter-the-worlds-largest-motorcycle-market/",
-      "source_segments": [
-        "ess",
-        "dc_power",
-        "forecasting"
-      ],
-      "title": "VinFast prepares to enter the world’s largest motorcycle market",
-      "summary": "Vietnamese EV maker VinFast is setting its sights on a major new frontier: India’s massive two-wheeler market. After already laying groundwork for its electric car business in the country, the company is now preparing to launch a lineup of electric scooters as part of a broader push into India’s fast-growing EV sector. more…",
-      "published_date": "2026-04-05",
-      "raw_text": "vinfast prepares to enter the world’s largest motorcycle market vietnamese ev maker vinfast is setting its sights on a major new frontier: india’s massive two-wheeler market. after already laying groundwork for its electric car business in the country, the company is now preparing to launch a lineup of electric scooters as part of a broader push into india’s fast-growing ev sector. more…"
-    },
-    {
-      "source_id": "electrek",
-      "source_name": "Electrek",
-      "source_url": "https://electrek.co/2026/04/05/here-are-the-best-electric-bikes-you-can-buy-at-every-price-level/",
-      "source_segments": [
-        "ess",
-        "dc_power",
-        "forecasting"
-      ],
-      "title": "Here are the best electric bikes you can buy at every price level in April 2026",
-      "summary": "I’ve spent countless hours here at Electrek doing detailed hands-on testing of hundreds of electric bikes. Through thousands of miles of riding, I’ve been fortunate to learn these e-bikes inside and out, top to bottom and front to back. That long-term experience with real-world e-bike testing has helped me find the best electric bicycles on the market for just about any budget. Below are some of the top e-bikes I’ve hand-tested for every price range, current as of April 2026. Spring is finally h",
-      "published_date": "2026-04-05",
-      "raw_text": "here are the best electric bikes you can buy at every price level in april 2026 i’ve spent countless hours here at electrek doing detailed hands-on testing of hundreds of electric bikes. through thousands of miles of riding, i’ve been fortunate to learn these e-bikes inside and out, top to bottom and front to back. that long-term experience with real-world e-bike testing has helped me find the best electric bicycles on the market for just about any budget. below are some of the top e-bikes i’ve hand-tested for every price range, current as of april 2026. spring is finally here, and that means it’s time to get back in the saddle! check out the awesome e-bikes below, any one of which could become your next electric bike. more…"
     }
   ],
   "source_logs": [
@@ -3219,10 +3206,10 @@
       "id": "canarymedia",
       "name": "Canary Media",
       "url": "https://www.canarymedia.com/rss.rss",
-      "status": "partial",
+      "status": "success",
       "error": null,
-      "items": 0,
-      "fetched_at": "2026-04-05T16:02:16.534273+00:00",
+      "items": 30,
+      "fetched_at": "2026-04-06T08:13:42.221685+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -3240,10 +3227,10 @@
       "id": "eia",
       "name": "EIA Today in Energy",
       "url": "https://www.eia.gov/rss/todayinenergy.xml",
-      "status": "partial",
+      "status": "success",
       "error": null,
-      "items": 0,
-      "fetched_at": "2026-04-05T16:02:16.596190+00:00",
+      "items": 1,
+      "fetched_at": "2026-04-06T08:13:42.166057+00:00",
       "source_type": "government",
       "reliability": 1,
       "topics": [
@@ -3260,10 +3247,10 @@
       "id": "pvmagazine",
       "name": "PV Magazine",
       "url": "https://www.pv-magazine.com/feed/",
-      "status": "partial",
+      "status": "success",
       "error": null,
-      "items": 0,
-      "fetched_at": "2026-04-05T16:02:16.836160+00:00",
+      "items": 25,
+      "fetched_at": "2026-04-06T08:13:42.726708+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -3280,10 +3267,10 @@
       "id": "energystoragenews",
       "name": "Energy Storage News",
       "url": "https://www.energy-storage.news/feed/",
-      "status": "partial",
+      "status": "success",
       "error": null,
-      "items": 0,
-      "fetched_at": "2026-04-05T16:02:16.804584+00:00",
+      "items": 50,
+      "fetched_at": "2026-04-06T08:13:42.185493+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -3300,10 +3287,10 @@
       "id": "cleantechnica",
       "name": "CleanTechnica",
       "url": "https://cleantechnica.com/feed/",
-      "status": "partial",
+      "status": "success",
       "error": null,
-      "items": 0,
-      "fetched_at": "2026-04-05T16:02:16.833562+00:00",
+      "items": 45,
+      "fetched_at": "2026-04-06T08:13:42.187000+00:00",
       "source_type": "industry",
       "reliability": 3,
       "topics": [
@@ -3321,10 +3308,10 @@
       "id": "electrek",
       "name": "Electrek",
       "url": "https://electrek.co/feed/",
-      "status": "partial",
+      "status": "success",
       "error": null,
-      "items": 0,
-      "fetched_at": "2026-04-05T16:02:16.873744+00:00",
+      "items": 50,
+      "fetched_at": "2026-04-06T08:13:42.121708+00:00",
       "source_type": "industry",
       "reliability": 3,
       "topics": [
@@ -3341,10 +3328,10 @@
       "id": "utilitydive",
       "name": "Utility Dive",
       "url": "https://www.utilitydive.com/feeds/news/",
-      "status": "partial",
+      "status": "success",
       "error": null,
-      "items": 0,
-      "fetched_at": "2026-04-05T16:02:17.034196+00:00",
+      "items": 10,
+      "fetched_at": "2026-04-06T08:13:42.931349+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -3365,7 +3352,7 @@
       "status": "partial",
       "error": "0개 기사 반환",
       "items": 0,
-      "fetched_at": "2026-04-05T16:02:17.248130+00:00",
+      "fetched_at": "2026-04-06T08:13:43.494640+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -3382,10 +3369,10 @@
       "id": "offshorewind",
       "name": "Offshore Wind Biz",
       "url": "https://www.offshorewind.biz/feed/",
-      "status": "partial",
+      "status": "success",
       "error": null,
-      "items": 0,
-      "fetched_at": "2026-04-05T16:02:17.091365+00:00",
+      "items": 10,
+      "fetched_at": "2026-04-06T08:13:43.205224+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -3405,7 +3392,7 @@
       "status": "failed",
       "error": "Exception: HTTP 404",
       "items": 0,
-      "fetched_at": "2026-04-05T16:02:17.336434+00:00",
+      "fetched_at": "2026-04-06T08:13:43.174904+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -3422,10 +3409,10 @@
       "id": "energymonitor",
       "name": "Energy Monitor",
       "url": "https://www.energymonitor.ai/feed/",
-      "status": "partial",
+      "status": "success",
       "error": null,
-      "items": 0,
-      "fetched_at": "2026-04-05T16:02:17.101213+00:00",
+      "items": 10,
+      "fetched_at": "2026-04-06T08:13:42.904495+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -3445,7 +3432,7 @@
       "status": "partial",
       "error": "0개 기사 반환",
       "items": 0,
-      "fetched_at": "2026-04-05T16:02:17.984277+00:00",
+      "fetched_at": "2026-04-06T08:13:43.469131+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -3465,7 +3452,7 @@
       "status": "failed",
       "error": "Exception: HTTP 404",
       "items": 0,
-      "fetched_at": "2026-04-05T16:02:18.519827+00:00",
+      "fetched_at": "2026-04-06T08:13:44.696648+00:00",
       "source_type": "industry",
       "reliability": 3,
       "topics": [
@@ -3485,7 +3472,7 @@
       "status": "partial",
       "error": "0개 기사 반환",
       "items": 0,
-      "fetched_at": "2026-04-05T16:02:18.514838+00:00",
+      "fetched_at": "2026-04-06T08:13:43.860935+00:00",
       "source_type": "industry",
       "reliability": 3,
       "topics": [
