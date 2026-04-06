@@ -1,19 +1,19 @@
 {
   "date": "2026-04-06",
   "dateKr": "2026년 04월 06일",
-  "generatedAt": "2026-04-06T08:13:58.648253+00:00",
-  "brief": "**Deal Flow Memo - April 6, 2026**\n\nToday's contract announcements signal a clear bifurcation in energy storage demand drivers, with Form Energy's 12GWh AI data center deal highlighting how compute infrastructure is becoming the primary growth vector for long-duration storage, while American Battery Factory's 4.5GWh LFP agreements suggest traditional grid applications remain robust. EnerVenue's $300M Series B for nickel-hydrogen manufacturing indicates investors are betting on cycle-life differentiation as the next competitive battleground beyond just cost per kWh. The €55M raised by European BESS optimizers Entrix and GridBeyond reinforces our thesis that software-layer value capture is expanding as hardware commoditizes. \n\nPV Magazine's reporting on slow hybrid PPA uptake among industrials bears watching—if corporate buyers remain hesitant on bundled renewable-plus-storage products, it could create near-term headwinds for integrated developers while potentially benefiting pure-play storage providers who can offer more flexible contracting structures.",
+  "generatedAt": "2026-04-06T17:33:24.190854+00:00",
+  "brief": "**Deal Flow Memo - April 6, 2026**\n\nThe energy storage sector is showing strong commercial traction today, with three major financing/offtake announcements signaling robust demand across different battery chemistries and applications. Form Energy's massive 12GWh iron-air battery deal with AI data centers (Energy Storage News) highlights how the AI boom is driving demand for long-duration storage solutions, while American Battery Factory's 4.5GWh LFP offtake agreements (Energy Storage News) suggest traditional lithium-ion remains competitive for shorter-duration applications. EnerVenue's $300M Series B for nickel-hydrogen manufacturing (Energy Storage News) indicates investors are betting on alternative chemistries that offer superior cycle life, potentially targeting the same multi-day storage market as Form Energy.\n\nThe European BESS optimization raises from Entrix and GridBeyond totaling €55M (Energy Storage News) suggest the software/optimization layer is attracting significant capital as storage deployments scale. Watch for more AI data center storage partnerships and potential consolidation in the long-duration storage space as different technologies compete for the same use cases.",
   "stats": {
-    "total": 70,
+    "total": 76,
     "high": 5,
-    "medium": 13,
+    "medium": 14,
     "negative": 3,
     "matched": 5,
-    "filtered_out": 161,
+    "filtered_out": 177,
     "companies_with_signals": 15,
     "auto_companies": 2,
     "by_segment": {
-      "ess": 64,
+      "ess": 70,
       "hvdc": 1,
       "marine_fc": 2,
       "grid_sw": 2,
@@ -22,8 +22,8 @@
     "by_type": {
       "Contract": 3,
       "Financing": 2,
-      "Partnership": 6,
-      "News": 56,
+      "Partnership": 7,
+      "News": 61,
       "Negative": 3
     }
   },
@@ -853,6 +853,44 @@
       }
     },
     {
+      "id": "81ea8f177e35",
+      "title": "We Need To Tax Billionaires At 2%, & Economist Gabriel Zucman Just Explained Exactly How",
+      "summary": "The most talked-about economics book of 2026 fits in your jacket pocket. Here are the five things you need to know. Gabriel Zucman is having a moment. The Paris-born Berkeley economist who coined the term “tax haven” and mapped the hidden wealth of nations is now one the most famous ... [continued] The post We Need To Tax Billionaires At 2%, & Economist Gabriel Zucman Just Explained Exactly How appeared first on CleanTechnica .",
+      "event_date": "2026-04-06",
+      "source_name": "CleanTechnica",
+      "source_url": "https://cleantechnica.com/2026/04/06/we-need-to-tax-billionaires-at-2-economist-gabriel-zucman-just-explained-exactly-how/",
+      "event_type": "Partnership",
+      "impact_type": "Commercial",
+      "matched_rule": "mou",
+      "tier": 3,
+      "signal_stage": "strategic",
+      "signal_strength": 36,
+      "signal_tier": "medium",
+      "score_breakdown": [],
+      "segment": "ess",
+      "company_id": null,
+      "company_name": "Unassigned",
+      "buyer_matches": [],
+      "project_matches": [],
+      "is_negative": false,
+      "neg_subtype": null,
+      "is_noise": false,
+      "evidence": {
+        "observed_fact": "We Need To Tax Billionaires At 2%, & Economist Gabriel Zucman Just Explained Exactly How",
+        "observed_fact_detail": "The most talked-about economics book of 2026 fits in your jacket pocket.",
+        "source_label": "CleanTechnica · 2026-04-06",
+        "matched_rule_name": "mou",
+        "matched_rule_tier": "Tier 3 — Partnership",
+        "why_it_matters": "Named strategic partnership is directional. MOU alone does not confirm commercial intent — check for binding terms.",
+        "missing_evidence": [
+          "Binding terms (exclusivity, minimum volume) not confirmed",
+          "IP ownership unclear"
+        ],
+        "confidence": "Low",
+        "confidence_rationale": "Score below threshold. Context only."
+      }
+    },
+    {
       "id": "9d4bdfaa69a8",
       "title": "US will install 500GWh of new energy storage by 2031, Wood Mackenzie predicts",
       "summary": "Wood Mackenzie has forecast that the US energy storage industry will install around half a terawatt-hour of new capacity over the next five years.",
@@ -996,7 +1034,7 @@
     {
       "id": "2753f2be0d67",
       "title": "EGO zero-turn riding mower + 6x batteries and wall charger new $4,800 low, Segway e-scooter Amazon deals, Anker exclusive, more",
-      "summary": "<div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2026/04/EGO-Z6-riding-mower-Segway-E3-Pro-Anker-F3800-eufy-E340-GDs.jpg?quality=82&#038;strip=all&#038;w=1600\" /></div><p>Our Thursday Green Deals are here, and leading the lineup is <a href=\"https://9to5toys.com/2026/04/02/ego-42-inch-z6-zero-turn-riding-mower-six-batteries-880w-charger-new-4800-low/\">EGO’s Z6 42-inch Cordless Electric Zero-Turn Riding Lawn Mower</a> with a fresh bundle of six 6.0Ah batteries and a",
+      "summary": "Our Thursday Green Deals are here, and leading the lineup is EGO’s Z6 42-inch Cordless Electric Zero-Turn Riding Lawn Mower with a fresh bundle of six 6.0Ah batteries and an 880W wall charger at a new $4,800 low . Right behind that, we spotted a selection of Segway e-scooters getting better deals at Amazon than within the extended spring sale lineup , like the E3 Pro Electric Scooter at $530 . There’s also Anker’s SOLIX F3800 Portable Power Station down at an exclusive $1,899 price , as well as ",
       "event_date": "2026-04-02",
       "source_name": "Electrek",
       "source_url": "https://electrek.co/2026/04/02/ego-zero-turn-riding-mower-4800-low-segway-electric-scooter-anker-exclusive-more/",
@@ -1025,7 +1063,7 @@
       "is_noise": false,
       "evidence": {
         "observed_fact": "EGO zero-turn riding mower + 6x batteries and wall charger new $4,800 low, Segway e-scooter Amazon deals, Anker exclusive, more",
-        "observed_fact_detail": "<div class=\"feat-image\"><img src=\"https://electrek.",
+        "observed_fact_detail": "Our Thursday Green Deals are here, and leading the lineup is EGO’s Z6 42-inch Cordless Electric Zero-Turn Riding Lawn Mower with a fresh bundle of six 6.",
         "source_label": "Electrek · 2026-04-02",
         "matched_rule_name": "no rule matched",
         "matched_rule_tier": "Tier 5 — News",
@@ -1141,6 +1179,57 @@
       }
     },
     {
+      "id": "07ac5228ff39",
+      "title": "‘Photovoltaics are, first and foremost, about energy security’",
+      "summary": "In an interview  with <b>pv magazine</b>, Carolina Novac, Secretary of State at Moldova’s Ministry of Energy explains how the country raised its solar capacity to 1 GW while advancing wind, storage, and regulatory reforms to strengthen energy security and reach 30% renewables by 2030. The Moldovan government is now focusing on scaling BESS, modernizing the power market, and enhancing cybersecurity through stronger policies and international cooperation.",
+      "event_date": "2026-04-06",
+      "source_name": "PV Magazine",
+      "source_url": "https://www.pv-magazine.com/2026/04/06/photovoltaics-are-first-and-foremost-about-energy-security/",
+      "event_type": "News",
+      "impact_type": "Informational",
+      "matched_rule": null,
+      "tier": 5,
+      "signal_stage": "strategic",
+      "signal_strength": 33,
+      "signal_tier": "low",
+      "score_breakdown": [
+        {
+          "id": "fig_mw",
+          "delta": 10,
+          "reason": "Specific capacity figure",
+          "group": "boost"
+        },
+        {
+          "id": "timeframe",
+          "delta": 8,
+          "reason": "Concrete timeframe stated",
+          "group": "boost"
+        }
+      ],
+      "segment": "ess",
+      "company_id": null,
+      "company_name": "Unassigned",
+      "buyer_matches": [],
+      "project_matches": [],
+      "is_negative": false,
+      "neg_subtype": null,
+      "is_noise": false,
+      "evidence": {
+        "observed_fact": "‘Photovoltaics are, first and foremost, about energy security’",
+        "observed_fact_detail": "In an interview  with <b>pv magazine</b>, Carolina Novac, Secretary of State at Moldova’s Ministry of Energy explains how the country raised its solar capacity to 1 GW while advancing wind, storage, and regulatory reforms to strengthen energy security and reach 30% renewables by 2030.",
+        "source_label": "PV Magazine · 2026-04-06",
+        "matched_rule_name": "no rule matched",
+        "matched_rule_tier": "Tier 5 — News",
+        "why_it_matters": "No specific investment pattern matched. Context only — not weighted without corroboration.",
+        "missing_evidence": [
+          "No investment-relevant pattern matched",
+          "Primary research required"
+        ],
+        "confidence": "Low",
+        "confidence_rationale": "Score below threshold. Context only."
+      }
+    },
+    {
       "id": "3860f5308208",
       "title": "Trump’s $1B offshore wind payout to TotalEnergies sparks legal concerns",
       "summary": "The Trump administration’s unusual deal to pay TotalEnergies to abandon its U.S. offshore wind ambitions might not be the last of its kind. Earlier this week, the Interior Department said it would reimburse the French oil giant for nearly $1 billion in lease fees the company paid in 2022 for areas off the coasts of…",
@@ -1186,51 +1275,6 @@
       }
     },
     {
-      "id": "213ef4d38071",
-      "title": "Texas opens $350M advanced nuclear grant program",
-      "summary": "<figure><div><img src=\"https://imgproxy.divecdn.com/CFaaZ_jDiFnwy5EbIdqaHjKdo6sMGC2Ijrd5HLlu8mA/g:ce/rs:fill:1600:900:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9HZXR0eUltYWdlcy0xNDk3MDA1NTk4LmpwZw==.webp\" /></div></figure><p>&quot;Texas is streamlining the nuclear regulatory environment and making investments to spur a flourishing nuclear energy ecosystem,&rdquo; said Gov. Greg Abbott.</p>",
-      "event_date": "2026-04-02",
-      "source_name": "Utility Dive",
-      "source_url": "https://www.utilitydive.com/news/texas-opens-350m-advanced-nuclear-grant-program/816442/",
-      "event_type": "News",
-      "impact_type": "Informational",
-      "matched_rule": null,
-      "tier": 5,
-      "signal_stage": "strategic",
-      "signal_strength": 30,
-      "signal_tier": "low",
-      "score_breakdown": [
-        {
-          "id": "fig_money",
-          "delta": 15,
-          "reason": "Specific financial figure",
-          "group": "boost"
-        }
-      ],
-      "segment": "grid_sw",
-      "company_id": null,
-      "company_name": "Unassigned",
-      "buyer_matches": [],
-      "project_matches": [],
-      "is_negative": false,
-      "neg_subtype": null,
-      "is_noise": false,
-      "evidence": {
-        "observed_fact": "Texas opens $350M advanced nuclear grant program",
-        "observed_fact_detail": "<figure><div><img src=\"https://imgproxy.",
-        "source_label": "Utility Dive · 2026-04-02",
-        "matched_rule_name": "no rule matched",
-        "matched_rule_tier": "Tier 5 — News",
-        "why_it_matters": "No specific investment pattern matched. Context only — not weighted without corroboration.",
-        "missing_evidence": [
-          "No investment-relevant pattern matched",
-          "Primary research required"
-        ],
-        "confidence": "Low",
-        "confidence_rationale": "Score below threshold. Context only."
-      }
-    },
-    {
       "id": "c25897e3889e",
       "title": "What If The US Redirected The Money From The Iran War To Clean Energy?",
       "summary": "If the US federal government had leaders with a vision of an achievable, healthy net-zero future, $200 billion would never be dedicated for the Iran War efforts. Yet the idiocy of the Iran War makes our minds wander and envision a robust US energy and climate package in its place. ... [continued] The post What If The US Redirected The Money From The Iran War To Clean Energy? appeared first on CleanTechnica .",
@@ -1264,6 +1308,51 @@
         "observed_fact": "What If The US Redirected The Money From The Iran War To Clean Energy?",
         "observed_fact_detail": "If the US federal government had leaders with a vision of an achievable, healthy net-zero future, $200 billion would never be dedicated for the Iran War efforts.",
         "source_label": "CleanTechnica · 2026-04-02",
+        "matched_rule_name": "no rule matched",
+        "matched_rule_tier": "Tier 5 — News",
+        "why_it_matters": "No specific investment pattern matched. Context only — not weighted without corroboration.",
+        "missing_evidence": [
+          "No investment-relevant pattern matched",
+          "Primary research required"
+        ],
+        "confidence": "Low",
+        "confidence_rationale": "Score below threshold. Context only."
+      }
+    },
+    {
+      "id": "213ef4d38071",
+      "title": "Texas opens $350M advanced nuclear grant program",
+      "summary": "\"Texas is streamlining the nuclear regulatory environment and making investments to spur a flourishing nuclear energy ecosystem,” said Gov. Greg Abbott.",
+      "event_date": "2026-04-02",
+      "source_name": "Utility Dive",
+      "source_url": "https://www.utilitydive.com/news/texas-opens-350m-advanced-nuclear-grant-program/816442/",
+      "event_type": "News",
+      "impact_type": "Informational",
+      "matched_rule": null,
+      "tier": 5,
+      "signal_stage": "strategic",
+      "signal_strength": 30,
+      "signal_tier": "low",
+      "score_breakdown": [
+        {
+          "id": "fig_money",
+          "delta": 15,
+          "reason": "Specific financial figure",
+          "group": "boost"
+        }
+      ],
+      "segment": "grid_sw",
+      "company_id": null,
+      "company_name": "Unassigned",
+      "buyer_matches": [],
+      "project_matches": [],
+      "is_negative": false,
+      "neg_subtype": null,
+      "is_noise": false,
+      "evidence": {
+        "observed_fact": "Texas opens $350M advanced nuclear grant program",
+        "observed_fact_detail": "\"Texas is streamlining the nuclear regulatory environment and making investments to spur a flourishing nuclear energy ecosystem,” said Gov.",
+        "source_label": "Utility Dive · 2026-04-02",
         "matched_rule_name": "no rule matched",
         "matched_rule_tier": "Tier 5 — News",
         "why_it_matters": "No specific investment pattern matched. Context only — not weighted without corroboration.",
@@ -1458,7 +1547,7 @@
     {
       "id": "0bbb439913bb",
       "title": "Hyundai previews two new IONIQ EVs in cryptic video",
-      "summary": "<div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2026/04/Hyundai-new-IONIQ-EVs-3.jpeg?quality=82&#038;strip=all&#038;w=1400\" /></div><p>Two new Hyundai IONIQ electric vehicles? In a cryptic teaser, <a href=\"https://electrek.co/guides/hyundai/\">Hyundai</a> offered the first look at “the new journey of IONIQ.”</p>\n\n\n\n <a class=\"more-link\" href=\"https://electrek.co/2026/04/02/hyundai-previews-two-new-ioniq-evs-cryptic-video/#more-462086\">more…</a>",
+      "summary": "Two new Hyundai IONIQ electric vehicles? In a cryptic teaser, Hyundai offered the first look at “the new journey of IONIQ.” more…",
       "event_date": "2026-04-02",
       "source_name": "Electrek",
       "source_url": "https://electrek.co/2026/04/02/hyundai-previews-two-new-ioniq-evs-cryptic-video/",
@@ -1487,7 +1576,7 @@
       "is_noise": false,
       "evidence": {
         "observed_fact": "Hyundai previews two new IONIQ EVs in cryptic video",
-        "observed_fact_detail": "<div class=\"feat-image\"><img src=\"https://electrek.",
+        "observed_fact_detail": "Two new Hyundai IONIQ electric vehicles? In a cryptic teaser, Hyundai offered the first look at “the new journey of IONIQ.",
         "source_label": "Electrek · 2026-04-02",
         "matched_rule_name": "no rule matched",
         "matched_rule_tier": "Tier 5 — News",
@@ -2716,6 +2805,51 @@
       }
     },
     {
+      "id": "75facaca7992",
+      "title": "Zambia launches 300MW solar PV tender through CFIP scheme",
+      "summary": "Zambia has opened a call for proposals for solar PV projects with a combined capacity of up to 300MW, as part of the CFIP programme.",
+      "event_date": "2026-04-02",
+      "source_name": "Energy Monitor",
+      "source_url": "https://www.energymonitor.ai/news/zambia-launches-solar-pv-tender/",
+      "event_type": "News",
+      "impact_type": "Informational",
+      "matched_rule": null,
+      "tier": 5,
+      "signal_stage": "strategic",
+      "signal_strength": 25,
+      "signal_tier": "low",
+      "score_breakdown": [
+        {
+          "id": "fig_mw",
+          "delta": 10,
+          "reason": "Specific capacity figure",
+          "group": "boost"
+        }
+      ],
+      "segment": "ess",
+      "company_id": null,
+      "company_name": "Unassigned",
+      "buyer_matches": [],
+      "project_matches": [],
+      "is_negative": false,
+      "neg_subtype": null,
+      "is_noise": false,
+      "evidence": {
+        "observed_fact": "Zambia launches 300MW solar PV tender through CFIP scheme",
+        "observed_fact_detail": "Zambia has opened a call for proposals for solar PV projects with a combined capacity of up to 300MW, as part of the CFIP programme.",
+        "source_label": "Energy Monitor · 2026-04-02",
+        "matched_rule_name": "no rule matched",
+        "matched_rule_tier": "Tier 5 — News",
+        "why_it_matters": "No specific investment pattern matched. Context only — not weighted without corroboration.",
+        "missing_evidence": [
+          "No investment-relevant pattern matched",
+          "Primary research required"
+        ],
+        "confidence": "Low",
+        "confidence_rationale": "Score below threshold. Context only."
+      }
+    },
+    {
       "id": "6007f6560555",
       "title": "Malaysia’s solar capacity surpasses 5.7 GW",
       "summary": "Reports from the International Energy Agency's Photovoltaic Power Systems Programme (IEA-PVPS) indicate Malaysia added over 1.4 GW of solar in 2025, with more than 5.7 GW now deployed across multiple government schemes.",
@@ -2794,6 +2928,51 @@
         "observed_fact": "Agratas advances 20 GWh battery plant in western India",
         "observed_fact_detail": "Agratas, the global battery business of the Tata Group, has completed the steel frame of its Sanand facility in India, with production expected to begin in 2027.",
         "source_label": "PV Magazine · 2026-04-03",
+        "matched_rule_name": "no rule matched",
+        "matched_rule_tier": "Tier 5 — News",
+        "why_it_matters": "No specific investment pattern matched. Context only — not weighted without corroboration.",
+        "missing_evidence": [
+          "No investment-relevant pattern matched",
+          "Primary research required"
+        ],
+        "confidence": "Low",
+        "confidence_rationale": "Score below threshold. Context only."
+      }
+    },
+    {
+      "id": "0bc85e5b37bf",
+      "title": "Minnesota approves Xcel’s utility-owned battery program",
+      "summary": "<figure><div><img src=\"https://imgproxy.divecdn.com/dzvTAs6NL9GkRRzaNu3FSRvVX39DBzQ9sWHuL4vuVTk/g:ce/rs:fill:1600:900:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9jY20yMTAxMDgtMDM0Ni5qcGc=.webp\" /></div></figure><p>Xcel&nbsp;will own up to 200 MW of energy storage under the second phase of its Capacity*Connect program. Solar industry groups and others called it a missed opportunity to include&nbsp;independent developers.&nbsp;</p>",
+      "event_date": "2026-04-06",
+      "source_name": "Utility Dive",
+      "source_url": "https://www.utilitydive.com/news/minnesota-approves-xcels-controversial-utility-owned-virtual-power-plant/816673/",
+      "event_type": "News",
+      "impact_type": "Informational",
+      "matched_rule": null,
+      "tier": 5,
+      "signal_stage": "strategic",
+      "signal_strength": 25,
+      "signal_tier": "low",
+      "score_breakdown": [
+        {
+          "id": "fig_mw",
+          "delta": 10,
+          "reason": "Specific capacity figure",
+          "group": "boost"
+        }
+      ],
+      "segment": "ess",
+      "company_id": null,
+      "company_name": "Unassigned",
+      "buyer_matches": [],
+      "project_matches": [],
+      "is_negative": false,
+      "neg_subtype": null,
+      "is_noise": false,
+      "evidence": {
+        "observed_fact": "Minnesota approves Xcel’s utility-owned battery program",
+        "observed_fact_detail": "<figure><div><img src=\"https://imgproxy.",
+        "source_label": "Utility Dive · 2026-04-06",
         "matched_rule_name": "no rule matched",
         "matched_rule_tier": "Tier 5 — News",
         "why_it_matters": "No specific investment pattern matched. Context only — not weighted without corroboration.",
@@ -2896,6 +3075,51 @@
       }
     },
     {
+      "id": "0fccbac160c1",
+      "title": "Geronimo Power begins operations at 117MW solar project in Ohio",
+      "summary": "Geronimo Power has started commercial operations at its 117MW Dodson Creek Solar Project located in Highland County, Ohio, US.",
+      "event_date": "2026-04-06",
+      "source_name": "Energy Monitor",
+      "source_url": "https://www.energymonitor.ai/news/geronimo-power-operations-solar-project-ohio/",
+      "event_type": "News",
+      "impact_type": "Informational",
+      "matched_rule": null,
+      "tier": 5,
+      "signal_stage": "strategic",
+      "signal_strength": 25,
+      "signal_tier": "low",
+      "score_breakdown": [
+        {
+          "id": "fig_mw",
+          "delta": 10,
+          "reason": "Specific capacity figure",
+          "group": "boost"
+        }
+      ],
+      "segment": "ess",
+      "company_id": null,
+      "company_name": "Unassigned",
+      "buyer_matches": [],
+      "project_matches": [],
+      "is_negative": false,
+      "neg_subtype": null,
+      "is_noise": false,
+      "evidence": {
+        "observed_fact": "Geronimo Power begins operations at 117MW solar project in Ohio",
+        "observed_fact_detail": "Geronimo Power has started commercial operations at its 117MW Dodson Creek Solar Project located in Highland County, Ohio, US.",
+        "source_label": "Energy Monitor · 2026-04-06",
+        "matched_rule_name": "no rule matched",
+        "matched_rule_tier": "Tier 5 — News",
+        "why_it_matters": "No specific investment pattern matched. Context only — not weighted without corroboration.",
+        "missing_evidence": [
+          "No investment-relevant pattern matched",
+          "Primary research required"
+        ],
+        "confidence": "Low",
+        "confidence_rationale": "Score below threshold. Context only."
+      }
+    },
+    {
       "id": "fb5127872f04",
       "title": "Africa’s clean energy story is being rewritten by grids, not gigawatts",
       "summary": "Africa’s energy transition is accelerating, yet the continent is unlikely to reach a 50% renewables share by 2035.",
@@ -2943,7 +3167,7 @@
     {
       "id": "d75b373331cd",
       "title": "Tesla (TSLA) Q1 2026 deliveries miss expectations at 358,000, builds 50,000 excess vehicles",
-      "summary": "<div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2025/04/Tesla-family-hero.png?w=1600\" /></div><p>Tesla released its Q1 2026 production and delivery results today, confirming 358,023 vehicle deliveries — about 7,600 units below the Wall Street consensus of 365,645 vehicles.</p>\n\n\n\n<p>More concerning than the miss itself is the gap between production and deliveries. Tesla produced 408,386 vehicles during the quarter but only delivered 358,023, adding over 50,000 ve",
+      "summary": "Tesla released its Q1 2026 production and delivery results today, confirming 358,023 vehicle deliveries — about 7,600 units below the Wall Street consensus of 365,645 vehicles. More concerning than the miss itself is the gap between production and deliveries. Tesla produced 408,386 vehicles during the quarter but only delivered 358,023, adding over 50,000 vehicles to inventory in a single quarter. more…",
       "event_date": "2026-04-02",
       "source_name": "Electrek",
       "source_url": "https://electrek.co/2026/04/02/tesla-tsla-q1-2026-delivery-results-misses-expectations/",
@@ -2972,7 +3196,7 @@
       "is_noise": false,
       "evidence": {
         "observed_fact": "Tesla (TSLA) Q1 2026 deliveries miss expectations at 358,000, builds 50,000 excess vehicles",
-        "observed_fact_detail": "<div class=\"feat-image\"><img src=\"https://electrek.",
+        "observed_fact_detail": "Tesla released its Q1 2026 production and delivery results today, confirming 358,023 vehicle deliveries — about 7,600 units below the Wall Street consensus of 365,645 vehicles.",
         "source_label": "Electrek · 2026-04-02",
         "matched_rule_name": "no rule matched",
         "matched_rule_tier": "Tier 5 — News",
@@ -3064,6 +3288,51 @@
         "observed_fact": "Were Elon’s Politics A Significant Part of Cruddy Q1 Sales?",
         "observed_fact_detail": "Let’s start with the hard numbers on this one.",
         "source_label": "CleanTechnica · 2026-04-03",
+        "matched_rule_name": "no rule matched",
+        "matched_rule_tier": "Tier 5 — News",
+        "why_it_matters": "No specific investment pattern matched. Context only — not weighted without corroboration.",
+        "missing_evidence": [
+          "No investment-relevant pattern matched",
+          "Primary research required"
+        ],
+        "confidence": "Low",
+        "confidence_rationale": "Score below threshold. Context only."
+      }
+    },
+    {
+      "id": "7d930d9cb33a",
+      "title": "US solar module prices face upward pressure",
+      "summary": "Median solar module pricing in the United States reached $0.28 per watt as the market adjusted to intensified trade enforcement and new Foreign Entity of Concern compliance requirements, according to the Q1 2026 Quarterly Pricing &#38; Domestic Content Report from Anza.",
+      "event_date": "2026-04-06",
+      "source_name": "PV Magazine",
+      "source_url": "https://www.pv-magazine.com/2026/04/06/u-s-solar-module-prices-face-upward-pressure/",
+      "event_type": "News",
+      "impact_type": "Informational",
+      "matched_rule": null,
+      "tier": 5,
+      "signal_stage": "strategic",
+      "signal_strength": 23,
+      "signal_tier": "low",
+      "score_breakdown": [
+        {
+          "id": "timeframe",
+          "delta": 8,
+          "reason": "Concrete timeframe stated",
+          "group": "boost"
+        }
+      ],
+      "segment": "ess",
+      "company_id": null,
+      "company_name": "Unassigned",
+      "buyer_matches": [],
+      "project_matches": [],
+      "is_negative": false,
+      "neg_subtype": null,
+      "is_noise": false,
+      "evidence": {
+        "observed_fact": "US solar module prices face upward pressure",
+        "observed_fact_detail": "Median solar module pricing in the United States reached $0.",
+        "source_label": "PV Magazine · 2026-04-06",
         "matched_rule_name": "no rule matched",
         "matched_rule_tier": "Tier 5 — News",
         "why_it_matters": "No specific investment pattern matched. Context only — not weighted without corroboration.",
@@ -3198,6 +3467,123 @@
     }
   ],
   "filteredOut": [
+    {
+      "id": "4f72b366b01a",
+      "title": "Greenhouse Gas Protocol changes can bring trust back to climate accounting",
+      "summary": "<figure><div><img src=\"https://imgproxy.divecdn.com/edk_mlEpB2ynZijtEX3Uw_m3ck8BZ8abD77Z8P2xQ80/g:nowe:0:320/c:3200:1807/rs:fill:1600:900:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9HZXR0eUltYWdlcy0yMjE2OTUxMzE5LmpwZw==.webp\" /></div></figure><p>Common claims of 100% reliance on wind and solar are clearly at odds with the physical reality of companies&rsquo; electricity supply, writes&nbsp;Wilson Ricks at the Clean Air Task Force.</p>",
+      "event_date": "2026-04-06",
+      "source_name": "Utility Dive",
+      "source_url": "https://www.utilitydive.com/news/greenhouse-gas-protocol-changes-accounting-methodology/814023/",
+      "event_type": "News",
+      "impact_type": "Informational",
+      "matched_rule": null,
+      "tier": 5,
+      "signal_stage": "strategic",
+      "signal_strength": 15,
+      "signal_tier": "noise",
+      "score_breakdown": [],
+      "segment": "grid_sw",
+      "company_id": null,
+      "company_name": "Unassigned",
+      "buyer_matches": [],
+      "project_matches": [],
+      "is_negative": false,
+      "neg_subtype": null,
+      "is_noise": true,
+      "evidence": {
+        "observed_fact": "Greenhouse Gas Protocol changes can bring trust back to climate accounting",
+        "observed_fact_detail": "<figure><div><img src=\"https://imgproxy.",
+        "source_label": "Utility Dive · 2026-04-06",
+        "matched_rule_name": "no rule matched",
+        "matched_rule_tier": "Tier 5 — News",
+        "why_it_matters": "No specific investment pattern matched. Context only — not weighted without corroboration.",
+        "missing_evidence": [
+          "No investment-relevant pattern matched",
+          "Primary research required"
+        ],
+        "confidence": "Low",
+        "confidence_rationale": "Score below threshold. Context only."
+      },
+      "drop_reason": "score below threshold"
+    },
+    {
+      "id": "f4a8e8bf9076",
+      "title": "Nevada PUC approves NV Energy plan to join day-ahead market",
+      "summary": "<p>The decision comes as markets are expanding in the West, with utilities opting between ones run by the California Independent System Operator and the Southwest Power Pool.</p>",
+      "event_date": "2026-04-06",
+      "source_name": "Utility Dive",
+      "source_url": "https://www.utilitydive.com/news/nevada-puc-nv-energy-caiso-edam-day-ahead-market/816690/",
+      "event_type": "News",
+      "impact_type": "Informational",
+      "matched_rule": null,
+      "tier": 5,
+      "signal_stage": "strategic",
+      "signal_strength": 15,
+      "signal_tier": "noise",
+      "score_breakdown": [],
+      "segment": "grid_sw",
+      "company_id": null,
+      "company_name": "Unassigned",
+      "buyer_matches": [],
+      "project_matches": [],
+      "is_negative": false,
+      "neg_subtype": null,
+      "is_noise": true,
+      "evidence": {
+        "observed_fact": "Nevada PUC approves NV Energy plan to join day-ahead market",
+        "observed_fact_detail": "<p>The decision comes as markets are expanding in the West, with utilities opting between ones run by the California Independent System Operator and the Southwest Power Pool.",
+        "source_label": "Utility Dive · 2026-04-06",
+        "matched_rule_name": "no rule matched",
+        "matched_rule_tier": "Tier 5 — News",
+        "why_it_matters": "No specific investment pattern matched. Context only — not weighted without corroboration.",
+        "missing_evidence": [
+          "No investment-relevant pattern matched",
+          "Primary research required"
+        ],
+        "confidence": "Low",
+        "confidence_rationale": "Score below threshold. Context only."
+      },
+      "drop_reason": "score below threshold"
+    },
+    {
+      "id": "c9c9695a90f9",
+      "title": "Low customer trust is quietly undermining utility digital payment programs",
+      "summary": "<p>Utilities that fail to address consumers' biggest areas of distrust are seeing measurable drops in online payment adoption &mdash; and the operational costs are adding up.</p>",
+      "event_date": "2026-04-06",
+      "source_name": "Utility Dive",
+      "source_url": "https://www.utilitydive.com/spons/low-customer-trust-is-quietly-undermining-utility-digital-payment-programs/815931/",
+      "event_type": "News",
+      "impact_type": "Informational",
+      "matched_rule": null,
+      "tier": 5,
+      "signal_stage": "strategic",
+      "signal_strength": 15,
+      "signal_tier": "noise",
+      "score_breakdown": [],
+      "segment": "ess",
+      "company_id": null,
+      "company_name": "Unassigned",
+      "buyer_matches": [],
+      "project_matches": [],
+      "is_negative": false,
+      "neg_subtype": null,
+      "is_noise": true,
+      "evidence": {
+        "observed_fact": "Low customer trust is quietly undermining utility digital payment programs",
+        "observed_fact_detail": "<p>Utilities that fail to address consumers' biggest areas of distrust are seeing measurable drops in online payment adoption &mdash; and the operational costs are adding up.",
+        "source_label": "Utility Dive · 2026-04-06",
+        "matched_rule_name": "no rule matched",
+        "matched_rule_tier": "Tier 5 — News",
+        "why_it_matters": "No specific investment pattern matched. Context only — not weighted without corroboration.",
+        "missing_evidence": [
+          "No investment-relevant pattern matched",
+          "Primary research required"
+        ],
+        "confidence": "Low",
+        "confidence_rationale": "Score below threshold. Context only."
+      },
+      "drop_reason": "score below threshold"
+    },
     {
       "id": "e4841c87001a",
       "title": "Trump adjusts metal tariffs, sets 15% rate for some electrical grid equipment",
@@ -3355,27 +3741,20 @@
       "drop_reason": "score below threshold"
     },
     {
-      "id": "8a2c8abbb278",
-      "title": "National Grid, GridCARE partnership could cut ‘time to power’ for large loads in New York",
-      "summary": "<figure><div><img src=\"https://imgproxy.divecdn.com/PPCZaUcvUQikIr1yorDCYRmEdbZctbIjt5kp4FqgHsE/g:ce/rs:fill:1600:900:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9HZXR0eUltYWdlcy0yMjEyMzA0NTk1LmpwZw==.webp\" /></div></figure><p>The initiative aims to boost grid utilization and keep bills in check in a region that has drawn high-profile data center and advanced manufacturing projects.</p>",
-      "event_date": "2026-04-01",
-      "source_name": "Utility Dive",
-      "source_url": "https://www.utilitydive.com/news/national-grid-gridcare-partnership-could-cut-time-to-power-for-large-loa/816344/",
-      "event_type": "Partnership",
-      "impact_type": "Commercial",
-      "matched_rule": "partnership",
-      "tier": 3,
+      "id": "f499110f21b6",
+      "title": "Solar, mining groups partner to improve mineral traceability",
+      "summary": "The Solar Stewardship Initiative (SSI) and the Initiative for Responsible Mining Assurance (IRMA) have signed an agreement to strengthen traceability and sustainability standards across solar supply chains.",
+      "event_date": "2026-04-06",
+      "source_name": "PV Magazine",
+      "source_url": "https://www.pv-magazine.com/2026/04/06/solar-mining-groups-partner-to-improve-mineral-traceability/",
+      "event_type": "News",
+      "impact_type": "Informational",
+      "matched_rule": null,
+      "tier": 5,
       "signal_stage": "strategic",
-      "signal_strength": 16,
+      "signal_strength": 15,
       "signal_tier": "noise",
-      "score_breakdown": [
-        {
-          "id": "n_intent",
-          "delta": -20,
-          "reason": "Intent stated, no confirmed action",
-          "group": "noise"
-        }
-      ],
+      "score_breakdown": [],
       "segment": "marine_fc",
       "company_id": null,
       "company_name": "Unassigned",
@@ -3385,48 +3764,9 @@
       "neg_subtype": null,
       "is_noise": true,
       "evidence": {
-        "observed_fact": "National Grid, GridCARE partnership could cut ‘time to power’ for large loads in New York",
-        "observed_fact_detail": "<figure><div><img src=\"https://imgproxy.",
-        "source_label": "Utility Dive · 2026-04-01",
-        "matched_rule_name": "partnership",
-        "matched_rule_tier": "Tier 3 — Partnership",
-        "why_it_matters": "Named strategic partnership is directional. MOU alone does not confirm commercial intent — check for binding terms.",
-        "missing_evidence": [
-          "Binding terms (exclusivity, minimum volume) not confirmed",
-          "IP ownership unclear"
-        ],
-        "confidence": "Low",
-        "confidence_rationale": "Score below threshold. Context only."
-      },
-      "drop_reason": "Intent stated, no confirmed action"
-    },
-    {
-      "id": "8d56c676e420",
-      "title": "Rebuttal: Coal plants are reliable and cost-competitive",
-      "summary": "<figure><div><img src=\"https://imgproxy.divecdn.com/u-dm7JU1eOb2lwmZL-WiD6grZP4F-bcrlNbfbiYyB5A/g:ce/rs:fill:1600:900:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9HZXR0eUltYWdlcy0yMjYxMjE2MjUzLmpwZw==.webp\" /></div></figure><p>Michelle Bloodworth, president and CEO of America's Power, which represents the U.S. coal fleet and its supply chain, pushes back on assertions that coal power should be replaced by renewables.</p>",
-      "event_date": "2026-04-01",
-      "source_name": "Utility Dive",
-      "source_url": "https://www.utilitydive.com/news/a-few-very-inconvenient-facts-about-coal-power-plants/812924/",
-      "event_type": "News",
-      "impact_type": "Informational",
-      "matched_rule": null,
-      "tier": 5,
-      "signal_stage": "strategic",
-      "signal_strength": 15,
-      "signal_tier": "noise",
-      "score_breakdown": [],
-      "segment": "grid_sw",
-      "company_id": null,
-      "company_name": "Unassigned",
-      "buyer_matches": [],
-      "project_matches": [],
-      "is_negative": false,
-      "neg_subtype": null,
-      "is_noise": true,
-      "evidence": {
-        "observed_fact": "Rebuttal: Coal plants are reliable and cost-competitive",
-        "observed_fact_detail": "<figure><div><img src=\"https://imgproxy.",
-        "source_label": "Utility Dive · 2026-04-01",
+        "observed_fact": "Solar, mining groups partner to improve mineral traceability",
+        "observed_fact_detail": "The Solar Stewardship Initiative (SSI) and the Initiative for Responsible Mining Assurance (IRMA) have signed an agreement to strengthen traceability and sustainability standards across solar supply chains.",
+        "source_label": "PV Magazine · 2026-04-06",
         "matched_rule_name": "no rule matched",
         "matched_rule_tier": "Tier 5 — News",
         "why_it_matters": "No specific investment pattern matched. Context only — not weighted without corroboration.",
@@ -3440,12 +3780,12 @@
       "drop_reason": "score below threshold"
     },
     {
-      "id": "a179f44e2d76",
-      "title": "Solar installations fell 22% in 2025: FERC",
-      "summary": "<figure><div><img src=\"https://imgproxy.divecdn.com/yLh4YelIUdmDK-YS3a04wQS-1qHdQ_mynKYp7fiZm2U/g:ce/rs:fill:1600:900:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9DYWxpZm9ybmlhX3NvbGFyX1JpY2htb25kLmpwZw==.webp\" /></div></figure><p>&ldquo;As developers shifted their focus towards safe harbor strategies, there was less urgency to bring late-stage projects online by year end,&rdquo; the Solar Energy Industries Association said in a March report.</p>",
-      "event_date": "2026-04-01",
-      "source_name": "Utility Dive",
-      "source_url": "https://www.utilitydive.com/news/solar-installations-fell-2024-2025-ferc-wind-gas/816319/",
+      "id": "83e32183664e",
+      "title": "Conductive smart hydrogels as battery electrolytes: Promising for lithium, sodium, and zinc-ion chemistries",
+      "summary": "Hydrogels offer promise in batteries as an electrolyte, including lithium and sodium chemistries, due to being inherently more safe.",
+      "event_date": "2026-04-06",
+      "source_name": "PV Magazine",
+      "source_url": "https://www.pv-magazine.com/2026/04/06/conductive-smart-hydrogels-as-battery-electrolytes-promising-for-lithium-sodium-and-zinc-ion-chemistries/",
       "event_type": "News",
       "impact_type": "Informational",
       "matched_rule": null,
@@ -3463,9 +3803,48 @@
       "neg_subtype": null,
       "is_noise": true,
       "evidence": {
-        "observed_fact": "Solar installations fell 22% in 2025: FERC",
-        "observed_fact_detail": "<figure><div><img src=\"https://imgproxy.",
-        "source_label": "Utility Dive · 2026-04-01",
+        "observed_fact": "Conductive smart hydrogels as battery electrolytes: Promising for lithium, sodium, and zinc-ion chemistries",
+        "observed_fact_detail": "Hydrogels offer promise in batteries as an electrolyte, including lithium and sodium chemistries, due to being inherently more safe.",
+        "source_label": "PV Magazine · 2026-04-06",
+        "matched_rule_name": "no rule matched",
+        "matched_rule_tier": "Tier 5 — News",
+        "why_it_matters": "No specific investment pattern matched. Context only — not weighted without corroboration.",
+        "missing_evidence": [
+          "No investment-relevant pattern matched",
+          "Primary research required"
+        ],
+        "confidence": "Low",
+        "confidence_rationale": "Score below threshold. Context only."
+      },
+      "drop_reason": "score below threshold"
+    },
+    {
+      "id": "21b01014cd6d",
+      "title": "Electrification alone may not shield firms from gas-linked prices",
+      "summary": "With electricity markets still tied to natural gas in many regions, battery storage is emerging as a tool to manage price volatility and reduce exposure to grid-driven risks.",
+      "event_date": "2026-04-06",
+      "source_name": "PV Magazine",
+      "source_url": "https://www.pv-magazine.com/2026/04/06/electrification-alone-may-not-shield-firms-from-gas-linked-prices/",
+      "event_type": "News",
+      "impact_type": "Informational",
+      "matched_rule": null,
+      "tier": 5,
+      "signal_stage": "strategic",
+      "signal_strength": 15,
+      "signal_tier": "noise",
+      "score_breakdown": [],
+      "segment": "ess",
+      "company_id": null,
+      "company_name": "Unassigned",
+      "buyer_matches": [],
+      "project_matches": [],
+      "is_negative": false,
+      "neg_subtype": null,
+      "is_noise": true,
+      "evidence": {
+        "observed_fact": "Electrification alone may not shield firms from gas-linked prices",
+        "observed_fact_detail": "With electricity markets still tied to natural gas in many regions, battery storage is emerging as a tool to manage price volatility and reduce exposure to grid-driven risks.",
+        "source_label": "PV Magazine · 2026-04-06",
         "matched_rule_name": "no rule matched",
         "matched_rule_tier": "Tier 5 — News",
         "why_it_matters": "No specific investment pattern matched. Context only — not weighted without corroboration.",
@@ -3868,123 +4247,6 @@
       "evidence": {
         "observed_fact": "Rooftop solar now accounts for one-fifth of Puerto Rico’s generation capacity",
         "observed_fact_detail": "Distributed solar additions have vastly outpaced all other forms of generation as Puerto Rico’s overall power generation capacity continues to grow.",
-        "source_label": "PV Magazine · 2026-04-03",
-        "matched_rule_name": "no rule matched",
-        "matched_rule_tier": "Tier 5 — News",
-        "why_it_matters": "No specific investment pattern matched. Context only — not weighted without corroboration.",
-        "missing_evidence": [
-          "No investment-relevant pattern matched",
-          "Primary research required"
-        ],
-        "confidence": "Low",
-        "confidence_rationale": "Score below threshold. Context only."
-      },
-      "drop_reason": "score below threshold"
-    },
-    {
-      "id": "54ae07a684d2",
-      "title": "Terabase Energy advances automated PV construction with robotics, AI tools",
-      "summary": "California-based Terabase Energy is scaling up its automated solar construction platform and expanding its engineering software ecosystem to improve project delivery and performance modeling.",
-      "event_date": "2026-04-03",
-      "source_name": "PV Magazine",
-      "source_url": "https://www.pv-magazine.com/2026/04/03/terabase-energy-advances-automated-pv-construction-with-robotics-ai-tools/",
-      "event_type": "News",
-      "impact_type": "Informational",
-      "matched_rule": null,
-      "tier": 5,
-      "signal_stage": "strategic",
-      "signal_strength": 15,
-      "signal_tier": "noise",
-      "score_breakdown": [],
-      "segment": "ess",
-      "company_id": null,
-      "company_name": "Unassigned",
-      "buyer_matches": [],
-      "project_matches": [],
-      "is_negative": false,
-      "neg_subtype": null,
-      "is_noise": true,
-      "evidence": {
-        "observed_fact": "Terabase Energy advances automated PV construction with robotics, AI tools",
-        "observed_fact_detail": "California-based Terabase Energy is scaling up its automated solar construction platform and expanding its engineering software ecosystem to improve project delivery and performance modeling.",
-        "source_label": "PV Magazine · 2026-04-03",
-        "matched_rule_name": "no rule matched",
-        "matched_rule_tier": "Tier 5 — News",
-        "why_it_matters": "No specific investment pattern matched. Context only — not weighted without corroboration.",
-        "missing_evidence": [
-          "No investment-relevant pattern matched",
-          "Primary research required"
-        ],
-        "confidence": "Low",
-        "confidence_rationale": "Score below threshold. Context only."
-      },
-      "drop_reason": "score below threshold"
-    },
-    {
-      "id": "ac9321a983f1",
-      "title": "‘Motherhood further shaped my leadership perspective’",
-      "summary": "This week Women in Solar+ Europe gives voice to Margarita Licht, Product Manager BESS &#38; Charging at Germany's Goldbeck Solar. She says diverse perspectives and cognitive styles are essential in the solar and energy storage sector, enabling smarter solutions, effective problem-solving, and long-term planning. She also emphasizes that creating inclusive environments, fostering allyship, and choosing workplaces that value authentic strengths empower growth and drive meaningful impact.",
-      "event_date": "2026-04-03",
-      "source_name": "PV Magazine",
-      "source_url": "https://www.pv-magazine.com/2026/04/03/motherhood-further-shaped-my-leadership-perspective/",
-      "event_type": "News",
-      "impact_type": "Informational",
-      "matched_rule": null,
-      "tier": 5,
-      "signal_stage": "strategic",
-      "signal_strength": 15,
-      "signal_tier": "noise",
-      "score_breakdown": [],
-      "segment": "ess",
-      "company_id": null,
-      "company_name": "Unassigned",
-      "buyer_matches": [],
-      "project_matches": [],
-      "is_negative": false,
-      "neg_subtype": null,
-      "is_noise": true,
-      "evidence": {
-        "observed_fact": "‘Motherhood further shaped my leadership perspective’",
-        "observed_fact_detail": "This week Women in Solar+ Europe gives voice to Margarita Licht, Product Manager BESS &#38; Charging at Germany's Goldbeck Solar.",
-        "source_label": "PV Magazine · 2026-04-03",
-        "matched_rule_name": "no rule matched",
-        "matched_rule_tier": "Tier 5 — News",
-        "why_it_matters": "No specific investment pattern matched. Context only — not weighted without corroboration.",
-        "missing_evidence": [
-          "No investment-relevant pattern matched",
-          "Primary research required"
-        ],
-        "confidence": "Low",
-        "confidence_rationale": "Score below threshold. Context only."
-      },
-      "drop_reason": "score below threshold"
-    },
-    {
-      "id": "cafb8d4c2041",
-      "title": "Bauer Solar launches 480 W back-contact solar module",
-      "summary": "The German manufacturer said its new back-contact solar panel has a power conversion efficiency of up to 23.52%.",
-      "event_date": "2026-04-03",
-      "source_name": "PV Magazine",
-      "source_url": "https://www.pv-magazine.com/2026/04/03/bauer-solar-launches-490-w-back-contact-solar-module/",
-      "event_type": "News",
-      "impact_type": "Informational",
-      "matched_rule": null,
-      "tier": 5,
-      "signal_stage": "strategic",
-      "signal_strength": 15,
-      "signal_tier": "noise",
-      "score_breakdown": [],
-      "segment": "ess",
-      "company_id": null,
-      "company_name": "Unassigned",
-      "buyer_matches": [],
-      "project_matches": [],
-      "is_negative": false,
-      "neg_subtype": null,
-      "is_noise": true,
-      "evidence": {
-        "observed_fact": "Bauer Solar launches 480 W back-contact solar module",
-        "observed_fact_detail": "The German manufacturer said its new back-contact solar panel has a power conversion efficiency of up to 23.",
         "source_label": "PV Magazine · 2026-04-03",
         "matched_rule_name": "no rule matched",
         "matched_rule_tier": "Tier 5 — News",
@@ -6418,7 +6680,7 @@
         "source_count": 0,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-06T08:13:46.223286+00:00"
+        "generated_at": "2026-04-06T17:33:12.407066+00:00"
       },
       "narrative": null,
       "generated_date": "2026-04-06"
@@ -6577,7 +6839,7 @@
         "source_count": 0,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-06T08:13:46.223321+00:00"
+        "generated_at": "2026-04-06T17:33:12.407095+00:00"
       },
       "narrative": null,
       "generated_date": "2026-04-06"
@@ -6747,7 +7009,7 @@
         "source_count": 0,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-06T08:13:46.223340+00:00"
+        "generated_at": "2026-04-06T17:33:12.407109+00:00"
       },
       "narrative": null,
       "generated_date": "2026-04-06"
@@ -6917,7 +7179,7 @@
         "source_count": 0,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-06T08:13:46.223354+00:00"
+        "generated_at": "2026-04-06T17:33:12.407121+00:00"
       },
       "narrative": null,
       "generated_date": "2026-04-06"
@@ -7069,7 +7331,7 @@
         "source_count": 0,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-06T08:13:46.223364+00:00"
+        "generated_at": "2026-04-06T17:33:12.407133+00:00"
       },
       "narrative": null,
       "generated_date": "2026-04-06"
@@ -7239,7 +7501,7 @@
         "source_count": 0,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-06T08:13:46.223374+00:00"
+        "generated_at": "2026-04-06T17:33:12.407144+00:00"
       },
       "narrative": null,
       "generated_date": "2026-04-06"
@@ -7396,9 +7658,9 @@
         "source_count": 2,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-06T08:13:46.223390+00:00"
+        "generated_at": "2026-04-06T17:33:12.407157+00:00"
       },
-      "narrative": "Form Energy has secured a significant 12GWh iron-air battery supply agreement for US AI data centers, demonstrating market traction in the multi-day storage segment, though the buyer remains unnamed and demand-side validation is limited. The company faces critical commercialization gaps including absence of third-party certification from recognized bodies (DNV GL, TÜV, KPX, UL) and no confirmed operational deployments to verify Technology Readiness Level 9 in commercial settings. Despite the promising contract size, regulatory procurement readiness and proven commercial performance remain unverified.\n\n**Next verification priority:** Confirm operational status of any existing Form Energy deployments and timeline for third-party certification completion.",
+      "narrative": "Form Energy secured a significant 12GWh supply agreement for iron-air batteries targeting AI data centers, demonstrating strong commercial traction in the emerging multi-day storage market. However, critical gaps remain around third-party certification status, actual operational deployments, and identified strategic buyers that would validate both technical readiness and market demand. The deal timing (March 2027) suggests near-term revenue potential, but we need to verify whether Form has achieved independent certification from DNV GL, TÜV, or similar bodies required for regulated utility procurement.\n\n**Next: Confirm third-party certification status with Form Energy directly.**",
       "generated_date": "2026-04-06"
     },
     "c_autogrid": {
@@ -7566,7 +7828,7 @@
         "source_count": 0,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-06T08:13:51.534180+00:00"
+        "generated_at": "2026-04-06T17:33:17.264674+00:00"
       },
       "narrative": null,
       "generated_date": "2026-04-06"
@@ -7700,7 +7962,7 @@
         "source_count": 0,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-06T08:13:51.534215+00:00"
+        "generated_at": "2026-04-06T17:33:17.264713+00:00"
       },
       "narrative": null,
       "generated_date": "2026-04-06"
@@ -7860,7 +8122,7 @@
         "source_count": 0,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-06T08:13:51.534233+00:00"
+        "generated_at": "2026-04-06T17:33:17.264730+00:00"
       },
       "narrative": null,
       "generated_date": "2026-04-06"
@@ -7993,7 +8255,7 @@
         "source_count": 0,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-06T08:13:51.534252+00:00"
+        "generated_at": "2026-04-06T17:33:17.264803+00:00"
       },
       "narrative": null,
       "generated_date": "2026-04-06"
@@ -8153,7 +8415,7 @@
         "source_count": 0,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-06T08:13:51.534267+00:00"
+        "generated_at": "2026-04-06T17:33:17.264821+00:00"
       },
       "narrative": null,
       "generated_date": "2026-04-06"
@@ -8313,7 +8575,7 @@
         "source_count": 0,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-06T08:13:51.534281+00:00"
+        "generated_at": "2026-04-06T17:33:17.264834+00:00"
       },
       "narrative": null,
       "generated_date": "2026-04-06"
@@ -8488,7 +8750,7 @@
         "source_count": 1,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-06T08:13:51.534300+00:00"
+        "generated_at": "2026-04-06T17:33:17.264852+00:00"
       },
       "narrative": null,
       "generated_date": "2026-04-06"
@@ -8645,7 +8907,7 @@
         "source_count": 1,
         "confidence": "Low",
         "caveat": "This memo is generated solely from public RSS signals. No primary research, LP-level intelligence, or proprietary data has been used. All claims require source verification before external use.",
-        "generated_at": "2026-04-06T08:13:51.534313+00:00"
+        "generated_at": "2026-04-06T17:33:17.264866+00:00"
       },
       "narrative": null,
       "generated_date": "2026-04-06"
@@ -11524,10 +11786,10 @@
       "short": "ESS / LDES",
       "icon": "⚡",
       "color": "#1A56DB",
-      "signal_count": 64,
+      "signal_count": 70,
       "high_count": 5,
       "neg_count": 2,
-      "share_of_total": 0.914,
+      "share_of_total": 0.921,
       "capital_signal": "Building",
       "top_events": [
         {
@@ -11778,7 +12040,7 @@
       "signal_count": 2,
       "high_count": 0,
       "neg_count": 0,
-      "share_of_total": 0.029,
+      "share_of_total": 0.026,
       "capital_signal": "Quiet",
       "top_events": [
         {
@@ -11910,7 +12172,7 @@
       "signal_count": 2,
       "high_count": 0,
       "neg_count": 0,
-      "share_of_total": 0.029,
+      "share_of_total": 0.026,
       "capital_signal": "Quiet",
       "top_events": [
         {
@@ -12059,7 +12321,7 @@
       "signal_count": 1,
       "high_count": 0,
       "neg_count": 1,
-      "share_of_total": 0.014,
+      "share_of_total": 0.013,
       "capital_signal": "Watching",
       "top_events": [
         {
@@ -12206,7 +12468,7 @@
       "signal_count": 1,
       "high_count": 0,
       "neg_count": 0,
-      "share_of_total": 0.014,
+      "share_of_total": 0.013,
       "capital_signal": "Quiet",
       "top_events": [
         {
@@ -13307,7 +13569,7 @@
       "companies_with_gaps": 15,
       "total_critical_gaps": 14,
       "watchlist_count": 5,
-      "profile_built_at": "2026-04-06T08:14:01.778292+00:00"
+      "profile_built_at": "2026-04-06T17:33:28.159706+00:00"
     }
   },
   "alert_candidates": [
@@ -13742,6 +14004,24 @@
       "entity_name": "ess",
       "stage": "",
       "pattern": ""
+    },
+    {
+      "signal_id": "81ea8f177e35",
+      "alert_type": "high_signal",
+      "event_type": "Partnership",
+      "headline": "We Need To Tax Billionaires At 2%, & Economist Gabriel Zucman Just Explained Exactly How",
+      "why_it_matters": "Named strategic partnership is directional. MOU alone does not confirm commercial intent — check for binding terms.",
+      "confidence": "Low",
+      "score": 36,
+      "date": "2026-04-06",
+      "source": "CleanTechnica",
+      "source_url": "https://cleantechnica.com/2026/04/06/we-need-to-tax-billionaires-at-2-economist-gabriel-zucman-just-explained-exactly-how/",
+      "segment": "ess",
+      "entity_type": "segment",
+      "entity_id": "ess",
+      "entity_name": "ess",
+      "stage": "",
+      "pattern": ""
     }
   ],
   "source_log": [
@@ -13752,7 +14032,7 @@
       "status": "success",
       "error": null,
       "items": 10,
-      "fetched_at": "2026-04-06T08:13:44.870454+00:00",
+      "fetched_at": "2026-04-06T17:33:08.123065+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -13775,7 +14055,7 @@
       "status": "success",
       "error": null,
       "items": 20,
-      "fetched_at": "2026-04-06T08:13:44.971002+00:00",
+      "fetched_at": "2026-04-06T17:33:08.292065+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -13798,7 +14078,7 @@
       "status": "success",
       "error": null,
       "items": 20,
-      "fetched_at": "2026-04-06T08:13:45.200037+00:00",
+      "fetched_at": "2026-04-06T17:33:09.085170+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -13820,7 +14100,7 @@
       "status": "success",
       "error": null,
       "items": 10,
-      "fetched_at": "2026-04-06T08:13:45.309008+00:00",
+      "fetched_at": "2026-04-06T17:33:09.286144+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -13842,7 +14122,7 @@
       "status": "success",
       "error": null,
       "items": 20,
-      "fetched_at": "2026-04-06T08:13:45.693989+00:00",
+      "fetched_at": "2026-04-06T17:33:11.531990+00:00",
       "source_type": "industry",
       "reliability": 3,
       "topics": [
@@ -13864,7 +14144,7 @@
       "status": "partial",
       "error": "Feed returned 0 usable items",
       "items": 0,
-      "fetched_at": "2026-04-06T08:13:45.849246+00:00",
+      "fetched_at": "2026-04-06T17:33:11.765000+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -13886,10 +14166,10 @@
       "id": "canarymedia",
       "name": "Canary Media",
       "url": "https://www.canarymedia.com/rss.rss",
-      "status": "success",
+      "status": "partial",
       "error": null,
-      "items": 30,
-      "fetched_at": "2026-04-06T08:13:42.221685+00:00",
+      "items": 0,
+      "fetched_at": "2026-04-06T17:33:02.165638+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -13907,10 +14187,10 @@
       "id": "eia",
       "name": "EIA Today in Energy",
       "url": "https://www.eia.gov/rss/todayinenergy.xml",
-      "status": "success",
+      "status": "partial",
       "error": null,
-      "items": 1,
-      "fetched_at": "2026-04-06T08:13:42.166057+00:00",
+      "items": 0,
+      "fetched_at": "2026-04-06T17:33:02.074582+00:00",
       "source_type": "government",
       "reliability": 1,
       "topics": [
@@ -13929,8 +14209,8 @@
       "url": "https://cleantechnica.com/feed/",
       "status": "success",
       "error": null,
-      "items": 45,
-      "fetched_at": "2026-04-06T08:13:42.187000+00:00",
+      "items": 5,
+      "fetched_at": "2026-04-06T17:33:02.205148+00:00",
       "source_type": "industry",
       "reliability": 3,
       "topics": [
@@ -13951,7 +14231,7 @@
       "status": "failed",
       "error": "Exception: HTTP 404",
       "items": 0,
-      "fetched_at": "2026-04-06T08:13:43.174904+00:00",
+      "fetched_at": "2026-04-06T17:33:03.227769+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -13970,8 +14250,8 @@
       "url": "https://www.energymonitor.ai/feed/",
       "status": "success",
       "error": null,
-      "items": 10,
-      "fetched_at": "2026-04-06T08:13:42.904495+00:00",
+      "items": 2,
+      "fetched_at": "2026-04-06T17:33:02.775084+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -13991,7 +14271,7 @@
       "status": "partial",
       "error": "0개 기사 반환",
       "items": 0,
-      "fetched_at": "2026-04-06T08:13:43.469131+00:00",
+      "fetched_at": "2026-04-06T17:33:03.181347+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -14011,7 +14291,7 @@
       "status": "failed",
       "error": "Exception: HTTP 404",
       "items": 0,
-      "fetched_at": "2026-04-06T08:13:44.696648+00:00",
+      "fetched_at": "2026-04-06T17:33:07.986132+00:00",
       "source_type": "industry",
       "reliability": 3,
       "topics": [
@@ -14031,7 +14311,7 @@
       "status": "partial",
       "error": "0개 기사 반환",
       "items": 0,
-      "fetched_at": "2026-04-06T08:13:43.860935+00:00",
+      "fetched_at": "2026-04-06T17:33:07.981410+00:00",
       "source_type": "industry",
       "reliability": 3,
       "topics": [
@@ -14356,11 +14636,11 @@
   },
   "reliability": {
     "sources_total": 14,
-    "sources_ok": 9,
-    "sources_partial": 3,
+    "sources_ok": 7,
+    "sources_partial": 5,
     "sources_failed": 2,
-    "new_events": 70,
-    "filtered_out": 161
+    "new_events": 76,
+    "filtered_out": 177
   },
   "_feature_stubs": {
     "analyst_notes": "⚠ PAID PILOT — stored in private DB, not in public JSON",
@@ -14372,7 +14652,7 @@
     "comparables_db": "⚠ SCALE — proprietary deal terms and round history",
     "api_access": "⚠ SCALE — GET /api/company/{id}/card + webhooks"
   },
-  "profile_built_at": "2026-04-06T08:14:01.778292+00:00",
+  "profile_built_at": "2026-04-06T17:33:28.159706+00:00",
   "profile_version": "8.0",
   "company_count_total": 17,
   "company_count_auto": 2
