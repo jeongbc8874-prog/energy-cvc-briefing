@@ -176,72 +176,72 @@
     "disabled_reason": ""
   },
   "eia": {
-    "total_runs": 13,
-    "total_successes": 13,
+    "total_runs": 14,
+    "total_successes": 14,
     "consecutive_failures": 0,
     "last_success": "2026-04-07",
     "disabled": false,
     "disabled_reason": ""
   },
   "canarymedia": {
-    "total_runs": 13,
-    "total_successes": 13,
+    "total_runs": 14,
+    "total_successes": 14,
     "consecutive_failures": 0,
     "last_success": "2026-04-07",
     "disabled": false,
     "disabled_reason": ""
   },
   "energystoragenews": {
-    "total_runs": 13,
-    "total_successes": 13,
+    "total_runs": 14,
+    "total_successes": 14,
     "consecutive_failures": 0,
     "last_success": "2026-04-07",
     "disabled": false,
     "disabled_reason": ""
   },
   "cleantechnica": {
-    "total_runs": 13,
-    "total_successes": 13,
+    "total_runs": 14,
+    "total_successes": 14,
     "consecutive_failures": 0,
     "last_success": "2026-04-07",
     "disabled": false,
     "disabled_reason": ""
   },
   "pvmagazine": {
-    "total_runs": 13,
-    "total_successes": 13,
+    "total_runs": 14,
+    "total_successes": 14,
     "consecutive_failures": 0,
     "last_success": "2026-04-07",
     "disabled": false,
     "disabled_reason": ""
   },
   "electrek": {
-    "total_runs": 13,
-    "total_successes": 13,
+    "total_runs": 14,
+    "total_successes": 14,
     "consecutive_failures": 0,
     "last_success": "2026-04-07",
     "disabled": false,
     "disabled_reason": ""
   },
   "utilitydive": {
-    "total_runs": 13,
-    "total_successes": 13,
+    "total_runs": 14,
+    "total_successes": 14,
     "consecutive_failures": 0,
     "last_success": "2026-04-07",
     "disabled": false,
     "disabled_reason": ""
   },
   "offshorewind": {
-    "total_runs": 13,
-    "total_successes": 13,
+    "total_runs": 14,
+    "total_successes": 14,
     "consecutive_failures": 0,
     "last_success": "2026-04-07",
     "disabled": false,
     "disabled_reason": ""
   },
   "energymonitor": {
-    "total_runs": 13,
-    "total_successes": 13,
+    "total_runs": 14,
+    "total_successes": 14,
     "consecutive_failures": 0,
     "last_success": "2026-04-07",
     "disabled": false,

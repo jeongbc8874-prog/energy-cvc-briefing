@@ -4165,5 +4165,152 @@
     "profile_version": "8.0",
     "stage_previous": "Lab",
     "_gen_stage_label": "Lab"
+  },
+  "energy_dome": {
+    "company_id": "energy_dome",
+    "name": "Energy Dome",
+    "sector": "ess",
+    "country": "",
+    "hq": "",
+    "founded": null,
+    "description": "Auto-registered from signal. Analyst review recommended.",
+    "source": "auto",
+    "registered_date": "2026-04-07",
+    "aliases": [
+      "energy dome",
+      "energy_dome"
+    ],
+    "stage": "Pilot",
+    "stage_label": "Pilot",
+    "stage_score": 0.9,
+    "stage_reason": "score=0.9 cd=0 types={'Partnership': 1} score_stage=Lab hard_floor=Lab prev=Pilot",
+    "gap_log": {
+      "no_contract": {
+        "first_seen": "2026-04-07",
+        "last_seen": "2026-04-07",
+        "absent_streak": 0,
+        "resolved": false,
+        "resolved_date": null
+      },
+      "no_cert": {
+        "first_seen": "2026-04-07",
+        "last_seen": "2026-04-07",
+        "absent_streak": 0,
+        "resolved": false,
+        "resolved_date": null
+      },
+      "no_buyer": {
+        "first_seen": "2026-04-07",
+        "last_seen": "2026-04-07",
+        "absent_streak": 0,
+        "resolved": false,
+        "resolved_date": null
+      },
+      "no_deploy": {
+        "first_seen": "2026-04-07",
+        "last_seen": "2026-04-07",
+        "absent_streak": 0,
+        "resolved": false,
+        "resolved_date": null
+      }
+    },
+    "active_gaps": [
+      {
+        "rule_id": "no_contract",
+        "label": "No Commercial Contract",
+        "severity": "critical",
+        "memo": "No binding commercial agreement on record. All revenue is hypothetical.",
+        "first_seen": "2026-04-07",
+        "tags": [],
+        "escalation_days": 0,
+        "escalation_tier": null
+      },
+      {
+        "rule_id": "no_cert",
+        "label": "No Third-Party Certification",
+        "severity": "high",
+        "memo": "No independent certification (DNV GL, TÜV, KPX, UL). Required for regulated procurement.",
+        "first_seen": "2026-04-07",
+        "tags": [],
+        "escalation_days": 0,
+        "escalation_tier": null
+      },
+      {
+        "rule_id": "no_buyer",
+        "label": "No Named Strategic Buyer",
+        "severity": "high",
+        "memo": "No named strategic buyer in any signal. Demand-side validation absent.",
+        "first_seen": "2026-04-07",
+        "tags": [],
+        "escalation_days": 0,
+        "escalation_tier": null
+      },
+      {
+        "rule_id": "no_deploy",
+        "label": "No Deployment / Go-Live",
+        "severity": "medium",
+        "memo": "No operational deployment confirmed. TRL-9 in commercial setting unverified.",
+        "first_seen": "2026-04-07",
+        "tags": [],
+        "escalation_days": 0,
+        "escalation_tier": null
+      }
+    ],
+    "structural_tags": [],
+    "blocker_score": 18,
+    "critical_gaps": 1,
+    "all_events": [
+      {
+        "id": "1c91a1901834",
+        "title": "CO2 battery startup Energy Dome signs MOU to deploy technology at Texas data centre",
+        "summary": "Carbon dioxide-based long-duration energy storage (LDES) company Energy Dome and digital infrastructure company New Era Energy &#038; Digital (NUAI) have signed a memorandum of understanding (MOU) to deploy Energy Dome’s CO2 Battery Plus technology in Odessa, Texas.",
+        "event_date": "2026-04-07",
+        "source_name": "Energy Storage News",
+        "source_url": "https://www.energy-storage.news/co2-battery-startup-energy-dome-signs-mou-to-deploy-technology-at-texas-data-centre/",
+        "event_type": "Partnership",
+        "impact_type": "Commercial",
+        "matched_rule": "mou",
+        "tier": 3,
+        "signal_stage": "strategic",
+        "signal_strength": 46,
+        "signal_tier": "medium",
+        "score_breakdown": [
+          {
+            "id": "co_match",
+            "delta": 10,
+            "reason": "Event matched to tracked company",
+            "group": "boost"
+          }
+        ],
+        "segment": "ess",
+        "company_id": "energy_dome",
+        "company_name": "Energy Dome",
+        "buyer_matches": [],
+        "project_matches": [],
+        "is_negative": false,
+        "neg_subtype": null,
+        "is_noise": false,
+        "evidence": {
+          "observed_fact": "CO2 battery startup Energy Dome signs MOU to deploy technology at Texas data centre",
+          "observed_fact_detail": "Carbon dioxide-based long-duration energy storage (LDES) company Energy Dome and digital infrastructure company New Era Energy &#038; Digital (NUAI) have signed a memorandum of understanding (MOU) to deploy Energy Dome’s CO2 Battery Plus technology in Odessa, Texas.",
+          "source_label": "Energy Storage News · 2026-04-07",
+          "matched_rule_name": "mou",
+          "matched_rule_tier": "Tier 3 — Partnership",
+          "why_it_matters": "Named strategic partnership is directional. MOU alone does not confirm commercial intent — check for binding terms.",
+          "missing_evidence": [
+            "Binding terms (exclusivity, minimum volume) not confirmed",
+            "IP ownership unclear"
+          ],
+          "confidence": "Low",
+          "confidence_rationale": "Tier-3 or borderline. Context only."
+        }
+      }
+    ],
+    "signal_count": 1,
+    "last_signal_date": "2026-04-07",
+    "profile_date": "2026-04-07",
+    "profile_version": "8.0",
+    "_gen_stage_label": "Pilot",
+    "stage_previous": "Pilot"
   }
 }

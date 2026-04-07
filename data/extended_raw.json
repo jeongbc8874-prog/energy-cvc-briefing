@@ -3157,6 +3157,631 @@
       "summary": "Arbor Energy has entered into an agreement with GridMarket to provide up to 5GW of zero-emission baseload power for infrastructure projects.",
       "published_date": "2026-03-26",
       "raw_text": "gridmarket to secure 5gw of zero-emission power from arbor energy arbor energy has entered into an agreement with gridmarket to provide up to 5gw of zero-emission baseload power for infrastructure projects."
+    },
+    {
+      "source_id": "canarymedia",
+      "source_name": "Canary Media",
+      "source_url": "https://www.canarymedia.com/articles/heat-pumps/merino-energy-launch-appliance-california",
+      "source_segments": [
+        "ess",
+        "grid_sw",
+        "hydrogen",
+        "dc_power"
+      ],
+      "title": "Bay Area startup introduces flat-rate, single-room heat pumps",
+      "summary": "If the U.S. is going to decarbonize, tens of millions of homes across the nation will need to make the switch from fossil fuel furnaces and boilers to all-electric heat pumps. California alone has set a goal to deploy 6 million of the superefficient appliances by 2030 . But such retrofits can be complicated to…",
+      "published_date": "2026-04-07",
+      "raw_text": "bay area startup introduces flat-rate, single-room heat pumps if the u.s. is going to decarbonize, tens of millions of homes across the nation will need to make the switch from fossil fuel furnaces and boilers to all-electric heat pumps. california alone has set a goal to deploy 6 million of the superefficient appliances by 2030 . but such retrofits can be complicated to…"
+    },
+    {
+      "source_id": "canarymedia",
+      "source_name": "Canary Media",
+      "source_url": "https://www.canarymedia.com/articles/offshore-wind/trumps-offshore-wind-opposition-whales",
+      "source_segments": [
+        "ess",
+        "grid_sw",
+        "hydrogen",
+        "dc_power"
+      ],
+      "title": "Trump’s offshore wind opposition was never really about the whales",
+      "summary": "The Trump administration has often evoked the plight of whales in its efforts to undermine U.S. offshore wind development — despite there being no evidence that wind-farm activities are harming the giant mammals. But those purported concerns didn’t stop federal officials last week from voting unanimously to override…",
+      "published_date": "2026-04-07",
+      "raw_text": "trump’s offshore wind opposition was never really about the whales the trump administration has often evoked the plight of whales in its efforts to undermine u.s. offshore wind development — despite there being no evidence that wind-farm activities are harming the giant mammals. but those purported concerns didn’t stop federal officials last week from voting unanimously to override…"
+    },
+    {
+      "source_id": "pvmagazine",
+      "source_name": "PV Magazine",
+      "source_url": "https://www.pv-magazine.com/2026/04/07/microinverters-hacked-with-ai-coordinated-remote-shutdown-possible/",
+      "source_segments": [
+        "ess",
+        "hydrogen",
+        "forecasting"
+      ],
+      "title": "AI-enabled hacks expose remote shutdown risk in microinverters",
+      "summary": "IT security firm Jakkaru has identified a vulnerability in microinverters from AP Systems that could enable a “kill switch” scenario, potentially shutting down tens of thousands of inverters simultaneously and disrupting grid operations.",
+      "published_date": "2026-04-07",
+      "raw_text": "ai-enabled hacks expose remote shutdown risk in microinverters it security firm jakkaru has identified a vulnerability in microinverters from ap systems that could enable a “kill switch” scenario, potentially shutting down tens of thousands of inverters simultaneously and disrupting grid operations."
+    },
+    {
+      "source_id": "pvmagazine",
+      "source_name": "PV Magazine",
+      "source_url": "https://www.pv-magazine.com/2026/04/07/greek-utility-completes-2-13-gw-solar-cluster-at-former-coal-mine/",
+      "source_segments": [
+        "ess",
+        "hydrogen",
+        "forecasting"
+      ],
+      "title": "Greek utility completes 2.13 GW solar cluster at former coal mine",
+      "summary": "Greece’s PPC Group has finished construction of its 2.13 GW solar portfolio in northern Greece. The company is now working on its third large-scale battery storage facility in the area, with plans for two pumped-hydro storage projects also progressing.",
+      "published_date": "2026-04-07",
+      "raw_text": "greek utility completes 2.13 gw solar cluster at former coal mine greece’s ppc group has finished construction of its 2.13 gw solar portfolio in northern greece. the company is now working on its third large-scale battery storage facility in the area, with plans for two pumped-hydro storage projects also progressing."
+    },
+    {
+      "source_id": "pvmagazine",
+      "source_name": "PV Magazine",
+      "source_url": "https://www.pv-magazine.com/2026/04/07/greece-installs-1-9-gw-of-pv-capacity-in-2025/",
+      "source_segments": [
+        "ess",
+        "hydrogen",
+        "forecasting"
+      ],
+      "title": "Greece installs 1.9 GW of PV capacity in 2025",
+      "summary": "Greece installed around 1.9 GW of new solar capacity in 2025, bringing total installed solar capacity to roughly 11.5 GW, according to industry estimates.",
+      "published_date": "2026-04-07",
+      "raw_text": "greece installs 1.9 gw of pv capacity in 2025 greece installed around 1.9 gw of new solar capacity in 2025, bringing total installed solar capacity to roughly 11.5 gw, according to industry estimates."
+    },
+    {
+      "source_id": "pvmagazine",
+      "source_name": "PV Magazine",
+      "source_url": "https://www.pv-magazine.com/2026/04/07/aroma-solar-launches-1-2-gw-module-factory-in-india/",
+      "source_segments": [
+        "ess",
+        "hydrogen",
+        "forecasting"
+      ],
+      "title": "Aroma Solar launches 1.2 GW module factory in India",
+      "summary": "Aroma Solar has opened a 1.2 GW tunnel oxide passivated contact (TOPCon) module facility in in the northern Indian state of Haryana, using automated production and AI-based quality control.",
+      "published_date": "2026-04-07",
+      "raw_text": "aroma solar launches 1.2 gw module factory in india aroma solar has opened a 1.2 gw tunnel oxide passivated contact (topcon) module facility in in the northern indian state of haryana, using automated production and ai-based quality control."
+    },
+    {
+      "source_id": "pvmagazine",
+      "source_name": "PV Magazine",
+      "source_url": "https://www.pv-magazine.com/2026/04/07/cornex-unveils-new-165-ah-sodium-ion-prismatic-cell-for-stationary-energy-storage/",
+      "source_segments": [
+        "ess",
+        "hydrogen",
+        "forecasting"
+      ],
+      "title": "Cornex unveils new 165 Ah sodium-ion prismatic cell for stationary energy storage",
+      "summary": "A new sodium-ion cell for ESS may further improve competitiveness in large-scale systems against the weight of the lithium-ion battery sector.",
+      "published_date": "2026-04-07",
+      "raw_text": "cornex unveils new 165 ah sodium-ion prismatic cell for stationary energy storage a new sodium-ion cell for ess may further improve competitiveness in large-scale systems against the weight of the lithium-ion battery sector."
+    },
+    {
+      "source_id": "pvmagazine",
+      "source_name": "PV Magazine",
+      "source_url": "https://www.pv-magazine.com/2026/04/07/the-hydrogen-stream-dutch-electrolyzer-merger-forms-alquion/",
+      "source_segments": [
+        "ess",
+        "hydrogen",
+        "forecasting"
+      ],
+      "title": "The Hydrogen Stream: Dutch electrolyzer merger forms Alquion",
+      "summary": "Battolyser Systems and VDL Hydrogen Systems have merged to form Alquion, while Ming Yang Smart Energy Group plans to invest more than $10 billion in hydrogen and renewable energy projects in Ethiopia.",
+      "published_date": "2026-04-07",
+      "raw_text": "the hydrogen stream: dutch electrolyzer merger forms alquion battolyser systems and vdl hydrogen systems have merged to form alquion, while ming yang smart energy group plans to invest more than $10 billion in hydrogen and renewable energy projects in ethiopia."
+    },
+    {
+      "source_id": "pvmagazine",
+      "source_name": "PV Magazine",
+      "source_url": "https://www.pv-magazine.com/2026/04/07/austrian-manufacturer-debuts-air-to-water-propane-heat-pump-series/",
+      "source_segments": [
+        "ess",
+        "hydrogen",
+        "forecasting"
+      ],
+      "title": "Austrian manufacturer offers modular air-to-water propane heat pumps",
+      "summary": "Lambda Wärmepumpen GmbH said its Eureka heat pump series uses a patented fluid mechanics system that reportedly improves heat transfer by four to six times while maintaining a temperature difference of just 3 K between the air and the refrigerant. Its seasonal coefficient of performance ranges from 4.50 to 6.10.",
+      "published_date": "2026-04-07",
+      "raw_text": "austrian manufacturer offers modular air-to-water propane heat pumps lambda wärmepumpen gmbh said its eureka heat pump series uses a patented fluid mechanics system that reportedly improves heat transfer by four to six times while maintaining a temperature difference of just 3 k between the air and the refrigerant. its seasonal coefficient of performance ranges from 4.50 to 6.10."
+    },
+    {
+      "source_id": "pvmagazine",
+      "source_name": "PV Magazine",
+      "source_url": "https://www.pv-magazine.com/2026/04/07/croatia-tenders-56-mw-solar-storage-project/",
+      "source_segments": [
+        "ess",
+        "hydrogen",
+        "forecasting"
+      ],
+      "title": "Croatia tenders 56 MW solar-storage project",
+      "summary": "Croatian power company Hrvatska Elektroprivreda is seeking a developer to build a 56 MW solar power plant tied to up to 200 MWh of battery energy storage. The deadline to submit expressions of interest is May 12.",
+      "published_date": "2026-04-07",
+      "raw_text": "croatia tenders 56 mw solar-storage project croatian power company hrvatska elektroprivreda is seeking a developer to build a 56 mw solar power plant tied to up to 200 mwh of battery energy storage. the deadline to submit expressions of interest is may 12."
+    },
+    {
+      "source_id": "pvmagazine",
+      "source_name": "PV Magazine",
+      "source_url": "https://www.pv-magazine.com/2026/04/07/gcl-optoelectronic-targets-2026-ipo-us-plant-space-solar-rollout/",
+      "source_segments": [
+        "ess",
+        "hydrogen",
+        "forecasting"
+      ],
+      "title": "GCL Optoelectronic targets 2026 IPO, US plant, space solar rollout",
+      "summary": "GCL Technology says its GCL Optoelectronic subsidiary plans a Hong Kong initial public offering (IPO) in 2026, alongside a potential 500 MW factory in the United States and a roadmap for space-based solar.",
+      "published_date": "2026-04-07",
+      "raw_text": "gcl optoelectronic targets 2026 ipo, us plant, space solar rollout gcl technology says its gcl optoelectronic subsidiary plans a hong kong initial public offering (ipo) in 2026, alongside a potential 500 mw factory in the united states and a roadmap for space-based solar."
+    },
+    {
+      "source_id": "energystoragenews",
+      "source_name": "Energy Storage News",
+      "source_url": "https://www.energy-storage.news/co2-battery-startup-energy-dome-signs-mou-to-deploy-technology-at-texas-data-centre/",
+      "source_segments": [
+        "ess"
+      ],
+      "title": "CO2 battery startup Energy Dome signs MOU to deploy technology at Texas data centre",
+      "summary": "Carbon dioxide-based long-duration energy storage (LDES) company Energy Dome and digital infrastructure company New Era Energy & Digital (NUAI) have signed a memorandum of understanding (MOU) to deploy Energy Dome’s CO2 Battery Plus technology in Odessa, Texas.",
+      "published_date": "2026-04-07",
+      "raw_text": "co2 battery startup energy dome signs mou to deploy technology at texas data centre carbon dioxide-based long-duration energy storage (ldes) company energy dome and digital infrastructure company new era energy & digital (nuai) have signed a memorandum of understanding (mou) to deploy energy dome’s co2 battery plus technology in odessa, texas."
+    },
+    {
+      "source_id": "energystoragenews",
+      "source_name": "Energy Storage News",
+      "source_url": "https://www.energy-storage.news/boralex-six-nations-of-the-grand-river-secure-us145-million-financing-for-500mwh-ontario-bess/",
+      "source_segments": [
+        "ess"
+      ],
+      "title": "Boralex, Six Nations of the Grand River secure US$145 million financing for 500MWh Ontario BESS",
+      "summary": "Quebec-based IPP Boralex and Six Nations of the Grand River Development Corporation (SNGRDC) have announced the closing of a CA$202 million (US$145.12 million) financing for a 125MW/500MWh battery energy storage system (BESS) in Oxford County, Ontario, CA.",
+      "published_date": "2026-04-07",
+      "raw_text": "boralex, six nations of the grand river secure us$145 million financing for 500mwh ontario bess quebec-based ipp boralex and six nations of the grand river development corporation (sngrdc) have announced the closing of a ca$202 million (us$145.12 million) financing for a 125mw/500mwh battery energy storage system (bess) in oxford county, ontario, ca."
+    },
+    {
+      "source_id": "energystoragenews",
+      "source_name": "Energy Storage News",
+      "source_url": "https://www.energy-storage.news/north-dakota-approves-certificate-of-site-compatibility-for-400mwh-bess-from-nextera-energy-resources/",
+      "source_segments": [
+        "ess"
+      ],
+      "title": "North Dakota approves certificate of site compatibility for 400MWh BESS from NextEra Energy Resources",
+      "summary": "The project represents a US$128.6 million investment and is scheduled to begin construction this year, with commercial operations commencing in December 2026.",
+      "published_date": "2026-04-07",
+      "raw_text": "north dakota approves certificate of site compatibility for 400mwh bess from nextera energy resources the project represents a us$128.6 million investment and is scheduled to begin construction this year, with commercial operations commencing in december 2026."
+    },
+    {
+      "source_id": "energystoragenews",
+      "source_name": "Energy Storage News",
+      "source_url": "https://www.energy-storage.news/catl-envision-sodium-ion-bess-cells-among-next-gen-tech-and-solutions-showcased-at-beijing-expo-esie-2026/",
+      "source_segments": [
+        "ess"
+      ],
+      "title": "CATL, Envision sodium-ion BESS cells among next-gen tech and solutions showcased at Beijing expo ESIE 2026",
+      "summary": "China's biggest energy storage companies were out in force at a recent trade expo in Beijing, with integrated offerings, bigger battery cells, data centre solutions and sodium-ion products among the new products and tech on show.",
+      "published_date": "2026-04-07",
+      "raw_text": "catl, envision sodium-ion bess cells among next-gen tech and solutions showcased at beijing expo esie 2026 china's biggest energy storage companies were out in force at a recent trade expo in beijing, with integrated offerings, bigger battery cells, data centre solutions and sodium-ion products among the new products and tech on show."
+    },
+    {
+      "source_id": "energystoragenews",
+      "source_name": "Energy Storage News",
+      "source_url": "https://www.energy-storage.news/neoen-enlists-nidec-for-496mwh-france-bess-launches-japan-project/",
+      "source_segments": [
+        "ess"
+      ],
+      "title": "Neoen enlists Nidec for 496MWh France BESS, launches Japan project",
+      "summary": "IPP Neoen will start construction on large-scale BESS projects in France and Japan in the coming months.",
+      "published_date": "2026-04-07",
+      "raw_text": "neoen enlists nidec for 496mwh france bess, launches japan project ipp neoen will start construction on large-scale bess projects in france and japan in the coming months."
+    },
+    {
+      "source_id": "energystoragenews",
+      "source_name": "Energy Storage News",
+      "source_url": "https://www.energy-storage.news/flexgen-acquires-us-battery-storage-and-solar-commissioning-services-provider-ces/",
+      "source_segments": [
+        "ess"
+      ],
+      "title": "FlexGen acquires US battery storage and solar commissioning services provider CES",
+      "summary": "FlexGen has acquired CES, which has to date commissioned more than 15GWh of battery energy storage system (BESS) projects.",
+      "published_date": "2026-04-07",
+      "raw_text": "flexgen acquires us battery storage and solar commissioning services provider ces flexgen has acquired ces, which has to date commissioned more than 15gwh of battery energy storage system (bess) projects."
+    },
+    {
+      "source_id": "cleantechnica",
+      "source_name": "CleanTechnica",
+      "source_url": "https://cleantechnica.com/2026/04/07/trump-is-losing-the-war-on-evs-as-new-incentives-kick-in/",
+      "source_segments": [
+        "ess",
+        "dc_power",
+        "forecasting",
+        "grid_sw"
+      ],
+      "title": "Trump Is Losing The War On EVs As New Incentives Kick In",
+      "summary": "Uber has expanded its $4,000 \"Go Electric\" EV incentive plan across the US under a supplies-limited offer, helping to offset the loss of the federal tax credit. The post Trump Is Losing The War On EVs As New Incentives Kick In appeared first on CleanTechnica .",
+      "published_date": "2026-04-07",
+      "raw_text": "trump is losing the war on evs as new incentives kick in uber has expanded its $4,000 \"go electric\" ev incentive plan across the us under a supplies-limited offer, helping to offset the loss of the federal tax credit. the post trump is losing the war on evs as new incentives kick in appeared first on cleantechnica ."
+    },
+    {
+      "source_id": "cleantechnica",
+      "source_name": "CleanTechnica",
+      "source_url": "https://cleantechnica.com/2026/04/07/battery-energy-storage-key-to-india-emissions-reduction-goal/",
+      "source_segments": [
+        "ess",
+        "dc_power",
+        "forecasting",
+        "grid_sw"
+      ],
+      "title": "Battery Energy Storage Key To India Emissions Reduction Goal",
+      "summary": "India is making a major commitment to renewable energy and battery storage to meet its goal of becoming carbon neutral by 2070. The post Battery Energy Storage Key To India Emissions Reduction Goal appeared first on CleanTechnica .",
+      "published_date": "2026-04-07",
+      "raw_text": "battery energy storage key to india emissions reduction goal india is making a major commitment to renewable energy and battery storage to meet its goal of becoming carbon neutral by 2070. the post battery energy storage key to india emissions reduction goal appeared first on cleantechnica ."
+    },
+    {
+      "source_id": "cleantechnica",
+      "source_name": "CleanTechnica",
+      "source_url": "https://cleantechnica.com/2026/04/07/op-ed-chinese-ev-brands-overwhelm-the-manila-auto-show-2026/",
+      "source_segments": [
+        "ess",
+        "dc_power",
+        "forecasting",
+        "grid_sw"
+      ],
+      "title": "Op-Ed: Chinese EV Brands Overwhelm The Manila Auto Show 2026",
+      "summary": "The 2026 Manila International Auto Show runs from April 9 to 12 across the World Trade Center and the Philippine Trade Training Center, with a noticeably broader electrification footprint than in previous years. The expansion to an additional 3,000 square meters of exhibition space increases both vehicle count and brand ... [continued] The post Op-Ed: Chinese EV Brands Overwhelm The Manila Auto Show 2026 appeared first on CleanTechnica .",
+      "published_date": "2026-04-07",
+      "raw_text": "op-ed: chinese ev brands overwhelm the manila auto show 2026 the 2026 manila international auto show runs from april 9 to 12 across the world trade center and the philippine trade training center, with a noticeably broader electrification footprint than in previous years. the expansion to an additional 3,000 square meters of exhibition space increases both vehicle count and brand ... [continued] the post op-ed: chinese ev brands overwhelm the manila auto show 2026 appeared first on cleantechnica ."
+    },
+    {
+      "source_id": "cleantechnica",
+      "source_name": "CleanTechnica",
+      "source_url": "https://cleantechnica.com/2026/04/07/trump-breathes-new-life-into-old-green-hydrogen-dreams/",
+      "source_segments": [
+        "ess",
+        "dc_power",
+        "forecasting",
+        "grid_sw"
+      ],
+      "title": "Trump Breathes New Life Into Old Green Hydrogen Dreams",
+      "summary": "With no end in sight to Trump's war in Iran, transportation stakeholders in Japan are forging new green hydrogen alliances and laying plans for a hydrogen truck freight corridor. The post Trump Breathes New Life Into Old Green Hydrogen Dreams appeared first on CleanTechnica .",
+      "published_date": "2026-04-07",
+      "raw_text": "trump breathes new life into old green hydrogen dreams with no end in sight to trump's war in iran, transportation stakeholders in japan are forging new green hydrogen alliances and laying plans for a hydrogen truck freight corridor. the post trump breathes new life into old green hydrogen dreams appeared first on cleantechnica ."
+    },
+    {
+      "source_id": "cleantechnica",
+      "source_name": "CleanTechnica",
+      "source_url": "https://cleantechnica.com/2026/04/07/51-million-in-new-ev-charger-funding-available-in-michigan/",
+      "source_segments": [
+        "ess",
+        "dc_power",
+        "forecasting",
+        "grid_sw"
+      ],
+      "title": "$51 Million In New EV Charger Funding Available In Michigan",
+      "summary": "The state of Michigan is not an electric vehicle leader among US states. However, we have seen some progress in EV charger installations in the state. Most recently, the Michigan Department of Transportation announced new National Electric Vehicle Infrastructure (NEVI) funds are now available. “MDOT is now authorized to begin ... [continued] The post $51 Million In New EV Charger Funding Available In Michigan appeared first on CleanTechnica .",
+      "published_date": "2026-04-07",
+      "raw_text": "$51 million in new ev charger funding available in michigan the state of michigan is not an electric vehicle leader among us states. however, we have seen some progress in ev charger installations in the state. most recently, the michigan department of transportation announced new national electric vehicle infrastructure (nevi) funds are now available. “mdot is now authorized to begin ... [continued] the post $51 million in new ev charger funding available in michigan appeared first on cleantechnica ."
+    },
+    {
+      "source_id": "cleantechnica",
+      "source_name": "CleanTechnica",
+      "source_url": "https://cleantechnica.com/2026/04/06/coming-to-you-from-big-oil-profits-the-vermont-climate-superfund/",
+      "source_segments": [
+        "ess",
+        "dc_power",
+        "forecasting",
+        "grid_sw"
+      ],
+      "title": "Coming To You From Big Oil Profits: The Vermont Climate Superfund",
+      "summary": "Passed in May 2024, the Vermont Climate Superfund Act allows the state to recover financial damages from the impacts of climate change to Vermont caused by the fossil fuel industry. These funds are targeted for climate adaption projects. Not surprisingly, in September 2025, the Trump administration filed suit in federal ... [continued] The post Coming To You From Big Oil Profits: The Vermont Climate Superfund appeared first on CleanTechnica .",
+      "published_date": "2026-04-07",
+      "raw_text": "coming to you from big oil profits: the vermont climate superfund passed in may 2024, the vermont climate superfund act allows the state to recover financial damages from the impacts of climate change to vermont caused by the fossil fuel industry. these funds are targeted for climate adaption projects. not surprisingly, in september 2025, the trump administration filed suit in federal ... [continued] the post coming to you from big oil profits: the vermont climate superfund appeared first on cleantechnica ."
+    },
+    {
+      "source_id": "cleantechnica",
+      "source_name": "CleanTechnica",
+      "source_url": "https://cleantechnica.com/2026/04/06/honda-offering-up-to-8000-off-the-prologue-ev/",
+      "source_segments": [
+        "ess",
+        "dc_power",
+        "forecasting",
+        "grid_sw"
+      ],
+      "title": "Honda Offering Up To $8,000 Off The Prologue EV!",
+      "summary": "Electric car sales are down significantly this year as the market remains “hung over” from the end of the $7,500 US EV tax credit. Several electric car models are seeing huge drops in consumer demand, and automakers have been pulling models off the market. The Honda Prologue is no exception ... [continued] The post Honda Offering Up To $8,000 Off The Prologue EV! appeared first on CleanTechnica .",
+      "published_date": "2026-04-07",
+      "raw_text": "honda offering up to $8,000 off the prologue ev! electric car sales are down significantly this year as the market remains “hung over” from the end of the $7,500 us ev tax credit. several electric car models are seeing huge drops in consumer demand, and automakers have been pulling models off the market. the honda prologue is no exception ... [continued] the post honda offering up to $8,000 off the prologue ev! appeared first on cleantechnica ."
+    },
+    {
+      "source_id": "cleantechnica",
+      "source_name": "CleanTechnica",
+      "source_url": "https://cleantechnica.com/2026/04/06/why-teslas-stock-price-has-dropped-nearly-20-in-6-months/",
+      "source_segments": [
+        "ess",
+        "dc_power",
+        "forecasting",
+        "grid_sw"
+      ],
+      "title": "Why Tesla’s Stock Price Has Dropped Nearly 20% In 6 Months",
+      "summary": "Tesla’s stock price continues to slide. It was down 2.15% today after a clear slide and then a leveling off at the lower level. It was definitely a “down and out” day rather than the roller-coaster ride you often see with stocks like TSLA. This follows months of decline. In ... [continued] The post Why Tesla’s Stock Price Has Dropped Nearly 20% In 6 Months appeared first on CleanTechnica .",
+      "published_date": "2026-04-07",
+      "raw_text": "why tesla’s stock price has dropped nearly 20% in 6 months tesla’s stock price continues to slide. it was down 2.15% today after a clear slide and then a leveling off at the lower level. it was definitely a “down and out” day rather than the roller-coaster ride you often see with stocks like tsla. this follows months of decline. in ... [continued] the post why tesla’s stock price has dropped nearly 20% in 6 months appeared first on cleantechnica ."
+    },
+    {
+      "source_id": "electrek",
+      "source_name": "Electrek",
+      "source_url": "https://electrek.co/2026/04/07/segway-max-g30p-e-scooter-jackery-256wh-explorer-240d-power-station-more/",
+      "source_segments": [
+        "ess",
+        "dc_power",
+        "forecasting"
+      ],
+      "title": "Segway 40-mile Max G30P e-scooter new $500 low, Jackery 256Wh Explorer 240D compact power station new $129 low, more",
+      "summary": "We’ve got another jam-packed Green Deals for you today, filled with a bunch of new low prices. To start, Segway has launched a flash sale on its Max G30P Electric Scooter with up to 40 miles of travel that drops it to a new $500 low . Right behind that, we have the 256Wh/80,000mAh Jackery Explorer 240D Portable Compact Power Station hitting a new $129 low , as well as the Baseus S1 Pro Wireless Outdoor Solar Security 2-Cam Kit with sun-tracking solar panels and an expandable 16GB hub – all at a ",
+      "published_date": "2026-04-07",
+      "raw_text": "segway 40-mile max g30p e-scooter new $500 low, jackery 256wh explorer 240d compact power station new $129 low, more we’ve got another jam-packed green deals for you today, filled with a bunch of new low prices. to start, segway has launched a flash sale on its max g30p electric scooter with up to 40 miles of travel that drops it to a new $500 low . right behind that, we have the 256wh/80,000mah jackery explorer 240d portable compact power station hitting a new $129 low , as well as the baseus s1 pro wireless outdoor solar security 2-cam kit with sun-tracking solar panels and an expandable 16gb hub – all at a new $100 low . there are also two of ego’s most advanced cordless electric pole saw and mower kits hitting their lowest prices in months, anker’s everfrost 2 portable electric cooler at its best price since cyber monday, and much more waiting for you below. and don’t forget about the other hangover deals at the bottom of the page, like yesterday’s 50% discount on the evolv terra e-scooter to a new $614.50 low , and more. head below for other new green deals we’ve found today and, of course, electrek ’s best ev buying and leasing deals . also, check out the new electrek tesla shop for the best deals on tesla accessories . more…"
+    },
+    {
+      "source_id": "electrek",
+      "source_name": "Electrek",
+      "source_url": "https://electrek.co/2026/04/07/toyotas-3-row-electric-suv-gain-upscale-luxury-sibling/",
+      "source_segments": [
+        "ess",
+        "dc_power",
+        "forecasting"
+      ],
+      "title": "Toyota’s 3-row electric SUV will likely gain an upscale, luxury sibling",
+      "summary": "Lexus is gearing up to introduce the next-gen TX, and all signs point to it being an all-electric three-row SUV. The new electric SUV is expected to be based on Toyota’s upcoming Highlander BEV. more…",
+      "published_date": "2026-04-07",
+      "raw_text": "toyota’s 3-row electric suv will likely gain an upscale, luxury sibling lexus is gearing up to introduce the next-gen tx, and all signs point to it being an all-electric three-row suv. the new electric suv is expected to be based on toyota’s upcoming highlander bev. more…"
+    },
+    {
+      "source_id": "electrek",
+      "source_name": "Electrek",
+      "source_url": "https://electrek.co/2026/04/07/specialized-just-gave-its-commuter-e-bikes-a-huge-power-boost-with-the-new-vado-3/",
+      "source_segments": [
+        "ess",
+        "dc_power",
+        "forecasting"
+      ],
+      "title": "Specialized just gave its commuter e-bikes a huge power boost with the new Vado 3",
+      "summary": "Specialized has unveiled its latest generation of urban electric bikes with the all-new Vado 3 and Vado 3 EVO, bringing a surprising amount of high-performance DNA from its trail-dominating electric mountain bikes into a more practical, everyday package. more…",
+      "published_date": "2026-04-07",
+      "raw_text": "specialized just gave its commuter e-bikes a huge power boost with the new vado 3 specialized has unveiled its latest generation of urban electric bikes with the all-new vado 3 and vado 3 evo, bringing a surprising amount of high-performance dna from its trail-dominating electric mountain bikes into a more practical, everyday package. more…"
+    },
+    {
+      "source_id": "electrek",
+      "source_name": "Electrek",
+      "source_url": "https://electrek.co/2026/04/07/hyundai-unveil-two-new-ioniq-ev-concepts/",
+      "source_segments": [
+        "ess",
+        "dc_power",
+        "forecasting"
+      ],
+      "title": "Hyundai is about to unveil two new IONIQ EV concepts: Here’s what we know so far",
+      "summary": "Hyundai previewed two new IONIQ EV concepts, Earth and Venus, for the first time ahead of their debut in just a few days. more…",
+      "published_date": "2026-04-07",
+      "raw_text": "hyundai is about to unveil two new ioniq ev concepts: here’s what we know so far hyundai previewed two new ioniq ev concepts, earth and venus, for the first time ahead of their debut in just a few days. more…"
+    },
+    {
+      "source_id": "electrek",
+      "source_name": "Electrek",
+      "source_url": "https://electrek.co/2026/04/07/volkswagen-bring-back-familiar-name-luxury-ev-suv/",
+      "source_segments": [
+        "ess",
+        "dc_power",
+        "forecasting"
+      ],
+      "title": "Volkswagen may bring back another familiar name for a new luxury electric SUV",
+      "summary": "Volkswagen is retiring the Touareg after a 23-year run, but the company is now looking into bringing it back as a purely electric luxury SUV. more…",
+      "published_date": "2026-04-07",
+      "raw_text": "volkswagen may bring back another familiar name for a new luxury electric suv volkswagen is retiring the touareg after a 23-year run, but the company is now looking into bringing it back as a purely electric luxury suv. more…"
+    },
+    {
+      "source_id": "electrek",
+      "source_name": "Electrek",
+      "source_url": "https://electrek.co/2026/04/07/tesla-terafab-intel-joins-foundry/",
+      "source_segments": [
+        "ess",
+        "dc_power",
+        "forecasting"
+      ],
+      "title": "Tesla won’t really build its own chip fab — Intel is going to do it",
+      "summary": "Tesla is not actually going to build its own chip fab. Intel is going to do it for them. That’s the real takeaway from Intel’s announcement today that it is joining the “Terafab” project alongside Tesla, SpaceX, and xAI — the $25 billion Austin chip factory Elon Musk unveiled with great fanfare last month. more…",
+      "published_date": "2026-04-07",
+      "raw_text": "tesla won’t really build its own chip fab — intel is going to do it tesla is not actually going to build its own chip fab. intel is going to do it for them. that’s the real takeaway from intel’s announcement today that it is joining the “terafab” project alongside tesla, spacex, and xai — the $25 billion austin chip factory elon musk unveiled with great fanfare last month. more…"
+    },
+    {
+      "source_id": "electrek",
+      "source_name": "Electrek",
+      "source_url": "https://electrek.co/2026/04/07/tesla-autopilot-drunk-driver-vacaville-passed-out-dui/",
+      "source_segments": [
+        "ess",
+        "dc_power",
+        "forecasting"
+      ],
+      "title": "Tesla driver passes out drunk on Autopilot — arrested for DUI",
+      "summary": "A Tesla driver was found passed out behind the wheel of his car as it drove itself through busy streets in Vacaville, California. Police caught up with the vehicle and arrested the driver on suspicion of driving under the influence of both alcohol and marijuana. It is the latest in a long string of incidents where Tesla owners have treated the automaker’s driver-assist systems as if they were a designated driver — and it keeps happening because Tesla keeps marketing them that way. more…",
+      "published_date": "2026-04-07",
+      "raw_text": "tesla driver passes out drunk on autopilot — arrested for dui a tesla driver was found passed out behind the wheel of his car as it drove itself through busy streets in vacaville, california. police caught up with the vehicle and arrested the driver on suspicion of driving under the influence of both alcohol and marijuana. it is the latest in a long string of incidents where tesla owners have treated the automaker’s driver-assist systems as if they were a designated driver — and it keeps happening because tesla keeps marketing them that way. more…"
+    },
+    {
+      "source_id": "electrek",
+      "source_name": "Electrek",
+      "source_url": "https://electrek.co/2026/04/07/royal-enfield-reveals-first-electric-motorcycle-specs-and-theyre-ridiculous/",
+      "source_segments": [
+        "ess",
+        "dc_power",
+        "forecasting"
+      ],
+      "title": "Royal Enfield reveals first electric motorcycle specs and they’re ridiculous",
+      "summary": "Royal Enfield has officially pulled the wraps off the full specifications of its first electric motorcycle, the beautifully designed Flying Flea C6, ahead of its April 10 launch in India. And while there’s a lot to like about the bike on paper, one particular number stands out so much that it almost overshadows everything else. more…",
+      "published_date": "2026-04-07",
+      "raw_text": "royal enfield reveals first electric motorcycle specs and they’re ridiculous royal enfield has officially pulled the wraps off the full specifications of its first electric motorcycle, the beautifully designed flying flea c6, ahead of its april 10 launch in india. and while there’s a lot to like about the bike on paper, one particular number stands out so much that it almost overshadows everything else. more…"
+    },
+    {
+      "source_id": "electrek",
+      "source_name": "Electrek",
+      "source_url": "https://electrek.co/2026/04/07/new-electric-4x4-roro-tractor-gains-traction-as-ports-plug-in-video/",
+      "source_segments": [
+        "ess",
+        "dc_power",
+        "forecasting"
+      ],
+      "title": "New electric 4×4 RoRo tractor gains traction as ports plug in [video]",
+      "summary": "The first regular production versions of a new 4×4 electric RoRo terminal truck co-developed by MOL and Volvo Penta have been put to work by European logistics giant DFDS – and hundreds more could be on the way. more…",
+      "published_date": "2026-04-07",
+      "raw_text": "new electric 4×4 roro tractor gains traction as ports plug in [video] the first regular production versions of a new 4×4 electric roro terminal truck co-developed by mol and volvo penta have been put to work by european logistics giant dfds – and hundreds more could be on the way. more…"
+    },
+    {
+      "source_id": "electrek",
+      "source_name": "Electrek",
+      "source_url": "https://electrek.co/2026/04/07/radio-flyer-launches-new-compact-cargo-e-bike-designed-to-make-family-riding-easier/",
+      "source_segments": [
+        "ess",
+        "dc_power",
+        "forecasting"
+      ],
+      "title": "Radio Flyer launches new compact cargo e-bike designed to make family riding easier",
+      "summary": "Radio Flyer is back with another electric bike, and this time the iconic American brand is taking aim at one of the biggest barriers in the cargo e-bike space: intimidation. more…",
+      "published_date": "2026-04-07",
+      "raw_text": "radio flyer launches new compact cargo e-bike designed to make family riding easier radio flyer is back with another electric bike, and this time the iconic american brand is taking aim at one of the biggest barriers in the cargo e-bike space: intimidation. more…"
+    },
+    {
+      "source_id": "utilitydive",
+      "source_name": "Utility Dive",
+      "source_url": "https://www.utilitydive.com/news/energy-storage-pricing-anza-woodmac/816857/",
+      "source_segments": [
+        "grid_sw",
+        "ess",
+        "dc_power"
+      ],
+      "title": "Energy storage pricing beginning to ‘fracture’ by product type: report",
+      "summary": "The split seems driven by battery developers supporting larger projects for data center and independent power producer clients, according to Anza Renewables.",
+      "published_date": "2026-04-07",
+      "raw_text": "energy storage pricing beginning to ‘fracture’ by product type: report the split seems driven by battery developers supporting larger projects for data center and independent power producer clients, according to anza renewables."
+    },
+    {
+      "source_id": "utilitydive",
+      "source_name": "Utility Dive",
+      "source_url": "https://www.utilitydive.com/news/commercial-nuclear-fuel-recycling-key-to-a-sustainable-supply-report/816847/",
+      "source_segments": [
+        "grid_sw",
+        "ess",
+        "dc_power"
+      ],
+      "title": "Commercial nuclear fuel recycling key to a sustainable supply: report",
+      "summary": "A robust recycling program could greatly reduce the volume and radiotoxicity of waste and reduce the need for additional uranium mining, according to the Energy Innovation Reform Project.",
+      "published_date": "2026-04-07",
+      "raw_text": "commercial nuclear fuel recycling key to a sustainable supply: report a robust recycling program could greatly reduce the volume and radiotoxicity of waste and reduce the need for additional uranium mining, according to the energy innovation reform project."
+    },
+    {
+      "source_id": "utilitydive",
+      "source_name": "Utility Dive",
+      "source_url": "https://www.utilitydive.com/news/federal-permitting-outsized-factor-clean-energy-permitting-crux/816824/",
+      "source_segments": [
+        "grid_sw",
+        "ess",
+        "dc_power"
+      ],
+      "title": "Federal permitting is ‘outsized’ factor in clean energy delays, cancellations: Crux",
+      "summary": "“More than 80% of respondents reported intentionally siting projects to avoid triggering federal permitting requirements,” fintech company Crux said about its survey of clean energy developers.",
+      "published_date": "2026-04-07",
+      "raw_text": "federal permitting is ‘outsized’ factor in clean energy delays, cancellations: crux “more than 80% of respondents reported intentionally siting projects to avoid triggering federal permitting requirements,” fintech company crux said about its survey of clean energy developers."
+    },
+    {
+      "source_id": "utilitydive",
+      "source_name": "Utility Dive",
+      "source_url": "https://www.utilitydive.com/news/turning-the-ac-dc-switch-learning-from-the-past-to-power-the-future/814988/",
+      "source_segments": [
+        "grid_sw",
+        "ess",
+        "dc_power"
+      ],
+      "title": "Turning the AC-DC switch: A legacy technology has reached its limits.",
+      "summary": "AC is no longer the preferred current for many applications. A transition is underway, but it calls for new technology to be deliberately deployed, writes Shaun Walsh at Peak Nano.",
+      "published_date": "2026-04-07",
+      "raw_text": "turning the ac-dc switch: a legacy technology has reached its limits. ac is no longer the preferred current for many applications. a transition is underway, but it calls for new technology to be deliberately deployed, writes shaun walsh at peak nano."
+    },
+    {
+      "source_id": "utilitydive",
+      "source_name": "Utility Dive",
+      "source_url": "https://www.utilitydive.com/news/eversource-avangrid-ferc-roe-refund-iso-ne/816797/",
+      "source_segments": [
+        "grid_sw",
+        "ess",
+        "dc_power"
+      ],
+      "title": "Eversource, Avangrid ask FERC to stay $1.5B refund decision",
+      "summary": "The utility companies asked the agency to put a hold on a recent return on equity decision, saying consumers could be hurt by “rate whiplash” if the refunds are overturned in court.",
+      "published_date": "2026-04-07",
+      "raw_text": "eversource, avangrid ask ferc to stay $1.5b refund decision the utility companies asked the agency to put a hold on a recent return on equity decision, saying consumers could be hurt by “rate whiplash” if the refunds are overturned in court."
+    },
+    {
+      "source_id": "offshorewind",
+      "source_name": "Offshore Wind Biz",
+      "source_url": "https://www.offshorewind.biz/2026/04/07/jan-de-nul-launches-second-cable-laying-giant/",
+      "source_segments": [
+        "hvdc",
+        "ess"
+      ],
+      "title": "Jan De Nul Launches Second Cable Laying Giant",
+      "summary": "Jan De Nul has launched William Thomson, the second of two identical subsea cable‑laying […]",
+      "published_date": "2026-04-07",
+      "raw_text": "jan de nul launches second cable laying giant jan de nul has launched william thomson, the second of two identical subsea cable‑laying […]"
+    },
+    {
+      "source_id": "offshorewind",
+      "source_name": "Offshore Wind Biz",
+      "source_url": "https://www.offshorewind.biz/2026/04/07/orlen-neptun-selects-technical-planning-team-for-900-mw-wind-farm-offshore-poland/",
+      "source_segments": [
+        "hvdc",
+        "ess"
+      ],
+      "title": "Orlen Neptun Selects Technical Planning Team for 900 MW Wind Farm Offshore Poland",
+      "summary": "Orlen Neptun has selected a consortium of Ramboll, Projmors ASE Group, and Enprom to […]",
+      "published_date": "2026-04-07",
+      "raw_text": "orlen neptun selects technical planning team for 900 mw wind farm offshore poland orlen neptun has selected a consortium of ramboll, projmors ase group, and enprom to […]"
+    },
+    {
+      "source_id": "offshorewind",
+      "source_name": "Offshore Wind Biz",
+      "source_url": "https://www.offshorewind.biz/2026/04/07/netherlands-to-establish-new-offshore-electricity-bidding-zone-linked-to-planned-interconnector/",
+      "source_segments": [
+        "hvdc",
+        "ess"
+      ],
+      "title": "Netherlands to Establish New Offshore Electricity Bidding Zone Linked to Planned Interconnector",
+      "summary": "The Netherlands will introduce a new offshore electricity bidding zone for wind farms that […]",
+      "published_date": "2026-04-07",
+      "raw_text": "netherlands to establish new offshore electricity bidding zone linked to planned interconnector the netherlands will introduce a new offshore electricity bidding zone for wind farms that […]"
+    },
+    {
+      "source_id": "energymonitor",
+      "source_name": "Energy Monitor",
+      "source_url": "https://www.energymonitor.ai/sponsored/from-nice-to-have-to-business-critical-the-tco-case-for-private-5g-in-oil-and-gas/",
+      "source_segments": [
+        "ess",
+        "grid_sw",
+        "hydrogen"
+      ],
+      "title": "From ‘nice to have’ to business critical: The TCO case for private 5G in oil and gas",
+      "summary": "Applying a TCO lens to downtime, safety and workforce costs turns private 5G from a discretionary upgrade into strategic infrastructure.",
+      "published_date": "2026-04-07",
+      "raw_text": "from ‘nice to have’ to business critical: the tco case for private 5g in oil and gas applying a tco lens to downtime, safety and workforce costs turns private 5g from a discretionary upgrade into strategic infrastructure."
+    },
+    {
+      "source_id": "energymonitor",
+      "source_name": "Energy Monitor",
+      "source_url": "https://www.energymonitor.ai/news/south-korea-renewable-power-goal/",
+      "source_segments": [
+        "ess",
+        "grid_sw",
+        "hydrogen"
+      ],
+      "title": "South Korea sets 20% renewable power goal for 2030",
+      "summary": "South Korea plans to raise renewable energy’s share of electricity generation to at least 20% by 2030.",
+      "published_date": "2026-04-07",
+      "raw_text": "south korea sets 20% renewable power goal for 2030 south korea plans to raise renewable energy’s share of electricity generation to at least 20% by 2030."
     }
   ],
   "source_logs": [
@@ -3166,8 +3791,8 @@
       "url": "https://www.canarymedia.com/rss.rss",
       "status": "success",
       "error": null,
-      "items": 28,
-      "fetched_at": "2026-04-07T07:58:57.282385+00:00",
+      "items": 2,
+      "fetched_at": "2026-04-07T18:10:07.344801+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -3185,10 +3810,10 @@
       "id": "eia",
       "name": "EIA Today in Energy",
       "url": "https://www.eia.gov/rss/todayinenergy.xml",
-      "status": "success",
+      "status": "partial",
       "error": null,
-      "items": 1,
-      "fetched_at": "2026-04-07T07:58:57.185644+00:00",
+      "items": 0,
+      "fetched_at": "2026-04-07T18:10:07.587326+00:00",
       "source_type": "government",
       "reliability": 1,
       "topics": [
@@ -3207,8 +3832,8 @@
       "url": "https://www.pv-magazine.com/feed/",
       "status": "success",
       "error": null,
-      "items": 25,
-      "fetched_at": "2026-04-07T07:58:57.502913+00:00",
+      "items": 9,
+      "fetched_at": "2026-04-07T18:10:07.699902+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -3227,8 +3852,8 @@
       "url": "https://www.energy-storage.news/feed/",
       "status": "success",
       "error": null,
-      "items": 49,
-      "fetched_at": "2026-04-07T07:58:57.392952+00:00",
+      "items": 6,
+      "fetched_at": "2026-04-07T18:10:07.521464+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -3247,8 +3872,8 @@
       "url": "https://cleantechnica.com/feed/",
       "status": "success",
       "error": null,
-      "items": 45,
-      "fetched_at": "2026-04-07T07:58:57.310670+00:00",
+      "items": 8,
+      "fetched_at": "2026-04-07T18:10:07.632701+00:00",
       "source_type": "industry",
       "reliability": 3,
       "topics": [
@@ -3268,8 +3893,8 @@
       "url": "https://electrek.co/feed/",
       "status": "success",
       "error": null,
-      "items": 50,
-      "fetched_at": "2026-04-07T07:58:57.427399+00:00",
+      "items": 10,
+      "fetched_at": "2026-04-07T18:10:07.602707+00:00",
       "source_type": "industry",
       "reliability": 3,
       "topics": [
@@ -3288,8 +3913,8 @@
       "url": "https://www.utilitydive.com/feeds/news/",
       "status": "success",
       "error": null,
-      "items": 10,
-      "fetched_at": "2026-04-07T07:58:57.694635+00:00",
+      "items": 5,
+      "fetched_at": "2026-04-07T18:10:07.875647+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -3309,8 +3934,8 @@
       "url": "https://www.offshorewind.biz/feed/",
       "status": "success",
       "error": null,
-      "items": 10,
-      "fetched_at": "2026-04-07T07:58:57.935214+00:00",
+      "items": 3,
+      "fetched_at": "2026-04-07T18:10:08.138747+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
@@ -3329,8 +3954,8 @@
       "url": "https://www.energymonitor.ai/feed/",
       "status": "success",
       "error": null,
-      "items": 10,
-      "fetched_at": "2026-04-07T07:58:57.716997+00:00",
+      "items": 2,
+      "fetched_at": "2026-04-07T18:10:07.865607+00:00",
       "source_type": "industry",
       "reliability": 2,
       "topics": [
