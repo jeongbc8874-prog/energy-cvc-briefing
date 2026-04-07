@@ -2504,28 +2504,28 @@
     "gap_log": {
       "no_contract": {
         "first_seen": "2026-04-05",
-        "last_seen": "2026-04-06",
+        "last_seen": "2026-04-07",
         "absent_streak": 0,
         "resolved": false,
         "resolved_date": null
       },
       "no_cert": {
         "first_seen": "2026-04-05",
-        "last_seen": "2026-04-06",
+        "last_seen": "2026-04-07",
         "absent_streak": 0,
         "resolved": false,
         "resolved_date": null
       },
       "no_buyer": {
         "first_seen": "2026-04-05",
-        "last_seen": "2026-04-06",
+        "last_seen": "2026-04-07",
         "absent_streak": 0,
         "resolved": false,
         "resolved_date": null
       },
       "no_deploy": {
         "first_seen": "2026-04-05",
-        "last_seen": "2026-04-06",
+        "last_seen": "2026-04-07",
         "absent_streak": 0,
         "resolved": false,
         "resolved_date": null
@@ -2539,7 +2539,7 @@
         "memo": "No binding commercial agreement on record. All revenue is hypothetical.",
         "first_seen": "2026-04-05",
         "tags": [],
-        "escalation_days": 1,
+        "escalation_days": 2,
         "escalation_tier": null
       },
       {
@@ -2549,7 +2549,7 @@
         "memo": "No independent certification (DNV GL, TÜV, KPX, UL). Required for regulated procurement.",
         "first_seen": "2026-04-05",
         "tags": [],
-        "escalation_days": 1,
+        "escalation_days": 2,
         "escalation_tier": null
       },
       {
@@ -2559,7 +2559,7 @@
         "memo": "No named strategic buyer in any signal. Demand-side validation absent.",
         "first_seen": "2026-04-05",
         "tags": [],
-        "escalation_days": 1,
+        "escalation_days": 2,
         "escalation_tier": null
       },
       {
@@ -2569,7 +2569,7 @@
         "memo": "No operational deployment confirmed. TRL-9 in commercial setting unverified.",
         "first_seen": "2026-04-05",
         "tags": [],
-        "escalation_days": 1,
+        "escalation_days": 2,
         "escalation_tier": null
       }
     ],
@@ -2579,7 +2579,7 @@
     "all_events": [],
     "signal_count": 0,
     "last_signal_date": "",
-    "profile_date": "2026-04-06",
+    "profile_date": "2026-04-07",
     "profile_version": "8.0",
     "stage_previous": "Lab",
     "_gen_stage_label": "Lab"
@@ -2607,28 +2607,28 @@
     "gap_log": {
       "no_contract": {
         "first_seen": "2026-04-05",
-        "last_seen": "2026-04-06",
+        "last_seen": "2026-04-07",
         "absent_streak": 0,
         "resolved": false,
         "resolved_date": null
       },
       "no_cert": {
         "first_seen": "2026-04-05",
-        "last_seen": "2026-04-06",
+        "last_seen": "2026-04-07",
         "absent_streak": 0,
         "resolved": false,
         "resolved_date": null
       },
       "no_buyer": {
         "first_seen": "2026-04-05",
-        "last_seen": "2026-04-06",
+        "last_seen": "2026-04-07",
         "absent_streak": 0,
         "resolved": false,
         "resolved_date": null
       },
       "no_deploy": {
         "first_seen": "2026-04-05",
-        "last_seen": "2026-04-06",
+        "last_seen": "2026-04-07",
         "absent_streak": 0,
         "resolved": false,
         "resolved_date": null
@@ -2642,7 +2642,7 @@
         "memo": "No binding commercial agreement on record. All revenue is hypothetical.",
         "first_seen": "2026-04-05",
         "tags": [],
-        "escalation_days": 1,
+        "escalation_days": 2,
         "escalation_tier": null
       },
       {
@@ -2652,7 +2652,7 @@
         "memo": "No independent certification (DNV GL, TÜV, KPX, UL). Required for regulated procurement.",
         "first_seen": "2026-04-05",
         "tags": [],
-        "escalation_days": 1,
+        "escalation_days": 2,
         "escalation_tier": null
       },
       {
@@ -2662,7 +2662,7 @@
         "memo": "No named strategic buyer in any signal. Demand-side validation absent.",
         "first_seen": "2026-04-05",
         "tags": [],
-        "escalation_days": 1,
+        "escalation_days": 2,
         "escalation_tier": null
       },
       {
@@ -2672,7 +2672,7 @@
         "memo": "No operational deployment confirmed. TRL-9 in commercial setting unverified.",
         "first_seen": "2026-04-05",
         "tags": [],
-        "escalation_days": 1,
+        "escalation_days": 2,
         "escalation_tier": null
       }
     ],
@@ -2682,7 +2682,7 @@
     "all_events": [],
     "signal_count": 0,
     "last_signal_date": "",
-    "profile_date": "2026-04-06",
+    "profile_date": "2026-04-07",
     "profile_version": "8.0",
     "stage_previous": "Lab",
     "_gen_stage_label": "Lab"
@@ -2709,28 +2709,28 @@
     "gap_log": {
       "no_contract": {
         "first_seen": "2026-04-05",
-        "last_seen": "2026-04-06",
+        "last_seen": "2026-04-07",
         "absent_streak": 0,
         "resolved": false,
         "resolved_date": null
       },
       "no_cert": {
         "first_seen": "2026-04-05",
-        "last_seen": "2026-04-06",
+        "last_seen": "2026-04-07",
         "absent_streak": 0,
         "resolved": false,
         "resolved_date": null
       },
       "no_buyer": {
         "first_seen": "2026-04-05",
-        "last_seen": "2026-04-06",
+        "last_seen": "2026-04-07",
         "absent_streak": 0,
         "resolved": false,
         "resolved_date": null
       },
       "no_deploy": {
         "first_seen": "2026-04-05",
-        "last_seen": "2026-04-06",
+        "last_seen": "2026-04-07",
         "absent_streak": 0,
         "resolved": false,
         "resolved_date": null
@@ -2744,7 +2744,7 @@
         "memo": "No binding commercial agreement on record. All revenue is hypothetical.",
         "first_seen": "2026-04-05",
         "tags": [],
-        "escalation_days": 1,
+        "escalation_days": 2,
         "escalation_tier": null
       },
       {
@@ -2754,7 +2754,7 @@
         "memo": "No independent certification (DNV GL, TÜV, KPX, UL). Required for regulated procurement.",
         "first_seen": "2026-04-05",
         "tags": [],
-        "escalation_days": 1,
+        "escalation_days": 2,
         "escalation_tier": null
       },
       {
@@ -2764,7 +2764,7 @@
         "memo": "No named strategic buyer in any signal. Demand-side validation absent.",
         "first_seen": "2026-04-05",
         "tags": [],
-        "escalation_days": 1,
+        "escalation_days": 2,
         "escalation_tier": null
       },
       {
@@ -2774,7 +2774,7 @@
         "memo": "No operational deployment confirmed. TRL-9 in commercial setting unverified.",
         "first_seen": "2026-04-05",
         "tags": [],
-        "escalation_days": 1,
+        "escalation_days": 2,
         "escalation_tier": null
       }
     ],
@@ -2784,7 +2784,7 @@
     "all_events": [],
     "signal_count": 0,
     "last_signal_date": "",
-    "profile_date": "2026-04-06",
+    "profile_date": "2026-04-07",
     "profile_version": "8.0",
     "stage_previous": "Lab",
     "_gen_stage_label": "Lab"
@@ -2810,28 +2810,28 @@
     "gap_log": {
       "no_contract": {
         "first_seen": "2026-04-05",
-        "last_seen": "2026-04-06",
+        "last_seen": "2026-04-07",
         "absent_streak": 0,
         "resolved": false,
         "resolved_date": null
       },
       "no_cert": {
         "first_seen": "2026-04-05",
-        "last_seen": "2026-04-06",
+        "last_seen": "2026-04-07",
         "absent_streak": 0,
         "resolved": false,
         "resolved_date": null
       },
       "no_buyer": {
         "first_seen": "2026-04-05",
-        "last_seen": "2026-04-06",
+        "last_seen": "2026-04-07",
         "absent_streak": 0,
         "resolved": false,
         "resolved_date": null
       },
       "no_deploy": {
         "first_seen": "2026-04-05",
-        "last_seen": "2026-04-06",
+        "last_seen": "2026-04-07",
         "absent_streak": 0,
         "resolved": false,
         "resolved_date": null
@@ -2845,7 +2845,7 @@
         "memo": "No binding commercial agreement on record. All revenue is hypothetical.",
         "first_seen": "2026-04-05",
         "tags": [],
-        "escalation_days": 1,
+        "escalation_days": 2,
         "escalation_tier": null
       },
       {
@@ -2855,7 +2855,7 @@
         "memo": "No independent certification (DNV GL, TÜV, KPX, UL). Required for regulated procurement.",
         "first_seen": "2026-04-05",
         "tags": [],
-        "escalation_days": 1,
+        "escalation_days": 2,
         "escalation_tier": null
       },
       {
@@ -2865,7 +2865,7 @@
         "memo": "No named strategic buyer in any signal. Demand-side validation absent.",
         "first_seen": "2026-04-05",
         "tags": [],
-        "escalation_days": 1,
+        "escalation_days": 2,
         "escalation_tier": null
       },
       {
@@ -2875,7 +2875,7 @@
         "memo": "No operational deployment confirmed. TRL-9 in commercial setting unverified.",
         "first_seen": "2026-04-05",
         "tags": [],
-        "escalation_days": 1,
+        "escalation_days": 2,
         "escalation_tier": null
       }
     ],
@@ -2885,7 +2885,7 @@
     "all_events": [],
     "signal_count": 0,
     "last_signal_date": "",
-    "profile_date": "2026-04-06",
+    "profile_date": "2026-04-07",
     "profile_version": "8.0",
     "stage_previous": "Lab",
     "_gen_stage_label": "Lab"
@@ -2912,21 +2912,21 @@
     "gap_log": {
       "no_contract": {
         "first_seen": "2026-04-05",
-        "last_seen": "2026-04-06",
+        "last_seen": "2026-04-07",
         "absent_streak": 0,
         "resolved": false,
         "resolved_date": null
       },
       "no_buyer": {
         "first_seen": "2026-04-05",
-        "last_seen": "2026-04-06",
+        "last_seen": "2026-04-07",
         "absent_streak": 0,
         "resolved": false,
         "resolved_date": null
       },
       "no_deploy": {
         "first_seen": "2026-04-05",
-        "last_seen": "2026-04-06",
+        "last_seen": "2026-04-07",
         "absent_streak": 0,
         "resolved": false,
         "resolved_date": null
@@ -2940,7 +2940,7 @@
         "memo": "No binding commercial agreement on record. All revenue is hypothetical.",
         "first_seen": "2026-04-05",
         "tags": [],
-        "escalation_days": 1,
+        "escalation_days": 2,
         "escalation_tier": null
       },
       {
@@ -2950,7 +2950,7 @@
         "memo": "No named strategic buyer in any signal. Demand-side validation absent.",
         "first_seen": "2026-04-05",
         "tags": [],
-        "escalation_days": 1,
+        "escalation_days": 2,
         "escalation_tier": null
       },
       {
@@ -2960,7 +2960,7 @@
         "memo": "No operational deployment confirmed. TRL-9 in commercial setting unverified.",
         "first_seen": "2026-04-05",
         "tags": [],
-        "escalation_days": 1,
+        "escalation_days": 2,
         "escalation_tier": null
       }
     ],
@@ -2970,7 +2970,7 @@
     "all_events": [],
     "signal_count": 0,
     "last_signal_date": "",
-    "profile_date": "2026-04-06",
+    "profile_date": "2026-04-07",
     "profile_version": "8.0",
     "stage_previous": "Lab",
     "_gen_stage_label": "Lab"
@@ -2996,28 +2996,28 @@
     "gap_log": {
       "no_contract": {
         "first_seen": "2026-04-05",
-        "last_seen": "2026-04-06",
+        "last_seen": "2026-04-07",
         "absent_streak": 0,
         "resolved": false,
         "resolved_date": null
       },
       "no_cert": {
         "first_seen": "2026-04-05",
-        "last_seen": "2026-04-06",
+        "last_seen": "2026-04-07",
         "absent_streak": 0,
         "resolved": false,
         "resolved_date": null
       },
       "no_buyer": {
         "first_seen": "2026-04-05",
-        "last_seen": "2026-04-06",
+        "last_seen": "2026-04-07",
         "absent_streak": 0,
         "resolved": false,
         "resolved_date": null
       },
       "no_deploy": {
         "first_seen": "2026-04-05",
-        "last_seen": "2026-04-06",
+        "last_seen": "2026-04-07",
         "absent_streak": 0,
         "resolved": false,
         "resolved_date": null
@@ -3031,7 +3031,7 @@
         "memo": "No binding commercial agreement on record. All revenue is hypothetical.",
         "first_seen": "2026-04-05",
         "tags": [],
-        "escalation_days": 1,
+        "escalation_days": 2,
         "escalation_tier": null
       },
       {
@@ -3041,7 +3041,7 @@
         "memo": "No independent certification (DNV GL, TÜV, KPX, UL). Required for regulated procurement.",
         "first_seen": "2026-04-05",
         "tags": [],
-        "escalation_days": 1,
+        "escalation_days": 2,
         "escalation_tier": null
       },
       {
@@ -3051,7 +3051,7 @@
         "memo": "No named strategic buyer in any signal. Demand-side validation absent.",
         "first_seen": "2026-04-05",
         "tags": [],
-        "escalation_days": 1,
+        "escalation_days": 2,
         "escalation_tier": null
       },
       {
@@ -3061,7 +3061,7 @@
         "memo": "No operational deployment confirmed. TRL-9 in commercial setting unverified.",
         "first_seen": "2026-04-05",
         "tags": [],
-        "escalation_days": 1,
+        "escalation_days": 2,
         "escalation_tier": null
       }
     ],
@@ -3071,7 +3071,7 @@
     "all_events": [],
     "signal_count": 0,
     "last_signal_date": "",
-    "profile_date": "2026-04-06",
+    "profile_date": "2026-04-07",
     "profile_version": "8.0",
     "stage_previous": "Lab",
     "_gen_stage_label": "Lab"
@@ -3097,21 +3097,21 @@
     "gap_log": {
       "no_cert": {
         "first_seen": "2026-04-05",
-        "last_seen": "2026-04-06",
+        "last_seen": "2026-04-07",
         "absent_streak": 0,
         "resolved": false,
         "resolved_date": null
       },
       "no_buyer": {
         "first_seen": "2026-04-05",
-        "last_seen": "2026-04-06",
+        "last_seen": "2026-04-07",
         "absent_streak": 0,
         "resolved": false,
         "resolved_date": null
       },
       "no_deploy": {
         "first_seen": "2026-04-05",
-        "last_seen": "2026-04-06",
+        "last_seen": "2026-04-07",
         "absent_streak": 0,
         "resolved": false,
         "resolved_date": null
@@ -3125,7 +3125,7 @@
         "memo": "No independent certification (DNV GL, TÜV, KPX, UL). Required for regulated procurement.",
         "first_seen": "2026-04-05",
         "tags": [],
-        "escalation_days": 1,
+        "escalation_days": 2,
         "escalation_tier": null
       },
       {
@@ -3135,7 +3135,7 @@
         "memo": "No named strategic buyer in any signal. Demand-side validation absent.",
         "first_seen": "2026-04-05",
         "tags": [],
-        "escalation_days": 1,
+        "escalation_days": 2,
         "escalation_tier": null
       },
       {
@@ -3145,7 +3145,7 @@
         "memo": "No operational deployment confirmed. TRL-9 in commercial setting unverified.",
         "first_seen": "2026-04-05",
         "tags": [],
-        "escalation_days": 1,
+        "escalation_days": 2,
         "escalation_tier": null
       }
     ],
@@ -3298,7 +3298,7 @@
     ],
     "signal_count": 3,
     "last_signal_date": "2026-03-31",
-    "profile_date": "2026-04-06",
+    "profile_date": "2026-04-07",
     "profile_version": "8.0",
     "stage_previous": "PF-Ready",
     "_gen_stage_label": "PF-Ready"
@@ -3324,28 +3324,28 @@
     "gap_log": {
       "no_contract": {
         "first_seen": "2026-04-05",
-        "last_seen": "2026-04-06",
+        "last_seen": "2026-04-07",
         "absent_streak": 0,
         "resolved": false,
         "resolved_date": null
       },
       "no_cert": {
         "first_seen": "2026-04-05",
-        "last_seen": "2026-04-06",
+        "last_seen": "2026-04-07",
         "absent_streak": 0,
         "resolved": false,
         "resolved_date": null
       },
       "no_buyer": {
         "first_seen": "2026-04-05",
-        "last_seen": "2026-04-06",
+        "last_seen": "2026-04-07",
         "absent_streak": 0,
         "resolved": false,
         "resolved_date": null
       },
       "no_deploy": {
         "first_seen": "2026-04-05",
-        "last_seen": "2026-04-06",
+        "last_seen": "2026-04-07",
         "absent_streak": 0,
         "resolved": false,
         "resolved_date": null
@@ -3359,7 +3359,7 @@
         "memo": "No binding commercial agreement on record. All revenue is hypothetical.",
         "first_seen": "2026-04-05",
         "tags": [],
-        "escalation_days": 1,
+        "escalation_days": 2,
         "escalation_tier": null
       },
       {
@@ -3369,7 +3369,7 @@
         "memo": "No independent certification (DNV GL, TÜV, KPX, UL). Required for regulated procurement.",
         "first_seen": "2026-04-05",
         "tags": [],
-        "escalation_days": 1,
+        "escalation_days": 2,
         "escalation_tier": null
       },
       {
@@ -3379,7 +3379,7 @@
         "memo": "No named strategic buyer in any signal. Demand-side validation absent.",
         "first_seen": "2026-04-05",
         "tags": [],
-        "escalation_days": 1,
+        "escalation_days": 2,
         "escalation_tier": null
       },
       {
@@ -3389,7 +3389,7 @@
         "memo": "No operational deployment confirmed. TRL-9 in commercial setting unverified.",
         "first_seen": "2026-04-05",
         "tags": [],
-        "escalation_days": 1,
+        "escalation_days": 2,
         "escalation_tier": null
       }
     ],
@@ -3399,7 +3399,7 @@
     "all_events": [],
     "signal_count": 0,
     "last_signal_date": "",
-    "profile_date": "2026-04-06",
+    "profile_date": "2026-04-07",
     "profile_version": "8.0",
     "stage_previous": "Lab",
     "_gen_stage_label": "Lab"
@@ -3424,21 +3424,21 @@
     "gap_log": {
       "no_contract": {
         "first_seen": "2026-04-05",
-        "last_seen": "2026-04-06",
+        "last_seen": "2026-04-07",
         "absent_streak": 0,
         "resolved": false,
         "resolved_date": null
       },
       "no_buyer": {
         "first_seen": "2026-04-05",
-        "last_seen": "2026-04-06",
+        "last_seen": "2026-04-07",
         "absent_streak": 0,
         "resolved": false,
         "resolved_date": null
       },
       "no_deploy": {
         "first_seen": "2026-04-05",
-        "last_seen": "2026-04-06",
+        "last_seen": "2026-04-07",
         "absent_streak": 0,
         "resolved": false,
         "resolved_date": null
@@ -3452,7 +3452,7 @@
         "memo": "No binding commercial agreement on record. All revenue is hypothetical.",
         "first_seen": "2026-04-05",
         "tags": [],
-        "escalation_days": 1,
+        "escalation_days": 2,
         "escalation_tier": null
       },
       {
@@ -3462,7 +3462,7 @@
         "memo": "No named strategic buyer in any signal. Demand-side validation absent.",
         "first_seen": "2026-04-05",
         "tags": [],
-        "escalation_days": 1,
+        "escalation_days": 2,
         "escalation_tier": null
       },
       {
@@ -3472,7 +3472,7 @@
         "memo": "No operational deployment confirmed. TRL-9 in commercial setting unverified.",
         "first_seen": "2026-04-05",
         "tags": [],
-        "escalation_days": 1,
+        "escalation_days": 2,
         "escalation_tier": null
       }
     ],
@@ -3482,7 +3482,7 @@
     "all_events": [],
     "signal_count": 0,
     "last_signal_date": "",
-    "profile_date": "2026-04-06",
+    "profile_date": "2026-04-07",
     "profile_version": "8.0",
     "stage_previous": "Lab",
     "_gen_stage_label": "Lab"
@@ -3507,28 +3507,28 @@
     "gap_log": {
       "no_contract": {
         "first_seen": "2026-04-05",
-        "last_seen": "2026-04-06",
+        "last_seen": "2026-04-07",
         "absent_streak": 0,
         "resolved": false,
         "resolved_date": null
       },
       "no_cert": {
         "first_seen": "2026-04-05",
-        "last_seen": "2026-04-06",
+        "last_seen": "2026-04-07",
         "absent_streak": 0,
         "resolved": false,
         "resolved_date": null
       },
       "no_buyer": {
         "first_seen": "2026-04-05",
-        "last_seen": "2026-04-06",
+        "last_seen": "2026-04-07",
         "absent_streak": 0,
         "resolved": false,
         "resolved_date": null
       },
       "no_deploy": {
         "first_seen": "2026-04-05",
-        "last_seen": "2026-04-06",
+        "last_seen": "2026-04-07",
         "absent_streak": 0,
         "resolved": false,
         "resolved_date": null
@@ -3542,7 +3542,7 @@
         "memo": "No binding commercial agreement on record. All revenue is hypothetical.",
         "first_seen": "2026-04-05",
         "tags": [],
-        "escalation_days": 1,
+        "escalation_days": 2,
         "escalation_tier": null
       },
       {
@@ -3552,7 +3552,7 @@
         "memo": "No independent certification (DNV GL, TÜV, KPX, UL). Required for regulated procurement.",
         "first_seen": "2026-04-05",
         "tags": [],
-        "escalation_days": 1,
+        "escalation_days": 2,
         "escalation_tier": null
       },
       {
@@ -3562,7 +3562,7 @@
         "memo": "No named strategic buyer in any signal. Demand-side validation absent.",
         "first_seen": "2026-04-05",
         "tags": [],
-        "escalation_days": 1,
+        "escalation_days": 2,
         "escalation_tier": null
       },
       {
@@ -3572,7 +3572,7 @@
         "memo": "No operational deployment confirmed. TRL-9 in commercial setting unverified.",
         "first_seen": "2026-04-05",
         "tags": [],
-        "escalation_days": 1,
+        "escalation_days": 2,
         "escalation_tier": null
       }
     ],
@@ -3582,7 +3582,7 @@
     "all_events": [],
     "signal_count": 0,
     "last_signal_date": "",
-    "profile_date": "2026-04-06",
+    "profile_date": "2026-04-07",
     "profile_version": "8.0",
     "stage_previous": "Lab",
     "_gen_stage_label": "Lab"
@@ -3607,21 +3607,21 @@
     "gap_log": {
       "no_contract": {
         "first_seen": "2026-04-05",
-        "last_seen": "2026-04-06",
+        "last_seen": "2026-04-07",
         "absent_streak": 0,
         "resolved": false,
         "resolved_date": null
       },
       "no_buyer": {
         "first_seen": "2026-04-05",
-        "last_seen": "2026-04-06",
+        "last_seen": "2026-04-07",
         "absent_streak": 0,
         "resolved": false,
         "resolved_date": null
       },
       "no_deploy": {
         "first_seen": "2026-04-05",
-        "last_seen": "2026-04-06",
+        "last_seen": "2026-04-07",
         "absent_streak": 0,
         "resolved": false,
         "resolved_date": null
@@ -3635,7 +3635,7 @@
         "memo": "No binding commercial agreement on record. All revenue is hypothetical.",
         "first_seen": "2026-04-05",
         "tags": [],
-        "escalation_days": 1,
+        "escalation_days": 2,
         "escalation_tier": null
       },
       {
@@ -3645,7 +3645,7 @@
         "memo": "No named strategic buyer in any signal. Demand-side validation absent.",
         "first_seen": "2026-04-05",
         "tags": [],
-        "escalation_days": 1,
+        "escalation_days": 2,
         "escalation_tier": null
       },
       {
@@ -3655,7 +3655,7 @@
         "memo": "No operational deployment confirmed. TRL-9 in commercial setting unverified.",
         "first_seen": "2026-04-05",
         "tags": [],
-        "escalation_days": 1,
+        "escalation_days": 2,
         "escalation_tier": null
       }
     ],
@@ -3665,7 +3665,7 @@
     "all_events": [],
     "signal_count": 0,
     "last_signal_date": "",
-    "profile_date": "2026-04-06",
+    "profile_date": "2026-04-07",
     "profile_version": "8.0",
     "stage_previous": "Lab",
     "_gen_stage_label": "Lab"
@@ -3691,28 +3691,28 @@
     "gap_log": {
       "no_contract": {
         "first_seen": "2026-04-05",
-        "last_seen": "2026-04-06",
+        "last_seen": "2026-04-07",
         "absent_streak": 0,
         "resolved": false,
         "resolved_date": null
       },
       "no_cert": {
         "first_seen": "2026-04-05",
-        "last_seen": "2026-04-06",
+        "last_seen": "2026-04-07",
         "absent_streak": 0,
         "resolved": false,
         "resolved_date": null
       },
       "no_buyer": {
         "first_seen": "2026-04-05",
-        "last_seen": "2026-04-06",
+        "last_seen": "2026-04-07",
         "absent_streak": 0,
         "resolved": false,
         "resolved_date": null
       },
       "no_deploy": {
         "first_seen": "2026-04-05",
-        "last_seen": "2026-04-06",
+        "last_seen": "2026-04-07",
         "absent_streak": 0,
         "resolved": false,
         "resolved_date": null
@@ -3726,7 +3726,7 @@
         "memo": "No binding commercial agreement on record. All revenue is hypothetical.",
         "first_seen": "2026-04-05",
         "tags": [],
-        "escalation_days": 1,
+        "escalation_days": 2,
         "escalation_tier": null
       },
       {
@@ -3736,7 +3736,7 @@
         "memo": "No independent certification (DNV GL, TÜV, KPX, UL). Required for regulated procurement.",
         "first_seen": "2026-04-05",
         "tags": [],
-        "escalation_days": 1,
+        "escalation_days": 2,
         "escalation_tier": null
       },
       {
@@ -3746,7 +3746,7 @@
         "memo": "No named strategic buyer in any signal. Demand-side validation absent.",
         "first_seen": "2026-04-05",
         "tags": [],
-        "escalation_days": 1,
+        "escalation_days": 2,
         "escalation_tier": null
       },
       {
@@ -3756,7 +3756,7 @@
         "memo": "No operational deployment confirmed. TRL-9 in commercial setting unverified.",
         "first_seen": "2026-04-05",
         "tags": [],
-        "escalation_days": 1,
+        "escalation_days": 2,
         "escalation_tier": null
       }
     ],
@@ -3766,7 +3766,7 @@
     "all_events": [],
     "signal_count": 0,
     "last_signal_date": "",
-    "profile_date": "2026-04-06",
+    "profile_date": "2026-04-07",
     "profile_version": "8.0",
     "stage_previous": "Lab",
     "_gen_stage_label": "Lab"
@@ -3792,28 +3792,28 @@
     "gap_log": {
       "no_contract": {
         "first_seen": "2026-04-05",
-        "last_seen": "2026-04-06",
+        "last_seen": "2026-04-07",
         "absent_streak": 0,
         "resolved": false,
         "resolved_date": null
       },
       "no_cert": {
         "first_seen": "2026-04-05",
-        "last_seen": "2026-04-06",
+        "last_seen": "2026-04-07",
         "absent_streak": 0,
         "resolved": false,
         "resolved_date": null
       },
       "no_buyer": {
         "first_seen": "2026-04-05",
-        "last_seen": "2026-04-06",
+        "last_seen": "2026-04-07",
         "absent_streak": 0,
         "resolved": false,
         "resolved_date": null
       },
       "no_deploy": {
         "first_seen": "2026-04-05",
-        "last_seen": "2026-04-06",
+        "last_seen": "2026-04-07",
         "absent_streak": 0,
         "resolved": false,
         "resolved_date": null
@@ -3827,7 +3827,7 @@
         "memo": "No binding commercial agreement on record. All revenue is hypothetical.",
         "first_seen": "2026-04-05",
         "tags": [],
-        "escalation_days": 1,
+        "escalation_days": 2,
         "escalation_tier": null
       },
       {
@@ -3837,7 +3837,7 @@
         "memo": "No independent certification (DNV GL, TÜV, KPX, UL). Required for regulated procurement.",
         "first_seen": "2026-04-05",
         "tags": [],
-        "escalation_days": 1,
+        "escalation_days": 2,
         "escalation_tier": null
       },
       {
@@ -3847,7 +3847,7 @@
         "memo": "No named strategic buyer in any signal. Demand-side validation absent.",
         "first_seen": "2026-04-05",
         "tags": [],
-        "escalation_days": 1,
+        "escalation_days": 2,
         "escalation_tier": null
       },
       {
@@ -3857,7 +3857,7 @@
         "memo": "No operational deployment confirmed. TRL-9 in commercial setting unverified.",
         "first_seen": "2026-04-05",
         "tags": [],
-        "escalation_days": 1,
+        "escalation_days": 2,
         "escalation_tier": null
       }
     ],
@@ -3867,7 +3867,7 @@
     "all_events": [],
     "signal_count": 0,
     "last_signal_date": "",
-    "profile_date": "2026-04-06",
+    "profile_date": "2026-04-07",
     "profile_version": "8.0",
     "stage_previous": "Lab",
     "_gen_stage_label": "Lab"
@@ -3893,28 +3893,28 @@
     "gap_log": {
       "no_contract": {
         "first_seen": "2026-04-05",
-        "last_seen": "2026-04-06",
+        "last_seen": "2026-04-07",
         "absent_streak": 0,
         "resolved": false,
         "resolved_date": null
       },
       "no_cert": {
         "first_seen": "2026-04-05",
-        "last_seen": "2026-04-06",
+        "last_seen": "2026-04-07",
         "absent_streak": 0,
         "resolved": false,
         "resolved_date": null
       },
       "no_buyer": {
         "first_seen": "2026-04-05",
-        "last_seen": "2026-04-06",
+        "last_seen": "2026-04-07",
         "absent_streak": 0,
         "resolved": false,
         "resolved_date": null
       },
       "no_deploy": {
         "first_seen": "2026-04-05",
-        "last_seen": "2026-04-06",
+        "last_seen": "2026-04-07",
         "absent_streak": 0,
         "resolved": false,
         "resolved_date": null
@@ -3928,7 +3928,7 @@
         "memo": "No binding commercial agreement on record. All revenue is hypothetical.",
         "first_seen": "2026-04-05",
         "tags": [],
-        "escalation_days": 1,
+        "escalation_days": 2,
         "escalation_tier": null
       },
       {
@@ -3938,7 +3938,7 @@
         "memo": "No independent certification (DNV GL, TÜV, KPX, UL). Required for regulated procurement.",
         "first_seen": "2026-04-05",
         "tags": [],
-        "escalation_days": 1,
+        "escalation_days": 2,
         "escalation_tier": null
       },
       {
@@ -3948,7 +3948,7 @@
         "memo": "No named strategic buyer in any signal. Demand-side validation absent.",
         "first_seen": "2026-04-05",
         "tags": [],
-        "escalation_days": 1,
+        "escalation_days": 2,
         "escalation_tier": null
       },
       {
@@ -3958,7 +3958,7 @@
         "memo": "No operational deployment confirmed. TRL-9 in commercial setting unverified.",
         "first_seen": "2026-04-05",
         "tags": [],
-        "escalation_days": 1,
+        "escalation_days": 2,
         "escalation_tier": null
       }
     ],
@@ -4014,7 +4014,7 @@
     ],
     "signal_count": 1,
     "last_signal_date": "2026-04-01",
-    "profile_date": "2026-04-06",
+    "profile_date": "2026-04-07",
     "profile_version": "8.0",
     "stage_previous": "Pilot",
     "_gen_stage_label": "Pilot"
@@ -4040,28 +4040,28 @@
     "gap_log": {
       "no_contract": {
         "first_seen": "2026-04-05",
-        "last_seen": "2026-04-06",
+        "last_seen": "2026-04-07",
         "absent_streak": 0,
         "resolved": false,
         "resolved_date": null
       },
       "no_cert": {
         "first_seen": "2026-04-05",
-        "last_seen": "2026-04-06",
+        "last_seen": "2026-04-07",
         "absent_streak": 0,
         "resolved": false,
         "resolved_date": null
       },
       "no_buyer": {
         "first_seen": "2026-04-05",
-        "last_seen": "2026-04-06",
+        "last_seen": "2026-04-07",
         "absent_streak": 0,
         "resolved": false,
         "resolved_date": null
       },
       "no_deploy": {
         "first_seen": "2026-04-05",
-        "last_seen": "2026-04-06",
+        "last_seen": "2026-04-07",
         "absent_streak": 0,
         "resolved": false,
         "resolved_date": null
@@ -4075,7 +4075,7 @@
         "memo": "No binding commercial agreement on record. All revenue is hypothetical.",
         "first_seen": "2026-04-05",
         "tags": [],
-        "escalation_days": 1,
+        "escalation_days": 2,
         "escalation_tier": null
       },
       {
@@ -4085,7 +4085,7 @@
         "memo": "No independent certification (DNV GL, TÜV, KPX, UL). Required for regulated procurement.",
         "first_seen": "2026-04-05",
         "tags": [],
-        "escalation_days": 1,
+        "escalation_days": 2,
         "escalation_tier": null
       },
       {
@@ -4095,7 +4095,7 @@
         "memo": "No named strategic buyer in any signal. Demand-side validation absent.",
         "first_seen": "2026-04-05",
         "tags": [],
-        "escalation_days": 1,
+        "escalation_days": 2,
         "escalation_tier": null
       },
       {
@@ -4105,7 +4105,7 @@
         "memo": "No operational deployment confirmed. TRL-9 in commercial setting unverified.",
         "first_seen": "2026-04-05",
         "tags": [],
-        "escalation_days": 1,
+        "escalation_days": 2,
         "escalation_tier": null
       }
     ],
@@ -4161,7 +4161,7 @@
     ],
     "signal_count": 1,
     "last_signal_date": "2026-04-02",
-    "profile_date": "2026-04-06",
+    "profile_date": "2026-04-07",
     "profile_version": "8.0",
     "stage_previous": "Lab",
     "_gen_stage_label": "Lab"
