@@ -1,18 +1,58 @@
 {
   "date": "2026-04-08",
-  "generated_at": "2026-04-08T14:42:19.492786+00:00",
+  "generated_at": "2026-04-08T15:19:06.520474+00:00",
   "total_articles": 105,
   "sources": 6,
   "articles": [
     {
+      "id": "69f8e8a8f7ee",
+      "title": "Virginia grid utilization bill set to become law",
+      "summary": "<figure><div><img src=\"https://imgproxy.divecdn.com/UHNZCC2PQepisaO0iAHxXxn486MY097xpC_IrDc9J8k/g:nowe:0:307/c:3199:1807/rs:fill:1600:900:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS82STVBMzA1N2IuanBn.webp\" /></div></figure><p>A growing body of research suggests increased grid utilization has broad benefits for utilities and customers, but experts say advanced metering technology is needed to unlock its full potential.</p>",
+      "url": "https://www.utilitydive.com/news/virginia-grid-utilization-bill-dominion/816888/",
+      "published_date": "2026-04-08",
+      "source_id": "utilitydive",
+      "source_name": "Utility Dive",
+      "raw_text": "virginia grid utilization bill set to become law <figure><div><img src=\"https://imgproxy.divecdn.com/uhnzcc2pqepisao0iahxxxn486my097xpc_irdc9j8k/g:nowe:0:307/c:3199:1807/rs:fill:1600:900:1/z3m6ly9kaxzlc2l0zs1zdg9yywdll2rpdmvpbwfnzs82stvbmza1n2iuanbn.webp\" /></div></figure><p>a growing body of research suggests increased grid utilization has broad benefits for utilities and customers, but experts say advanced metering technology is needed to unlock its full potential.</p>"
+    },
+    {
+      "id": "85534f3fe200",
+      "title": "NERC is ‘actively monitoring the grid’ following Iran-linked cyber threat",
+      "summary": "<figure><div><img src=\"https://imgproxy.divecdn.com/wpY4vHm_N3w7SUMZYkHabNaZ-UeT-gbkLtOU5XruXTM/g:ce/rs:fill:1600:900:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9HZXR0eUltYWdlcy0yMjY1NDAyODc3LmpwZw==.webp\" /></div></figure><p>Hackers have disrupted critical U.S. infrastructure by targeting programmable logic controllers, the Cybersecurity and Infrastructure Security Agency warned.</p>",
+      "url": "https://www.utilitydive.com/news/nerc-cisa-iran-war-cyber-hacking/816914/",
+      "published_date": "2026-04-08",
+      "source_id": "utilitydive",
+      "source_name": "Utility Dive",
+      "raw_text": "nerc is ‘actively monitoring the grid’ following iran-linked cyber threat <figure><div><img src=\"https://imgproxy.divecdn.com/wpy4vhm_n3w7sumzykhabnaz-uet-gbkltou5xruxtm/g:ce/rs:fill:1600:900:1/z3m6ly9kaxzlc2l0zs1zdg9yywdll2rpdmvpbwfnzs9hzxr0eultywdlcy0ymjy1ndayodc3lmpwzw==.webp\" /></div></figure><p>hackers have disrupted critical u.s. infrastructure by targeting programmable logic controllers, the cybersecurity and infrastructure security agency warned.</p>"
+    },
+    {
       "id": "8ac91028c23d",
       "title": "Recalibrating the social license for AI infrastructure in the United States",
-      "summary": "<figure><div><img src=\"https://imgproxy.divecdn.com/PPCZaUcvUQikIr1yorDCYRmEdbZctbIjt5kp4FqgHsE/g:ce/rs:fill:1600:900:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9HZXR0eUltYWdlcy0yMjEyMzA0NTk1LmpwZw==.webp\" /></div></figure><p>To counter a public backlash, data center developers must embrace economic reciprocity, while utilities and regulators must design rates that penalize grid stress and reward flexibility,&nbsp;write&nbsp;Fred Bailey of Gideon Arktos and Frank Willey at the Atlantic Council.",
+      "summary": "<figure><div><img src=\"https://imgproxy.divecdn.com/PPCZaUcvUQikIr1yorDCYRmEdbZctbIjt5kp4FqgHsE/g:ce/rs:fill:1600:900:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9HZXR0eUltYWdlcy0yMjEyMzA0NTk1LmpwZw==.webp\" /></div></figure><p>To counter a public backlash, data center developers must embrace economic reciprocity while utilities and regulators must design rates that penalize grid stress and reward flexibility,&nbsp;write&nbsp;Fred Bailey of Gideon Arktos and Frank Willey at the Atlantic Council.<",
       "url": "https://www.utilitydive.com/news/recalibrating-the-social-license-for-ai-infrastructure-in-the-united-states/815236/",
       "published_date": "2026-04-08",
       "source_id": "utilitydive",
       "source_name": "Utility Dive",
-      "raw_text": "recalibrating the social license for ai infrastructure in the united states <figure><div><img src=\"https://imgproxy.divecdn.com/ppczaucvuqikir1yordcyrmedbzctbijt5kp4fqghse/g:ce/rs:fill:1600:900:1/z3m6ly9kaxzlc2l0zs1zdg9yywdll2rpdmvpbwfnzs9hzxr0eultywdlcy0ymjeymza0ntk1lmpwzw==.webp\" /></div></figure><p>to counter a public backlash, data center developers must embrace economic reciprocity, while utilities and regulators must design rates that penalize grid stress and reward flexibility,&nbsp;write&nbsp;fred bailey of gideon arktos and frank willey at the atlantic council.</p>"
+      "raw_text": "recalibrating the social license for ai infrastructure in the united states <figure><div><img src=\"https://imgproxy.divecdn.com/ppczaucvuqikir1yordcyrmedbzctbijt5kp4fqghse/g:ce/rs:fill:1600:900:1/z3m6ly9kaxzlc2l0zs1zdg9yywdll2rpdmvpbwfnzs9hzxr0eultywdlcy0ymjeymza0ntk1lmpwzw==.webp\" /></div></figure><p>to counter a public backlash, data center developers must embrace economic reciprocity while utilities and regulators must design rates that penalize grid stress and reward flexibility,&nbsp;write&nbsp;fred bailey of gideon arktos and frank willey at the atlantic council.</p>"
+    },
+    {
+      "id": "01004500c917",
+      "title": "Large-scale solar surpasses 1 TWac worldwide",
+      "summary": "Analysis from Wiki-Solar finds the world's 33 largest utility-scale solar markets had a cumulative capacity of 1,008 GWac by the end of last year.",
+      "url": "https://www.pv-magazine.com/2026/04/08/large-scale-solar-surpasses-1-twac-worldwide/",
+      "published_date": "2026-04-08",
+      "source_id": "pvmagazine",
+      "source_name": "PV Magazine",
+      "raw_text": "large-scale solar surpasses 1 twac worldwide analysis from wiki-solar finds the world's 33 largest utility-scale solar markets had a cumulative capacity of 1,008 gwac by the end of last year."
+    },
+    {
+      "id": "32315ebb409e",
+      "title": "Brazil approves first co-located solar and battery project",
+      "summary": "Brazil’s National Electric Energy Agency (Aneel) has authorized a 5 MWh battery system co-located with a solar plant, setting a regulatory precedent for integrated storage.",
+      "url": "https://www.pv-magazine.com/2026/04/08/brazil-approves-first-co-located-solar-and-battery-project/",
+      "published_date": "2026-04-08",
+      "source_id": "pvmagazine",
+      "source_name": "PV Magazine",
+      "raw_text": "brazil approves first co-located solar and battery project brazil’s national electric energy agency (aneel) has authorized a 5 mwh battery system co-located with a solar plant, setting a regulatory precedent for integrated storage."
     },
     {
       "id": "f0ac040a97e0",
@@ -25,14 +65,14 @@
       "raw_text": "blackstone and sunotec enter €250 million partnership investment firm blackstone has announced plans for a partnership with solar and storage project developer sunotec, via a €250 million ($292.4 million) structured equity investment. the investment will support sunotec’s project plans in europe, as well as the company’s expansion into new areas including building grid infrastructure."
     },
     {
-      "id": "d335c68e36bb",
-      "title": "Renalfa venture targets 3.6 GWh hybrid BESS cluster in Romania",
+      "id": "736dceed7f2b",
+      "title": "Utility-scale sodium-ion arrives in Romania",
       "summary": "Renalfa Power Clusters plans to combine newly acquired solar and battery assets in Romania into a hybrid project using lithium-ion and sodium-ion storage.",
       "url": "https://www.pv-magazine.com/2026/04/08/renalfa-targets-3-6-gwh-hybrid-bess-cluster-in-romania/",
       "published_date": "2026-04-08",
       "source_id": "pvmagazine",
       "source_name": "PV Magazine",
-      "raw_text": "renalfa venture targets 3.6 gwh hybrid bess cluster in romania renalfa power clusters plans to combine newly acquired solar and battery assets in romania into a hybrid project using lithium-ion and sodium-ion storage."
+      "raw_text": "utility-scale sodium-ion arrives in romania renalfa power clusters plans to combine newly acquired solar and battery assets in romania into a hybrid project using lithium-ion and sodium-ion storage."
     },
     {
       "id": "440e646671bc",
@@ -425,26 +465,6 @@
       "raw_text": "gcl optoelectronic targets 2026 ipo, us plant, space solar rollout gcl technology says its gcl optoelectronic subsidiary plans a hong kong initial public offering (ipo) in 2026, alongside a potential 500 mw factory in the united states and a roadmap for space-based solar."
     },
     {
-      "id": "da147a9e1edf",
-      "title": "PV-driven hydraulic hydro storage may hit $0.022/kWh LCOE in the U.S.",
-      "summary": "An international study has demonstrated that utility-scale solar PV paired with hydraulic hydro storage (HHS) could reach an LCOE as low as $0.022/kWh in select U.S. regions. The system could provide GWh-scale, cost-competitive, and highly reliable long-duration storage, capable of powering large commercial districts with minimal environmental impact.",
-      "url": "https://www.pv-magazine.com/2026/04/07/pv-driven-hydraulic-hydro-storage-may-hit-0-022-kwh-lcoe-in-the-u-s/",
-      "published_date": "2026-04-07",
-      "source_id": "pvmagazine",
-      "source_name": "PV Magazine",
-      "raw_text": "pv-driven hydraulic hydro storage may hit $0.022/kwh lcoe in the u.s. an international study has demonstrated that utility-scale solar pv paired with hydraulic hydro storage (hhs) could reach an lcoe as low as $0.022/kwh in select u.s. regions. the system could provide gwh-scale, cost-competitive, and highly reliable long-duration storage, capable of powering large commercial districts with minimal environmental impact."
-    },
-    {
-      "id": "2a03c462572c",
-      "title": "Colorado House passes legislation to legalize plug-in solar for renters",
-      "summary": "The Colorado House of Representatives has passed a bill to legalize plug-in solar systems for renters and multifamily residents, establishing a regulatory framework for portable arrays that connect directly to standard home outlets.",
-      "url": "https://www.pv-magazine.com/2026/04/07/colorado-house-passes-legislation-to-legalize-plug-in-solar-for-renters/",
-      "published_date": "2026-04-07",
-      "source_id": "pvmagazine",
-      "source_name": "PV Magazine",
-      "raw_text": "colorado house passes legislation to legalize plug-in solar for renters the colorado house of representatives has passed a bill to legalize plug-in solar systems for renters and multifamily residents, establishing a regulatory framework for portable arrays that connect directly to standard home outlets."
-    },
-    {
       "id": "7692937c184e",
       "title": "VIDEO: Extracting more value from battery storage assets in Australia’s NEM",
       "summary": "In this webinar, GridBeyond's Scott Berrie and Paul Conlon explore how to extract more value from battery storage assets in Australia’s NEM.",
@@ -723,26 +743,6 @@
       "source_id": "utilitydive",
       "source_name": "Utility Dive",
       "raw_text": "greenhouse gas protocol changes can bring trust back to climate accounting <figure><div><img src=\"https://imgproxy.divecdn.com/edk_mlepb2ynzijtex3uw_m3ck8bz8abd77z8p2xq80/g:nowe:0:320/c:3200:1807/rs:fill:1600:900:1/z3m6ly9kaxzlc2l0zs1zdg9yywdll2rpdmvpbwfnzs9hzxr0eultywdlcy0ymje2otuxmze5lmpwzw==.webp\" /></div></figure><p>common claims of 100% reliance on wind and solar are clearly at odds with the physical reality of companies&rsquo; electricity supply, writes&nbsp;wilson ricks at the clean air task force.</p>"
-    },
-    {
-      "id": "21933328384f",
-      "title": "Nevada PUC approves NV Energy plan to join day-ahead market",
-      "summary": "<p>The decision comes as markets are expanding in the West, with utilities opting between ones run by the California Independent System Operator and the Southwest Power Pool.</p>",
-      "url": "https://www.utilitydive.com/news/nevada-puc-nv-energy-caiso-edam-day-ahead-market/816690/",
-      "published_date": "2026-04-06",
-      "source_id": "utilitydive",
-      "source_name": "Utility Dive",
-      "raw_text": "nevada puc approves nv energy plan to join day-ahead market <p>the decision comes as markets are expanding in the west, with utilities opting between ones run by the california independent system operator and the southwest power pool.</p>"
-    },
-    {
-      "id": "5269146b95f8",
-      "title": "Minnesota approves Xcel’s utility-owned battery program",
-      "summary": "<figure><div><img src=\"https://imgproxy.divecdn.com/dzvTAs6NL9GkRRzaNu3FSRvVX39DBzQ9sWHuL4vuVTk/g:ce/rs:fill:1600:900:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9jY20yMTAxMDgtMDM0Ni5qcGc=.webp\" /></div></figure><p>Xcel&nbsp;will own up to 200 MW of energy storage under the second phase of its Capacity*Connect program. Solar industry groups and others called it a missed opportunity to include&nbsp;independent developers.&nbsp;</p>",
-      "url": "https://www.utilitydive.com/news/minnesota-approves-xcels-controversial-utility-owned-virtual-power-plant/816673/",
-      "published_date": "2026-04-06",
-      "source_id": "utilitydive",
-      "source_name": "Utility Dive",
-      "raw_text": "minnesota approves xcel’s utility-owned battery program <figure><div><img src=\"https://imgproxy.divecdn.com/dzvtas6nl9gkrrzanu3fsrvvx39dbzq9swhul4vuvtk/g:ce/rs:fill:1600:900:1/z3m6ly9kaxzlc2l0zs1zdg9yywdll2rpdmvpbwfnzs9jy20ymtaxmdgtmdm0ni5qcgc=.webp\" /></div></figure><p>xcel&nbsp;will own up to 200 mw of energy storage under the second phase of its capacity*connect program. solar industry groups and others called it a missed opportunity to include&nbsp;independent developers.&nbsp;</p>"
     },
     {
       "id": "128d8ee7dc0c",

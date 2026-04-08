@@ -1,0 +1,99 @@
+{
+  "date": "2026-04-08",
+  "generated_at": "2026-04-08T15:19:06.584135+00:00",
+  "total_raw": 105,
+  "total_capital_events": 4,
+  "capital_flow_feed": [
+    {
+      "id": "f30b410f6dbc",
+      "event_type": "capital_signal",
+      "title": "IPPs Zelestra, BNZ adding BESS to solar PV plants in Southern Europe",
+      "date": "2026-04-08",
+      "score": 40,
+      "company_name": "IPPs",
+      "sector": "unknown",
+      "amount": null,
+      "source_name": "Energy Storage News",
+      "source_url": "https://www.energy-storage.news/ipps-zelestra-bnz-adding-bess-to-solar-pv-plants-in-southern-europe/",
+      "why_important": "관련 신호",
+      "tags": [
+        "capital_flow"
+      ]
+    },
+    {
+      "id": "440e646671bc",
+      "event_type": "capital_signal",
+      "title": "Voltalia secures €100 million financing amid restructuring",
+      "date": "2026-04-08",
+      "score": 45,
+      "company_name": "Voltalia",
+      "sector": "unknown",
+      "amount": null,
+      "source_name": "PV Magazine",
+      "source_url": "https://www.pv-magazine.com/2026/04/08/voltalia-secures-e100-million-financing-amid-restructuring/",
+      "why_important": "관련 신호",
+      "tags": [
+        "capital_flow"
+      ]
+    },
+    {
+      "id": "a11566549a5e",
+      "event_type": "capital_signal",
+      "title": "Boralex, Six Nations of the Grand River secure US$145 million financing for 500MWh Ontario BESS",
+      "date": "2026-04-07",
+      "score": 45,
+      "company_name": "Boralex,",
+      "sector": "unknown",
+      "amount": null,
+      "source_name": "Energy Storage News",
+      "source_url": "https://www.energy-storage.news/boralex-six-nations-of-the-grand-river-secure-us145-million-financing-for-500mwh-ontario-bess/",
+      "why_important": "관련 신호",
+      "tags": [
+        "capital_flow"
+      ]
+    },
+    {
+      "id": "11100e305b79",
+      "event_type": "funding_round",
+      "title": "EnerVenue closes US$300 million Series B for 30,000-cycle nickel-hydrogen battery manufacturing",
+      "date": "2026-04-01",
+      "score": 75,
+      "company_name": "EnerVenue",
+      "sector": "unknown",
+      "amount": null,
+      "source_name": "Energy Storage News",
+      "source_url": "https://www.energy-storage.news/enervenue-closes-us300-million-series-b-for-30000-cycle-nickel-hydrogen-battery-manufacturing/",
+      "why_important": "자본 흐름 관련 신호 감지",
+      "tags": [
+        "capital_flow"
+      ]
+    }
+  ],
+  "top_funding": [
+    {
+      "id": "11100e305b79",
+      "event_type": "funding_round",
+      "title": "EnerVenue closes US$300 million Series B for 30,000-cycle nickel-hydrogen battery manufacturing",
+      "date": "2026-04-01",
+      "score": 75,
+      "company_name": "EnerVenue",
+      "sector": "unknown",
+      "amount": null,
+      "source_name": "Energy Storage News",
+      "source_url": "https://www.energy-storage.news/enervenue-closes-us300-million-series-b-for-30000-cycle-nickel-hydrogen-battery-manufacturing/",
+      "why_important": "자본 흐름 관련 신호 감지",
+      "tags": [
+        "capital_flow"
+      ]
+    }
+  ],
+  "sector_heat": {
+    "ess": 65,
+    "hydrogen": 48,
+    "grid_sw": 72
+  },
+  "stats": {
+    "high_score_events": 1,
+    "funding_related": 1
+  }
+}
