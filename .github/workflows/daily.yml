@@ -1,13 +1,43 @@
-- name: Collect signals
-  run: BASE_DIR=data python collect_energy_signals.py
+name: Daily Energy Capital Flow
 
-- name: Process capital flow
-  run: python process_capital_flow.py
+on:
+  schedule:
+    - cron: '0 15 * * *'    # KST 00:00
+    - cron: '0 3 * * *'     # KST 12:00
+  workflow_dispatch:
 
-- name: Commit & push data
-  run: |
-    git config --local user.email "action@github.com"
-    git config --local user.name "CVC AI Agent"
-    git add data/
-    git diff --quiet && git diff --staged --quiet || git commit -m "Daily capital flow update: $(date '+%Y-%m-%d')"
-    git push
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install feedparser
+
+      - name: Collect signals
+        run: BASE_DIR=data python collect_energy_signals.py
+
+      - name: Process capital flow
+        run: python process_capital_flow.py
+
+      - name: Commit & push data
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "CVC AI Agent"
+          git add data/
+          git diff --quiet && git diff --staged --quiet || \
+            git commit -m "Daily capital flow update: $(date '+%Y-%m-%d %H:%M')"
+          git push
