@@ -1,55 +1,13 @@
-name: Daily Energy CVC Signals
+- name: Collect signals
+  run: BASE_DIR=data python collect_energy_signals.py
 
-on:
-  schedule:
-    - cron: '0 15 * * *'     # 매일 KST 00:00 (UTC 15:00)
-    - cron: '0 3 * * *'      # 매일 KST 12:00 (UTC 03:00)
-    - cron: '0 15 * * 0'     # 매주 일요일 KST 00:00 — reset 트리거용
-  workflow_dispatch:
+- name: Process capital flow
+  run: python process_capital_flow.py
 
-permissions:
-  contents: write
-
-jobs:
-  generate:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-
-      - name: Install dependencies
-        run: pip install feedparser anthropic rapidfuzz
-
-      - name: Reset disabled feeds (weekly, Sunday)
-        if: github.event.schedule == '0 15 * * 0'
-        run: BASE_DIR=data python collect_energy_signals.py --reset-health
-
-      - name: Collect signals
-        run: BASE_DIR=data python collect_energy_signals.py
-
-      - name: Run signal pipeline
-        run: python generate-signals.py
-        env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-
-      - name: Build company profiles
-        run: python build_company_profile.py
-        env:
-          BASE_DIR: data
-
-      - name: Commit & push data
-        run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "CVC AI Agent"
-          git add data/
-          git diff --quiet && git diff --staged --quiet || \
-            git commit -m "Daily signals: $(date '+%Y-%m-%d %H:%M KST')"
-          git push
+- name: Commit & push data
+  run: |
+    git config --local user.email "action@github.com"
+    git config --local user.name "CVC AI Agent"
+    git add data/
+    git diff --quiet && git diff --staged --quiet || git commit -m "Daily capital flow update: $(date '+%Y-%m-%d')"
+    git push
