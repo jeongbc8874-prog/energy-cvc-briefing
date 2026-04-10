@@ -1,0 +1,1058 @@
+{
+  "date": "2026-04-10",
+  "generated_at": "2026-04-10T08:11:57.680426+00:00",
+  "total_articles": 105,
+  "sources": 6,
+  "articles": [
+    {
+      "id": "753cf652ba57",
+      "title": "Solar PV Capex could fall to $192/kW by 2050",
+      "summary": "A review of 60 renewable energy studies finds that by 2050, solar PV and wind could supply 80–100% of electricity, but overly conservative Capex assumptions and simplified PV modeling often underestimate deployment potential. While future PV costs depend on supply chains and geopolitical risks, historical experience suggests medium-term risks are manageable, and material constraints are being resolved.",
+      "url": "https://www.pv-magazine.com/2026/04/10/pv-capex/",
+      "published_date": "2026-04-10",
+      "source_id": "pvmagazine",
+      "source_name": "PV Magazine",
+      "raw_text": "solar pv capex could fall to $192/kw by 2050 a review of 60 renewable energy studies finds that by 2050, solar pv and wind could supply 80–100% of electricity, but overly conservative capex assumptions and simplified pv modeling often underestimate deployment potential. while future pv costs depend on supply chains and geopolitical risks, historical experience suggests medium-term risks are manageable, and material constraints are being resolved."
+    },
+    {
+      "id": "3018d15b225c",
+      "title": "Dust, storms drag southern European solar as central regions outperform in March",
+      "summary": "In a new weekly update for <b>pv magazine</b>, Solcast, a DNV company, reports that Saharan dust caused widespread panel soiling in southern Europe in early May, while much of central and eastern Europe benefitted from above-average solar resources. Favourable conditions broke down later in the month as cold polar air and a powerful storm system brought cloud, snow and damaging winds to many parts of the continent.",
+      "url": "https://www.pv-magazine.com/2026/04/10/dust-storms-drag-southern-european-solar-as-central-regions-outperform-in-march/",
+      "published_date": "2026-04-10",
+      "source_id": "pvmagazine",
+      "source_name": "PV Magazine",
+      "raw_text": "dust, storms drag southern european solar as central regions outperform in march in a new weekly update for <b>pv magazine</b>, solcast, a dnv company, reports that saharan dust caused widespread panel soiling in southern europe in early may, while much of central and eastern europe benefitted from above-average solar resources. favourable conditions broke down later in the month as cold polar air and a powerful storm system brought cloud, snow and damaging winds to many parts of the continent."
+    },
+    {
+      "id": "4c2da59c468e",
+      "title": "Solarport launches modular PV carport series",
+      "summary": "Solarport has launched the modular PowerPark PRO PV carport series, designed to meet UK/EU parking standards and adapt to various site layouts with multiple configurations and orientations.",
+      "url": "https://www.pv-magazine.com/2026/04/10/solarport-launches-modular-pv-carport-series/",
+      "published_date": "2026-04-10",
+      "source_id": "pvmagazine",
+      "source_name": "PV Magazine",
+      "raw_text": "solarport launches modular pv carport series solarport has launched the modular powerpark pro pv carport series, designed to meet uk/eu parking standards and adapt to various site layouts with multiple configurations and orientations."
+    },
+    {
+      "id": "e16fc904ce15",
+      "title": "Kosol Energie airlifts solar cells to avoid delays",
+      "summary": "Kosol Energie has used air freight to sustain PV module production, as supply constraints pressure timelines across utility-scale and commercial and industrial (C&#38;I) segments.",
+      "url": "https://www.pv-magazine.com/2026/04/10/kosol-energie-airlifts-solar-cells-to-avoid-delays/",
+      "published_date": "2026-04-10",
+      "source_id": "pvmagazine",
+      "source_name": "PV Magazine",
+      "raw_text": "kosol energie airlifts solar cells to avoid delays kosol energie has used air freight to sustain pv module production, as supply constraints pressure timelines across utility-scale and commercial and industrial (c&#38;i) segments."
+    },
+    {
+      "id": "bf3d25a9c9c5",
+      "title": "How Switzerland plans to integrate 40 GW of solar by 2050",
+      "summary": "Swiss national grid company Swissgrid teamed up with a group of Swiss energy expects to publish a white paper covering how Switzerland can integrate up to 40 GW of solar by 2050 while maintaining safe and reliable operation of the grid.",
+      "url": "https://www.pv-magazine.com/2026/04/10/how-switzerland-plans-to-integrate-40-gw-of-solar-by-2050/",
+      "published_date": "2026-04-10",
+      "source_id": "pvmagazine",
+      "source_name": "PV Magazine",
+      "raw_text": "how switzerland plans to integrate 40 gw of solar by 2050 swiss national grid company swissgrid teamed up with a group of swiss energy expects to publish a white paper covering how switzerland can integrate up to 40 gw of solar by 2050 while maintaining safe and reliable operation of the grid."
+    },
+    {
+      "id": "fd898492d294",
+      "title": "California community solar proposal ‘virtually ensures’ no new projects",
+      "summary": "A proposed decision by the California Public Utilities Commission (CPUC) has drawn criticism from industry groups, who say it fails to support a viable market for community solar.",
+      "url": "https://www.pv-magazine.com/2026/04/10/california-community-solar-proposal-virtually-ensures-no-new-projects/",
+      "published_date": "2026-04-10",
+      "source_id": "pvmagazine",
+      "source_name": "PV Magazine",
+      "raw_text": "california community solar proposal ‘virtually ensures’ no new projects a proposed decision by the california public utilities commission (cpuc) has drawn criticism from industry groups, who say it fails to support a viable market for community solar."
+    },
+    {
+      "id": "a154df65f3e7",
+      "title": "Internet-of-Things could bring solar module water cooling closer to commercial viability",
+      "summary": "A Czech team developed an IoT system using MQTT to autonomously cool PV panels, boosting daily energy yield by 7.38% with a positive net energy balance.",
+      "url": "https://www.pv-magazine.com/2026/04/10/internet-of-things-could-bring-solar-module-water-cooling-closer-to-commercial-viability/",
+      "published_date": "2026-04-10",
+      "source_id": "pvmagazine",
+      "source_name": "PV Magazine",
+      "raw_text": "internet-of-things could bring solar module water cooling closer to commercial viability a czech team developed an iot system using mqtt to autonomously cool pv panels, boosting daily energy yield by 7.38% with a positive net energy balance."
+    },
+    {
+      "id": "96db76ab46e5",
+      "title": "U.S. scientists build copper-contacted TOPCon solar cell with 24.3% efficiency",
+      "summary": "The TOPCon solar cells with fabricated with screen-printed, fire-through copper rear contacts and silver front contacts, using laser-enhanced contact optimization (LECO) to significantly reduce contact resistivity. Optimized copper cells achieved 24.3% efficiency, comparable to Ag-contacted cells, with excellent stability.",
+      "url": "https://www.pv-magazine.com/2026/04/10/u-s-scientists-build-copper-contacted-topcon-solar-cell-with-24-3-efficiency/",
+      "published_date": "2026-04-10",
+      "source_id": "pvmagazine",
+      "source_name": "PV Magazine",
+      "raw_text": "u.s. scientists build copper-contacted topcon solar cell with 24.3% efficiency the topcon solar cells with fabricated with screen-printed, fire-through copper rear contacts and silver front contacts, using laser-enhanced contact optimization (leco) to significantly reduce contact resistivity. optimized copper cells achieved 24.3% efficiency, comparable to ag-contacted cells, with excellent stability."
+    },
+    {
+      "id": "46ac399e20d5",
+      "title": "New tech reduces silver use in TOPCon solar cells by a factor of 10",
+      "summary": "Researchers at the Fraunhofer Institute for Solar Energy Systems ISE have reduced silver consumption in solar cell metallization to 1.1 mg/Wp using an electrodeposition-based process, down from current levels of 10–12 mg/Wp.",
+      "url": "https://www.pv-magazine.com/2026/04/10/new-tech-reduces-silver-use-in-topcon-solar-cells-by-a-factor-of-10/",
+      "published_date": "2026-04-10",
+      "source_id": "pvmagazine",
+      "source_name": "PV Magazine",
+      "raw_text": "new tech reduces silver use in topcon solar cells by a factor of 10 researchers at the fraunhofer institute for solar energy systems ise have reduced silver consumption in solar cell metallization to 1.1 mg/wp using an electrodeposition-based process, down from current levels of 10–12 mg/wp."
+    },
+    {
+      "id": "b7cfd4e63222",
+      "title": "Australia: Battery storage cushions AU$1 billion fuel shock as Climate Council demands May budget action",
+      "summary": "Australia's heavy reliance on imported fossil fuels has left households and businesses dangerously exposed to global energy shocks, with the current conflict involving the US and Iran costing motorists more than AU$1 billion (US$710 million) in March alone.",
+      "url": "https://www.energy-storage.news/australia-battery-storage-cushions-au1-billion-fuel-shock-as-climate-council-demands-may-budget-action/",
+      "published_date": "2026-04-10",
+      "source_id": "energystoragenews",
+      "source_name": "Energy Storage News",
+      "raw_text": "australia: battery storage cushions au$1 billion fuel shock as climate council demands may budget action australia's heavy reliance on imported fossil fuels has left households and businesses dangerously exposed to global energy shocks, with the current conflict involving the us and iran costing motorists more than au$1 billion (us$710 million) in march alone."
+    },
+    {
+      "id": "65973409e262",
+      "title": "‘75% of what we need is not there’: Australian states race to deploy gigawatts of battery storage",
+      "summary": "New South Wales has been warned that it must accelerate the development of battery energy storage systems to meet its 2030 targets.",
+      "url": "https://www.energy-storage.news/75-of-what-we-need-is-not-there-australian-states-race-to-deploy-gigawatts-of-battery-storage/",
+      "published_date": "2026-04-10",
+      "source_id": "energystoragenews",
+      "source_name": "Energy Storage News",
+      "raw_text": "‘75% of what we need is not there’: australian states race to deploy gigawatts of battery storage new south wales has been warned that it must accelerate the development of battery energy storage systems to meet its 2030 targets."
+    },
+    {
+      "id": "cd49a5fea3d4",
+      "title": "Energy Vault the latest international player to tap Japan’s BESS market potential",
+      "summary": "Energy Vault has entered what it has described as “one of the world’s fastest-growing energy storage markets,” acquiring a portfolio of development projects in Japan.",
+      "url": "https://www.energy-storage.news/energy-vault-the-latest-international-player-to-tap-japans-bess-market-potential/",
+      "published_date": "2026-04-10",
+      "source_id": "energystoragenews",
+      "source_name": "Energy Storage News",
+      "raw_text": "energy vault the latest international player to tap japan’s bess market potential energy vault has entered what it has described as “one of the world’s fastest-growing energy storage markets,” acquiring a portfolio of development projects in japan."
+    },
+    {
+      "id": "74d1b72f9af1",
+      "title": "As EV load grows, utilities use managed charging to harness flexibility, lower costs",
+      "summary": "<figure><div><img src=\"https://imgproxy.divecdn.com/dQZC3zDD6-8maaV3QF70tFnSRv2oDve1L0UyVD7w5-Q/g:ce/rs:fill:1600:900:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9SaXZpYW4uanBn.webp\" /></div></figure><p>Active managed charging can delay costly system upgrades while saving individual customers money on their bills, utilities, automakers and aggregators say, but a lack of standardized data-sharing is slowing adoption.</p>",
+      "url": "https://www.utilitydive.com/news/as-ev-load-grows-utilities-use-managed-charging-to-harness-flexibility-lo/816859/",
+      "published_date": "2026-04-09",
+      "source_id": "utilitydive",
+      "source_name": "Utility Dive",
+      "raw_text": "as ev load grows, utilities use managed charging to harness flexibility, lower costs <figure><div><img src=\"https://imgproxy.divecdn.com/dqzc3zdd6-8maav3qf70tfnsrv2odve1l0uyvd7w5-q/g:ce/rs:fill:1600:900:1/z3m6ly9kaxzlc2l0zs1zdg9yywdll2rpdmvpbwfnzs9saxzpyw4uanbn.webp\" /></div></figure><p>active managed charging can delay costly system upgrades while saving individual customers money on their bills, utilities, automakers and aggregators say, but a lack of standardized data-sharing is slowing adoption.</p>"
+    },
+    {
+      "id": "d0169f08ee63",
+      "title": "Fervo enters 1.75-GW geothermal turbine supply deal with Turboden",
+      "summary": "<figure><div><img src=\"https://imgproxy.divecdn.com/vovqRoLyyKJpeY7qcrsjTHRlLDfWoQJqNFA2seWSybY/g:ce/rs:fill:1600:900:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9jYXBlLXN0YXRpb24tYmVhdmVyLWNvdW50eS5qcGc=.webp\" /></div></figure><p>The commitment is a step up from a previous agreement between the companies for Turboden to supply Fervo with turbines to support 150 MW in capacity.</p>",
+      "url": "https://www.utilitydive.com/news/fervo-turboden-enhanced-geothermal-turbines-vallourec/817096/",
+      "published_date": "2026-04-09",
+      "source_id": "utilitydive",
+      "source_name": "Utility Dive",
+      "raw_text": "fervo enters 1.75-gw geothermal turbine supply deal with turboden <figure><div><img src=\"https://imgproxy.divecdn.com/vovqrolyykjpey7qcrsjthrlldfwoqjqnfa2sewsyby/g:ce/rs:fill:1600:900:1/z3m6ly9kaxzlc2l0zs1zdg9yywdll2rpdmvpbwfnzs9jyxbllxn0yxrpb24tymvhdmvylwnvdw50es5qcgc=.webp\" /></div></figure><p>the commitment is a step up from a previous agreement between the companies for turboden to supply fervo with turbines to support 150 mw in capacity.</p>"
+    },
+    {
+      "id": "98856b90e160",
+      "title": "Gas turbine supply crunch set to raise prices 195% by 2027: WoodMac",
+      "summary": "<figure><div><img src=\"https://imgproxy.divecdn.com/D44Q4q1C8kjOr00YUlZQVbeeKcqxkcdpxqDQejXArPw/g:ce/rs:fill:1600:900:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9ib282STVBMjU1Ny5qcGc=.webp\" /></div></figure><p>Restricted shipping through&nbsp;the Strait of Hormuz is also likely to impact the price and availability&nbsp;of gas turbine&nbsp;components, said Bobby Noble, a senior program manager at the Electric Power Research Institute.</p>",
+      "url": "https://www.utilitydive.com/news/gas-turbine-supply-crunch-set-to-raise-prices-195-by-2027-woodmac/816904/",
+      "published_date": "2026-04-09",
+      "source_id": "utilitydive",
+      "source_name": "Utility Dive",
+      "raw_text": "gas turbine supply crunch set to raise prices 195% by 2027: woodmac <figure><div><img src=\"https://imgproxy.divecdn.com/d44q4q1c8kjor00yulzqvbeekcqxkcdpxqdqejxarpw/g:ce/rs:fill:1600:900:1/z3m6ly9kaxzlc2l0zs1zdg9yywdll2rpdmvpbwfnzs9ib282stvbmju1ny5qcgc=.webp\" /></div></figure><p>restricted shipping through&nbsp;the strait of hormuz is also likely to impact the price and availability&nbsp;of gas turbine&nbsp;components, said bobby noble, a senior program manager at the electric power research institute.</p>"
+    },
+    {
+      "id": "897aac5ad9f0",
+      "title": "States are already working on solutions to large-load challenges",
+      "summary": "<figure><div><img src=\"https://imgproxy.divecdn.com/dsP9IiXPOfx4zaSN-TIDeQwjbt-Xz0jmhfvre_EJ0JM/g:ce/rs:fill:1600:900:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9TY3JlZW5zaG90XzEwNy5wbmc=.webp\" /></div></figure><p>The Federal Energy Regulatory Commission has never regulated retail load interconnections before and should leave it to the states, who have done it for decades, writes former FERC Chairman Mark Christie.</p>",
+      "url": "https://www.utilitydive.com/news/states-ferc-large-load-tariff-doe-christie/816672/",
+      "published_date": "2026-04-09",
+      "source_id": "utilitydive",
+      "source_name": "Utility Dive",
+      "raw_text": "states are already working on solutions to large-load challenges <figure><div><img src=\"https://imgproxy.divecdn.com/dsp9iixpofx4zasn-tideqwjbt-xz0jmhfvre_ej0jm/g:ce/rs:fill:1600:900:1/z3m6ly9kaxzlc2l0zs1zdg9yywdll2rpdmvpbwfnzs9ty3jlzw5zag90xzewny5wbmc=.webp\" /></div></figure><p>the federal energy regulatory commission has never regulated retail load interconnections before and should leave it to the states, who have done it for decades, writes former ferc chairman mark christie.</p>"
+    },
+    {
+      "id": "c2166478e35a",
+      "title": "Entergy, Xcel, others seek to upend competitive transmission bidding in MISO, SPP",
+      "summary": "<figure><div><img src=\"https://imgproxy.divecdn.com/WKEoxX1RBKc8CfVbDCk-AExgj6ZOQ9MQXUXg0QPWkAU/g:ce/rs:fill:1600:900:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9HZXR0eUltYWdlcy0xNDAyMTYxNDA5XzEuanBn.webp\" /></div></figure><p>Ending competition for regional transmission would be &ldquo;counterproductive and not in the interest of consumers,&rdquo; former Federal Energy Regulatory Commission Chairman Neil Chatterjee told Utility Dive.</p>",
+      "url": "https://www.utilitydive.com/news/entergy-xcel-transmission-rofr-miso-spp-ferc-complaint/817062/",
+      "published_date": "2026-04-09",
+      "source_id": "utilitydive",
+      "source_name": "Utility Dive",
+      "raw_text": "entergy, xcel, others seek to upend competitive transmission bidding in miso, spp <figure><div><img src=\"https://imgproxy.divecdn.com/wkeoxx1rbkc8cfvbdck-aexgj6zoq9mqxuxg0qpwkau/g:ce/rs:fill:1600:900:1/z3m6ly9kaxzlc2l0zs1zdg9yywdll2rpdmvpbwfnzs9hzxr0eultywdlcy0xndaymtyxnda5xzeuanbn.webp\" /></div></figure><p>ending competition for regional transmission would be &ldquo;counterproductive and not in the interest of consumers,&rdquo; former federal energy regulatory commission chairman neil chatterjee told utility dive.</p>"
+    },
+    {
+      "id": "29a2ce76f44b",
+      "title": "Envision unveils 12.5 MWh BESS, begins 790 Ah cell output",
+      "summary": "China’s Envision has launched a 12.5 MWh battery storage system and started production of a 790 Ah lithium iron phosphate (LFP) cell, as it advances an AI-driven storage strategy.",
+      "url": "https://www.pv-magazine.com/2026/04/09/envision-unveils-12-5-mwh-bess-begins-790-ah-cell-output/",
+      "published_date": "2026-04-09",
+      "source_id": "pvmagazine",
+      "source_name": "PV Magazine",
+      "raw_text": "envision unveils 12.5 mwh bess, begins 790 ah cell output china’s envision has launched a 12.5 mwh battery storage system and started production of a 790 ah lithium iron phosphate (lfp) cell, as it advances an ai-driven storage strategy."
+    },
+    {
+      "id": "b2a87069b51a",
+      "title": "Anker Solix launches 7 kWh plug-in battery targeting rooftop solar retrofits",
+      "summary": "The new Anker Solix Solarbank Max AC steps up from balcony-scale storage with a 3.5 kW inverter, plug-in capabilities for do-it-yourself (DIY) ease of installation, and expandability to 42 kWh, priced from €2,229.",
+      "url": "https://www.pv-magazine.com/2026/04/09/anker-solix-launches-7-kwh-plug-in-battery-targeting-rooftop-solar-retrofits/",
+      "published_date": "2026-04-09",
+      "source_id": "pvmagazine",
+      "source_name": "PV Magazine",
+      "raw_text": "anker solix launches 7 kwh plug-in battery targeting rooftop solar retrofits the new anker solix solarbank max ac steps up from balcony-scale storage with a 3.5 kw inverter, plug-in capabilities for do-it-yourself (diy) ease of installation, and expandability to 42 kwh, priced from €2,229."
+    },
+    {
+      "id": "11a1310a2ade",
+      "title": "Data center energy spend rivals global solar investment",
+      "summary": "Rystad Energy says capital expenditure on data centers reached USD 770 billion in 2025, matching investment levels in photovoltaic infrastructure and surpassing upstream oil and gas.",
+      "url": "https://www.pv-magazine.com/2026/04/09/data-center-energy-spend-rivals-global-solar-investment/",
+      "published_date": "2026-04-09",
+      "source_id": "pvmagazine",
+      "source_name": "PV Magazine",
+      "raw_text": "data center energy spend rivals global solar investment rystad energy says capital expenditure on data centers reached usd 770 billion in 2025, matching investment levels in photovoltaic infrastructure and surpassing upstream oil and gas."
+    },
+    {
+      "id": "fd2ea2e1926c",
+      "title": "How to delaminate end-of-life solar modules with ultrasonic cavitation",
+      "summary": "A German-Turkish research team has developed a solvent-free method using ultrasonic cavitation to delaminate end-of-life crystalline-silicon PV modules, fully separating the glass and front EVA layer while partially releasing c-Si fragments. The proposed approach achieved an 82.2% mass-based delamination efficiency, highlighting ultrasonic cavitation as a sustainable alternative for PV module recycling.",
+      "url": "https://www.pv-magazine.com/2026/04/09/how-to-delaminate-end-of-life-solar-modules-with-ultrasonic-cavitation/",
+      "published_date": "2026-04-09",
+      "source_id": "pvmagazine",
+      "source_name": "PV Magazine",
+      "raw_text": "how to delaminate end-of-life solar modules with ultrasonic cavitation a german-turkish research team has developed a solvent-free method using ultrasonic cavitation to delaminate end-of-life crystalline-silicon pv modules, fully separating the glass and front eva layer while partially releasing c-si fragments. the proposed approach achieved an 82.2% mass-based delamination efficiency, highlighting ultrasonic cavitation as a sustainable alternative for pv module recycling."
+    },
+    {
+      "id": "feba838eb187",
+      "title": "Aggreko to deliver ‘Australia’s largest’ off-grid renewable hybrid power plant",
+      "summary": "Aggreko has unveiled plans to build what it says will be Australia’s biggest off-grid renewable hybrid power facility after signing a long-term power purchase agreement with the owner of Queensland’s largest proposed copper mine.",
+      "url": "https://www.pv-magazine.com/2026/04/09/aggreko-to-deliver-australias-largest-off-grid-renewable-hybrid-power-plant/",
+      "published_date": "2026-04-09",
+      "source_id": "pvmagazine",
+      "source_name": "PV Magazine",
+      "raw_text": "aggreko to deliver ‘australia’s largest’ off-grid renewable hybrid power plant aggreko has unveiled plans to build what it says will be australia’s biggest off-grid renewable hybrid power facility after signing a long-term power purchase agreement with the owner of queensland’s largest proposed copper mine."
+    },
+    {
+      "id": "478e055f67e3",
+      "title": "How LECO process could push TOPCon solar cell efficiency beyond 26%",
+      "summary": "A new UNSW study shows that laser-enhanced contact optimization (LECO) can boost industrial TOPCon solar cell efficiency by improving contact properties and reducing recombination losses. By combining optimized firing conditions with LECO “repair” of contacts, the approach balances recombination and resistance, offering a practical path for conventional TOPCon cells to compete with PV technologies offering higher efficiencies.",
+      "url": "https://www.pv-magazine.com/2026/04/09/how-leco-process-could-push-topcon-solar-cell-efficiency-beyond-26/",
+      "published_date": "2026-04-09",
+      "source_id": "pvmagazine",
+      "source_name": "PV Magazine",
+      "raw_text": "how leco process could push topcon solar cell efficiency beyond 26% a new unsw study shows that laser-enhanced contact optimization (leco) can boost industrial topcon solar cell efficiency by improving contact properties and reducing recombination losses. by combining optimized firing conditions with leco “repair” of contacts, the approach balances recombination and resistance, offering a practical path for conventional topcon cells to compete with pv technologies offering higher efficiencies."
+    },
+    {
+      "id": "02a2060990d9",
+      "title": "Singapore installs 504 MW of solar in 2025",
+      "summary": "Figures from Singapore's Energy Market Authority indicate that the country had a record year for solar deployment in 2025. Cumulative capacity surpassed 2 GW, leading to Singapore's 2030 solar target being increased to 3 GW.",
+      "url": "https://www.pv-magazine.com/2026/04/09/singapore-installs-504-mw-of-solar-in-2025/",
+      "published_date": "2026-04-09",
+      "source_id": "pvmagazine",
+      "source_name": "PV Magazine",
+      "raw_text": "singapore installs 504 mw of solar in 2025 figures from singapore's energy market authority indicate that the country had a record year for solar deployment in 2025. cumulative capacity surpassed 2 gw, leading to singapore's 2030 solar target being increased to 3 gw."
+    },
+    {
+      "id": "38b2598170c1",
+      "title": "UK government approves record 800 MW solar plant over local opposition",
+      "summary": "The 800 MW PV project with battery storage has been granted planning approval by the Energy Secretary, despite local councils and campaigners raising objections. Springwell Solar Farm expected to connect to new National Grid substation being built to accommodate flurry of local grid-scale solar projects.",
+      "url": "https://www.pv-magazine.com/2026/04/09/uk-government-approves-record-800-mw-solar-plant-over-local-opposition/",
+      "published_date": "2026-04-09",
+      "source_id": "pvmagazine",
+      "source_name": "PV Magazine",
+      "raw_text": "uk government approves record 800 mw solar plant over local opposition the 800 mw pv project with battery storage has been granted planning approval by the energy secretary, despite local councils and campaigners raising objections. springwell solar farm expected to connect to new national grid substation being built to accommodate flurry of local grid-scale solar projects."
+    },
+    {
+      "id": "b0d5fce1167b",
+      "title": "Negative electricity prices return to France, Germany",
+      "summary": "AleaSoft Energy Forecasting’s latest analysis finds negative hourly electricity prices returned to the French and German markets last week, while the British, Dutch and Nordic markets registered their lowest daily averages since October 2025 and the Belgian market saw its lowest daily average since May 2025.",
+      "url": "https://www.pv-magazine.com/2026/04/09/negative-electricity-prices-return-to-france-germany/",
+      "published_date": "2026-04-09",
+      "source_id": "pvmagazine",
+      "source_name": "PV Magazine",
+      "raw_text": "negative electricity prices return to france, germany aleasoft energy forecasting’s latest analysis finds negative hourly electricity prices returned to the french and german markets last week, while the british, dutch and nordic markets registered their lowest daily averages since october 2025 and the belgian market saw its lowest daily average since may 2025."
+    },
+    {
+      "id": "677ed11c8623",
+      "title": "Batteries reshape solar pricing in California market",
+      "summary": "Aurora Energy Research has found that energy storage is raising the value of negatively priced solar electricity by up to $42/MWh in the California Independent System Operator (CAISO) wholesale market.",
+      "url": "https://www.pv-magazine.com/2026/04/09/batteries-reshape-solar-pricing-in-california-market/",
+      "published_date": "2026-04-09",
+      "source_id": "pvmagazine",
+      "source_name": "PV Magazine",
+      "raw_text": "batteries reshape solar pricing in california market aurora energy research has found that energy storage is raising the value of negatively priced solar electricity by up to $42/mwh in the california independent system operator (caiso) wholesale market."
+    },
+    {
+      "id": "2e5c18ae87c4",
+      "title": "UK opens door to plug-in solar boom",
+      "summary": "In its first monthly column for <b>pv magazine</b>, experts from UK-based consultancy Ricardo, part of the WSP Group, explain how UK will soon allow low-cost plug-in solar panels under 800 W to be installed without a qualified electrician, making home solar more affordable and accessible. These portable systems, expected on sale by summer 2026, could significantly boost household solar adoption while complementing the country’s wider renewable energy growth.",
+      "url": "https://www.pv-magazine.com/2026/04/09/uk-opens-door-to-plug-in-solar-boom/",
+      "published_date": "2026-04-09",
+      "source_id": "pvmagazine",
+      "source_name": "PV Magazine",
+      "raw_text": "uk opens door to plug-in solar boom in its first monthly column for <b>pv magazine</b>, experts from uk-based consultancy ricardo, part of the wsp group, explain how uk will soon allow low-cost plug-in solar panels under 800 w to be installed without a qualified electrician, making home solar more affordable and accessible. these portable systems, expected on sale by summer 2026, could significantly boost household solar adoption while complementing the country’s wider renewable energy growth."
+    },
+    {
+      "id": "1b5654c01bfc",
+      "title": "Polysilicon prices sliding toward historical lows",
+      "summary": "Polysilicon prices have fallen sharply over recent weeks due to persistent oversupply and weakening demand, briefly dipping to low levels before stabilizing slightly above CNY 50 ($7.31)/kg, though still near historical lows and below production costs. OPIS analyst Summer Zhang tells <b>pv magazine</b> that despite policy signals and potential future regulations, unclear implementation and continued excess capacity mean market conditions remain weak, with further demand declines and possible pro",
+      "url": "https://www.pv-magazine.com/2026/04/09/polysilicon-prices-sliding-toward-historical-lows/",
+      "published_date": "2026-04-09",
+      "source_id": "pvmagazine",
+      "source_name": "PV Magazine",
+      "raw_text": "polysilicon prices sliding toward historical lows polysilicon prices have fallen sharply over recent weeks due to persistent oversupply and weakening demand, briefly dipping to low levels before stabilizing slightly above cny 50 ($7.31)/kg, though still near historical lows and below production costs. opis analyst summer zhang tells <b>pv magazine</b> that despite policy signals and potential future regulations, unclear implementation and continued excess capacity mean market conditions remain weak, with further demand declines and possible production cuts or discounted sales expected in the near term."
+    },
+    {
+      "id": "cf3843b862a6",
+      "title": "Australia rooftop PV hits record as battery rush accelerates",
+      "summary": "Australia’s rooftop solar market has surged 19% in the past month with the latest data revealing a record 341 MW of small-scale rooftop PV capacity was registered across the country in March as consumers also raced to install battery energy storage systems.",
+      "url": "https://www.pv-magazine.com/2026/04/09/australia-rooftop-pv-hits-record-as-battery-rush-accelerates/",
+      "published_date": "2026-04-09",
+      "source_id": "pvmagazine",
+      "source_name": "PV Magazine",
+      "raw_text": "australia rooftop pv hits record as battery rush accelerates australia’s rooftop solar market has surged 19% in the past month with the latest data revealing a record 341 mw of small-scale rooftop pv capacity was registered across the country in march as consumers also raced to install battery energy storage systems."
+    },
+    {
+      "id": "332b7fd0bfb5",
+      "title": "New Zealand sets 10 kW default export limit for rooftop solar",
+      "summary": "New Zealand’s Electricity Authority has introduced a 10 kW default export limit for residential solar and battery systems to standardize grid access and support higher penetration of distributed energy.",
+      "url": "https://www.pv-magazine.com/2026/04/09/new-zealand-sets-10-kw-default-export-limit-for-rooftop-solar/",
+      "published_date": "2026-04-09",
+      "source_id": "pvmagazine",
+      "source_name": "PV Magazine",
+      "raw_text": "new zealand sets 10 kw default export limit for rooftop solar new zealand’s electricity authority has introduced a 10 kw default export limit for residential solar and battery systems to standardize grid access and support higher penetration of distributed energy."
+    },
+    {
+      "id": "7a45aa403e1e",
+      "title": "VIDEO – Energy Storage Summit 2026: What is the outlook for BESS Capex this year?",
+      "summary": "What does the combination of regulatory, supply chain and market pressures mean for the cost of building large-scale BESS this year?",
+      "url": "https://www.energy-storage.news/video-energy-storage-summit-2026-what-is-the-outlook-for-bess-capex-this-year/",
+      "published_date": "2026-04-09",
+      "source_id": "energystoragenews",
+      "source_name": "Energy Storage News",
+      "raw_text": "video – energy storage summit 2026: what is the outlook for bess capex this year? what does the combination of regulatory, supply chain and market pressures mean for the cost of building large-scale bess this year?"
+    },
+    {
+      "id": "67f67d4ca7e4",
+      "title": "GridStor, Axpo execute energy storage revenue swap agreement for 440MWh Texas BESS",
+      "summary": "Gridstor and Axpo have executed an energy storage revenue swap agreement for a 220MW/440MWh BESS in Galveston County, Texas.",
+      "url": "https://www.energy-storage.news/gridstor-axpo-execute-energy-storage-revenue-swap-agreement-for-440mwh-texas-bess/",
+      "published_date": "2026-04-09",
+      "source_id": "energystoragenews",
+      "source_name": "Energy Storage News",
+      "raw_text": "gridstor, axpo execute energy storage revenue swap agreement for 440mwh texas bess gridstor and axpo have executed an energy storage revenue swap agreement for a 220mw/440mwh bess in galveston county, texas."
+    },
+    {
+      "id": "dcbcc0554081",
+      "title": "VIDEO: European BESS integration with Chinese cells can be competitive, says Maxxen’s Ruben Valiente",
+      "summary": "Maxxen managing director Ruben Valiente speaks with Energy-Storage.news editor Andy Colthorpe at Energy Storage Summit 2026 in London.",
+      "url": "https://www.energy-storage.news/video-european-bess-integration-with-chinese-cells-can-be-competitive-says-maxxens-ruben-valiente/",
+      "published_date": "2026-04-09",
+      "source_id": "energystoragenews",
+      "source_name": "Energy Storage News",
+      "raw_text": "video: european bess integration with chinese cells can be competitive, says maxxen’s ruben valiente maxxen managing director ruben valiente speaks with energy-storage.news editor andy colthorpe at energy storage summit 2026 in london."
+    },
+    {
+      "id": "cb20bb8e46d7",
+      "title": "Beyond 314Ah: A comparison of large-format LFP battery cells for BESS",
+      "summary": "We analyse and compare the metrics of the various LFP battery cells of 587Ah and above, from leading providers CATL, Eve Energy, Hithium, Rept Battero, CALB and BYD.",
+      "url": "https://www.energy-storage.news/beyond-314ah-a-comparison-of-large-format-lfp-battery-cells-for-bess/",
+      "published_date": "2026-04-09",
+      "source_id": "energystoragenews",
+      "source_name": "Energy Storage News",
+      "raw_text": "beyond 314ah: a comparison of large-format lfp battery cells for bess we analyse and compare the metrics of the various lfp battery cells of 587ah and above, from leading providers catl, eve energy, hithium, rept battero, calb and byd."
+    },
+    {
+      "id": "9d9de6008226",
+      "title": "Engie buys 1.1GWh of synchronous condenser-paired BESS in Spain, starts building 220MWh France project",
+      "summary": "Multinational power firm Engie has acquired two large-scale BESS projects in Spain, paired with synchronous condensers and has launched construction on a BESS in France.",
+      "url": "https://www.energy-storage.news/engie-buys-1-1gwh-of-synchronous-condenser-paired-bess-in-spain-starts-building-220mwh-france-project/",
+      "published_date": "2026-04-09",
+      "source_id": "energystoragenews",
+      "source_name": "Energy Storage News",
+      "raw_text": "engie buys 1.1gwh of synchronous condenser-paired bess in spain, starts building 220mwh france project multinational power firm engie has acquired two large-scale bess projects in spain, paired with synchronous condensers and has launched construction on a bess in france."
+    },
+    {
+      "id": "28490647c21b",
+      "title": "EU-India trade agreement will propel innovation in energy storage",
+      "summary": "The recent European Union-India agreement could unlock innovation and scale in energy storage, writes Eugene Beh, CEO of Quino Energy.",
+      "url": "https://www.energy-storage.news/eu-india-trade-agreement-will-propel-innovation-in-energy-storage/",
+      "published_date": "2026-04-09",
+      "source_id": "energystoragenews",
+      "source_name": "Energy Storage News",
+      "raw_text": "eu-india trade agreement will propel innovation in energy storage the recent european union-india agreement could unlock innovation and scale in energy storage, writes eugene beh, ceo of quino energy."
+    },
+    {
+      "id": "2d9774bfeded",
+      "title": "Private Energy Partners submits 780MW battery storage project to Australia’s EPBC Act",
+      "summary": "Private Energy Partners has submitted a hybrid energy project to Australia's environmental approval process, proposing a 780MW BESS.",
+      "url": "https://www.energy-storage.news/private-energy-partners-submits-780mw-battery-storage-project-to-australias-epbc-act/",
+      "published_date": "2026-04-09",
+      "source_id": "energystoragenews",
+      "source_name": "Energy Storage News",
+      "raw_text": "private energy partners submits 780mw battery storage project to australia’s epbc act private energy partners has submitted a hybrid energy project to australia's environmental approval process, proposing a 780mw bess."
+    },
+    {
+      "id": "cda5dcfe011b",
+      "title": "BYD teams up with one of the world’s largest fast food chains to offer 9 minute EV charging",
+      "summary": "<div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2026/04/BYD-KFC-fast-food-EV-charging.jpeg?quality=82&#038;strip=all&#038;w=1400\" /></div><p>By the time you’re done eating, your electric vehicle will be charged and ready to go. <a href=\"https://electrek.co/guides/byd/\">BYD</a> is partnering with KFC to offer EV drivers a 9-minute one-stop shop and charge service.</p>\n\n\n\n <a class=\"more-link\" href=\"https://electrek.co/2026/04/09/byd-fast-food-giant-offer-9-minute-",
+      "url": "https://electrek.co/2026/04/09/byd-fast-food-giant-offer-9-minute-ev-charging/",
+      "published_date": "2026-04-09",
+      "source_id": "electrek",
+      "source_name": "Electrek",
+      "raw_text": "byd teams up with one of the world’s largest fast food chains to offer 9 minute ev charging <div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2026/04/byd-kfc-fast-food-ev-charging.jpeg?quality=82&#038;strip=all&#038;w=1400\" /></div><p>by the time you’re done eating, your electric vehicle will be charged and ready to go. <a href=\"https://electrek.co/guides/byd/\">byd</a> is partnering with kfc to offer ev drivers a 9-minute one-stop shop and charge service.</p>\n\n\n\n <a class=\"more-link\" href=\"https://electrek.co/2026/04/09/byd-fast-food-giant-offer-9-minute-ev-charging/#more-462913\">more…</a>"
+    },
+    {
+      "id": "77347241f94a",
+      "title": "Tesla (TSLA) retail sales crash 16% in China in Q1 despite ‘rising’ wholesale numbers",
+      "summary": "<div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2026/02/Tesla-China-sales.jpg?quality=82&#038;strip=all&#038;w=1600\" /></div><p>Tesla’s actual retail sales in China crashed 16% year-over-year in Q1 2026, with March alone plunging 24% — despite several media outlets reporting that Tesla’s China numbers were up for the quarter.</p>\n\n\n\n<p>The discrepancy comes down to the difference between wholesale and retail numbers. Tesla’s wholesale figures include vehicles pro",
+      "url": "https://electrek.co/2026/04/09/tesla-tsla-china-retail-sales-crash-q1-2026-wholesale-misleading/",
+      "published_date": "2026-04-09",
+      "source_id": "electrek",
+      "source_name": "Electrek",
+      "raw_text": "tesla (tsla) retail sales crash 16% in china in q1 despite ‘rising’ wholesale numbers <div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2026/02/tesla-china-sales.jpg?quality=82&#038;strip=all&#038;w=1600\" /></div><p>tesla’s actual retail sales in china crashed 16% year-over-year in q1 2026, with march alone plunging 24% — despite several media outlets reporting that tesla’s china numbers were up for the quarter.</p>\n\n\n\n<p>the discrepancy comes down to the difference between wholesale and retail numbers. tesla’s wholesale figures include vehicles produced at giga shanghai and exported to other markets, masking a significant decline in actual chinese consumer demand.</p>\n\n\n\n <a class=\"more-link\" href=\"https://electrek.co/2026/04/09/tesla-tsla-china-retail-sales-crash-q1-2026-wholesale-misleading/#more-462900\">more…</a>"
+    },
+    {
+      "id": "71ffbadae5b5",
+      "title": "Kia’s mid-size electric SUV spotted with US plates [Images]",
+      "summary": "<div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2026/02/Kia-EV5-update.jpeg?quality=82&#038;strip=all&#038;w=1400\" /></div><p>The <a href=\"https://electrek.co/guides/kia-ev5/\">EV5</a> is about the size of Kia’s best-selling Sportage SUV and the Tesla Model Y. After opening orders in Europe and Canada, Kia’s mid-size electric SUV was spotted testing in the US again, but this one is different.</p>\n\n\n\n <a class=\"more-link\" href=\"https://electrek.co/2026/04/09/kias-m",
+      "url": "https://electrek.co/2026/04/09/kias-mid-size-ev-suv-caught-testing-in-the-us-images/",
+      "published_date": "2026-04-09",
+      "source_id": "electrek",
+      "source_name": "Electrek",
+      "raw_text": "kia’s mid-size electric suv spotted with us plates [images] <div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2026/02/kia-ev5-update.jpeg?quality=82&#038;strip=all&#038;w=1400\" /></div><p>the <a href=\"https://electrek.co/guides/kia-ev5/\">ev5</a> is about the size of kia’s best-selling sportage suv and the tesla model y. after opening orders in europe and canada, kia’s mid-size electric suv was spotted testing in the us again, but this one is different.</p>\n\n\n\n <a class=\"more-link\" href=\"https://electrek.co/2026/04/09/kias-mid-size-ev-suv-caught-testing-in-the-us-images/#more-462869\">more…</a>"
+    },
+    {
+      "id": "0cb7e6aed703",
+      "title": "Gendome 3,072Wh Home3000 power station at exclusive new $748 low, Autel 4-cam solar security kit new $180 low, EGO, more",
+      "summary": "<div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2026/04/Gendome-Autel-EGO-Birdfy-GDs-FI.jpg?quality=82&#038;strip=all&#038;w=1600\" /></div><p>Our Thursday Green Deals this week is headlined by an exclusive deal we secured that saves you $1,551 on the unique <a href=\"https://9to5toys.com/2026/04/09/3072wh-gendome-home3000-power-station-1551-exclusive-savings-new-748-low/\">Gendome 3,072Wh Home3000 Portable Power Station at a new $748 low</a>. Right behind it, we ha",
+      "url": "https://electrek.co/2026/04/09/gendome-3072wh-home3000-power-station-autel-4-cam-solar-security-kit-ego-more/",
+      "published_date": "2026-04-09",
+      "source_id": "electrek",
+      "source_name": "Electrek",
+      "raw_text": "gendome 3,072wh home3000 power station at exclusive new $748 low, autel 4-cam solar security kit new $180 low, ego, more <div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2026/04/gendome-autel-ego-birdfy-gds-fi.jpg?quality=82&#038;strip=all&#038;w=1600\" /></div><p>our thursday green deals this week is headlined by an exclusive deal we secured that saves you $1,551 on the unique <a href=\"https://9to5toys.com/2026/04/09/3072wh-gendome-home3000-power-station-1551-exclusive-savings-new-748-low/\">gendome 3,072wh home3000 portable power station at a new $748 low</a>. right behind it, we have <a href=\"https://9to5toys.com/2026/04/09/autels-4-cam-outdoor-wireless-solar-security-kit-new-180-low/\">autel’s 4-cam outdoor wireless solar security camera kit at a new $180 low</a>, as well as <a href=\"https://9to5toys.com/2026/04/09/ego-52-inch-z6-zero-turn-cordless-electric-riding-mower-new-5999-low/\">ego’s latest 52-inch z6 zero turn cordless electric riding lawn mower</a> with 6x 10.0ah batteries and 880w wall charger at a <a href=\"https://9to5toys.com/2026/04/09/ego-52-inch-z6-zero-turn-cordless-electric-riding-mower-new-5999-low/\">new $5,999 low</a>, a spring-ready deal on birdfy’s wooden smart bird house with an iron guard and inside camera, and much more waiting for you below. and don’t forget about the other hangover deals at the bottom of the page, like yesterday’s <a href=\"https://9to5toys.com/2026/04/08/ecoflow-earth-day-mega-sale-power-station-starting-from-169/\">ecoflow earth day mega sale with up to 62% power station discounts</a> and plenty of extra savings + the launch deals on the brand’s <a href=\"https://9to5toys.com/2026/04/08/ecoflow-launches-288wh-trail-plus-300-dc-compact-power-station-from-199/\">trail plus 300 dc portable compact power station</a>, and more. </p>\n\n\n\n<p>head below for other new green deals we’ve found today and, of course, <a href=\"https://electrek.co/best-electric-vehicle-prices/\"><em>electrek</em>’s best ev buying </a>and <a href=\"https://electrek.co/best-electric-vehicle-leases/\">leasing deals</a>. also, check out the new <a href=\"https://electrek.co/shop/\"><em>electrek</em> tesla shop for the best deals on tesla accessories</a>.</p>\n\n\n\n <a class=\"more-link\" href=\"https://electrek.co/2026/04/09/gendome-3072wh-home3000-power-station-autel-4-cam-solar-security-kit-ego-more/#more-462874\">more…</a>"
+    },
+    {
+      "id": "172f6eba3903",
+      "title": "Musk says Tesla FSD v15 will ‘far exceed’ human safety — he said the same about v12 and v14",
+      "summary": "<div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2024/10/fred5648_Elon_Musk_looking_embarassed_in_front_of_a_judge_in_co_b7fa0a6e-6a38-4ff2-a553-f67e3f7a132a.webp?w=1100\" /></div><p>Elon Musk is once again promising that the next version of Tesla’s “Full Self-Driving” software will “far exceed human levels of safety.” This time it’s V15. The problem is that he made virtually identical claims about Version 12 in 2023 and V14 in 2025 — and neither came close to deli",
+      "url": "https://electrek.co/2026/04/09/elon-musk-tesla-fsd-v15-safer-than-humans-same-claim-every-version/",
+      "published_date": "2026-04-09",
+      "source_id": "electrek",
+      "source_name": "Electrek",
+      "raw_text": "musk says tesla fsd v15 will ‘far exceed’ human safety — he said the same about v12 and v14 <div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2024/10/fred5648_elon_musk_looking_embarassed_in_front_of_a_judge_in_co_b7fa0a6e-6a38-4ff2-a553-f67e3f7a132a.webp?w=1100\" /></div><p>elon musk is once again promising that the next version of tesla’s “full self-driving” software will “far exceed human levels of safety.” this time it’s v15. the problem is that he made virtually identical claims about version 12 in 2023 and v14 in 2025 — and neither came close to delivering.</p>\n\n\n\n<p>musk posted the claim today in response to a user’s detailed review of fsd v14.3 after 600+ miles of testing. he acknowledged that “point releases will bring polish” to the current version before projecting that v15, the next major release, will achieve what every previous version was supposed to achieve.</p>\n\n\n\n <a class=\"more-link\" href=\"https://electrek.co/2026/04/09/elon-musk-tesla-fsd-v15-safer-than-humans-same-claim-every-version/#more-462856\">more…</a>"
+    },
+    {
+      "id": "7e010158061b",
+      "title": "VW replaces US ID.4 production with 18mpg Atlas SUV as gas prices spike",
+      "summary": "<div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2024/02/P1033167-edited-e1709159978272.jpg?quality=82&#038;strip=all&#038;w=1600\" /></div><p>VW says it will stop building the ID.4 in the US, and instead replace it with production of a gas-guzzling, pollution-spewing, 18mpg three row land yacht instead.</p>\n\n\n\n<p>The change comes just as gas prices have risen dramatically and after republicans inflated the price of every EV by $7,500, ensuring Americans have even ",
+      "url": "https://electrek.co/2026/04/09/vw-replaces-us-id-4-production-with-18mpg-atlas-suv-as-gas-prices-spike/",
+      "published_date": "2026-04-09",
+      "source_id": "electrek",
+      "source_name": "Electrek",
+      "raw_text": "vw replaces us id.4 production with 18mpg atlas suv as gas prices spike <div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2024/02/p1033167-edited-e1709159978272.jpg?quality=82&#038;strip=all&#038;w=1600\" /></div><p>vw says it will stop building the id.4 in the us, and instead replace it with production of a gas-guzzling, pollution-spewing, 18mpg three row land yacht instead.</p>\n\n\n\n<p>the change comes just as gas prices have risen dramatically and after republicans inflated the price of every ev by $7,500, ensuring americans have even fewer affordable choices during an affordability crisis.</p>\n\n\n\n <a class=\"more-link\" href=\"https://electrek.co/2026/04/09/vw-replaces-us-id-4-production-with-18mpg-atlas-suv-as-gas-prices-spike/#more-462849\">more…</a>"
+    },
+    {
+      "id": "6ae54ac72246",
+      "title": "Kia reveals a slate of new EVs set to launch soon, including its first electric SDV and an SUV",
+      "summary": "<div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2026/04/Kia-new-EVs-launching.jpeg?quality=82&#038;strip=all&#038;w=1400\" /></div><p><a href=\"https://electrek.co/guides/kia/\">Kia</a> plans to expand its EV lineup to 14 models by 2030, including its first software-defined electric vehicle and a new entry-level SUV.</p>\n\n\n\n <a class=\"more-link\" href=\"https://electrek.co/2026/04/09/kia-reveals-new-ev-plans-first-sdv-suv/#more-462840\">more…</a>",
+      "url": "https://electrek.co/2026/04/09/kia-reveals-new-ev-plans-first-sdv-suv/",
+      "published_date": "2026-04-09",
+      "source_id": "electrek",
+      "source_name": "Electrek",
+      "raw_text": "kia reveals a slate of new evs set to launch soon, including its first electric sdv and an suv <div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2026/04/kia-new-evs-launching.jpeg?quality=82&#038;strip=all&#038;w=1400\" /></div><p><a href=\"https://electrek.co/guides/kia/\">kia</a> plans to expand its ev lineup to 14 models by 2030, including its first software-defined electric vehicle and a new entry-level suv.</p>\n\n\n\n <a class=\"more-link\" href=\"https://electrek.co/2026/04/09/kia-reveals-new-ev-plans-first-sdv-suv/#more-462840\">more…</a>"
+    },
+    {
+      "id": "d8175e491636",
+      "title": "Cadillac Optiq 2026 EV Review: a mixed bag",
+      "summary": "<div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2026/04/Cadillac-Optiq-2026-in-a-beautiful-deep-red.jpg?quality=82&#038;strip=all&#038;w=1600\" /></div><p>I drove the latest Cadillac Optiq electric SUV for a week. I was able to drive it for a bit more than 500 miles in the tough conditions of a Canadian winter that doesn’t seem to end.</p>\n\n\n\n<p>The results were a mixed bag of experiences. Some good, some bad. Find out more in the review below!</p>\n\n\n\n <a class=\"m",
+      "url": "https://electrek.co/2026/04/09/cadillac-optiq-2026-ev-review-a-mixed-bag/",
+      "published_date": "2026-04-09",
+      "source_id": "electrek",
+      "source_name": "Electrek",
+      "raw_text": "cadillac optiq 2026 ev review: a mixed bag <div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2026/04/cadillac-optiq-2026-in-a-beautiful-deep-red.jpg?quality=82&#038;strip=all&#038;w=1600\" /></div><p>i drove the latest cadillac optiq electric suv for a week. i was able to drive it for a bit more than 500 miles in the tough conditions of a canadian winter that doesn’t seem to end.</p>\n\n\n\n<p>the results were a mixed bag of experiences. some good, some bad. find out more in the review below!</p>\n\n\n\n <a class=\"more-link\" href=\"https://electrek.co/2026/04/09/cadillac-optiq-2026-ev-review-a-mixed-bag/#more-458188\">more…</a>"
+    },
+    {
+      "id": "75795ccd3ed8",
+      "title": "BYD opens Denza Z9 GT EV orders in Europe at over 3X the price",
+      "summary": "<div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2026/04/BYD-Denza-Z9-GT-EV-price.jpeg?quality=82&#038;strip=all&#038;w=1400\" /></div><p><a href=\"https://electrek.co/guides/byd/\">BYD</a> launched its luxury sub-brand Denza in Europe with a little help from James Bond himself. The Denza Z9 GT EV can recharge in as little as 5 minutes, can drive nearly 400 miles on a single charge, and looks like something straight out of an action movie.</p>\n\n\n\n <a class=\"more-link",
+      "url": "https://electrek.co/2026/04/09/byd-opens-denza-z9-gt-ev-orders-europe-over-3x-the-price/",
+      "published_date": "2026-04-09",
+      "source_id": "electrek",
+      "source_name": "Electrek",
+      "raw_text": "byd opens denza z9 gt ev orders in europe at over 3x the price <div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2026/04/byd-denza-z9-gt-ev-price.jpeg?quality=82&#038;strip=all&#038;w=1400\" /></div><p><a href=\"https://electrek.co/guides/byd/\">byd</a> launched its luxury sub-brand denza in europe with a little help from james bond himself. the denza z9 gt ev can recharge in as little as 5 minutes, can drive nearly 400 miles on a single charge, and looks like something straight out of an action movie.</p>\n\n\n\n <a class=\"more-link\" href=\"https://electrek.co/2026/04/09/byd-opens-denza-z9-gt-ev-orders-europe-over-3x-the-price/#more-462817\">more…</a>"
+    },
+    {
+      "id": "3980d0034819",
+      "title": "Tesla cracks down on FSD hacking devices, remotely shuts down access",
+      "summary": "<div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2026/04/Tesla-cancels-FSd-remotely.png?w=1600\" /></div><p>Tesla is hitting back at a growing gray market of unauthorized devices that unlock Full Self-Driving (FSD) in regions where the software hasn’t been approved. The automaker has been remotely disabling FSD on affected vehicles — permanently revoking access without warning.</p>\n\n\n\n<p>Reports are surfacing from owners in Europe, South Korea, China, and Turkey th",
+      "url": "https://electrek.co/2026/04/09/tesla-cracks-down-fsd-hack-devices-remotely-disables-access/",
+      "published_date": "2026-04-09",
+      "source_id": "electrek",
+      "source_name": "Electrek",
+      "raw_text": "tesla cracks down on fsd hacking devices, remotely shuts down access <div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2026/04/tesla-cancels-fsd-remotely.png?w=1600\" /></div><p>tesla is hitting back at a growing gray market of unauthorized devices that unlock full self-driving (fsd) in regions where the software hasn’t been approved. the automaker has been remotely disabling fsd on affected vehicles — permanently revoking access without warning.</p>\n\n\n\n<p>reports are surfacing from owners in europe, south korea, china, and turkey that tesla remotely woke their vehicles, detected the unauthorized can bus devices, and stripped fsd entirely — reverting them to basic autopilot.</p>\n\n\n\n <a class=\"more-link\" href=\"https://electrek.co/2026/04/09/tesla-cracks-down-fsd-hack-devices-remotely-disables-access/#more-462826\">more…</a>"
+    },
+    {
+      "id": "eeb2aa15ed75",
+      "title": "Tesla (TSLA) reportedly developing new smaller, cheaper EV after killing Model 2",
+      "summary": "<div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2021/08/Tesla-Model-2-render-hero.jpeg?quality=82&#038;strip=all&#038;w=1600\" /></div><p>Tesla is reportedly developing an all-new smaller, cheaper electric SUV — two years after CEO Elon Musk killed the company’s affordable EV program and called building cars for human drivers “pointless.”</p>\n\n\n\n<p>Reuters reports that four people familiar with the matter say the new compact SUV would be produced at Tesla’s Shangh",
+      "url": "https://electrek.co/2026/04/09/tesla-reportedly-developing-new-smaller-cheaper-ev-after-killing-model-2/",
+      "published_date": "2026-04-09",
+      "source_id": "electrek",
+      "source_name": "Electrek",
+      "raw_text": "tesla (tsla) reportedly developing new smaller, cheaper ev after killing model 2 <div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2021/08/tesla-model-2-render-hero.jpeg?quality=82&#038;strip=all&#038;w=1600\" /></div><p>tesla is reportedly developing an all-new smaller, cheaper electric suv — two years after ceo elon musk killed the company’s affordable ev program and called building cars for human drivers “pointless.”</p>\n\n\n\n<p>reuters reports that four people familiar with the matter say the new compact suv would be produced at tesla’s shanghai factory, priced substantially below the model 3’s $34,000 starting price in china and $37,000 in the us.</p>\n\n\n\n <a class=\"more-link\" href=\"https://electrek.co/2026/04/09/tesla-reportedly-developing-new-smaller-cheaper-ev-after-killing-model-2/#more-462821\">more…</a>"
+    },
+    {
+      "id": "5488e01b3640",
+      "title": "76 chargers, 9 MW: An EV truck hub opens where US freight runs",
+      "summary": "<div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2026/04/EV-Realty-San-Bernardino-Site-Photo-3.jpg?quality=82&#038;strip=all&#038;w=1600\" /></div><p><a href=\"https://evrealtyus.com/\" rel=\"noreferrer noopener\" target=\"_blank\">EV Realty</a> just opened its flagship electric truck charging hub in San Bernardino, California, and it’s built for the kind of heavy-duty freight work that keeps supply chains moving.</p>\n\n\n\n <a class=\"more-link\" href=\"https://electrek.co/20",
+      "url": "https://electrek.co/2026/04/09/76-chargers-9-mw-a-huge-ev-truck-charging-hub-opens-where-us-freight-actually-runs/",
+      "published_date": "2026-04-09",
+      "source_id": "electrek",
+      "source_name": "Electrek",
+      "raw_text": "76 chargers, 9 mw: an ev truck hub opens where us freight runs <div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2026/04/ev-realty-san-bernardino-site-photo-3.jpg?quality=82&#038;strip=all&#038;w=1600\" /></div><p><a href=\"https://evrealtyus.com/\" rel=\"noreferrer noopener\" target=\"_blank\">ev realty</a> just opened its flagship electric truck charging hub in san bernardino, california, and it’s built for the kind of heavy-duty freight work that keeps supply chains moving.</p>\n\n\n\n <a class=\"more-link\" href=\"https://electrek.co/2026/04/09/76-chargers-9-mw-a-huge-ev-truck-charging-hub-opens-where-us-freight-actually-runs/#more-462774\">more…</a>"
+    },
+    {
+      "id": "7353e6a1e521",
+      "title": "DJI’s e-bike drive maker Avinox launches new ultra-high-power motor systems",
+      "summary": "<div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2026/04/avinox-m2-drive-head.jpg?quality=82&#038;strip=all&#038;w=1600\" /></div><p>Avinox is back with its next-generation e-bike drive systems, and if the numbers are anything to go by, the company is definitely targeting the higher performance end of the market.</p>\n\n\n\n <a class=\"more-link\" href=\"https://electrek.co/2026/04/09/djis-e-bike-drive-maker-avinox-launches-new-ultra-high-power-motor-systems/#more-462799\"",
+      "url": "https://electrek.co/2026/04/09/djis-e-bike-drive-maker-avinox-launches-new-ultra-high-power-motor-systems/",
+      "published_date": "2026-04-09",
+      "source_id": "electrek",
+      "source_name": "Electrek",
+      "raw_text": "dji’s e-bike drive maker avinox launches new ultra-high-power motor systems <div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2026/04/avinox-m2-drive-head.jpg?quality=82&#038;strip=all&#038;w=1600\" /></div><p>avinox is back with its next-generation e-bike drive systems, and if the numbers are anything to go by, the company is definitely targeting the higher performance end of the market.</p>\n\n\n\n <a class=\"more-link\" href=\"https://electrek.co/2026/04/09/djis-e-bike-drive-maker-avinox-launches-new-ultra-high-power-motor-systems/#more-462799\">more…</a>"
+    },
+    {
+      "id": "ed89ca1693a0",
+      "title": "Norway just ordered 20 ‘flying’ electric ferries in historic deal",
+      "summary": "<div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2026/04/candela-norway-p-12-header.jpg?quality=82&#038;strip=all&#038;w=1600\" /></div><p>Norway is doubling down on electric maritime transport in a big way, placing an order for 20 of <a href=\"https://electrek.co/2026/04/02/candelas-new-p-12-business-electric-ferry-is-luxury-soaring-just-above-the-waves/\">Candela’s P-12</a> electric hydrofoil ferries in what’s being described as the largest deployment of its kind t",
+      "url": "https://electrek.co/2026/04/09/norway-just-orderded-20-flying-electric-ferries-in-historic-deal/",
+      "published_date": "2026-04-09",
+      "source_id": "electrek",
+      "source_name": "Electrek",
+      "raw_text": "norway just ordered 20 ‘flying’ electric ferries in historic deal <div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2026/04/candela-norway-p-12-header.jpg?quality=82&#038;strip=all&#038;w=1600\" /></div><p>norway is doubling down on electric maritime transport in a big way, placing an order for 20 of <a href=\"https://electrek.co/2026/04/02/candelas-new-p-12-business-electric-ferry-is-luxury-soaring-just-above-the-waves/\">candela’s p-12</a> electric hydrofoil ferries in what’s being described as the largest deployment of its kind to date.</p>\n\n\n\n <a class=\"more-link\" href=\"https://electrek.co/2026/04/09/norway-just-orderded-20-flying-electric-ferries-in-historic-deal/#more-462688\">more…</a>"
+    },
+    {
+      "id": "ea3740dcd4bb",
+      "title": "Financing in Place for 390 MW Shinan Ui Offshore Wind Project in South Korea",
+      "summary": "South Korea has completed the financial close structure for the 390 MW Shinan Ui [&#8230;]",
+      "url": "https://www.offshorewind.biz/2026/04/09/financing-in-place-for-390-mw-shinan-ui-offshore-wind-project-in-south-korea/",
+      "published_date": "2026-04-09",
+      "source_id": "offshorewind",
+      "source_name": "Offshore Wind Biz",
+      "raw_text": "financing in place for 390 mw shinan ui offshore wind project in south korea south korea has completed the financial close structure for the 390 mw shinan ui [&#8230;]"
+    },
+    {
+      "id": "3ad27767b07e",
+      "title": "Industry’s Largest Subsea Rock Installation Vessel in Final Preparations for First Job",
+      "summary": "Boskalis&#8217;s new subsea rock installation (SRI) vessel, described by the company as the largest [&#8230;]",
+      "url": "https://www.offshorewind.biz/2026/04/09/industrys-largest-subsea-rock-installation-vessel-in-final-preparations-for-first-job/",
+      "published_date": "2026-04-09",
+      "source_id": "offshorewind",
+      "source_name": "Offshore Wind Biz",
+      "raw_text": "industry’s largest subsea rock installation vessel in final preparations for first job boskalis&#8217;s new subsea rock installation (sri) vessel, described by the company as the largest [&#8230;]"
+    },
+    {
+      "id": "81cc682cdcaf",
+      "title": "Fugro Preparing for Geotechnical Investigation at Morecambe Offshore Wind Farm Site",
+      "summary": "Fugro will conduct a UXO survey at the Morecambe Bay area this month, ahead [&#8230;]",
+      "url": "https://www.offshorewind.biz/2026/04/09/fugro-preparing-for-geotechnical-investigation-at-morecambe-offshore-wind-farm-site/",
+      "published_date": "2026-04-09",
+      "source_id": "offshorewind",
+      "source_name": "Offshore Wind Biz",
+      "raw_text": "fugro preparing for geotechnical investigation at morecambe offshore wind farm site fugro will conduct a uxo survey at the morecambe bay area this month, ahead [&#8230;]"
+    },
+    {
+      "id": "64d0440742bb",
+      "title": "‘World’s First’ Wind Turbine with CO2-Reduced Steel Tower and Recyclable Blades Installed Offshore Denmark",
+      "summary": "Waters off Denmark’s west coast are now home to what RWE says is the [&#8230;]",
+      "url": "https://www.offshorewind.biz/2026/04/09/worlds-first-wind-turbine-with-co2-reduced-steel-tower-and-recyclable-blades-installed-offshore-denmark/",
+      "published_date": "2026-04-09",
+      "source_id": "offshorewind",
+      "source_name": "Offshore Wind Biz",
+      "raw_text": "‘world’s first’ wind turbine with co2-reduced steel tower and recyclable blades installed offshore denmark waters off denmark’s west coast are now home to what rwe says is the [&#8230;]"
+    },
+    {
+      "id": "1a4148274ef5",
+      "title": "DEME’s Next-Gen Offshore Wind Turbine Installation Vessel Officially Named",
+      "summary": "DEME recently held a naming ceremony for its new offshore wind turbine installation vessel [&#8230;]",
+      "url": "https://www.offshorewind.biz/2026/04/09/demes-next-gen-offshore-wind-turbine-installation-vessel-officially-named/",
+      "published_date": "2026-04-09",
+      "source_id": "offshorewind",
+      "source_name": "Offshore Wind Biz",
+      "raw_text": "deme’s next-gen offshore wind turbine installation vessel officially named deme recently held a naming ceremony for its new offshore wind turbine installation vessel [&#8230;]"
+    },
+    {
+      "id": "69f8e8a8f7ee",
+      "title": "Virginia grid utilization bill set to become law",
+      "summary": "<figure><div><img src=\"https://imgproxy.divecdn.com/UHNZCC2PQepisaO0iAHxXxn486MY097xpC_IrDc9J8k/g:nowe:0:307/c:3199:1807/rs:fill:1600:900:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS82STVBMzA1N2IuanBn.webp\" /></div></figure><p>A growing body of research suggests increased grid utilization has broad benefits for utilities and customers, but experts say advanced metering technology is needed to unlock its full potential.</p>",
+      "url": "https://www.utilitydive.com/news/virginia-grid-utilization-bill-dominion/816888/",
+      "published_date": "2026-04-08",
+      "source_id": "utilitydive",
+      "source_name": "Utility Dive",
+      "raw_text": "virginia grid utilization bill set to become law <figure><div><img src=\"https://imgproxy.divecdn.com/uhnzcc2pqepisao0iahxxxn486my097xpc_irdc9j8k/g:nowe:0:307/c:3199:1807/rs:fill:1600:900:1/z3m6ly9kaxzlc2l0zs1zdg9yywdll2rpdmvpbwfnzs82stvbmza1n2iuanbn.webp\" /></div></figure><p>a growing body of research suggests increased grid utilization has broad benefits for utilities and customers, but experts say advanced metering technology is needed to unlock its full potential.</p>"
+    },
+    {
+      "id": "85534f3fe200",
+      "title": "NERC is ‘actively monitoring the grid’ following Iran-linked cyber threat",
+      "summary": "<figure><div><img src=\"https://imgproxy.divecdn.com/wpY4vHm_N3w7SUMZYkHabNaZ-UeT-gbkLtOU5XruXTM/g:ce/rs:fill:1600:900:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9HZXR0eUltYWdlcy0yMjY1NDAyODc3LmpwZw==.webp\" /></div></figure><p>Hackers have disrupted critical U.S. infrastructure by targeting programmable logic controllers, the Cybersecurity and Infrastructure Security Agency warned.</p>",
+      "url": "https://www.utilitydive.com/news/nerc-cisa-iran-war-cyber-hacking/816914/",
+      "published_date": "2026-04-08",
+      "source_id": "utilitydive",
+      "source_name": "Utility Dive",
+      "raw_text": "nerc is ‘actively monitoring the grid’ following iran-linked cyber threat <figure><div><img src=\"https://imgproxy.divecdn.com/wpy4vhm_n3w7sumzykhabnaz-uet-gbkltou5xruxtm/g:ce/rs:fill:1600:900:1/z3m6ly9kaxzlc2l0zs1zdg9yywdll2rpdmvpbwfnzs9hzxr0eultywdlcy0ymjy1ndayodc3lmpwzw==.webp\" /></div></figure><p>hackers have disrupted critical u.s. infrastructure by targeting programmable logic controllers, the cybersecurity and infrastructure security agency warned.</p>"
+    },
+    {
+      "id": "8ac91028c23d",
+      "title": "Recalibrating the social license for AI infrastructure in the United States",
+      "summary": "<figure><div><img src=\"https://imgproxy.divecdn.com/PPCZaUcvUQikIr1yorDCYRmEdbZctbIjt5kp4FqgHsE/g:ce/rs:fill:1600:900:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9HZXR0eUltYWdlcy0yMjEyMzA0NTk1LmpwZw==.webp\" /></div></figure><p>To counter a public backlash, data center developers must embrace economic reciprocity while utilities and regulators must design rates that penalize grid stress and reward flexibility,&nbsp;write&nbsp;Fred Bailey of Gideon Arktos and Frank Willey at the Atlantic Council.<",
+      "url": "https://www.utilitydive.com/news/recalibrating-the-social-license-for-ai-infrastructure-in-the-united-states/815236/",
+      "published_date": "2026-04-08",
+      "source_id": "utilitydive",
+      "source_name": "Utility Dive",
+      "raw_text": "recalibrating the social license for ai infrastructure in the united states <figure><div><img src=\"https://imgproxy.divecdn.com/ppczaucvuqikir1yordcyrmedbzctbijt5kp4fqghse/g:ce/rs:fill:1600:900:1/z3m6ly9kaxzlc2l0zs1zdg9yywdll2rpdmvpbwfnzs9hzxr0eultywdlcy0ymjeymza0ntk1lmpwzw==.webp\" /></div></figure><p>to counter a public backlash, data center developers must embrace economic reciprocity while utilities and regulators must design rates that penalize grid stress and reward flexibility,&nbsp;write&nbsp;fred bailey of gideon arktos and frank willey at the atlantic council.</p>"
+    },
+    {
+      "id": "96655bd101bf",
+      "title": "Sigenergy launches Hong Kong IPO",
+      "summary": "China’s Sigenergy has announced a Hong Kong initial public offering (IPO), with shares open to retail investors until April 13 and backing from major international asset managers.",
+      "url": "https://www.pv-magazine.com/2026/04/08/sigenergy-launches-hong-kong-ipo/",
+      "published_date": "2026-04-08",
+      "source_id": "pvmagazine",
+      "source_name": "PV Magazine",
+      "raw_text": "sigenergy launches hong kong ipo china’s sigenergy has announced a hong kong initial public offering (ipo), with shares open to retail investors until april 13 and backing from major international asset managers."
+    },
+    {
+      "id": "d15c27a407c4",
+      "title": "Brazil adds 2.3 GW of solar in first two months of 2026",
+      "summary": "Brazil installed 2.3 GW of solar capacity in January and February, as centralized generation more than doubled while distributed growth declined.",
+      "url": "https://www.pv-magazine.com/2026/04/08/brazil-adds-2-3-gw-of-solar-in-first-two-months-of-2026/",
+      "published_date": "2026-04-08",
+      "source_id": "pvmagazine",
+      "source_name": "PV Magazine",
+      "raw_text": "brazil adds 2.3 gw of solar in first two months of 2026 brazil installed 2.3 gw of solar capacity in january and february, as centralized generation more than doubled while distributed growth declined."
+    },
+    {
+      "id": "71fa3ad86acd",
+      "title": "US battery storage developers get creative as pure merchant model fades",
+      "summary": "A panel at the 2026 US Energy Storage Summit in Dallas, Texas, discussed the “creative, innovative structures” developers are having to embrace to secure long-term revenues for energy storage projects.",
+      "url": "https://www.energy-storage.news/us-battery-storage-developers-get-creative-as-pure-merchant-model-fades/",
+      "published_date": "2026-04-08",
+      "source_id": "energystoragenews",
+      "source_name": "Energy Storage News",
+      "raw_text": "us battery storage developers get creative as pure merchant model fades a panel at the 2026 us energy storage summit in dallas, texas, discussed the “creative, innovative structures” developers are having to embrace to secure long-term revenues for energy storage projects."
+    },
+    {
+      "id": "0fb782c66667",
+      "title": "Canada’s smallest province, Prince Edward Island, issues REOI for up to 50MW of BESS",
+      "summary": "The Canadian Province of Prince Edward Island’s PEI Energy Corporation (PEIEC) has issued a request for expressions of interest (REOI) for a 10-50MW, four-hour duration battery energy storage system (BESS).",
+      "url": "https://www.energy-storage.news/canadas-smallest-province-prince-edward-island-issues-reoi-for-up-to-50mw-of-bess/",
+      "published_date": "2026-04-08",
+      "source_id": "energystoragenews",
+      "source_name": "Energy Storage News",
+      "raw_text": "canada’s smallest province, prince edward island, issues reoi for up to 50mw of bess the canadian province of prince edward island’s pei energy corporation (peiec) has issued a request for expressions of interest (reoi) for a 10-50mw, four-hour duration battery energy storage system (bess)."
+    },
+    {
+      "id": "f30b410f6dbc",
+      "title": "IPPs Zelestra, BNZ adding BESS to solar PV plants in Southern Europe",
+      "summary": "IPPs Zelestra, BNZ and ALFI have secured offtake and financing to hybridise solar projects with BESS across Spain, Italy, Portugal and Romania.",
+      "url": "https://www.energy-storage.news/ipps-zelestra-bnz-adding-bess-to-solar-pv-plants-in-southern-europe/",
+      "published_date": "2026-04-08",
+      "source_id": "energystoragenews",
+      "source_name": "Energy Storage News",
+      "raw_text": "ipps zelestra, bnz adding bess to solar pv plants in southern europe ipps zelestra, bnz and alfi have secured offtake and financing to hybridise solar projects with bess across spain, italy, portugal and romania."
+    },
+    {
+      "id": "a8adb8ad4616",
+      "title": "Japanese business heavyweights in Tokyu Land’s US$190 million BESS investment consortium",
+      "summary": "Amid growing interest in Japan’s battery storage market, a consortium of major Japanese businesses is targeting 174MW of deployments.",
+      "url": "https://www.energy-storage.news/japanese-business-heavyweights-in-tokyu-lands-us190-million-bess-investment-consortium/",
+      "published_date": "2026-04-08",
+      "source_id": "energystoragenews",
+      "source_name": "Energy Storage News",
+      "raw_text": "japanese business heavyweights in tokyu land’s us$190 million bess investment consortium amid growing interest in japan’s battery storage market, a consortium of major japanese businesses is targeting 174mw of deployments."
+    },
+    {
+      "id": "bd6e122cb311",
+      "title": "TSLA stock slides, Supercharger prices, and who’s REALLY behind Elon’s big chip fab",
+      "summary": "<div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2026/04/Tesla-Alachua-Wawa-copy.png?w=1600\" /></div><p>On today’s Tesla-tastic episode of <em><a href=\"https://www.youtube.com/@ElectrekDaily\" rel=\"noreferrer noopener\" target=\"_blank\">Quick Charge</a></em>, a TSLA bear thinks the stock is headed for a 60% slide before the year is out, Tesla launches a Supercharger configurator, and we find out what’s really going on at Elon’s proposed chip fab.</p>\n\n\n\n <a class=\"mo",
+      "url": "https://electrek.co/2026/04/08/tsla-stock-slides-supercharger-prices-and-whos-really-behind-elons-big-chip-fab/",
+      "published_date": "2026-04-08",
+      "source_id": "electrek",
+      "source_name": "Electrek",
+      "raw_text": "tsla stock slides, supercharger prices, and who’s really behind elon’s big chip fab <div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2026/04/tesla-alachua-wawa-copy.png?w=1600\" /></div><p>on today’s tesla-tastic episode of <em><a href=\"https://www.youtube.com/@electrekdaily\" rel=\"noreferrer noopener\" target=\"_blank\">quick charge</a></em>, a tsla bear thinks the stock is headed for a 60% slide before the year is out, tesla launches a supercharger configurator, and we find out what’s really going on at elon’s proposed chip fab.</p>\n\n\n\n <a class=\"more-link\" href=\"https://electrek.co/2026/04/08/tsla-stock-slides-supercharger-prices-and-whos-really-behind-elons-big-chip-fab/#more-462776\">more…</a>"
+    },
+    {
+      "id": "26e975d50005",
+      "title": "The Genesis GV90 interior leaks, revealing next-level luxury and massive screens",
+      "summary": "<div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2026/01/Genesis-GV90-tech.jpeg?quality=82&#038;strip=all&#038;w=1400\" /></div><p>The GV90 is shaping up to be an ultra-luxe tech powerhouse. <a href=\"https://electrek.co/guides/genesis/\">Genesis</a> set out to redefine luxury with the GV90, and the interior proves it. Here’s our first look.</p>\n\n\n\n <a class=\"more-link\" href=\"https://electrek.co/2026/04/08/genesis-gv90-interior-leaks-next-level-luxury-big-screens/#mo",
+      "url": "https://electrek.co/2026/04/08/genesis-gv90-interior-leaks-next-level-luxury-big-screens/",
+      "published_date": "2026-04-08",
+      "source_id": "electrek",
+      "source_name": "Electrek",
+      "raw_text": "the genesis gv90 interior leaks, revealing next-level luxury and massive screens <div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2026/01/genesis-gv90-tech.jpeg?quality=82&#038;strip=all&#038;w=1400\" /></div><p>the gv90 is shaping up to be an ultra-luxe tech powerhouse. <a href=\"https://electrek.co/guides/genesis/\">genesis</a> set out to redefine luxury with the gv90, and the interior proves it. here’s our first look.</p>\n\n\n\n <a class=\"more-link\" href=\"https://electrek.co/2026/04/08/genesis-gv90-interior-leaks-next-level-luxury-big-screens/#more-422572\">more…</a>"
+    },
+    {
+      "id": "b27068f5b2ba",
+      "title": "The UK’s largest solar farm just got the green light",
+      "summary": "<div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2026/04/Springwell-Solar-Farm.jpg?quality=82&#038;strip=all&#038;w=1200\" /></div><p>The UK just approved what will become its largest solar farm yet – and it’s a clear signal of where its energy strategy is headed.</p>\n\n\n\n <a class=\"more-link\" href=\"https://electrek.co/2026/04/08/uk-largest-solar-farm-just-got-the-green-light/#more-462764\">more…</a>",
+      "url": "https://electrek.co/2026/04/08/uk-largest-solar-farm-just-got-the-green-light/",
+      "published_date": "2026-04-08",
+      "source_id": "electrek",
+      "source_name": "Electrek",
+      "raw_text": "the uk’s largest solar farm just got the green light <div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2026/04/springwell-solar-farm.jpg?quality=82&#038;strip=all&#038;w=1200\" /></div><p>the uk just approved what will become its largest solar farm yet – and it’s a clear signal of where its energy strategy is headed.</p>\n\n\n\n <a class=\"more-link\" href=\"https://electrek.co/2026/04/08/uk-largest-solar-farm-just-got-the-green-light/#more-462764\">more…</a>"
+    },
+    {
+      "id": "6dfd4ec8a9e4",
+      "title": "Hyundai’s EV hot hatch will make its big debut this month: Here’s our best look at it [Video]",
+      "summary": "<div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2026/04/Hyundai-EV-hot-hatch-debut.jpeg?quality=82&#038;strip=all&#038;w=1400\" /></div><p><a href=\"https://electrek.co/guides/hyundai/\">Hyundai</a> will unveil the IONIQ 3 during Milan Design Week later this month. Ahead of its debut, a covered production model was spotted in a parking garage, offering a closer look at the new electric hatch.</p>\n\n\n\n <a class=\"more-link\" href=\"https://electrek.co/2026/04/08/hyundais",
+      "url": "https://electrek.co/2026/04/08/hyundais-ev-hot-hatch-almost-here-best-look-video/",
+      "published_date": "2026-04-08",
+      "source_id": "electrek",
+      "source_name": "Electrek",
+      "raw_text": "hyundai’s ev hot hatch will make its big debut this month: here’s our best look at it [video] <div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2026/04/hyundai-ev-hot-hatch-debut.jpeg?quality=82&#038;strip=all&#038;w=1400\" /></div><p><a href=\"https://electrek.co/guides/hyundai/\">hyundai</a> will unveil the ioniq 3 during milan design week later this month. ahead of its debut, a covered production model was spotted in a parking garage, offering a closer look at the new electric hatch.</p>\n\n\n\n <a class=\"more-link\" href=\"https://electrek.co/2026/04/08/hyundais-ev-hot-hatch-almost-here-best-look-video/#more-462749\">more…</a>"
+    },
+    {
+      "id": "29804d0d98b8",
+      "title": "EcoFlow Earth Day Mega Sale with up to 62% power station savings + 24-hour flash sale + TRAIL Plus 300 DC launch deals, EGO tools, more",
+      "summary": "<div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2026/04/EcoFlow-x3-and-EGO-GDs-FI.jpg?quality=82&#038;strip=all&#038;w=1600\" /></div><p>Our mid-week Green Deals edition is packed and focused on EcoFlow, but that’s not to say the other deals we’ve collected for you today are any less exciting. First, we have <a href=\"https://9to5toys.com/2026/04/08/ecoflow-earth-day-mega-sale-power-station-starting-from-169/\">EcoFlow’s latest Members’ Festival x Earth Day Mega Sal",
+      "url": "https://electrek.co/2026/04/08/ecoflow-earth-day-mega-sale-power-station-flash-sale-trail-plus-300-dc-launch-ego-more/",
+      "published_date": "2026-04-08",
+      "source_id": "electrek",
+      "source_name": "Electrek",
+      "raw_text": "ecoflow earth day mega sale with up to 62% power station savings + 24-hour flash sale + trail plus 300 dc launch deals, ego tools, more <div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2026/04/ecoflow-x3-and-ego-gds-fi.jpg?quality=82&#038;strip=all&#038;w=1600\" /></div><p>our mid-week green deals edition is packed and focused on ecoflow, but that’s not to say the other deals we’ve collected for you today are any less exciting. first, we have <a href=\"https://9to5toys.com/2026/04/08/ecoflow-earth-day-mega-sale-power-station-starting-from-169/\">ecoflow’s latest members’ festival x earth day mega sale</a> with up to 62% power station discounts, extra savings on solar generators, free gifts, and 3x ecocredit rewards – all <a href=\"https://9to5toys.com/2026/04/08/ecoflow-earth-day-mega-sale-power-station-starting-from-169/\">starting from $169</a>. the brand has also just launched its <a href=\"https://9to5toys.com/2026/04/08/ecoflow-launches-288wh-trail-plus-300-dc-compact-power-station-from-199/\">288wh trail plus 300 dc portable compact power station (and two solar bundles) starting from $199</a>, as well as offering a <a href=\"https://9to5toys.com/2026/04/08/ecoflow-24-hour-flash-sale-2048wh-delta-2-max-power-station-799-more/\">24-hour flash sale</a> on three units, like the <a href=\"https://9to5toys.com/2026/04/08/ecoflow-24-hour-flash-sale-2048wh-delta-2-max-power-station-799-more/\">2,048wh delta 2 max portable power station at $799</a>, which is the best new price we have tracked aside from a black friday exclusive deal. we also have three ego multi-head combo bundles that give you a string trimmer + one of three secondary attachments at new lows, a spotlight on lectric’s april showers xp trike2 bundles with up to $588 in free gear, an eve aqua apple homekit smart water controller deal worth considering for your spigots, and much more waiting for you below. and don’t forget about the other hangover deals at the bottom of the page, like yesterday’s flash sale on the <a href=\"https://9to5toys.com/2026/04/06/segway-flash-sale-max-g30p-electric-scooter-new-500-low/\">segway g30p electric scooter to a new $500 low</a>, jackery’s <a href=\"https://9to5toys.com/2026/04/07/jackery-256wh-80000mah-explorer-240d-compact-power-station-new-129-low/\">256wh explorer 240d power station at a new $129 low</a>, and more. </p>\n\n\n\n<p>head below for other new green deals we’ve found today and, of course, <a href=\"https://electrek.co/best-electric-vehicle-prices/\"><em>electrek</em>’s best ev buying </a>and <a href=\"https://electrek.co/best-electric-vehicle-leases/\">leasing deals</a>. also, check out the new <a href=\"https://electrek.co/shop/\"><em>electrek</em> tesla shop for the best deals on tesla accessories</a>.</p>\n\n\n\n <a class=\"more-link\" href=\"https://electrek.co/2026/04/08/ecoflow-earth-day-mega-sale-power-station-flash-sale-trail-plus-300-dc-launch-ego-more/#more-462714\">more…</a>"
+    },
+    {
+      "id": "62de21817255",
+      "title": "BYD’s chief scientist says solid-state EV batteries hit a ‘critical stage,’ but there’s more to it",
+      "summary": "<div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2026/04/solid-state-EV-batteries-BYD.jpeg?quality=82&#038;strip=all&#038;w=1400\" /></div><p>Solid-state EV batteries have entered a “critical stage,” <a href=\"https://electrek.co/guides/byd/\">BYD’s</a> chief scientist, Lian Yubo, said during a seminar this week.</p>\n\n\n\n <a class=\"more-link\" href=\"https://electrek.co/2026/04/08/byds-chief-scientist-solid-state-ev-batteries-critical-stage/#more-462707\">more…</a>",
+      "url": "https://electrek.co/2026/04/08/byds-chief-scientist-solid-state-ev-batteries-critical-stage/",
+      "published_date": "2026-04-08",
+      "source_id": "electrek",
+      "source_name": "Electrek",
+      "raw_text": "byd’s chief scientist says solid-state ev batteries hit a ‘critical stage,’ but there’s more to it <div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2026/04/solid-state-ev-batteries-byd.jpeg?quality=82&#038;strip=all&#038;w=1400\" /></div><p>solid-state ev batteries have entered a “critical stage,” <a href=\"https://electrek.co/guides/byd/\">byd’s</a> chief scientist, lian yubo, said during a seminar this week.</p>\n\n\n\n <a class=\"more-link\" href=\"https://electrek.co/2026/04/08/byds-chief-scientist-solid-state-ev-batteries-critical-stage/#more-462707\">more…</a>"
+    },
+    {
+      "id": "4ab538b17525",
+      "title": "Tesla’s new Supercharger for Business tool reveals $940,000 all-in price",
+      "summary": "<div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2026/01/Tesla-Alachua-Wawa.jpg?quality=82&#038;strip=all&#038;w=1600\" /></div><p>Tesla has quietly switched on a public configurator for its Supercharger for Business program, and the numbers tell us exactly what it now costs a third party to buy into the network: <strong>$500,000 in hardware and roughly $940,000 all-in</strong> for a standard V4 8-stall site.</p>\n\n\n\n<p>The tool also spits out ROI estimates that swi",
+      "url": "https://electrek.co/2026/04/08/tesla-supercharger-for-business-configurator-pricing/",
+      "published_date": "2026-04-08",
+      "source_id": "electrek",
+      "source_name": "Electrek",
+      "raw_text": "tesla’s new supercharger for business tool reveals $940,000 all-in price <div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2026/01/tesla-alachua-wawa.jpg?quality=82&#038;strip=all&#038;w=1600\" /></div><p>tesla has quietly switched on a public configurator for its supercharger for business program, and the numbers tell us exactly what it now costs a third party to buy into the network: <strong>$500,000 in hardware and roughly $940,000 all-in</strong> for a standard v4 8-stall site.</p>\n\n\n\n<p>the tool also spits out roi estimates that swing wildly by location — from a 4-year payback in san francisco to 7 years in manhattan — and effectively prices tesla’s own cut at a flat $0.10/kwh.</p>\n\n\n\n <a class=\"more-link\" href=\"https://electrek.co/2026/04/08/tesla-supercharger-for-business-configurator-pricing/#more-462710\">more…</a>"
+    },
+    {
+      "id": "5be4ddb70713",
+      "title": "Musk falsely claims Tesla FSD is 10X safer than humans, complains about lawsuits",
+      "summary": "<div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2023/02/Tesla-Full-Self-Driving-Beta-smear-campaign.jpg?quality=82&#038;strip=all&#038;w=1600\" /></div><p>Elon Musk claimed this week that Tesla’s “Full Self-Driving” is so much safer than human drivers that it could save 90% of the roughly one million lives lost in car crashes globally each year — a 10X improvement in safety.</p>\n\n\n\n<p>The problem is that Tesla has never released the data that would support anythin",
+      "url": "https://electrek.co/2026/04/08/musk-tesla-fsd-10x-safer-claim-doesnt-hold-up/",
+      "published_date": "2026-04-08",
+      "source_id": "electrek",
+      "source_name": "Electrek",
+      "raw_text": "musk falsely claims tesla fsd is 10x safer than humans, complains about lawsuits <div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2023/02/tesla-full-self-driving-beta-smear-campaign.jpg?quality=82&#038;strip=all&#038;w=1600\" /></div><p>elon musk claimed this week that tesla’s “full self-driving” is so much safer than human drivers that it could save 90% of the roughly one million lives lost in car crashes globally each year — a 10x improvement in safety.</p>\n\n\n\n<p>the problem is that tesla has never released the data that would support anything close to that claim, and musk is already using it to pre-frame the lawsuits tesla is facing over fsd crashes as an unavoidable cost of progress.</p>\n\n\n\n <a class=\"more-link\" href=\"https://electrek.co/2026/04/08/musk-tesla-fsd-10x-safer-claim-doesnt-hold-up/#more-462700\">more…</a>"
+    },
+    {
+      "id": "90daaea4eb3d",
+      "title": "Hyundai prepares to enter rugged new territory with this off-road SUV concept",
+      "summary": "<div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2026/04/Hyundai-new-SUV-pickup.jpeg?quality=82&#038;strip=all&#038;w=1400\" /></div><p>The Boulder SUV concept is a preview of <a href=\"https://electrek.co/guides/hyundai/\">Hyundai’s</a> upcoming body-on-frame vehicles set to rival the Ford Bronco, Jeep Wrangler, and Toyota Tacoma.</p>\n\n\n\n <a class=\"more-link\" href=\"https://electrek.co/2026/04/08/hyundai-enter-rugged-new-territory-suv/#more-462676\">more…</a>",
+      "url": "https://electrek.co/2026/04/08/hyundai-enter-rugged-new-territory-suv/",
+      "published_date": "2026-04-08",
+      "source_id": "electrek",
+      "source_name": "Electrek",
+      "raw_text": "hyundai prepares to enter rugged new territory with this off-road suv concept <div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2026/04/hyundai-new-suv-pickup.jpeg?quality=82&#038;strip=all&#038;w=1400\" /></div><p>the boulder suv concept is a preview of <a href=\"https://electrek.co/guides/hyundai/\">hyundai’s</a> upcoming body-on-frame vehicles set to rival the ford bronco, jeep wrangler, and toyota tacoma.</p>\n\n\n\n <a class=\"more-link\" href=\"https://electrek.co/2026/04/08/hyundai-enter-rugged-new-territory-suv/#more-462676\">more…</a>"
+    },
+    {
+      "id": "672a150a3bdb",
+      "title": "New California e-bike bill makes it illegal to bring a friend",
+      "summary": "<div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2023/08/two-riders-super73-pillion-2up.jpg?quality=82&#038;strip=all&#038;w=1600\" /></div><p>A newly introduced California bill could quietly reshape how passengers are carried on bicycles and e-bikes – and in the process, potentially outlaw one of the most popular features on many modern electric bikes.</p>\n\n\n\n <a class=\"more-link\" href=\"https://electrek.co/2026/04/08/new-california-e-bike-bill-makes-it-illegal-to-",
+      "url": "https://electrek.co/2026/04/08/new-california-e-bike-bill-makes-it-illegal-to-bring-a-friend/",
+      "published_date": "2026-04-08",
+      "source_id": "electrek",
+      "source_name": "Electrek",
+      "raw_text": "new california e-bike bill makes it illegal to bring a friend <div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2023/08/two-riders-super73-pillion-2up.jpg?quality=82&#038;strip=all&#038;w=1600\" /></div><p>a newly introduced california bill could quietly reshape how passengers are carried on bicycles and e-bikes – and in the process, potentially outlaw one of the most popular features on many modern electric bikes.</p>\n\n\n\n <a class=\"more-link\" href=\"https://electrek.co/2026/04/08/new-california-e-bike-bill-makes-it-illegal-to-bring-a-friend/#more-462679\">more…</a>"
+    },
+    {
+      "id": "1b428f7fff33",
+      "title": "Toyota’s updated electric SUV is turning into a sleeper hit",
+      "summary": "<div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2026/04/Toyota-updated-electric-SUV-side.jpeg?quality=82&#038;strip=all&#038;w=1400\" /></div><p><a href=\"https://electrek.co/guides/toyota/\">Toyota’s</a> updated electric SUV is now among the top-selling EVs in several markets, including Japan, the US, and parts of Europe.</p>\n\n\n\n <a class=\"more-link\" href=\"https://electrek.co/2026/04/08/toyotas-updated-electric-suv-sleeper-hit/#more-462360\">more…</a>",
+      "url": "https://electrek.co/2026/04/08/toyotas-updated-electric-suv-sleeper-hit/",
+      "published_date": "2026-04-08",
+      "source_id": "electrek",
+      "source_name": "Electrek",
+      "raw_text": "toyota’s updated electric suv is turning into a sleeper hit <div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2026/04/toyota-updated-electric-suv-side.jpeg?quality=82&#038;strip=all&#038;w=1400\" /></div><p><a href=\"https://electrek.co/guides/toyota/\">toyota’s</a> updated electric suv is now among the top-selling evs in several markets, including japan, the us, and parts of europe.</p>\n\n\n\n <a class=\"more-link\" href=\"https://electrek.co/2026/04/08/toyotas-updated-electric-suv-sleeper-hit/#more-462360\">more…</a>"
+    },
+    {
+      "id": "d26c68ecdaa3",
+      "title": "Tesla (TSLA) down 20% in 2026 — JPMorgan sees another 60% downside",
+      "summary": "<div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2025/01/Tesla-Model-Y-hero-new-design.png?w=1600\" /></div><p>Tesla stock is down roughly 20% year-to-date in 2026, and JPMorgan thinks the bleeding is far from over. Analyst Ryan Brinkman reiterated his Underweight rating this week and stuck with a $145 price target — implying another ~60% downside from where TSLA trades today.</p>\n\n\n\n<p>The note landed days after Tesla disclosed a Q1 delivery miss and the largest s",
+      "url": "https://electrek.co/2026/04/08/tesla-jpmorgan-145-price-target-60-percent-downside/",
+      "published_date": "2026-04-08",
+      "source_id": "electrek",
+      "source_name": "Electrek",
+      "raw_text": "tesla (tsla) down 20% in 2026 — jpmorgan sees another 60% downside <div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2025/01/tesla-model-y-hero-new-design.png?w=1600\" /></div><p>tesla stock is down roughly 20% year-to-date in 2026, and jpmorgan thinks the bleeding is far from over. analyst ryan brinkman reiterated his underweight rating this week and stuck with a $145 price target — implying another ~60% downside from where tsla trades today.</p>\n\n\n\n<p>the note landed days after tesla disclosed a q1 delivery miss and the largest single-quarter inventory build in company history.</p>\n\n\n\n <a class=\"more-link\" href=\"https://electrek.co/2026/04/08/tesla-jpmorgan-145-price-target-60-percent-downside/#more-462672\">more…</a>"
+    },
+    {
+      "id": "dd06200c7ad2",
+      "title": "How the e-bike industry just pushed back against and won on (some) tariffs",
+      "summary": "<div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2026/03/trek-e-bike-header-fx1.jpg?quality=82&#038;strip=all&#038;w=1600\" /></div><p>In a rare bit of good news for the e-bike industry, manufacturers, importers, and advocacy groups have successfully fought off a potentially painful round of new tariffs on bicycles and e-bikes in the US.</p>\n\n\n\n <a class=\"more-link\" href=\"https://electrek.co/2026/04/08/how-the-e-bike-industry-pushed-back-against-and-won-against-som",
+      "url": "https://electrek.co/2026/04/08/how-the-e-bike-industry-pushed-back-against-and-won-against-some-tariffs/",
+      "published_date": "2026-04-08",
+      "source_id": "electrek",
+      "source_name": "Electrek",
+      "raw_text": "how the e-bike industry just pushed back against and won on (some) tariffs <div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2026/03/trek-e-bike-header-fx1.jpg?quality=82&#038;strip=all&#038;w=1600\" /></div><p>in a rare bit of good news for the e-bike industry, manufacturers, importers, and advocacy groups have successfully fought off a potentially painful round of new tariffs on bicycles and e-bikes in the us.</p>\n\n\n\n <a class=\"more-link\" href=\"https://electrek.co/2026/04/08/how-the-e-bike-industry-pushed-back-against-and-won-against-some-tariffs/#more-462666\">more…</a>"
+    },
+    {
+      "id": "3e0b73fbd203",
+      "title": "European Consortium Developing Underwater Noise Reduction System for Floating and Jacket Foundations",
+      "summary": "Chantiers de l’Atlantique, EDF power solutions, Heerema Marine Contractors, Menck, RTE, Sealence and Smulders [&#8230;]",
+      "url": "https://www.offshorewind.biz/2026/04/08/european-consortium-developing-underwater-noise-reduction-system-for-floating-and-jacket-foundations/",
+      "published_date": "2026-04-08",
+      "source_id": "offshorewind",
+      "source_name": "Offshore Wind Biz",
+      "raw_text": "european consortium developing underwater noise reduction system for floating and jacket foundations chantiers de l’atlantique, edf power solutions, heerema marine contractors, menck, rte, sealence and smulders [&#8230;]"
+    },
+    {
+      "id": "f66bc61d3baf",
+      "title": "NKT Eleonora Enters New Construction Phase as Its Hull Makes a Splash",
+      "summary": "The hull of NKT’s new cable-laying vessel (CLV) NKT Eleonora has been launched into [&#8230;]",
+      "url": "https://www.offshorewind.biz/2026/04/08/nkt-eleonora-enters-new-construction-phase-as-its-hull-makes-a-splash/",
+      "published_date": "2026-04-08",
+      "source_id": "offshorewind",
+      "source_name": "Offshore Wind Biz",
+      "raw_text": "nkt eleonora enters new construction phase as its hull makes a splash the hull of nkt’s new cable-laying vessel (clv) nkt eleonora has been launched into [&#8230;]"
+    },
+    {
+      "id": "78c53f4fd7e7",
+      "title": "Nature Organisations Join Forces to Scale Up Oyster Reef Development in Offshore Wind",
+      "summary": "Three organisations for nature conservation and restoration have launched a new collaborative project to [&#8230;]",
+      "url": "https://www.offshorewind.biz/2026/04/08/nature-organisations-join-forces-to-scale-up-oyster-reef-development-in-offshore-wind/",
+      "published_date": "2026-04-08",
+      "source_id": "offshorewind",
+      "source_name": "Offshore Wind Biz",
+      "raw_text": "nature organisations join forces to scale up oyster reef development in offshore wind three organisations for nature conservation and restoration have launched a new collaborative project to [&#8230;]"
+    },
+    {
+      "id": "587dcf47552b",
+      "title": "China’s Deepest-Water Offshore Wind Farm Goes Into Full Operation",
+      "summary": "A 504 MW offshore wind farm developed by China Huaneng Group (CHNG) was fully [&#8230;]",
+      "url": "https://www.offshorewind.biz/2026/04/08/chinas-deepest-water-offshore-wind-farm-goes-into-full-operation/",
+      "published_date": "2026-04-08",
+      "source_id": "offshorewind",
+      "source_name": "Offshore Wind Biz",
+      "raw_text": "china’s deepest-water offshore wind farm goes into full operation a 504 mw offshore wind farm developed by china huaneng group (chng) was fully [&#8230;]"
+    },
+    {
+      "id": "a74b2fa2d8ae",
+      "title": "Pennsylvania DEP seeks potential fast-track storage, generation projects",
+      "summary": "<figure><div><img src=\"https://imgproxy.divecdn.com/Uljz72DoHTizGafKjMXKouFM-fTroC2sYCsQCH_X3iY/g:ce/rs:fill:1600:900:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9HZXR0eUltYWdlcy0yMTgwMzU2MDc0LmpwZw==.webp\" /></div></figure><p>The request is in response to the PJM Interconnection&rsquo;s proposed Expedited Interconnection Track, which faces opposition at the Federal Energy Regulatory Commission from independent power producer&nbsp;Vistra and environmental groups.</p>",
+      "url": "https://www.utilitydive.com/news/pennsylvania-dep-fast-track-storage-generation-pjm/816846/",
+      "published_date": "2026-04-07",
+      "source_id": "utilitydive",
+      "source_name": "Utility Dive",
+      "raw_text": "pennsylvania dep seeks potential fast-track storage, generation projects <figure><div><img src=\"https://imgproxy.divecdn.com/uljz72dohtizgafkjmxkoufm-ftroc2sycsqch_x3iy/g:ce/rs:fill:1600:900:1/z3m6ly9kaxzlc2l0zs1zdg9yywdll2rpdmvpbwfnzs9hzxr0eultywdlcy0ymtgwmzu2mdc0lmpwzw==.webp\" /></div></figure><p>the request is in response to the pjm interconnection&rsquo;s proposed expedited interconnection track, which faces opposition at the federal energy regulatory commission from independent power producer&nbsp;vistra and environmental groups.</p>"
+    },
+    {
+      "id": "503388e69012",
+      "title": "Energy storage pricing beginning to ‘fracture’ by product type: report",
+      "summary": "<figure><div><img src=\"https://imgproxy.divecdn.com/s-ufjmSRiqsBqehyrlZiUF69XFnwzuz-uX-kfRNlkkg/g:ce/rs:fill:1600:900:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9oZW1pbmd3YXktMDUzMDIzLTIwOC13ZWJfMS5qcGc=.webp\" /></div></figure><p>The split seems driven by battery developers supporting larger projects for data center and independent power producer clients, according to Anza Renewables.</p>",
+      "url": "https://www.utilitydive.com/news/energy-storage-pricing-anza-woodmac/816857/",
+      "published_date": "2026-04-07",
+      "source_id": "utilitydive",
+      "source_name": "Utility Dive",
+      "raw_text": "energy storage pricing beginning to ‘fracture’ by product type: report <figure><div><img src=\"https://imgproxy.divecdn.com/s-ufjmsriqsbqehyrlziuf69xfnwzuz-ux-kfrnlkkg/g:ce/rs:fill:1600:900:1/z3m6ly9kaxzlc2l0zs1zdg9yywdll2rpdmvpbwfnzs9ozw1pbmd3yxktmduzmdizltiwoc13zwjfms5qcgc=.webp\" /></div></figure><p>the split seems driven by battery developers supporting larger projects for data center and independent power producer clients, according to anza renewables.</p>"
+    },
+    {
+      "id": "7692937c184e",
+      "title": "VIDEO: Extracting more value from battery storage assets in Australia’s NEM",
+      "summary": "In this webinar, GridBeyond's Scott Berrie and Paul Conlon explore how to extract more value from battery storage assets in Australia’s NEM.",
+      "url": "https://www.energy-storage.news/video-extracting-more-value-from-battery-storage-assets-in-australias-nem/",
+      "published_date": "2026-04-07",
+      "source_id": "energystoragenews",
+      "source_name": "Energy Storage News",
+      "raw_text": "video: extracting more value from battery storage assets in australia’s nem in this webinar, gridbeyond's scott berrie and paul conlon explore how to extract more value from battery storage assets in australia’s nem."
+    },
+    {
+      "id": "12f8d64bf45a",
+      "title": "CO2 battery startup Energy Dome signs MOU to deploy technology at Texas data centre",
+      "summary": "Carbon dioxide-based long-duration energy storage (LDES) company Energy Dome and digital infrastructure company New Era Energy &#038; Digital (NUAI) have signed a memorandum of understanding (MOU) to deploy Energy Dome’s CO2 Battery Plus technology in Odessa, Texas.",
+      "url": "https://www.energy-storage.news/co2-battery-startup-energy-dome-signs-mou-to-deploy-technology-at-texas-data-centre/",
+      "published_date": "2026-04-07",
+      "source_id": "energystoragenews",
+      "source_name": "Energy Storage News",
+      "raw_text": "co2 battery startup energy dome signs mou to deploy technology at texas data centre carbon dioxide-based long-duration energy storage (ldes) company energy dome and digital infrastructure company new era energy &#038; digital (nuai) have signed a memorandum of understanding (mou) to deploy energy dome’s co2 battery plus technology in odessa, texas."
+    },
+    {
+      "id": "a11566549a5e",
+      "title": "Boralex, Six Nations of the Grand River secure US$145 million financing for 500MWh Ontario BESS",
+      "summary": "Quebec-based IPP Boralex and Six Nations of the Grand River Development Corporation (SNGRDC) have announced the closing of a CA$202 million (US$145.12 million) financing for a 125MW/500MWh battery energy storage system (BESS) in Oxford County, Ontario, CA.",
+      "url": "https://www.energy-storage.news/boralex-six-nations-of-the-grand-river-secure-us145-million-financing-for-500mwh-ontario-bess/",
+      "published_date": "2026-04-07",
+      "source_id": "energystoragenews",
+      "source_name": "Energy Storage News",
+      "raw_text": "boralex, six nations of the grand river secure us$145 million financing for 500mwh ontario bess quebec-based ipp boralex and six nations of the grand river development corporation (sngrdc) have announced the closing of a ca$202 million (us$145.12 million) financing for a 125mw/500mwh battery energy storage system (bess) in oxford county, ontario, ca."
+    },
+    {
+      "id": "e728cdaa75d5",
+      "title": "North Dakota approves certificate of site compatibility for 400MWh BESS from NextEra Energy Resources",
+      "summary": "The project represents a US$128.6 million investment and is scheduled to begin construction this year, with commercial operations commencing in December 2026.",
+      "url": "https://www.energy-storage.news/north-dakota-approves-certificate-of-site-compatibility-for-400mwh-bess-from-nextera-energy-resources/",
+      "published_date": "2026-04-07",
+      "source_id": "energystoragenews",
+      "source_name": "Energy Storage News",
+      "raw_text": "north dakota approves certificate of site compatibility for 400mwh bess from nextera energy resources the project represents a us$128.6 million investment and is scheduled to begin construction this year, with commercial operations commencing in december 2026."
+    },
+    {
+      "id": "d2884fa9530a",
+      "title": "CATL, Envision sodium-ion BESS cells among next-gen tech and solutions showcased at Beijing expo ESIE 2026",
+      "summary": "China's biggest energy storage companies were out in force at a recent trade expo in Beijing, with integrated offerings, bigger battery cells, data centre solutions and sodium-ion products among the new products and tech on show.",
+      "url": "https://www.energy-storage.news/catl-envision-sodium-ion-bess-cells-among-next-gen-tech-and-solutions-showcased-at-beijing-expo-esie-2026/",
+      "published_date": "2026-04-07",
+      "source_id": "energystoragenews",
+      "source_name": "Energy Storage News",
+      "raw_text": "catl, envision sodium-ion bess cells among next-gen tech and solutions showcased at beijing expo esie 2026 china's biggest energy storage companies were out in force at a recent trade expo in beijing, with integrated offerings, bigger battery cells, data centre solutions and sodium-ion products among the new products and tech on show."
+    },
+    {
+      "id": "17b1ed12c49e",
+      "title": "Neoen enlists Nidec for 496MWh France BESS, launches Japan project",
+      "summary": "IPP Neoen will start construction on large-scale BESS projects in France and Japan in the coming months.",
+      "url": "https://www.energy-storage.news/neoen-enlists-nidec-for-496mwh-france-bess-launches-japan-project/",
+      "published_date": "2026-04-07",
+      "source_id": "energystoragenews",
+      "source_name": "Energy Storage News",
+      "raw_text": "neoen enlists nidec for 496mwh france bess, launches japan project ipp neoen will start construction on large-scale bess projects in france and japan in the coming months."
+    },
+    {
+      "id": "e9905f63e6e5",
+      "title": "FlexGen acquires US battery storage and solar commissioning services provider CES",
+      "summary": "FlexGen has acquired CES, which has to date commissioned more than 15GWh of battery energy storage system (BESS) projects.",
+      "url": "https://www.energy-storage.news/flexgen-acquires-us-battery-storage-and-solar-commissioning-services-provider-ces/",
+      "published_date": "2026-04-07",
+      "source_id": "energystoragenews",
+      "source_name": "Energy Storage News",
+      "raw_text": "flexgen acquires us battery storage and solar commissioning services provider ces flexgen has acquired ces, which has to date commissioned more than 15gwh of battery energy storage system (bess) projects."
+    },
+    {
+      "id": "e91fa834aedf",
+      "title": "NSW IPC approves 1.5GWh solar-plus-storage project in Australia",
+      "summary": "The NSW IPC has approved Spark Renewables' Dinawan Solar Farm, an 800MW solar project paired with a 356MW/1,574MWh BESS.",
+      "url": "https://www.energy-storage.news/nsw-ipc-approves-1-5gwh-solar-plus-storage-project-in-australia/",
+      "published_date": "2026-04-07",
+      "source_id": "energystoragenews",
+      "source_name": "Energy Storage News",
+      "raw_text": "nsw ipc approves 1.5gwh solar-plus-storage project in australia the nsw ipc has approved spark renewables' dinawan solar farm, an 800mw solar project paired with a 356mw/1,574mwh bess."
+    },
+    {
+      "id": "323169da34f6",
+      "title": "Sneak peek of Rove’s 2nd ‘full service’ EV charger in Costa Mesa, open Wed",
+      "summary": "<div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2026/04/IMG_2327.jpeg?quality=82&#038;strip=all&#038;w=1333\" /></div><p>Rove, a company founded to improve the EV charging experience by building “full service” EV charging centers with access to amenities you can use while charging, has now opened its second charging plaza in Costa Mesa, CA, and we got a sneak preview.</p>\n\n\n\n <a class=\"more-link\" href=\"https://electrek.co/2026/04/07/sneak-peek-of-roves-2nd-full-se",
+      "url": "https://electrek.co/2026/04/07/sneak-peek-of-roves-2nd-full-service-ev-charger-in-costa-mesa-open-wed/",
+      "published_date": "2026-04-07",
+      "source_id": "electrek",
+      "source_name": "Electrek",
+      "raw_text": "sneak peek of rove’s 2nd ‘full service’ ev charger in costa mesa, open wed <div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2026/04/img_2327.jpeg?quality=82&#038;strip=all&#038;w=1333\" /></div><p>rove, a company founded to improve the ev charging experience by building “full service” ev charging centers with access to amenities you can use while charging, has now opened its second charging plaza in costa mesa, ca, and we got a sneak preview.</p>\n\n\n\n <a class=\"more-link\" href=\"https://electrek.co/2026/04/07/sneak-peek-of-roves-2nd-full-service-ev-charger-in-costa-mesa-open-wed/#more-462477\">more…</a>"
+    },
+    {
+      "id": "ab79bb5431db",
+      "title": "Used EVs just hit a sales record – a much bigger wave is coming",
+      "summary": "<div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2022/05/2022-tesla-prices-model-3.jpg?quality=82&#038;strip=all&#038;w=1400\" /></div><p>Used EV sales are picking up serious momentum in the US – and now there’s hard data to back it up.</p>\n\n\n\n <a class=\"more-link\" href=\"https://electrek.co/2026/04/07/used-evs-just-hit-a-sales-record-a-much-bigger-wave-is-coming/#more-462625\">more…</a>",
+      "url": "https://electrek.co/2026/04/07/used-evs-just-hit-a-sales-record-a-much-bigger-wave-is-coming/",
+      "published_date": "2026-04-07",
+      "source_id": "electrek",
+      "source_name": "Electrek",
+      "raw_text": "used evs just hit a sales record – a much bigger wave is coming <div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2022/05/2022-tesla-prices-model-3.jpg?quality=82&#038;strip=all&#038;w=1400\" /></div><p>used ev sales are picking up serious momentum in the us – and now there’s hard data to back it up.</p>\n\n\n\n <a class=\"more-link\" href=\"https://electrek.co/2026/04/07/used-evs-just-hit-a-sales-record-a-much-bigger-wave-is-coming/#more-462625\">more…</a>"
+    },
+    {
+      "id": "3d05c9359a1e",
+      "title": "Tesla FSD v14.3 rolls out with MLIR rewrite, 20% faster reactions",
+      "summary": "<div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2021/08/Tesla-Full-Self-Driving-Beta-Hero.jpg?quality=82&#038;strip=all&#038;w=1600\" /></div><p>Tesla has started rolling out Full Self-Driving (Supervised) v14.3 to HW4 vehicles, and the headline change is under the hood: Tesla rewrote the AI compiler and runtime from scratch on MLIR, which the automaker says delivers a 20% faster reaction time.</p>\n\n\n\n<p>The update, shipping as software version 2026.2.9.6, also br",
+      "url": "https://electrek.co/2026/04/07/tesla-fsd-14-3-rolling-out-mlir-lattner/",
+      "published_date": "2026-04-07",
+      "source_id": "electrek",
+      "source_name": "Electrek",
+      "raw_text": "tesla fsd v14.3 rolls out with mlir rewrite, 20% faster reactions <div class=\"feat-image\"><img src=\"https://electrek.co/wp-content/uploads/sites/3/2021/08/tesla-full-self-driving-beta-hero.jpg?quality=82&#038;strip=all&#038;w=1600\" /></div><p>tesla has started rolling out full self-driving (supervised) v14.3 to hw4 vehicles, and the headline change is under the hood: tesla rewrote the ai compiler and runtime from scratch on mlir, which the automaker says delivers a 20% faster reaction time.</p>\n\n\n\n<p>the update, shipping as software version 2026.2.9.6, also brings a new parking spot pin on the map, better behavior around emergency vehicles and school buses, and tesla’s first public acknowledgement that it’s leaning on mlir — the compiler infrastructure built by chris lattner, who briefly led tesla autopilot back in 2017.</p>\n\n\n\n <a class=\"more-link\" href=\"https://electrek.co/2026/04/07/tesla-fsd-14-3-rolling-out-mlir-lattner/#more-462628\">more…</a>"
+    },
+    {
+      "id": "53a7ed043dea",
+      "title": "Jan De Nul Launches Second Cable Laying Giant",
+      "summary": "Jan De Nul has launched William Thomson, the second of two identical subsea cable‑laying [&#8230;]",
+      "url": "https://www.offshorewind.biz/2026/04/07/jan-de-nul-launches-second-cable-laying-giant/",
+      "published_date": "2026-04-07",
+      "source_id": "offshorewind",
+      "source_name": "Offshore Wind Biz",
+      "raw_text": "jan de nul launches second cable laying giant jan de nul has launched william thomson, the second of two identical subsea cable‑laying [&#8230;]"
+    },
+    {
+      "id": "ee455abe778f",
+      "title": "VIDEO – Energy Storage Summit 2026: How can you ensure quality and performance when buying BESS?",
+      "summary": "How do you ensure quality and performance and mitigate risk when buying BESS equipment? Expert speakers from consultancies, analytics firms and independent power producers discussed the topic in a recent panel discussion.",
+      "url": "https://www.energy-storage.news/video-energy-storage-summit-2026-how-can-you-ensure-quality-and-performance-when-buying-bess/",
+      "published_date": "2026-04-03",
+      "source_id": "energystoragenews",
+      "source_name": "Energy Storage News",
+      "raw_text": "video – energy storage summit 2026: how can you ensure quality and performance when buying bess? how do you ensure quality and performance and mitigate risk when buying bess equipment? expert speakers from consultancies, analytics firms and independent power producers discussed the topic in a recent panel discussion."
+    },
+    {
+      "id": "f20513f73c18",
+      "title": "Reno planning commission approves permit for 200MW Trego Grid BESS project",
+      "summary": "The Reno Planning Commission, in Nevada, US, recommended approval for a conditional-use permit for the 200MW Trego Grid energy storage project on 4 March.",
+      "url": "https://www.energy-storage.news/reno-planning-commission-approves-permit-for-200mw-trego-grid-bess-project/",
+      "published_date": "2026-04-02",
+      "source_id": "energystoragenews",
+      "source_name": "Energy Storage News",
+      "raw_text": "reno planning commission approves permit for 200mw trego grid bess project the reno planning commission, in nevada, us, recommended approval for a conditional-use permit for the 200mw trego grid energy storage project on 4 march."
+    },
+    {
+      "id": "86fc705ea695",
+      "title": "ROUNDUP: Aypa’s US$500 million credit facility upsizing, Georgia Power begins construction on 260MW BESS, Eolus sells 506MWh BESS to DESRI",
+      "summary": "In this news roundup, Aypa power upsizes its credit facility, Georgia Power begins construction on a 260MW BESS, and IOWN Energy on behalf of Eolus sells a 506MWh BESS to DESRI",
+      "url": "https://www.energy-storage.news/roundup-aypas-us500-million-credit-facility-upsizing-georgia-power-begins-construction-on-260mw-bess-eolus-sells-506mwh-bess-to-desri/",
+      "published_date": "2026-04-02",
+      "source_id": "energystoragenews",
+      "source_name": "Energy Storage News",
+      "raw_text": "roundup: aypa’s us$500 million credit facility upsizing, georgia power begins construction on 260mw bess, eolus sells 506mwh bess to desri in this news roundup, aypa power upsizes its credit facility, georgia power begins construction on a 260mw bess, and iown energy on behalf of eolus sells a 506mwh bess to desri"
+    },
+    {
+      "id": "bf2ef411710d",
+      "title": "VIDEO – Energy Storage Summit 2026: Assessing Germany’s unique merchant opportunities",
+      "summary": "What are the merchant opportunities in Germany, where there are almost no capacity schemes or subsidies for energy storage? A panel of expert speakers discussed the opportunities in Europe's largest energy market on the panel at the Energy Storage Summit 2026 in London in February.",
+      "url": "https://www.energy-storage.news/video-energy-storage-summit-2026-assessing-germanys-unique-merchant-opportunities/",
+      "published_date": "2026-04-02",
+      "source_id": "energystoragenews",
+      "source_name": "Energy Storage News",
+      "raw_text": "video – energy storage summit 2026: assessing germany’s unique merchant opportunities what are the merchant opportunities in germany, where there are almost no capacity schemes or subsidies for energy storage? a panel of expert speakers discussed the opportunities in europe's largest energy market on the panel at the energy storage summit 2026 in london in february."
+    },
+    {
+      "id": "7858cf9b0cbd",
+      "title": "Romanian investment platform looks to open up BESS project financing to retail investors",
+      "summary": "MetaWealth COO Michael Topolinski IV discussed the firm’s first BESS project in Romania, which is partially financed with bonds marketed at retail investors.",
+      "url": "https://www.energy-storage.news/romanian-investment-platform-looks-to-open-up-bess-project-financing-to-retail-investors/",
+      "published_date": "2026-04-02",
+      "source_id": "energystoragenews",
+      "source_name": "Energy Storage News",
+      "raw_text": "romanian investment platform looks to open up bess project financing to retail investors metawealth coo michael topolinski iv discussed the firm’s first bess project in romania, which is partially financed with bonds marketed at retail investors."
+    },
+    {
+      "id": "cb2e0003c4fb",
+      "title": "UK BESS ROUNDUP: SSE commissions 300MWh unit, Matrix, Drax and Voltaria progress projects",
+      "summary": "SSE Renewables, Matrix Renewables, Drax and Voltaria have all progressed large-scale BESS projects in the UK, all-in-all totalling 1.8GWh of new capacity.",
+      "url": "https://www.energy-storage.news/uk-bess-roundup-sse-commissions-300mwh-unit-matrix-drax-and-voltaria-progress-projects/",
+      "published_date": "2026-04-02",
+      "source_id": "energystoragenews",
+      "source_name": "Energy Storage News",
+      "raw_text": "uk bess roundup: sse commissions 300mwh unit, matrix, drax and voltaria progress projects sse renewables, matrix renewables, drax and voltaria have all progressed large-scale bess projects in the uk, all-in-all totalling 1.8gwh of new capacity."
+    },
+    {
+      "id": "46c88293b6c1",
+      "title": "Amid Europe’s energy storage boom, residential batteries offer new trading potential",
+      "summary": "Opportunity is ahead for Europe's growing fleet of residential battery storage systems in electricity trading, writes Chris Bernkopf, CEO of flexibility and trading platform Podero.",
+      "url": "https://www.energy-storage.news/amid-europes-energy-storage-boom-residential-batteries-offer-new-trading-potential/",
+      "published_date": "2026-04-02",
+      "source_id": "energystoragenews",
+      "source_name": "Energy Storage News",
+      "raw_text": "amid europe’s energy storage boom, residential batteries offer new trading potential opportunity is ahead for europe's growing fleet of residential battery storage systems in electricity trading, writes chris bernkopf, ceo of flexibility and trading platform podero."
+    },
+    {
+      "id": "f5653ca45911",
+      "title": "New vanadium flow battery player Eora Energy launches in Australia with mining and date centre focus",
+      "summary": "Eora Energy has officially launched in Australia and is positioning itself as a challenger in the vanadium redox flow battery market.",
+      "url": "https://www.energy-storage.news/new-vanadium-flow-battery-player-eora-energy-launches-in-australia-with-mining-and-date-centre-focus/",
+      "published_date": "2026-04-02",
+      "source_id": "energystoragenews",
+      "source_name": "Energy Storage News",
+      "raw_text": "new vanadium flow battery player eora energy launches in australia with mining and date centre focus eora energy has officially launched in australia and is positioning itself as a challenger in the vanadium redox flow battery market."
+    }
+  ]
+}
