@@ -1,9 +1,25 @@
 {
   "date": "2026-04-10",
-  "generated_at": "2026-04-10T08:11:57.741670+00:00",
-  "total_raw": 105,
-  "total_capital_events": 2,
+  "generated_at": "2026-04-10T17:37:11.706912+00:00",
+  "total_raw": 95,
+  "total_capital_events": 4,
   "capital_flow_feed": [
+    {
+      "id": "650e86371e26",
+      "event_type": "capital_signal",
+      "title": "American Battery Factory, Lion Energy form partnership for US-made LFP BESS equipment",
+      "date": "2026-04-10",
+      "score": 40,
+      "company_name": "American",
+      "sector": "unknown",
+      "amount": null,
+      "source_name": "Energy Storage News",
+      "source_url": "https://www.energy-storage.news/american-battery-factory-lion-energy-form-partnership-for-us-made-lfp-bess-equipment/",
+      "why_important": "관련 신호",
+      "tags": [
+        "capital_flow"
+      ]
+    },
     {
       "id": "f30b410f6dbc",
       "event_type": "capital_signal",
@@ -31,6 +47,22 @@
       "amount": null,
       "source_name": "Energy Storage News",
       "source_url": "https://www.energy-storage.news/boralex-six-nations-of-the-grand-river-secure-us145-million-financing-for-500mwh-ontario-bess/",
+      "why_important": "관련 신호",
+      "tags": [
+        "capital_flow"
+      ]
+    },
+    {
+      "id": "8cc88df8e899",
+      "event_type": "capital_signal",
+      "title": "Chinese PV Industry Brief: Polysilicon prices extend decline",
+      "date": "2026-04-10",
+      "score": 55,
+      "company_name": "Chinese",
+      "sector": "unknown",
+      "amount": null,
+      "source_name": "PV Magazine",
+      "source_url": "https://www.pv-magazine.com/2026/04/10/chinese-pv-industry-brief-polysilicon-prices-extend-decline/",
       "why_important": "관련 신호",
       "tags": [
         "capital_flow"
