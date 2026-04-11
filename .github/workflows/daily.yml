@@ -33,6 +33,9 @@ jobs:
       - name: Process capital flow
         run: python process_capital_flow.py
 
+      - name: Copy processed to latest.json
+        run: cp data/processed/latest.json data/latest.json
+
       - name: Commit & push data
         run: |
           git config --local user.email "action@github.com"
