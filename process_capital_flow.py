@@ -1,6 +1,6 @@
 """
 process_capital_flow.py
-Energy Capital Flow — Capital Flow Processor (Option A 핵심 파일)
+Energy Capital Flow — Capital Flow Processor
 """
 
 import json
@@ -36,7 +36,7 @@ def calculate_capital_score(article: dict) -> int:
 def extract_company_name(title: str) -> str:
     words = title.split()
     for word in words:
-        if word[0].isupper() and len(word) > 3 and word.lower() not in ["the", "new", "first", "for"]:
+        if word and word[0].isupper() and len(word) > 3 and word.lower() not in ["the", "new", "first", "for"]:
             return word.strip()
     return "Unknown"
 
@@ -46,7 +46,6 @@ def main():
     raw_file = RAW_DIR / f"{TODAY}.json"
     if not raw_file.exists():
         print(f"❌ 오늘 raw 파일이 없습니다: {raw_file}")
-        print("collect_energy_signals.py를 먼저 실행해주세요.")
         return
 
     data = json.loads(raw_file.read_text(encoding="utf-8"))
@@ -64,7 +63,7 @@ def main():
 
         event = {
             "id": art.get("id") or hashlib.md5(art["title"].encode()).hexdigest()[:12],
-            "event_type": "funding_round" if "raises" in art["title"].lower() or "series" in art["title"].lower() else "capital_signal",
+            "event_type": "funding_round" if any(k in art["title"].lower() for k in ["raises", "series"]) else "capital_signal",
             "title": art["title"],
             "date": art.get("published_date", TODAY),
             "score": score,
@@ -73,7 +72,7 @@ def main():
             "amount": None,
             "source_name": art["source_name"],
             "source_url": art.get("url", ""),
-            "why_important": "자본 흐름 관련 신호 감지" if score >= 60 else "관련 신호",
+            "why_important": "자본 흐름 관련 신호" if score >= 60 else "관련 신호",
             "tags": ["capital_flow"]
         }
         capital_events.append(event)
