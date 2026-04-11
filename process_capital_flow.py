@@ -1,8 +1,3 @@
-"""
-process_capital_flow.py
-Energy Capital Flow — Capital Flow Processor (개선 버전)
-"""
-
 import json
 import hashlib
 import re
@@ -13,52 +8,53 @@ TODAY = datetime.now(timezone.utc).strftime("%Y-%m-%d")
 RAW_DIR = Path("data/raw")
 PROCESSED_DIR = Path("data/processed")
 PROCESSED_DIR.mkdir(parents=True, exist_ok=True)
-
 OUTPUT_PATH = PROCESSED_DIR / "latest.json"
 
-# 더 많은 회사명 패턴
-COMPANY_PATTERNS = [
-    r'\b([A-Z][A-Za-z0-9&]+(?:\s+[A-Z][A-Za-z0-9&]+){0,3})\b',  # 대문자로 시작하는 회사명
-    r'\b(Tesla|Kia|BYD|Northvolt|Form Energy|EnerVenue|Amogy|Sunfire|Ceres|Gridwiz|SixtyHertz)\b'
-]
+KNOWN_COMPANIES = {
+    "tesla", "kia", "byd", "northvolt", "form energy", "enervenue", "amogy", "sunfire", 
+    "ceres", "gridwiz", "sixtyhertz", "boralex", "tennet", "entergy", "xcel", "nextEra", 
+    "eolus", "aypa", "lion energy", "zelestra", "tokyu land"
+}
 
-def calculate_capital_score(article: dict) -> int:
-    text = (article.get("title", "") + " " + article.get("summary", "")).lower()
-    score = 15
+def extract_company_name(title: str) -> str:
+    title_lower = title.lower()
+    
+    # 알려진 회사 우선 매칭
+    for co in KNOWN_COMPANIES:
+        if co in title_lower:
+            # 원본 형태로 복원
+            for word in title.split():
+                if word.lower().startswith(co.split()[0]):
+                    return word.replace(',', '').replace('’', '').strip()
+    
+    # 일반 회사명 패턴 (대문자로 시작하는 2~4단어)
+    match = re.search(r'\b([A-Z][A-Za-z0-9&]+(?:\s+[A-Z][A-Za-z0-9&]+){0,3})\b', title)
+    if match:
+        candidate = match.group(1).strip()
+        bad_words = {"the", "new", "first", "video", "roundup", "australia", "japanese", "european", "chinese"}
+        if candidate.lower() not in bad_words and len(candidate) > 3:
+            return candidate
+    
+    return "Unknown"
 
-    capital_keywords = [
-        "raises", "raised", "funding", "series a", "series b", "series c", "series d", "series e",
-        "investment", "strategic investment", "led by", "offtake", "ppa", "power purchase",
-        "project finance", "capex", "financing", "grant", "doe award", "hyperscaler", "utility",
-        "contract", "deployment", "pilot", "partnership"
-    ]
+def calculate_capital_score(title: str, summary: str = "") -> int:
+    text = (title + " " + summary).lower()
+    score = 20
 
-    if any(kw in text for kw in capital_keywords):
+    strong_keywords = ["raises", "raised", "funding", "series a", "series b", "series c", "investment", "offtake", "ppa", "project finance", "financing"]
+    if any(kw in text for kw in strong_keywords):
         score += 40
 
-    if any(x in text for x in ["$100m", "$200m", "$300m", "$400m", "million", "billion", "억", "조", "usd", "eur"]):
-        score += 30
+    if any(x in text for x in ["$100", "$200", "$300", "$400", "million", "billion", "억", "조"]):
+        score += 25
+
+    if any(kw in text for kw in ["contract", "deployment", "partnership", "pilot", "grant"]):
+        score += 15
 
     return min(100, score)
 
-def extract_company_name(title: str) -> str:
-    # 알려진 회사명 우선 매칭
-    known_companies = ["Tesla", "Kia", "BYD", "Northvolt", "Form Energy", "EnerVenue", "Amogy", "Sunfire", "Ceres", "Gridwiz", "SixtyHertz", "Boralex", "TenneT", "Entergy", "Xcel"]
-    for co in known_companies:
-        if co.lower() in title.lower():
-            return co
-
-    # 일반 패턴
-    match = re.search(r'\b([A-Z][A-Za-z0-9&]+(?:\s+[A-Z][A-Za-z0-9&]+){0,2})\b', title)
-    if match:
-        candidate = match.group(1).strip()
-        if len(candidate) > 3 and candidate.lower() not in ["the", "new", "first", "for", "with", "and", "video", "roundup"]:
-            return candidate
-
-    return "Unknown"
-
 def main():
-    print(f"\n=== Energy Capital Flow Processor ===\n{TODAY}\n")
+    print(f"\n=== Energy Capital Flow Processor === {TODAY}\n")
 
     raw_file = RAW_DIR / f"{TODAY}.json"
     if not raw_file.exists():
@@ -68,45 +64,44 @@ def main():
     data = json.loads(raw_file.read_text(encoding="utf-8"))
     articles = data.get("articles", [])
 
-    print(f"로드된 raw 기사: {len(articles)}개")
-
     capital_events = []
     for art in articles:
-        score = calculate_capital_score(art)
-        if score < 25:
+        title = art.get("title", "")
+        summary = art.get("summary", "")
+        
+        score = calculate_capital_score(title, summary)
+        if score < 30:
             continue
 
-        company = extract_company_name(art.get("title", ""))
+        company = extract_company_name(title)
 
         event = {
-            "id": hashlib.md5(art.get("title", "").encode()).hexdigest()[:12],
-            "event_type": "funding" if any(k in art.get("title", "").lower() for k in ["raises", "series", "funding"]) else "capital_signal",
-            "title": art.get("title", ""),
+            "id": hashlib.md5(title.encode()).hexdigest()[:12],
+            "event_type": "funding" if any(k in title.lower() for k in ["raises", "funding", "series"]) else "capital_signal",
+            "title": title,
             "date": art.get("published_date", TODAY),
             "score": score,
             "company_name": company,
-            "sector": "unknown",
-            "source_name": art.get("source_name", ""),
+            "sector": "unknown",   # 나중에 더 세밀하게 분류 가능
+            "source_name": art.get("source_name", "Unknown Source"),
             "source_url": art.get("url", ""),
-            "why_important": "자본 흐름 관련 신호 감지"
+            "why_important": "자본 흐름 / 투자 / 계약 관련 신호"
         }
         capital_events.append(event)
 
-    capital_events.sort(key=lambda x: (-x["score"], x["date"]), reverse=True)
+    capital_events.sort(key=lambda x: (-x["score"], x.get("date", "")), reverse=True)
 
     output = {
         "date": TODAY,
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "total_raw": len(articles),
         "total_capital_events": len(capital_events),
-        "capital_flow_feed": capital_events[:80],
-        "stats": {
-            "high_score": sum(1 for e in capital_events if e["score"] >= 60)
-        }
+        "capital_flow_feed": capital_events[:50],
+        "stats": {"high_score": sum(1 for e in capital_events if e["score"] >= 60)}
     }
 
     OUTPUT_PATH.write_text(json.dumps(output, ensure_ascii=False, indent=2), encoding="utf-8")
-    print(f"✅ {len(capital_events)}개 이벤트 생성 → {OUTPUT_PATH}")
+    print(f"✅ {len(capital_events)}개 자본 흐름 이벤트 생성 완료")
 
 if __name__ == "__main__":
     main()
