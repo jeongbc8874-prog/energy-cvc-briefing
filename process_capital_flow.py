@@ -19,7 +19,7 @@ def calculate_capital_score(article: dict) -> int:
     text = (article.get("title", "") + " " + article.get("summary", "")).lower()
     score = 0
     capital_keywords = ["raises", "raised", "series a", "series b", "series c", "series d", "series e", 
-                        "investment round", "strategic investment", "offtake", "ppa", "project finance", "capex"]
+                        "investment round", "strategic investment", "offtake", "ppa", "project finance"]
     if any(kw in text for kw in capital_keywords):
         score += 40
     if any(x in text for x in ["$100m", "$200m", "$300m", "million", "billion", "억", "조"]):
@@ -54,7 +54,7 @@ def main():
 
         event = {
             "id": hashlib.md5(art.get("title", "").encode()).hexdigest()[:12],
-            "event_type": "funding" if "raises" in art.get("title", "").lower() or "series" in art.get("title", "").lower() else "capital_signal",
+            "event_type": "funding" if any(k in art.get("title", "").lower() for k in ["raises", "series"]) else "capital_signal",
             "title": art.get("title", ""),
             "date": art.get("published_date", TODAY),
             "score": score,
@@ -62,7 +62,7 @@ def main():
             "sector": "unknown",
             "source_name": art.get("source_name", ""),
             "source_url": art.get("url", ""),
-            "why_important": "자본 흐름 신호 감지"
+            "why_important": "자본 흐름 관련 신호"
         }
         capital_events.append(event)
 
@@ -80,7 +80,7 @@ def main():
     }
 
     OUTPUT_PATH.write_text(json.dumps(output, ensure_ascii=False, indent=2), encoding="utf-8")
-    print(f"✅ {len(capital_events)}개 자본 흐름 이벤트 생성 → {OUTPUT_PATH}")
+    print(f"✅ {len(capital_events)}개 이벤트 생성 → {OUTPUT_PATH}")
 
 if __name__ == "__main__":
     main()
