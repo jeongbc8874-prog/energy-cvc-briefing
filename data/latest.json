@@ -1,82 +1,83 @@
 {
   "date": "2026-04-11",
-  "generated_at": "2026-04-11T14:43:41.142266+00:00",
+  "generated_at": "2026-04-11T14:48:11.420661+00:00",
   "total_raw": 105,
-  "total_capital_events": 4,
+  "total_capital_events": 6,
   "capital_flow_feed": [
     {
-      "id": "650e86371e26",
+      "id": "1cb0e5d64a7b",
+      "event_type": "capital_signal",
+      "title": "Japanese rail operator to procure 98 MW of new solar via corporate PPA",
+      "date": "2026-04-10",
+      "score": 40,
+      "company_name": "Japanese",
+      "sector": "unknown",
+      "source_name": "PV Magazine",
+      "source_url": "https://www.pv-magazine.com/2026/04/10/japanese-rail-operator-to-procure-98-mw-of-new-solar-via-corporate-ppa/",
+      "why_important": "자본 흐름 신호 감지"
+    },
+    {
+      "id": "6f3b388ba85f",
+      "event_type": "capital_signal",
+      "title": "Solar PV Capex could fall to $192/kW by 2050",
+      "date": "2026-04-10",
+      "score": 40,
+      "company_name": "Solar",
+      "sector": "unknown",
+      "source_name": "PV Magazine",
+      "source_url": "https://www.pv-magazine.com/2026/04/10/pv-capex/",
+      "why_important": "자본 흐름 신호 감지"
+    },
+    {
+      "id": "b708a5322623",
       "event_type": "capital_signal",
       "title": "American Battery Factory, Lion Energy form partnership for US-made LFP BESS equipment",
       "date": "2026-04-10",
       "score": 40,
       "company_name": "American",
       "sector": "unknown",
-      "amount": null,
       "source_name": "Energy Storage News",
       "source_url": "https://www.energy-storage.news/american-battery-factory-lion-energy-form-partnership-for-us-made-lfp-bess-equipment/",
-      "why_important": "관련 신호",
-      "tags": [
-        "capital_flow"
-      ]
+      "why_important": "자본 흐름 신호 감지"
     },
     {
-      "id": "f30b410f6dbc",
+      "id": "930a3cd3b1b9",
+      "event_type": "capital_signal",
+      "title": "VIDEO – Energy Storage Summit 2026: What is the outlook for BESS Capex this year?",
+      "date": "2026-04-09",
+      "score": 40,
+      "company_name": "VIDEO",
+      "sector": "unknown",
+      "source_name": "Energy Storage News",
+      "source_url": "https://www.energy-storage.news/video-energy-storage-summit-2026-what-is-the-outlook-for-bess-capex-this-year/",
+      "why_important": "자본 흐름 신호 감지"
+    },
+    {
+      "id": "2449c684717e",
       "event_type": "capital_signal",
       "title": "IPPs Zelestra, BNZ adding BESS to solar PV plants in Southern Europe",
       "date": "2026-04-08",
       "score": 40,
       "company_name": "IPPs",
       "sector": "unknown",
-      "amount": null,
       "source_name": "Energy Storage News",
       "source_url": "https://www.energy-storage.news/ipps-zelestra-bnz-adding-bess-to-solar-pv-plants-in-southern-europe/",
-      "why_important": "관련 신호",
-      "tags": [
-        "capital_flow"
-      ]
+      "why_important": "자본 흐름 신호 감지"
     },
     {
-      "id": "a11566549a5e",
-      "event_type": "capital_signal",
-      "title": "Boralex, Six Nations of the Grand River secure US$145 million financing for 500MWh Ontario BESS",
-      "date": "2026-04-07",
-      "score": 45,
-      "company_name": "Boralex,",
-      "sector": "unknown",
-      "amount": null,
-      "source_name": "Energy Storage News",
-      "source_url": "https://www.energy-storage.news/boralex-six-nations-of-the-grand-river-secure-us145-million-financing-for-500mwh-ontario-bess/",
-      "why_important": "관련 신호",
-      "tags": [
-        "capital_flow"
-      ]
-    },
-    {
-      "id": "8cc88df8e899",
+      "id": "33e8da86c7fb",
       "event_type": "capital_signal",
       "title": "Chinese PV Industry Brief: Polysilicon prices extend decline",
       "date": "2026-04-10",
-      "score": 55,
+      "score": 65,
       "company_name": "Chinese",
       "sector": "unknown",
-      "amount": null,
       "source_name": "PV Magazine",
       "source_url": "https://www.pv-magazine.com/2026/04/10/chinese-pv-industry-brief-polysilicon-prices-extend-decline/",
-      "why_important": "관련 신호",
-      "tags": [
-        "capital_flow"
-      ]
+      "why_important": "자본 흐름 신호 감지"
     }
   ],
-  "top_funding": [],
-  "sector_heat": {
-    "ess": 65,
-    "hydrogen": 48,
-    "grid_sw": 72
-  },
   "stats": {
-    "high_score_events": 0,
-    "funding_related": 0
+    "high_score": 0
   }
 }
