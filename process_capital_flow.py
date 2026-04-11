@@ -44,6 +44,8 @@ def main():
     data = json.loads(raw_file.read_text(encoding="utf-8"))
     articles = data.get("articles", [])
 
+    print(f"로드된 raw 기사: {len(articles)}개")
+
     capital_events = []
     for art in articles:
         score = calculate_capital_score(art)
