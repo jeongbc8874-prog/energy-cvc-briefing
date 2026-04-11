@@ -1,8 +1,8 @@
 {
   "date": "2026-04-11",
-  "generated_at": "2026-04-11T16:11:31.680184+00:00",
-  "total_raw": 95,
-  "total_capital_events": 17,
+  "generated_at": "2026-04-11T16:13:35.638784+00:00",
+  "total_raw": 105,
+  "total_capital_events": 19,
   "capital_flow_feed": [
     {
       "id": "909c1d4bc1ca",
@@ -65,6 +65,18 @@
       "why_important": "자본 흐름 / 투자 / 계약 관련 신호"
     },
     {
+      "id": "c8bf705d95ea",
+      "event_type": "capital_signal",
+      "title": "European Consortium Developing Underwater Noise Reduction System for Floating and Jacket Foundations",
+      "date": "2026-04-08",
+      "score": 35,
+      "company_name": "European Consortium Developing Underwater",
+      "sector": "unknown",
+      "source_name": "Offshore Wind Biz",
+      "source_url": "https://www.offshorewind.biz/2026/04/08/european-consortium-developing-underwater-noise-reduction-system-for-floating-and-jacket-foundations/",
+      "why_important": "자본 흐름 / 투자 / 계약 관련 신호"
+    },
+    {
       "id": "705ab5edb34c",
       "event_type": "capital_signal",
       "title": "Australia: Battery storage cushions AU$1 billion fuel shock as Climate Council demands May budget action",
@@ -82,7 +94,7 @@
       "title": "ROUNDUP: Aypa’s US$500 million credit facility upsizing, Georgia Power begins construction on 260MW BESS, Eolus sells 506MWh BESS to DESRI",
       "date": "2026-04-02",
       "score": 45,
-      "company_name": "Aypas",
+      "company_name": "Eolus",
       "sector": "unknown",
       "source_name": "Energy Storage News",
       "source_url": "https://www.energy-storage.news/roundup-aypas-us500-million-credit-facility-upsizing-georgia-power-begins-construction-on-260mw-bess-eolus-sells-506mwh-bess-to-desri/",
@@ -110,6 +122,18 @@
       "sector": "unknown",
       "source_name": "PV Magazine",
       "source_url": "https://www.pv-magazine.com/2026/04/10/japanese-rail-operator-to-procure-98-mw-of-new-solar-via-corporate-ppa/",
+      "why_important": "자본 흐름 / 투자 / 계약 관련 신호"
+    },
+    {
+      "id": "f4cf66c23ffa",
+      "event_type": "capital_signal",
+      "title": "Financing in Place for 390 MW Shinan Ui Offshore Wind Project in South Korea",
+      "date": "2026-04-09",
+      "score": 60,
+      "company_name": "Financing",
+      "sector": "unknown",
+      "source_name": "Offshore Wind Biz",
+      "source_url": "https://www.offshorewind.biz/2026/04/09/financing-in-place-for-390-mw-shinan-ui-offshore-wind-project-in-south-korea/",
       "why_important": "자본 흐름 / 투자 / 계약 관련 신호"
     },
     {
@@ -210,6 +234,6 @@
     }
   ],
   "stats": {
-    "high_score": 10
+    "high_score": 11
   }
 }
