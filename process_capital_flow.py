@@ -1,6 +1,6 @@
 """
 process_capital_flow.py
-Energy Capital Flow — Capital Flow Processor
+Energy Capital Flow — Capital Flow Processor (완화 버전)
 """
 
 import json
@@ -17,16 +17,17 @@ OUTPUT_PATH = PROCESSED_DIR / "latest.json"
 
 def calculate_capital_score(article: dict) -> int:
     text = (article.get("title", "") + " " + article.get("summary", "")).lower()
-    score = 20  # 기본 점수 (너무 엄격하지 않게)
+    score = 15  # 기본 점수 상향
 
     capital_keywords = [
         "raises", "raised", "funding", "series a", "series b", "series c", "series d", "series e",
         "investment", "strategic investment", "led by", "offtake", "ppa", "power purchase",
-        "project finance", "capex", "financing", "grant", "doe award", "hyperscaler"
+        "project finance", "capex", "financing", "grant", "doe award", "hyperscaler", "utility",
+        "contract", "deployment", "pilot", "partnership"
     ]
 
     if any(kw in text for kw in capital_keywords):
-        score += 40
+        score += 35
 
     if any(x in text for x in ["$100m", "$200m", "$300m", "$400m", "million", "billion", "억", "조", "usd", "eur"]):
         score += 25
@@ -36,7 +37,7 @@ def calculate_capital_score(article: dict) -> int:
 def extract_company_name(title: str) -> str:
     words = title.split()
     for word in words:
-        if word and word[0].isupper() and len(word) > 3 and word.lower() not in ["the", "new", "first", "for", "with", "and"]:
+        if word and word[0].isupper() and len(word) > 3 and word.lower() not in ["the", "new", "first", "for", "with", "and", "of"]:
             return word.strip()
     return "Unknown"
 
@@ -56,7 +57,7 @@ def main():
     capital_events = []
     for art in articles:
         score = calculate_capital_score(art)
-        if score < 25:   # 최소 점수 낮춤
+        if score < 25:   # 최소 점수 더 낮춤
             continue
 
         company = extract_company_name(art.get("title", ""))
@@ -82,14 +83,14 @@ def main():
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "total_raw": len(articles),
         "total_capital_events": len(capital_events),
-        "capital_flow_feed": capital_events[:50],
+        "capital_flow_feed": capital_events[:80],   # 더 많이 보여주기
         "stats": {
             "high_score": sum(1 for e in capital_events if e["score"] >= 60)
         }
     }
 
     OUTPUT_PATH.write_text(json.dumps(output, ensure_ascii=False, indent=2), encoding="utf-8")
-    print(f"✅ {len(capital_events)}개 자본 흐름 이벤트 생성 → {OUTPUT_PATH}")
+    print(f"✅ {len(capital_events)}개 이벤트 생성 → {OUTPUT_PATH}")
 
 if __name__ == "__main__":
     main()
