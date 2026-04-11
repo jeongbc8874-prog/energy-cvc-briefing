@@ -20,7 +20,7 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11'     # ← 이 줄을 명확히 추가
+          python-version: '3.11'
 
       - name: Install dependencies
         run: pip install feedparser
@@ -31,11 +31,9 @@ jobs:
       - name: Process capital flow
         run: python process_capital_flow.py
 
-
       - name: Copy processed to latest.json
         run: cp data/processed/latest.json data/latest.json
-        
-      
+
       - name: Commit & push data
         run: |
           git config --local user.email "action@github.com"
