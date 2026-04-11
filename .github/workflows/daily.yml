@@ -2,8 +2,8 @@ name: Daily Energy Capital Flow
 
 on:
   schedule:
-    - cron: '0 15 * * *'
-    - cron: '0 3 * * *'
+    - cron: '0 15 * * *'    # KST 00:00
+    - cron: '0 3 * * *'     # KST 12:00
   workflow_dispatch:
 
 permissions:
@@ -15,10 +15,12 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4   # ← 이건 그대로 OK
+        uses: actions/checkout@v4
 
       - name: Setup Python
-        uses: actions/setup-python@v5   # ← 이건 v5가 아직 괜찮지만, 가능하면 아래처럼 최신 유지
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'     # ← 이 줄을 명확히 추가
 
       - name: Install dependencies
         run: pip install feedparser
