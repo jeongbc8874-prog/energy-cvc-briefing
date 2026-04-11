@@ -1,10 +1,11 @@
 """
 process_capital_flow.py
-Energy Capital Flow — Capital Flow Processor (완화 버전)
+Energy Capital Flow — Capital Flow Processor (개선 버전)
 """
 
 import json
 import hashlib
+import re
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -15,9 +16,15 @@ PROCESSED_DIR.mkdir(parents=True, exist_ok=True)
 
 OUTPUT_PATH = PROCESSED_DIR / "latest.json"
 
+# 더 많은 회사명 패턴
+COMPANY_PATTERNS = [
+    r'\b([A-Z][A-Za-z0-9&]+(?:\s+[A-Z][A-Za-z0-9&]+){0,3})\b',  # 대문자로 시작하는 회사명
+    r'\b(Tesla|Kia|BYD|Northvolt|Form Energy|EnerVenue|Amogy|Sunfire|Ceres|Gridwiz|SixtyHertz)\b'
+]
+
 def calculate_capital_score(article: dict) -> int:
     text = (article.get("title", "") + " " + article.get("summary", "")).lower()
-    score = 15  # 기본 점수 상향
+    score = 15
 
     capital_keywords = [
         "raises", "raised", "funding", "series a", "series b", "series c", "series d", "series e",
@@ -27,18 +34,27 @@ def calculate_capital_score(article: dict) -> int:
     ]
 
     if any(kw in text for kw in capital_keywords):
-        score += 35
+        score += 40
 
     if any(x in text for x in ["$100m", "$200m", "$300m", "$400m", "million", "billion", "억", "조", "usd", "eur"]):
-        score += 25
+        score += 30
 
     return min(100, score)
 
 def extract_company_name(title: str) -> str:
-    words = title.split()
-    for word in words:
-        if word and word[0].isupper() and len(word) > 3 and word.lower() not in ["the", "new", "first", "for", "with", "and", "of"]:
-            return word.strip()
+    # 알려진 회사명 우선 매칭
+    known_companies = ["Tesla", "Kia", "BYD", "Northvolt", "Form Energy", "EnerVenue", "Amogy", "Sunfire", "Ceres", "Gridwiz", "SixtyHertz", "Boralex", "TenneT", "Entergy", "Xcel"]
+    for co in known_companies:
+        if co.lower() in title.lower():
+            return co
+
+    # 일반 패턴
+    match = re.search(r'\b([A-Z][A-Za-z0-9&]+(?:\s+[A-Z][A-Za-z0-9&]+){0,2})\b', title)
+    if match:
+        candidate = match.group(1).strip()
+        if len(candidate) > 3 and candidate.lower() not in ["the", "new", "first", "for", "with", "and", "video", "roundup"]:
+            return candidate
+
     return "Unknown"
 
 def main():
@@ -57,7 +73,7 @@ def main():
     capital_events = []
     for art in articles:
         score = calculate_capital_score(art)
-        if score < 25:   # 최소 점수 더 낮춤
+        if score < 25:
             continue
 
         company = extract_company_name(art.get("title", ""))
@@ -83,7 +99,7 @@ def main():
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "total_raw": len(articles),
         "total_capital_events": len(capital_events),
-        "capital_flow_feed": capital_events[:80],   # 더 많이 보여주기
+        "capital_flow_feed": capital_events[:80],
         "stats": {
             "high_score": sum(1 for e in capital_events if e["score"] >= 60)
         }
