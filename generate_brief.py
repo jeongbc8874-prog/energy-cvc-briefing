@@ -373,7 +373,7 @@ def generate_brief(signals: list[dict], eia_data: dict) -> dict:
     print("[3단계] Claude API 호출...")
     message = client.messages.create(
         model="claude-opus-4-5",
-        max_tokens=4096,
+        max_tokens=8192,
         system=SYSTEM_PROMPT,
         messages=[{"role": "user", "content": user_prompt}],
     )
@@ -385,7 +385,15 @@ def generate_brief(signals: list[dict], eia_data: dict) -> dict:
             raw = raw[4:]
     raw = raw.strip()
 
-    brief = json.loads(raw)
+    try:
+        brief = json.loads(raw)
+    except json.JSONDecodeError:
+        last_brace = raw.rfind("}")
+        if last_brace > 0:
+            raw = raw[:last_brace + 1]
+            brief = json.loads(raw)
+        else:
+            raise
     brief["generated_at"]  = now.isoformat()
     brief["signal_count"]  = len(signals)
     brief["sources_used"]  = list({s["source"] for s in signals})
