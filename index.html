@@ -3,59 +3,32 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Energy Capital Flow Intelligence</title>
+<title>Energy Capital Intelligence</title>
 <style>
-  :root {
-    --bg: #f8f7f4;
-    --text: #1f1f1f;
-    --accent: #0a6640;
-    --card: #ffffff;
-  }
-  body {
-    font-family: system-ui, -apple-system, sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    margin: 0;
-    padding: 20px;
-    line-height: 1.5;
-  }
-  h1 { color: var(--accent); margin-bottom: 8px; }
-  .subtitle { color: #666; font-size: 1.1rem; margin-bottom: 30px; }
-  .card {
-    background: var(--card);
-    border-radius: 12px;
-    padding: 20px;
-    margin-bottom: 24px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-  }
-  table { width: 100%; border-collapse: collapse; }
-  th, td { padding: 12px 8px; text-align: left; border-bottom: 1px solid #eee; }
-  th { background: #f0ede6; }
-  .score-high { color: #0a6640; font-weight: 600; }
-  .unknown { color: #999; font-style: italic; }
+  body { font-family: system-ui, -apple-system, sans-serif; background:#f8f7f4; color:#1f1f1f; margin:0; padding:24px; line-height:1.6; }
+  h1 { color:#0a6640; margin-bottom:8px; }
+  .subtitle { color:#666; font-size:1.1rem; }
+  .card { background:white; border-radius:12px; padding:24px; margin-bottom:28px; box-shadow:0 4px 15px rgba(0,0,0,0.07); }
+  .memo { background:#fffef0; border-left:6px solid #0a6640; padding:20px; font-size:1.05rem; }
+  table { width:100%; border-collapse:collapse; margin-top:12px; }
+  th, td { padding:14px 10px; text-align:left; border-bottom:1px solid #eee; }
+  th { background:#f0ede6; }
+  .high { color:#0a6640; font-weight:600; }
 </style>
 </head>
 <body>
-  <h1>Energy Capital Flow Intelligence</h1>
-  <p class="subtitle">에너지 분야 자본 흐름 실시간 브리핑 • Updated: <span id="updated"></span></p>
+  <h1>Energy Capital Intelligence</h1>
+  <p class="subtitle">에너지 투자 전문 심사역 관점 브리핑 • Updated: <span id="updated"></span></p>
 
-  <div class="card">
-    <h2>📊 오늘의 자본 흐름 요약</h2>
-    <p><strong>Raw 기사:</strong> <span id="total_raw">0</span>개 | 
-       <strong>Capital Events:</strong> <span id="total_events">0</span>개</p>
+  <div class="card memo" id="daily-memo">
+    <h2>📝 Daily Investment Memo</h2>
+    <div id="memo-content">인사이트를 생성하는 중입니다...</div>
   </div>
 
   <div class="card">
-    <h2>🔥 Top Capital Flow Signals</h2>
-    <table id="feed-table">
-      <thead>
-        <tr>
-          <th>Date</th>
-          <th>Company / Event</th>
-          <th>Source</th>
-          <th>Score</th>
-        </tr>
-      </thead>
+    <h2>🔥 High-Conviction Deals</h2>
+    <table id="conviction-table">
+      <thead><tr><th>Date</th><th>Company / Deal</th><th>Why Important (인사이트)</th><th>Score</th></tr></thead>
       <tbody></tbody>
     </table>
   </div>
@@ -63,46 +36,34 @@
   <script>
     async function loadData() {
       try {
-        const res = await fetch('data/latest.json?' + Date.now()); // 캐시 방지
+        const res = await fetch('data/latest.json?' + Date.now());
         const data = await res.json();
 
-        document.getElementById('updated').textContent = new Date(data.generated_at).toLocaleString('ko-KR');
+        document.getElementById('updated').textContent = new Date(data.generated_at || Date.now()).toLocaleString('ko-KR');
 
-        document.getElementById('total_raw').textContent = data.total_raw || 0;
-        document.getElementById('total_events').textContent = data.total_capital_events || 0;
+        // Daily Memo
+        document.getElementById('memo-content').innerHTML = data.daily_memo || "오늘의 인사이트가 아직 생성되지 않았습니다.";
 
-        const tbody = document.querySelector('#feed-table tbody');
+        // High-Conviction Table
+        const tbody = document.querySelector('#conviction-table tbody');
         tbody.innerHTML = '';
-
-        const feed = data.capital_flow_feed || [];
-        feed.slice(0, 30).forEach(item => {
+        (data.high_conviction || []).forEach(item => {
           const row = document.createElement('tr');
           row.innerHTML = `
             <td>${item.date}</td>
-            <td>
-              <strong>${item.company_name || 'Unknown'}</strong><br>
-              <small>${item.title.substring(0, 90)}${item.title.length > 90 ? '...' : ''}</small>
-            </td>
-            <td><small>${item.source_name}</small></td>
-            <td class="score-high">${item.score}</td>
+            <td><strong>${item.company}</strong></td>
+            <td>${item.insight}</td>
+            <td class="high">${item.score}</td>
           `;
           tbody.appendChild(row);
         });
-
-        if (feed.length === 0) {
-          tbody.innerHTML = `<tr><td colspan="4" style="text-align:center; padding:40px; color:#999;">아직 의미 있는 자본 흐름 이벤트가 없습니다.<br>process_capital_flow.py 개선 후 다시 확인해주세요.</td></tr>`;
-        }
-      } catch (err) {
-        console.error(err);
-        document.body.innerHTML += `<div style="color:red; margin-top:20px;">데이터 로드 실패: ${err.message}</div>`;
+      } catch(e) {
+        console.error(e);
       }
     }
 
-    // 페이지 로드 시 + 10초마다 자동 갱신
-    window.onload = () => {
-      loadData();
-      setInterval(loadData, 10000);
-    };
+    window.onload = loadData;
+    setInterval(loadData, 30000); // 30초마다 자동 갱신
   </script>
 </body>
 </html>
