@@ -30,38 +30,25 @@ ENTSOE_TOKEN      = os.environ.get("ENTSOE_TOKEN", "")      # 무료 발급: tra
 # ── 무료 RSS 소스 정의 ────────────────────────────────────────────────────────
 
 RSS_SOURCES = [
-    # ── Tier A: 글로벌 에너지 딜/투자 전문 ──────────────────────────
-    {"name": "Utility Dive",        "url": "https://www.utilitydive.com/feeds/news/",              "tier": "A"},
-    {"name": "PV Magazine",         "url": "https://www.pv-magazine.com/feed/",                    "tier": "A"},
-    {"name": "PV Tech",             "url": "https://www.pv-tech.org/feed/",                        "tier": "A"},
-    {"name": "Recharge News",       "url": "https://www.rechargenews.com/rss",                     "tier": "A"},
-    {"name": "Energy Monitor",      "url": "https://www.energymonitor.ai/feed/",                   "tier": "A"},
-    {"name": "Energy Storage News", "url": "https://www.energy-storage.news/feed/",                "tier": "A"},
-    {"name": "Electrek",            "url": "https://electrek.co/feed/",                            "tier": "A"},
-    {"name": "CleanTechnica",       "url": "https://cleantechnica.com/feed/",                      "tier": "A"},
-    {"name": "Canary Media",        "url": "https://canarymedia.com/feed",                         "tier": "A"},
-    {"name": "Offshore Wind Biz",   "url": "https://www.offshorewind.biz/feed/",                   "tier": "A"},
-    {"name": "CTVC Climatetech",    "url": "https://www.ctvc.co/rss/",                             "tier": "A"},
-    # ── Tier A: 공공기관 / 데이터 ───────────────────────────────────
-    {"name": "IEA News",            "url": "https://www.iea.org/news/rss",                         "tier": "A"},
-    {"name": "FERC News",           "url": "https://www.ferc.gov/news-events/news/rss.xml",        "tier": "A"},
-    {"name": "DOE News",            "url": "https://www.energy.gov/rss.xml",                       "tier": "A"},
-    {"name": "NREL News",           "url": "https://www.nrel.gov/news/rss/newsroom.xml",           "tier": "A"},
-    # ── Tier B: 섹터 전문 ───────────────────────────────────────────
-    {"name": "Hydrogen Insight",    "url": "https://www.hydrogeninsight.com/feed",                 "tier": "B"},
-    {"name": "Wind Power Monthly",  "url": "https://www.windpowermonthly.com/rss-feeds",           "tier": "B"},
-    {"name": "Nuclear Engineering", "url": "https://www.neimagazine.com/rss",                      "tier": "B"},
-    {"name": "Power Magazine",      "url": "https://www.powermag.com/feed/",                       "tier": "B"},
-    {"name": "Carbon Brief",        "url": "https://www.carbonbrief.org/feed/",                    "tier": "B"},
-    {"name": "Clean Energy Wire",   "url": "https://www.cleanenergywire.org/rss.xml",              "tier": "B"},
-    {"name": "IRENA News",          "url": "https://www.irena.org/rss/News",                       "tier": "B"},
-    {"name": "Greentown Labs",      "url": "https://greentownlabs.com/feed/",                      "tier": "B"},
-    {"name": "Global Energy Mon",   "url": "https://globalenergymonitor.org/feed/",                "tier": "B"},
-    {"name": "Utility Global",      "url": "https://utilityglobal.com/feed/",                      "tier": "B"},
-    {"name": "New Energy Update",   "url": "https://newenergyupdate.com/feed",                     "tier": "B"},
-    # ── 한국 ────────────────────────────────────────────────────────
-    {"name": "전기신문",            "url": "https://www.electimes.com/rss/allArticle.xml",         "tier": "B"},
-    {"name": "투데이에너지",        "url": "https://www.todayenergy.kr/rss/allArticle.xml",        "tier": "B"},
+    # 에너지 전문 미디어
+    {"name": "Utility Dive",       "url": "https://www.utilitydive.com/feeds/news/",               "tier": "A"},
+    {"name": "PV Magazine",        "url": "https://www.pv-magazine.com/feed/",                      "tier": "A"},
+    {"name": "Recharge News",      "url": "https://www.rechargenews.com/rss",                       "tier": "A"},
+    {"name": "Energy Monitor",     "url": "https://www.energymonitor.ai/feed/",                     "tier": "A"},
+    {"name": "PV Tech",            "url": "https://www.pv-tech.org/feed/",                          "tier": "A"},
+    {"name": "Energy Storage News","url": "https://www.energy-storage.news/feed/",                  "tier": "A"},
+    {"name": "Wind Power Monthly", "url": "https://www.windpowermonthly.com/rss-feeds",             "tier": "B"},
+    {"name": "Hydrogen Insight",   "url": "https://www.hydrogeninsight.com/feed",                   "tier": "B"},
+    {"name": "Nuclear Engineering","url": "https://www.neimagazine.com/rss",                        "tier": "B"},
+    # 공공기관
+    {"name": "IEA News",           "url": "https://www.iea.org/news/rss",                           "tier": "A"},
+    {"name": "IRENA News",         "url": "https://www.irena.org/rss/News",                         "tier": "B"},
+    {"name": "FERC News",          "url": "https://www.ferc.gov/news-events/news/rss.xml",          "tier": "B"},
+    # VC/펀딩 관련
+    {"name": "Greentown Labs",     "url": "https://greentownlabs.com/feed/",                        "tier": "B"},
+    {"name": "CTVC (Climatetech)", "url": "https://www.ctvc.co/rss/",                              "tier": "A"},
+    # 한국
+    {"name": "전기신문",           "url": "https://www.electimes.com/rss/allArticle.xml",           "tier": "B"},
 ]
 
 # 섹터 키워드 매핑 (시그널 분류용)
@@ -95,7 +82,7 @@ RISK_KEYWORDS = [
 
 # ── 1단계: RSS 수집 ───────────────────────────────────────────────────────────
 
-def parse_rss(source: dict, days_back: int = 2) -> list[dict]:
+def parse_rss(source: dict, days_back: int = 7) -> list[dict]:
     """RSS 피드 파싱 — 최근 N일 기사만 수집"""
     headers = {"User-Agent": "GRIDEDGE-Bot/2.0 (energy investment intelligence)"}
     try:
@@ -306,6 +293,18 @@ SYSTEM_PROMPT = """
 5. "확인된 사실"과 "분석적 추론" 구분 명시
 6. 한국어 작성
 
+TRL 스코어링 기준 (기술 관련 딜만 적용):
+TRL 1-3: 기초연구/개념 단계 → 투자 시기상조
+TRL 4-6: 실험실/파일럿 단계 → 기술 리스크 HIGH
+TRL 7-8: 실증/상용화 직전 → 스케일업 리스크
+TRL 9:   상용 검증 완료 → 기술 리스크 LOW
+
+물리적 한계 체크 예시:
+- 배터리 에너지밀도 클레임 > 500Wh/kg → RED_FLAG (현재 한계 ~300Wh/kg)
+- 전해조 효율 > 85% → QUESTIONABLE (현재 한계 ~75%)
+- 태양전지 효율 > 33% (단접합) → RED_FLAG (샤클리-퀘이서 한계)
+- 풍력 용량인수 > 60% (육상) → QUESTIONABLE
+
 출력: 순수 JSON만. 마크다운 코드블록 없이.
 """
 
@@ -329,7 +328,11 @@ USER_PROMPT_TEMPLATE = """
       "summary": "투자 판단 관점 2-3문장",
       "implication": "밸류에이션/IRR/리스크 임플리케이션 1문장",
       "confidence": "HIGH | MEDIUM | LOW",
-      "source": "출처명"
+      "source": "출처명",
+      "source_url": "해당 기사 원본 URL (입력 시그널의 URL 그대로)",
+      "trl_score": 숫자 1-9 또는 null (기술 성숙도, 해당없으면 null),
+      "trl_verdict": "PLAUSIBLE | QUESTIONABLE | RED_FLAG | N/A",
+      "claim_check": "기술 클레임 vs 물리적 한계 비교 1문장 (해당없으면 null)"
     }}
   ],
   "sector_positioning": [
@@ -445,6 +448,11 @@ HTML_TEMPLATE = """<!DOCTYPE html>
   .signal-summary{font-size:12px;line-height:1.65;color:var(--muted);margin-bottom:8px;}
   .signal-impl{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--amber-light);padding:8px 12px;background:rgba(212,130,10,.04);border-left:1px solid var(--border);margin-bottom:6px;}
   .signal-source{font-family:'IBM Plex Mono',monospace;font-size:9px;color:rgba(245,244,239,.2);}
+  .trl-badge{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.1em;padding:2px 7px;border-radius:2px;margin-right:6px;}
+  .trl-PLAUSIBLE{background:rgba(74,222,128,.08);color:#4ade80;border:1px solid rgba(74,222,128,.2);}
+  .trl-QUESTIONABLE{background:rgba(212,130,10,.08);color:#f0a832;border:1px solid rgba(212,130,10,.2);}
+  .trl-RED_FLAG{background:rgba(248,113,113,.08);color:#f87171;border:1px solid rgba(248,113,113,.2);}
+  .claim-check{font-family:'IBM Plex Mono',monospace;font-size:10px;color:rgba(245,244,239,.35);padding:6px 10px;border-left:1px solid rgba(212,130,10,.15);margin:6px 0;font-style:italic;}
   .positioning-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin-bottom:48px;}
   .pos-card{border:1px solid var(--border);padding:18px;}
   .OVERWEIGHT{color:#4ade80;} .NEUTRAL{color:var(--amber);} .UNDERWEIGHT{color:#f87171;}
@@ -535,17 +543,95 @@ def render_html(brief: dict) -> str:
 
 # ── 6단계: 저장 ───────────────────────────────────────────────────────────────
 
+ARCHIVE_TEMPLATE = """<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GRIDEDGE — 브리프 아카이브</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=IBM+Plex+Mono:wght@400;500&family=Pretendard:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{--black:#0a0a08;--white:#f5f4ef;--amber:#d4820a;--muted:#6b6b5e;--border:rgba(212,130,10,0.2);}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:var(--black);color:var(--white);font-family:'Pretendard',sans-serif;max-width:720px;margin:0 auto;padding:48px 32px;}
+  .logo{font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--amber);letter-spacing:.15em;margin-bottom:48px;display:block;text-decoration:none;}
+  h1{font-family:'DM Serif Display',serif;font-size:32px;margin-bottom:8px;}
+  .sub{font-size:13px;color:var(--muted);margin-bottom:48px;}
+  .brief-list{display:flex;flex-direction:column;gap:1px;background:var(--border);}
+  .brief-row{background:var(--black);padding:20px 24px;display:flex;align-items:flex-start;justify-content:space-between;gap:16px;text-decoration:none;color:inherit;transition:background .2s;}
+  .brief-row:hover{background:rgba(212,130,10,.04);}
+  .brief-date{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--amber);letter-spacing:.1em;margin-bottom:6px;}
+  .brief-headline{font-size:14px;font-weight:500;line-height:1.4;flex:1;}
+  .brief-arrow{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted);flex-shrink:0;margin-top:2px;}
+  .footer{font-family:'IBM Plex Mono',monospace;font-size:9px;color:rgba(245,244,239,.12);border-top:1px solid var(--border);padding-top:20px;margin-top:48px;}
+</style>
+</head>
+<body>
+<a class="logo" href="./index.html">GRID/EDGE</a>
+<h1>브리프 아카이브</h1>
+<p class="sub">{{ briefs|length }}개 브리프 · 매일 업데이트</p>
+<div class="brief-list">
+  {% for b in briefs %}
+  <a class="brief-row" href="./briefs/{{ b.filename }}">
+    <div>
+      <div class="brief-date">{{ b.date }}</div>
+      <div class="brief-headline">{{ b.headline }}</div>
+    </div>
+    <div class="brief-arrow">↗</div>
+  </a>
+  {% endfor %}
+</div>
+<div class="footer">GRIDEDGE INTELLIGENCE · AI-assisted, expert-framed</div>
+</body>
+</html>"""
+
+
+def render_archive(briefs_dir: str) -> str:
+    """docs/briefs/ 폴더의 JSON 파일들로 아카이브 페이지 생성"""
+    import glob
+    entries = []
+    for path in sorted(glob.glob(f"{briefs_dir}/*.json"), reverse=True):
+        try:
+            with open(path, encoding="utf-8") as f:
+                data = json.load(f)
+            filename = os.path.basename(path).replace(".json", ".html")
+            entries.append({
+                "filename": filename,
+                "date":     data.get("generated_at", "")[:10],
+                "headline": data.get("headline", "—"),
+            })
+        except:
+            continue
+    return Template(ARCHIVE_TEMPLATE).render(briefs=entries)
+
+
+def render_brief_archive_html(brief: dict) -> str:
+    """개별 브리프를 briefs/ 폴더용 HTML로 렌더링"""
+    return render_html(brief)
+
+
 def save_outputs(brief: dict) -> None:
     os.makedirs("docs/briefs", exist_ok=True)
 
+    date_str  = brief.get("generated_at", "")[:10]
+    brief_filename = f"{date_str}.json"
+    html_filename  = f"{date_str}.html"
+
     for path, content in [
-        ("docs/brief_latest.json", json.dumps(brief, ensure_ascii=False, indent=2)),
-        ("docs/brief_latest.html", render_html(brief)),
-        (f"docs/briefs/{brief['week']}.json", json.dumps(brief, ensure_ascii=False, indent=2)),
+        ("docs/brief_latest.json",          json.dumps(brief, ensure_ascii=False, indent=2)),
+        ("docs/brief_latest.html",           render_html(brief)),
+        (f"docs/briefs/{brief_filename}",    json.dumps(brief, ensure_ascii=False, indent=2)),
+        (f"docs/briefs/{html_filename}",     render_brief_archive_html(brief)),
     ]:
         with open(path, "w", encoding="utf-8") as f:
             f.write(content)
         print(f"[INFO] 저장: {path}")
+
+    # 아카이브 페이지 재생성
+    archive_html = render_archive("docs/briefs")
+    with open("docs/archive.html", "w", encoding="utf-8") as f:
+        f.write(archive_html)
+    print("[INFO] 저장: docs/archive.html")
 
 
 # ── 메인 ─────────────────────────────────────────────────────────────────────
@@ -556,7 +642,7 @@ if __name__ == "__main__":
     print("=" * 60)
 
     signals  = collect_all_signals()
-    filtered = filter_signals(signals, top_n=20)
+    filtered = filter_signals(signals, top_n=15)
     eia_data = fetch_eia_data()
     brief    = generate_brief(filtered, eia_data)
     save_outputs(brief)
