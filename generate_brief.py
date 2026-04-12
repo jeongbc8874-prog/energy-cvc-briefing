@@ -30,25 +30,38 @@ ENTSOE_TOKEN      = os.environ.get("ENTSOE_TOKEN", "")      # 무료 발급: tra
 # ── 무료 RSS 소스 정의 ────────────────────────────────────────────────────────
 
 RSS_SOURCES = [
-    # 에너지 전문 미디어
-    {"name": "Utility Dive",       "url": "https://www.utilitydive.com/feeds/news/",               "tier": "A"},
-    {"name": "PV Magazine",        "url": "https://www.pv-magazine.com/feed/",                      "tier": "A"},
-    {"name": "Recharge News",      "url": "https://www.rechargenews.com/rss",                       "tier": "A"},
-    {"name": "Energy Monitor",     "url": "https://www.energymonitor.ai/feed/",                     "tier": "A"},
-    {"name": "PV Tech",            "url": "https://www.pv-tech.org/feed/",                          "tier": "A"},
-    {"name": "Energy Storage News","url": "https://www.energy-storage.news/feed/",                  "tier": "A"},
-    {"name": "Wind Power Monthly", "url": "https://www.windpowermonthly.com/rss-feeds",             "tier": "B"},
-    {"name": "Hydrogen Insight",   "url": "https://www.hydrogeninsight.com/feed",                   "tier": "B"},
-    {"name": "Nuclear Engineering","url": "https://www.neimagazine.com/rss",                        "tier": "B"},
-    # 공공기관
-    {"name": "IEA News",           "url": "https://www.iea.org/news/rss",                           "tier": "A"},
-    {"name": "IRENA News",         "url": "https://www.irena.org/rss/News",                         "tier": "B"},
-    {"name": "FERC News",          "url": "https://www.ferc.gov/news-events/news/rss.xml",          "tier": "B"},
-    # VC/펀딩 관련
-    {"name": "Greentown Labs",     "url": "https://greentownlabs.com/feed/",                        "tier": "B"},
-    {"name": "CTVC (Climatetech)", "url": "https://www.ctvc.co/rss/",                              "tier": "A"},
-    # 한국
-    {"name": "전기신문",           "url": "https://www.electimes.com/rss/allArticle.xml",           "tier": "B"},
+    # ── Tier A: 글로벌 에너지 딜/투자 전문 ──────────────────────────
+    {"name": "Utility Dive",        "url": "https://www.utilitydive.com/feeds/news/",              "tier": "A"},
+    {"name": "PV Magazine",         "url": "https://www.pv-magazine.com/feed/",                    "tier": "A"},
+    {"name": "PV Tech",             "url": "https://www.pv-tech.org/feed/",                        "tier": "A"},
+    {"name": "Recharge News",       "url": "https://www.rechargenews.com/rss",                     "tier": "A"},
+    {"name": "Energy Monitor",      "url": "https://www.energymonitor.ai/feed/",                   "tier": "A"},
+    {"name": "Energy Storage News", "url": "https://www.energy-storage.news/feed/",                "tier": "A"},
+    {"name": "Electrek",            "url": "https://electrek.co/feed/",                            "tier": "A"},
+    {"name": "CleanTechnica",       "url": "https://cleantechnica.com/feed/",                      "tier": "A"},
+    {"name": "Canary Media",        "url": "https://canarymedia.com/feed",                         "tier": "A"},
+    {"name": "Offshore Wind Biz",   "url": "https://www.offshorewind.biz/feed/",                   "tier": "A"},
+    {"name": "CTVC Climatetech",    "url": "https://www.ctvc.co/rss/",                             "tier": "A"},
+    # ── Tier A: 공공기관 / 데이터 ───────────────────────────────────
+    {"name": "IEA News",            "url": "https://www.iea.org/news/rss",                         "tier": "A"},
+    {"name": "FERC News",           "url": "https://www.ferc.gov/news-events/news/rss.xml",        "tier": "A"},
+    {"name": "DOE News",            "url": "https://www.energy.gov/rss.xml",                       "tier": "A"},
+    {"name": "NREL News",           "url": "https://www.nrel.gov/news/rss/newsroom.xml",           "tier": "A"},
+    # ── Tier B: 섹터 전문 ───────────────────────────────────────────
+    {"name": "Hydrogen Insight",    "url": "https://www.hydrogeninsight.com/feed",                 "tier": "B"},
+    {"name": "Wind Power Monthly",  "url": "https://www.windpowermonthly.com/rss-feeds",           "tier": "B"},
+    {"name": "Nuclear Engineering", "url": "https://www.neimagazine.com/rss",                      "tier": "B"},
+    {"name": "Power Magazine",      "url": "https://www.powermag.com/feed/",                       "tier": "B"},
+    {"name": "Carbon Brief",        "url": "https://www.carbonbrief.org/feed/",                    "tier": "B"},
+    {"name": "Clean Energy Wire",   "url": "https://www.cleanenergywire.org/rss.xml",              "tier": "B"},
+    {"name": "IRENA News",          "url": "https://www.irena.org/rss/News",                       "tier": "B"},
+    {"name": "Greentown Labs",      "url": "https://greentownlabs.com/feed/",                      "tier": "B"},
+    {"name": "Global Energy Mon",   "url": "https://globalenergymonitor.org/feed/",                "tier": "B"},
+    {"name": "Utility Global",      "url": "https://utilityglobal.com/feed/",                      "tier": "B"},
+    {"name": "New Energy Update",   "url": "https://newenergyupdate.com/feed",                     "tier": "B"},
+    # ── 한국 ────────────────────────────────────────────────────────
+    {"name": "전기신문",            "url": "https://www.electimes.com/rss/allArticle.xml",         "tier": "B"},
+    {"name": "투데이에너지",        "url": "https://www.todayenergy.kr/rss/allArticle.xml",        "tier": "B"},
 ]
 
 # 섹터 키워드 매핑 (시그널 분류용)
@@ -82,7 +95,7 @@ RISK_KEYWORDS = [
 
 # ── 1단계: RSS 수집 ───────────────────────────────────────────────────────────
 
-def parse_rss(source: dict, days_back: int = 7) -> list[dict]:
+def parse_rss(source: dict, days_back: int = 2) -> list[dict]:
     """RSS 피드 파싱 — 최근 N일 기사만 수집"""
     headers = {"User-Agent": "GRIDEDGE-Bot/2.0 (energy investment intelligence)"}
     try:
@@ -316,8 +329,7 @@ USER_PROMPT_TEMPLATE = """
       "summary": "투자 판단 관점 2-3문장",
       "implication": "밸류에이션/IRR/리스크 임플리케이션 1문장",
       "confidence": "HIGH | MEDIUM | LOW",
-      "source": "출처명",
-      "source_url": "해당 기사 원본 URL (입력 시그널의 URL 그대로)"
+      "source": "출처명"
     }}
   ],
   "sector_positioning": [
@@ -463,11 +475,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     </div>
     <div class="signal-summary">{{ s.summary }}</div>
     <div class="signal-impl">→ {{ s.implication }}</div>
-    {% if s.source_url %}
-    <a class="signal-source" href="{{ s.source_url }}" target="_blank" rel="noopener" style="color:rgba(245,244,239,.25);text-decoration:none;font-family:IBM Plex Mono,monospace;font-size:9px;">출처: {{ s.source }} ↗</a>
-    {% else %}
     <div class="signal-source">출처: {{ s.source }}</div>
-    {% endif %}
   </div>
   {% endfor %}
 </section>
@@ -548,7 +556,7 @@ if __name__ == "__main__":
     print("=" * 60)
 
     signals  = collect_all_signals()
-    filtered = filter_signals(signals, top_n=15)
+    filtered = filter_signals(signals, top_n=20)
     eia_data = fetch_eia_data()
     brief    = generate_brief(filtered, eia_data)
     save_outputs(brief)
