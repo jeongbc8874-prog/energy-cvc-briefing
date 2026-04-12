@@ -316,7 +316,8 @@ USER_PROMPT_TEMPLATE = """
       "summary": "투자 판단 관점 2-3문장",
       "implication": "밸류에이션/IRR/리스크 임플리케이션 1문장",
       "confidence": "HIGH | MEDIUM | LOW",
-      "source": "출처명"
+      "source": "출처명",
+      "source_url": "해당 기사 원본 URL (입력 시그널의 URL 그대로)"
     }}
   ],
   "sector_positioning": [
@@ -462,7 +463,11 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     </div>
     <div class="signal-summary">{{ s.summary }}</div>
     <div class="signal-impl">→ {{ s.implication }}</div>
+    {% if s.source_url %}
+    <a class="signal-source" href="{{ s.source_url }}" target="_blank" rel="noopener" style="color:rgba(245,244,239,.25);text-decoration:none;font-family:IBM Plex Mono,monospace;font-size:9px;">출처: {{ s.source }} ↗</a>
+    {% else %}
     <div class="signal-source">출처: {{ s.source }}</div>
+    {% endif %}
   </div>
   {% endfor %}
 </section>
