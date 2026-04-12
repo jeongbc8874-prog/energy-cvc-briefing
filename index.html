@@ -5,15 +5,33 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Energy Capital Intelligence</title>
 <style>
-  body { font-family: system-ui, -apple-system, sans-serif; background:#f8f7f4; color:#1f1f1f; margin:0; padding:24px; line-height:1.6; }
-  h1 { color:#0a6640; margin-bottom:8px; }
-  .subtitle { color:#666; font-size:1.1rem; }
-  .card { background:white; border-radius:12px; padding:24px; margin-bottom:28px; box-shadow:0 4px 15px rgba(0,0,0,0.07); }
-  .memo { background:#fffef0; border-left:6px solid #0a6640; padding:20px; font-size:1.05rem; }
-  table { width:100%; border-collapse:collapse; margin-top:12px; }
-  th, td { padding:14px 10px; text-align:left; border-bottom:1px solid #eee; }
-  th { background:#f0ede6; }
-  .high { color:#0a6640; font-weight:600; }
+  body { 
+    font-family: system-ui, -apple-system, sans-serif; 
+    background: #f8f7f4; 
+    color: #1f1f1f; 
+    margin: 0; 
+    padding: 24px; 
+    line-height: 1.6; 
+  }
+  h1 { color: #0a6640; margin-bottom: 8px; }
+  .subtitle { color: #666; font-size: 1.1rem; }
+  .card { 
+    background: white; 
+    border-radius: 12px; 
+    padding: 24px; 
+    margin-bottom: 28px; 
+    box-shadow: 0 4px 15px rgba(0,0,0,0.07); 
+  }
+  .memo { 
+    background: #fffef0; 
+    border-left: 6px solid #0a6640; 
+    padding: 20px; 
+    font-size: 1.05rem; 
+  }
+  table { width: 100%; border-collapse: collapse; margin-top: 12px; }
+  th, td { padding: 14px 10px; text-align: left; border-bottom: 1px solid #eee; }
+  th { background: #f0ede6; }
+  .high { color: #0a6640; font-weight: 600; }
 </style>
 </head>
 <body>
@@ -28,7 +46,14 @@
   <div class="card">
     <h2>🔥 High-Conviction Deals</h2>
     <table id="conviction-table">
-      <thead><tr><th>Date</th><th>Company / Deal</th><th>Why Important (인사이트)</th><th>Score</th></tr></thead>
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Company / Deal</th>
+          <th>Why Important (인사이트)</th>
+          <th>Score</th>
+        </tr>
+      </thead>
       <tbody></tbody>
     </table>
   </div>
@@ -41,10 +66,8 @@
 
         document.getElementById('updated').textContent = new Date(data.generated_at || Date.now()).toLocaleString('ko-KR');
 
-        // Daily Memo
         document.getElementById('memo-content').innerHTML = data.daily_memo || "오늘의 인사이트가 아직 생성되지 않았습니다.";
 
-        // High-Conviction Table
         const tbody = document.querySelector('#conviction-table tbody');
         tbody.innerHTML = '';
         (data.high_conviction || []).forEach(item => {
@@ -59,6 +82,7 @@
         });
       } catch(e) {
         console.error(e);
+        document.getElementById('memo-content').innerHTML = "데이터를 불러오는 중 오류가 발생했습니다.";
       }
     }
 
