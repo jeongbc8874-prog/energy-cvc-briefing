@@ -8,7 +8,6 @@ import os
 import json
 import requests
 from datetime import datetime, timedelta
-from dateutil.isocalendar import IsoCalendarDate
 import anthropic
 from jinja2 import Template
 
@@ -204,7 +203,7 @@ def generate_brief(signals: list[dict]) -> dict:
 
     now = datetime.utcnow()
     iso_cal = now.isocalendar()
-    week_str = f"{iso_cal.year}-W{iso_cal.week:02d}"
+    week_str = f"{iso_cal[0]}-W{iso_cal[1]:02d}"
 
     signals_text = "\n\n".join([
         f"[{i+1}] {s['title']}\n출처: {s['source']} ({s['published']})\n내용: {s['description']}\nScore: {s['score']}"
