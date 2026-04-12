@@ -1,79 +1,145 @@
 {
   "week": "2026-W15",
-  "headline": "BESS 성장 자금 유입 지속, 시리즈B 규모·밸류에이션 미공개로 신호 강도 제한적",
-  "thesis": "그리드스케일 ESS 스타트업 성장 단계 자금 조달은 섹터 기본 수요 확인 신호이나, 구체적 딜 조건 부재로 멀티플 방향성 판단 유보. 현 시점 BESS 후속 투자는 PPA/용량계약 확보 여부가 핵심 심사 기준.",
+  "headline": "BESS 글로벌 파이낸싱 5건 합산 $650M+ 클로징, 일본·북미·유럽 동시 자본 유입 확인",
+  "thesis": "이번 주 BESS 섹터에서 대형 금융 클로징이 집중 발생하며 기관투자자의 에너지저장 자산군 편입 가속화가 확인됨. 특히 Tax Equity 구조(Medway 250MW, Origis 캘리포니아)와 Revenue Swap(GridStor/Axpo 텍사스) 등 다양한 금융 공학 기법이 적용되어 Secondary Market 유동성 확대 신호로 해석. 폴리실리콘 7주 연속 하락으로 Solar Capex 추가 하방 압력이 지속되나, 공급망 지정학 리스크(미-이란 충돌)가 물류비 변동성을 키우는 양면 구도.",
   "deal_signals": [
     {
-      "title": "미공개 에너지 스토리지 스타트업 Series B",
-      "tag": "WATCH",
-      "sector": "BESS",
-      "summary": "그리드스케일 배포 목적 성장 자금 조달 발표. 투자 규모, 리드 인베스터, 프리머니 밸류에이션 모두 미공개로 딜 품질 판단 불가. 시리즈B 단계에서 그리드스케일 진입은 기술 리스크보다 프로젝트 파이낸스 역량이 핵심.",
-      "implication": "비교 가능 딜 없이 멀티플 벤치마크 불가, 후속 라운드 참여 시 DD에서 계약 파이프라인 우선 검증 필요.",
-      "source_title": "[MOCK] energy storage battery startup funding — Series B funding announced"
-    },
-    {
-      "title": "그리드스케일 ESS 프로젝트 자금조달 구조 트렌드",
+      "title": "Tokyu Land 컨소시엄 일본 BESS $190M 투자 — 174MW 타깃",
       "tag": "BULLISH",
       "sector": "BESS",
-      "summary": "VC 단독 펀딩에서 인프라 펀드·유틸리티 코인베스트 구조 전환 가속화 신호. 성장 단계 스타트업이 직접 프로젝트 디벨롭먼트까지 수직통합 시도 시 자본 효율성 하락 리스크 존재.",
-      "implication": "순수 기술 플레이 vs 프로젝트 코어 플레이 구분하여 Exit 경로별 IRR 시나리오 차별화 필요.",
-      "source_title": "[MOCK] energy storage battery startup funding — Series B funding announced"
+      "summary": "Tokyu Land, 미쓰이스미토모 등 일본 대기업 컨소시엄이 174MW BESS 개발에 $190M 투입. 일본 내 BESS 시장 본격 개화 신호이며, 기존 가스 피킹 대체 수요와 맞물려 ancillary 시장 수익 기대.",
+      "implication": "일본 BESS IRR 추정 mid-single(5-7%) 수준이나, 용량시장 제도화 시 상향 가능; 엔화 약세 지속 시 해외 LP 환손실 리스크 주의.",
+      "confidence": "MEDIUM",
+      "source": "Energy Storage News"
     },
     {
-      "title": "LFP 셀 공급망 재편 임박",
+      "title": "Advantage Capital, Medway Grid 250MW BESS에 $158M Tax Equity 투자",
+      "tag": "BULLISH",
+      "sector": "BESS",
+      "summary": "미국 Tax Equity 시장에서 단일 BESS 자산 $158M 규모 클로징. ITC Transferability 구조 활용으로 세금 효율 극대화 및 Sponsor Equity IRR 레버리지 효과 확인.",
+      "implication": "Tax Equity 가격($/W) 하락 추세 시 Sponsor 잔여 IRR 15%+ 유지 가능; 반대로 정책 불확실성 재점화 시 구조 붕괴 리스크.",
+      "confidence": "HIGH",
+      "source": "Energy Monitor"
+    },
+    {
+      "title": "Boralex-Six Nations 온타리오 125MW/500MWh BESS CA$202M 파이낸싱 클로즈",
+      "tag": "BULLISH",
+      "sector": "BESS",
+      "summary": "캐나다 온타리오 대규모 공공 입찰(915MW Solar 포함) 연계 프로젝트. First Nations 파트너십으로 지역사회 수용성 확보, 장기 용량 계약(IESO) 기반 현금흐름 예측 가능성 높음.",
+      "implication": "CA$400+/kW 투자 단가, 4시간 듀레이션 기준 LCOS $120-140/MWh 추정; 캐나다 달러 변동 및 IESO 가격 개정 리스크 존재.",
+      "confidence": "HIGH",
+      "source": "Energy Storage News"
+    },
+    {
+      "title": "GridStor-Axpo 텍사스 220MW/440MWh Revenue Swap 계약 체결",
       "tag": "WATCH",
       "sector": "BESS",
-      "summary": "중국 LFP 셀 가격 하락세 지속 중이나 미국 IRA 세액공제 충족 위한 현지 조달 의무화로 실질 원가 상승 압력. 한국계 셀 제조사 공급 계약 확보 여부가 그리드스케일 프로젝트 마진에 직결.",
-      "implication": "셀 조달 장기계약 미확보 프로젝트는 2027년 이후 EBITDA 마진 300-500bp 하방 리스크.",
-      "source_title": "[MOCK] energy storage battery startup funding — Series B funding announced"
+      "summary": "ERCOT 가격 변동성을 헤지하는 Revenue Swap 구조로 개발사 현금흐름 안정화. Axpo의 BESS 트레이딩 역량과 결합해 Merchant 리스크 완화.",
+      "implication": "Swap Strike 가격 미공개로 정확한 IRR 산정 제한; ERCOT 프리미엄 축소 시 Swap 손실 발생 가능.",
+      "confidence": "MEDIUM",
+      "source": "Energy Storage News"
     },
     {
-      "title": "캘리포니아 CPUC 용량시장 개편 청신호",
+      "title": "Origis, 캘리포니아 Chalan Solar+Storage $118M Tax Equity 확보",
       "tag": "BULLISH",
-      "sector": "GRID",
-      "summary": "4시간 이상 저장시간 프로젝트에 대한 RA(Resource Adequacy) 크레딧 상향 논의 진행. 장주기 ESS 및 하이브리드 프로젝트 밸류에이션 재평가 촉매 가능성.",
-      "implication": "캘리포니아 노출 포트폴리오 6-8시간 저장 프로젝트 NAV 10-15% 상향 여력.",
-      "source_title": "[MOCK] energy storage battery startup funding — Series B funding announced"
+      "sector": "SOLAR",
+      "summary": "Kern County 소재 하이브리드 프로젝트로, CPUC RA 계약 기반 안정적 캐시플로우 확보. 캘리포니아 Duck Curve 심화에 따른 저녁 피크 수익 극대화 가능.",
+      "implication": "Solar+Storage 하이브리드 프리미엄 $/W 0.05-0.10 추정; 단독 Solar 대비 IRR 200-300bp 상향 효과.",
+      "confidence": "HIGH",
+      "source": "PV Tech"
+    },
+    {
+      "title": "American Battery Factory-Lion Energy 4.5GWh LFP BESS 공급 파트너십",
+      "tag": "WATCH",
+      "sector": "BESS",
+      "summary": "미국산 LFP 셀 기반 BESS 내재화 시도. IRA 45X Manufacturing Credit 수혜 겨냥, 중국 CATL/BYD 의존도 탈피 전략.",
+      "implication": "기술 성숙도 및 대량생산 Ramp-up 리스크 존재; Cell-level Cost Parity 달성 시점(2027-2028 추정) 전까지 IRR 압박.",
+      "confidence": "LOW",
+      "source": "Energy Storage News"
+    },
+    {
+      "title": "Societe Generale-EIB 이탈리아 137MW Solar $178.9M 파이낸싱",
+      "tag": "BULLISH",
+      "sector": "SOLAR",
+      "summary": "EIB 보증 기반 저비용 부채 조달, Southern Europe Solar 확장 지속. 이탈리아 PPA 가격 €70-80/MWh 수준 유지로 수익성 안정적.",
+      "implication": "WACC 4-5% 수준 추정, Levered IRR 10%+ 기대; 그리드 연결 지연 리스크 상존.",
+      "confidence": "HIGH",
+      "source": "PV Tech"
+    },
+    {
+      "title": "Zelestra-BNZ 남유럽 Solar-BESS 하이브리드화 추진 (스페인·이탈리아·포르투갈·루마니아)",
+      "tag": "WATCH",
+      "sector": "SOLAR",
+      "summary": "기존 운영 중인 Solar 자산에 BESS 추가 설치하여 Merchant 수익 업사이드 확보 전략. 각국 용량시장 참여 통해 현금흐름 다변화.",
+      "implication": "Brownfield BESS 추가는 Capex 효율적(공유 인프라)이나, Permitting 신규 취득 필요 시 일정 지연 리스크.",
+      "confidence": "MEDIUM",
+      "source": "Energy Storage News"
     }
   ],
   "sector_positioning": [
     {
       "sector": "BESS",
       "stance": "OVERWEIGHT",
-      "rationale": "그리드 병목 심화 및 재생에너지 간헐성 보완 수요 구조적 증가. 다만 시리즈B 이상 밸류에이션 피크아웃 경계, 프로젝트 레벨 계약 품질 중심 선별 필수."
+      "rationale": "이번 주만 글로벌 5건 $650M+ 클로징, Tax Equity·Revenue Swap 등 금융 구조 다양화로 유동성 풀 확대 확인. 4시간 듀레이션 LFP 기반 프로젝트가 표준화되며 Capex 학습곡선 효과 가시화.",
+      "key_risk": "미국 IIJA/IRA 예산 삭감 제안(DOE 비국방 예산 $15B+ 감축 검토)으로 Tax Credit 연속성 리스크 부상."
     },
     {
-      "sector": "GRID",
+      "sector": "SOLAR",
       "stance": "OVERWEIGHT",
-      "rationale": "송배전 인프라 투자 사이클 초입, 규제 승인 리드타임 긴 만큼 선행 진입 프리미엄 존재. GIS·디지털 변전 소프트웨어 레이어 기회 주목."
-    },
-    {
-      "sector": "SMR",
-      "stance": "NEUTRAL",
-      "rationale": "NRC 인허가 일정 지연 리스크 상존, 데이터센터 자가발전 수요 테마는 유효하나 상업화 타임라인 2030년 이후로 현 펀드 빈티지 IRR 기여 제한적."
-    },
-    {
-      "sector": "H2",
-      "stance": "UNDERWEIGHT",
-      "rationale": "그린수소 생산 LCOH $3/kg 돌파 사례 부재, 수요처 확정 없는 생산 프로젝트 과잉. 산업용 연료전환 계약 확보 딜에 한정 선별 검토."
+      "rationale": "폴리실리콘 7주 연속 하락(중국 CECEP $432M 조달 포함 공급 과잉 지속)으로 모듈 Capex $192/kW 2050 전망치 조기 실현 가능성. 온타리오 915MW, 이탈리아 137MW 등 대형 파이낸싱 건전.",
+      "key_risk": "미-이란 충돌로 중동 경유 물류 지연 시 단기 셀 공급 차질; Kosol Energie 항공운송 사례는 비용 20-30% 상승 시사."
     },
     {
       "sector": "VPP",
       "stance": "NEUTRAL",
-      "rationale": "유틸리티 DR 프로그램 확대로 TAM 성장 확인, 그러나 고객 획득 비용 상승 및 SaaS 마진 압박으로 수익성 검증 구간 진입."
+      "rationale": "EV 관리형 충전 유틸리티 파일럿 확대 중이나 데이터 표준화 부재로 스케일업 제한. Aggregator 비즈니스 모델 수익화까지 2-3년 소요 추정.",
+      "key_risk": "OEM-유틸리티 간 데이터 공유 프로토콜 미합의로 시장 분절화 지속 가능."
+    },
+    {
+      "sector": "SMR",
+      "stance": "UNDERWEIGHT",
+      "rationale": "이번 주 SMR 관련 의미 있는 파이낸싱/허가 시그널 부재. NRC 심사 일정 불확실성 및 First-of-a-kind 프로젝트 비용 초과 사례 누적.",
+      "key_risk": "DOE 비국방 예산 삭감 제안 시 원자력 실증 지원금 축소 가능성."
+    },
+    {
+      "sector": "H2",
+      "stance": "NEUTRAL",
+      "rationale": "시그널 내 H2 직접 딜 부재. 그린 수소 Levelized Cost가 $4-5/kg 수준에서 정체되며 투자 모멘텀 약화.",
+      "key_risk": "천연가스 가격 반등 시 블루 수소 경쟁력 회복으로 그린 H2 투자 매력 감소."
+    },
+    {
+      "sector": "OTHER",
+      "stance": "UNDERWEIGHT",
+      "rationale": "DOE 비국방 예산 대폭 삭감 제안은 IIJA/IRA 집행 속도 둔화 리스크 내포. 정책 의존 섹터(CCS, DAC 등) 투자 타이밍 재검토 필요.",
+      "key_risk": "2025-2026 예산 협상 과정에서 추가 삭감 확대 시 프로젝트 파이프라인 지연 장기화."
     }
   ],
   "red_flags": [
     {
-      "issue": "시리즈B 딜 조건 미공개",
-      "detail": "투자 규모, 밸류에이션, 리드 인베스터 정보 부재로 시장 센티먼트 판단 불가. 후속 보도 없이 90일 경과 시 딜 클로징 실패 가능성 고려."
+      "issue": "DOE 비국방 에너지 예산 $15B+ 삭감 제안",
+      "detail": "IIJA/IRA 기반 Tax Credit·보조금 집행 지연 시 Tax Equity 시장 위축 및 BESS/Solar 프로젝트 IRR 하락 우려. 특히 45X Manufacturing Credit 대상 국내 LFP 공장 투자 불확실성 증가.",
+      "source": "Utility Dive"
     },
     {
-      "issue": "그리드스케일 배포 기술 검증 수준 불명",
-      "detail": "MW급 실증 완료 여부, 라운드트립 효율 공인 테스트 결과 미확인. 파일럿 단계 기술을 성장 자금으로 스케일업 시도 시 자본 소진 가속 리스크."
+      "issue": "미-이란 충돌로 호르무즈 해협 물류 지연 리스크",
+      "detail": "호주 연료비 충격 AU$1B(3월), Kosol Energie 항공운송 전환 사례에서 보듯 태양광 셀·모듈 운송 비용 급등 가능. 단기 Capex 상승으로 개발사 마진 압박.",
+      "source": "PV Magazine, Energy Storage News"
+    },
+    {
+      "issue": "American Battery Factory 기술 Ramp-up 불확실성",
+      "detail": "4.5GWh 오프테이크 계약 체결에도 실제 대량생산 검증 미완료. 품질·비용 경쟁력 확보 실패 시 Lion Energy 및 투자자 손실 직결.",
+      "source": "Energy Storage News"
     }
   ],
-  "macro_watch": "미국 10년물 금리 4.5% 상회 고착 시 프로젝트 파이낸스 레버리지 비용 상승으로 BESS IRR 100-150bp 하락 압력. 연준 6월 금리 동결 기대 약화 시 인프라 딜 클로징 지연 사이클 재진입 경계.",
-  "generated_at": "2026-04-12T05:53:01.623579",
-  "signal_count": 1
+  "macro_watch": "미-이란 지정학 긴장이 유가 및 LNG 현물 프리미엄을 끌어올리며 화석연료 대체 투자 명분 강화, 그러나 물류비 상승이 단기 프로젝트 Capex를 압박. DOE 예산 삭감 제안이 현실화될 경우 2026 하반기 Tax Equity 공급 위축 → BESS/Solar 딜플로우 일시 냉각 시나리오 점검 필요.",
+  "data_note": "Energy Storage News (5건), PV Tech (2건), PV Magazine (5건), Utility Dive (2건), Energy Monitor (1건)",
+  "generated_at": "2026-04-12T06:20:26.043567",
+  "signal_count": 18,
+  "sources_used": [
+    "Utility Dive",
+    "Energy Storage News",
+    "Energy Monitor",
+    "PV Tech",
+    "PV Magazine"
+  ]
 }
