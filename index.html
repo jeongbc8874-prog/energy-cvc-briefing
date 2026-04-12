@@ -3,91 +3,924 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Energy Capital Intelligence</title>
+<title>GRIDEDGE — Energy Investment Intelligence</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=IBM+Plex+Mono:wght@400;500&family=Pretendard:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-  body { 
-    font-family: system-ui, -apple-system, sans-serif; 
-    background: #f8f7f4; 
-    color: #1f1f1f; 
-    margin: 0; 
-    padding: 24px; 
-    line-height: 1.6; 
+  :root {
+    --black: #0a0a08;
+    --white: #f5f4ef;
+    --amber: #d4820a;
+    --amber-light: #f0a832;
+    --green: #1a3a2a;
+    --green-mid: #2d5c40;
+    --muted: #6b6b5e;
+    --border: rgba(212,130,10,0.2);
   }
-  h1 { color: #0a6640; margin-bottom: 8px; }
-  .subtitle { color: #666; font-size: 1.1rem; }
-  .card { 
-    background: white; 
-    border-radius: 12px; 
-    padding: 24px; 
-    margin-bottom: 28px; 
-    box-shadow: 0 4px 15px rgba(0,0,0,0.07); 
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'Pretendard', sans-serif;
+    overflow-x: hidden;
+    cursor: crosshair;
   }
-  .memo { 
-    background: #fffef0; 
-    border-left: 6px solid #0a6640; 
-    padding: 20px; 
-    font-size: 1.05rem; 
+
+  /* NOISE OVERLAY */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 999;
+    opacity: 0.6;
   }
-  table { width: 100%; border-collapse: collapse; margin-top: 12px; }
-  th, td { padding: 14px 10px; text-align: left; border-bottom: 1px solid #eee; }
-  th { background: #f0ede6; }
-  .high { color: #0a6640; font-weight: 600; }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 48px;
+    border-bottom: 1px solid rgba(212,130,10,0.08);
+    backdrop-filter: blur(12px);
+    background: rgba(10,10,8,0.7);
+  }
+
+  .logo {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    color: var(--amber);
+    text-transform: uppercase;
+  }
+
+  .logo span {
+    color: var(--white);
+    opacity: 0.4;
+  }
+
+  nav .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+
+  .nav-badge {
+    background: var(--amber);
+    color: var(--black);
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    padding: 3px 8px;
+    border-radius: 2px;
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 160px 64px 80px 64px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--amber);
+    text-transform: uppercase;
+    margin-bottom: 32px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 32px;
+    height: 1px;
+    background: var(--amber);
+  }
+
+  h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(48px, 5vw, 72px);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--white);
+    margin-bottom: 24px;
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--amber-light);
+  }
+
+  .hero-sub {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--muted);
+    max-width: 420px;
+    margin-bottom: 48px;
+    font-weight: 300;
+  }
+
+  /* FORM */
+  .subscribe-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 400px;
+  }
+
+  .form-row {
+    display: flex;
+    gap: 0;
+  }
+
+  .form-input {
+    flex: 1;
+    background: rgba(245,244,239,0.04);
+    border: 1px solid var(--border);
+    border-right: none;
+    color: var(--white);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    padding: 14px 18px;
+    outline: none;
+    transition: border-color 0.2s, background 0.2s;
+    border-radius: 0;
+  }
+
+  .form-input::placeholder {
+    color: rgba(245,244,239,0.2);
+  }
+
+  .form-input:focus {
+    border-color: var(--amber);
+    background: rgba(212,130,10,0.04);
+  }
+
+  .form-btn {
+    background: var(--amber);
+    color: var(--black);
+    border: none;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 14px 24px;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+    white-space: nowrap;
+  }
+
+  .form-btn:hover {
+    background: var(--amber-light);
+  }
+
+  .form-btn:active {
+    transform: scale(0.98);
+  }
+
+  .form-meta {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: rgba(245,244,239,0.2);
+    letter-spacing: 0.08em;
+  }
+
+  .form-meta span {
+    color: var(--amber);
+  }
+
+  /* HERO RIGHT — CHART VISUAL */
+  .hero-right {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-right::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(26,58,42,0.3) 0%, rgba(10,10,8,0) 60%);
+    z-index: 1;
+  }
+
+  .grid-lines {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    opacity: 0.06;
+    background-image:
+      linear-gradient(var(--amber) 1px, transparent 1px),
+      linear-gradient(90deg, var(--amber) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+
+  .chart-container {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: flex-end;
+    padding: 80px 40px 60px 20px;
+    z-index: 2;
+  }
+
+  .chart-svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .ticker-strip {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 48px;
+    background: rgba(212,130,10,0.06);
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    z-index: 3;
+  }
+
+  .ticker-inner {
+    display: flex;
+    gap: 64px;
+    animation: ticker 30s linear infinite;
+    white-space: nowrap;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--amber);
+    letter-spacing: 0.1em;
+  }
+
+  .ticker-item { display: flex; align-items: center; gap: 8px; }
+  .ticker-item .up { color: #4ade80; }
+  .ticker-item .down { color: #f87171; }
+
+  @keyframes ticker {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* STATS BAR */
+  .stats-bar {
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    position: relative;
+    z-index: 2;
+  }
+
+  .stat-item {
+    padding: 36px 48px;
+    border-right: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s;
+  }
+
+  .stat-item:last-child { border-right: none; }
+
+  .stat-item:hover {
+    background: rgba(212,130,10,0.04);
+  }
+
+  .stat-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 36px;
+    color: var(--amber-light);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .stat-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+
+  /* WHAT WE COVER */
+  .section {
+    padding: 120px 64px;
+    position: relative;
+  }
+
+  .section-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--amber);
+    text-transform: uppercase;
+    margin-bottom: 64px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .section-label::after {
+    content: '';
+    display: block;
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .coverage-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+
+  .coverage-item {
+    background: var(--black);
+    padding: 40px 36px;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s;
+  }
+
+  .coverage-item:hover { background: rgba(212,130,10,0.03); }
+
+  .coverage-item::before {
+    content: attr(data-num);
+    position: absolute;
+    top: 20px;
+    right: 24px;
+    font-family: 'DM Serif Display', serif;
+    font-size: 72px;
+    color: rgba(212,130,10,0.06);
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  .coverage-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    color: var(--amber);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    border: 1px solid var(--border);
+    display: inline-block;
+    padding: 3px 8px;
+  }
+
+  .coverage-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    line-height: 1.2;
+    margin-bottom: 16px;
+    color: var(--white);
+  }
+
+  .coverage-desc {
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--muted);
+    font-weight: 300;
+  }
+
+  /* SAMPLE BRIEF */
+  .sample-section {
+    padding: 0 64px 120px;
+  }
+
+  .brief-card {
+    border: 1px solid var(--border);
+    background: rgba(245,244,239,0.02);
+    padding: 48px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .brief-card::before {
+    content: 'SAMPLE ISSUE';
+    position: absolute;
+    top: 24px;
+    right: 32px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    color: var(--amber);
+    opacity: 0.5;
+  }
+
+  .brief-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 40px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .brief-issue {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+  }
+
+  .brief-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 28px;
+    margin-top: 8px;
+    line-height: 1.2;
+  }
+
+  .brief-sections {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+  }
+
+  .brief-block-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    color: var(--amber);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .brief-item {
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(212,130,10,0.06);
+  }
+
+  .brief-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .brief-item-title {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--white);
+    margin-bottom: 6px;
+  }
+
+  .brief-item-body {
+    font-size: 12px;
+    line-height: 1.65;
+    color: var(--muted);
+    font-weight: 300;
+  }
+
+  .brief-item-tag {
+    display: inline-block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 8px;
+    letter-spacing: 0.1em;
+    padding: 2px 6px;
+    margin-bottom: 6px;
+    border-radius: 2px;
+  }
+
+  .tag-bull { background: rgba(74,222,128,0.1); color: #4ade80; }
+  .tag-watch { background: rgba(212,130,10,0.1); color: var(--amber); }
+  .tag-risk { background: rgba(248,113,113,0.1); color: #f87171; }
+
+  /* CTA */
+  .cta-section {
+    padding: 120px 64px;
+    border-top: 1px solid var(--border);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    background: linear-gradient(180deg, rgba(26,58,42,0.08) 0%, transparent 100%);
+  }
+
+  .cta-left h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(36px, 3.5vw, 54px);
+    line-height: 1.1;
+    margin-bottom: 16px;
+  }
+
+  .cta-left h2 em {
+    font-style: italic;
+    color: var(--amber-light);
+  }
+
+  .cta-desc {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  .tier-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+
+  .tier-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 13px;
+    color: var(--muted);
+    font-weight: 300;
+  }
+
+  .tier-list li::before {
+    content: '→';
+    color: var(--amber);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 40px 64px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-logo {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    color: var(--amber);
+    letter-spacing: 0.15em;
+  }
+
+  .footer-meta {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: rgba(245,244,239,0.15);
+    letter-spacing: 0.1em;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-eyebrow { animation: fadeUp 0.8s ease both; }
+  h1 { animation: fadeUp 0.8s 0.1s ease both; }
+  .hero-sub { animation: fadeUp 0.8s 0.2s ease both; }
+  .subscribe-form { animation: fadeUp 0.8s 0.3s ease both; }
+
+  /* SUCCESS STATE */
+  .success-msg {
+    display: none;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: #4ade80;
+    letter-spacing: 0.08em;
+    padding: 14px 0;
+    border-top: 1px solid rgba(74,222,128,0.2);
+    margin-top: 4px;
+  }
+
+  /* CURSOR DOT */
+  .cursor-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--amber);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.1s ease;
+    transform: translate(-50%, -50%);
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; }
+    .hero-right { display: none; }
+    .hero-left { padding: 140px 32px 80px; }
+    .stats-bar { grid-template-columns: repeat(2, 1fr); }
+    .coverage-grid { grid-template-columns: 1fr; }
+    .brief-sections { grid-template-columns: 1fr; }
+    .cta-section { grid-template-columns: 1fr; }
+    .section, .sample-section { padding: 80px 32px; }
+    nav { padding: 20px 32px; }
+    footer { padding: 32px; flex-direction: column; gap: 16px; text-align: center; }
+    .stat-item { padding: 24px 28px; }
+  }
 </style>
 </head>
 <body>
-  <h1>Energy Capital Intelligence</h1>
-  <p class="subtitle">에너지 투자 전문 심사역 관점 브리핑 • Updated: <span id="updated"></span></p>
 
-  <div class="card memo" id="daily-memo">
-    <h2>📝 Daily Investment Memo</h2>
-    <div id="memo-content">인사이트를 생성하는 중입니다...</div>
+<div class="cursor-dot" id="cursorDot"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">GRID<span>/</span>EDGE</div>
+  <div class="nav-right">
+    <span>Energy Intelligence</span>
+    <span class="nav-badge">BETA</span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">Weekly Intelligence Brief</div>
+    <h1>에너지 투자,<br><em>한 단계 깊게</em><br>읽는 법</h1>
+    <p class="hero-sub">
+      피치북이 줄 수 없는 것 — 그리드 물리학, 기술 성숙도, 정책 베타까지 통합한
+      에너지 전문 심사역 관점의 주간 인텔리전스 브리프.
+    </p>
+    <form class="subscribe-form" id="subscribeForm">
+      <div class="form-row">
+        <input class="form-input" type="email" placeholder="your@fund.com" id="emailInput" required>
+        <button class="form-btn" type="submit">구독 →</button>
+      </div>
+      <div class="form-meta">무료 · 매주 화요일 · <span>스팸 없음</span></div>
+      <div class="success-msg" id="successMsg">✓ 등록 완료 — 다음 호가 발송됩니다</div>
+    </form>
   </div>
 
-  <div class="card">
-    <h2>🔥 High-Conviction Deals</h2>
-    <table id="conviction-table">
-      <thead>
-        <tr>
-          <th>Date</th>
-          <th>Company / Deal</th>
-          <th>Why Important (인사이트)</th>
-          <th>Score</th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
+  <div class="hero-right">
+    <div class="grid-lines"></div>
+    <div class="chart-container">
+      <svg class="chart-svg" viewBox="0 0 500 400" preserveAspectRatio="none">
+        <defs>
+          <linearGradient id="lineGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#d4820a" stop-opacity="0.3"/>
+            <stop offset="100%" stop-color="#d4820a" stop-opacity="0"/>
+          </linearGradient>
+        </defs>
+        <!-- Grid -->
+        <line x1="0" y1="80" x2="500" y2="80" stroke="rgba(212,130,10,0.08)" stroke-width="1"/>
+        <line x1="0" y1="160" x2="500" y2="160" stroke="rgba(212,130,10,0.08)" stroke-width="1"/>
+        <line x1="0" y1="240" x2="500" y2="240" stroke="rgba(212,130,10,0.08)" stroke-width="1"/>
+        <line x1="0" y1="320" x2="500" y2="320" stroke="rgba(212,130,10,0.08)" stroke-width="1"/>
+        <!-- Area fill -->
+        <path d="M0,320 L40,290 L80,270 L120,240 L160,220 L200,200 L240,170 L280,150 L320,120 L360,100 L400,80 L440,60 L500,40 L500,400 L0,400 Z"
+              fill="url(#lineGrad)" opacity="0.6"/>
+        <!-- Main line -->
+        <polyline points="0,320 40,290 80,270 120,240 160,220 200,200 240,170 280,150 320,120 360,100 400,80 440,60 500,40"
+                  fill="none" stroke="#d4820a" stroke-width="2" stroke-linejoin="round"/>
+        <!-- Dots -->
+        <circle cx="500" cy="40" r="5" fill="#f0a832"/>
+        <circle cx="320" cy="120" r="4" fill="#d4820a" opacity="0.6"/>
+        <circle cx="160" cy="220" r="4" fill="#d4820a" opacity="0.6"/>
+        <!-- Labels -->
+        <text x="8" y="400" font-family="IBM Plex Mono" font-size="10" fill="rgba(212,130,10,0.3)">2022</text>
+        <text x="228" y="400" font-family="IBM Plex Mono" font-size="10" fill="rgba(212,130,10,0.3)">2023</text>
+        <text x="460" y="400" font-family="IBM Plex Mono" font-size="10" fill="rgba(212,130,10,0.3)">2025</text>
+        <text x="420" y="36" font-family="IBM Plex Mono" font-size="9" fill="#f0a832">Global Energy VC</text>
+        <text x="420" y="50" font-family="IBM Plex Mono" font-size="9" fill="rgba(240,168,50,0.5)">$82.4B AUM</text>
+        <!-- Secondary line -->
+        <polyline points="0,360 40,350 80,340 120,330 160,310 200,295 240,280 280,265 320,245 360,230 400,215 440,195 500,175"
+                  fill="none" stroke="#2d5c40" stroke-width="1.5" stroke-dasharray="4,4" opacity="0.5"/>
+      </svg>
+    </div>
+    <div class="ticker-strip">
+      <div class="ticker-inner">
+        <div class="ticker-item">SOLAR <span class="up">▲ 14.2%</span></div>
+        <div class="ticker-item">BESS <span class="up">▲ 8.7%</span></div>
+        <div class="ticker-item">SMR <span class="watch">◆ 모니터링</span></div>
+        <div class="ticker-item">H₂ <span class="down">▼ 3.1%</span></div>
+        <div class="ticker-item">GRID <span class="up">▲ 21.4%</span></div>
+        <div class="ticker-item">CCS <span class="watch">◆ 모니터링</span></div>
+        <div class="ticker-item">EV <span class="down">▼ 5.8%</span></div>
+        <div class="ticker-item">WIND <span class="up">▲ 11.3%</span></div>
+        <!-- repeat for seamless loop -->
+        <div class="ticker-item">SOLAR <span class="up">▲ 14.2%</span></div>
+        <div class="ticker-item">BESS <span class="up">▲ 8.7%</span></div>
+        <div class="ticker-item">SMR <span class="watch">◆ 모니터링</span></div>
+        <div class="ticker-item">H₂ <span class="down">▼ 3.1%</span></div>
+        <div class="ticker-item">GRID <span class="up">▲ 21.4%</span></div>
+        <div class="ticker-item">CCS <span class="watch">◆ 모니터링</span></div>
+        <div class="ticker-item">EV <span class="down">▼ 5.8%</span></div>
+        <div class="ticker-item">WIND <span class="up">▲ 11.3%</span></div>
+      </div>
+    </div>
   </div>
+</section>
 
-  <script>
-    async function loadData() {
-      try {
-        const res = await fetch('data/latest.json?' + Date.now());
-        const data = await res.json();
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat-item">
+    <div class="stat-num">12</div>
+    <div class="stat-label">Sub-sectors Tracked</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">Weekly</div>
+    <div class="stat-label">Intelligence Cadence</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">3-Tier</div>
+    <div class="stat-label">Depth of Analysis</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">AI+</div>
+    <div class="stat-label">Expert Curated</div>
+  </div>
+</div>
 
-        document.getElementById('updated').textContent = new Date(data.generated_at || Date.now()).toLocaleString('ko-KR');
+<!-- COVERAGE -->
+<section class="section">
+  <div class="section-label">커버리지 영역</div>
+  <div class="coverage-grid">
+    <div class="coverage-item" data-num="01">
+      <div class="coverage-tag">Deal Signal</div>
+      <div class="coverage-title">딜 소싱<br>인텔리전스</div>
+      <div class="coverage-desc">단순 펀딩 공시 집계가 아닌 — 기술 성숙도(TRL) × 시장 타이밍 교차점에서 떠오르는 진짜 딜 시그널. 노이즈 차단.</div>
+    </div>
+    <div class="coverage-item" data-num="02">
+      <div class="coverage-tag">Tech DD</div>
+      <div class="coverage-title">기술 타당성<br>레이어</div>
+      <div class="coverage-desc">에너지 밀도 클레임이 물리적으로 가능한가? 계통 연계 대기는 얼마나 현실적인가? 심사역 관점의 기술 검증 프레임.</div>
+    </div>
+    <div class="coverage-item" data-num="03">
+      <div class="coverage-tag">Policy Beta</div>
+      <div class="coverage-title">정책 리스크<br>정량화</div>
+      <div class="coverage-desc">보조금 의존도를 정책 베타 지수로 환산. IRA·REPowerEU·K-RE100이 포트폴리오 밸류에이션에 미치는 영향 추적.</div>
+    </div>
+    <div class="coverage-item" data-num="04">
+      <div class="coverage-tag">Grid Physics</div>
+      <div class="coverage-title">그리드 안정성<br>분석</div>
+      <div class="coverage-desc">계통 주파수 영향, 송전 제약, AI 데이터센터 전력 수요 급증이 만드는 구조적 투자 기회. 물리학 먼저.</div>
+    </div>
+    <div class="coverage-item" data-num="05">
+      <div class="coverage-tag">Valuation</div>
+      <div class="coverage-title">섹터 밸류에이션<br>벤치마크</div>
+      <div class="coverage-desc">에너지 스타트업 배수가 왜 SaaS와 다르게 읽혀야 하는가. 자산 집약도·규제 수익·계약 구조 반영 멀티플 프레임.</div>
+    </div>
+    <div class="coverage-item" data-num="06">
+      <div class="coverage-tag">Macro Watch</div>
+      <div class="coverage-title">매크로 →<br>임플리케이션</div>
+      <div class="coverage-desc">금리·LNG 가격·탄소 시장이 에너지 VC 딜플로우에 미치는 영향. 뉴스가 아닌 투자 판단 재료로 변환.</div>
+    </div>
+  </div>
+</section>
 
-        document.getElementById('memo-content').innerHTML = data.daily_memo || "오늘의 인사이트가 아직 생성되지 않았습니다.";
+<!-- SAMPLE BRIEF -->
+<section class="sample-section">
+  <div class="section-label">샘플 브리프</div>
+  <div class="brief-card">
+    <div class="brief-header">
+      <div>
+        <div class="brief-issue">Vol.01 · 2025.W47 · GRIDEDGE INTELLIGENCE</div>
+        <div class="brief-title">AI 전력 수요 가속 — 그리드 인프라<br>투자 윈도우의 해부</div>
+      </div>
+    </div>
+    <div class="brief-sections">
+      <div>
+        <div class="brief-block-label">■ 이번 주 딜 시그널</div>
+        <div class="brief-item">
+          <div class="brief-item-tag tag-bull">BULLISH</div>
+          <div class="brief-item-title">변압기 제조사 Series B — 핵심 병목 포지션</div>
+          <div class="brief-item-body">AI 데이터센터 전력 연결 대기 36개월. 초고압 변압기 공급 부족이 구조적. 이 회사의 계약 파이프라인은 밸류에이션의 선행지표.</div>
+        </div>
+        <div class="brief-item">
+          <div class="brief-item-tag tag-watch">WATCH</div>
+          <div class="brief-item-title">장주기 BESS 스타트업 — TRL 체크 필요</div>
+          <div class="brief-item-body">에너지 밀도 클레임 450Wh/kg. 현재 상용 한계(300Wh/kg) 대비 50% 초과 — 독립 검증 없이 라운드 참여 비권고.</div>
+        </div>
+        <div class="brief-item">
+          <div class="brief-item-tag tag-bull">BULLISH</div>
+          <div class="brief-item-title">VPP 플랫폼 — 계통 서비스 수익 모델</div>
+          <div class="brief-item-body">분산에너지자원 집합으로 주파수 조정 시장 참여. 규제 수익 기반 SaaS 멀티플 적용 가능한 드문 구조.</div>
+        </div>
+      </div>
+      <div>
+        <div class="brief-block-label">■ 섹터 판단</div>
+        <div class="brief-item">
+          <div class="brief-item-tag tag-bull">그리드 인프라</div>
+          <div class="brief-item-title">OVERWEIGHT — 구조적 공급 부족</div>
+          <div class="brief-item-body">AI 클러스터 전력 수요 2028년까지 3배. 계통 접속 대기 누적. 변압기·보호계전기·SCADA가 병목. 정책 독립적 수요.</div>
+        </div>
+        <div class="brief-item">
+          <div class="brief-item-tag tag-risk">그린수소</div>
+          <div class="brief-item-title">UNDERWEIGHT — 단가 현실화 지연</div>
+          <div class="brief-item-body">$2/kg 목표 2030년 달성 불투명. 전해조 스택 열화율이 예상보다 빠름. 보조금 의존 구조 — 정책 베타 HIGH.</div>
+        </div>
+        <div class="brief-item">
+          <div class="brief-item-tag tag-watch">SMR</div>
+          <div class="brief-item-title">SELECTIVE — 허가 리스크 vs. AI 수요</div>
+          <div class="brief-item-body">마이크로소프트·구글 오프테이크 계약이 투자 논거 재정립. 그러나 NRC 허가 타임라인 불확실성이 IRR을 압박.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-        const tbody = document.querySelector('#conviction-table tbody');
-        tbody.innerHTML = '';
-        (data.high_conviction || []).forEach(item => {
-          const row = document.createElement('tr');
-          row.innerHTML = `
-            <td>${item.date}</td>
-            <td><strong>${item.company}</strong></td>
-            <td>${item.insight}</td>
-            <td class="high">${item.score}</td>
-          `;
-          tbody.appendChild(row);
-        });
-      } catch(e) {
-        console.error(e);
-        document.getElementById('memo-content').innerHTML = "데이터를 불러오는 중 오류가 발생했습니다.";
+<!-- BOTTOM CTA -->
+<section class="cta-section">
+  <div class="cta-left">
+    <h2>에너지 투자 판단,<br><em>한 발 앞서</em><br>시작하세요</h2>
+    <p class="cta-desc">매주 화요일 — 딜 시그널, 기술 DD 프레임, 섹터 포지셔닝.<br>무료로 시작, 필요하면 더 깊게.</p>
+  </div>
+  <div class="cta-right">
+    <ul class="tier-list">
+      <li>매주 에너지 섹터 딜 시그널 3–5개</li>
+      <li>기술 타당성 레드플래그 체크리스트</li>
+      <li>섹터 오버/언더웨이트 포지셔닝</li>
+      <li>정책 변수 → 투자 임플리케이션 변환</li>
+      <li>그리드 물리학 기반 분석 (정책 언어 제거)</li>
+    </ul>
+    <form class="subscribe-form" id="subscribeForm2">
+      <div class="form-row">
+        <input class="form-input" type="email" placeholder="your@fund.com" id="emailInput2" required>
+        <button class="form-btn" type="submit">무료 구독 →</button>
+      </div>
+      <div class="form-meta">스팸 없음 · 언제든 해지 가능 · <span>주 1회 발송</span></div>
+      <div class="success-msg" id="successMsg2">✓ 등록 완료 — 다음 호가 발송됩니다</div>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">GRID/EDGE</div>
+  <div class="footer-meta">© 2025 GRIDEDGE INTELLIGENCE · ENERGY INVESTMENT BRIEF</div>
+</footer>
+
+<script>
+  // Cursor dot
+  const dot = document.getElementById('cursorDot');
+  document.addEventListener('mousemove', e => {
+    dot.style.left = e.clientX + 'px';
+    dot.style.top = e.clientY + 'px';
+  });
+
+  // Form handlers
+  function handleForm(formId, inputId, msgId) {
+    document.getElementById(formId).addEventListener('submit', function(e) {
+      e.preventDefault();
+      const email = document.getElementById(inputId).value;
+      if (!email) return;
+      document.getElementById(msgId).style.display = 'block';
+      document.getElementById(inputId).value = '';
+      document.getElementById(inputId).placeholder = '등록되었습니다';
+    });
+  }
+
+  handleForm('subscribeForm', 'emailInput', 'successMsg');
+  handleForm('subscribeForm2', 'emailInput2', 'successMsg2');
+
+  // Scroll reveal
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
       }
-    }
+    });
+  }, { threshold: 0.1 });
 
-    window.onload = loadData;
-    setInterval(loadData, 30000); // 30초마다 자동 갱신
-  </script>
+  document.querySelectorAll('.coverage-item, .brief-item, .stat-item').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    observer.observe(el);
+  });
+</script>
 </body>
 </html>
