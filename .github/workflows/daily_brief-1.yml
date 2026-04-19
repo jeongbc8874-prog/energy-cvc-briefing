@@ -32,7 +32,9 @@ jobs:
         run: |
           git config user.name "gridedge-bot"
           git config user.email "bot@gridedge.io"
-          git pull --rebase origin main
           git add docs/brief_latest.json docs/brief_latest.html docs/briefs/ docs/archive.html
+          git stash
+          git pull --rebase origin main
+          git stash pop
           git diff --cached --quiet || git commit -m "brief: $(date +'%Y-%m-%d')"
           git push
