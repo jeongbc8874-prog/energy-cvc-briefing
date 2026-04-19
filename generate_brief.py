@@ -454,6 +454,13 @@ HTML_TEMPLATE = """<!DOCTYPE html>
   .signal-summary{font-size:12px;line-height:1.65;color:var(--muted);margin-bottom:8px;}
   .signal-impl{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--amber-light);padding:8px 12px;background:rgba(212,130,10,.04);border-left:1px solid var(--border);margin-bottom:6px;}
   .signal-source{font-family:'IBM Plex Mono',monospace;font-size:9px;color:rgba(245,244,239,.2);}
+  .badge-row{display:flex;gap:8px;margin:6px 0;flex-wrap:wrap;}
+  .trl-badge{font-family:'IBM Plex Mono',monospace;font-size:9px;padding:2px 7px;border-radius:2px;}
+  .trl-PLAUSIBLE{background:rgba(74,222,128,.08);color:#4ade80;border:1px solid rgba(74,222,128,.2);}
+  .trl-QUESTIONABLE{background:rgba(212,130,10,.08);color:#f0a832;border:1px solid rgba(212,130,10,.2);}
+  .trl-RED_FLAG{background:rgba(248,113,113,.08);color:#f87171;border:1px solid rgba(248,113,113,.2);}
+  .trl-NA{background:rgba(107,107,94,.08);color:#6b6b5e;border:1px solid rgba(107,107,94,.2);}
+  .policy-badge{font-family:'IBM Plex Mono',monospace;font-size:9px;padding:2px 7px;border-radius:2px;border:1px solid var(--border);color:var(--muted);}
   .positioning-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin-bottom:48px;}
   .pos-card{border:1px solid var(--border);padding:18px;}
   .OVERWEIGHT{color:#4ade80;} .NEUTRAL{color:var(--amber);} .UNDERWEIGHT{color:#f87171;}
@@ -484,6 +491,16 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     </div>
     <div class="signal-summary">{{ s.summary }}</div>
     <div class="signal-impl">→ {{ s.implication }}</div>
+    {% if s.trl_verdict or s.policy_beta %}
+    <div class="badge-row">
+      {% if s.trl_score and s.trl_verdict and s.trl_verdict != 'N/A' %}
+      <span class="trl-badge trl-{{ s.trl_verdict }}">TRL {{ s.trl_score }} · {{ s.trl_verdict }}</span>
+      {% endif %}
+      {% if s.policy_beta is not none and s.policy_beta != none %}
+      <span class="policy-badge">Policy Beta: {{ s.policy_beta }}/10</span>
+      {% endif %}
+    </div>
+    {% endif %}
     {% if s.source_url %}
     <a class="signal-source" href="{{ s.source_url }}" target="_blank" rel="noopener" style="color:rgba(245,244,239,.3);text-decoration:none;">Source: {{ s.source }} ↗</a>
     {% else %}
