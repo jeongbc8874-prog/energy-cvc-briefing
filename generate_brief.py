@@ -21,6 +21,14 @@ from urllib.parse import urlparse
 import anthropic
 from jinja2 import Template
 
+# 독점 데이터 모듈
+try:
+    from proprietary_data import collect_proprietary_data, format_proprietary_for_prompt
+    PROPRIETARY_ENABLED = True
+except ImportError:
+    PROPRIETARY_ENABLED = False
+    print('[WARN] proprietary_data.py 없음 — 독점 데이터 비활성화')
+
 # ── 설정 ─────────────────────────────────────────────────────────────────────
 
 ANTHROPIC_API_KEY = os.environ["ANTHROPIC_API_KEY"]
@@ -344,7 +352,7 @@ For LOW confidence items, always state the reason explicitly.
 """
 
 
-def generate_brief(signals: list[dict], eia_data: dict) -> dict:
+def generate_brief(signals: list[dict], eia_data: dict, proprietary_text: str = "") -> dict:
     client = anthropic.Anthropic(api_key=ANTHROPIC_API_KEY)
 
     now      = datetime.utcnow()
@@ -364,11 +372,16 @@ def generate_brief(signals: list[dict], eia_data: dict) -> dict:
     if eia_data:
         eia_context = f"\n\n=== EIA 최신 데이터 ===\n{json.dumps(eia_data, ensure_ascii=False, indent=2)}"
 
+    # 독점 데이터 추가
+    prop_context = ""
+    if proprietary_text:
+        prop_context = f"\n\n=== PROPRIETARY DATA (EXCLUSIVE SIGNALS) ===\n{proprietary_text}\n\nNote: Prioritize proprietary data signals — these are not available to competitors."
+
     user_prompt = USER_PROMPT_TEMPLATE.format(
         n=len(signals),
         date=now.strftime("%Y-%m-%d"),
         week=week_str,
-        signals_text=signals_text + eia_context,
+        signals_text=signals_text + eia_context + prop_context,
     )
 
     print("[3단계] Claude API 호출...")
