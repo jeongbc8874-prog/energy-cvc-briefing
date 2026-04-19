@@ -565,13 +565,37 @@ def save_outputs(brief: dict) -> None:
 
 if __name__ == "__main__":
     print("=" * 60)
-    print("GRIDEDGE Weekly Brief Pipeline v2")
+    print("GRIDEDGE Brief Pipeline")
     print("=" * 60)
 
     signals  = collect_all_signals()
-    filtered = filter_signals(signals, top_n=15)
+    filtered = filter_signals(signals, top_n=20)
     eia_data = fetch_eia_data()
-    brief    = generate_brief(filtered, eia_data)
+
+    # 독점 데이터 수집
+    proprietary_text = ""
+    if PROPRIETARY_ENABLED:
+        try:
+            prop_data = collect_proprietary_data()
+            proprietary_text = format_proprietary_for_prompt(prop_data)
+        except Exception as e:
+            print(f"[WARN] 독점 데이터 수집 실패: {e}")
+
+    # 에이전트 체인 or 단일 AI 분기
+    if AGENT_CHAIN_ENABLED:
+        print("[INFO] 에이전트 체인 모드 (4개 전문 에이전트)")
+        _now      = datetime.utcnow()
+        _iso      = _now.isocalendar()
+        _week_str = f"{_iso[0]}-W{_iso[1]:02d}"
+        _date_str = _now.strftime("%Y-%m-%d")
+        brief = run_agent_chain(filtered, proprietary_text, _week_str, _date_str)
+        brief["generated_at"] = _now.isoformat()
+        brief["signal_count"] = len(filtered)
+        brief["sources_used"] = list({s["source"] for s in filtered})
+    else:
+        print("[INFO] 단일 AI 모드")
+        brief = generate_brief(filtered, eia_data, proprietary_text)
+
     save_outputs(brief)
 
     print("=" * 60)
