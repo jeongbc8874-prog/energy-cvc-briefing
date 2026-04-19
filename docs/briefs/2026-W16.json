@@ -1,195 +1,205 @@
 {
   "week": "2026-W16",
-  "headline": "DFI-backed solar+storage in Egypt achieves $436/kW all-in cost, 40% below comparable MENA benchmarks, signaling institutional capital's flight to contracted emerging market assets amid Chinese supply chain distress.",
-  "thesis": "This week crystallized a bifurcation in energy transition capital allocation: institutional money is flooding into contracted, DFI-backed projects in Egypt and Australia while avoiding merchant and Chinese-linked exposures. The Scatec 1.1GW project and Amazon's 430MW Australian portfolio demonstrate that solar+storage with locked-in revenues commands premium capital access even as Freedom Forever's $500M bankruptcy and Hoshine's $411M loss expose the carnage in unhedged positions. Position overweight in contracted hybrid assets with DFI/corporate offtake, underweight merchant BESS and Chinese supply chain exposure until consolidation completes.",
+  "headline": "Amazon's 430MW solar+storage Australia deal signals hyperscaler demand shifting BESS from grid-services play to baseload-firm corporate PPA structure at 10-14% unlevered IRR.",
+  "thesis": "This week crystallized the bifurcation in energy storage economics: hyperscaler-backed solar+BESS PPAs in Australia and Nordic markets offer contracted 10-14% returns with low policy beta, while European battery manufacturing plays face critical EU-China trade exposure. The FERC June deadline on large-load interconnection will determine whether AI data center demand unlocks or strands $50B+ in US grid infrastructure investment. Position for contracted corporate offtake, avoid policy-dependent manufacturing bets until EU trade framework clarifies.",
   "deal_signals": [
     {
-      "title": "Scatec 1.1GW Obelisk Solar+BESS Egypt - Phase 1 Commissioned",
+      "title": "Amazon Australia 430MW Solar+Storage PPA Portfolio",
       "tag": "BULLISH",
       "sector": "BESS",
-      "summary": "Scatec's $479M DFI-backed financing for Egypt's largest solar+storage project achieves an implied $436/kW all-in cost, 30-40% below comparable MENA projects. The fully contracted storage revenue model eliminates merchant risk while DFI debt at estimated 5-7% USD provides 18-24% levered equity IRR potential. Technology risk is minimal at TRL-9 for proven GW-scale solar+BESS configuration.",
-      "implication": "Levered equity IRR of 18-24% with Egyptian sovereign credit risk hedged by DFI coverage; currency convertibility remains the swing factor—model 200bps IRR haircut for FX risk.",
-      "confidence": "HIGH",
-      "trl_score": 9,
-      "trl_verdict": "PLAUSIBLE",
-      "policy_beta": 4,
-      "source": "pv-magazine",
-      "source_url": "https://www.pv-magazine.com/2026/04/17/the-financial-strategy-behind-egypts-largest-solar-plus-storage-project/"
-    },
-    {
-      "title": "Amazon 430MW Solar+Storage Australia PPAs for AI Data Centers",
-      "tag": "BULLISH",
-      "sector": "BESS",
-      "summary": "Amazon's nine Australian PPAs totaling 430MW with 8 projects featuring co-located BESS represents the clearest signal yet of hyperscaler demand pulling solar+storage into premium offtake structures. Amazon's investment-grade credit eliminates counterparty risk while AI load growth provides secular demand visibility through 2035. This deal structure—corporate PPA with integrated storage—is now the template for Australian renewable development.",
-      "implication": "Corporate PPA-backed solar+BESS in Australia likely commands 200-300bps premium over merchant equivalents; target 10-12% unlevered IRR with Amazon credit.",
+      "summary": "Amazon signed nine renewable PPAs totaling 430MW in Australia, with eight featuring co-located BESS—its first solar+storage deals in the country. The hybrid structure addresses 24/7 data center load profiles using mature TRL-9 technology with typical 2-4 hour storage duration. Investment-grade counterparty eliminates offtake risk; Australian NEM market structure supports firm capacity value.",
+      "implication": "Estimated A$55-65/MWh PPA supports 10-14% unlevered IRR for developers with policy beta of 2; single-offtaker concentration is manageable given Amazon credit quality.",
       "confidence": "HIGH",
       "trl_score": 9,
       "trl_verdict": "PLAUSIBLE",
       "policy_beta": 2,
-      "source": "pv-tech / energy-storage.news",
+      "source": "PV Tech / Energy Storage News",
       "source_url": "https://www.pv-tech.org/amazon-signs-first-solar-plus-storage-ppas-in-australia-to-power-ai-expansion/"
     },
     {
-      "title": "Hithium €400M Spain Gigafactory Investment",
+      "title": "Hithium €400M Spain Battery Gigafactory",
       "tag": "WATCH",
       "sector": "BESS",
-      "summary": "After two years of negotiations, Hithium's Navarre gigafactory commitment signals Chinese battery manufacturers' determination to establish EU manufacturing despite mounting anti-subsidy investigation risk. Implied capex of €20-40/kWh is competitive but EU tariff risk (policy beta 8/10) could fundamentally alter project economics. Regional subsidies likely cover 40-50% of capex, but CBAM cost pass-through remains uncertain.",
-      "implication": "Project IRR of 8-14% is below hurdle for most financial sponsors; strategic value to Hithium exceeds pure financial returns. Do not chase this structure without EU subsidy certainty.",
+      "summary": "Chinese Tier-2 battery manufacturer Hithium commits to Navarre facility after two-year negotiation, implying €27-40/kWh manufacturing capex for estimated 10-15 GWh capacity. Technology is proven LFP at TRL-9, but execution risk is elevated given EU CBAM tariffs and potential anti-subsidy duties on Chinese cell manufacturers. Financing likely 60-70% debt via EIB/ICO at sub-5% rates.",
+      "implication": "12-16% equity IRR target faces material downside if EU anti-China trade measures intensify; policy beta of 7 warrants significant discount to comparable CATL/BYD valuations.",
       "confidence": "MEDIUM",
       "trl_score": 9,
       "trl_verdict": "PLAUSIBLE",
-      "policy_beta": 8,
-      "source": "energy-storage.news",
+      "policy_beta": 7,
+      "source": "Energy Storage News",
       "source_url": "https://www.energy-storage.news/hithium-signs-e400-million-spain-battery-gigafactory-investment-agreement-after-two-year-courtship/"
+    },
+    {
+      "title": "FERC June Deadline on AI Data Center Interconnection Rules",
+      "tag": "WATCH",
+      "sector": "GRID",
+      "summary": "FERC set June 2026 deadline to finalize RM26-4-000 rulemaking governing how large loads—including AI data centers—connect to interstate transmission. Decision will determine whether hyperscaler power demand accelerates or stalls grid infrastructure investment. Chairman Swett signaled frustration with PJM backstop auction mechanics, suggesting reform appetite.",
+      "implication": "Outcome determines $50B+ in potential transmission/interconnection capex; policy beta of 8 means grid-adjacent investments should await regulatory clarity before deployment.",
+      "confidence": "MEDIUM",
+      "trl_score": null,
+      "trl_verdict": "N/A",
+      "policy_beta": 8,
+      "source": "Utility Dive / Power Magazine",
+      "source_url": "https://www.utilitydive.com/news/ferc-doe-data-center-interconnection-pjm-backstop-auction/817804/"
+    },
+    {
+      "title": "Stegra €1.4B Green Steel Mill Financing Close",
+      "tag": "WATCH",
+      "sector": "OTHER",
+      "summary": "Stegra (formerly H2 Green Steel) secured €1.4B from Wallenberg-led consortium to complete world's first major green-steel mill in Sweden. Technology involves green hydrogen DRI, a TRL-7 process at commercial scale. Offtake economics entirely dependent on EU CBAM green premium maintaining competitiveness against Asian conventional steel.",
+      "implication": "Green premium offtake requires sustained 20-30% price differential; policy beta of 7 reflects CBAM dependency—hedge with carbon credit exposure if allocating.",
+      "confidence": "MEDIUM",
+      "trl_score": 7,
+      "trl_verdict": "PLAUSIBLE",
+      "policy_beta": 7,
+      "source": "Canary Media",
+      "source_url": "https://www.canarymedia.com/articles/green-steel/stegra-funding-complete-mill"
     },
     {
       "title": "Freedom Forever $500M Chapter 11 Bankruptcy",
       "tag": "RED_FLAG",
       "sector": "SOLAR",
-      "summary": "The largest US residential solar installer bankruptcy since SunEdison's collapse exposes structural fragility in the resi solar dealer model amid higher rates and ITC step-down uncertainty. $500M in debt suggests overleveraged growth strategy collided with 2025-2026 demand softening. This is a sector-wide warning signal for residential solar finance exposure.",
-      "implication": "Residential solar loan portfolios face elevated default risk; assume 150-200bps credit spread widening on resi solar ABS through H2 2026.",
+      "summary": "US residential solar installer Freedom Forever filed Chapter 11 with $500M debts amid litigation claims, marking continued distress in residential solar channel. Follows 2024-2025 bankruptcies at SunPower and others. Signals structural overcapacity and margin compression in US resi solar despite strong utility-scale fundamentals.",
+      "implication": "Residential solar equity multiples face further compression; avoid installer/financing pure-plays until consolidation completes—focus on upstream module or utility-scale developers.",
       "confidence": "HIGH",
-      "trl_score": null,
+      "trl_score": 9,
       "trl_verdict": "N/A",
-      "policy_beta": 6,
-      "source": "pv-tech",
+      "policy_beta": 5,
+      "source": "PV Tech",
       "source_url": "https://www.pv-tech.org/freedom-forever-files-for-chapter-11-bankruptcy-with-500-million-debts/"
     },
     {
-      "title": "Hoshine Silicon CNY 2.99B ($411M) Net Loss for 2025",
-      "tag": "RED_FLAG",
-      "sector": "SOLAR",
-      "summary": "Hoshine's massive loss alongside continued polysilicon/wafer price declines confirms Chinese PV supply chain is in acute distress. CNY 20.5B revenue generating CNY 3B loss implies negative 15% operating margin—unsustainable without consolidation. Counterparty risk for equipment and module supply agreements is now material.",
-      "implication": "Chinese PV supplier counterparty risk warrants 5-10% contingency reserves in project pro formas; prefer Tier-1 suppliers with visible balance sheet strength.",
-      "confidence": "HIGH",
-      "trl_score": null,
-      "trl_verdict": "N/A",
-      "policy_beta": 5,
-      "source": "pv-magazine",
-      "source_url": "https://www.pv-magazine.com/2026/04/17/chinese-pv-industry-brief-hoshine-silicon-posts-411-million-loss-for-2025/"
+      "title": "Wood & Co 145MW Nordic BESS Portfolio",
+      "tag": "BULLISH",
+      "sector": "BESS",
+      "summary": "Czech investor Wood & Company engaged construction and optimization partners for 145MW BESS across Finland and Sweden. Nordic markets offer strong ancillary services revenue with improving frequency regulation pricing. Mature technology deployment in low-policy-risk jurisdictions with transparent market structures.",
+      "implication": "Nordic BESS offers 12-15% project returns with policy beta of 3; attractive risk-adjusted entry for EU-focused LPs seeking contracted storage exposure.",
+      "confidence": "MEDIUM",
+      "trl_score": 9,
+      "trl_verdict": "PLAUSIBLE",
+      "policy_beta": 3,
+      "source": "Energy Storage News",
+      "source_url": "https://www.energy-storage.news/investor-wood-co-engages-partners-to-put-145mw-of-bess-into-nordic-electricity-markets/"
     },
     {
-      "title": "Sigenergy HK$4.4B ($565M) Hong Kong IPO",
+      "title": "Vogtle Nuclear: $36B for 2.2 GW Sets Toxic US Precedent",
+      "tag": "RED_FLAG",
+      "sector": "SMR",
+      "summary": "Post-mortem on Georgia Vogtle shows $16,364/kW all-in cost—4-5x international nuclear benchmarks and 16x Texas solar+storage. Ratepayer recovery model worked for Southern Company shareholders but destroyed political capital for US nuclear expansion. Comparison to Texas 36 GW solar/storage buildout at equivalent cost is devastating for merchant nuclear economics.",
+      "implication": "US new-build nuclear effectively uninvestable outside regulated cost-of-service structures; SMR economics must demonstrate <$6,000/kW to attract private capital—current estimates at $5,000-8,000/kW remain unproven.",
+      "confidence": "HIGH",
+      "trl_score": 9,
+      "trl_verdict": "PLAUSIBLE",
+      "policy_beta": 9,
+      "source": "Utility Dive",
+      "source_url": "https://www.utilitydive.com/news/after-2-years-ratepayer-pain-political-fallout-georgia-nuclear-vogtle/817792/"
+    },
+    {
+      "title": "Sigenergy HK$4.4B Hong Kong IPO",
       "tag": "WATCH",
       "sector": "BESS",
-      "summary": "Sigenergy's successful listing provides rare public market valuation benchmark for integrated battery storage solutions providers. The $565M raise in current markets demonstrates investor appetite for BESS pure-plays despite M&A slowdown noted at Energy Storage Summit 2026. Watch for secondary market trading to establish true price discovery.",
-      "implication": "IPO pricing provides comp for private BESS platform valuations; expect 1.5-2.5x revenue multiples for scaled storage solutions companies with geographic diversification.",
+      "summary": "Battery storage solutions provider Sigenergy listed on HKEX at HK$4.4B raise, providing liquidity benchmark for Asian storage equipment companies. IPO timing amid M&A slowdown (per Energy Storage Summit panel) suggests public markets offering premium to private exits in current environment.",
+      "implication": "HK listing multiples provide comp for Asian storage equipment M&A; watch 90-day trading pattern to assess sustainable valuation range for sector.",
       "confidence": "MEDIUM",
       "trl_score": 9,
       "trl_verdict": "PLAUSIBLE",
-      "policy_beta": 3,
-      "source": "energy-storage.news",
+      "policy_beta": 4,
+      "source": "Energy Storage News",
       "source_url": "https://www.energy-storage.news/sigenergy-lists-on-hong-kong-stock-exchange-raises-hk4-4-billion/"
-    },
-    {
-      "title": "FERC June Decision on Data Center Interconnection Reform",
-      "tag": "WATCH",
-      "sector": "GRID",
-      "summary": "FERC teeing up June rulemaking on data center interconnection addresses the critical bottleneck for AI-driven load growth. Chairman Swett's expressed frustration with PJM backstop auction mechanics suggests regulatory momentum toward streamlined large-load interconnection. This decision will materially impact behind-the-meter generation and storage economics for hyperscaler projects.",
-      "implication": "Favorable FERC ruling could unlock 10-15 GW of data center load for renewable+storage PPAs in PJM alone; position for interconnection queue advancement beneficiaries.",
-      "confidence": "MEDIUM",
-      "trl_score": null,
-      "trl_verdict": "N/A",
-      "policy_beta": 7,
-      "source": "utilitydive",
-      "source_url": "https://www.utilitydive.com/news/ferc-doe-data-center-interconnection-pjm-backstop-auction/817804/"
-    },
-    {
-      "title": "Shell-Evolve 573MW Race Bank Offshore Wind PPA Through 2035",
-      "tag": "BULLISH",
-      "sector": "WIND",
-      "summary": "Long-term offshore wind PPA with Shell provides contracted revenue visibility for existing asset through 2035. Oil major counterparty credit (policy beta 3/10) is strong despite energy transition execution risk. This structure—operational asset with creditworthy offtaker—represents low-risk infrastructure yield play.",
-      "implication": "Operational offshore wind with investment-grade PPA commands 6-8% yield; appropriate for infrastructure yield strategies, not growth mandates.",
-      "confidence": "HIGH",
-      "trl_score": 9,
-      "trl_verdict": "PLAUSIBLE",
-      "policy_beta": 3,
-      "source": "energymonitor.ai",
-      "source_url": "https://www.energymonitor.ai/news/evolve-shell-sign-race-bank-ppa/"
     }
   ],
   "sector_positioning": [
     {
       "sector": "BESS",
       "stance": "OVERWEIGHT",
-      "rationale": "Corporate PPA-backed solar+storage is emerging as the preferred structure for both hyperscalers (Amazon Australia) and DFI capital (Egypt projects). Sigenergy's successful IPO confirms public market appetite while M&A activity remains muted, creating potential for multiple expansion as consolidation completes.",
-      "key_risk": "Chinese battery manufacturer anti-subsidy risk (policy beta 8) could disrupt EU supply chain; hedge with geographic diversification.",
-      "valuation_note": "DFI-backed projects at $350-450/kW; merchant BESS trading at 0.8-1.2x replacement cost"
+      "rationale": "Hyperscaler demand for firm renewable PPAs creates contracted revenue streams at 10-14% unlevered IRR with low policy beta. Amazon Australia deal and Wood & Co Nordic deployment demonstrate mature technology in low-risk offtake structures.",
+      "key_risk": "Manufacturing supply chain (Hithium) faces EU-China trade risk at policy beta 7; focus on project-level exposure over equipment/manufacturing plays.",
+      "valuation_note": "Project-level multiples at 8-10x contracted EBITDA; equipment makers trading at 15-20x forward but face margin compression"
     },
     {
       "sector": "SOLAR",
       "stance": "NEUTRAL",
-      "rationale": "Utility-scale solar fundamentals remain strong (TRL-9, declining costs) but residential segment distress (Freedom Forever bankruptcy) and Chinese supply chain losses (Hoshine -$411M) create counterparty and credit risk. EU PPA compression to €55/MWh threatens developer returns below 10% hurdle rates.",
-      "key_risk": "Chinese PV manufacturer consolidation risk (policy beta 5); counterparty defaults could delay project timelines 6-12 months.",
-      "valuation_note": "EU solar PPAs at €55/MWh imply 10-14% project IRR; US PPAs rising suggests supply constraint premium emerging"
+      "rationale": "European PPA prices at €55/MWh compress developer margins to 8-11% levered IRR; US residential channel distress (Freedom Forever bankruptcy) signals structural overcapacity. Utility-scale remains investable but selective.",
+      "key_risk": "European curtailment risk increasing in Iberia/Italy at midday; residential installer exposure should be avoided until consolidation completes.",
+      "valuation_note": "European utility-scale at €650-750/kW asset values; US resi installer multiples deeply distressed"
     },
     {
       "sector": "GRID",
-      "stance": "OVERWEIGHT",
-      "rationale": "FERC's June decision on data center interconnection reform is the highest-impact near-term regulatory catalyst. Hyperscaler load growth (Amazon, Microsoft) creates secular demand for grid-connected storage and transmission assets. PJM backstop auction resolution will unlock billions in grid investment.",
-      "key_risk": "Regulatory delay risk (policy beta 7); adverse FERC ruling could defer interconnection queue by 18-24 months.",
-      "valuation_note": "Grid-scale infrastructure trading at 8-12x EBITDA; interconnection queue positions increasingly valuable"
-    },
-    {
-      "sector": "WIND",
       "stance": "NEUTRAL",
-      "rationale": "Operational offshore wind with long-term PPAs (Race Bank through 2035) provides stable yield but limited upside. New build offshore wind faces supply chain cost pressure and permitting delays. Denmark study showing offshore wind+solar 53% cheaper than nuclear supports long-term thesis but near-term execution risk persists.",
-      "key_risk": "Supply chain cost inflation on new build; installed cost risk vs. contracted PPA pricing.",
-      "valuation_note": "Operational offshore wind at 6-8% yield; development-stage at 12-15% target IRR"
-    },
-    {
-      "sector": "H2",
-      "stance": "UNDERWEIGHT",
-      "rationale": "Mediterranean port hydrogen study shows €2.5/kg achievable only with fossil hybrid inputs, undermining green premium. Pure renewable hydrogen at €5.7-8.6/kg remains uncompetitive with grey hydrogen at €1.5-2.5/kg. Near-term investment thesis requires subsidy visibility absent from current signals.",
-      "key_risk": "Green premium collapse if hybrid systems dominate (policy beta 6); stranded asset risk for pure-green projects.",
-      "valuation_note": "Green hydrogen projects remain pre-commercial; avoid until €3/kg threshold achieved"
+      "rationale": "FERC June deadline creates binary regulatory event for grid infrastructure investment thesis. Outcome determines whether AI data center demand unlocks or strands interconnection capex.",
+      "key_risk": "Policy beta of 8 warrants position sizing discipline; FERC $1.1B American Efficient fraud penalty signals enforcement risk for capacity market participants.",
+      "valuation_note": "Grid infrastructure trading at 12-15x EBITDA; premium justified only if interconnection reform favorable"
     },
     {
       "sector": "SMR",
       "stance": "UNDERWEIGHT",
-      "rationale": "Vogtle aftermath demonstrates nuclear's fundamental cost disadvantage—$36B for 2GW over 15 years vs. Texas's $36B for 36GW solar+storage in 4 years. Denmark study confirms renewables 53% cheaper on total system cost basis. Rate recovery disputes create utility credit risk spillover.",
-      "key_risk": "Political reversal risk is the only bull case; rate recovery litigation (policy beta 7) threatens utility balance sheets.",
-      "valuation_note": "Avoid direct nuclear exposure; tangential benefit to grid storage from baseload replacement"
+      "rationale": "Vogtle $16,364/kW cost establishes toxic precedent for US nuclear economics. SMR must prove <$6,000/kW to compete; current estimates remain at $5,000-8,000/kW with TRL-6/7 technology risk.",
+      "key_risk": "Policy beta of 9 reflects total dependence on regulatory/political support; fusion milestones remain speculative with commercialization timeline beyond 2035.",
+      "valuation_note": "Private SMR developers at 3-5x revenue; discount vs. peers appropriate given execution risk"
+    },
+    {
+      "sector": "WIND",
+      "stance": "NEUTRAL",
+      "rationale": "Shell/Evolve Race Bank PPA through 2035 demonstrates continued offshore wind offtake appetite, but no new investment signals this week. Sector in holding pattern pending supply chain cost normalization.",
+      "key_risk": "Offshore installation vessel constraints and interconnection delays; onshore margins compressed by solar competition.",
+      "valuation_note": "Offshore projects at €2,500-3,000/kW; development multiples stable at 5-7x"
+    },
+    {
+      "sector": "H2",
+      "stance": "NEUTRAL",
+      "rationale": "Stegra green steel financing validates green hydrogen offtake in industrial applications, but economics entirely dependent on EU CBAM green premium sustainability. No pure-play H2 production deals this week.",
+      "key_risk": "Policy beta of 7 for green premium offtake; electrolyzer cost trajectory remains key variable for project economics.",
+      "valuation_note": "Green H2 projects seeking $3-5/kg offtake; sub-$2/kg required for competitiveness without policy support"
     }
   ],
   "red_flags": [
     {
-      "issue": "Chinese PV Supply Chain Systemic Distress",
-      "detail": "Hoshine's $411M loss on $2.82B revenue (-15% margin) combined with continued polysilicon/wafer price declines indicates industry-wide margin destruction. JinkoSolar losses compound the picture. Counterparty risk for module supply agreements, equipment warranties, and EPC contracts with Chinese suppliers requires immediate portfolio review and contingency reserves.",
+      "issue": "US Residential Solar Structural Distress",
+      "detail": "Freedom Forever $500M bankruptcy follows SunPower and others, indicating channel overcapacity and margin collapse persist. Private market valuations for resi installers require 50%+ haircuts to reflect restructuring risk.",
       "policy_beta": 5,
-      "source": "pv-magazine Chinese PV Industry Brief"
+      "source": "PV Tech"
     },
     {
-      "issue": "US Residential Solar Credit Contagion",
-      "detail": "Freedom Forever's $500M bankruptcy is likely the first of multiple residential solar installer failures as higher rates and ITC uncertainty compress economics. Residential solar loan portfolios and ABS structures face elevated default risk. Downstream contagion to panel manufacturers and inverter suppliers possible.",
-      "policy_beta": 6,
-      "source": "pv-tech"
-    },
-    {
-      "issue": "EU Battery Manufacturer Anti-Subsidy Exposure",
-      "detail": "Hithium's €400M Spain investment proceeds despite elevated risk (policy beta 8) of EU anti-subsidy investigations targeting Chinese battery manufacturers. CATL Hungary, Envision France, and other Chinese-owned EU gigafactories face similar regulatory overhang. Sponsors should model 25-40% tariff scenarios on imported cells and components.",
+      "issue": "FERC $1.1B Fraud Penalty Signals Enforcement Escalation",
+      "detail": "American Efficient penalty for capacity market manipulation demonstrates FERC willingness to impose existential penalties. Capacity market participants face heightened compliance scrutiny and potential clawback exposure.",
       "policy_beta": 8,
-      "source": "energy-storage.news"
+      "source": "Utility Dive"
+    },
+    {
+      "issue": "EU-China Battery Trade Tensions Threaten Localization Plays",
+      "detail": "Hithium two-year negotiation and CBAM exposure illustrate regulatory complexity for Chinese battery manufacturers seeking EU production footprint. Position sizing must reflect potential anti-subsidy duties.",
+      "policy_beta": 7,
+      "source": "Energy Storage News"
+    },
+    {
+      "issue": "Flywheel Storage 'Comeback' Narrative Lacks Scale Evidence",
+      "detail": "CleanTechnica flywheel hype piece lacks commercial deployment data at grid scale. Flywheels remain TRL-7 for multi-hour applications; 85-95% efficiency claims accurate but cost/duration economics unproven versus lithium at scale.",
+      "policy_beta": 5,
+      "source": "CleanTechnica"
     }
   ],
-  "macro_watch": "DFI capital and hyperscaler corporate PPAs are crowding out traditional energy PE/VC in contracted renewable deals, forcing private capital toward higher-risk merchant, development-stage, or technology-differentiated opportunities. Chinese supply chain distress creates near-term execution risk but medium-term consolidation will strengthen surviving suppliers—position for the survivors, not the casualties.",
-  "data_note": "Key sources: pv-magazine (Egypt financing, Chinese PV losses), pv-tech (Amazon Australia, Freedom Forever, Italy FER X), energy-storage.news (Hithium Spain, Sigenergy IPO, BESS M&A panel), utilitydive (FERC interconnection, Vogtle ratepayer impact), energymonitor.ai (Shell Race Bank PPA).",
-  "agent_chain_summary": "Three-agent synthesis upgraded Egypt Obelisk from standard project finance to top conviction pick by combining tech validation (TRL-9, desert thermal risk manageable), financial analysis ($436/kW below benchmarks, 18-24% levered IRR), and risk assessment (FX risk hedged by DFI structure)—a single AI would have missed the integrated value signal.",
+  "macro_watch": "EU-China trade tensions and European merchant power price deflation create headwinds for manufacturing-centric energy deals; capital rotating toward contracted corporate PPA structures with investment-grade offtakers. FERC regulatory calendar dominates US grid infrastructure timing—delay deployment decisions until June 2026 clarity on large-load interconnection rules.",
+  "data_note": "Primary sources: Energy Storage News (4 signals), PV Tech (4 signals), Utility Dive (3 signals), Power Magazine (2 signals), Canary Media (1 signal). SEC EDGAR filings non-actionable this week. arXiv signals no direct energy investment relevance.",
+  "agent_chain_summary": "Three-agent synthesis elevated Amazon Australia deal from routine PPA announcement to sector-defining signal by integrating TRL-9 technical maturity, 10-14% IRR financial validation, and policy beta 2 risk profile—a combination no single-agent analysis would have prioritized over headline €400M Hithium deal that faces materially higher execution risk.",
   "agent_chain": {
-    "tech_assessments_count": 9,
+    "tech_assessments_count": 8,
     "deal_assessments_count": 9,
     "risk_assessments_count": 10,
-    "tech_summary": "This week's signals reflect the mature commercial state of solar PV, BESS, and offshore wind technologies, with multiple GW-scale deployments proceeding at TRL 9. The more aggressive claims around €2.5/kg hydrogen and €46/MWh renewable system costs require careful scrutiny of boundary conditions and system integration assumptions. The solar-vs-nuclear cost comparison, while directionally accurate, oversimplifies the firm capacity value difference between technologies.",
-    "deal_summary": "DFI-backed project finance in emerging markets (Egypt) offers attractive risk-adjusted returns at $400-550/kW for solar+storage with concessional debt at 5-7%. European and US PPA markets show bifurcation—EU solar PPAs compressing to €55/MWh signal margin squeeze while North American prices rise on supply constraints. Chinese battery/PV supply chain distress creates potential value traps; avoid until consolidation stabilizes margins. Corporate offtake from investment-grade counterparties (Amazon, Shell) continues to support project-level debt capacity at 70%+ leverage.",
-    "risk_summary": "Elevated counterparty risk from Chinese supply chain losses; emerging market FX exposure on DFI-backed deals requires hedging."
+    "tech_summary": "This week's signals reflect mostly mature technology deployments (TRL 9) in solar, BESS, and nuclear, with no significant breakthrough claims. The two outliers requiring scrutiny are flywheel storage's 'comeback' narrative—which overstates addressable market given fundamental energy density limits—and fusion's 2030s commercialization timeline, which remains aspirational given unsolved tritium breeding and materials challenges. The Stegra green-steel project represents the most technically interesting near-term deployment, pushing H2-DRI from pilot to commercial scale.",
+    "deal_summary": "This week's deal flow reflects continued capital availability for contracted renewable assets at fair-to-attractive valuations, with corporate PPAs (Amazon Australia, Shell/Race Bank) demonstrating persistent demand from investment-grade offtakers. The Vogtle nuclear comparison crystallizes the value destruction in conventional nuclear versus distributed renewables. Manufacturing investments (Hithium, Sigenergy) face margin pressure headwinds but strategic capital remains available for supply chain localization plays.",
+    "risk_summary": "Week dominated by policy-dependent manufacturing bets and technology risk in storage alternatives; corporate PPA deals offer relative safety."
   },
-  "generated_at": "2026-04-19T13:48:22.894863",
+  "generated_at": "2026-04-19T23:46:51.948619",
   "signal_count": 22,
   "sources_used": [
-    "Energy Monitor",
+    "Nuclear Engineering",
     "PV Tech",
-    "PV Magazine",
+    "Energy Monitor",
+    "Power Magazine",
+    "Canary Media",
     "Energy Storage News",
+    "CleanTechnica",
+    "Electrek",
     "Utility Dive"
   ]
 }
