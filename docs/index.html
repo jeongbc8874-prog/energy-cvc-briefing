@@ -4,966 +4,315 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>GRIDEDGE — AI Data Center Power Investment Intelligence</title>
-<meta name="description" content="The only investment intelligence service built by a power systems researcher. Daily briefs on AI data center power infrastructure — grid interconnection, BESS, nuclear, transmission.">
+<meta name="description" content="The only investment intelligence service built by a power systems researcher. Daily briefs on AI data center power infrastructure.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:wght@300;400;500&family=Geist:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-:root {
-  --bg:       #050507;
-  --white:    #e8e8f0;
-  --dim:      #5a5a7a;
-  --blue:     #3b82f6;
-  --blue-dim: rgba(59,130,246,0.15);
-  --green:    #22c55e;
-  --amber:    #f59e0b;
-  --red:      #ef4444;
-  --border:   rgba(59,130,246,0.12);
-  --card:     rgba(255,255,255,0.02);
-}
-
-* { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-body {
-  background: var(--bg);
-  color: var(--white);
-  font-family: 'Geist', sans-serif;
-  overflow-x: hidden;
-}
-
-/* GRID BACKGROUND */
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background-image:
-    linear-gradient(rgba(59,130,246,0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(59,130,246,0.04) 1px, transparent 1px);
-  background-size: 64px 64px;
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* GLOW */
-.glow-orb {
-  position: fixed;
-  width: 600px;
-  height: 600px;
-  background: radial-gradient(circle, rgba(59,130,246,0.06) 0%, transparent 70%);
-  border-radius: 50%;
-  pointer-events: none;
-  top: -200px;
-  right: -100px;
-  z-index: 0;
-}
-
-/* NAV */
-nav {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  z-index: 100;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 18px 48px;
-  background: rgba(5,5,7,0.8);
-  backdrop-filter: blur(20px);
-  border-bottom: 1px solid var(--border);
-}
-.logo {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 13px;
-  font-weight: 500;
-  letter-spacing: 0.2em;
-  color: var(--blue);
-  text-decoration: none;
-}
-.logo em { color: var(--white); opacity: 0.3; font-style: normal; }
-.nav-right {
-  display: flex;
-  align-items: center;
-  gap: 24px;
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 10px;
-  letter-spacing: 0.12em;
-  color: var(--dim);
-  text-transform: uppercase;
-}
-.nav-right a { color: var(--dim); text-decoration: none; transition: color 0.2s; }
-.nav-right a:hover { color: var(--white); }
-.nav-pill {
-  background: var(--blue-dim);
-  color: var(--blue);
-  border: 1px solid rgba(59,130,246,0.3);
-  font-size: 9px;
-  padding: 3px 10px;
-  border-radius: 20px;
-  letter-spacing: 0.1em;
-}
-
-/* HERO */
-.hero {
-  position: relative;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 120px 48px 80px;
-  z-index: 1;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.hero-tag {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 10px;
-  letter-spacing: 0.25em;
-  color: var(--blue);
-  text-transform: uppercase;
-  margin-bottom: 32px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-.hero-tag::before {
-  content: '';
-  display: inline-block;
-  width: 6px;
-  height: 6px;
-  background: var(--blue);
-  border-radius: 50%;
-  animation: pulse 2s infinite;
-}
-@keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.3; }
-}
-
-h1 {
-  font-family: 'Instrument Serif', serif;
-  font-size: clamp(48px, 6vw, 88px);
-  line-height: 1.0;
-  letter-spacing: -0.02em;
-  color: var(--white);
-  margin-bottom: 32px;
-  max-width: 900px;
-}
-h1 em {
-  font-style: italic;
-  color: transparent;
-  -webkit-text-stroke: 1px rgba(59,130,246,0.6);
-}
-
-.hero-sub {
-  font-size: 16px;
-  line-height: 1.7;
-  color: var(--dim);
-  max-width: 560px;
-  margin-bottom: 48px;
-  font-weight: 300;
-}
-.hero-sub strong { color: var(--white); font-weight: 400; }
-
-/* FORM */
-.form-wrap { max-width: 480px; }
-.form-row { display: flex; }
-.form-input {
-  flex: 1;
-  background: rgba(255,255,255,0.04);
-  border: 1px solid var(--border);
-  border-right: none;
-  color: var(--white);
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 13px;
-  padding: 13px 16px;
-  outline: none;
-  transition: border-color 0.2s, background 0.2s;
-}
-.form-input::placeholder { color: rgba(232,232,240,0.2); }
-.form-input:focus {
-  border-color: rgba(59,130,246,0.5);
-  background: rgba(59,130,246,0.04);
-}
-.form-btn {
-  background: var(--blue);
-  color: #fff;
-  border: none;
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 10px;
-  font-weight: 500;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  padding: 13px 24px;
-  cursor: pointer;
-  transition: background 0.2s;
-  white-space: nowrap;
-}
-.form-btn:hover { background: #2563eb; }
-.form-meta {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 10px;
-  color: rgba(232,232,240,0.2);
-  letter-spacing: 0.06em;
-  margin-top: 10px;
-}
-.form-meta span { color: var(--blue); }
-.brief-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  margin-top: 16px;
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 11px;
-  letter-spacing: 0.1em;
-  color: var(--blue);
-  text-decoration: none;
-  opacity: 0.7;
-  transition: opacity 0.2s;
-}
-.brief-link:hover { opacity: 1; }
-
-/* POWER DEMAND VISUAL */
-.power-visual {
-  position: absolute;
-  right: 48px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 420px;
-  z-index: 1;
-}
-.power-card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  padding: 24px;
-  margin-bottom: 12px;
-  position: relative;
-  overflow: hidden;
-}
-.power-card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--blue), transparent);
-  opacity: 0.5;
-}
-.pc-label {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 9px;
-  letter-spacing: 0.2em;
-  color: var(--dim);
-  text-transform: uppercase;
-  margin-bottom: 12px;
-}
-.pc-value {
-  font-family: 'Instrument Serif', serif;
-  font-size: 36px;
-  color: var(--white);
-  line-height: 1;
-  margin-bottom: 4px;
-}
-.pc-sub {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 10px;
-  color: var(--blue);
-}
-.pc-bar {
-  height: 3px;
-  background: rgba(255,255,255,0.06);
-  margin-top: 16px;
-  border-radius: 2px;
-  overflow: hidden;
-}
-.pc-bar-fill {
-  height: 100%;
-  background: linear-gradient(90deg, var(--blue), #60a5fa);
-  border-radius: 2px;
-  animation: growBar 2s ease forwards;
-}
-@keyframes growBar {
-  from { width: 0; }
-}
-
-.signal-stream {
-  background: var(--card);
-  border: 1px solid var(--border);
-  padding: 16px;
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 10px;
-}
-.ss-header {
-  color: var(--dim);
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  margin-bottom: 12px;
-  font-size: 9px;
-}
-.ss-item {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 6px 0;
-  border-bottom: 1px solid rgba(255,255,255,0.04);
-  color: rgba(232,232,240,0.6);
-  font-size: 10px;
-}
-.ss-item:last-child { border-bottom: none; }
-.ss-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-.dot-green { background: var(--green); }
-.dot-amber { background: var(--amber); }
-.dot-red   { background: var(--red); }
-.ss-tag {
-  margin-left: auto;
-  font-size: 8px;
-  letter-spacing: 0.1em;
-  opacity: 0.5;
-}
-
-/* STATS */
-.stats-bar {
-  position: relative;
-  z-index: 1;
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  max-width: 100%;
-}
-.stat-item {
-  padding: 28px 32px;
-  border-right: 1px solid var(--border);
-  transition: background 0.3s;
-}
-.stat-item:last-child { border-right: none; }
-.stat-item:hover { background: rgba(59,130,246,0.03); }
-.stat-num {
-  font-family: 'Instrument Serif', serif;
-  font-size: 28px;
-  color: var(--blue);
-  line-height: 1;
-  margin-bottom: 4px;
-}
-.stat-label {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 9px;
-  letter-spacing: 0.12em;
-  color: var(--dim);
-  text-transform: uppercase;
-}
-
-/* WHY SECTION */
-.why-section {
-  position: relative;
-  z-index: 1;
-  padding: 100px 48px;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-.section-eyebrow {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 9px;
-  letter-spacing: 0.25em;
-  color: var(--blue);
-  text-transform: uppercase;
-  margin-bottom: 48px;
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-.section-eyebrow::after {
-  content: '';
-  flex: 1;
-  height: 1px;
-  background: var(--border);
-}
-.why-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 48px;
-  align-items: start;
-}
-.why-left h2 {
-  font-family: 'Instrument Serif', serif;
-  font-size: clamp(32px, 3vw, 48px);
-  line-height: 1.15;
-  margin-bottom: 24px;
-}
-.why-left h2 em {
-  font-style: italic;
-  color: var(--blue);
-  -webkit-text-stroke: 0;
-}
-.why-left p {
-  font-size: 15px;
-  line-height: 1.75;
-  color: var(--dim);
-  font-weight: 300;
-}
-.why-right {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-.why-card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  padding: 20px 24px;
-  display: flex;
-  gap: 16px;
-  align-items: flex-start;
-  transition: border-color 0.3s, background 0.3s;
-}
-.why-card:hover {
-  border-color: rgba(59,130,246,0.3);
-  background: rgba(59,130,246,0.03);
-}
-.why-icon {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 10px;
-  color: var(--blue);
-  background: var(--blue-dim);
-  border: 1px solid rgba(59,130,246,0.2);
-  padding: 6px 10px;
-  flex-shrink: 0;
-  letter-spacing: 0.1em;
-}
-.why-text h4 {
-  font-size: 14px;
-  font-weight: 500;
-  margin-bottom: 4px;
-  color: var(--white);
-}
-.why-text p {
-  font-size: 12px;
-  line-height: 1.6;
-  color: var(--dim);
-  font-weight: 300;
-}
-
-/* COVERAGE */
-.coverage-section {
-  position: relative;
-  z-index: 1;
-  padding: 0 48px 100px;
-}
-.coverage-wrap { max-width: 1200px; margin: 0 auto; }
-.coverage-grid {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 1px;
-  background: var(--border);
-  border: 1px solid var(--border);
-}
-.cov-item {
-  background: var(--bg);
-  padding: 28px 20px;
-  transition: background 0.3s;
-  position: relative;
-  overflow: hidden;
-}
-.cov-item:hover { background: rgba(59,130,246,0.03); }
-.cov-item::after {
-  content: '';
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  height: 2px;
-  background: var(--blue);
-  transform: scaleX(0);
-  transition: transform 0.3s;
-}
-.cov-item:hover::after { transform: scaleX(1); }
-.cov-tag {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 8px;
-  letter-spacing: 0.2em;
-  color: var(--blue);
-  text-transform: uppercase;
-  margin-bottom: 12px;
-}
-.cov-title {
-  font-family: 'Instrument Serif', serif;
-  font-size: 17px;
-  line-height: 1.25;
-  margin-bottom: 10px;
-  color: var(--white);
-}
-.cov-desc {
-  font-size: 11px;
-  line-height: 1.65;
-  color: var(--dim);
-  font-weight: 300;
-}
-
-/* SAMPLE */
-.sample-section {
-  position: relative;
-  z-index: 1;
-  padding: 0 48px 100px;
-}
-.sample-wrap { max-width: 1200px; margin: 0 auto; }
-.sample-card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  padding: 40px;
-  position: relative;
-  overflow: hidden;
-}
-.sample-card::before {
-  content: 'LATEST BRIEF EXCERPT';
-  position: absolute;
-  top: 20px; right: 28px;
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 9px;
-  letter-spacing: 0.2em;
-  color: var(--blue);
-  opacity: 0.35;
-}
-.sample-header {
-  margin-bottom: 32px;
-  padding-bottom: 24px;
-  border-bottom: 1px solid var(--border);
-}
-.sample-meta {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 10px;
-  color: var(--dim);
-  letter-spacing: 0.1em;
-  margin-bottom: 10px;
-}
-.sample-title {
-  font-family: 'Instrument Serif', serif;
-  font-size: 22px;
-  line-height: 1.25;
-  color: var(--white);
-}
-.sample-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
-.sample-block-label {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 9px;
-  letter-spacing: 0.2em;
-  color: var(--blue);
-  text-transform: uppercase;
-  margin-bottom: 16px;
-  padding-bottom: 8px;
-  border-bottom: 1px solid var(--border);
-}
-.signal-item {
-  margin-bottom: 18px;
-  padding-bottom: 18px;
-  border-bottom: 1px solid rgba(255,255,255,0.04);
-}
-.signal-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
-.signal-badges { display: flex; gap: 6px; margin-bottom: 6px; flex-wrap: wrap; }
-.badge {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 8px;
-  letter-spacing: 0.1em;
-  padding: 2px 7px;
-  border-radius: 2px;
-}
-.b-bull { background: rgba(34,197,94,.1); color: var(--green); }
-.b-watch { background: rgba(245,158,11,.1); color: var(--amber); }
-.b-red { background: rgba(239,68,68,.1); color: var(--red); }
-.b-sector { border: 1px solid var(--border); color: var(--dim); }
-.signal-title-sm { font-size: 13px; font-weight: 500; margin-bottom: 5px; color: var(--white); }
-.signal-body { font-size: 11px; line-height: 1.65; color: var(--dim); font-weight: 300; }
-.signal-impl {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 10px;
-  color: var(--blue);
-  padding: 6px 10px;
-  background: var(--blue-dim);
-  border-left: 1px solid rgba(59,130,246,0.3);
-  margin-top: 6px;
-}
-
-/* CTA */
-.cta-section {
-  position: relative;
-  z-index: 1;
-  padding: 100px 48px;
-  border-top: 1px solid var(--border);
-  background: linear-gradient(180deg, rgba(59,130,246,0.03) 0%, transparent 100%);
-}
-.cta-wrap {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 80px;
-  align-items: center;
-}
-.cta-left h2 {
-  font-family: 'Instrument Serif', serif;
-  font-size: clamp(32px, 3vw, 52px);
-  line-height: 1.1;
-  margin-bottom: 16px;
-}
-.cta-left h2 em { font-style: italic; color: var(--blue); }
-.cta-left p { font-size: 14px; color: var(--dim); line-height: 1.7; font-weight: 300; }
-.feature-list { list-style: none; margin-bottom: 28px; display: flex; flex-direction: column; gap: 10px; }
-.feature-list li {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  font-size: 13px;
-  color: var(--dim);
-  font-weight: 300;
-}
-.feature-list li::before {
-  content: '→';
-  color: var(--blue);
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 10px;
-  flex-shrink: 0;
-  margin-top: 2px;
-}
-
-/* FOOTER */
-footer {
-  position: relative;
-  z-index: 1;
-  border-top: 1px solid var(--border);
-  padding: 32px 48px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.footer-logo {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 12px;
-  color: var(--blue);
-  letter-spacing: 0.15em;
-}
-.footer-meta {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 9px;
-  color: rgba(232,232,240,0.12);
-  letter-spacing: 0.08em;
-}
-
-/* ANIMATIONS */
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(24px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-.hero-tag    { animation: fadeUp 0.6s ease both; }
-h1           { animation: fadeUp 0.6s 0.1s ease both; }
-.hero-sub    { animation: fadeUp 0.6s 0.2s ease both; }
-.form-wrap   { animation: fadeUp 0.6s 0.3s ease both; }
-.power-visual { animation: fadeUp 0.8s 0.4s ease both; }
-
-/* RESPONSIVE */
-@media (max-width: 1024px) {
-  .power-visual { display: none; }
-  .coverage-grid { grid-template-columns: repeat(3, 1fr); }
-  .stats-bar { grid-template-columns: repeat(3, 1fr); }
-}
-@media (max-width: 768px) {
-  nav { padding: 16px 24px; }
-  .hero { padding: 100px 24px 60px; }
-  .why-grid, .sample-grid, .cta-wrap { grid-template-columns: 1fr; }
-  .why-section, .coverage-section, .sample-section, .cta-section { padding-left: 24px; padding-right: 24px; }
-  .coverage-grid { grid-template-columns: 1fr 1fr; }
-  .stats-bar { grid-template-columns: repeat(2, 1fr); }
-  footer { flex-direction: column; gap: 12px; padding: 24px; text-align: center; }
-  .nav-right { display: none; }
-}
+:root{--bg:#050507;--white:#e8e8f0;--dim:#5a5a7a;--blue:#3b82f6;--blue-dim:rgba(59,130,246,0.12);--green:#22c55e;--amber:#f59e0b;--red:#ef4444;--border:rgba(59,130,246,0.1);--card:rgba(255,255,255,0.02);}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--white);font-family:'Geist',sans-serif;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(59,130,246,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(59,130,246,0.04) 1px,transparent 1px);background-size:64px 64px;pointer-events:none;z-index:0;}
+.glow{position:fixed;width:700px;height:700px;background:radial-gradient(circle,rgba(59,130,246,0.05) 0%,transparent 70%);border-radius:50%;top:-200px;right:-150px;pointer-events:none;z-index:0;}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:18px 48px;background:rgba(5,5,7,0.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);}
+.logo{font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:500;letter-spacing:0.2em;color:var(--blue);text-decoration:none;}
+.logo em{color:var(--white);opacity:0.3;font-style:normal;}
+.nav-r{display:flex;align-items:center;gap:24px;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.12em;color:var(--dim);text-transform:uppercase;}
+.nav-r a{color:var(--dim);text-decoration:none;transition:color .2s;}
+.nav-r a:hover{color:var(--white);}
+.pill{background:rgba(59,130,246,0.12);color:var(--blue);border:1px solid rgba(59,130,246,0.25);font-size:9px;padding:3px 10px;border-radius:20px;}
+.hero{position:relative;min-height:100vh;display:grid;grid-template-columns:1fr 420px;gap:48px;align-items:center;padding:120px 48px 80px;z-index:1;max-width:1280px;margin:0 auto;}
+.hero-tag{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.25em;color:var(--blue);text-transform:uppercase;margin-bottom:28px;display:flex;align-items:center;gap:10px;}
+.hero-tag::before{content:'';width:6px;height:6px;background:var(--blue);border-radius:50%;animation:blink 2s infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:.3;}}
+h1{font-family:'Instrument Serif',serif;font-size:clamp(44px,5.5vw,80px);line-height:1.0;letter-spacing:-0.02em;margin-bottom:28px;max-width:820px;}
+h1 em{font-style:italic;color:transparent;-webkit-text-stroke:1px rgba(59,130,246,0.55);}
+.hero-sub{font-size:15px;line-height:1.75;color:var(--dim);max-width:520px;margin-bottom:40px;font-weight:300;}
+.hero-sub strong{color:var(--white);font-weight:400;}
+.form-wrap{max-width:460px;}
+.form-row{display:flex;}
+.fi{flex:1;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-right:none;color:var(--white);font-family:'IBM Plex Mono',monospace;font-size:13px;padding:13px 16px;outline:none;transition:border-color .2s;}
+.fi::placeholder{color:rgba(232,232,240,.2);}
+.fi:focus{border-color:rgba(59,130,246,.45);}
+.fb{background:var(--blue);color:#fff;border:none;font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:500;letter-spacing:.15em;text-transform:uppercase;padding:13px 22px;cursor:pointer;transition:background .2s;white-space:nowrap;}
+.fb:hover{background:#2563eb;}
+.form-meta{font-family:'IBM Plex Mono',monospace;font-size:10px;color:rgba(232,232,240,.2);letter-spacing:.06em;margin-top:10px;}
+.form-meta span{color:var(--blue);}
+.brief-lnk{display:inline-flex;align-items:center;gap:6px;margin-top:14px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.1em;color:var(--blue);text-decoration:none;opacity:.65;transition:opacity .2s;}
+.brief-lnk:hover{opacity:1;}
+.pv{display:flex;flex-direction:column;gap:12px;}
+.pc{background:var(--card);border:1px solid var(--border);padding:22px;position:relative;overflow:hidden;}
+.pc::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--blue),transparent);opacity:.4;}
+.pc-lbl{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.18em;color:var(--dim);text-transform:uppercase;margin-bottom:10px;}
+.pc-val{font-family:'Instrument Serif',serif;font-size:32px;line-height:1;margin-bottom:4px;}
+.pc-sub{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--blue);}
+.pc-bar{height:2px;background:rgba(255,255,255,.06);margin-top:14px;border-radius:2px;overflow:hidden;}
+.pc-fill{height:100%;background:linear-gradient(90deg,var(--blue),#60a5fa);border-radius:2px;animation:grow 1.5s ease forwards;}
+@keyframes grow{from{width:0;}}
+.ss{background:var(--card);border:1px solid var(--border);padding:16px;}
+.ss-h{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.2em;color:var(--dim);text-transform:uppercase;margin-bottom:12px;}
+.si{display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.04);font-family:'IBM Plex Mono',monospace;font-size:9px;color:rgba(232,232,240,.55);}
+.si:last-child{border-bottom:none;}
+.sd{width:5px;height:5px;border-radius:50%;flex-shrink:0;}
+.g{background:var(--green);}.a{background:var(--amber);}.r{background:var(--red);}
+.st{margin-left:auto;opacity:.4;font-size:8px;}
+.stats{position:relative;z-index:1;border-top:1px solid var(--border);border-bottom:1px solid var(--border);display:grid;grid-template-columns:repeat(5,1fr);}
+.si2{padding:26px 32px;border-right:1px solid var(--border);transition:background .3s;}
+.si2:last-child{border-right:none;}
+.si2:hover{background:rgba(59,130,246,.03);}
+.sn{font-family:'Instrument Serif',serif;font-size:26px;color:var(--blue);line-height:1;margin-bottom:4px;}
+.sl{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.1em;color:var(--dim);text-transform:uppercase;}
+.sec{position:relative;z-index:1;padding:90px 48px;max-width:1280px;margin:0 auto;}
+.ey{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.25em;color:var(--blue);text-transform:uppercase;margin-bottom:48px;display:flex;align-items:center;gap:16px;}
+.ey::after{content:'';flex:1;height:1px;background:var(--border);}
+.wg{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;}
+.wl h2{font-family:'Instrument Serif',serif;font-size:clamp(30px,3vw,46px);line-height:1.15;margin-bottom:20px;}
+.wl h2 em{font-style:italic;color:var(--blue);}
+.wl p{font-size:14px;line-height:1.75;color:var(--dim);font-weight:300;}
+.wr{display:flex;flex-direction:column;gap:14px;}
+.wc{background:var(--card);border:1px solid var(--border);padding:18px 22px;display:flex;gap:14px;align-items:flex-start;transition:border-color .3s,background .3s;}
+.wc:hover{border-color:rgba(59,130,246,.3);background:rgba(59,130,246,.03);}
+.wi{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--blue);background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.2);padding:5px 9px;flex-shrink:0;letter-spacing:.1em;}
+.wt h4{font-size:13px;font-weight:500;margin-bottom:4px;}
+.wt p{font-size:11px;line-height:1.6;color:var(--dim);font-weight:300;}
+.cov-sec{position:relative;z-index:1;padding:0 48px 90px;}
+.cov-w{max-width:1280px;margin:0 auto;}
+.cg{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--border);border:1px solid var(--border);}
+.ci{background:var(--bg);padding:26px 18px;transition:background .3s;position:relative;}
+.ci:hover{background:rgba(59,130,246,.03);}
+.ci::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--blue);transform:scaleX(0);transition:transform .3s;}
+.ci:hover::after{transform:scaleX(1);}
+.ct{font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:.2em;color:var(--blue);text-transform:uppercase;margin-bottom:10px;}
+.ch{font-family:'Instrument Serif',serif;font-size:16px;line-height:1.25;margin-bottom:8px;}
+.cd{font-size:11px;line-height:1.6;color:var(--dim);font-weight:300;}
+.samp-sec{position:relative;z-index:1;padding:0 48px 90px;}
+.sw{max-width:1280px;margin:0 auto;}
+.sc{background:var(--card);border:1px solid var(--border);padding:36px;position:relative;}
+.sc::before{content:'LATEST BRIEF EXCERPT';position:absolute;top:18px;right:24px;font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.2em;color:var(--blue);opacity:.3;}
+.sh{margin-bottom:28px;padding-bottom:20px;border-bottom:1px solid var(--border);}
+.sm{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--dim);letter-spacing:.1em;margin-bottom:8px;}
+.sg{display:grid;grid-template-columns:1fr 1fr;gap:36px;}
+.sbl{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.2em;color:var(--blue);text-transform:uppercase;margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid var(--border);}
+.sigi{margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid rgba(255,255,255,.04);}
+.sigi:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0;}
+.badges{display:flex;gap:5px;margin-bottom:5px;flex-wrap:wrap;}
+.b{font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:.1em;padding:2px 6px;border-radius:2px;}
+.bull{background:rgba(34,197,94,.1);color:var(--green);}
+.wat{background:rgba(245,158,11,.1);color:var(--amber);}
+.red2{background:rgba(239,68,68,.1);color:var(--red);}
+.sec2{border:1px solid var(--border);color:var(--dim);}
+.st2{font-size:12px;font-weight:500;margin-bottom:4px;}
+.sb{font-size:11px;line-height:1.6;color:var(--dim);font-weight:300;}
+.impl{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--blue);padding:5px 9px;background:rgba(59,130,246,.08);border-left:1px solid rgba(59,130,246,.25);margin-top:5px;}
+.cta-sec{position:relative;z-index:1;padding:90px 48px;border-top:1px solid var(--border);background:linear-gradient(180deg,rgba(59,130,246,.03) 0%,transparent 100%);}
+.cta-w{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+.cl h2{font-family:'Instrument Serif',serif;font-size:clamp(30px,3vw,50px);line-height:1.1;margin-bottom:14px;}
+.cl h2 em{font-style:italic;color:var(--blue);}
+.cl p{font-size:13px;color:var(--dim);line-height:1.7;font-weight:300;}
+.fl{list-style:none;margin-bottom:24px;display:flex;flex-direction:column;gap:9px;}
+.fl li{display:flex;align-items:flex-start;gap:9px;font-size:12px;color:var(--dim);font-weight:300;}
+.fl li::before{content:'→';color:var(--blue);font-family:'IBM Plex Mono',monospace;font-size:10px;flex-shrink:0;margin-top:1px;}
+footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:28px 48px;display:flex;justify-content:space-between;align-items:center;}
+.fl2{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--blue);letter-spacing:.15em;}
+.fm{font-family:'IBM Plex Mono',monospace;font-size:9px;color:rgba(232,232,240,.1);letter-spacing:.08em;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+.hero-tag{animation:fadeUp .6s ease both;}
+h1{animation:fadeUp .6s .1s ease both;}
+.hero-sub{animation:fadeUp .6s .2s ease both;}
+.form-wrap{animation:fadeUp .6s .3s ease both;}
+.pv{animation:fadeUp .8s .4s ease both;}
+@media(max-width:1100px){.hero{grid-template-columns:1fr;}.pv{display:none;}.cg{grid-template-columns:repeat(3,1fr);}.stats{grid-template-columns:repeat(3,1fr);}}
+@media(max-width:768px){nav{padding:14px 20px;}.nav-r{display:none;}.hero{padding:100px 20px 60px;}.sec,.cov-sec,.samp-sec,.cta-sec{padding-left:20px;padding-right:20px;}.wg,.sg,.cta-w{grid-template-columns:1fr;}.cg{grid-template-columns:1fr 1fr;}.stats{grid-template-columns:repeat(2,1fr);}.si2{padding:20px;}.sn{font-size:22px;}footer{flex-direction:column;gap:10px;padding:20px;text-align:center;}}
 </style>
 </head>
 <body>
-<div class="glow-orb"></div>
+<div class="glow"></div>
 
-<!-- NAV -->
 <nav>
   <a class="logo" href="/">GRID<em>/</em>EDGE</a>
-  <div class="nav-right">
+  <div class="nav-r">
     <a href="./brief_latest.html">Latest Brief</a>
     <a href="./archive.html">Archive</a>
-    <span class="nav-pill">FREE ACCESS</span>
+    <span class="pill">FREE ACCESS</span>
   </div>
 </nav>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-tag">AI Data Center Power Investment Intelligence</div>
-  <h1>The power crisis<br>behind <em>every AI deal</em><br>— decoded daily.</h1>
-  <p class="hero-sub">
-    <strong>Built by a power systems researcher.</strong> The only investment brief that reads AI data center deals through the lens of grid physics, interconnection queues, and real load economics — not just funding headlines.
-  </p>
-  <div class="form-wrap">
-    <form action="https://gmail.us7.list-manage.com/subscribe/post?u=7ab10153cec32ee11bb267787&amp;id=dfbd3768ec&amp;f_id=00feb2e4f0" method="post" target="_blank">
-      <div class="form-row">
-        <input class="form-input" type="email" name="EMAIL" placeholder="your@fund.com" required>
-        <button class="form-btn" type="submit">Get Access →</button>
-      </div>
-      <div aria-hidden="true" style="position:absolute;left:-5000px;">
-        <input type="text" name="b_7ab10153cec32ee11bb267787_dfbd3768ec" tabindex="-1" value="">
-      </div>
-      <div class="form-meta">Free · Mon–Fri · <span>No spam</span></div>
-    </form>
-    <a class="brief-link" href="./brief_latest.html">Read latest brief →</a>
+<div style="position:relative;z-index:1;">
+<div style="max-width:1280px;margin:0 auto;">
+<div class="hero">
+  <div>
+    <div class="hero-tag">AI Data Center Power Investment Intelligence</div>
+    <h1>The power crisis<br>behind <em>every AI deal</em><br>— decoded daily.</h1>
+    <p class="hero-sub">
+      <strong>Built by a power systems researcher.</strong> The only investment brief that reads AI data center deals through grid physics, interconnection queues, and real load economics — not funding headlines.
+    </p>
+    <div class="form-wrap">
+      <form action="https://gmail.us7.list-manage.com/subscribe/post?u=7ab10153cec32ee11bb267787&amp;id=dfbd3768ec&amp;f_id=00feb2e4f0" method="post" target="_blank">
+        <div class="form-row">
+          <input class="fi" type="email" name="EMAIL" placeholder="your@fund.com" required>
+          <button class="fb" type="submit">Get Access →</button>
+        </div>
+        <div aria-hidden="true" style="position:absolute;left:-5000px;"><input type="text" name="b_7ab10153cec32ee11bb267787_dfbd3768ec" tabindex="-1" value=""></div>
+        <div class="form-meta">Free · Mon–Fri · <span>No spam</span></div>
+      </form>
+      <a class="brief-lnk" href="./brief_latest.html">Read latest brief →</a>
+    </div>
   </div>
-
-  <!-- POWER VISUAL -->
-  <div class="power-visual">
-    <div class="power-card">
-      <div class="pc-label">AI DC Power Demand Forecast</div>
-      <div class="pc-value">1,050 GW</div>
+  <div class="pv">
+    <div class="pc">
+      <div class="pc-lbl">AI DC Power Demand Forecast</div>
+      <div class="pc-val">1,050 GW</div>
       <div class="pc-sub">Global AI data center load by 2030 · ↑ 3.4x from 2024</div>
-      <div class="pc-bar"><div class="pc-bar-fill" style="width:78%"></div></div>
+      <div class="pc-bar"><div class="pc-fill" style="width:78%"></div></div>
     </div>
-    <div class="power-card">
-      <div class="pc-label">US Grid Interconnection Queue</div>
-      <div class="pc-value">2,600 GW</div>
+    <div class="pc">
+      <div class="pc-lbl">US Grid Interconnection Queue</div>
+      <div class="pc-val">2,600 GW</div>
       <div class="pc-sub">Projects waiting · Average wait: 5.4 years</div>
-      <div class="pc-bar"><div class="pc-bar-fill" style="width:92%;animation-delay:0.3s"></div></div>
+      <div class="pc-bar"><div class="pc-fill" style="width:93%;animation-delay:.3s"></div></div>
     </div>
-    <div class="signal-stream">
-      <div class="ss-header">■ Live signal feed</div>
-      <div class="ss-item">
-        <div class="ss-dot dot-green"></div>
-        <span>Microsoft 500MW nuclear offtake — PJM queue skip</span>
-        <span class="ss-tag">GRID</span>
-      </div>
-      <div class="ss-item">
-        <div class="ss-dot dot-amber"></div>
-        <span>BESS co-location mandate — CAISO new rule</span>
-        <span class="ss-tag">BESS</span>
-      </div>
-      <div class="ss-item">
-        <div class="ss-dot dot-red"></div>
-        <span>Texas DC cluster — transformer 36mo backlog</span>
-        <span class="ss-tag">INFRA</span>
-      </div>
-      <div class="ss-item">
-        <div class="ss-dot dot-green"></div>
-        <span>Google 430MW solar+storage PPA — AI campus</span>
-        <span class="ss-tag">PPA</span>
-      </div>
+    <div class="ss">
+      <div class="ss-h">■ Live signal feed</div>
+      <div class="si"><div class="sd g"></div><span>Microsoft 500MW nuclear offtake — PJM queue bypass</span><span class="st">GRID</span></div>
+      <div class="si"><div class="sd a"></div><span>BESS co-location mandate — CAISO new rule 2026</span><span class="st">BESS</span></div>
+      <div class="si"><div class="sd r"></div><span>Texas AI cluster — transformer 36mo backlog</span><span class="st">INFRA</span></div>
+      <div class="si"><div class="sd g"></div><span>Amazon 430MW solar+storage PPA — AI campus</span><span class="st">PPA</span></div>
     </div>
   </div>
-</section>
+</div>
+</div>
+</div>
 
-<!-- STATS -->
-<div class="stats-bar">
-  <div class="stat-item">
-    <div class="stat-num">Daily</div>
-    <div class="stat-label">Brief Cadence</div>
-  </div>
-  <div class="stat-item">
-    <div class="stat-num">5</div>
-    <div class="stat-label">Focus Verticals</div>
-  </div>
-  <div class="stat-item">
-    <div class="stat-num">4×</div>
-    <div class="stat-label">AI Agent Chain</div>
-  </div>
-  <div class="stat-item">
-    <div class="stat-num">PhD</div>
-    <div class="stat-label">Power Systems Research</div>
-  </div>
-  <div class="stat-item">
-    <div class="stat-num">0</div>
-    <div class="stat-label">Policy Language</div>
+<div class="stats">
+  <div class="si2"><div class="sn">Daily</div><div class="sl">Brief Cadence</div></div>
+  <div class="si2"><div class="sn">5</div><div class="sl">AI Power Verticals</div></div>
+  <div class="si2"><div class="sn">4×</div><div class="sl">AI Agent Chain</div></div>
+  <div class="si2"><div class="sn">PhD</div><div class="sl">Power Systems</div></div>
+  <div class="si2"><div class="sn">0</div><div class="sl">Policy Language</div></div>
+</div>
+
+<div class="sec">
+  <div class="ey">Why GRIDEDGE</div>
+  <div class="wg">
+    <div class="wl">
+      <h2>PitchBook tracks the deal.<br>We track <em>what makes it work.</em></h2>
+      <p>Every AI data center investment has a power problem underneath it. Grid interconnection timelines, transformer backlogs, frequency response requirements — these determine whether a project pencils. No general-purpose intelligence service is built to see this layer.</p>
+    </div>
+    <div class="wr">
+      <div class="wc"><div class="wi">TRL</div><div class="wt"><h4>Technical Feasibility Layer</h4><p>Every technology claim validated against physical limits. Energy density, electrolyzer efficiency, grid constraints — flagged before you commit capital.</p></div></div>
+      <div class="wc"><div class="wi">IRR</div><div class="wt"><h4>Deal Structure Analysis</h4><p>Implied EV/MW, contract structure, DFI vs. merchant — compared against recent comps with specific IRR estimates.</p></div></div>
+      <div class="wc"><div class="wi">β</div><div class="wt"><h4>Policy Beta Scoring</h4><p>Subsidy dependency quantified 0–10. Deals that only work with government support flagged before rate changes erase returns.</p></div></div>
+      <div class="wc"><div class="wi">⚡</div><div class="wt"><h4>Grid Physics First</h4><p>AI data center power demand, FERC interconnection reform, transformer supply — the physical constraints that determine winners.</p></div></div>
+    </div>
   </div>
 </div>
 
-<!-- WHY -->
-<section class="why-section">
-  <div class="section-eyebrow">Why GRIDEDGE</div>
-  <div class="why-grid">
-    <div class="why-left">
-      <h2>PitchBook tracks<br>the deal.<br>We track <em>what makes<br>it work.</em></h2>
-      <p>Every AI data center investment has a power problem underneath. Grid interconnection timelines, transformer backlogs, frequency response requirements — these determine whether a project pencils or not. No general-purpose intelligence service is built to see this.</p>
-    </div>
-    <div class="why-right">
-      <div class="why-card">
-        <div class="why-icon">TRL</div>
-        <div class="why-text">
-          <h4>Technical Feasibility Layer</h4>
-          <p>Every technology claim validated against physical limits. Energy density, electrolyzer efficiency, grid frequency constraints — flagged before you commit capital.</p>
-        </div>
-      </div>
-      <div class="why-card">
-        <div class="why-icon">IRR</div>
-        <div class="why-text">
-          <h4>Deal Structure Analysis</h4>
-          <p>Implied EV/MW, contract structure, DFI vs. merchant revenue — compared against recent comps. Not just "is this bullish" but "at what price."</p>
-        </div>
-      </div>
-      <div class="why-card">
-        <div class="why-icon">β</div>
-        <div class="why-text">
-          <h4>Policy Beta Scoring</h4>
-          <p>Subsidy dependency quantified 0–10. Deals that only work with government support are flagged — before rate changes erase your IRR.</p>
-        </div>
-      </div>
-      <div class="why-card">
-        <div class="why-icon">⚡</div>
-        <div class="why-text">
-          <h4>Grid Physics First</h4>
-          <p>AI data center power demand, FERC interconnection reform, transformer supply chains — the physical constraints that determine who wins.</p>
-        </div>
-      </div>
+<div class="cov-sec">
+  <div class="cov-w">
+    <div class="ey">Coverage Verticals</div>
+    <div class="cg">
+      <div class="ci"><div class="ct">AI DC Power</div><div class="ch">Hyperscaler Load & Grid Impact</div><div class="cd">Microsoft, Google, Amazon power offtake. Interconnection queue dynamics. AI load forecasting vs. physical grid capacity.</div></div>
+      <div class="ci"><div class="ct">BESS for AI</div><div class="ch">Storage as AI Infrastructure</div><div class="cd">Co-location mandates, 24/7 CFE requirements, BESS project finance for data center adjacent projects.</div></div>
+      <div class="ci"><div class="ct">Nuclear for AI</div><div class="ch">Baseload Supply Deals</div><div class="cd">SMR offtake agreements, reactor restart economics, nuclear vs. gas for AI baseload. IRR reality check.</div></div>
+      <div class="ci"><div class="ct">Transmission</div><div class="ch">Grid Infrastructure Bottleneck</div><div class="cd">Transformer backlogs, FERC policy shifts, transmission investment supercycle from AI load growth.</div></div>
+      <div class="ci"><div class="ct">Power Tech</div><div class="ch">Enabling Technology Signals</div><div class="cd">Grid software, SCADA, power electronics, demand response. TRL-validated signals from patent and paper filings.</div></div>
     </div>
   </div>
-</section>
+</div>
 
-<!-- COVERAGE -->
-<section class="coverage-section">
-  <div class="coverage-wrap">
-    <div class="section-eyebrow">Coverage Verticals</div>
-    <div class="coverage-grid">
-      <div class="cov-item">
-        <div class="cov-tag">AI DC Power</div>
-        <div class="cov-title">Hyperscaler Load & Grid Impact</div>
-        <div class="cov-desc">Microsoft, Google, Amazon power offtake. Interconnection queue dynamics. Load forecasting vs. physical grid capacity.</div>
+<div class="samp-sec">
+  <div class="sw">
+    <div class="ey">Sample Brief</div>
+    <div class="sc">
+      <div class="sh">
+        <div class="sm">GRIDEDGE INTELLIGENCE · 2026-W16 · AI DC POWER EDITION</div>
+        <div style="font-family:'Instrument Serif',serif;font-size:20px;line-height:1.25;">Scatec 1.1GW Egypt Solar+BESS closes at $479M DFI debt — sets EM project finance template as EU PPA prices collapse to €55/MWh</div>
       </div>
-      <div class="cov-item">
-        <div class="cov-tag">BESS for AI</div>
-        <div class="cov-title">Storage as AI Infrastructure</div>
-        <div class="cov-desc">Co-location mandates, 24/7 CFE requirements, BESS project finance structures for data center adjacent projects.</div>
-      </div>
-      <div class="cov-item">
-        <div class="cov-tag">Nuclear for AI</div>
-        <div class="cov-title">Baseload Supply Deals</div>
-        <div class="cov-desc">SMR offtake agreements, reactor restart economics, nuclear vs. gas peaker for AI baseload. IRR reality check.</div>
-      </div>
-      <div class="cov-item">
-        <div class="cov-tag">Transmission</div>
-        <div class="cov-title">Grid Infrastructure Bottleneck</div>
-        <div class="cov-desc">Transformer backlogs, FERC policy shifts, transmission investment supercycle driven by AI load growth.</div>
-      </div>
-      <div class="cov-item">
-        <div class="cov-tag">Power Tech</div>
-        <div class="cov-title">Enabling Technology Signals</div>
-        <div class="cov-desc">Grid software, SCADA, power electronics, demand response platforms. TRL-validated investment signals.</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- SAMPLE -->
-<section class="sample-section">
-  <div class="sample-wrap">
-    <div class="section-eyebrow">Sample Brief</div>
-    <div class="sample-card">
-      <div class="sample-header">
-        <div class="sample-meta">GRIDEDGE INTELLIGENCE · 2026-W16 · AI DC POWER EDITION</div>
-        <div class="sample-title">Microsoft's 500MW nuclear offtake resets AI power pricing benchmarks — grid interconnection reform incoming</div>
-      </div>
-      <div class="sample-grid">
+      <div class="sg">
         <div>
-          <div class="sample-block-label">■ Deal Signals</div>
-          <div class="signal-item">
-            <div class="signal-badges">
-              <span class="badge b-bull">BULLISH</span>
-              <span class="badge b-sector">GRID</span>
-              <span class="badge b-sector">HIGH</span>
-            </div>
-            <div class="signal-title-sm">Scatec 1.1GW Egypt Solar+BESS — $479M DFI Close</div>
-            <div class="signal-body">Fully contracted storage revenue model eliminates merchant exposure. DFI debt reduces blended cost of capital 200-300bps vs. commercial financing.</div>
-            <div class="signal-impl">→ IRR 12-14% levered; sets EM solar+BESS project finance benchmark. TRL 9 · Policy Beta 3/10</div>
+          <div class="sbl">■ Deal Signals</div>
+          <div class="sigi">
+            <div class="badges"><span class="b bull">BULLISH</span><span class="b sec2">BESS</span><span class="b sec2">HIGH</span></div>
+            <div class="st2">Scatec 1.1GW Egypt Solar+BESS — $479M DFI Close</div>
+            <div class="sb">Fully contracted storage revenue model eliminates merchant exposure. DFI debt reduces blended cost of capital 200-300bps vs. commercial financing in EM markets.</div>
+            <div class="impl">→ IRR 12-14% levered · TRL 9 · Policy Beta 3/10 · Sets MENA benchmark</div>
           </div>
-          <div class="signal-item">
-            <div class="signal-badges">
-              <span class="badge b-red">RED FLAG</span>
-              <span class="badge b-sector">INFRA</span>
-            </div>
-            <div class="signal-title-sm">Texas AI Cluster — 36-Month Transformer Backlog</div>
-            <div class="signal-body">Major hyperscaler campus delayed by EHV transformer shortage. Physical constraint, not permitting. Supply chain concentration in 3 manufacturers.</div>
-            <div class="signal-impl">→ Transformer lead time now IRR risk factor for all AI DC investments. Underwrite accordingly.</div>
+          <div class="sigi">
+            <div class="badges"><span class="b red2">RED FLAG</span><span class="b sec2">INFRA</span></div>
+            <div class="st2">Texas AI Cluster — 36-Month Transformer Backlog</div>
+            <div class="sb">Major hyperscaler campus delayed by EHV transformer shortage. Physical constraint, not permitting. Supply chain concentrated in 3 manufacturers globally.</div>
+            <div class="impl">→ Transformer lead time is now an IRR risk factor for all AI DC investments</div>
           </div>
-          <div class="signal-item">
-            <div class="signal-badges">
-              <span class="badge b-bull">BULLISH</span>
-              <span class="badge b-sector">BESS</span>
-            </div>
-            <div class="signal-title-sm">Amazon 430MW Australia Solar+Storage PPAs</div>
-            <div class="signal-body">8 of 9 PPAs feature co-located BESS — 24/7 CFE mandate driving storage attachment. Premium pricing 15-25% above standalone solar.</div>
-            <div class="signal-impl">→ Hybrid PPA structure now standard for hyperscaler offtake. Pure solar developers squeezed.</div>
+          <div class="sigi">
+            <div class="badges"><span class="b bull">BULLISH</span><span class="b sec2">BESS</span></div>
+            <div class="st2">Amazon 430MW Australia Solar+Storage PPAs</div>
+            <div class="sb">8 of 9 PPAs feature co-located BESS — 24/7 CFE mandate driving storage attachment across all hyperscaler offtake.</div>
+            <div class="impl">→ Hybrid PPA now standard. Pure solar developers structurally squeezed.</div>
           </div>
         </div>
         <div>
-          <div class="sample-block-label">■ Sector Positioning</div>
-          <div class="signal-item">
-            <div class="signal-badges"><span class="badge b-bull">GRID · OVERWEIGHT</span></div>
-            <div class="signal-title-sm">AI Load Creating Transmission Supercycle</div>
-            <div class="signal-body">FERC June decision on DC interconnection reform + 3.4x AI power demand growth = multi-year structural tailwind. Physics-driven, policy-independent.</div>
+          <div class="sbl">■ Sector Positioning</div>
+          <div class="sigi">
+            <div class="badges"><span class="b bull">GRID · OVERWEIGHT</span></div>
+            <div class="st2">AI Load Creating Transmission Supercycle</div>
+            <div class="sb">FERC June decision on DC interconnection reform + 3.4x AI power demand = multi-year structural tailwind. Physics-driven, policy-independent.</div>
           </div>
-          <div class="signal-item">
-            <div class="signal-badges"><span class="badge b-bull">BESS · OVERWEIGHT</span></div>
-            <div class="signal-title-sm">Storage Attachment Rate >60% on New Solar</div>
-            <div class="signal-body">Hyperscaler 24/7 CFE mandates making standalone solar projects unfundable for AI offtake. BESS co-location now table stakes.</div>
+          <div class="sigi">
+            <div class="badges"><span class="b bull">BESS · OVERWEIGHT</span></div>
+            <div class="st2">Storage Attachment Rate >60% on New Solar</div>
+            <div class="sb">Hyperscaler 24/7 CFE mandates making standalone solar unfundable for AI offtake. BESS co-location now table stakes globally.</div>
           </div>
-          <div class="signal-item">
-            <div class="signal-badges"><span class="badge b-watch">H₂ · UNDERWEIGHT</span></div>
-            <div class="signal-title-sm">LCOH €2.5–13/kg — Too Wide to Underwrite</div>
-            <div class="signal-body">Mediterranean study shows 5x cost variance. AI data centers need dispatchable, not intermittent hydrogen. Electrolyzer costs unvalidated at scale. Policy Beta 8/10.</div>
+          <div class="sigi">
+            <div class="badges"><span class="b wat">H₂ · UNDERWEIGHT</span></div>
+            <div class="st2">LCOH €2.5–13/kg — Too Wide to Underwrite</div>
+            <div class="sb">5x cost variance across projects. AI data centers need dispatchable power, not intermittent hydrogen. Policy Beta 8/10 — subsidy-dependent.</div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</section>
+</div>
 
-<!-- CTA -->
-<section class="cta-section">
-  <div class="cta-wrap">
-    <div class="cta-left">
+<div class="cta-sec">
+  <div class="cta-w">
+    <div class="cl">
       <h2>The AI power crisis<br>is the <em>investment<br>opportunity.</em></h2>
       <p>Every gigawatt of AI compute needs power infrastructure that doesn't exist yet. That gap is where returns are made. Get the brief that reads the physics before the market does.</p>
     </div>
     <div>
-      <ul class="feature-list">
+      <ul class="fl">
         <li>Daily AI data center power deal signals</li>
-        <li>TRL validation — is the tech claim physically possible?</li>
-        <li>Policy Beta score — subsidy dependency quantified</li>
+        <li>TRL validation — is the technology claim physically possible?</li>
+        <li>Policy Beta score — subsidy dependency quantified 0-10</li>
         <li>IRR estimates with grid physics context</li>
         <li>FERC, interconnection queue, transformer supply tracking</li>
       </ul>
-      <form style="max-width:420px" action="https://gmail.us7.list-manage.com/subscribe/post?u=7ab10153cec32ee11bb267787&amp;id=dfbd3768ec&amp;f_id=00feb2e4f0" method="post" target="_blank">
+      <form style="max-width:440px" action="https://gmail.us7.list-manage.com/subscribe/post?u=7ab10153cec32ee11bb267787&amp;id=dfbd3768ec&amp;f_id=00feb2e4f0" method="post" target="_blank">
         <div class="form-row">
-          <input class="form-input" type="email" name="EMAIL" placeholder="your@fund.com" required>
-          <button class="form-btn" type="submit">Get free access →</button>
+          <input class="fi" type="email" name="EMAIL" placeholder="your@fund.com" required>
+          <button class="fb" type="submit">Get free access →</button>
         </div>
-        <div aria-hidden="true" style="position:absolute;left:-5000px;">
-          <input type="text" name="b_7ab10153cec32ee11bb267787_dfbd3768ec" tabindex="-1" value="">
-        </div>
+        <div aria-hidden="true" style="position:absolute;left:-5000px;"><input type="text" name="b_7ab10153cec32ee11bb267787_dfbd3768ec" tabindex="-1" value=""></div>
         <div class="form-meta" style="margin-top:10px">No spam · Cancel anytime · <span>Mon–Fri</span></div>
       </form>
     </div>
   </div>
-</section>
+</div>
 
-<!-- FOOTER -->
 <footer>
-  <div class="footer-logo">GRID/EDGE</div>
-  <div class="footer-meta">© 2026 GRIDEDGE INTELLIGENCE · AI DATA CENTER POWER INVESTMENT BRIEF</div>
+  <div class="fl2">GRID/EDGE</div>
+  <div class="fm">© 2026 GRIDEDGE INTELLIGENCE · AI DATA CENTER POWER INVESTMENT BRIEF</div>
 </footer>
 
 <script>
-  // Scroll reveal
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.style.opacity = '1';
-        e.target.style.transform = 'translateY(0)';
-      }
-    });
-  }, { threshold: 0.08 });
-
-  document.querySelectorAll('.why-card, .cov-item, .signal-item, .stat-item, .power-card').forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(16px)';
-    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-    obs.observe(el);
-  });
+const obs = new IntersectionObserver(e => {
+  e.forEach(x => { if(x.isIntersecting){ x.target.style.opacity='1'; x.target.style.transform='translateY(0)'; }});
+}, {threshold:0.08});
+document.querySelectorAll('.wc,.ci,.sigi,.si2,.pc').forEach(el => {
+  el.style.opacity='0'; el.style.transform='translateY(14px)';
+  el.style.transition='opacity .45s ease, transform .45s ease';
+  obs.observe(el);
+});
 </script>
 </body>
 </html>
