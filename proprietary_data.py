@@ -187,7 +187,8 @@ def fetch_patent_signals() -> dict:
 
     # 대안: arXiv 에너지 기술 논문 (특허 전 단계 기술 신호)
     try:
-        arxiv_url = "http://export.arxiv.org/api/query?search_query=cat:eess.SY+AND+(battery+OR+solar+OR+hydrogen+OR+grid)&start=0&max_results=10&sortBy=submittedDate&sortOrder=descending"
+        # AI 데이터센터 전력 특화 쿼리
+        arxiv_url = "http://export.arxiv.org/api/query?search_query=(cat:eess.SY+OR+cat:cs.SY)+AND+(data+center+OR+datacenter+OR+power+optimization+OR+grid+frequency+OR+energy+storage+control)&start=0&max_results=15&sortBy=submittedDate&sortOrder=descending"
         r = requests.get(arxiv_url, headers=headers, timeout=12)
         root = ET.fromstring(r.content)
         ns = {"atom": "http://www.w3.org/2005/Atom"}
@@ -322,11 +323,14 @@ def fetch_hiring_signals() -> dict:
     # Greenhouse ATS — 주요 에너지 스타트업 채용 모니터링
     # (공개 API 없이 RSS로 접근 가능한 곳)
     greenhouse_companies = [
-        ("Form Energy",    "https://boards.greenhouse.io/formenergy"),
-        ("Solugen",        "https://boards.greenhouse.io/solugen"),
-        ("Twelve",         "https://boards.greenhouse.io/twelve"),
-        ("Antora Energy",  "https://boards.greenhouse.io/antoraenergy"),
+        # AI DC 전력 인프라 스타트업
+        ("Form Energy",       "https://boards.greenhouse.io/formenergy"),
+        ("Antora Energy",     "https://boards.greenhouse.io/antoraenergy"),
         ("Electric Hydrogen", "https://boards.greenhouse.io/electrichydrogen"),
+        ("Quanta Grid",       "https://boards.greenhouse.io/quantagrid"),
+        ("Gridmatic",         "https://boards.greenhouse.io/gridmatic"),
+        ("AutoGrid",          "https://boards.greenhouse.io/autogrid"),
+        ("Swell Energy",      "https://boards.greenhouse.io/swellenergy"),
     ]
 
     for company, url in greenhouse_companies:
