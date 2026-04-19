@@ -463,7 +463,11 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     </div>
     <div class="signal-summary">{{ s.summary }}</div>
     <div class="signal-impl">→ {{ s.implication }}</div>
-    <div class="signal-source">출처: {{ s.source }}</div>
+    {% if s.source_url %}
+    <a class="signal-source" href="{{ s.source_url }}" target="_blank" rel="noopener" style="color:rgba(245,244,239,.3);text-decoration:none;">Source: {{ s.source }} ↗</a>
+    {% else %}
+    <div class="signal-source">Source: {{ s.source }}</div>
+    {% endif %}
   </div>
   {% endfor %}
 </section>
@@ -489,7 +493,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
   <div class="signal-card" style="border-color:rgba(248,113,113,.15);">
     <div style="color:#f87171;font-size:13px;font-weight:500;margin-bottom:8px;">⚠ {{ r.issue }}</div>
     <div class="signal-summary">{{ r.detail }}</div>
-    <div class="signal-source">출처: {{ r.source }}</div>
+    <div class="signal-source">Source: {{ r.source }}</div>
   </div>
   {% endfor %}
 </section>
