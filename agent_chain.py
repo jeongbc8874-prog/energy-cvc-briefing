@@ -289,7 +289,7 @@ def run_risk_screener(signals: list[dict], tech_result: dict, deal_result: dict)
 
     message = client.messages.create(
         model=MODEL,
-        max_tokens=3000,
+        max_tokens=4096,
         system=RISK_SCREENER_SYSTEM,
         messages=[{
             "role": "user",
@@ -308,15 +308,21 @@ def run_risk_screener(signals: list[dict], tech_result: dict, deal_result: dict)
             raw = raw[4:]
     raw = raw.strip()
 
+    parsed = None
     try:
-        result = json.loads(raw)
-        print(f"  [Agent 3] 완료 — {len(result.get('risk_assessments', []))}개 리스크 평가")
-        return result
+        parsed = json.loads(raw)
     except json.JSONDecodeError:
         last = raw.rfind("}")
         if last > 0:
-            return json.loads(raw[:last+1])
-        return {"risk_assessments": [], "risk_summary": "Risk assessment unavailable"}
+            try:
+                parsed = json.loads(raw[:last+1])
+            except Exception:
+                pass
+    if parsed is None:
+        print("  [Agent 3] JSON 파싱 실패 — 빈 결과로 계속")
+        parsed = {"risk_assessments": [], "risk_summary": "Unavailable", "macro_risks": {}}
+    print(f"  [Agent 3] 완료 — {len(parsed.get('risk_assessments', []))}개 리스크 평가")
+    return parsed
 
 
 # ── Agent 4: Brief Synthesizer ───────────────────────────────────────────────
