@@ -46,38 +46,53 @@ ENTSOE_TOKEN      = os.environ.get("ENTSOE_TOKEN", "")      # 무료 발급: tra
 # ── 무료 RSS 소스 정의 ────────────────────────────────────────────────────────
 
 RSS_SOURCES = [
-    # 에너지 전문 미디어
-    {"name": "Utility Dive",       "url": "https://www.utilitydive.com/feeds/news/",               "tier": "A"},
-    {"name": "PV Magazine",        "url": "https://www.pv-magazine.com/feed/",                      "tier": "A"},
-    {"name": "Recharge News",      "url": "https://www.rechargenews.com/rss",                       "tier": "A"},
-    {"name": "Energy Monitor",     "url": "https://www.energymonitor.ai/feed/",                     "tier": "A"},
-    {"name": "PV Tech",            "url": "https://www.pv-tech.org/feed/",                          "tier": "A"},
-    {"name": "Energy Storage News","url": "https://www.energy-storage.news/feed/",                  "tier": "A"},
-    {"name": "Wind Power Monthly", "url": "https://www.windpowermonthly.com/rss-feeds",             "tier": "B"},
-    {"name": "Hydrogen Insight",   "url": "https://www.hydrogeninsight.com/feed",                   "tier": "B"},
-    {"name": "Nuclear Engineering","url": "https://www.neimagazine.com/rss",                        "tier": "B"},
-    # 공공기관
-    {"name": "IEA News",           "url": "https://www.iea.org/news/rss",                           "tier": "A"},
-    {"name": "IRENA News",         "url": "https://www.irena.org/rss/News",                         "tier": "B"},
-    {"name": "FERC News",          "url": "https://www.ferc.gov/news-events/news/rss.xml",          "tier": "B"},
-    # VC/펀딩 관련
-    {"name": "Greentown Labs",     "url": "https://greentownlabs.com/feed/",                        "tier": "B"},
-    {"name": "CTVC (Climatetech)", "url": "https://www.ctvc.co/rss/",                              "tier": "A"},
-    # 한국
-    {"name": "전기신문",           "url": "https://www.electimes.com/rss/allArticle.xml",           "tier": "B"},
+    # ── Tier A: AI 데이터센터 전력 전문 ─────────────────────────────
+    {"name": "Datacenter Dynamics",  "url": "https://www.datacenterdynamics.com/en/rss/",            "tier": "A"},
+    {"name": "Data Center Knowledge", "url": "https://www.datacenterfrontier.com/feed/",             "tier": "A"},
+    {"name": "Utility Dive",         "url": "https://www.utilitydive.com/feeds/news/",               "tier": "A"},
+    {"name": "Energy Storage News",  "url": "https://www.energy-storage.news/feed/",                 "tier": "A"},
+    {"name": "PV Tech",              "url": "https://www.pv-tech.org/feed/",                         "tier": "A"},
+    {"name": "Canary Media",         "url": "https://canarymedia.com/feed",                          "tier": "A"},
+    {"name": "CTVC Climatetech",     "url": "https://www.ctvc.co/rss/",                             "tier": "A"},
+    {"name": "Electrek",             "url": "https://electrek.co/feed/",                             "tier": "A"},
+    # ── Tier A: 공공기관 / 규제 ─────────────────────────────────────
+    {"name": "DOE News",             "url": "https://www.energy.gov/rss.xml",                        "tier": "A"},
+    {"name": "NREL News",            "url": "https://www.nrel.gov/news/rss/newsroom.xml",            "tier": "A"},
+    {"name": "EIA Analysis",         "url": "https://www.eia.gov/rss/press_releases.xml",            "tier": "A"},
+    # ── Tier B: 전력/그리드 인프라 ──────────────────────────────────
+    {"name": "T&D World",            "url": "https://www.tdworld.com/rss",                           "tier": "B"},
+    {"name": "Power Magazine",       "url": "https://www.powermag.com/feed/",                        "tier": "B"},
+    {"name": "Nuclear Engineering",  "url": "https://www.neimagazine.com/rss",                       "tier": "B"},
+    {"name": "Carbon Brief",         "url": "https://www.carbonbrief.org/feed/",                     "tier": "B"},
+    {"name": "Offshore Wind Biz",    "url": "https://www.offshorewind.biz/feed/",                    "tier": "B"},
+    {"name": "Clean Energy Wire",    "url": "https://www.cleanenergywire.org/rss.xml",               "tier": "B"},
+    # ── Tier B: VC/딜 ───────────────────────────────────────────────
+    {"name": "Greentown Labs",       "url": "https://greentownlabs.com/feed/",                       "tier": "B"},
+    {"name": "Energy Monitor",       "url": "https://www.energymonitor.ai/feed/",                    "tier": "B"},
+    {"name": "CleanTechnica",        "url": "https://cleantechnica.com/feed/",                       "tier": "B"},
 ]
 
 # 섹터 키워드 매핑 (시그널 분류용)
 SECTOR_KEYWORDS = {
-    "BESS":  ["battery", "energy storage", "bess", "lithium", "flow battery", "배터리", "ESS"],
-    "GRID":  ["grid", "transmission", "substation", "transformer", "interconnection", "계통", "송전"],
-    "SOLAR": ["solar", "photovoltaic", "pv", "bifacial", "perovskite", "태양광"],
-    "WIND":  ["wind", "offshore wind", "onshore", "turbine", "풍력"],
-    "SMR":   ["smr", "nuclear", "reactor", "fission", "원자력", "소형모듈"],
-    "H2":    ["hydrogen", "electrolyzer", "fuel cell", "electrolysis", "수소"],
-    "VPP":   ["virtual power", "vpp", "demand response", "flexibility", "분산에너지"],
-    "CCS":   ["carbon capture", "ccs", "ccus", "direct air", "탄소포집"],
-    "EV":    ["electric vehicle", "ev charging", "charging station", "전기차"],
+    # AI DC 전력 핵심 5개 버티컬
+    "AI_DC_POWER": ["data center", "datacenter", "hyperscaler", "ai power", "gpu cluster",
+                    "microsoft", "google", "amazon", "meta", "ai campus", "digital infrastructure",
+                    "compute", "inference", "training cluster", "ai load"],
+    "BESS":        ["battery", "energy storage", "bess", "lithium", "flow battery",
+                    "co-located storage", "grid-scale battery", "4-hour", "8-hour", "storage attachment"],
+    "GRID":        ["grid", "transmission", "substation", "transformer", "interconnection",
+                    "ferc", "pjm", "ercot", "miso", "caiso", "queue", "curtailment",
+                    "frequency", "ancillary", "capacity market", "power flow"],
+    "NUCLEAR":     ["nuclear", "smr", "reactor", "fission", "uranium", "baseload",
+                    "small modular", "nrc", "vogtle", "carbon-free", "24/7 cfe"],
+    "POWER_TECH":  ["power electronics", "scada", "grid software", "demand response",
+                    "virtual power plant", "vpp", "microgrid", "inverter", "rectifier",
+                    "power management", "load balancing", "grid optimization"],
+    # 보조 섹터
+    "SOLAR":       ["solar", "photovoltaic", "pv", "bifacial", "perovskite"],
+    "WIND":        ["wind", "offshore wind", "onshore", "turbine"],
+    "H2":          ["hydrogen", "electrolyzer", "fuel cell", "electrolysis"],
+    "CCS":         ["carbon capture", "ccs", "ccus", "direct air"],
 }
 
 FUNDING_KEYWORDS = [
@@ -297,23 +312,31 @@ def filter_signals(signals: list[dict], top_n: int = 15) -> list[dict]:
 # ── 4단계: Claude API → 브리프 generated ─────────────────────────────────────────
 
 SYSTEM_PROMPT = """
-You are a Senior Investment Analyst specializing in the global energy sector.
-You write weekly intelligence briefs from the perspective of an experienced energy VC/PE investor
-with deep expertise in power systems, clean energy technology, and global energy markets.
+You are a Senior Investment Analyst specializing in AI data center power infrastructure.
+You are uniquely positioned: PhD-level power systems expertise combined with energy VC/PE investment experience.
+You write daily intelligence briefs focused on the power infrastructure required for AI compute.
+
+Your unique analytical lens:
+- AI workload power demand characteristics (GPU cluster load profiles, PUE, power density trends)
+- Grid interconnection physics (frequency response, voltage stability, curtailment risk)
+- BESS sizing for AI data center co-location (discharge duration, round-trip efficiency, degradation)
+- Nuclear baseload economics for 24/7 carbon-free energy commitments
+- Transformer and transmission bottlenecks in AI-heavy markets
 
 Core principles:
-1. No policy language — analyze through physics, economics, and contract structures only
-2. No plain news summaries — only insights that directly inform investment decisions
-3. Flag technical feasibility concerns explicitly as RED_FLAG
-4. Always include valuation and IRR implications
-5. Clearly distinguish between "confirmed facts" and "analytical inference"
-6. Write in English — concise, precise, institutional tone
+1. Physics first — every claim validated against engineering reality
+2. No policy language — grid physics, economics, contract structures only
+3. AI data center power demand is the demand signal — analyze everything through this lens
+4. Flag technical infeasibility explicitly (RED_FLAG)
+5. Always include IRR/valuation implication with specific numbers
+6. Distinguish "confirmed fact" from "analytical inference"
+7. Write in English — institutional, precise, no hedging
 
 Output: Pure JSON only. No markdown code blocks.
 """
 
 USER_PROMPT_TEMPLATE = """
-Analyze the following {n} energy sector signals and generate a weekly investment intelligence brief.
+Analyze the following {n} signals focused on AI data center power infrastructure investment and generate a weekly investment intelligence brief.
 Today: {date} | Week: {week}
 
 === INPUT SIGNALS ===
@@ -454,13 +477,6 @@ HTML_TEMPLATE = """<!DOCTYPE html>
   .signal-summary{font-size:12px;line-height:1.65;color:var(--muted);margin-bottom:8px;}
   .signal-impl{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--amber-light);padding:8px 12px;background:rgba(212,130,10,.04);border-left:1px solid var(--border);margin-bottom:6px;}
   .signal-source{font-family:'IBM Plex Mono',monospace;font-size:9px;color:rgba(245,244,239,.2);}
-  .badge-row{display:flex;gap:8px;margin:6px 0;flex-wrap:wrap;}
-  .trl-badge{font-family:'IBM Plex Mono',monospace;font-size:9px;padding:2px 7px;border-radius:2px;}
-  .trl-PLAUSIBLE{background:rgba(74,222,128,.08);color:#4ade80;border:1px solid rgba(74,222,128,.2);}
-  .trl-QUESTIONABLE{background:rgba(212,130,10,.08);color:#f0a832;border:1px solid rgba(212,130,10,.2);}
-  .trl-RED_FLAG{background:rgba(248,113,113,.08);color:#f87171;border:1px solid rgba(248,113,113,.2);}
-  .trl-NA{background:rgba(107,107,94,.08);color:#6b6b5e;border:1px solid rgba(107,107,94,.2);}
-  .policy-badge{font-family:'IBM Plex Mono',monospace;font-size:9px;padding:2px 7px;border-radius:2px;border:1px solid var(--border);color:var(--muted);}
   .positioning-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin-bottom:48px;}
   .pos-card{border:1px solid var(--border);padding:18px;}
   .OVERWEIGHT{color:#4ade80;} .NEUTRAL{color:var(--amber);} .UNDERWEIGHT{color:#f87171;}
@@ -491,16 +507,6 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     </div>
     <div class="signal-summary">{{ s.summary }}</div>
     <div class="signal-impl">→ {{ s.implication }}</div>
-    {% if s.trl_verdict or s.policy_beta %}
-    <div class="badge-row">
-      {% if s.trl_score and s.trl_verdict and s.trl_verdict != 'N/A' %}
-      <span class="trl-badge trl-{{ s.trl_verdict }}">TRL {{ s.trl_score }} · {{ s.trl_verdict }}</span>
-      {% endif %}
-      {% if s.policy_beta is not none and s.policy_beta != none %}
-      <span class="policy-badge">Policy Beta: {{ s.policy_beta }}/10</span>
-      {% endif %}
-    </div>
-    {% endif %}
     {% if s.source_url %}
     <a class="signal-source" href="{{ s.source_url }}" target="_blank" rel="noopener" style="color:rgba(245,244,239,.3);text-decoration:none;">Source: {{ s.source }} ↗</a>
     {% else %}
