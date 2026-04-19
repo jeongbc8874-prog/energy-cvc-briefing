@@ -278,84 +278,69 @@ def filter_signals(signals: list[dict], top_n: int = 15) -> list[dict]:
     return selected
 
 
-# ── 4단계: Claude API → 브리프 생성 ─────────────────────────────────────────
+# ── 4단계: Claude API → 브리프 generated ─────────────────────────────────────────
 
 SYSTEM_PROMPT = """
-당신은 에너지 섹터 전문 투자 심사역(Senior Investment Analyst)입니다.
-독립 에너지 VC/PE 펀드에서 15년 이상 활동한 경험을 바탕으로
-주간 인텔리전스 브리프를 작성합니다.
+You are a Senior Investment Analyst specializing in the global energy sector.
+You write weekly intelligence briefs from the perspective of an experienced energy VC/PE investor
+with deep expertise in power systems, clean energy technology, and global energy markets.
 
-핵심 원칙:
-1. 정책 언어 금지 — 물리학·경제학·계약 구조로만 분석
-2. 단순 뉴스 요약 금지 — 투자 판단에 직결되는 인사이트만
-3. 기술 타당성 의심 사례 → 명시적 레드플래그
-4. 밸류에이션·IRR 임플리케이션 항상 포함
-5. "확인된 사실"과 "분석적 추론" 구분 명시
-6. 한국어 작성
+Core principles:
+1. No policy language — analyze through physics, economics, and contract structures only
+2. No plain news summaries — only insights that directly inform investment decisions
+3. Flag technical feasibility concerns explicitly as RED_FLAG
+4. Always include valuation and IRR implications
+5. Clearly distinguish between "confirmed facts" and "analytical inference"
+6. Write in English — concise, precise, institutional tone
 
-TRL 스코어링 기준 (기술 관련 딜만 적용):
-TRL 1-3: 기초연구/개념 단계 → 투자 시기상조
-TRL 4-6: 실험실/파일럿 단계 → 기술 리스크 HIGH
-TRL 7-8: 실증/상용화 직전 → 스케일업 리스크
-TRL 9:   상용 검증 완료 → 기술 리스크 LOW
-
-물리적 한계 체크 예시:
-- 배터리 에너지밀도 클레임 > 500Wh/kg → RED_FLAG (현재 한계 ~300Wh/kg)
-- 전해조 효율 > 85% → QUESTIONABLE (현재 한계 ~75%)
-- 태양전지 효율 > 33% (단접합) → RED_FLAG (샤클리-퀘이서 한계)
-- 풍력 용량인수 > 60% (육상) → QUESTIONABLE
-
-출력: 순수 JSON만. 마크다운 코드블록 없이.
+Output: Pure JSON only. No markdown code blocks.
 """
 
 USER_PROMPT_TEMPLATE = """
-아래 {n}개의 에너지 섹터 시그널을 분석해 주간 투자 인텔리전스 브리프를 생성하세요.
-오늘: {date} | 주차: {week}
+Analyze the following {n} energy sector signals and generate a weekly investment intelligence brief.
+Today: {date} | Week: {week}
 
-=== 입력 시그널 ===
+=== INPUT SIGNALS ===
 {signals_text}
 
-=== 출력 JSON 스키마 ===
+=== OUTPUT JSON SCHEMA ===
 {{
   "week": "{week}",
-  "headline": "이번 주 핵심 투자 테마 (한 줄, 구체적 수치 포함)",
-  "thesis": "심사역 관점의 핵심 판단 2-3문장. 왜 지금이 중요한가.",
+  "headline": "This week's core investment theme (one line, include specific figures)",
+  "thesis": "2-3 sentences of core investment judgment from a senior analyst perspective. Why does this matter now.",
   "deal_signals": [
     {{
-      "title": "딜/이슈 제목",
+      "title": "Deal/issue title",
       "tag": "BULLISH | WATCH | RED_FLAG",
       "sector": "BESS | GRID | SOLAR | WIND | SMR | H2 | VPP | CCS | EV | OTHER",
-      "summary": "투자 판단 관점 2-3문장",
-      "implication": "밸류에이션/IRR/리스크 임플리케이션 1문장",
+      "summary": "2-3 sentences of investment judgment perspective",
+      "implication": "1 sentence on valuation/IRR/risk implication",
       "confidence": "HIGH | MEDIUM | LOW",
-      "source": "출처명",
-      "source_url": "해당 기사 원본 URL (입력 시그널의 URL 그대로)",
-      "trl_score": 숫자 1-9 또는 null (기술 성숙도, 해당없으면 null),
-      "trl_verdict": "PLAUSIBLE | QUESTIONABLE | RED_FLAG | N/A",
-      "claim_check": "기술 클레임 vs 물리적 한계 비교 1문장 (해당없으면 null)"
+      "source": "Source name",
+      "source_url": "Original article URL from input signals"
     }}
   ],
   "sector_positioning": [
     {{
-      "sector": "섹터명",
+      "sector": "Sector name",
       "stance": "OVERWEIGHT | NEUTRAL | UNDERWEIGHT",
-      "rationale": "근거 1-2문장 (물리적/경제적 근거 중심)",
-      "key_risk": "핵심 리스크 1문장"
+      "rationale": "1-2 sentences of rationale (physics/economics-based)",
+      "key_risk": "1 sentence on key risk"
     }}
   ],
   "red_flags": [
     {{
-      "issue": "레드플래그 제목",
-      "detail": "구체적 우려 — 왜 투자 판단에 영향을 주는가",
-      "source": "출처"
+      "issue": "Red flag title",
+      "detail": "Specific concern — why this affects investment judgment",
+      "source": "Source"
     }}
   ],
-  "macro_watch": "매크로(금리/LNG/탄소가격) → 에너지 VC 딜플로우 임플리케이션 2문장",
-  "data_note": "이번 호 분석에 사용된 주요 소스 목록 (3-5개)"
+  "macro_watch": "2 sentences on macro variables (rates/LNG/carbon) → energy VC dealflow implications",
+  "data_note": "List of 3-5 key sources used in this issue"
 }}
 
-deal_signals 최소 5개, sector_positioning 4-6개 필수.
-confidence LOW인 항목은 반드시 이유 명시.
+Minimum 5 deal_signals, 4-6 sector_positioning required.
+For LOW confidence items, always state the reason explicitly.
 """
 
 
@@ -413,7 +398,7 @@ def generate_brief(signals: list[dict], eia_data: dict) -> dict:
     brief["generated_at"]  = now.isoformat()
     brief["signal_count"]  = len(signals)
     brief["sources_used"]  = list({s["source"] for s in signals})
-    print(f"[INFO] 생성 완료: {brief.get('week')} — {brief.get('headline')}\n")
+    print(f"[INFO] generated 완료: {brief.get('week')} — {brief.get('headline')}\n")
     return brief
 
 
@@ -448,11 +433,6 @@ HTML_TEMPLATE = """<!DOCTYPE html>
   .signal-summary{font-size:12px;line-height:1.65;color:var(--muted);margin-bottom:8px;}
   .signal-impl{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--amber-light);padding:8px 12px;background:rgba(212,130,10,.04);border-left:1px solid var(--border);margin-bottom:6px;}
   .signal-source{font-family:'IBM Plex Mono',monospace;font-size:9px;color:rgba(245,244,239,.2);}
-  .trl-badge{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.1em;padding:2px 7px;border-radius:2px;margin-right:6px;}
-  .trl-PLAUSIBLE{background:rgba(74,222,128,.08);color:#4ade80;border:1px solid rgba(74,222,128,.2);}
-  .trl-QUESTIONABLE{background:rgba(212,130,10,.08);color:#f0a832;border:1px solid rgba(212,130,10,.2);}
-  .trl-RED_FLAG{background:rgba(248,113,113,.08);color:#f87171;border:1px solid rgba(248,113,113,.2);}
-  .claim-check{font-family:'IBM Plex Mono',monospace;font-size:10px;color:rgba(245,244,239,.35);padding:6px 10px;border-left:1px solid rgba(212,130,10,.15);margin:6px 0;font-style:italic;}
   .positioning-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin-bottom:48px;}
   .pos-card{border:1px solid var(--border);padding:18px;}
   .OVERWEIGHT{color:#4ade80;} .NEUTRAL{color:var(--amber);} .UNDERWEIGHT{color:#f87171;}
@@ -472,7 +452,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 <div class="thesis">{{ brief.thesis }}</div>
 
 <section>
-  <div class="section-label">■ 딜 시그널</div>
+  <div class="section-label">■ DEAL SIGNALS</div>
   {% for s in brief.deal_signals %}
   <div class="signal-card">
     <div class="signal-header">
@@ -489,7 +469,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 </section>
 
 <section>
-  <div class="section-label">■ 섹터 포지셔닝</div>
+  <div class="section-label">■ SECTOR POSITIONING</div>
   <div class="positioning-grid">
     {% for p in brief.sector_positioning %}
     <div class="pos-card">
@@ -504,7 +484,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 
 {% if brief.red_flags %}
 <section>
-  <div class="section-label">■ 레드플래그</div>
+  <div class="section-label">■ RED FLAGS</div>
   {% for r in brief.red_flags %}
   <div class="signal-card" style="border-color:rgba(248,113,113,.15);">
     <div style="color:#f87171;font-size:13px;font-weight:500;margin-bottom:8px;">⚠ {{ r.issue }}</div>
@@ -516,22 +496,22 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 {% endif %}
 
 <section>
-  <div class="section-label">■ 매크로 워치</div>
+  <div class="section-label">■ MACRO WATCH</div>
   <div class="macro-box">{{ brief.macro_watch }}</div>
 </section>
 
 <section>
-  <div class="section-label">■ 이번 호 소스</div>
+  <div class="section-label">■ SOURCES</div>
   <div class="sources-box">
     {{ brief.data_note }}<br><br>
-    수집 소스 ({{ brief.sources_used | length }}개): {{ brief.sources_used | join(' · ') }}
+    Sources ({{ brief.sources_used | length }}개): {{ brief.sources_used | join(' · ') }}
   </div>
 </section>
 
 <div class="footer-meta">
-  GRIDEDGE INTELLIGENCE · {{ brief.generated_at[:10] }} 생성<br>
-  처리 시그널: {{ brief.signal_count }}개 · AI-assisted, expert-framed<br>
-  본 브리프는 투자 참고용이며 투자 권유가 아닙니다.
+  GRIDEDGE INTELLIGENCE · {{ brief.generated_at[:10] }} generated<br>
+  Signals processed: {{ brief.signal_count }}개 · AI-assisted, expert-framed<br>
+  For informational purposes only. Not investment advice.
 </div>
 </body>
 </html>"""
@@ -543,95 +523,17 @@ def render_html(brief: dict) -> str:
 
 # ── 6단계: 저장 ───────────────────────────────────────────────────────────────
 
-ARCHIVE_TEMPLATE = """<!DOCTYPE html>
-<html lang="ko">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GRIDEDGE — 브리프 아카이브</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=IBM+Plex+Mono:wght@400;500&family=Pretendard:wght@300;400;500&display=swap" rel="stylesheet">
-<style>
-  :root{--black:#0a0a08;--white:#f5f4ef;--amber:#d4820a;--muted:#6b6b5e;--border:rgba(212,130,10,0.2);}
-  *{margin:0;padding:0;box-sizing:border-box;}
-  body{background:var(--black);color:var(--white);font-family:'Pretendard',sans-serif;max-width:720px;margin:0 auto;padding:48px 32px;}
-  .logo{font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--amber);letter-spacing:.15em;margin-bottom:48px;display:block;text-decoration:none;}
-  h1{font-family:'DM Serif Display',serif;font-size:32px;margin-bottom:8px;}
-  .sub{font-size:13px;color:var(--muted);margin-bottom:48px;}
-  .brief-list{display:flex;flex-direction:column;gap:1px;background:var(--border);}
-  .brief-row{background:var(--black);padding:20px 24px;display:flex;align-items:flex-start;justify-content:space-between;gap:16px;text-decoration:none;color:inherit;transition:background .2s;}
-  .brief-row:hover{background:rgba(212,130,10,.04);}
-  .brief-date{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--amber);letter-spacing:.1em;margin-bottom:6px;}
-  .brief-headline{font-size:14px;font-weight:500;line-height:1.4;flex:1;}
-  .brief-arrow{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted);flex-shrink:0;margin-top:2px;}
-  .footer{font-family:'IBM Plex Mono',monospace;font-size:9px;color:rgba(245,244,239,.12);border-top:1px solid var(--border);padding-top:20px;margin-top:48px;}
-</style>
-</head>
-<body>
-<a class="logo" href="./index.html">GRID/EDGE</a>
-<h1>브리프 아카이브</h1>
-<p class="sub">{{ briefs|length }}개 브리프 · 매일 업데이트</p>
-<div class="brief-list">
-  {% for b in briefs %}
-  <a class="brief-row" href="./briefs/{{ b.filename }}">
-    <div>
-      <div class="brief-date">{{ b.date }}</div>
-      <div class="brief-headline">{{ b.headline }}</div>
-    </div>
-    <div class="brief-arrow">↗</div>
-  </a>
-  {% endfor %}
-</div>
-<div class="footer">GRIDEDGE INTELLIGENCE · AI-assisted, expert-framed</div>
-</body>
-</html>"""
-
-
-def render_archive(briefs_dir: str) -> str:
-    """docs/briefs/ 폴더의 JSON 파일들로 아카이브 페이지 생성"""
-    import glob
-    entries = []
-    for path in sorted(glob.glob(f"{briefs_dir}/*.json"), reverse=True):
-        try:
-            with open(path, encoding="utf-8") as f:
-                data = json.load(f)
-            filename = os.path.basename(path).replace(".json", ".html")
-            entries.append({
-                "filename": filename,
-                "date":     data.get("generated_at", "")[:10],
-                "headline": data.get("headline", "—"),
-            })
-        except:
-            continue
-    return Template(ARCHIVE_TEMPLATE).render(briefs=entries)
-
-
-def render_brief_archive_html(brief: dict) -> str:
-    """개별 브리프를 briefs/ 폴더용 HTML로 렌더링"""
-    return render_html(brief)
-
-
 def save_outputs(brief: dict) -> None:
     os.makedirs("docs/briefs", exist_ok=True)
 
-    date_str  = brief.get("generated_at", "")[:10]
-    brief_filename = f"{date_str}.json"
-    html_filename  = f"{date_str}.html"
-
     for path, content in [
-        ("docs/brief_latest.json",          json.dumps(brief, ensure_ascii=False, indent=2)),
-        ("docs/brief_latest.html",           render_html(brief)),
-        (f"docs/briefs/{brief_filename}",    json.dumps(brief, ensure_ascii=False, indent=2)),
-        (f"docs/briefs/{html_filename}",     render_brief_archive_html(brief)),
+        ("docs/brief_latest.json", json.dumps(brief, ensure_ascii=False, indent=2)),
+        ("docs/brief_latest.html", render_html(brief)),
+        (f"docs/briefs/{brief['week']}.json", json.dumps(brief, ensure_ascii=False, indent=2)),
     ]:
         with open(path, "w", encoding="utf-8") as f:
             f.write(content)
         print(f"[INFO] 저장: {path}")
-
-    # 아카이브 페이지 재생성
-    archive_html = render_archive("docs/briefs")
-    with open("docs/archive.html", "w", encoding="utf-8") as f:
-        f.write(archive_html)
-    print("[INFO] 저장: docs/archive.html")
 
 
 # ── 메인 ─────────────────────────────────────────────────────────────────────
