@@ -237,8 +237,7 @@ Output: Pure JSON only.
 """
 
 RISK_SCREENER_PROMPT = """
-Screen for investment risks in these energy signals.
-Focus ONLY on risk identification — not on upside.
+Screen investment risks for these energy signals. Be concise.
 
 === SIGNALS ===
 {signals_text}
@@ -249,29 +248,21 @@ Focus ONLY on risk identification — not on upside.
 === DEAL CONTEXT ===
 {deal_context}
 
-Output JSON:
+Output JSON (keep each field SHORT — 1 sentence max):
 {{
   "risk_assessments": [
     {{
-      "signal_title": "title",
+      "signal_title": "exact title",
       "policy_beta": 0-10,
-      "policy_beta_reasoning": "which specific policy creates dependency",
-      "supply_chain_risk": "LOW | MEDIUM | HIGH",
-      "supply_chain_detail": "specific concern if HIGH/MEDIUM",
-      "counterparty_risk": "LOW | MEDIUM | HIGH",
-      "counterparty_detail": "specific concern",
-      "red_flags": ["specific red flag 1", "specific red flag 2"],
       "overall_risk": "LOW | MEDIUM | HIGH | CRITICAL",
-      "risk_mitigants": "what reduces the risk"
+      "top_risk": "single biggest risk in 1 sentence"
     }}
   ],
-  "macro_risks": {{
-    "interest_rate_sensitivity": "impact on energy deal IRRs",
-    "commodity_exposure": "LNG/coal/carbon price sensitivity",
-    "geopolitical_hotspots": "current geopolitical risks to monitor"
-  }},
-  "risk_summary": "2-3 sentence overall risk landscape this week"
+  "macro_risks": "1-2 sentences on macro risks this week",
+  "risk_summary": "1-2 sentences overall"
 }}
+
+Assess ALL signals but keep responses SHORT. Max 5 words per field.
 """
 
 
@@ -382,9 +373,9 @@ Synthesize into this JSON schema:
       "summary": "2-3 sentences integrating tech + financial + risk perspectives",
       "implication": "1 sentence on IRR/valuation/risk implication with specific numbers",
       "confidence": "HIGH | MEDIUM | LOW",
-      "trl_score": null or 1-9,
+      "trl_score": extract from tech_assessments or null,
       "trl_verdict": "PLAUSIBLE | QUESTIONABLE | RED_FLAG | N/A",
-      "policy_beta": null or 0-10,
+      "policy_beta": extract from risk_assessments or estimate 0-10,
       "source": "source name",
       "source_url": "URL if available"
     }}
