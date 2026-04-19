@@ -29,6 +29,14 @@ except ImportError:
     PROPRIETARY_ENABLED = False
     print('[WARN] proprietary_data.py 없음 — 독점 데이터 비활성화')
 
+# 에이전트 체인 모듈
+try:
+    from agent_chain import run_agent_chain
+    AGENT_CHAIN_ENABLED = True
+except ImportError:
+    AGENT_CHAIN_ENABLED = False
+    print('[WARN] agent_chain.py 없음 — 단일 AI 모드로 실행')
+
 # ── 설정 ─────────────────────────────────────────────────────────────────────
 
 ANTHROPIC_API_KEY = os.environ["ANTHROPIC_API_KEY"]
