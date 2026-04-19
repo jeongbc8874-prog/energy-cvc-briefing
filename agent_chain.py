@@ -77,12 +77,12 @@ def run_tech_validator(signals: list[dict]) -> dict:
 
     signals_text = "\n\n".join([
         f"[{i+1}] {s['title']}\n{s['description']}\nSector: {s['sector']}"
-        for i, s in enumerate(signals[:15])
+        for i, s in enumerate(signals[:10])
     ])
 
     message = client.messages.create(
         model=MODEL,
-        max_tokens=3000,
+        max_tokens=4096,
         system=TECH_VALIDATOR_SYSTEM,
         messages=[{
             "role": "user",
@@ -97,15 +97,21 @@ def run_tech_validator(signals: list[dict]) -> dict:
             raw = raw[4:]
     raw = raw.strip()
 
+    parsed = None
     try:
-        result = json.loads(raw)
-        print(f"  [Agent 1] 완료 — {len(result.get('tech_assessments', []))}개 기술 평가")
-        return result
+        parsed = json.loads(raw)
     except json.JSONDecodeError:
         last = raw.rfind("}")
         if last > 0:
-            return json.loads(raw[:last+1])
-        return {"tech_assessments": [], "tech_summary": "Technical assessment unavailable"}
+            try:
+                parsed = json.loads(raw[:last+1])
+            except Exception:
+                pass
+    if parsed is None:
+        print("  [Agent 1] JSON 파싱 실패 — 빈 결과로 계속")
+        parsed = {"tech_assessments": [], "tech_summary": "Unavailable"}
+    print(f"  [Agent 1] 완료 — {len(parsed.get('tech_assessments', []))}개 기술 평가")
+    return parsed
 
 
 # ── Agent 2: Deal Analyst ────────────────────────────────────────────────────
@@ -184,7 +190,7 @@ def run_deal_analyst(signals: list[dict], tech_result: dict) -> dict:
 
     message = client.messages.create(
         model=MODEL,
-        max_tokens=3000,
+        max_tokens=4096,
         system=DEAL_ANALYST_SYSTEM,
         messages=[{
             "role": "user",
@@ -202,15 +208,21 @@ def run_deal_analyst(signals: list[dict], tech_result: dict) -> dict:
             raw = raw[4:]
     raw = raw.strip()
 
+    parsed = None
     try:
-        result = json.loads(raw)
-        print(f"  [Agent 2] 완료 — {len(result.get('deal_assessments', []))}개 딜 평가")
-        return result
+        parsed = json.loads(raw)
     except json.JSONDecodeError:
         last = raw.rfind("}")
         if last > 0:
-            return json.loads(raw[:last+1])
-        return {"deal_assessments": [], "valuation_summary": "Deal analysis unavailable"}
+            try:
+                parsed = json.loads(raw[:last+1])
+            except Exception:
+                pass
+    if parsed is None:
+        print("  [Agent 2] JSON 파싱 실패 — 빈 결과로 계속")
+        parsed = {"deal_assessments": [], "valuation_summary": "Unavailable", "sector_multiples_observed": {}}
+    print(f"  [Agent 2] 완료 — {len(parsed.get('deal_assessments', []))}개 딜 평가")
+    return parsed
 
 
 # ── Agent 3: Risk Screener ───────────────────────────────────────────────────
@@ -272,7 +284,7 @@ def run_risk_screener(signals: list[dict], tech_result: dict, deal_result: dict)
 
     signals_text = "\n\n".join([
         f"[{i+1}] {s['title']}\n{s['description']}\nSector: {s['sector']}"
-        for i, s in enumerate(signals[:15])
+        for i, s in enumerate(signals[:10])
     ])
 
     tech_context  = tech_result.get("tech_summary", "")
