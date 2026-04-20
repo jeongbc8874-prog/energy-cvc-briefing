@@ -18,7 +18,6 @@
 body{background:var(--bg);color:var(--white);font-family:'Geist',sans-serif;min-height:100vh;}
 body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(59,130,246,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(59,130,246,0.03) 1px,transparent 1px);background-size:48px 48px;pointer-events:none;z-index:0;}
 
-/* NAV */
 nav{position:sticky;top:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:14px 32px;background:rgba(5,5,7,0.9);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);}
 .logo{font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:500;letter-spacing:0.2em;color:var(--blue);text-decoration:none;}
 .logo em{color:var(--white);opacity:0.3;font-style:normal;}
@@ -29,35 +28,28 @@ nav{position:sticky;top:0;z-index:100;display:flex;justify-content:space-between
 .live-dot::before{content:'';width:5px;height:5px;background:var(--green);border-radius:50%;animation:blink 2s infinite;}
 @keyframes blink{0%,100%{opacity:1;}50%{opacity:.3;}}
 
-/* LAYOUT */
 .dash{position:relative;z-index:1;padding:24px 32px;max-width:1400px;margin:0 auto;}
 .dash-header{margin-bottom:24px;}
 .dash-title{font-family:'Instrument Serif',serif;font-size:28px;line-height:1;margin-bottom:4px;}
 .dash-meta{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--dim);letter-spacing:.15em;text-transform:uppercase;}
 .dash-meta span{color:var(--blue);}
 
-/* TOP METRICS */
 .metrics{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin-bottom:24px;}
 .metric{background:var(--card);border:1px solid var(--border);padding:16px 18px;}
 .metric-label{font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:.18em;color:var(--dim);text-transform:uppercase;margin-bottom:8px;}
 .metric-val{font-family:'Instrument Serif',serif;font-size:26px;line-height:1;margin-bottom:2px;}
 .metric-sub{font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--dim);}
-.metric-val.up{color:var(--green);}
-.metric-val.down{color:var(--red);}
-.metric-val.blue{color:var(--blue);}
+.up{color:var(--green);}.down{color:var(--red);}.blue{color:var(--blue);}
 
-/* GRID */
 .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;}
 .grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:16px;}
 .grid-full{margin-bottom:16px;}
-
-/* CARDS */
 .card{background:var(--card);border:1px solid var(--border);padding:20px;}
 .card-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;}
 .card-title{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.2em;color:var(--blue);text-transform:uppercase;}
 .card-badge{font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:.1em;padding:2px 8px;border-radius:20px;color:var(--dim);border:1px solid var(--border);}
 
-/* SECTOR POSITIONING TABLE */
+/* SECTOR TABLE */
 .sector-table{width:100%;border-collapse:collapse;}
 .sector-table th{font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:.15em;color:var(--dim);text-transform:uppercase;text-align:left;padding:0 0 10px;border-bottom:1px solid var(--border);}
 .sector-table td{padding:10px 0;border-bottom:1px solid rgba(255,255,255,.03);font-size:12px;vertical-align:middle;}
@@ -75,12 +67,19 @@ nav{position:sticky;top:0;z-index:100;display:flex;justify-content:space-between
 .bar-high{background:var(--red);}
 .bar-label{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--dim);}
 
-/* HISTORY CHART */
-.history-chart{position:relative;height:120px;margin-top:8px;}
-.chart-svg{width:100%;height:100%;}
-.chart-label{font-family:'IBM Plex Mono',monospace;font-size:8px;fill:rgba(232,232,240,.25);}
+/* VALUATION TABLE */
+.val-table{width:100%;border-collapse:collapse;}
+.val-table th{font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:.12em;color:var(--dim);text-transform:uppercase;text-align:right;padding:0 0 10px;border-bottom:1px solid var(--border);}
+.val-table th:first-child{text-align:left;}
+.val-table td{padding:9px 0;border-bottom:1px solid rgba(255,255,255,.03);font-size:10px;text-align:right;font-family:'IBM Plex Mono',monospace;color:rgba(232,232,240,.7);}
+.val-table td:first-child{text-align:left;font-family:'Geist',sans-serif;font-size:12px;font-weight:500;color:var(--white);}
+.val-table tr:last-child td{border-bottom:none;}
+.val-up{color:var(--green)!important;}
+.val-dn{color:var(--red)!important;}
+.val-na{color:var(--dim)!important;}
+.src-tag{font-family:'IBM Plex Mono',monospace;font-size:7px;color:var(--dim);display:block;margin-top:2px;opacity:.6;}
 
-/* SIGNAL FEED */
+/* SIGNALS */
 .signal-list{display:flex;flex-direction:column;gap:8px;}
 .signal-row{display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.04);}
 .signal-row:last-child{border-bottom:none;}
@@ -95,51 +94,29 @@ nav{position:sticky;top:0;z-index:100;display:flex;justify-content:space-between
 .sb-red{background:var(--red-dim);color:var(--red);}
 .sb-sec{border:1px solid var(--border);color:var(--dim);}
 
-/* VALUATION TABLE */
-.val-table{width:100%;border-collapse:collapse;}
-.val-table th{font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:.12em;color:var(--dim);text-transform:uppercase;text-align:right;padding:0 0 10px;border-bottom:1px solid var(--border);}
-.val-table th:first-child{text-align:left;}
-.val-table td{padding:9px 0;border-bottom:1px solid rgba(255,255,255,.03);font-size:11px;text-align:right;font-family:'IBM Plex Mono',monospace;}
-.val-table td:first-child{text-align:left;font-family:'Geist',sans-serif;font-size:12px;font-weight:500;}
-.val-table tr:last-child td{border-bottom:none;}
-.val-up{color:var(--green);}
-.val-dn{color:var(--red);}
-.val-na{color:var(--dim);}
+/* DEMAND CHART */
+.demand-chart{margin-top:8px;}
+.dc-row{display:flex;align-items:center;gap:10px;margin-bottom:8px;}
+.dc-label{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--dim);width:90px;flex-shrink:0;}
+.dc-bar-wrap{flex:1;height:6px;background:rgba(255,255,255,.05);border-radius:3px;overflow:hidden;}
+.dc-bar{height:100%;border-radius:3px;background:var(--blue);}
+.dc-val{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--white);width:70px;text-align:right;flex-shrink:0;}
 
-/* TREND SPARKLINE */
-.sparkline{display:inline-flex;align-items:flex-end;gap:2px;height:20px;margin-left:8px;vertical-align:middle;}
-.spark-bar{width:3px;border-radius:1px;background:var(--blue);opacity:.4;}
-.spark-bar.active{opacity:1;}
+/* POLICY TABLE */
+.policy-table{width:100%;border-collapse:collapse;}
+.policy-table th{font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:.12em;color:var(--dim);text-transform:uppercase;text-align:left;padding:0 0 10px;border-bottom:1px solid var(--border);}
+.policy-table td{padding:8px 0;border-bottom:1px solid rgba(255,255,255,.03);font-size:11px;vertical-align:middle;}
+.policy-table tr:last-child td{border-bottom:none;}
+.beta-chip{font-family:'IBM Plex Mono',monospace;font-size:9px;padding:2px 8px;border-radius:2px;display:inline-block;}
+.beta-low{background:var(--green-dim);color:var(--green);}
+.beta-mid{background:var(--amber-dim);color:var(--amber);}
+.beta-high{background:var(--red-dim);color:var(--red);}
 
-/* PREDICTION TRACKER */
-.pred-list{display:flex;flex-direction:column;gap:8px;}
-.pred-row{display:flex;align-items:center;gap:10px;padding:8px 10px;background:rgba(255,255,255,.01);border:1px solid var(--border);}
-.pred-week{font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--dim);min-width:60px;}
-.pred-text{font-size:11px;flex:1;line-height:1.4;}
-.pred-result{font-family:'IBM Plex Mono',monospace;font-size:8px;padding:2px 6px;border-radius:2px;}
-.pred-hit{background:var(--green-dim);color:var(--green);}
-.pred-miss{background:var(--red-dim);color:var(--red);}
-.pred-pending{background:var(--amber-dim);color:var(--amber);}
-
-/* ACCURACY METER */
-.accuracy-ring{display:flex;align-items:center;gap:16px;padding:12px 0;}
-.ring-wrap{position:relative;width:64px;height:64px;}
-.ring-svg{width:64px;height:64px;transform:rotate(-90deg);}
-.ring-track{fill:none;stroke:rgba(255,255,255,.06);stroke-width:6;}
-.ring-fill{fill:none;stroke:var(--green);stroke-width:6;stroke-linecap:round;stroke-dasharray:163;stroke-dashoffset:49;transition:stroke-dashoffset 1s ease;}
-.ring-label{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;}
-.ring-pct{font-family:'Instrument Serif',serif;font-size:18px;color:var(--green);line-height:1;}
-.ring-sub{font-family:'IBM Plex Mono',monospace;font-size:7px;color:var(--dim);}
-.ring-info h4{font-size:13px;font-weight:500;margin-bottom:4px;}
-.ring-info p{font-size:11px;color:var(--dim);line-height:1.5;}
-
-/* LOADING STATE */
 .loading{display:flex;align-items:center;gap:8px;font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--dim);padding:20px 0;}
 .loading::before{content:'';width:4px;height:4px;background:var(--blue);border-radius:50%;animation:blink 1s infinite;}
 
-/* RESPONSIVE */
-@media(max-width:1100px){.metrics{grid-template-columns:repeat(3,1fr);}.grid-3{grid-template-columns:1fr 1fr;}}
-@media(max-width:768px){.metrics{grid-template-columns:repeat(2,1fr);}.grid-2,.grid-3{grid-template-columns:1fr;}.dash{padding:16px;}.nav-r{display:none;}}
+@media(max-width:1100px){.metrics{grid-template-columns:repeat(3,1fr);}.grid-2,.grid-3{grid-template-columns:1fr;}}
+@media(max-width:768px){.metrics{grid-template-columns:repeat(2,1fr);}.dash{padding:16px;}.nav-r{display:none;}}
 </style>
 </head>
 <body>
@@ -158,46 +135,47 @@ nav{position:sticky;top:0;z-index:100;display:flex;justify-content:space-between
 <div class="dash">
   <div class="dash-header">
     <div class="dash-title">Intelligence Dashboard</div>
-    <div class="dash-meta">GRIDEDGE · AI Data Center Power · Updated <span id="lastUpdate">Loading...</span></div>
+    <div class="dash-meta">GRIDEDGE · AI Data Center Power · <span id="lastUpdate">Loading...</span> · Sources: BNEF, LevelTen, LBNL, IEA, Goldman Sachs, Lazard</div>
   </div>
 
-  <!-- TOP METRICS -->
+  <!-- TOP METRICS — 실제 데이터 -->
   <div class="metrics">
     <div class="metric">
-      <div class="metric-label">Briefs Published</div>
-      <div class="metric-val blue" id="briefCount">—</div>
-      <div class="metric-sub">since launch</div>
+      <div class="metric-label">Global AI DC Demand</div>
+      <div class="metric-val blue">55 GW</div>
+      <div class="metric-sub">Current · 2030E: 122 GW (Goldman)</div>
     </div>
     <div class="metric">
-      <div class="metric-label">Signals Processed</div>
-      <div class="metric-val blue" id="signalCount">—</div>
-      <div class="metric-sub">this week</div>
+      <div class="metric-label">US Grid Queue</div>
+      <div class="metric-val down">2,290 GW</div>
+      <div class="metric-sub">Stalled · Avg wait 4+ yrs · LBNL 2025</div>
     </div>
     <div class="metric">
-      <div class="metric-label">BESS Stance</div>
-      <div class="metric-val up" id="besStance">—</div>
-      <div class="metric-sub">current positioning</div>
+      <div class="metric-label">BESS Capex</div>
+      <div class="metric-val up">$110/kWh</div>
+      <div class="metric-sub">↓31% YoY · 4hr system · BNEF 2025</div>
     </div>
     <div class="metric">
-      <div class="metric-label">GRID Stance</div>
-      <div class="metric-val up" id="gridStance">—</div>
-      <div class="metric-sub">current positioning</div>
+      <div class="metric-label">US Solar PPA</div>
+      <div class="metric-val up">$64.49</div>
+      <div class="metric-sub">/MWh · Q1 2026 · ↑13.3% YoY</div>
     </div>
     <div class="metric">
-      <div class="metric-label">H₂ Policy Beta</div>
-      <div class="metric-val down" id="h2Beta">—</div>
-      <div class="metric-sub">avg this month</div>
+      <div class="metric-label">EU Solar PPA</div>
+      <div class="metric-val down">€55.05</div>
+      <div class="metric-sub">/MWh · Q1 2026 · ↓13% YoY</div>
     </div>
     <div class="metric">
-      <div class="metric-label">Prediction Accuracy</div>
-      <div class="metric-val up">73%</div>
-      <div class="metric-sub">last 12 weeks</div>
+      <div class="metric-label">Nuclear EV/MW</div>
+      <div class="metric-val up">$3.5–5M</div>
+      <div class="metric-sub">Operating · Constellation re-rating</div>
     </div>
   </div>
 
   <!-- ROW 1 -->
   <div class="grid-2">
-    <!-- SECTOR POSITIONING -->
+
+    <!-- SECTOR POSITIONING (실시간 브리프에서 로드) -->
     <div class="card">
       <div class="card-header">
         <div class="card-title">■ Sector Positioning</div>
@@ -213,62 +191,89 @@ nav{position:sticky;top:0;z-index:100;display:flex;justify-content:space-between
           </tr>
         </thead>
         <tbody id="sectorTable">
-          <tr><td colspan="4"><div class="loading">Loading sector data...</div></td></tr>
+          <tr><td colspan="4"><div class="loading">Loading from latest brief...</div></td></tr>
         </tbody>
       </table>
     </div>
 
-    <!-- VALUATION BENCHMARKS -->
+    <!-- VALUATION BENCHMARKS — 실제 데이터 -->
     <div class="card">
       <div class="card-header">
         <div class="card-title">■ Valuation Benchmarks</div>
-        <div class="card-badge">EV/MW · IRR Range</div>
+        <div class="card-badge">April 2026 · Verified Sources</div>
       </div>
       <table class="val-table">
         <thead>
           <tr>
             <th>Sector</th>
-            <th>EV/MW</th>
-            <th>IRR Range</th>
+            <th>EV/MW or Capex</th>
+            <th>Levered IRR</th>
             <th>Policy β</th>
-            <th>Trend</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>BESS (AI Co-lo)</td>
-            <td>$0.9–1.3M</td>
-            <td class="val-up">10–14%</td>
+            <td>
+              BESS (Contracted)
+              <span class="src-tag">BNEF 2025, Capstone DC</span>
+            </td>
+            <td class="val-up">$0.8–1.5M</td>
+            <td class="val-up">12–16%</td>
             <td class="val-up">2–3</td>
-            <td><span class="sparkline"><span class="spark-bar" style="height:8px"></span><span class="spark-bar" style="height:12px"></span><span class="spark-bar" style="height:10px"></span><span class="spark-bar" style="height:14px"></span><span class="spark-bar active" style="height:18px"></span></span></td>
           </tr>
           <tr>
-            <td>Grid Infra</td>
-            <td>$1.5–2.5M</td>
-            <td class="val-up">12–18%</td>
+            <td>
+              BESS (Merchant EU)
+              <span class="src-tag">Capstone DC; German sub-WACC</span>
+            </td>
+            <td class="val-na">$0.5–0.9M</td>
+            <td class="val-dn">3–7%</td>
+            <td class="val-mid">4–5</td>
+          </tr>
+          <tr>
+            <td>
+              Grid / Transmission
+              <span class="src-tag">KKR-AEP Jan 2025: 30.3x P/E</span>
+            </td>
+            <td class="val-up">27–40x P/E</td>
+            <td class="val-up">8–12%</td>
             <td class="val-up">1–2</td>
-            <td><span class="sparkline"><span class="spark-bar" style="height:10px"></span><span class="spark-bar" style="height:12px"></span><span class="spark-bar" style="height:14px"></span><span class="spark-bar" style="height:16px"></span><span class="spark-bar active" style="height:20px"></span></span></td>
           </tr>
           <tr>
-            <td>Solar+Storage</td>
-            <td>$0.7–1.0M</td>
+            <td>
+              Solar+Storage PPA (US)
+              <span class="src-tag">LevelTen Q1 2026</span>
+            </td>
+            <td class="val-up">$64/MWh</td>
             <td class="val-up">8–12%</td>
             <td class="val-up">3–4</td>
-            <td><span class="sparkline"><span class="spark-bar" style="height:14px"></span><span class="spark-bar" style="height:13px"></span><span class="spark-bar" style="height:12px"></span><span class="spark-bar" style="height:11px"></span><span class="spark-bar active" style="height:10px"></span></span></td>
           </tr>
           <tr>
-            <td>SMR / Nuclear</td>
-            <td>$8–18M</td>
-            <td class="val-na">6–10%</td>
-            <td class="val-dn">4–6</td>
-            <td><span class="sparkline"><span class="spark-bar" style="height:8px"></span><span class="spark-bar" style="height:9px"></span><span class="spark-bar" style="height:8px"></span><span class="spark-bar" style="height:10px"></span><span class="spark-bar active" style="height:9px"></span></span></td>
+            <td>
+              Nuclear (Operating)
+              <span class="src-tag">Constellation; MSFT TMI PPA ~$110/MWh</span>
+            </td>
+            <td class="val-up">$3.5–5M/MW</td>
+            <td class="val-up">10–14%</td>
+            <td class="val-up">2–3</td>
           </tr>
           <tr>
-            <td>Green H₂</td>
-            <td>N/A</td>
-            <td class="val-na">Uneconomic</td>
-            <td class="val-dn">7–9</td>
-            <td><span class="sparkline"><span class="spark-bar" style="height:12px"></span><span class="spark-bar" style="height:10px"></span><span class="spark-bar" style="height:8px"></span><span class="spark-bar" style="height:6px"></span><span class="spark-bar active" style="height:5px"></span></span></td>
+            <td>
+              SMR (FOAK)
+              <span class="src-tag">OPG Darlington FID 2025</span>
+            </td>
+            <td class="val-na">~$15,000/kW</td>
+            <td class="val-na">Pre-FID</td>
+            <td class="val-na">3–5</td>
+          </tr>
+          <tr>
+            <td>
+              Green H₂
+              <span class="src-tag">BNEF; unsubsidized $4.5–6.5/kg</span>
+            </td>
+            <td class="val-dn">Uneconomic</td>
+            <td class="val-dn">Sub-WACC</td>
+            <td class="val-dn">8–9</td>
           </tr>
         </tbody>
       </table>
@@ -277,58 +282,60 @@ nav{position:sticky;top:0;z-index:100;display:flex;justify-content:space-between
 
   <!-- ROW 2 -->
   <div class="grid-3">
-    <!-- PREDICTION TRACKER -->
+
+    <!-- AI DC 전력 수요 차트 -->
     <div class="card">
       <div class="card-header">
-        <div class="card-title">■ Prediction Tracker</div>
-        <div class="card-badge">73% accuracy</div>
+        <div class="card-title">■ AI DC Power Demand Forecasts</div>
+        <div class="card-badge">2030 · Multiple Sources</div>
       </div>
-      <div class="accuracy-ring">
-        <div class="ring-wrap">
-          <svg class="ring-svg" viewBox="0 0 64 64">
-            <circle class="ring-track" cx="32" cy="32" r="26"/>
-            <circle class="ring-fill" cx="32" cy="32" r="26"/>
-          </svg>
-          <div class="ring-label">
-            <div class="ring-pct">73%</div>
-            <div class="ring-sub">acc.</div>
+      <div class="demand-chart">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--dim);margin-bottom:12px;letter-spacing:.1em;">GLOBAL DATA CENTER ELECTRICITY (TWh/yr)</div>
+        <div class="dc-row">
+          <div class="dc-label">Actual 2024</div>
+          <div class="dc-bar-wrap"><div class="dc-bar" style="width:30%;background:rgba(59,130,246,.4)"></div></div>
+          <div class="dc-val">415 TWh</div>
+        </div>
+        <div class="dc-row">
+          <div class="dc-label">IEA 2030E</div>
+          <div class="dc-bar-wrap"><div class="dc-bar" style="width:68%"></div></div>
+          <div class="dc-val">945 TWh</div>
+        </div>
+        <div class="dc-row">
+          <div class="dc-label">GS SUSTAIN 2030E</div>
+          <div class="dc-bar-wrap"><div class="dc-bar" style="width:97%"></div></div>
+          <div class="dc-val">1,350 TWh</div>
+        </div>
+        <div class="dc-row">
+          <div class="dc-label">McKinsey 2030E</div>
+          <div class="dc-bar-wrap"><div class="dc-bar" style="width:77%"></div></div>
+          <div class="dc-val">~1,060 TWh</div>
+        </div>
+        <div style="margin-top:16px;font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--dim);letter-spacing:.1em;">US DATA CENTER DEMAND (GW)</div>
+        <div style="margin-top:8px;">
+          <div class="dc-row">
+            <div class="dc-label">Current ~2025</div>
+            <div class="dc-bar-wrap"><div class="dc-bar" style="width:25%;background:rgba(59,130,246,.4)"></div></div>
+            <div class="dc-val">~30 GW</div>
+          </div>
+          <div class="dc-row">
+            <div class="dc-label">BNEF 2035E</div>
+            <div class="dc-bar-wrap"><div class="dc-bar" style="width:85%"></div></div>
+            <div class="dc-val">106 GW</div>
+          </div>
+          <div class="dc-row">
+            <div class="dc-label">LBNL 2028E</div>
+            <div class="dc-bar-wrap"><div class="dc-bar" style="width:50%"></div></div>
+            <div class="dc-val">325–580 TWh</div>
           </div>
         </div>
-        <div class="ring-info">
-          <h4>Sector calls verified</h4>
-          <p>11 of 15 positioning calls confirmed within 4 weeks of publication</p>
-        </div>
-      </div>
-      <div class="pred-list">
-        <div class="pred-row">
-          <div class="pred-week">W15</div>
-          <div class="pred-text">BESS OVERWEIGHT — DFI capital converging</div>
-          <div class="pred-result pred-hit">✓ HIT</div>
-        </div>
-        <div class="pred-row">
-          <div class="pred-week">W15</div>
-          <div class="pred-text">H₂ UNDERWEIGHT — LCOH unviable</div>
-          <div class="pred-result pred-hit">✓ HIT</div>
-        </div>
-        <div class="pred-row">
-          <div class="pred-week">W14</div>
-          <div class="pred-text">EU Solar PPA compression continuing</div>
-          <div class="pred-result pred-hit">✓ HIT</div>
-        </div>
-        <div class="pred-row">
-          <div class="pred-week">W14</div>
-          <div class="pred-text">SMR timeline risk underpriced</div>
-          <div class="pred-result pred-pending">● PENDING</div>
-        </div>
-        <div class="pred-row">
-          <div class="pred-week">W13</div>
-          <div class="pred-text">Transformer shortage IRR impact</div>
-          <div class="pred-result pred-hit">✓ HIT</div>
+        <div style="margin-top:12px;font-family:'IBM Plex Mono',monospace;font-size:8px;color:rgba(232,232,240,.2);line-height:1.5;">
+          Sources: IEA Energy and AI (Apr 2025) · Goldman Sachs (Feb/Nov 2025) · BNEF (Dec 2025) · McKinsey · LBNL Queued Up 2025
         </div>
       </div>
     </div>
 
-    <!-- LATEST DEAL SIGNALS -->
+    <!-- LATEST DEAL SIGNALS (실시간) -->
     <div class="card">
       <div class="card-header">
         <div class="card-title">■ Latest Deal Signals</div>
@@ -339,7 +346,7 @@ nav{position:sticky;top:0;z-index:100;display:flex;justify-content:space-between
       </div>
     </div>
 
-    <!-- RED FLAGS -->
+    <!-- RED FLAGS (실시간) -->
     <div class="card">
       <div class="card-header">
         <div class="card-title">■ Active Red Flags</div>
@@ -351,24 +358,138 @@ nav{position:sticky;top:0;z-index:100;display:flex;justify-content:space-between
     </div>
   </div>
 
-  <!-- ROW 3: STANCE HISTORY -->
+  <!-- ROW 3: POLICY BETA TABLE — 실제 OBBBA 데이터 -->
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">■ Policy Beta Ranking</div>
+        <div class="card-badge">OBBBA (Jul 2025) · IRA residuals</div>
+      </div>
+      <table class="policy-table">
+        <thead>
+          <tr>
+            <th>Sector</th>
+            <th>Policy Beta</th>
+            <th>Key Provision</th>
+            <th>Risk</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Green H₂</td>
+            <td><span class="beta-chip beta-high">9/10</span></td>
+            <td style="font-size:10px;color:var(--dim);">45V $3/kg — deadline 2027</td>
+            <td style="font-size:10px;color:var(--red);">$1.4B Q4'25 cancellations</td>
+          </tr>
+          <tr>
+            <td>Offshore Wind</td>
+            <td><span class="beta-chip beta-high">8/10</span></td>
+            <td style="font-size:10px;color:var(--dim);">45Y deadline Jul 2026</td>
+            <td style="font-size:10px;color:var(--red);">COD cliff risk</td>
+          </tr>
+          <tr>
+            <td>Onshore Wind</td>
+            <td><span class="beta-chip beta-high">7/10</span></td>
+            <td style="font-size:10px;color:var(--dim);">45X component PTC to 2027</td>
+            <td style="font-size:10px;color:var(--amber);">PPA +24% YoY; FEOC risk</td>
+          </tr>
+          <tr>
+            <td>Utility Solar</td>
+            <td><span class="beta-chip beta-mid">5/10</span></td>
+            <td style="font-size:10px;color:var(--dim);">48E/45Y — in-service by Dec 2027</td>
+            <td style="font-size:10px;color:var(--amber);">Cliff rush + tariff exposure</td>
+          </tr>
+          <tr>
+            <td>BESS (Contracted)</td>
+            <td><span class="beta-chip beta-mid">3/10</span></td>
+            <td style="font-size:10px;color:var(--dim);">48E full credit through 2033</td>
+            <td style="font-size:10px;color:var(--green);">Physics-independent economics</td>
+          </tr>
+          <tr>
+            <td>Nuclear (Existing)</td>
+            <td><span class="beta-chip beta-low">2/10</span></td>
+            <td style="font-size:10px;color:var(--dim);">45U PTC preserved through 2031</td>
+            <td style="font-size:10px;color:var(--green);">Hyperscaler PPAs at $100+/MWh</td>
+          </tr>
+          <tr>
+            <td>Grid / Transmission</td>
+            <td><span class="beta-chip beta-low">1/10</span></td>
+            <td style="font-size:10px;color:var(--dim);">FERC regulated ROE ~9.98%</td>
+            <td style="font-size:10px;color:var(--green);">AI load = structural demand pull</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- HYPERSCALER NUCLEAR DEALS — 실제 거래 데이터 -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">■ Hyperscaler Nuclear Offtake Deals</div>
+        <div class="card-badge">Verified transactions · 2024–2026</div>
+      </div>
+      <table class="val-table">
+        <thead>
+          <tr>
+            <th>Deal</th>
+            <th>MW</th>
+            <th>Term</th>
+            <th>Price est.</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>MSFT–Constellation TMI<span class="src-tag">Jefferies; Bloomberg Sep 2024</span></td>
+            <td class="val-up">835</td>
+            <td>20yr</td>
+            <td class="val-up">~$110/MWh</td>
+          </tr>
+          <tr>
+            <td>Amazon–Talen Susquehanna<span class="src-tag">Power Mag 2025; $18B PPA</span></td>
+            <td class="val-up">1,920</td>
+            <td>17yr</td>
+            <td class="val-up">~$80/MWh</td>
+          </tr>
+          <tr>
+            <td>Meta–Constellation Clinton<span class="src-tag">Constellation PR Jun 2025</span></td>
+            <td class="val-up">1,121</td>
+            <td>20yr</td>
+            <td class="val-na">~$60–70/MWh</td>
+          </tr>
+          <tr>
+            <td>Google–Kairos Power SMR<span class="src-tag">Utility Dive Oct 2024</span></td>
+            <td class="val-na">500</td>
+            <td>To 2035</td>
+            <td class="val-na">Undisclosed</td>
+          </tr>
+          <tr>
+            <td>Amazon–X-energy Cascade<span class="src-tag">NucNet Oct 2025; $500M equity</span></td>
+            <td class="val-na">960</td>
+            <td>Pre-FID</td>
+            <td class="val-na">Pre-commercial</td>
+          </tr>
+        </tbody>
+      </table>
+      <div style="margin-top:12px;font-family:'IBM Plex Mono',monospace;font-size:8px;color:rgba(232,232,240,.2);line-height:1.5;">
+        Nuclear PPA premium over spot: +$30–60/MWh · Operating nuclear EV re-rated to $3.5–5M/MW vs $1–2M/MW pre-AI
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 4: STANCE HISTORY (실시간 아카이브) -->
   <div class="card grid-full">
     <div class="card-header">
       <div class="card-title">■ Sector Stance History</div>
-      <div class="card-badge">Cumulative positioning across all briefs</div>
+      <div class="card-badge">Cumulative · All published briefs</div>
     </div>
-    <div id="stanceHistory" style="overflow-x:auto;">
+    <div id="stanceHistory">
       <div class="loading">Loading historical data...</div>
     </div>
   </div>
 
-</div>
+</div><!-- /dash -->
 
 <script>
-// ── 데이터 로드 ──────────────────────────────────────────────────────────────
-
-const BRIEF_URL = './brief_latest.json';
-const ARCHIVE_BASE = './briefs/';
+// ── 실시간 브리프 데이터 로드 ────────────────────────────────────────────────
 
 async function loadBrief(url) {
   try {
@@ -378,145 +499,128 @@ async function loadBrief(url) {
   } catch { return null; }
 }
 
-// 브리프 날짜 목록 추정 (archive.html 파싱 대신 직접 시도)
 async function loadArchiveBriefs() {
   const briefs = [];
-  // 최신 브리프 먼저
-  const latest = await loadBrief(BRIEF_URL);
+  const latest = await loadBrief('./brief_latest.json');
   if (latest) briefs.push(latest);
 
-  // 지난 8주치 시도
   const now = new Date();
-  for (let i = 1; i <= 30; i++) {
+  for (let i = 1; i <= 60; i++) {
     const d = new Date(now);
     d.setDate(d.getDate() - i);
-    const dateStr = d.toISOString().slice(0,10);
-    const weekData = await loadBrief(`${ARCHIVE_BASE}${dateStr}.json`);
-    if (weekData) briefs.push(weekData);
-    if (briefs.length >= 8) break;
+    const y = d.getFullYear();
+    const w = getISOWeek(d);
+    const url = `./briefs/${y}-W${String(w).padStart(2,'0')}.json`;
+    if (briefs.some(b => b.week === `${y}-W${String(w).padStart(2,'0')}`)) continue;
+    const data = await loadBrief(url);
+    if (data) briefs.push(data);
+    if (briefs.length >= 12) break;
   }
   return briefs;
 }
 
+function getISOWeek(d) {
+  const date = new Date(d);
+  date.setHours(0,0,0,0);
+  date.setDate(date.getDate() + 3 - (date.getDay() + 6) % 7);
+  const week1 = new Date(date.getFullYear(), 0, 4);
+  return 1 + Math.round(((date.getTime() - week1.getTime()) / 86400000 - 3 + (week1.getDay() + 6) % 7) / 7);
+}
+
 // ── 렌더링 ────────────────────────────────────────────────────────────────────
-
-function stanceClass(stance) {
-  if (!stance) return 'nt';
-  if (stance.includes('OVER')) return 'ow';
-  if (stance.includes('UNDER')) return 'uw';
-  return 'nt';
-}
-
-function stanceLabel(stance) {
-  if (!stance) return 'NEUTRAL';
-  return stance;
-}
-
-function policyColor(beta) {
-  if (beta === null || beta === undefined) return 'var(--dim)';
-  if (beta <= 3) return 'var(--green)';
-  if (beta <= 6) return 'var(--amber)';
-  return 'var(--red)';
-}
 
 function renderSectorTable(brief) {
   const positions = brief.sector_positioning || [];
   const tbody = document.getElementById('sectorTable');
+  document.getElementById('posWeek').textContent = brief.week || '';
+
   if (!positions.length) {
-    tbody.innerHTML = '<tr><td colspan="4" style="color:var(--dim);font-size:11px;padding:12px 0;">No positioning data</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="4" style="color:var(--dim);font-size:11px;padding:12px 0;">No positioning data in latest brief</td></tr>';
     return;
   }
 
   tbody.innerHTML = positions.map(p => {
-    const beta = p.policy_beta !== undefined ? p.policy_beta : '—';
+    const beta = p.policy_beta;
     const betaNum = parseFloat(beta);
     const barW = isNaN(betaNum) ? 0 : (betaNum / 10) * 100;
     const barClass = isNaN(betaNum) ? 'bar-low' : betaNum <= 3 ? 'bar-low' : betaNum <= 6 ? 'bar-mid' : 'bar-high';
+    const stanceClass = (p.stance||'').includes('OVER') ? 'ow' : (p.stance||'').includes('UNDER') ? 'uw' : 'nt';
 
-    return `
-      <tr>
-        <td class="sector-name">${p.sector || '—'}</td>
-        <td><span class="stance-badge ${stanceClass(p.stance)}">${stanceLabel(p.stance)}</span></td>
-        <td>
-          <div class="policy-bar">
-            <div class="bar-track"><div class="bar-fill ${barClass}" style="width:${barW}%"></div></div>
-            <span class="bar-label">${isNaN(betaNum) ? '—' : betaNum + '/10'}</span>
-          </div>
-        </td>
-        <td style="font-size:10px;color:var(--dim);max-width:200px;line-height:1.4;">${(p.key_risk || '—').slice(0,80)}${(p.key_risk||'').length>80?'...':''}</td>
-      </tr>`;
+    return `<tr>
+      <td class="sector-name">${p.sector||'—'}</td>
+      <td><span class="stance-badge ${stanceClass}">${p.stance||'NEUTRAL'}</span></td>
+      <td>
+        <div class="policy-bar">
+          <div class="bar-track"><div class="bar-fill ${barClass}" style="width:${barW}%"></div></div>
+          <span class="bar-label">${isNaN(betaNum)?'—':betaNum+'/10'}</span>
+        </div>
+      </td>
+      <td style="font-size:10px;color:var(--dim);max-width:180px;line-height:1.4;">${(p.key_risk||'—').slice(0,70)}${(p.key_risk||'').length>70?'...':''}</td>
+    </tr>`;
   }).join('');
 
-  // 메트릭 업데이트
-  const bess = positions.find(p => p.sector && p.sector.toUpperCase().includes('BESS'));
-  const grid = positions.find(p => p.sector && p.sector.toUpperCase().includes('GRID'));
-  const h2   = positions.find(p => p.sector && (p.sector.toUpperCase().includes('H2') || p.sector.includes('H₂')));
-
-  if (bess) document.getElementById('besStance').textContent = bess.stance?.includes('OVER') ? 'OW ↑' : bess.stance?.includes('UNDER') ? 'UW ↓' : 'NT';
-  if (grid) document.getElementById('gridStance').textContent = grid.stance?.includes('OVER') ? 'OW ↑' : grid.stance?.includes('UNDER') ? 'UW ↓' : 'NT';
-  if (h2 && h2.policy_beta) document.getElementById('h2Beta').textContent = h2.policy_beta + '/10';
+  // 상단 메트릭 업데이트
+  const bess = positions.find(p => (p.sector||'').toUpperCase().includes('BESS'));
+  const grid = positions.find(p => (p.sector||'').toUpperCase().includes('GRID'));
+  if (bess) document.getElementById('besStance').textContent = (bess.stance||'').includes('OVER') ? 'OW ↑' : (bess.stance||'').includes('UNDER') ? 'UW ↓' : 'NT —';
+  if (grid) document.getElementById('gridStance').textContent = (grid.stance||'').includes('OVER') ? 'OW ↑' : (grid.stance||'').includes('UNDER') ? 'UW ↓' : 'NT —';
 }
 
 function renderDealSignals(brief) {
   const signals = (brief.deal_signals || []).slice(0, 5);
   const el = document.getElementById('dealList');
-  if (!signals.length) { el.innerHTML = '<div style="color:var(--dim);font-size:11px;">No signals</div>'; return; }
+  document.getElementById('dealWeek').textContent = brief.week || '';
+  if (!signals.length) { el.innerHTML = '<div style="color:var(--dim);font-size:11px;padding:8px 0;">No signals in brief</div>'; return; }
 
-  const dotColor = tag => tag === 'BULLISH' ? 'var(--green)' : tag === 'RED_FLAG' ? 'var(--red)' : 'var(--amber)';
-  const badgeClass = tag => tag === 'BULLISH' ? 'sb-bull' : tag === 'RED_FLAG' ? 'sb-red' : 'sb-watch';
-
-  el.innerHTML = signals.map(s => `
-    <div class="signal-row">
-      <div class="sig-dot" style="background:${dotColor(s.tag)}"></div>
+  el.innerHTML = signals.map(s => {
+    const dotColor = s.tag === 'BULLISH' ? 'var(--green)' : s.tag === 'RED_FLAG' ? 'var(--red)' : 'var(--amber)';
+    const bClass = s.tag === 'BULLISH' ? 'sb-bull' : s.tag === 'RED_FLAG' ? 'sb-red' : 'sb-watch';
+    return `<div class="signal-row">
+      <div class="sig-dot" style="background:${dotColor}"></div>
       <div class="sig-content">
         <div class="sig-badges">
-          <span class="sbadge ${badgeClass(s.tag)}">${s.tag}</span>
-          <span class="sbadge sb-sec">${s.sector || ''}</span>
-          ${s.trl_score ? `<span class="sbadge sb-sec">TRL ${s.trl_score}</span>` : ''}
-          ${s.policy_beta !== undefined && s.policy_beta !== null ? `<span class="sbadge sb-sec">β${s.policy_beta}</span>` : ''}
+          <span class="sbadge ${bClass}">${s.tag}</span>
+          <span class="sbadge sb-sec">${s.sector||''}</span>
+          ${s.trl_score ? `<span class="sbadge sb-sec">TRL${s.trl_score}</span>` : ''}
+          ${s.policy_beta != null ? `<span class="sbadge sb-sec">β${s.policy_beta}</span>` : ''}
         </div>
-        <div class="sig-title">${s.title || ''}</div>
-        <div class="sig-meta">
-          <span>${s.source || ''}</span>
-          ${s.confidence ? `<span>${s.confidence}</span>` : ''}
-        </div>
+        <div class="sig-title">${s.title||''}</div>
+        <div class="sig-meta"><span>${s.source||''}</span>${s.confidence?`<span>${s.confidence}</span>`:''}</div>
       </div>
-    </div>`).join('');
-
-  document.getElementById('dealWeek').textContent = brief.week || '';
+    </div>`;
+  }).join('');
 }
 
 function renderRedFlags(brief) {
   const flags = brief.red_flags || [];
   const el = document.getElementById('redFlagList');
   document.getElementById('rfCount').textContent = flags.length + ' active';
-
-  if (!flags.length) { el.innerHTML = '<div style="color:var(--dim);font-size:11px;">No red flags this week</div>'; return; }
+  if (!flags.length) { el.innerHTML = '<div style="color:var(--dim);font-size:11px;">None this week</div>'; return; }
 
   el.innerHTML = flags.map(f => `
     <div class="signal-row">
       <div class="sig-dot" style="background:var(--red)"></div>
       <div class="sig-content">
-        <div class="sig-badges"><span class="sbadge sb-red">RED FLAG</span></div>
-        <div class="sig-title">${f.issue || ''}</div>
-        <div class="sig-meta" style="line-height:1.5;margin-top:2px;">${(f.detail||'').slice(0,100)}${(f.detail||'').length>100?'...':''}</div>
+        <div class="sig-badges"><span class="sbadge sb-red">RED FLAG</span>${f.policy_beta!=null?`<span class="sbadge sb-sec">β${f.policy_beta}</span>`:''}</div>
+        <div class="sig-title">${f.issue||''}</div>
+        <div class="sig-meta">${(f.detail||'').slice(0,90)}${(f.detail||'').length>90?'...':''}</div>
       </div>
     </div>`).join('');
 }
 
 function renderStanceHistory(briefs) {
   const el = document.getElementById('stanceHistory');
-  if (!briefs.length) { el.innerHTML = '<div style="color:var(--dim);font-size:11px;padding:12px 0;">No historical data yet</div>'; return; }
+  if (!briefs.length) { el.innerHTML = '<div style="color:var(--dim);font-size:11px;padding:12px 0;">No historical data yet — data accumulates daily</div>'; return; }
 
-  const sectors = ['BESS','GRID','SOLAR','NUCLEAR','H2','WIND'];
-  const stanceIcon = s => s?.includes('OVER') ? '▲' : s?.includes('UNDER') ? '▼' : '—';
-  const stanceColor = s => s?.includes('OVER') ? 'var(--green)' : s?.includes('UNDER') ? 'var(--red)' : 'var(--amber)';
+  const sectors = ['BESS','GRID','SOLAR','NUCLEAR','H2','WIND','POWER_TECH'];
+  const icon = s => (s||'').includes('OVER') ? '▲' : (s||'').includes('UNDER') ? '▼' : '—';
+  const color = s => (s||'').includes('OVER') ? 'var(--green)' : (s||'').includes('UNDER') ? 'var(--red)' : 'var(--amber)';
 
-  let html = `<table style="width:100%;border-collapse:collapse;min-width:600px;">
+  let html = `<div style="overflow-x:auto;"><table style="width:100%;border-collapse:collapse;min-width:600px;">
     <thead><tr>
       <th style="font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:.12em;color:var(--dim);text-transform:uppercase;text-align:left;padding:0 12px 10px 0;border-bottom:1px solid var(--border);">Week</th>
-      ${sectors.map(s=>`<th style="font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:.12em;color:var(--dim);text-transform:uppercase;text-align:center;padding:0 8px 10px;border-bottom:1px solid var(--border);">${s}</th>`).join('')}
-      <th style="font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:.12em;color:var(--dim);text-transform:uppercase;text-align:left;padding:0 0 10px 12px;border-bottom:1px solid var(--border);">Headline</th>
+      ${sectors.map(s=>`<th style="font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:.1em;color:var(--dim);text-transform:uppercase;text-align:center;padding:0 8px 10px;border-bottom:1px solid var(--border);">${s}</th>`).join('')}
+      <th style="font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:.1em;color:var(--dim);text-transform:uppercase;text-align:left;padding:0 0 10px 12px;border-bottom:1px solid var(--border);">Headline</th>
     </tr></thead><tbody>`;
 
   briefs.forEach(b => {
@@ -524,40 +628,39 @@ function renderStanceHistory(briefs) {
     html += `<tr>
       <td style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--dim);padding:8px 12px 8px 0;border-bottom:1px solid rgba(255,255,255,.03);white-space:nowrap;">${b.week||''}</td>
       ${sectors.map(sec => {
-        const p = pos.find(x => x.sector && x.sector.toUpperCase().includes(sec.toUpperCase().replace('NUCLEAR','NUC').replace('NUC','NUCLEAR').replace('H2','H')));
-        const icon = stanceIcon(p?.stance);
-        const color = stanceColor(p?.stance);
-        return `<td style="text-align:center;padding:8px;border-bottom:1px solid rgba(255,255,255,.03);font-family:'IBM Plex Mono',monospace;font-size:11px;color:${color};">${icon}</td>`;
+        const p = pos.find(x => (x.sector||'').toUpperCase().includes(sec.replace('_TECH','').replace('POWER','POWER').toUpperCase()));
+        return `<td style="text-align:center;padding:8px;border-bottom:1px solid rgba(255,255,255,.03);font-family:'IBM Plex Mono',monospace;font-size:12px;color:${color(p?.stance)};">${icon(p?.stance)}</td>`;
       }).join('')}
-      <td style="font-size:10px;color:var(--dim);padding:8px 0 8px 12px;border-bottom:1px solid rgba(255,255,255,.03);line-height:1.4;max-width:300px;">${(b.headline||'').slice(0,80)}${(b.headline||'').length>80?'...':''}</td>
+      <td style="font-size:10px;color:var(--dim);padding:8px 0 8px 12px;border-bottom:1px solid rgba(255,255,255,.03);line-height:1.4;max-width:280px;">${(b.headline||'').slice(0,75)}${(b.headline||'').length>75?'...':''}</td>
     </tr>`;
   });
 
-  html += '</tbody></table>';
+  html += '</tbody></table></div>';
   el.innerHTML = html;
 }
 
 // ── 메인 ─────────────────────────────────────────────────────────────────────
 
 async function init() {
-  const latest = await loadBrief(BRIEF_URL);
+  const latest = await loadBrief('./brief_latest.json');
 
   if (latest) {
-    document.getElementById('lastUpdate').textContent = (latest.generated_at || '').slice(0,10);
-    document.getElementById('signalCount').textContent = latest.signal_count || '—';
-    document.getElementById('posWeek').textContent = latest.week || '';
+    document.getElementById('lastUpdate').innerHTML =
+      `Updated <span>${(latest.generated_at||'').slice(0,10) || latest.week}</span>`;
     renderSectorTable(latest);
     renderDealSignals(latest);
     renderRedFlags(latest);
   } else {
-    document.getElementById('lastUpdate').textContent = 'Unavailable';
+    document.getElementById('lastUpdate').textContent = 'Brief unavailable';
   }
 
-  // 아카이브 로드 (비동기)
   const briefs = await loadArchiveBriefs();
-  document.getElementById('briefCount').textContent = briefs.length;
   renderStanceHistory(briefs);
 }
+
+// 상단 메트릭 BESS/GRID는 섹터 테이블 로드 후 채워짐
+// 미리 placeholder id 추가
+document.querySelector('.metrics').insertAdjacentHTML('beforeend', '<span id="besStance" style="display:none"></span><span id="gridStance" style="display:none"></span>');
 
 init();
 </script>
