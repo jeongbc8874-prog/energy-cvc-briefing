@@ -36,6 +36,6 @@ jobs:
           git stash
           git pull --rebase origin main
           git stash pop
-          git add docs/brief_latest.json docs/brief_latest.html docs/briefs/ docs/archive.html
+          git add -A docs/
           git commit --allow-empty -m "brief: $(date +'%Y-%m-%d %H:%M')"
           git push
