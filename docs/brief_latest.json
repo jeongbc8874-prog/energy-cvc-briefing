@@ -1,14 +1,27 @@
 {
   "week": "2026-W17",
-  "headline": "Data center power demand drives $4.6B+ in new credit facilities as hyperscalers secure 100GWh+ long-duration storage commitments",
-  "thesis": "This week's $2.6B Switch and $2B DataBank credit facilities signal institutional capital's conviction that AI-driven power demand is the defining energy investment theme of 2026-2030. The Meta-Noon Energy deal (1GW/100GWh reservation) represents the first hyperscaler commitment to ultra-long duration storage at this scale, establishing a new asset class for grid-edge infrastructure investors. Position overweight on contracted data center power infrastructure while avoiding policy-dependent manufacturing plays and war-zone assets.",
+  "headline": "Data center capital deployment accelerates to $7.1B this week while Meta's 100 GWh ultra-long duration storage deal signals hyperscaler pivot from firm power PPAs to owned storage infrastructure.",
+  "thesis": "Hyperscalers are fundamentally restructuring energy procurement—Meta's 1 GW/100 GWh reservation with Noon Energy represents a strategic shift from contracting firm renewable power to owning ultra-long duration storage assets, a 10x cost structure change if executed at scale. Combined with $4.6B in data center financing (DataBank $2B, Switch $2.6B) and OpenAI Stargate's $470M Texas buildout, the AI infrastructure capital wave is now directly financing grid-edge generation and storage rather than merely demanding it. Energy investors should position in BESS platforms with hyperscaler relationships and avoid pure-play renewable developers without storage integration capabilities.",
   "deal_signals": [
     {
-      "title": "Switch secures $2.6B credit facility for data center transmission and generation",
+      "title": "Meta reserves 1 GW/100 GWh ultra-long duration storage from Noon Energy",
       "tag": "BULLISH",
-      "sector": "OTHER",
-      "summary": "Switch's syndicated performance letter of credit facility—described as a first for the data center sector—validates the bankability of integrated power-generation assets for hyperscale customers. Combined with DataBank's $2B financing ($4.7B raised in 12 months), this signals credit markets have fully underwritten the AI power demand thesis. Low policy beta (2) reflects pure market-driven demand without subsidy dependency.",
-      "implication": "Contracted DC power infrastructure targeting 15-20% equity IRRs with ERCOT interconnection as primary execution risk; valuations at $8-12M/MW IT load remain investable.",
+      "sector": "BESS",
+      "summary": "Meta's reservation of up to 1 GW/100 GWh from Noon Energy's carbon-oxygen battery technology represents the largest single corporate storage commitment disclosed to date. Initial 25 MW/2.5 GWh phase targets 2028 COD. At 100-hour duration, this is fundamentally different from 4-hour Li-ion—targeting seasonal arbitrage and multi-day backup.",
+      "implication": "If Noon achieves $50/kWh installed cost targets, Meta's full deployment would represent $5B+ capex; initial phase implies $125-250M project value at current LDES benchmarks.",
+      "confidence": "MEDIUM",
+      "trl_score": 6,
+      "trl_verdict": "QUESTIONABLE",
+      "policy_beta": 3,
+      "source": "POWER Magazine",
+      "source_url": "https://www.powermag.com/meta-secures-power-from-noon-energy-to-serve-data-centers/"
+    },
+    {
+      "title": "Switch secures $2.6B credit facility for transmission and generation assets",
+      "tag": "BULLISH",
+      "sector": "GRID",
+      "summary": "First syndicated performance letter of credit facility in data center sector, explicitly earmarked for transmission interconnection and on-site generation. This structure enables Switch to bypass utility queues by self-developing grid infrastructure. Signals fundamental shift in hyperscale power procurement from customer to asset owner.",
+      "implication": "At $8-12M/MW typical data center cost, this facility supports 200-325 MW incremental capacity; credit facility structure suggests 15-20% levered equity IRR on self-developed generation assets.",
       "confidence": "HIGH",
       "trl_score": 9,
       "trl_verdict": "PLAUSIBLE",
@@ -17,37 +30,24 @@
       "source_url": "https://www.datacenterdynamics.com/en/news/switch-secures-26bn-credit-facility-to-fuel-transmission-and-generation-for-data-centers/"
     },
     {
-      "title": "Meta reserves 1GW/100GWh from Noon Energy for ultra-long duration storage",
+      "title": "CIP begins construction on 300 MW/1,500 MWh Chile BESS",
       "tag": "BULLISH",
       "sector": "BESS",
-      "summary": "Meta's agreement with Noon Energy—starting with 25MW/2.5GWh by 2028, scaling to 1GW/100GWh—establishes the first hyperscaler commitment to 100-hour duration storage at commercial scale. Noon's carbon-oxygen battery chemistry (TRL 6-7) carries technology risk, but Meta's capacity reservation de-risks the commercialization pathway. This deal creates a valuation benchmark for long-duration storage developers targeting data center offtake.",
-      "implication": "LDES developers with credible 100+ hour duration and hyperscaler relationships should command 2-3x multiples vs. 4-hour Li-ion pure-plays; initial 25MW phase provides proof-of-concept checkpoint before 2028.",
-      "confidence": "MEDIUM",
-      "trl_score": 7,
-      "trl_verdict": "QUESTIONABLE",
-      "policy_beta": 3,
-      "source": "POWER Magazine",
-      "source_url": "https://www.powermag.com/meta-secures-power-from-noon-energy-to-serve-data-centers/"
-    },
-    {
-      "title": "Copenhagen Infrastructure Partners begins construction on 1,500MWh Chile BESS",
-      "tag": "BULLISH",
-      "sector": "BESS",
-      "summary": "CIP's 300MW/1,500MWh Patache project in northern Chile is among the largest BESS projects under construction globally, targeting merchant arbitrage in Chile's volatile spot market. 5-hour duration positions the asset for both ancillary services and energy shifting in a market with 30%+ solar penetration. DFI-grade sponsor (CIP) mitigates execution risk despite merchant price exposure.",
-      "implication": "Merchant BESS in Chile targeting 10-14% IRR with significant upside from spot volatility; policy beta of 3 reflects stable mining-driven demand but currency/regulatory risk.",
+      "summary": "Copenhagen Infrastructure Partners' Patache project represents 5-hour duration BESS targeting Chilean mining load arbitrage. Construction start de-risks execution; CIP's infrastructure pedigree reduces counterparty risk. Chile's copper-driven industrial demand provides stable offtake basis.",
+      "implication": "5-hour duration at scale suggests $180-220M total capex; Chilean merchant spreads of $40-60/MWh support 12-15% unlevered project IRRs.",
       "confidence": "HIGH",
       "trl_score": 9,
       "trl_verdict": "PLAUSIBLE",
-      "policy_beta": 3,
+      "policy_beta": 4,
       "source": "Energy Storage News",
       "source_url": "https://www.energy-storage.news/copenhagen-infrastructure-partners-begins-construction-on-1500mwh-chile-bess/"
     },
     {
-      "title": "EBRD provides $82M for 450MW solar + 250MW/1GWh BESS in Hungary",
+      "title": "EBRD provides $82M for 450 MW solar + 250 MW/1 GWh BESS in Hungary",
       "tag": "WATCH",
       "sector": "SOLAR",
-      "summary": "EBRD's €70M loan for Hungary's largest hybrid solar-BESS project signals DFI appetite for CEE exposure despite Orbán government's unpredictable energy policy record. At $329/kWh implied BESS cost and $80-120/kW solar, valuations are fair but not compelling. DFI participation provides implicit political risk insurance, though retroactive policy changes remain a concern.",
-      "implication": "10-14% equity IRR achievable if contracted offtake confirmed; Hungary's policy beta of 6 warrants 200-300bps risk premium vs. Western European equivalents.",
+      "summary": "EBRD senior debt tranche at ~10% of implied $800-900M total project capex indicates deep multi-lender stack. 4-hour BESS paired with solar is standard but Hungarian regulatory unpredictability and EU rule-of-law disputes create elevated sovereign risk. DFI involvement caps upside but reduces execution risk.",
+      "implication": "EBRD participation suggests 10-14% equity IRRs with political risk insurance embedded; watch for Hungarian METÁR auction results to validate revenue assumptions.",
       "confidence": "MEDIUM",
       "trl_score": 9,
       "trl_verdict": "PLAUSIBLE",
@@ -56,37 +56,37 @@
       "source_url": "https://www.energymonitor.ai/news/ebrd-82m-solar-and-bess-project-hungary/"
     },
     {
-      "title": "Stegra secures €1.4B to complete world's first major green-steel mill",
+      "title": "ILOS upsizes European solar/BESS credit facility to €450M for 2 GW pipeline",
       "tag": "WATCH",
-      "sector": "H2",
-      "summary": "Wallenberg-led €1.4B round for Stegra (formerly H2 Green Steel) represents the largest single investment in hydrogen-based direct reduced iron (H2-DRI) to date. First-of-kind execution risk at commercial scale is substantial—no H2-DRI plant has operated at this throughput. Technology is TRL 7-8 but integration at 2.5Mt/year capacity is unproven.",
-      "implication": "Investors should treat as quasi-venture exposure despite infrastructure-like capital structure; success would establish $660/ton green steel as competitive with EAF, failure would set back European industrial decarbonization by 3-5 years.",
+      "sector": "SOLAR",
+      "summary": "Facility upsizing to €450M signals lender confidence in ILOS pipeline quality. Target of 2 GW by 2028 implies ~500 MW/year deployment—achievable but contingent on EU grid connection queue progress. Implied financing at $265/kW is within market range for pre-COD development assets.",
+      "implication": "Structured credit facility suggests 12-16% sponsor equity IRR target; execution risk concentrated in permitting rather than technology or financing.",
       "confidence": "MEDIUM",
-      "trl_score": 8,
-      "trl_verdict": "QUESTIONABLE",
-      "policy_beta": 7,
-      "source": "Canary Media",
-      "source_url": "https://www.canarymedia.com/articles/green-steel/stegra-funding-complete-mill"
-    },
-    {
-      "title": "Tenaska signs 900MWh ESA with TVA in Tennessee",
-      "tag": "BULLISH",
-      "sector": "BESS",
-      "summary": "Tenaska's 225MW/900MWh Bobwhite project with long-term TVA offtake represents the type of contracted, creditworthy BESS deal that de-risks utility-scale storage. TVA's investment-grade counterparty status and Southeast grid congestion dynamics make this an attractive risk-adjusted play. 4-hour duration at TRL 9 eliminates technology risk.",
-      "implication": "Contracted utility BESS with IOU/public power offtake targeting 10-12% levered returns; TVA exposure provides effective policy beta of 2.",
-      "confidence": "HIGH",
       "trl_score": 9,
       "trl_verdict": "PLAUSIBLE",
-      "policy_beta": 2,
-      "source": "Energy Storage News",
-      "source_url": "https://www.energy-storage.news/ipp-tenaska-signs-esa-for-900mwh-tennessee-bess/"
+      "policy_beta": 5,
+      "source": "PV Tech",
+      "source_url": "https://www.pv-tech.org/ilos-secures-us530-million-facility-to-scale-european-solar-pv-and-bess-pipeline/"
     },
     {
-      "title": "DTEK announces $1.4B, 650MW wind farm in Ukraine",
+      "title": "BrightNight acquires 6 GW Western US portfolio from Cordelio",
+      "tag": "BULLISH",
+      "sector": "SOLAR",
+      "summary": "BrightNight consolidates full ownership of joint venture assets, signaling conviction in Western US renewable buildout despite IRA uncertainty. 6 GW portfolio represents significant scale for hybrid solar+storage development targeting CAISO and Southwest markets.",
+      "implication": "At $50-100k/MW for late-stage development rights, implied transaction value of $300-600M; strategic positioning for hyperscaler PPAs in constrained Western interconnection markets.",
+      "confidence": "MEDIUM",
+      "trl_score": 9,
+      "trl_verdict": "PLAUSIBLE",
+      "policy_beta": 4,
+      "source": "PV Tech",
+      "source_url": "https://www.pv-tech.org/brightnight-expands-western-us-footprint-with-6gw-portfolio-acquisition-from-cordelio/"
+    },
+    {
+      "title": "DTEK commits $1.4B to 650 MW Ukraine wind farm",
       "tag": "RED_FLAG",
       "sector": "WIND",
-      "summary": "DTEK's €1.2B Poltavska wind farm commitment in an active war zone represents uninvestable risk regardless of technical feasibility. At $2.15/W, installed costs are reasonable for the logistics environment, but asset destruction risk is uninsurable. War risk insurance markets are effectively closed for Ukrainian energy infrastructure.",
-      "implication": "Avoid all Ukraine energy exposure until conflict resolution; any development-stage capital deployed is effectively written down on Day 1 from insurance perspective.",
+      "summary": "€1.2B investment in active war zone carries uninsurable physical destruction risk. While cost structure at ~$2.15/W is market-consistent, counterparty, currency, and force majeure risks make this effectively uninvestable for Western capital. Signals DTEK's strategic bet on post-conflict reconstruction positioning.",
+      "implication": "Zero institutional capital should deploy to Ukraine energy assets until cessation of hostilities; project serves as reconstruction optionality for DTEK balance sheet only.",
       "confidence": "HIGH",
       "trl_score": 9,
       "trl_verdict": "PLAUSIBLE",
@@ -95,107 +95,113 @@
       "source_url": "https://www.powermag.com/dtek-will-build-1-4-billion-650-mw-wind-farm-in-ukraine/"
     },
     {
-      "title": "BrightNight acquires 6GW portfolio from Cordelio JV",
-      "tag": "BULLISH",
-      "sector": "SOLAR",
-      "summary": "BrightNight's consolidation of the 6GW Western US portfolio from its Cordelio joint venture signals confidence in US renewables development despite tariff uncertainty. Portfolio concentration in Western interconnection provides exposure to California's aggressive storage mandates and CAISO market dynamics. Transaction structure (JV buyout) suggests valuation aligned with development-stage multiples.",
-      "implication": "6GW at early-stage likely valued at $20-40M/GW ($120-240M implied); watch for FID announcements as leading indicator of execution velocity.",
-      "confidence": "MEDIUM",
-      "trl_score": 9,
+      "title": "Tesla lithium refinery faces shutdown over hexavalent chromium discharge",
+      "tag": "RED_FLAG",
+      "sector": "OTHER",
+      "summary": "Independent testing confirmed hexavalent chromium (known carcinogen) and arsenic in wastewater from Tesla's $1B Robstown refinery. Nueces County Drainage District demanding operations halt. This threatens the only at-scale domestic lithium refining facility and exposes broader supply chain permitting risk.",
+      "implication": "Facility shutdown would remove ~8% of planned US lithium hydroxide capacity by 2028; watch for EPA enforcement escalation and read-across to other battery materials facilities.",
+      "confidence": "HIGH",
+      "trl_score": 8,
       "trl_verdict": "PLAUSIBLE",
-      "policy_beta": 5,
-      "source": "PV Tech",
-      "source_url": "https://www.pv-tech.org/brightnight-expands-western-us-footprint-with-6gw-portfolio-acquisition-from-cordelio/"
+      "policy_beta": 3,
+      "source": "Electrek",
+      "source_url": "https://electrek.co/2026/04/21/tesla-lithium-refinery-toxic-metals-wastewater-texas/"
     }
   ],
   "sector_positioning": [
     {
       "sector": "BESS",
       "stance": "OVERWEIGHT",
-      "rationale": "Five significant BESS transactions this week (Chile 1.5GWh, Hungary 1GWh, Tennessee 900MWh, NZ FID, Meta 100GWh reservation) demonstrate accelerating deployment across geographies. Contracted utility deals (TVA, Genesis) offer 10-14% IRR with minimal technology risk while LDES positions for hyperscaler offtake represent asymmetric upside.",
-      "key_risk": "Merchant price exposure in uncontracted markets (Chile spot, ERCOT); policy beta ranges 2-4 for contracted, 5-6 for merchant",
-      "valuation_note": "4-hour Li-ion at $250-400/kWh all-in project cost; LDES commanding premium for hyperscaler offtake"
+      "rationale": "Three construction/FID announcements this week (CIP Chile, Genesis NZ, Rivian/Redwood) plus Meta's transformative 100 GWh LDES reservation demonstrate capital velocity into storage. Duration is extending from 4-hour to 5-hour and beyond, expanding addressable market.",
+      "key_risk": "Ultra-long duration (100+ hour) remains TRL 6; hyperscaler commitments may strand if technology doesn't deliver. Policy beta: 3-4.",
+      "valuation_note": "4-hour Li-ion BESS trading at 8-10x EBITDA for operational assets; development platforms at 1.2-1.5x NAV."
     },
     {
-      "sector": "OTHER",
+      "sector": "AI_DC_POWER",
       "stance": "OVERWEIGHT",
-      "rationale": "Data center power infrastructure ($4.6B in credit facilities this week) is the highest-conviction energy adjacency for 2026-2030. Switch and DataBank facilities demonstrate credit market appetite; AI training power demand is non-discretionary and growing 30%+ annually.",
-      "key_risk": "Grid interconnection timelines in ERCOT, PJM; policy beta of 2 reflects minimal regulatory dependency",
-      "valuation_note": "DC construction at $8-12M/MW IT load; 15-20% platform-level equity returns"
+      "rationale": "$4.6B in data center financing this week (DataBank $2B, Switch $2.6B) plus OpenAI's $470M Texas facility confirms AI infrastructure capital wave accelerating. Critical shift: hyperscalers now self-developing generation/transmission rather than relying on utility interconnection.",
+      "key_risk": "ERCOT grid constraints creating 2-4 year interconnection delays in Texas; FERC transmission reform could shift value to utilities. Policy beta: 2.",
+      "valuation_note": "Data center REITs at 15-20x FFO; infrastructure plays (Switch, QTS) at premium due to power procurement capabilities."
     },
     {
       "sector": "SOLAR",
       "stance": "NEUTRAL",
-      "rationale": "ILOS €450M facility and BrightNight 6GW acquisition show continued capital formation, but VSUN UFLPA detention ($30M earnings impact) highlights persistent supply chain/trade policy risk. Module pricing pressure and tariff uncertainty warrant neutral positioning.",
-      "key_risk": "UFLPA enforcement creating supply chain disruption; policy beta of 5-6 for US market exposure",
-      "valuation_note": "European development at $200-350/kW; US tariff uncertainty compressing multiples"
+      "rationale": "€450M ILOS facility and 6 GW BrightNight portfolio consolidation show continued development activity, but VSUN UFLPA detention ($30M earnings impact) signals persistent supply chain compliance risk. European permitting delays offsetting financing availability.",
+      "key_risk": "UFLPA enforcement expanding; any module traceability gaps create detention risk. Policy beta: 6-7 for import-dependent developers.",
+      "valuation_note": "US residential solar at 0.8-1.0x book; utility-scale developers at 6-8x development EBITDA depending on contracted percentage."
     },
     {
       "sector": "WIND",
       "stance": "UNDERWEIGHT",
-      "rationale": "Ørsted-Hitachi partnership signals supply chain maturation, but offshore cost inflation and Ukraine war risk (DTEK $1.4B) make sector uninvestable at current risk-adjusted returns. Evolve-Shell PPA (573MW Race Bank through 2035) shows contracted assets remain financeable but new development IRRs compressed.",
-      "key_risk": "Ukraine exposure is CRITICAL risk; offshore cost overruns; policy beta ranges 3-7 depending on geography",
-      "valuation_note": "Offshore at $3,500-4,500/kW; onshore Ukraine at $2,150/kW but uninsurable"
+      "rationale": "Ørsted-Hitachi partnership on offshore electrical systems is positive for execution, but Shell's Race Bank PPA extension through 2035 signals merchant price concerns. Ukraine wind investment ($1.4B) reflects war-zone optionality, not investable opportunity.",
+      "key_risk": "European offshore wind auction prices compressing returns below 8% levered equity; supply chain inflation persisting. Policy beta: 5.",
+      "valuation_note": "Offshore wind developers at 0.7-0.9x NAV on compressed return expectations; onshore at 7-9x EBITDA."
     },
     {
-      "sector": "H2",
-      "stance": "UNDERWEIGHT",
-      "rationale": "Stegra €1.4B represents significant capital commitment to H2-DRI, but first-of-kind execution risk at commercial scale warrants caution. No operating reference plants at 2.5Mt/year capacity. Treat as venture-adjacent exposure despite infrastructure capital structure.",
-      "key_risk": "Technology integration risk at scale; offtake pricing for green steel unproven; policy beta of 7",
-      "valuation_note": "Implied $660/ton green steel cost must compete with $500-550/ton EAF"
+      "sector": "GRID",
+      "stance": "OVERWEIGHT",
+      "rationale": "Switch's $2.6B credit facility for self-developed transmission and New England's push for $1.5B ratepayer refunds highlight grid infrastructure value creation. Data center operators are becoming transmission developers, creating new competitive dynamics.",
+      "key_risk": "FERC transmission cost allocation disputes create regulatory uncertainty; utility pushback on behind-the-meter generation. Policy beta: 4.",
+      "valuation_note": "Transmission-exposed utilities at 12-14x regulated earnings; grid services platforms at significant premiums where contracted."
     },
     {
-      "sector": "NUCLEAR",
+      "sector": "OTHER",
       "stance": "NEUTRAL",
-      "rationale": "Fusion milestones article signals continued private capital flow into speculative timeline plays, but no near-term investable transactions. SMR/fusion remain 2030+ commercialization stories with policy beta highly dependent on NRC/regulatory pathway.",
-      "key_risk": "Decade-plus commercialization timeline; regulatory approval uncertainty; policy beta of 3-5",
-      "valuation_note": "Insufficient transaction data for valuation benchmarks"
+      "rationale": "Stegra's €1.4B green steel funding (Wallenberg-led) validates CBAM-driven decarbonization thesis, but first-of-kind integration risk remains high. AITO's entry into BMW/Mercedes IONCHI charging JV signals Chinese EV ecosystem maturation.",
+      "key_risk": "Green steel CBAM dependency creates policy beta of 7; Tesla lithium refinery contamination exposes domestic supply chain permitting fragility. Policy beta: 3-7.",
+      "valuation_note": "Green steel premiums of $100-200/ton assumed in Stegra financing; EV charging at early-stage multiples (3-5x revenue)."
     }
   ],
   "red_flags": [
     {
-      "issue": "Tesla lithium refinery toxic discharge threatens regulatory shutdown",
-      "detail": "Hexavalent chromium (known carcinogen), arsenic, and elevated lithium detected in wastewater from Tesla's $1B Robstown refinery. Nueces County Drainage District demanding halt. TCEQ enforcement action could delay domestic lithium production 12-24 months, impacting battery supply chain thesis.",
-      "policy_beta": 4,
+      "issue": "Tesla lithium refinery contamination threatens US battery supply chain",
+      "detail": "Hexavalent chromium and arsenic in wastewater from the only at-scale US lithium refinery creates precedent for EPA enforcement across battery materials sector. Shutdown would remove 8% of planned 2028 lithium hydroxide capacity.",
+      "policy_beta": 3,
       "source": "Electrek"
     },
     {
-      "issue": "VSUN UFLPA detention signals expanded supply chain enforcement",
-      "detail": "Vietnam-based VSUN modules detained under Uyghur Forced Labor Prevention Act, potentially knocking $30M off earnings. Signals CBP expanding enforcement beyond Chinese-origin modules to Southeast Asian reshipment. Portfolio companies with SE Asia solar supply chains require immediate due diligence.",
-      "policy_beta": 6,
+      "issue": "VSUN UFLPA detention signals expanded Customs enforcement",
+      "detail": "$30M earnings impact from module detention demonstrates CBP actively enforcing traceability requirements. Vietnam-based manufacturing no longer provides safe harbor from UFLPA scrutiny; polysilicon origin documentation now critical.",
+      "policy_beta": 7,
       "source": "PV Tech"
     },
     {
-      "issue": "Ukraine wind investment is uninvestable war-zone capital destruction risk",
-      "detail": "DTEK's $1.4B commitment to 650MW Poltavska wind farm represents capital deployment in active conflict zone. War risk insurance unavailable; asset destruction risk is binary and unhedgeable. Any LP exposure to Ukraine energy should be marked to zero for risk purposes.",
+      "issue": "Ukraine wind investment reflects war optionality, not viable deployment",
+      "detail": "DTEK's $1.4B commitment to 650 MW wind in active conflict zone is uninvestable for Western institutional capital. Physical destruction risk uninsurable; signals DTEK positioning for post-conflict reconstruction rather than near-term returns.",
       "policy_beta": 7,
       "source": "POWER Magazine"
+    },
+    {
+      "issue": "Fusion funding milestone claims remain pre-commercial",
+      "detail": "Despite private investment acceleration, no credible path to commercial fusion power plants by 2030s. Stranded capital risk for early-stage fusion investments remains elevated; 15+ year commercialization timeline unchanged.",
+      "policy_beta": 4,
+      "source": "Nuclear Engineering International"
     }
   ],
-  "macro_watch": "European energy policy fragmentation (Hungary regulatory risk, UK/EU divergence) is pushing capital toward US and Latin American markets with clearer regulatory frameworks. The $4.6B+ data center credit facilities demonstrate that AI power demand has become the primary demand driver for energy infrastructure capital allocation, displacing traditional utility procurement cycles.",
-  "data_note": "Key sources: Energy Storage News (4 BESS transactions), Data Center Dynamics ($4.6B DC facilities), POWER Magazine (Meta LDES, DTEK wind), PV Tech (UFLPA enforcement), Canary Media (Stegra H2-DRI)",
-  "agent_chain_summary": "The three-agent synthesis elevated the Meta-Noon Energy LDES deal from a technology curiosity (TRL 7 questionable) to a strategic positioning signal by integrating the financial analyst's hyperscaler offtake valuation premium with the risk officer's low policy beta assessment—a conclusion a single AI would have missed by treating technology risk in isolation.",
+  "macro_watch": "Data center capital deployment of $7.1B this week (DataBank, Switch, OpenAI Stargate) is reshaping energy VC dealflow toward integrated power+compute infrastructure rather than standalone renewable generation. European DFI involvement (EBRD Hungary, potential EIB follow-on) signals risk appetite for CEE energy despite geopolitical tensions, but Ukraine exposure remains stranded capital.",
+  "data_note": "Primary sources: Data Center Dynamics (3 signals), Energy Storage News (3 signals), PV Tech (2 signals), POWER Magazine (2 signals), Electrek (2 signals). SEC Edgar filings reviewed but no material energy disclosures this week. arXiv signals on DER control systems noted but no commercial implications identified.",
+  "agent_chain_summary": "Three-agent analysis elevated Meta/Noon LDES deal from routine corporate PPA to strategic inflection point—tech agent flagged TRL 6 risk on 100-hour duration, financial agent identified 10x cost structure change potential, and risk agent confirmed low policy beta versus contracted alternatives, yielding MEDIUM confidence BULLISH versus single-AI's likely WATCH rating.",
   "agent_chain": {
     "tech_assessments_count": 9,
-    "deal_assessments_count": 11,
+    "deal_assessments_count": 12,
     "risk_assessments_count": 10,
-    "tech_summary": "This week's signals predominantly feature mature, TRL-9 technologies (solar, wind, Li-ion BESS) in routine deployment scale-ups with no technical risk. Two notable exceptions: Tesla's lithium refinery faces real process engineering challenges evidenced by wastewater contamination, and fusion timelines remain aspirational versus physics constraints. Stegra's green steel represents a genuine first-of-kind commercial integration worth monitoring for H2-DRI learning curves.",
-    "deal_summary": "This week's deal flow shows continued DFI/infrastructure capital deployment into mature solar and BESS at fair valuations (€450M ILOS, $82M EBRD Hungary). The Ukraine wind project at $2,154/kW is a clear outlier reflecting war-risk premium and should be avoided. Most interesting is CIP's Chile BESS at reasonable $/kWh for 5-hour duration in a merchant-heavy market - suggests infrastructure capital comfortable with Latin American execution. Data center financing remains robust with DataBank's $2B raise.",
-    "risk_summary": "Ukraine wind is uninvestable; Tesla refinery and Stegra require close monitoring for regulatory and execution risk respectively."
+    "tech_summary": "This week's signals reflect a mature renewable energy deployment landscape—solar PV, onshore wind, and grid-scale BESS (up to 5-hour duration) are all TRL 9 with no technical barriers to the announced projects. The more technically challenging signals involve first-of-kind industrial applications: Tesla's lithium refinery shows typical scale-up teething issues with process engineering, while Stegra's green steel represents a credible but ambitious integration of proven components. Fusion remains the outlier with 2030s power plant claims requiring major breakthroughs in tritium breeding and materials science that have no clear path to resolution.",
+    "deal_summary": "This week's deal flow shows continued institutional capital deployment into BESS and data center infrastructure at fair-to-aggressive valuations. DFI-backed renewable deals (EBRD Hungary, CIP Chile) offer de-risked returns in the 10-16% range, while hyperscale data center financing reflects strong conviction in AI-driven demand. The Ukraine wind project at $2,154/kW represents war-risk pricing that makes economic returns highly questionable despite strategic energy security narrative.",
+    "risk_summary": "Ukraine wind and Tesla refinery require immediate attention; BESS deals generally well-structured but watch policy dependency in manufacturing subsidies."
   },
-  "generated_at": "2026-04-22T14:02:25.183882",
+  "generated_at": "2026-04-22T14:15:02.972095",
   "signal_count": 23,
   "sources_used": [
-    "Energy Monitor",
     "Offshore Wind Biz",
-    "Electrek",
-    "Datacenter Dynamics",
-    "Nuclear Engineering",
+    "Energy Monitor",
     "Energy Storage News",
-    "Canary Media",
-    "Utility Dive",
-    "CleanTechnica",
     "Power Magazine",
-    "PV Tech"
+    "Canary Media",
+    "PV Tech",
+    "Datacenter Dynamics",
+    "Electrek",
+    "Nuclear Engineering",
+    "Utility Dive",
+    "CleanTechnica"
   ]
 }
