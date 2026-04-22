@@ -477,6 +477,21 @@ HTML_TEMPLATE = """<!DOCTYPE html>
   .signal-summary{font-size:12px;line-height:1.65;color:var(--muted);margin-bottom:8px;}
   .signal-impl{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--amber-light);padding:8px 12px;background:rgba(212,130,10,.04);border-left:1px solid var(--border);margin-bottom:6px;}
   .signal-source{font-family:'IBM Plex Mono',monospace;font-size:9px;color:rgba(245,244,239,.2);}
+  .agent-badge-row{display:flex;gap:6px;margin:8px 0 4px;flex-wrap:wrap;}
+  .trl-badge{font-family:'IBM Plex Mono',monospace;font-size:9px;padding:2px 8px;border-radius:2px;font-weight:500;}
+  .trl-PLAUSIBLE{background:rgba(74,222,128,.1);color:#4ade80;border:1px solid rgba(74,222,128,.2);}
+  .trl-QUESTIONABLE{background:rgba(245,158,11,.1);color:#f0a832;border:1px solid rgba(245,158,11,.2);}
+  .trl-RED_FLAG{background:rgba(248,113,113,.1);color:#f87171;border:1px solid rgba(248,113,113,.2);}
+  .trl-NA{background:rgba(107,107,94,.1);color:#6b6b5e;border:1px solid rgba(107,107,94,.2);}
+  .policy-badge{font-family:'IBM Plex Mono',monospace;font-size:9px;padding:2px 8px;border-radius:2px;border:1px solid rgba(245,244,239,.1);color:rgba(245,244,239,.4);}
+  .policy-high{border-color:rgba(248,113,113,.3)!important;color:#f87171!important;}
+  .policy-mid{border-color:rgba(245,158,11,.3)!important;color:#f0a832!important;}
+  .agent-chain-bar{background:rgba(59,130,246,.04);border:1px solid rgba(59,130,246,.1);padding:16px 20px;margin-bottom:24px;border-radius:2px;}
+  .acb-title{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.2em;color:rgba(59,130,246,.7);text-transform:uppercase;margin-bottom:10px;}
+  .acb-stats{display:flex;gap:24px;margin-bottom:10px;flex-wrap:wrap;}
+  .acb-stat{font-family:'IBM Plex Mono',monospace;font-size:10px;color:rgba(245,244,239,.5);}
+  .acb-stat span{color:rgba(59,130,246,.9);font-weight:500;}
+  .acb-summary{font-size:12px;color:rgba(245,244,239,.4);line-height:1.6;font-style:italic;}
   .positioning-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin-bottom:48px;}
   .pos-card{border:1px solid var(--border);padding:18px;}
   .OVERWEIGHT{color:#4ade80;} .NEUTRAL{color:var(--amber);} .UNDERWEIGHT{color:#f87171;}
@@ -495,6 +510,22 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 <h1>{{ brief.headline }}</h1>
 <div class="thesis">{{ brief.thesis }}</div>
 
+{% if brief.agent_chain %}
+<div class="agent-chain-bar">
+  <div class="acb-title">■ AI Agent Chain Analysis</div>
+  <div class="acb-stats">
+    <div class="acb-stat">Tech Validator <span>{{ brief.agent_chain.tech_assessments_count }}개</span></div>
+    <div class="acb-stat">Deal Analyst <span>{{ brief.agent_chain.deal_assessments_count }}개</span></div>
+    <div class="acb-stat">Risk Screener <span>{{ brief.agent_chain.risk_assessments_count }}개</span></div>
+    <div class="acb-stat">Signals <span>{{ brief.signal_count }}</span></div>
+    <div class="acb-stat">Generated <span>{{ brief.generated_at[:10] if brief.generated_at else "" }}</span></div>
+  </div>
+  {% if brief.agent_chain_summary %}
+  <div class="acb-summary">"{{ brief.agent_chain_summary }}"</div>
+  {% endif %}
+</div>
+{% endif %}
+
 <section>
   <div class="section-label">■ DEAL SIGNALS</div>
   {% for s in brief.deal_signals %}
@@ -507,6 +538,22 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     </div>
     <div class="signal-summary">{{ s.summary }}</div>
     <div class="signal-impl">→ {{ s.implication }}</div>
+    {% if s.trl_verdict or s.policy_beta is not none %}
+    <div class="agent-badge-row">
+      {% if s.trl_score and s.trl_verdict and s.trl_verdict != 'N/A' %}
+      <span class="trl-badge trl-{{ s.trl_verdict }}">TRL {{ s.trl_score }} · {{ s.trl_verdict }}</span>
+      {% endif %}
+      {% if s.policy_beta is not none %}
+      {% if s.policy_beta >= 7 %}
+      <span class="policy-badge policy-high">Policy Beta {{ s.policy_beta }}/10</span>
+      {% elif s.policy_beta >= 4 %}
+      <span class="policy-badge policy-mid">Policy Beta {{ s.policy_beta }}/10</span>
+      {% else %}
+      <span class="policy-badge">Policy Beta {{ s.policy_beta }}/10</span>
+      {% endif %}
+      {% endif %}
+    </div>
+    {% endif %}
     {% if s.source_url %}
     <a class="signal-source" href="{{ s.source_url }}" target="_blank" rel="noopener" style="color:rgba(245,244,239,.3);text-decoration:none;">Source: {{ s.source }} ↗</a>
     {% else %}
