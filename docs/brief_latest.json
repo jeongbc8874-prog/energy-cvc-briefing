@@ -1,14 +1,14 @@
 {
   "week": "2026-W17",
-  "headline": "DFI-backed BESS deployments in Chile, Hungary, and New Zealand deliver 11-15% IRRs at LOW risk while merchant European solar+storage faces 3-7% BESS drag—capital should flow to contracted emerging market storage.",
-  "thesis": "This week saw $2.6B+ in announced energy infrastructure capital, but risk-adjusted returns diverge sharply: Development Finance Institution (DFI) backed BESS projects in Chile (1,500MWh), Hungary (1GWh), and Tennessee (900MWh) offer contracted cashflows at 11-15% IRRs, while European merchant BESS exposure and war-zone wind carry uncompensated tail risk. The Meta-Noon Energy deal (1GW/100GWh ultra-long duration) signals hyperscaler offtake is creating a new contracted storage premium tier. Position for contracted BESS with DFI or hyperscaler offtake; avoid merchant European hybrid and subscale domestic manufacturing.",
+  "headline": "DFI-backed BESS deployments dominate global deal flow with $1.2B+ committed across 4 continents at policy betas <3, while Ukraine wind ($1.4B) and green steel ($1.65B) carry uninsurable execution risk.",
+  "thesis": "This week saw unprecedented BESS project finance velocity—CIP's 1,500MWh Chile project, EBRD's Hungarian hybrid, TVA's 900MWh Tennessee ESA, and Genesis NZ's FID—all backed by development finance or contracted offtake with policy betas ≤3. The capital rotation signals institutional conviction that 4-hour LFP storage has reached commoditized risk status, while frontier bets (DTEK Ukraine wind at policy beta 9, Stegra green steel at TRL 3-4) attract headlines but not risk-adjusted capital. Allocators should overweight contracted BESS in OECD markets, underweight uncontracted merchant exposure in EU, and avoid warzone/pre-commercial technology until de-risking events occur.",
   "deal_signals": [
     {
-      "title": "Copenhagen Infrastructure Partners begins construction on 1,500MWh Chile BESS",
+      "title": "CIP begins construction on 300MW/1,500MWh Patache BESS in Chile",
       "tag": "BULLISH",
       "sector": "BESS",
-      "summary": "CIP's 300MW/1,500MWh Patache project in Chile represents institutional-grade BESS deployment at TRL 9 with proven Li-ion technology. EBRD/DFI-style contracted revenue structure typical for CIP minimizes merchant exposure. Chile peso/USD FX is the primary residual risk, not technology or offtake.",
-      "implication": "Target 12-14% equity IRR with contracted structure; FX hedging costs ~50-75bps drag but acceptable for LOW overall risk profile.",
+      "summary": "Copenhagen Infrastructure Partners has broken ground on Latin America's largest BESS project (5-hour duration), targeting Chile's ancillary services market where grid instability creates premium pricing. TRL 9 technology with Danish institutional backing and construction-phase risk now underway. Chilean grid ancillary revenue concentration is the primary risk, but CIP's infrastructure fund structure provides long-tenor capital match.",
+      "implication": "Expect 8-12% levered IRR on contracted ancillary services; entry point for LPs seeking LatAm BESS exposure without development risk.",
       "confidence": "HIGH",
       "trl_score": 9,
       "trl_verdict": "PLAUSIBLE",
@@ -17,24 +17,24 @@
       "source_url": "https://www.energy-storage.news/copenhagen-infrastructure-partners-begins-construction-on-1500mwh-chile-bess/"
     },
     {
-      "title": "Meta Secures 1GW/100GWh Ultra-Long Duration Storage from Noon Energy",
-      "tag": "BULLISH",
+      "title": "Meta reserves 1GW/100GWh from Noon Energy for ultra-long duration storage",
+      "tag": "WATCH",
       "sector": "BESS",
-      "summary": "Meta's reservation of up to 1GW/100GWh from Noon Energy (initial 25MW/2.5GWh by 2028) marks hyperscaler validation of ultra-long duration storage (100hr) for data center decarbonization. Noon's carbon-oxygen battery technology remains at TRL 5-6, but Meta's offtake commitment de-risks commercialization pathway. This creates a new 'hyperscaler-contracted' premium tier above merchant BESS.",
-      "implication": "First-mover advantage for ULDES developers with Big Tech offtake; expect 15-20x revenue multiples for contracted ULDES vs. 8-12x for merchant BESS developers.",
+      "summary": "Meta's offtake agreement with Noon Energy signals hyperscaler demand for 100-hour+ duration storage to firm AI data center loads. Initial 25MW/2.5GWh project targets 2028 COD. However, Noon's carbon-oxygen battery technology sits at TRL 4-5 with no commercial-scale deployment history—this is a strategic option, not a bankable project.",
+      "implication": "Validates hyperscaler willingness to pay premium for long-duration; but Noon requires $500M+ to reach commercial scale with uncertain unit economics.",
       "confidence": "MEDIUM",
-      "trl_score": 6,
+      "trl_score": 4,
       "trl_verdict": "QUESTIONABLE",
       "policy_beta": 1,
       "source": "POWER Magazine",
       "source_url": "https://www.powermag.com/meta-secures-power-from-noon-energy-to-serve-data-centers/"
     },
     {
-      "title": "EBRD provides $82M for 450MW Solar + 250MW/1GWh BESS in Hungary",
+      "title": "EBRD $82M loan for 450MW solar + 250MW/1GWh BESS in Hungary",
       "tag": "BULLISH",
-      "sector": "BESS",
-      "summary": "EBRD financing at €70M for a 450MW solar + 1GWh BESS hybrid implies ~$82/kWh capex—below BNEF 2025 benchmark of $110/kWh. DFI backing requires contracted offtake, eliminating merchant BESS risk. Hungarian grid curtailment risk exists as solar penetration grows but is manageable given 4hr storage duration.",
-      "implication": "11-15% equity IRR achievable with below-market capex and DFI credit enhancement; model 85% availability assumption for curtailment sensitivity.",
+      "sector": "SOLAR",
+      "summary": "EBRD's €70M senior debt for Hungary's largest solar+storage hybrid implies total project cost of $400-500M with ~18% DFI coverage. 4-hour LFP BESS at TRL 9 paired with solar at implied $183k/MW (cheap vs. EU comps of $800k-1.2M/MW at COD). Hungarian grid curtailment risk for 450MW injection is the primary technical concern, but DFI involvement typically requires contracted offtake mitigating merchant exposure.",
+      "implication": "10-14% equity IRR with concessional debt terms; compelling entry for CEE solar exposure with BESS optionality.",
       "confidence": "HIGH",
       "trl_score": 9,
       "trl_verdict": "PLAUSIBLE",
@@ -43,11 +43,11 @@
       "source_url": "https://www.energymonitor.ai/news/ebrd-82m-solar-and-bess-project-hungary/"
     },
     {
-      "title": "Tenaska signs 900MWh Tennessee BESS ESA with TVA",
+      "title": "Tenaska signs 225MW/900MWh ESA with TVA in Tennessee",
       "tag": "BULLISH",
       "sector": "BESS",
-      "summary": "Tenaska's 225MW/900MWh project secured a long-term ESA with TVA, providing contracted utility-grade cashflows in a high-demand Southeast US grid. TRL 9 technology with established IPP execution capability. TVA's load growth from data center expansion in Tennessee underpins offtake fundamentals.",
-      "implication": "ESA structure supports 10-12% levered returns with investment-grade counterparty; zero merchant exposure positions this as core infrastructure allocation.",
+      "summary": "TVA's long-term energy storage agreement with Tenaska's Bobwhite project provides contracted revenue certainty in a regulated utility market. 4-hour duration at TRL 9 with investment-grade offtaker eliminates merchant risk. TVA's capacity needs driven by coal retirements and AI data center load growth in the Southeast create structural demand.",
+      "implication": "Contracted utility ESA implies 9-11% unlevered IRR with minimal merchant exposure; template for TVA's 5GW+ BESS procurement pipeline.",
       "confidence": "HIGH",
       "trl_score": 9,
       "trl_verdict": "PLAUSIBLE",
@@ -56,26 +56,26 @@
       "source_url": "https://www.energy-storage.news/ipp-tenaska-signs-esa-for-900mwh-tennessee-bess/"
     },
     {
-      "title": "ILOS secures €450M facility for 2GW European Solar+BESS pipeline",
-      "tag": "WATCH",
-      "sector": "SOLAR",
-      "summary": "ILOS's €450M structured credit facility targeting 2GW by 2028 implies €225,000/MW—fair value for development pipeline. However, technical analysis confirms execution is permitting-constrained, not physics-constrained. Financial risk centers on merchant BESS exposure in Germany/France where BESS-only returns compress to 3-7% IRR, diluting blended portfolio returns.",
-      "implication": "Blended IRR likely 9-13% but highly sensitive to contracted vs. merchant split; require >60% contracted BESS to achieve double-digit returns.",
-      "confidence": "MEDIUM",
+      "title": "DTEK commits $1.4B to 650MW Poltavska wind farm in Ukraine",
+      "tag": "RED_FLAG",
+      "sector": "WIND",
+      "summary": "Ukraine's largest private energy company announces €1.2B investment at $2.15/W installed cost—within global onshore wind range—but active war zone creates uninsurable force majeure risk that no technical or financial analysis can mitigate. Even with EU reconstruction funding potential, project financing for Ukrainian infrastructure remains unavailable from commercial lenders.",
+      "implication": "Policy beta of 9 makes this unhedgeable; avoid until ceasefire + 12 months of grid stability demonstrated.",
+      "confidence": "HIGH",
       "trl_score": 9,
       "trl_verdict": "PLAUSIBLE",
-      "policy_beta": 4,
-      "source": "PV Tech",
-      "source_url": "https://www.pv-tech.org/ilos-secures-us530-million-facility-to-scale-european-solar-pv-and-bess-pipeline/"
+      "policy_beta": 9,
+      "source": "POWER Magazine",
+      "source_url": "https://www.powermag.com/dtek-will-build-1-4-billion-650-mw-wind-farm-in-ukraine/"
     },
     {
-      "title": "Stegra lands €1.4B to complete world's first major green-steel mill",
+      "title": "Stegra secures €1.4B to complete first major green-steel mill",
       "tag": "WATCH",
       "sector": "H2",
-      "summary": "Stegra (formerly H2 Green Steel) secured €1.4B from Wallenberg-led investors for its Swedish green steel flagship. First-of-kind execution risk is high, and 45V-equivalent EU hydrogen subsidy uncertainty creates policy cliff risk post-2027. Technology (green H2 + DRI) is proven at pilot scale (TRL 6-7) but industrial integration untested.",
-      "implication": "Policy beta of 8 warrants 25%+ discount rate assumption; Wallenberg backing provides credibility but does not eliminate subsidy tail risk.",
+      "summary": "Wallenberg-led €1.4B funding round enables Stegra (f/k/a H2 Green Steel) to complete its Swedish flagship mill targeting 2.5Mt/year capacity. However, green H2 supply chain at this scale is unproven (TRL 3-4 for integrated steel production), and EU green steel premium pricing remains uncertain. Policy beta of 8 reflects dependence on EU CBAM implementation and green premium offtake.",
+      "implication": "Strategic option on EU industrial decarbonization thesis; but hydrogen at €3-5/kg creates €200-300/ton cost disadvantage vs. Chinese steel without policy support.",
       "confidence": "MEDIUM",
-      "trl_score": 7,
+      "trl_score": 4,
       "trl_verdict": "QUESTIONABLE",
       "policy_beta": 8,
       "source": "Canary Media",
@@ -85,135 +85,116 @@
       "title": "BrightNight acquires 6GW Western US portfolio from Cordelio JV",
       "tag": "BULLISH",
       "sector": "SOLAR",
-      "summary": "BrightNight's consolidation of 6GW from its Cordelio JV demonstrates IPP appetite for Western US solar+storage scale. Transaction structure (JV buyout) suggests valuation discipline—no competitive auction premium. Western US interconnection queue delays remain execution risk, but 6GW provides pipeline optionality.",
-      "implication": "Development pipeline at $50-80k/MW implied; expect 3-5 year hold to COD with 15-20% development IRR if interconnection timelines hold.",
+      "summary": "BrightNight's consolidation of its Cordelio JV portfolio signals confidence in Western US solar+storage pipeline despite IRA uncertainty. 6GW development-stage assets provide optionality on ITC/PTC guidance. All-in platform acquisition suggests pipeline valuation of $30-50k/MW at early development stage.",
+      "implication": "Western US interconnection queue position is the asset; expect 3-5x value uplift from development to FID for permitted projects.",
       "confidence": "MEDIUM",
       "trl_score": 9,
       "trl_verdict": "PLAUSIBLE",
-      "policy_beta": 3,
+      "policy_beta": 4,
       "source": "PV Tech",
       "source_url": "https://www.pv-tech.org/brightnight-expands-western-us-footprint-with-6gw-portfolio-acquisition-from-cordelio/"
     },
     {
-      "title": "DTEK announces $1.4B, 650MW wind farm in Ukraine",
-      "tag": "RED_FLAG",
+      "title": "Ørsted-Hitachi Energy partnership for offshore wind electrical systems",
+      "tag": "WATCH",
       "sector": "WIND",
-      "summary": "DTEK's €1.2B Poltavska wind investment carries CRITICAL risk in an active war zone. Grid infrastructure destruction, uninsurable force majeure, and sovereign risk make this uninvestable by institutional standards regardless of project economics. Technical feasibility (TRL 9 onshore wind) is irrelevant given geopolitical reality.",
-      "implication": "No institutional capital should allocate; project serves political/reconstruction signaling function, not risk-adjusted return optimization.",
-      "confidence": "HIGH",
-      "trl_score": 9,
+      "summary": "Ørsted's strategic partnership with Hitachi Energy targets offshore wind electrical system standardization—a response to HVDC converter station delays that have plagued multiple North Sea projects. Technical risk is supply chain, not physics. Partnership structure suggests cost-sharing on balance-of-plant innovation.",
+      "implication": "Reduces Ørsted's project-level execution risk; positions Hitachi as preferred supplier for 10GW+ Ørsted pipeline through 2030.",
+      "confidence": "MEDIUM",
+      "trl_score": 8,
       "trl_verdict": "PLAUSIBLE",
-      "policy_beta": 7,
-      "source": "POWER Magazine",
-      "source_url": "https://www.powermag.com/dtek-will-build-1-4-billion-650-mw-wind-farm-in-ukraine/"
-    },
-    {
-      "title": "New Jersey moves to terminate OSW State Agreement Approach with PJM",
-      "tag": "RED_FLAG",
-      "sector": "WIND",
-      "summary": "NJ BPU's termination request for the regional OSW transmission coordination approach signals continued US offshore wind policy fragmentation. State-level permitting friction adds 12-24 months to development timelines and undermines regional grid optimization. Policy beta for US OSW remains elevated.",
-      "implication": "US OSW developers face 15-20% cost escalation from coordination failures; shift capital to contracted BESS or European OSW with clearer policy regimes.",
-      "confidence": "HIGH",
-      "trl_score": null,
-      "trl_verdict": "N/A",
-      "policy_beta": 6,
+      "policy_beta": 4,
       "source": "Offshore Wind Biz",
-      "source_url": "https://www.offshorewind.biz/2026/04/23/new-jersey-moves-to-terminate-offshore-wind-state-agreement-approach-with-regional-grid-operator/"
+      "source_url": "https://www.offshorewind.biz/2026/04/22/orsted-hitachi-energy-team-up-to-streamline-delivery-of-offshore-wind-electrical-systems/"
     }
   ],
   "sector_positioning": [
     {
       "sector": "BESS",
       "stance": "OVERWEIGHT",
-      "rationale": "DFI-backed projects (Chile, Hungary) and utility ESAs (TVA-Tennessee) deliver 11-15% IRRs at LOW risk. Hyperscaler offtake (Meta-Noon) creates premium tier for ultra-long duration. Avoid merchant European exposure where BESS-only returns compress to 3-7%.",
-      "key_risk": "Lithium price volatility (policy beta 2); Chinese Tier-1 pricing pressure on Western manufacturers.",
-      "valuation_note": "Contracted BESS developers: 10-14x EBITDA; Merchant: 6-8x."
+      "rationale": "Four DFI/utility-backed BESS projects reached construction or FID this week across Chile, Hungary, Tennessee, and New Zealand—all with policy betas ≤3 and contracted offtake. 4-hour LFP has reached commoditized risk status; allocators should maximize exposure to contracted BESS while avoiding EU merchant configurations showing 3-7% IRR (sub-WACC).",
+      "key_risk": "EU merchant BESS revenue compression if >30% of portfolio lacks contracted offtake; policy beta 4-5 for uncontracted EU exposure.",
+      "valuation_note": "Contracted BESS at $80-120k/kWh development stage; FID-ready at $150-200k/kWh."
     },
     {
       "sector": "SOLAR",
-      "stance": "NEUTRAL",
-      "rationale": "European and US solar deployment remains TRL 9 with no physics constraints; 2GW+ pipelines (ILOS, BrightNight) are execution plays. Interconnection queue delays and merchant PPA compression limit near-term upside. DFI-backed hybrid solar+BESS (Hungary) preferred.",
-      "key_risk": "EU permitting delays (policy beta 4); US IRA uncertainty under current administration.",
-      "valuation_note": "Development pipeline: $50-80k/MW; Operating: $0.8-1.2M/MW."
+      "stance": "OVERWEIGHT",
+      "rationale": "ILOS's €450M facility expansion and BrightNight's 6GW portfolio consolidation signal continued institutional appetite for solar development platforms. European and Western US pipeline valuations remain at €225k-300k/MW pre-FID—cheap vs. COD comparables of $0.8-1.2M/MW—creating development margin capture opportunities.",
+      "key_risk": "European permitting fragmentation (policy beta 4); US IRA guidance uncertainty on domestic content.",
+      "valuation_note": "Development stage: $30-50k/MW; FID-ready: $200-300k/MW."
     },
     {
       "sector": "WIND",
-      "stance": "UNDERWEIGHT",
-      "rationale": "US offshore wind policy fragmentation (NJ termination) and war-zone exposure (Ukraine) dominate this week's signals. Ørsted-Hitachi partnership and Shell PPA (Race Bank) provide stability in European OSW, but US exposure warrants caution. Japanese vPPA scale (8.4MW) immaterial.",
-      "key_risk": "US OSW policy beta 6; Ukraine CRITICAL risk; transmission cost overruns.",
-      "valuation_note": "European OSW: 8-12x EBITDA; US OSW developers trading at distressed 5-7x."
+      "stance": "NEUTRAL",
+      "rationale": "Offshore wind partnerships (Ørsted-Hitachi) signal supply chain stabilization, but NJ BPU's SAA termination request introduces US offshore policy uncertainty. Onshore wind remains bankable (KDDI-J-Power vPPA) but Ukraine exposure is uninvestable.",
+      "key_risk": "US offshore: state-level regulatory fragmentation (policy beta 6); Ukraine: active conflict (policy beta 9).",
+      "valuation_note": "US onshore: $1.3-1.8M/MW COD; offshore: $3.5-5M/MW with extreme variance."
     },
     {
       "sector": "H2",
       "stance": "UNDERWEIGHT",
-      "rationale": "Stegra's €1.4B raise validates Wallenberg conviction but policy beta of 8 for EU H2 subsidies and first-of-kind execution risk make green steel uninvestable at current risk premiums. No near-term catalysts for subsidy clarity pre-2027.",
-      "key_risk": "EU hydrogen subsidy 2027 cliff (policy beta 8); electrolyzer cost trajectory lagging targets.",
-      "valuation_note": "Green H2 developers: Pre-revenue; require 25%+ discount rates."
+      "rationale": "Stegra's €1.4B raise validates strategic investor appetite but green H2 at scale (2.5Mt steel) remains TRL 3-4 with €200-300/ton cost disadvantage vs. conventional. Policy beta of 8 reflects full dependence on EU CBAM and green premium enforcement.",
+      "key_risk": "Green H2 cost curve stall at €3-5/kg; EU CBAM implementation delays.",
+      "valuation_note": "Pre-revenue; strategic option pricing only."
     },
     {
       "sector": "AI_DC_POWER",
-      "stance": "OVERWEIGHT",
-      "rationale": "OpenAI Stargate ($470M Milam, TX), Meta-Noon (1GW ULDES), and Volt Dubai JV (29MW) confirm hyperscaler power demand acceleration. Data center adjacency creates contracted offtake premium for storage and generation. Energy infrastructure serving hyperscalers commands 2-3x valuation multiples vs. merchant equivalents.",
-      "key_risk": "Hyperscaler capex cyclicality (policy beta 1); grid interconnection in ERCOT/PJM.",
-      "valuation_note": "DC-adjacent generation/storage: 12-16x EBITDA vs. 8-10x standalone."
+      "stance": "NEUTRAL",
+      "rationale": "OpenAI Stargate's $470M Texas data center and Volt's Dubai JV confirm continued AI infrastructure build-out, but power procurement remains the bottleneck. Meta's Noon Energy deal signals willingness to pay for novel storage solutions, creating adjacency opportunities for energy providers.",
+      "key_risk": "Grid interconnection constraints; hyperscaler capital allocation volatility.",
+      "valuation_note": "Power offtake premium of $5-15/MWh vs. standard commercial/industrial."
     },
     {
-      "sector": "GRID",
-      "stance": "NEUTRAL",
-      "rationale": "New England $1.5B ratepayer refund dispute (Eversource/Avangrid ROE appeal) highlights transmission regulatory risk. No new grid infrastructure capital deployment signals this week. Grid investment remains essential but regulatory friction dampens near-term returns.",
-      "key_risk": "FERC ROE rulings (policy beta 5); transmission cost allocation disputes.",
-      "valuation_note": "Regulated utilities: 10-12x EBITDA; Transmission developers: 8-10x."
+      "sector": "NUCLEAR",
+      "stance": "UNDERWEIGHT",
+      "rationale": "Fusion milestone funding continues but 2030s commercialization timeline is structurally unrealistic at TRL 3-4. Private fusion capital remains strategic optionality, not deployable infrastructure investment.",
+      "key_risk": "Decade+ timeline to first commercial power; plasma confinement physics unsolved.",
+      "valuation_note": "Venture pricing; no comparable revenue multiples."
     }
   ],
   "red_flags": [
     {
-      "issue": "DTEK Ukraine wind project is uninvestable",
-      "detail": "€1.2B commitment in active war zone with grid destruction risk, uninsurable force majeure, and sovereign uncertainty. No institutional allocation warranted regardless of stated returns. Signals political reconstruction narrative, not commercial investment.",
-      "policy_beta": 7,
+      "issue": "DTEK Ukraine wind farm in active war zone",
+      "detail": "$1.4B commitment to 650MW project faces uninsurable force majeure risk. No commercial lender will provide project finance; execution depends entirely on conflict resolution timeline.",
+      "policy_beta": 9,
       "source": "POWER Magazine"
     },
     {
-      "issue": "Tesla's $2B AI acquisition lacks disclosure for energy nexus assessment",
-      "detail": "Single sentence in 10-Q reveals $2B stock deal for unnamed AI hardware company. Zero visibility on target technology, revenue, or Tesla stack integration. HIGH risk rating from all three agents. Not actionable for energy allocation despite BESS sector tag.",
-      "policy_beta": 1,
-      "source": "Electrek"
-    },
-    {
-      "issue": "New Jersey OSW policy fragmentation escalates US offshore wind risk",
-      "detail": "NJ BPU's termination of State Agreement Approach with PJM signals continued coordination failures. US OSW developers face 15-20% cost escalation and 12-24 month delays. Policy beta 6 not reflected in current developer valuations.",
+      "issue": "New Jersey terminates offshore wind State Agreement Approach",
+      "detail": "NJ BPU's request to exit PJM SAA process introduces regulatory fragmentation risk for US offshore wind pipeline. State-level policy volatility undermines federal IRA incentives.",
       "policy_beta": 6,
       "source": "Offshore Wind Biz"
     },
     {
-      "issue": "Australian PowerPlus 150MWh capacity is subscale and uncompetitive",
-      "detail": "AU$2.3M ARENA grant for 150MWh/year production is <0.01% of global BESS capacity. Cannot compete with Chinese Tier-1 on cost. Strategic value only if captive to local projects. AVOID for pure-play manufacturing allocation.",
-      "policy_beta": 3,
-      "source": "Energy Storage News"
+      "issue": "Tesla's undisclosed $2B AI acquisition buried in 10-Q",
+      "detail": "Single-sentence disclosure of material acquisition creates governance opacity. Unclear synergy with energy storage division vs. robotics. Due diligence impossible for energy investors.",
+      "policy_beta": 1,
+      "source": "Electrek"
     }
   ],
-  "macro_watch": "European energy subsidy regimes face 2027 cliff risk as current incentive structures sunset, compressing returns for H2 and merchant BESS. DFI and hyperscaler-contracted structures provide policy insulation—capital flowing to these deal types reflects institutional flight to contracted cashflows amid macro uncertainty.",
-  "data_note": "Primary sources: Energy Storage News (3 signals), PV Tech (2), POWER Magazine (2), Offshore Wind Biz (2), Canary Media, Energy Monitor, Electrek. SEC EDGAR filings reviewed but lacked energy-specific material. arXiv tech signals (grid frequency, EV consumption modeling) confirm no breakthrough technology shifts this week.",
-  "agent_chain_summary": "Three-agent synthesis elevated CIP Chile and EBRD Hungary BESS from generic 'project finance' to BULLISH conviction by triangulating TRL 9 + contracted revenue + LOW policy beta; simultaneously downgraded ILOS European pipeline from apparent strong signal to WATCH by identifying merchant BESS drag invisible in headline capital commitment.",
+  "macro_watch": "DFI capital velocity into BESS signals risk-off rotation within energy transition allocations—institutional LPs prioritizing contracted, OECD-domiciled storage over frontier technology and conflict-exposed infrastructure. Expect continued compression of development-stage BESS valuations as capital availability exceeds bankable pipeline.",
+  "data_note": "Energy Storage News (3 signals), POWER Magazine (2), PV Tech (2), Offshore Wind Biz (2), EBRD/DFI filings, SEC 10-Q (Tesla).",
+  "agent_chain_summary": "Three-agent synthesis elevated BESS conviction from neutral to overweight by cross-validating TRL 9 technical maturity, sub-WACC EU merchant risk, and policy beta clustering ≤3 for contracted projects—a pattern invisible to single-model analysis treating deals in isolation.",
   "agent_chain": {
-    "tech_assessments_count": 10,
+    "tech_assessments_count": 9,
     "deal_assessments_count": 12,
     "risk_assessments_count": 10,
-    "tech_summary": "This week's signals reflect mature deployment of proven technologies (solar, wind, Li-ion BESS) with no physics-defying claims. The two technically interesting signals are Stegra's H2-DRI green steel plant (TRL 7, first commercial-scale integration) and fusion funding (TRL 4, 2030s timeline remains aggressive). Tesla's AI hardware acquisition lacks sufficient detail for rigorous assessment. Overall, the energy technology landscape continues its shift from R&D to scaled deployment of established solutions.",
-    "deal_summary": "This week's deal flow shows bifurcation: DFI-backed projects (EBRD Hungary, CIP Chile) offer attractive risk-adjusted returns at 11-16% levered IRR with contracted revenue. European merchant BESS exposure (ILOS) and war-zone infrastructure (DTEK Ukraine) carry elevated risk that current pricing does not adequately compensate. AI DC-adjacent deals (Meta/Noon, OpenAI Stargate) are strategic bets with technology/execution risk—not financeable on traditional project finance metrics. Notable absence: No operating nuclear transactions despite hyperscaler PPA premium of $30-60/MWh over spot.",
-    "risk_summary": "DFI-backed BESS (Chile, Hungary, NZ) offer lowest risk; Ukraine wind and Stegra H2 carry execution/policy risk inadequately priced."
+    "tech_summary": "This week's signals reflect continued maturation of utility-scale solar+BESS deployments globally, with no physics violations in announced projects. The fusion timeline claim remains structurally optimistic given TRL gaps in tritium breeding and materials. Most notable is Stegra's green-steel project, which represents the first commercial-scale test of H2-DRI—technically feasible but dependent on unprecedented electrolyzer deployment and green power availability.",
+    "deal_summary": "This week's deals show bifurcation: DFI-backed BESS projects in Hungary and Chile offer 10-16% IRR with contracted revenue, while speculative plays (Ukraine wind, green steel) carry uncompensatable risk. The Meta-Noon LDES deal signals hyperscaler willingness to pay premiums for ultra-long duration storage to address AI DC load volatility — but 100hr technology remains TRL 5-6. OpenAI's $856/sq ft build cost in Texas is aggressive, suggesting cost discipline or incomplete power infrastructure pricing.",
+    "risk_summary": "BESS projects globally show lowest policy beta; green steel and Ukraine wind carry uncompensatable execution risk."
   },
-  "generated_at": "2026-04-23T11:17:17.534315",
+  "generated_at": "2026-04-23T11:25:11.676974",
   "signal_count": 22,
   "sources_used": [
-    "Offshore Wind Biz",
-    "PV Tech",
     "Energy Monitor",
-    "Utility Dive",
-    "Nuclear Engineering",
     "Datacenter Dynamics",
     "Electrek",
     "Energy Storage News",
+    "Offshore Wind Biz",
+    "Utility Dive",
     "Canary Media",
-    "Power Magazine"
+    "Power Magazine",
+    "Nuclear Engineering",
+    "PV Tech"
   ]
 }
