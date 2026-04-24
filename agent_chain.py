@@ -223,18 +223,21 @@ Output JSON:
       "implied_valuation_metric": "$/kW or EV/EBITDA or $/MWh or Series X at $XM",
       "comparable_range": "market comparable range for this metric",
       "relative_value": "CHEAP | FAIR | EXPENSIVE | INSUFFICIENT_DATA",
-      "equity_irr_estimate": "X-Y% range or null",
+      "equity_irr_low": null or number (e.g. 12),
+      "equity_irr_high": null or number (e.g. 16),
+      "irr_structure": "levered | unlevered | N/A",
       "revenue_structure": "Contracted | Merchant | Hybrid",
-      "capital_structure_note": "key observation about financing",
-      "financial_risk": "biggest financial risk",
+      "capital_structure_note": "key observation about financing in 1 sentence",
+      "financial_risk": "biggest financial risk in 1 sentence",
       "investment_stance": "BULLISH | WATCH | AVOID"
     }}
   ],
   "valuation_summary": "2-3 sentence overall deal market assessment this week",
   "sector_multiples_observed": {{
-    "BESS": "observed range if data available",
-    "SOLAR": "observed range if data available",
-    "GRID": "observed range if data available"
+    "BESS": "observed $/MW range if data available",
+    "SOLAR": "observed $/MW or $/MWh range if data available",
+    "GRID": "observed P/E or $/MW range if data available",
+    "NUCLEAR": "observed $/MW range if data available"
   }}
 }}
 
@@ -505,10 +508,29 @@ Synthesize into this JSON schema:
   ],
   "macro_watch": "2 sentences on macro → energy VC dealflow implications",
   "data_note": "3-5 key sources used",
-  "agent_chain_summary": "1 sentence on how the 3-agent analysis changed the conclusion vs. single-AI"
+  "agent_chain_summary": "1 sentence on how the 3-agent analysis changed the conclusion vs. single-AI",
+  "week_stats": {{
+    "avg_trl_score": null or number,
+    "trl_distribution": {{"PLAUSIBLE": 0, "QUESTIONABLE": 0, "RED_FLAG": 0}},
+    "avg_policy_beta": null or number,
+    "irr_range_low": null or number,
+    "irr_range_high": null or number,
+    "grid_risk_count": 0,
+    "top_irr_deal": "title of highest IRR deal this week",
+    "top_risk_deal": "title of highest policy beta deal this week"
+  }}
 }}
 
 Minimum 5 deal_signals, 4-6 sector_positioning. Prioritize signals where all 3 agents agree.
+
+IMPORTANT: Populate week_stats by aggregating agent assessments:
+- avg_trl_score: average of all trl_score values from tech_assessments
+- trl_distribution: count PLAUSIBLE/QUESTIONABLE/RED_FLAG verdicts
+- avg_policy_beta: average of all policy_beta values from risk_assessments  
+- irr_range_low/high: min/max equity_irr_low/high from deal_assessments
+- grid_risk_count: count signals with GRID sector or interconnection/transformer risk
+- top_irr_deal: title of deal with highest equity_irr_high
+- top_risk_deal: title of deal with highest policy_beta
 """
 
 
