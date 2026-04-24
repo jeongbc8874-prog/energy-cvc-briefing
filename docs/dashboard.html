@@ -113,6 +113,22 @@ nav{position:sticky;top:0;z-index:100;display:flex;justify-content:space-between
 .beta-high{background:var(--red-dim);color:var(--red);}
 
 .loading{display:flex;align-items:center;gap:8px;font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--dim);padding:20px 0;}
+.ring-wrap{position:relative;width:64px;height:64px;}
+.ring-svg{width:64px;height:64px;transform:rotate(-90deg);}
+.ring-track{fill:none;stroke:rgba(255,255,255,.06);stroke-width:6;}
+.ring-fill{fill:none;stroke:var(--green);stroke-width:6;stroke-linecap:round;stroke-dasharray:163;transition:stroke-dashoffset 1s ease;}
+.ring-label{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+.ring-pct{font-family:'Instrument Serif',serif;font-size:18px;color:var(--green);line-height:1;}
+.ring-sub{font-family:'IBM Plex Mono',monospace;font-size:7px;color:var(--dim);}
+.ring-info h4{font-size:13px;font-weight:500;margin-bottom:4px;}
+.ring-info p{font-size:11px;color:var(--dim);line-height:1.5;}
+.accuracy-ring{display:flex;align-items:center;gap:16px;padding:12px 0;}
+.pred-list{display:flex;flex-direction:column;gap:8px;}
+.pred-row{display:flex;align-items:center;gap:10px;padding:8px 10px;background:rgba(255,255,255,.01);border:1px solid var(--border);}
+.pred-week{font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--dim);min-width:60px;}
+.pred-text{font-size:11px;flex:1;line-height:1.4;}
+.pred-result{font-family:'IBM Plex Mono',monospace;font-size:8px;padding:2px 6px;border-radius:2px;}
+.pred-pending{background:var(--amber-dim);color:var(--amber);}
 .loading::before{content:'';width:4px;height:4px;background:var(--blue);border-radius:50%;animation:blink 1s infinite;}
 
 @media(max-width:1100px){.metrics{grid-template-columns:repeat(3,1fr);}.grid-2,.grid-3{grid-template-columns:1fr;}}
@@ -663,6 +679,81 @@ async function init() {
 document.querySelector('.metrics').insertAdjacentHTML('beforeend', '<span id="besStance" style="display:none"></span><span id="gridStance" style="display:none"></span>');
 
 init();
+
+// ── 스탠스 트래커 (실제 아카이브 기반) ─────────────────────────────────────
+
+async function renderStanceTracker(briefs) {
+  const el = document.getElementById('stanceTracker');
+  const badge = document.getElementById('trackerBadge');
+  const ring = document.getElementById('accuracyRing');
+  const noData = document.getElementById('noDataMsg');
+
+  if (!briefs || briefs.length === 0) {
+    el.innerHTML = '';
+    noData.style.display = 'block';
+    badge.textContent = '0 briefs';
+    return;
+  }
+
+  // 브리프 수 표시
+  const count = briefs.length;
+  badge.textContent = count + ' briefs tracked';
+  ring.style.display = 'flex';
+
+  // 링 차트 — 브리프 수 기반
+  const maxBriefs = 20;
+  const pct = Math.min(count / maxBriefs, 1);
+  const offset = 163 - (163 * pct);
+  document.getElementById('ringFill').style.strokeDashoffset = offset;
+  document.getElementById('ringPct').textContent = count;
+  document.getElementById('ringTitle').textContent = count + ' briefs published';
+  document.getElementById('ringDesc').textContent =
+    'Sector positioning tracked across ' + count + ' AI DC power briefs';
+
+  // 각 브리프에서 섹터 포지셔닝 추출 → 테이블
+  const rows = [];
+  briefs.slice(0, 8).forEach(b => {
+    const positions = b.sector_positioning || [];
+    const week = b.week || '';
+    const headline = (b.headline || '').slice(0, 50) + ((b.headline||'').length > 50 ? '...' : '');
+
+    positions.slice(0, 2).forEach(p => {
+      const stance = p.stance || 'NEUTRAL';
+      const sector = p.sector || '';
+      const betaNum = p.policy_beta;
+      const stanceClass = stance.includes('OVER') ? 'pred-hit' :
+                          stance.includes('UNDER') ? 'pred-miss' : 'pred-pending';
+      const stanceLabel = stance.includes('OVER') ? '▲ OW' :
+                          stance.includes('UNDER') ? '▼ UW' : '— NT';
+
+      rows.push(`
+        <div class="pred-row">
+          <div class="pred-week">${week}</div>
+          <div class="pred-text">
+            ${sector}
+            ${betaNum != null ? `<span style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--dim);margin-left:6px;">β${betaNum}</span>` : ''}
+          </div>
+          <div class="pred-result ${stanceClass}">${stanceLabel}</div>
+        </div>`);
+    });
+  });
+
+  el.innerHTML = rows.length ? rows.join('') :
+    '<div style="color:var(--dim);font-size:11px;padding:8px 0;">No positioning data yet</div>';
+
+  // pred-miss CSS 없으면 추가
+  if (!document.querySelector('style[data-tracker]')) {
+    const s = document.createElement('style');
+    s.setAttribute('data-tracker','1');
+    s.textContent = '.pred-hit{background:rgba(34,197,94,.1);color:var(--green);}.pred-miss{background:rgba(239,68,68,.1);color:var(--red);}';
+    document.head.appendChild(s);
+  }
+}
+
+// 아카이브 로드 후 트래커 렌더링
+loadArchiveBriefs().then(briefs => {
+  renderStanceTracker(briefs);
+});
 </script>
 </body>
 </html>
