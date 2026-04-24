@@ -200,11 +200,17 @@ h1{animation:fadeUp .6s .1s ease both;}
     </div>
     <div class="wr">
       <a href="./brief_latest.html" style="text-decoration:none;color:inherit;">
-      <div class="wc" style="cursor:pointer;transition:border-color .2s,background .2s;" onmouseover="this.style.borderColor='rgba(59,130,246,.4)';this.style.background='rgba(59,130,246,.06)'" onmouseout="this.style.borderColor='';this.style.background=''">
+      <div class="wc" style="cursor:pointer;" onmouseover="this.style.borderColor='rgba(59,130,246,.4)';this.style.background='rgba(59,130,246,.06)'" onmouseout="this.style.borderColor='';this.style.background=''">
         <div class="wi">TRL</div>
         <div class="wt">
           <h4>Technical Feasibility Layer</h4>
           <p>Every technology claim validated against physical limits. Energy density, electrolyzer efficiency, grid constraints — flagged before you commit capital.</p>
+          <div id="trlStat" style="margin-top:10px;font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--dim);display:none;">
+            <span style="color:var(--green);" id="trlPlausible">—</span> PLAUSIBLE &nbsp;
+            <span style="color:var(--amber);" id="trlQuestion">—</span> QUESTIONABLE &nbsp;
+            <span style="color:var(--red);" id="trlRed">—</span> RED FLAG
+            <div style="color:var(--dim);margin-top:4px;">Avg TRL: <span style="color:var(--white);" id="trlAvg">—</span></div>
+          </div>
           <p style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--blue);margin-top:8px;letter-spacing:.1em;">VIEW IN LATEST BRIEF →</p>
         </div>
       </div>
@@ -215,6 +221,10 @@ h1{animation:fadeUp .6s .1s ease both;}
         <div class="wt">
           <h4>Deal Structure Analysis</h4>
           <p>Implied EV/MW, contract structure, DFI vs. merchant — compared against recent comps with specific IRR estimates.</p>
+          <div id="irrStat" style="margin-top:10px;font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--dim);display:none;">
+            This week: <span style="color:var(--green);" id="irrRange">—</span>% levered IRR range
+            <div style="color:var(--dim);margin-top:4px;">Top deal: <span style="color:var(--white);font-size:8px;" id="topIrrDeal">—</span></div>
+          </div>
           <p style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--blue);margin-top:8px;letter-spacing:.1em;">VIEW BENCHMARKS →</p>
         </div>
       </div>
@@ -225,6 +235,10 @@ h1{animation:fadeUp .6s .1s ease both;}
         <div class="wt">
           <h4>Policy Beta Scoring</h4>
           <p>Subsidy dependency quantified 0–10. Deals that only work with government support flagged before rate changes erase returns.</p>
+          <div id="betaStat" style="margin-top:10px;font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--dim);display:none;">
+            This week avg: <span style="color:var(--amber);" id="betaAvg">—</span>/10
+            <div style="color:var(--dim);margin-top:4px;">Highest risk: <span style="color:var(--red);font-size:8px;" id="topRiskDeal">—</span></div>
+          </div>
           <p style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--blue);margin-top:8px;letter-spacing:.1em;">VIEW POLICY BETA TABLE →</p>
         </div>
       </div>
@@ -235,6 +249,10 @@ h1{animation:fadeUp .6s .1s ease both;}
         <div class="wt">
           <h4>Grid Physics First</h4>
           <p>AI data center power demand, FERC interconnection reform, transformer supply — the physical constraints that determine winners.</p>
+          <div id="gridStat" style="margin-top:10px;font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--dim);display:none;">
+            Grid risk signals: <span style="color:var(--red);" id="gridRisk">—</span> this week
+            <div style="color:var(--dim);margin-top:4px;">US queue: <span style="color:var(--white);">2,290 GW</span> · Avg wait: <span style="color:var(--white);">4+ yrs</span></div>
+          </div>
           <p style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--blue);margin-top:8px;letter-spacing:.1em;">VIEW INTELLIGENCE DASHBOARD →</p>
         </div>
       </div>
@@ -417,6 +435,82 @@ async function loadLatestBrief() {
 }
 
 loadLatestBrief();
+
+// week_stats 카드 업데이트
+async function loadWeekStats() {
+  try {
+    const r = await fetch('./brief_latest.json?t=' + Date.now());
+    if (!r.ok) return;
+    const d = await r.json();
+    const ws = d.week_stats;
+
+    if (ws) {
+      // TRL 카드
+      if (ws.trl_distribution) {
+        document.getElementById('trlStat').style.display = 'block';
+        document.getElementById('trlPlausible').textContent = ws.trl_distribution.PLAUSIBLE || 0;
+        document.getElementById('trlQuestion').textContent = ws.trl_distribution.QUESTIONABLE || 0;
+        document.getElementById('trlRed').textContent = ws.trl_distribution.RED_FLAG || 0;
+        if (ws.avg_trl_score) document.getElementById('trlAvg').textContent = ws.avg_trl_score.toFixed(1);
+      }
+
+      // IRR 카드
+      if (ws.irr_range_low || ws.irr_range_high) {
+        document.getElementById('irrStat').style.display = 'block';
+        const lo = ws.irr_range_low || '—';
+        const hi = ws.irr_range_high || '—';
+        document.getElementById('irrRange').textContent = lo + '–' + hi;
+        if (ws.top_irr_deal) document.getElementById('topIrrDeal').textContent = ws.top_irr_deal.slice(0,40) + '...';
+      }
+
+      // Beta 카드
+      if (ws.avg_policy_beta != null) {
+        document.getElementById('betaStat').style.display = 'block';
+        document.getElementById('betaAvg').textContent = ws.avg_policy_beta.toFixed(1);
+        if (ws.top_risk_deal) document.getElementById('topRiskDeal').textContent = ws.top_risk_deal.slice(0,35) + '...';
+      }
+
+      // Grid 카드
+      if (ws.grid_risk_count != null) {
+        document.getElementById('gridStat').style.display = 'block';
+        document.getElementById('gridRisk').textContent = ws.grid_risk_count;
+      }
+    } else {
+      // week_stats 없는 구버전 브리프 — deal_signals에서 직접 계산
+      const signals = d.deal_signals || [];
+      const trlScores = signals.filter(s => s.trl_score).map(s => s.trl_score);
+      const betas = signals.filter(s => s.policy_beta != null).map(s => s.policy_beta);
+      const gridRisks = signals.filter(s => (s.sector||'').includes('GRID') ||
+        (s.summary||'').toLowerCase().includes('interconnection') ||
+        (s.summary||'').toLowerCase().includes('transformer')).length;
+
+      if (trlScores.length) {
+        document.getElementById('trlStat').style.display = 'block';
+        const avg = (trlScores.reduce((a,b)=>a+b,0)/trlScores.length).toFixed(1);
+        document.getElementById('trlAvg').textContent = avg;
+        const p = signals.filter(s=>s.trl_verdict==='PLAUSIBLE').length;
+        const q = signals.filter(s=>s.trl_verdict==='QUESTIONABLE').length;
+        const rf = signals.filter(s=>s.trl_verdict==='RED_FLAG').length;
+        document.getElementById('trlPlausible').textContent = p;
+        document.getElementById('trlQuestion').textContent = q;
+        document.getElementById('trlRed').textContent = rf;
+      }
+
+      if (betas.length) {
+        document.getElementById('betaStat').style.display = 'block';
+        const avg = (betas.reduce((a,b)=>a+b,0)/betas.length).toFixed(1);
+        document.getElementById('betaAvg').textContent = avg;
+        const topRisk = signals.sort((a,b)=>(b.policy_beta||0)-(a.policy_beta||0))[0];
+        if (topRisk) document.getElementById('topRiskDeal').textContent = (topRisk.title||'').slice(0,35)+'...';
+      }
+
+      document.getElementById('gridStat').style.display = 'block';
+      document.getElementById('gridRisk').textContent = gridRisks;
+    }
+  } catch(e) { console.log('week_stats error:', e); }
+}
+
+loadWeekStats();
 </script>
 
 </body>
