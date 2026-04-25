@@ -610,6 +610,8 @@ HTML_TEMPLATE = """<!DOCTYPE html>
   .policy-high{border-color:rgba(248,113,113,.3)!important;color:#f87171!important;}
   .policy-mid{border-color:rgba(245,158,11,.3)!important;color:#f0a832!important;}
   .agent-chain-bar{background:rgba(59,130,246,.04);border:1px solid rgba(59,130,246,.1);padding:16px 20px;margin-bottom:24px;border-radius:2px;}
+  .analyst-edge{font-family:'IBM Plex Mono',monospace;font-size:10px;color:rgba(59,130,246,.7);padding:7px 12px;background:rgba(59,130,246,.04);border-left:2px solid rgba(59,130,246,.3);margin-top:8px;line-height:1.5;}
+  .analyst-edge-label{font-size:8px;letter-spacing:.15em;text-transform:uppercase;color:rgba(59,130,246,.45);margin-bottom:2px;}
   .acb-title{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.2em;color:rgba(59,130,246,.7);text-transform:uppercase;margin-bottom:10px;}
   .acb-stats{display:flex;gap:24px;margin-bottom:10px;flex-wrap:wrap;}
   .acb-stat{font-family:'IBM Plex Mono',monospace;font-size:10px;color:rgba(245,244,239,.5);}
@@ -648,17 +650,21 @@ HTML_TEMPLATE = """<!DOCTYPE html>
   {% endif %}
   {% if brief.agent_chain %}
   <div style="margin-top:10px;display:flex;gap:16px;flex-wrap:wrap;">
-    <div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:rgba(34,197,94,.6);">
-      ▲ LEAD: {{ brief.deal_signals | selectattr('recommendation','equalto','LEAD') | list | length }}
+    {% set lead_c = brief.deal_signals | selectattr('recommendation','defined') | selectattr('recommendation','equalto','LEAD') | list | length %}
+    {% set follow_c = brief.deal_signals | selectattr('recommendation','defined') | selectattr('recommendation','equalto','FOLLOW') | list | length %}
+    {% set watch_c = brief.deal_signals | selectattr('recommendation','defined') | selectattr('recommendation','equalto','WATCH') | list | length %}
+    {% set pass_c = brief.deal_signals | selectattr('recommendation','defined') | selectattr('recommendation','equalto','PASS') | list | length %}
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:rgba(34,197,94,.7);">
+      ▲ LEAD: {{ lead_c }}
     </div>
-    <div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:rgba(59,130,246,.6);">
-      → FOLLOW: {{ brief.deal_signals | selectattr('recommendation','equalto','FOLLOW') | list | length }}
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:rgba(59,130,246,.7);">
+      → FOLLOW: {{ follow_c }}
     </div>
-    <div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:rgba(245,158,11,.6);">
-      ● WATCH: {{ brief.deal_signals | selectattr('recommendation','equalto','WATCH') | list | length }}
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:rgba(245,158,11,.7);">
+      ● WATCH: {{ watch_c }}
     </div>
-    <div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:rgba(239,68,68,.6);">
-      ✕ PASS: {{ brief.deal_signals | selectattr('recommendation','equalto','PASS') | list | length }}
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:rgba(239,68,68,.7);">
+      ✕ PASS: {{ pass_c }}
     </div>
   </div>
   {% endif %}
@@ -708,6 +714,12 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       <span class="policy-badge">Policy Beta {{ s.policy_beta }}/10</span>
       {% endif %}
       {% endif %}
+    </div>
+    {% endif %}
+    {% if s.analyst_edge %}
+    <div class="analyst-edge">
+      <div class="analyst-edge-label">■ Analyst Insight</div>
+      {{ s.analyst_edge }}
     </div>
     {% endif %}
     {% if s.source_url %}
