@@ -1,14 +1,14 @@
 {
   "week": "2026-W17",
-  "headline": "TVA signs 1.7GWh of new BESS capacity in single week—largest single-utility storage procurement signal since IRA passage.",
-  "thesis": "Tennessee Valley Authority executed two long-term energy storage agreements totaling 1.7GWh (Plus Power 800MWh, Tenaska 900MWh) in a single week, signaling accelerated grid-scale BESS deployment by regulated utilities seeking to backstop AI datacenter load growth. This procurement pace—if sustained—implies TVA alone could add 8-10GWh annually, creating a structural demand floor for 4-hour duration BESS developers. Position in contracted BESS developers with TVA exposure while avoiding pre-revenue nuclear plays trading at speculative premiums.",
+  "headline": "TVA signs 1.7GWh contracted BESS in 72hrs while X-energy IPO prices $1B+ pre-revenue SMR—grid-forming inverter gap exposes AI DC infrastructure mismatch",
+  "thesis": "Two TVA BESS contracts (Plus Power 800MWh, Tenaska 900MWh) with 20-year ESAs represent the institutional-grade contracted storage play at 12-15% levered IRR, while X-energy's $1B+ IPO prices blue-sky SMR deployment 4+ years before any commercial operation. Neither TVA deal specifies grid-forming inverters—a critical gap when 74% of Australia's 33.2GW NEM pipeline confirms grid-forming as the new standard for AI DC co-location. Position: OVERWEIGHT contracted US BESS with grid-forming verification; AVOID pre-revenue nuclear and TRL<7 storage plays.",
   "deal_signals": [
     {
-      "title": "TVA Signs 1.7GWh BESS Procurement (Plus Power + Tenaska)",
+      "title": "Plus Power 800MWh Alabama BESS – TVA 20-Year ESA",
       "tag": "BULLISH",
       "sector": "BESS",
-      "summary": "TVA executed two 20-year ESAs totaling 1.7GWh in a single week—Plus Power's 200MW/800MWh Crawfish Creek (Alabama) and Tenaska's 225MW/900MWh Bobwhite (East Tennessee). Both projects are 4-hour duration systems using commercially proven LFP technology (TRL 9). The 20-year contracted structure de-risks merchant exposure entirely, while TVA's investment-grade credit (Aa2/AA) ensures bankable offtake.",
-      "implication": "Contracted BESS at 20-year tenors typically clears 10-14% levered equity IRR; TVA credit reduces financing costs ~50-75bps vs merchant structures.",
+      "summary": "200MW/800MWh 4-hour BESS with TVA investment-grade 20-year ESA eliminates merchant tail risk and supports 75-80% advance rate project finance. TRL 9 technology with Plus Power's operational track record (Kapolei, Edwards Sanborn). However, no grid-forming inverter specification disclosed—this limits frequency response capability for AI DC load volatility which can swing 3-5x peak-to-average.",
+      "implication": "Levered equity IRR 12-15% with de-risked offtake; missing grid-forming capability leaves 50-100bps ancillary service upside on table for future AI DC co-location premium.",
       "confidence": "HIGH",
       "trl_score": 9,
       "trl_verdict": "PLAUSIBLE",
@@ -17,199 +17,215 @@
       "source_url": "https://www.energy-storage.news/plus-power-signs-esa-for-800mwh-alabama-bess/"
     },
     {
-      "title": "X-energy $1bn+ IPO: Hyperscaler SMR Premium Priced In",
+      "title": "Tenaska 900MWh Tennessee BESS – TVA Long-Term ESA",
+      "tag": "BULLISH",
+      "sector": "BESS",
+      "summary": "225MW/900MWh BESS in East Tennessee with TVA long-term ESA mirrors Plus Power structure. IPP-developed with contracted revenue floor. Same grid-forming gap applies—TVA's procurement lacks specification that would enable frequency response for AI inference load volatility (request-mix driven demand spikes up to 5x baseline).",
+      "implication": "Levered equity IRR 12-15%; TVA bulk procurement signals regional grid stress but grid-forming omission means these assets are capacity-only, not premium AI DC infrastructure.",
+      "confidence": "HIGH",
+      "trl_score": 9,
+      "trl_verdict": "PLAUSIBLE",
+      "policy_beta": 2,
+      "source": "Energy Storage News",
+      "source_url": "https://www.energy-storage.news/ipp-tenaska-signs-esa-for-900mwh-tennessee-bess/"
+    },
+    {
+      "title": "X-energy $1B+ IPO – Pre-Revenue SMR Pricing Blue Sky",
       "tag": "RED_FLAG",
       "sector": "SMR",
-      "summary": "X-energy raised $1bn+ at ~$22.60/share via upsized 44.3M share offering, reflecting intense retail/institutional appetite for Amazon-backed SMR exposure. However, the Xe-100 HTGR remains at TRL 6—engineering complete but no operating commercial unit. NRC design certification is still pending with typical licensing timelines of 5-10 years. First-of-a-kind nuclear projects historically run 2-3x over budget.",
-      "implication": "Pre-revenue SMR at >$1bn market cap prices in 2030+ commercialization with no margin of safety for licensing delays or HALEU supply chain constraints; NuScale's 70%+ post-de-SPAC decline is the comparable precedent.",
+      "summary": "44.3M share upsized offering raises $1B+ for Xe-100 HTGR with no commercial reactor before 2030. TRL 6-7 with TRISO fuel supply chain not commercially scaled (Centrus capacity constraint). Amazon anchor commitment is non-binding intention, not bankable PPA. FOAK SMR comparable at Darlington BWRX-300 prices ~$15,000/kW—this IPO prices regulatory and execution risk as zero.",
+      "implication": "No IRR calculable; pre-revenue valuation at >$1B prices 2030+ COD as certain—any AI DC power claim before 2030 is fiction. TRISO fuel bottleneck alone adds 18-24mo execution risk.",
       "confidence": "HIGH",
       "trl_score": 6,
-      "trl_verdict": "PLAUSIBLE",
-      "policy_beta": 7,
+      "trl_verdict": "QUESTIONABLE",
+      "policy_beta": 3,
       "source": "Data Center Dynamics",
       "source_url": "https://www.datacenterdynamics.com/en/news/amazon-backed-smr-firm-x-energy-raises-more-than-1bn-in-ipo/"
     },
     {
-      "title": "EBRD €70M Hungary Solar+BESS: Concessional Debt Play",
+      "title": "Meta-Noon Energy 100GWh Storage Partnership",
+      "tag": "RED_FLAG",
+      "sector": "BESS",
+      "summary": "Meta reserves 1GW capacity from Noon Energy's aqueous sulfur technology at TRL 5. No commercial-scale deployment exists. 100GWh headline is aspirational—Noon's current manufacturing capacity is <100MWh. This is a hyperscaler optionality play, not a bankable deal. Energy density claims for aqueous sulfur remain unvalidated at grid scale.",
+      "implication": "Zero IRR pathway until 2028+ at earliest; Meta's 'reservation' structure signals R&D hedge, not procurement commitment. Compare: Meta simultaneously signs AWS Graviton5 deal for proven infrastructure.",
+      "confidence": "HIGH",
+      "trl_score": 5,
+      "trl_verdict": "RED_FLAG",
+      "policy_beta": 8,
+      "source": "Energy Monitor",
+      "source_url": "https://www.energymonitor.ai/news/meta-noon-energy-partner/"
+    },
+    {
+      "title": "Australia NEM 33.2GW BESS Pipeline – 74% Grid-Forming Confirmed",
       "tag": "BULLISH",
       "sector": "BESS",
-      "summary": "EBRD's €70M loan for a 450MW solar + 250MW/1GWh BESS in Hungary implies ~$82/kWh BESS capex—well below market rates of $800-1,500/kW. This suggests EBRD is covering 40-50% of total capex at concessional rates (~3-4%), materially lowering project WACC. Technology is fully commercial (TRL 9) with 4-hour duration standard for time-shifting applications.",
-      "implication": "Concessional financing structure likely delivers 10-14% levered equity IRR despite EU merchant BESS compression to 3-7% unlevered; Hungary sovereign risk is the key monitor.",
+      "summary": "AEMO confirms 74% of 33.2GW NEM battery pipeline equipped with grid-forming inverters. This is the global benchmark for AI DC co-location capability—grid-forming enables synthetic inertia and frequency response essential for AI inference load volatility (token throughput spikes). US TVA deals notably lack this specification.",
+      "implication": "Australian BESS developers command 10-15% premium on ancillary services; US developers without grid-forming are undersized for AI DC infrastructure thesis and will face retrofit costs.",
+      "confidence": "HIGH",
+      "trl_score": 9,
+      "trl_verdict": "PLAUSIBLE",
+      "policy_beta": 2,
+      "source": "Energy Storage News",
+      "source_url": "https://www.energy-storage.news/grid-forming-inverters-feature-in-74-of-australias-33-2gw-nem-battery-storage-pipeline/"
+    },
+    {
+      "title": "EBRD €70M Hungary Solar+BESS – DFI Dependency Signal",
+      "tag": "WATCH",
+      "sector": "BESS",
+      "summary": "450MW solar + 250MW/1GWh BESS financed via EBRD senior debt signals developer could not secure commercial terms. Central European merchant BESS returns compress to 3-7% levered. Standard 4hr duration is TRL 9 but Hungarian grid interconnection capacity and curtailment risk at 450MW single-point injection needs monitoring.",
+      "implication": "Levered equity IRR 8-12%; DFI presence confirms subsidy dependency. Post-subsidy economics would compress IRR below WACC—this is policy-driven, not market-driven investment.",
       "confidence": "MEDIUM",
       "trl_score": 9,
       "trl_verdict": "PLAUSIBLE",
-      "policy_beta": 4,
+      "policy_beta": 3,
       "source": "Energy Monitor",
       "source_url": "https://www.energymonitor.ai/news/ebrd-82m-solar-and-bess-project-hungary/"
     },
     {
-      "title": "Lydian Energy Acquires 1.5GW Hanwha Solar+BESS Portfolio",
+      "title": "Shell-Evolve Race Bank Offshore Wind PPA to 2035",
       "tag": "BULLISH",
-      "sector": "BESS",
-      "summary": "Lydian Energy's acquisition of Hanwha Renewables' 1.5GW North American solar+BESS portfolio signals continued consolidation among IPPs seeking scale. Portfolio transactions provide development-stage exposure at lower per-MW risk than greenfield. Undisclosed pricing limits valuation assessment, but strategic fit suggests premium to standard development multiples.",
-      "implication": "Development-stage portfolios typically trade at $50-150k/MW depending on permitting status; strategic buyer premiums can add 20-30% for grid-ready assets.",
-      "confidence": "MEDIUM",
-      "trl_score": 9,
-      "trl_verdict": "PLAUSIBLE",
-      "policy_beta": 3,
-      "source": "PV Tech",
-      "source_url": "https://www.pv-tech.org/lydian-energy-acquires-hanwha-renewables-1-5gw-solar-pv-bess-north-america-portfolio/"
-    },
-    {
-      "title": "Tesla $2B AI Hardware Acquisition: Buried Disclosure Risk",
-      "tag": "WATCH",
-      "sector": "OTHER",
-      "summary": "Tesla disclosed a $2bn all-stock acquisition of an unnamed AI hardware company in a single sentence buried in its Q1 2026 10-Q. The hidden disclosure methodology—no press release, no earnings call mention—suggests regulatory sensitivity or integration uncertainty. Without target financials, valuation assessment is impossible, but AI hardware M&A typically prices at 5-8x EV/Revenue.",
-      "implication": "All-stock structure preserves Tesla cash but dilutes shareholders; buried disclosure pattern historically correlates with integration challenges or overpayment for pre-revenue targets.",
-      "confidence": "LOW",
-      "trl_score": null,
-      "trl_verdict": "N/A",
-      "policy_beta": 3,
-      "source": "Electrek",
-      "source_url": "https://electrek.co/2026/04/23/tesla-tsla-quietly-discloses-2-billion-ai-hardware-acquisition-10q/"
-    },
-    {
-      "title": "DTEK €1.2B Ukraine Wind Farm: War-Risk Premium",
-      "tag": "WATCH",
       "sector": "WIND",
-      "summary": "DTEK committed €1.2bn ($1.4bn) for a 650MW onshore wind project in Poltava, Ukraine at $2.15M/MW—20-30% above EU onshore wind norms ($1.2-1.8M/MW). While capex inflation reflects war-risk insurance and supply chain premiums, the underlying wind technology is TRL 9. Political/security risk dominates the investment case entirely.",
-      "implication": "Even at 8-12% levered IRR range, sovereign/conflict risk (policy beta ~9) makes this uninvestable for institutional capital absent DFI guarantees.",
-      "confidence": "MEDIUM",
+      "summary": "573MW operational UK offshore wind farm with contracted offtake through 2035. Operational asset (TRL 9) with investment-grade counterparty eliminates construction and technology risk. Shell offtake provides corporate PPA floor in uncertain UK CfD AR5+ environment.",
+      "implication": "Contracted offshore wind at 8-10% levered IRR with de-risked merchant tail; structural scarcity value as UK offshore pipeline faces HVDC equipment delays.",
+      "confidence": "HIGH",
       "trl_score": 9,
       "trl_verdict": "PLAUSIBLE",
-      "policy_beta": 9,
+      "policy_beta": 4,
+      "source": "Energy Monitor",
+      "source_url": "https://www.energymonitor.ai/news/evolve-shell-sign-race-bank-ppa/"
+    },
+    {
+      "title": "DTEK $1.4B Ukraine Wind Farm",
+      "tag": "RED_FLAG",
+      "sector": "WIND",
+      "summary": "650MW Poltavska wind farm in active conflict zone. No commercial insurer will underwrite. No lender will finance. This is a corporate announcement, not an investable deal. Any capital deployment here is grants/DFI concessional only.",
+      "implication": "Uninvestable. Policy beta 10/10. Zero IRR pathway until conflict resolution + sovereign credit restoration. This is PR, not deal flow.",
+      "confidence": "HIGH",
+      "trl_score": 9,
+      "trl_verdict": "PLAUSIBLE",
+      "policy_beta": 10,
       "source": "Power Magazine",
       "source_url": "https://www.powermag.com/dtek-will-build-1-4-billion-650-mw-wind-farm-in-ukraine/"
     },
     {
-      "title": "Meta-AWS Graviton5 Deal: AI DC Power Demand Validation",
-      "tag": "BULLISH",
+      "title": "Fusion $50/MWh Target Article",
+      "tag": "RED_FLAG",
       "sector": "OTHER",
-      "summary": "Meta's 'multibillion-dollar' AWS agreement for 'tens of millions' of Graviton5 ARM cores validates the structural shift to custom silicon for AI inference. ARM architecture offers 2-3x performance-per-watt vs x86 for inference workloads, with Graviton5 building on proven Graviton4 performance gains (40%+ price-performance vs x86). TRL 8 reflects production-ready next-gen silicon.",
-      "implication": "Power efficiency gains from ARM deployment partially offset AI DC load growth; implications for grid planning models assuming x86 power curves.",
+      "summary": "Editorial discussing fusion's $50/MWh LCOE target reveals no commercial pathway this decade. TRL 3-4 globally with >$10B private investment chasing scientific feasibility, not commercial deployment. Any energy investment thesis predicated on fusion before 2035 is fiction.",
+      "implication": "Zero IRR pathway. $50/MWh target requires 10x+ improvement in plasma confinement economics. This is basic research, not energy infrastructure investing.",
       "confidence": "HIGH",
-      "trl_score": 8,
-      "trl_verdict": "PLAUSIBLE",
-      "policy_beta": 1,
-      "source": "Data Center Dynamics",
-      "source_url": "https://www.datacenterdynamics.com/en/news/meta-signs-agreement-with-aws-for-large-scale-graviton5-deployment/"
-    },
-    {
-      "title": "Australia NEM: 74% Grid-Forming Inverter Penetration in 33.2GW Pipeline",
-      "tag": "BULLISH",
-      "sector": "BESS",
-      "summary": "AEMO data shows 74% of Australia's 33.2GW NEM battery storage pipeline will deploy grid-forming inverters—a technical requirement for grid stability as synchronous generation retires. This represents the clearest regulatory signal globally that grid-forming capability will become a baseline BESS requirement, not a premium feature.",
-      "implication": "Grid-forming inverter mandates create technical moat for suppliers (Hitachi, Siemens, Sungrow) and potentially exclude lower-cost Chinese grid-following systems from premium markets.",
-      "confidence": "HIGH",
-      "trl_score": 9,
-      "trl_verdict": "PLAUSIBLE",
-      "policy_beta": 3,
-      "source": "Energy Storage News",
-      "source_url": "https://www.energy-storage.news/grid-forming-inverters-feature-in-74-of-australias-33-2gw-nem-battery-storage-pipeline/"
+      "trl_score": 4,
+      "trl_verdict": "RED_FLAG",
+      "policy_beta": 10,
+      "source": "Power Magazine",
+      "source_url": "https://www.powermag.com/fusion-energy-the-50-mwh-target/"
     }
   ],
   "sector_positioning": [
     {
       "sector": "BESS",
       "stance": "OVERWEIGHT",
-      "rationale": "TVA's 1.7GWh single-week procurement and Lydian's 1.5GW portfolio acquisition demonstrate accelerating utility demand for contracted storage. Australia's 74% grid-forming mandate signals regulatory tailwinds globally.",
-      "key_risk": "LFP cell supply chain concentration in China; EU merchant spread compression to 3-7% unlevered IRR",
-      "valuation_note": "Contracted BESS clearing 10-14% levered IRR; development portfolios at $50-150k/MW"
+      "rationale": "TVA's back-to-back 1.7GWh procurement confirms utility-scale BESS demand acceleration. 20-year ESAs with investment-grade offtaker at 12-15% levered IRR represent institutional-grade returns. Grid-forming capability is the differentiator—Australian 74% benchmark exposes US specification gap.",
+      "key_risk": "Grid-forming inverter specification gap in US procurement limits AI DC co-location premium; policy beta 2/10",
+      "valuation_note": "Contracted US BESS: $0.8-1.5M/MW; 12-15% levered IRR"
     },
     {
       "sector": "SMR",
       "stance": "UNDERWEIGHT",
-      "rationale": "X-energy's $1bn+ IPO prices in perfect execution to 2030 commercialization despite TRL 6 status and NRC licensing uncertainty. NuScale's 70% post-de-SPAC decline demonstrates the downside when timelines slip.",
-      "key_risk": "NRC licensing timelines (5-10 years), HALEU fuel supply chain, first-of-a-kind cost overruns (2-3x historical)",
-      "valuation_note": "Pre-revenue SMR trading at $1bn+ EV with no operating assets; no comparable for fair value"
+      "rationale": "X-energy IPO prices pre-revenue FOAK SMR at >$1B with no commercial operation before 2030. TRISO fuel supply chain constraint adds 18-24mo execution risk. Amazon commitment is non-binding. Hyperscaler offtake premium only applies to operating nuclear (contrast: Constellation re-rating).",
+      "key_risk": "NRC FOAK licensing 10-15yr minimum; TRISO fuel bottleneck; policy beta 3/10",
+      "valuation_note": "FOAK SMR: ~$15,000/kW (Darlington comparable); pre-revenue multiples unsupportable"
     },
     {
       "sector": "WIND",
       "stance": "NEUTRAL",
-      "rationale": "Ørsted-Hitachi partnership and Shell PPA signal continued offshore wind commercialization, but New Jersey's move to terminate OSW state agreement and Ukraine war-risk pricing demonstrate bifurcated market conditions.",
-      "key_risk": "Offshore supply chain bottlenecks (electrical systems); onshore exposed to war/sovereign risk in emerging markets",
-      "valuation_note": "EU onshore at $1.2-1.8M/MW; Ukraine premium to $2.15M/MW reflects conflict insurance"
-    },
-    {
-      "sector": "VPP",
-      "stance": "OVERWEIGHT",
-      "rationale": "RWE-Polarium 50MW/135MWh German VPP demonstrates utility-scale aggregation economics reaching commercial viability. Distributed battery aggregation provides grid services without interconnection queue delays.",
-      "key_risk": "Regulatory frameworks for VPP participation in ancillary services markets still evolving in most jurisdictions",
-      "valuation_note": "VPP platform economics highly dependent on local market design; Germany's capacity market reforms favorable"
-    },
-    {
-      "sector": "SOLAR",
-      "stance": "NEUTRAL",
-      "rationale": "EBRD Hungary financing and Lydian portfolio acquisition confirm continued utility-scale buildout, but solar increasingly functions as BESS pairing opportunity rather than standalone investment thesis.",
-      "key_risk": "Module price deflation compressing developer margins; grid interconnection queues extending 4-6 years in US",
-      "valuation_note": "Utility-scale solar capex at ~$117/kW implied in Hungary deal (partial financing)"
+      "rationale": "Operational offshore (Race Bank/Shell PPA) remains investable at 8-10% IRR. Development-stage faces HVDC equipment delays and interconnection queue risk. Ukraine announcement is uninvestable distraction.",
+      "key_risk": "New Jersey terminating OSW State Agreement Approach signals regulatory fragmentation; policy beta 4-5/10",
+      "valuation_note": "Contracted operational offshore: 8-10% levered IRR; development: 15-20% IRR required for queue risk"
     },
     {
       "sector": "AI_DC_POWER",
       "stance": "OVERWEIGHT",
-      "rationale": "Meta-AWS Graviton5 deal and Naver's $270M Korean DC loan confirm AI infrastructure buildout continues regardless of efficiency gains. ARM silicon offers 2-3x perf/watt but absolute load growth dominates.",
-      "key_risk": "Hyperscaler capex cycle volatility; grid interconnection constraints in key markets",
-      "valuation_note": "AI DC power demand driving SMR and BESS valuations as secondary beneficiaries"
+      "rationale": "Meta AWS Graviton5 deal confirms hyperscaler infrastructure demand acceleration. Intel Q1 DC growth validates compute capex cycle. However, TRL<7 storage partnerships (Noon Energy) are R&D hedges not procurement—separate signal from noise.",
+      "key_risk": "Agentic AI load volatility undersized in power planning; 3-5x peak-to-average load swings require grid-forming BESS; policy beta 1/10",
+      "valuation_note": "Data center REITs trading at 20-25x FFO; infrastructure adjacencies (contracted BESS) at discount"
+    },
+    {
+      "sector": "GRID",
+      "stance": "OVERWEIGHT",
+      "rationale": "Ørsted-Hitachi strategic partnership for offshore wind electrical systems signals supply chain consolidation. FERC-regulated transcos in AI-dense regions (TVA service territory) benefit from compounding demand pull.",
+      "key_risk": "Transformer shortage extends interconnection timelines 12-18mo; policy beta 2/10",
+      "valuation_note": "Regulated utilities: 10-12x EBITDA; transcos with AI DC exposure at premium"
+    },
+    {
+      "sector": "H2",
+      "stance": "UNDERWEIGHT",
+      "rationale": "No material H2 signals this week. Green H2 without post-2027 45V subsidy economics remains uninvestable. Any electrolyzer deal without disclosed $/kg off-take is structural PASS.",
+      "key_risk": "45V credit haircut post-election; policy beta 7-8/10",
+      "valuation_note": "Green H2: $5-8/kg without subsidy vs $2-3/kg breakeven required"
     }
   ],
   "red_flags": [
     {
-      "issue": "X-energy IPO Priced for Perfection Despite TRL 6 Status",
-      "detail": "Amazon backing and AI datacenter narrative drove $1bn+ IPO despite no operating commercial reactor, pending NRC certification, and 2030+ commercialization timeline. Pre-revenue nuclear IPOs have historically de-rated 50-70% when timelines slip.",
-      "policy_beta": 7,
+      "issue": "Meta-Noon Energy 100GWh TRL 5 Storage Partnership",
+      "detail": "Hyperscaler reservation of unproven aqueous sulfur technology at TRL 5 with no commercial-scale deployment. 100GWh headline is aspirational—current manufacturing capacity <100MWh. This signals R&D optionality, not procurement commitment.",
+      "policy_beta": 8,
+      "source": "Energy Monitor"
+    },
+    {
+      "issue": "X-energy Pre-Revenue SMR IPO at >$1B Valuation",
+      "detail": "Pricing FOAK SMR deployment 4+ years before any commercial operation. TRISO fuel supply chain not commercially scaled. Amazon commitment non-binding. Any AI DC power claim before 2030 is fiction.",
+      "policy_beta": 3,
       "source": "Data Center Dynamics"
     },
     {
-      "issue": "New Jersey Terminates OSW State Agreement Approach",
-      "detail": "NJ BPU's request to terminate the offshore wind state agreement framework with PJM signals regulatory uncertainty for the 7.5GW+ NJ offshore wind pipeline. Policy instability increases development risk for Ørsted, Atlantic Shores, and other developers.",
-      "policy_beta": 6,
-      "source": "Offshore Wind Biz"
+      "issue": "TVA BESS Procurement Lacks Grid-Forming Specification",
+      "detail": "Neither Plus Power nor Tenaska ESA specifies grid-forming inverters. Australia's 74% NEM benchmark exposes US specification gap. These assets are capacity-only, not premium AI DC infrastructure capable of frequency response for inference load volatility.",
+      "policy_beta": 2,
+      "source": "Energy Storage News"
     },
     {
-      "issue": "Tesla $2B Acquisition Disclosure Methodology",
-      "detail": "Burying a $2bn M&A transaction in a single 10-Q sentence without press release or earnings call mention is atypical for material acquisitions. Pattern historically correlates with integration uncertainty, regulatory sensitivity, or overpayment for pre-revenue targets.",
-      "policy_beta": 3,
-      "source": "Electrek"
+      "issue": "New Jersey OSW State Agreement Termination",
+      "detail": "NJ BPU requesting termination of State Agreement Approach with PJM signals regulatory fragmentation. Offshore wind interconnection via regional grid operator at risk—adds uncertainty to Atlantic coast OSW pipeline.",
+      "policy_beta": 5,
+      "source": "Offshore Wind Biz"
     }
   ],
-  "macro_watch": "AI datacenter power demand continues driving structured procurement by regulated utilities (TVA 1.7GWh this week alone), creating a demand floor for contracted BESS developers while hyperscaler-backed nuclear plays trade at speculative premiums. Watch for Fed commentary on infrastructure financing costs as the rate environment increasingly bifurcates concessional (EBRD, DFC) vs commercial project finance economics.",
-  "data_note": "Energy Storage News (TVA ESAs, Australia AEMO data), Data Center Dynamics (X-energy IPO, Meta-AWS), PV Tech (Lydian acquisition), Power Magazine (DTEK Ukraine), Electrek (Tesla 10-Q disclosure).",
-  "agent_chain_summary": "Technical agent's TRL 6 assessment on X-energy directly contradicted the market's bullish IPO reception; financial agent's 'AVOID' stance on pre-revenue SMR at $1bn+ valuation aligned with NuScale precedent—a conclusion a single-AI analysis would likely have missed by defaulting to 'Amazon-backed = positive signal.'",
+  "macro_watch": "Tesla's $5.8B China credit facility drawdown (35% single-quarter increase) signals EV working capital stress as China sales crash—watch for contagion to adjacent battery supply chain financing. AI DC power demand thesis intact (Intel Q1 DC growth, Meta-AWS deal) but hyperscaler optionality deals (Noon Energy) distort signal-to-noise ratio for true infrastructure investment.",
+  "data_note": "Primary: Energy Storage News (TVA BESS contracts), Data Center Dynamics (X-energy IPO, Intel earnings), AEMO (NEM grid-forming data), Energy Monitor (EBRD Hungary, Meta partnerships). Secondary: Power Magazine (fusion editorial, Ukraine wind).",
+  "agent_chain_summary": "Our analysis detected grid-forming inverter specification gap that standard VC analysis would miss: TVA's 1.7GWh BESS procurement prices capacity-only assets while Australia's 74% grid-forming benchmark validates AI DC infrastructure premium—US developers without retrofit face 50-100bps ancillary service shortfall.",
   "week_stats": {
-    "avg_trl_score": 8.4,
+    "avg_trl_score": 7.6,
     "trl_distribution": {
-      "PLAUSIBLE": 8,
-      "QUESTIONABLE": 0,
-      "RED_FLAG": 0
+      "PLAUSIBLE": 7,
+      "QUESTIONABLE": 1,
+      "RED_FLAG": 2
     },
-    "avg_policy_beta": 4.1,
+    "avg_policy_beta": 4.5,
     "irr_range_low": 8,
-    "irr_range_high": 14,
+    "irr_range_high": 15,
     "grid_risk_count": 4,
-    "top_irr_deal": "EBRD Hungary Solar+BESS (10-14% levered)",
-    "top_risk_deal": "DTEK Ukraine Wind Farm (policy beta 9)"
+    "top_irr_deal": "Plus Power 800MWh Alabama BESS – TVA 20-Year ESA",
+    "top_risk_deal": "DTEK $1.4B Ukraine Wind Farm"
   },
   "agent_chain": {
-    "tech_assessments_count": 8,
-    "deal_assessments_count": 10,
-    "risk_assessments_count": 0,
-    "tech_summary": "This week's signals show continued deployment of mature technologies (utility-scale BESS, onshore/offshore wind, solar PV) at TRL 9 with standard commercial execution risk. The two signals requiring scrutiny are: (1) fusion commercialization claims in the 2030s remain aspirational without demonstrated Q>10 operation, and (2) AI data center power claims (Meta/Graviton5, AirTrunk) must account for the extreme load volatility of agentic AI workloads — any power infrastructure sized for 'average' AI load is structurally underpowered for peak reasoning demand. SMR deployment (X-energy) is technically plausible but licensing timeline to 2030 operation is aggressive.",
-    "deal_summary": "This week's energy deal flow shows a clear bifurcation: contracted BESS in the US Southeast (TVA offtake) offers 12-15% levered IRRs at fair valuations — these are investable. Pre-revenue nuclear (X-energy IPO) and Ukraine wind capex are priced for optimistic scenarios and should be avoided. AI DC power financing (Naver, Tesla) lacks sufficient data to assess, but structural undersizing for agentic AI load volatility remains a systemic risk across the sector.",
-    "risk_summary": "Unavailable"
+    "tech_assessments_count": 10,
+    "deal_assessments_count": 11,
+    "risk_assessments_count": 10,
+    "tech_summary": "This week's signals reveal critical divergence: mature BESS (TRL 9) is scaling predictably in US and Europe, while AI DC power technologies show dangerous hype-reality gaps. Meta's Noon Energy deal (100GWh at TRL 5) and X-energy SMR assumptions pre-2030 trigger multiple red flags. Australia's 74% grid-forming BESS adoption validates GRIDEDGE thesis—this capability is mandatory for AI DC co-location, yet conspicuously absent from US TVA deals. Most concerning: Meta's Graviton5 agentic AI deployment will exhibit load volatility patterns that traditional DC power planning cannot capture.",
+    "deal_summary": "This week's deals bifurcate sharply: TVA's systematic BESS procurement (Plus Power + Tenaska) at $1.0-1.3M/MW with 20-year ESAs represents fair value for contracted storage with investment-grade offtake. X-energy IPO at >$1B pre-revenue and Meta's Noon Energy TRL 5 announcement are hype-driven—zero bankable economics. Ukraine wind at $2.15M/MW in active conflict zone is uninvestable. Key insight: TVA BESS lacks grid-forming specification, missing AI DC premium opportunity.",
+    "risk_summary": "Contracted US BESS (TVA deals) lowest risk; SMR/fusion/novel storage announcements are hype-driven with no bankable near-term economics."
   },
-  "generated_at": "2026-04-24T15:23:06.076932",
+  "generated_at": "2026-04-25T09:59:29.631611",
   "signal_count": 23,
   "sources_used": [
-    "Nuclear Engineering",
-    "PV Tech",
-    "Canary Media",
-    "Electrek",
-    "Utility Dive",
     "Datacenter Dynamics",
     "Energy Monitor",
-    "CleanTechnica",
-    "Power Magazine",
     "Energy Storage News",
-    "Offshore Wind Biz"
+    "Power Magazine",
+    "Electrek",
+    "PV Tech",
+    "Offshore Wind Biz",
+    "Nuclear Engineering"
   ]
 }
