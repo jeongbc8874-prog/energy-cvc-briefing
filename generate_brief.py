@@ -260,6 +260,17 @@ def classify_sector(text: str) -> str:
 HYPERSCALER_BOOST = ["microsoft", "google", "amazon", "meta", "apple", "oracle",
                      "aws", "azure", "gcp", "openai", "anthropic", "nvidia"]
 
+# Early Stage 신호 키워드 — VC 관점에서 중요
+EARLY_STAGE_SIGNALS = [
+    "seed round", "series a", "seed funding", "series a funding",
+    "pre-seed", "angel round", "seed investment",
+    "raises $", "secures $", "closes $", "announces $",
+    "stealth", "emerges from stealth", "launches", "founded",
+    "spinout", "spin-out", "university spinoff",
+    "arpa-e", "doe funding", "sbir", "sttr",
+    "y combinator", "techstars", "cleantech open",
+]
+
 # 딜 규모 임팩트 (MW/GW/$ 규모에 따른 가중치)
 import re as _re
 
@@ -320,15 +331,23 @@ def score_signal(article: dict) -> tuple[float, dict]:
                       "inference", "token", "gpu power", "data center power"]
     ai_dc_boost = min(sum(0.1 for k in ai_dc_keywords if k in text), 0.3)
 
+    # Early Stage 부스트 — VC 관점 우선순위
+    early_boost = 0.2 if any(k in text for k in EARLY_STAGE_SIGNALS) else 0.0
+
+    # Early Stage 감지
+    is_early = early_boost > 0
+    article["is_early_stage"] = is_early
+
     total = (
-        funding_score      * 0.25 +
+        funding_score      * 0.20 +
         deal_score         * 0.15 +
         sector_score       * 0.20 +
-        tier_bonus         * 0.10 +
-        hyperscaler_boost  * 0.15 +
-        size_score         * 0.10 +
+        tier_bonus         * 0.08 +
+        hyperscaler_boost  * 0.12 +
+        size_score         * 0.08 +
         ai_dc_boost        * 0.05 +
-        (1 - risk_score)   * 0.00   # 리스크 기사 보존 (레드플래그용)
+        early_boost        * 0.12 +   # Early Stage 우선순위
+        (1 - risk_score)   * 0.00
     )
 
     # 수치 추출
@@ -610,6 +629,12 @@ HTML_TEMPLATE = """<!DOCTYPE html>
   .policy-high{border-color:rgba(248,113,113,.3)!important;color:#f87171!important;}
   .policy-mid{border-color:rgba(245,158,11,.3)!important;color:#f0a832!important;}
   .agent-chain-bar{background:rgba(59,130,246,.04);border:1px solid rgba(59,130,246,.1);padding:16px 20px;margin-bottom:24px;border-radius:2px;}
+  .stage-badge{font-family:'IBM Plex Mono',monospace;font-size:8px;padding:2px 7px;border-radius:2px;letter-spacing:.08em;}
+  .stage-seed{background:rgba(168,85,247,.1);color:#a855f7;border:1px solid rgba(168,85,247,.25);}
+  .stage-series-a{background:rgba(59,130,246,.1);color:#3b82f6;border:1px solid rgba(59,130,246,.25);}
+  .stage-series-b{background:rgba(34,197,94,.1);color:#22c55e;border:1px solid rgba(34,197,94,.25);}
+  .stage-late{background:rgba(107,107,94,.1);color:#6b6b5e;border:1px solid rgba(107,107,94,.2);}
+  .stage-pf{background:rgba(245,158,11,.1);color:#f59e0b;border:1px solid rgba(245,158,11,.2);}
   .analyst-edge{font-family:'IBM Plex Mono',monospace;font-size:10px;color:rgba(59,130,246,.7);padding:7px 12px;background:rgba(59,130,246,.04);border-left:2px solid rgba(59,130,246,.3);margin-top:8px;line-height:1.5;}
   .analyst-edge-label{font-size:8px;letter-spacing:.15em;text-transform:uppercase;color:rgba(59,130,246,.45);margin-bottom:2px;}
   .acb-title{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.2em;color:rgba(59,130,246,.7);text-transform:uppercase;margin-bottom:10px;}
@@ -683,8 +708,14 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     </div>
     <div class="signal-summary">{{ s.summary }}</div>
     <div class="signal-impl">→ {{ s.implication }}</div>
-    {% if s.recommendation %}
+    {% if s.recommendation or s.deal_stage %}
     <div style="margin:8px 0 4px;display:flex;gap:6px;align-items:center;flex-wrap:wrap;">
+      {% if s.deal_stage == 'SEED' %}<span class="stage-badge stage-seed">SEED</span>
+      {% elif s.deal_stage == 'SERIES_A' %}<span class="stage-badge stage-series-a">SERIES A</span>
+      {% elif s.deal_stage == 'SERIES_B' %}<span class="stage-badge stage-series-b">SERIES B</span>
+      {% elif s.deal_stage == 'LATE_STAGE' %}<span class="stage-badge stage-late">LATE STAGE</span>
+      {% elif s.deal_stage == 'PROJECT_FINANCE' %}<span class="stage-badge stage-pf">PROJECT FINANCE</span>
+      {% endif %}
       {% if s.recommendation == 'LEAD' %}
       <span style="font-family:'IBM Plex Mono',monospace;font-size:9px;font-weight:600;padding:3px 10px;border-radius:2px;background:rgba(34,197,94,.1);color:#22c55e;border:1px solid rgba(34,197,94,.25);letter-spacing:.12em;">LEAD</span>
       {% elif s.recommendation == 'FOLLOW' %}
@@ -785,17 +816,136 @@ def render_html(brief: dict) -> str:
 
 # ── 6단계: 저장 ───────────────────────────────────────────────────────────────
 
+def make_rec_badge(label, count, color, bg):
+    """추천 배지 HTML 생성"""
+    if not count:
+        return ""
+    style = (
+        "font-family:'IBM Plex Mono',monospace;font-size:8px;"
+        "padding:2px 7px;border-radius:2px;"
+        "background:" + bg + ";color:" + color + ";"
+        "border:1px solid " + color + "44;"
+    )
+    return '<span style="' + style + '">' + label + " " + str(count) + "</span> "
+
+
+def generate_archive_html() -> str:
+    """docs/briefs/ 폴더의 모든 JSON을 스캔해서 archive.html 재생성"""
+    import glob, json as _json
+
+    briefs = []
+    for fp in sorted(glob.glob("docs/briefs/*.json"), reverse=True):
+        try:
+            d = _json.loads(open(fp, encoding="utf-8").read())
+            week = d.get("week", "")
+            headline = d.get("headline", "")
+            generated_at = d.get("generated_at", "")[:10]
+            signal_count = d.get("signal_count", 0)
+            signals = d.get("deal_signals", [])
+            lead  = sum(1 for s in signals if s.get("recommendation") == "LEAD")
+            follow= sum(1 for s in signals if s.get("recommendation") == "FOLLOW")
+            watch = sum(1 for s in signals if s.get("recommendation") == "WATCH")
+            pass_ = sum(1 for s in signals if s.get("recommendation") == "PASS")
+            thesis = d.get("thesis", "")[:200]
+            is_latest = len(briefs) == 0
+            briefs.append({
+                "week": week, "headline": headline,
+                "date": generated_at, "signal_count": signal_count,
+                "lead": lead, "follow": follow, "watch": watch, "pass_": pass_,
+                "thesis": thesis,
+                "html_url": "./brief_latest.html" if is_latest else "./briefs/" + week + ".html",
+            })
+        except:
+            pass
+
+    row_list = []
+    for b in briefs:
+        rec_badges = (
+            make_rec_badge("LEAD",   b["lead"],   "#22c55e", "rgba(34,197,94,.1)") +
+            make_rec_badge("FOLLOW", b["follow"], "#3b82f6", "rgba(59,130,246,.1)") +
+            make_rec_badge("WATCH",  b["watch"],  "#f59e0b", "rgba(245,158,11,.1)") +
+            make_rec_badge("PASS",   b["pass_"],  "#ef4444", "rgba(239,68,68,.1)")
+        )
+        parts = []
+        parts.append('<a href="' + b["html_url"] + '" style="display:block;text-decoration:none;color:inherit;">')
+        parts.append('<div style="background:rgba(255,255,255,.02);border:1px solid rgba(59,130,246,.08);padding:24px 28px;margin-bottom:12px;">')
+        parts.append('<div style="display:flex;align-items:center;gap:12px;margin-bottom:10px;flex-wrap:wrap;">')
+        parts.append('<span style="font-family:IBM Plex Mono,monospace;font-size:9px;letter-spacing:.15em;color:#3b82f6;">' + b["week"] + '</span>')
+        parts.append('<span style="font-family:IBM Plex Mono,monospace;font-size:9px;color:rgba(232,232,240,.25);">' + b["date"] + '</span>')
+        if b["signal_count"]:
+            parts.append('<span style="font-family:IBM Plex Mono,monospace;font-size:8px;color:rgba(232,232,240,.2);">' + str(b["signal_count"]) + ' signals</span>')
+        parts.append('</div>')
+        parts.append('<div style="font-family:Instrument Serif,serif;font-size:18px;line-height:1.3;margin-bottom:10px;color:#e8e8f0;">' + b["headline"] + '</div>')
+        if b["thesis"]:
+            parts.append('<div style="font-size:12px;color:rgba(232,232,240,.4);line-height:1.6;margin-bottom:10px;">' + b["thesis"] + '...</div>')
+        parts.append('<div style="display:flex;gap:6px;flex-wrap:wrap;">' + rec_badges + '</div>')
+        parts.append('</div></a>')
+        row_list.append("".join(parts))
+    rows = "\n".join(row_list)
+
+    count = len(briefs)
+    return f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GRIDEDGE — Brief Archive</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:wght@300;400;500&family=Geist:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{{margin:0;padding:0;box-sizing:border-box;}}
+body{{background:#050507;color:#e8e8f0;font-family:'Geist',sans-serif;min-height:100vh;}}
+body::before{{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(59,130,246,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(59,130,246,0.03) 1px,transparent 1px);background-size:48px 48px;pointer-events:none;z-index:0;}}
+nav{{position:sticky;top:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:14px 32px;background:rgba(5,5,7,0.9);backdrop-filter:blur(20px);border-bottom:1px solid rgba(59,130,246,.08);}}
+.logo{{font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:500;letter-spacing:0.2em;color:#3b82f6;text-decoration:none;}}
+.logo em{{color:#e8e8f0;opacity:0.3;font-style:normal;}}
+.nav-r{{display:flex;align-items:center;gap:20px;font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.12em;color:#5a5a7a;text-transform:uppercase;}}
+.nav-r a{{color:#5a5a7a;text-decoration:none;}}
+.nav-r a:hover,.nav-r a.active{{color:#3b82f6;}}
+.wrap{{position:relative;z-index:1;max-width:900px;margin:0 auto;padding:48px 32px;}}
+</style>
+</head>
+<body>
+<nav>
+  <a class="logo" href="./index.html">GRID<em>/</em>EDGE</a>
+  <div class="nav-r">
+    <a href="./index.html">Home</a>
+    <a href="./brief_latest.html">Latest Brief</a>
+    <a href="./dashboard.html">Dashboard</a>
+    <a href="./archive.html" class="active">Archive</a>
+  </div>
+</nav>
+<div class="wrap">
+  <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.25em;color:#3b82f6;text-transform:uppercase;margin-bottom:12px;">Brief Archive</div>
+  <h1 style="font-family:'Instrument Serif',serif;font-size:clamp(28px,3.5vw,44px);line-height:1.05;margin-bottom:6px;">All Deal Memos</h1>
+  <p style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:rgba(232,232,240,.3);letter-spacing:.06em;margin-bottom:36px;">{count} briefs · Updated daily · Mon–Fri</p>
+  {rows if rows else "<div style='text-align:center;padding:60px 0;font-family:IBM Plex Mono,monospace;font-size:11px;color:rgba(232,232,240,.2);'>No briefs yet. First brief will appear after next run.</div>"}
+</div>
+</body>
+</html>"""
+
+
 def save_outputs(brief: dict) -> None:
     os.makedirs("docs/briefs", exist_ok=True)
 
+    # 브리프별 HTML도 저장 (아카이브 링크용)
+    week = brief.get("week", "")
+    brief_html = render_html(brief)
+
     for path, content in [
         ("docs/brief_latest.json", json.dumps(brief, ensure_ascii=False, indent=2)),
-        ("docs/brief_latest.html", render_html(brief)),
-        (f"docs/briefs/{brief['week']}.json", json.dumps(brief, ensure_ascii=False, indent=2)),
+        ("docs/brief_latest.html", brief_html),
+        (f"docs/briefs/{week}.json", json.dumps(brief, ensure_ascii=False, indent=2)),
+        (f"docs/briefs/{week}.html", brief_html),
     ]:
         with open(path, "w", encoding="utf-8") as f:
             f.write(content)
         print(f"[INFO] 저장: {path}")
+
+    # archive.html 자동 재생성
+    archive_html = generate_archive_html()
+    with open("docs/archive.html", "w", encoding="utf-8") as f:
+        f.write(archive_html)
+    print(f"[INFO] 아카이브 재생성 완료 ({len(open('docs/archive.html').readlines())} lines)")
 
 
 # ── 메인 ─────────────────────────────────────────────────────────────────────
