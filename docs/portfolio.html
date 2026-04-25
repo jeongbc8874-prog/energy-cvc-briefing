@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GRIDEDGE — Portfolio Monitor</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:wght@300;400;500&family=Geist:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#050507;--white:#e8e8f0;--dim:#5a5a7a;--blue:#3b82f6;--blue-dim:rgba(59,130,246,0.1);--green:#22c55e;--green-dim:rgba(34,197,94,0.1);--amber:#f59e0b;--amber-dim:rgba(245,158,11,0.1);--red:#ef4444;--red-dim:rgba(239,68,68,0.1);--border:rgba(59,130,246,0.08);--card:rgba(255,255,255,0.02);}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--white);font-family:'Geist',sans-serif;min-height:100vh;}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(59,130,246,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(59,130,246,0.03) 1px,transparent 1px);background-size:48px 48px;pointer-events:none;z-index:0;}
+nav{position:sticky;top:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:14px 32px;background:rgba(5,5,7,0.9);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);}
+.logo{font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:500;letter-spacing:0.2em;color:var(--blue);text-decoration:none;}
+.logo em{color:var(--white);opacity:0.3;font-style:normal;}
+.nav-r{display:flex;align-items:center;gap:20px;font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.12em;color:var(--dim);text-transform:uppercase;}
+.nav-r a{color:var(--dim);text-decoration:none;transition:color .2s;}
+.nav-r a:hover,.nav-r a.active{color:var(--blue);}
+.wrap{position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:48px 32px;}
+.page-tag{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.25em;color:var(--blue);text-transform:uppercase;margin-bottom:12px;}
+.page-title{font-family:'Instrument Serif',serif;font-size:clamp(28px,3.5vw,48px);line-height:1.05;margin-bottom:12px;}
+.page-title em{font-style:italic;color:var(--blue);}
+.page-sub{font-size:14px;color:var(--dim);line-height:1.7;font-weight:300;max-width:560px;margin-bottom:40px;}
+.grid-2{display:grid;grid-template-columns:380px 1fr;gap:24px;align-items:start;}
+.card{background:var(--card);border:1px solid var(--border);padding:24px;}
+.card-title{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.2em;color:var(--blue);text-transform:uppercase;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center;}
+/* 폼 */
+.field{margin-bottom:14px;}
+.field-label{font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:.15em;color:var(--dim);text-transform:uppercase;margin-bottom:6px;}
+.field input,.field select,.field textarea{width:100%;background:rgba(255,255,255,.04);border:1px solid var(--border);color:var(--white);font-family:'IBM Plex Mono',monospace;font-size:12px;padding:9px 12px;outline:none;transition:border-color .2s;}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:rgba(59,130,246,.4);}
+.field select option{background:#050507;}
+.add-btn{width:100%;background:var(--blue);color:#fff;border:none;font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:500;letter-spacing:.15em;text-transform:uppercase;padding:11px;cursor:pointer;transition:background .2s;margin-top:4px;}
+.add-btn:hover{background:#2563eb;}
+/* 포트폴리오 리스트 */
+.portfolio-empty{text-align:center;padding:48px 20px;color:var(--dim);font-family:'IBM Plex Mono',monospace;font-size:11px;line-height:1.8;}
+.pf-item{border:1px solid var(--border);margin-bottom:12px;overflow:hidden;transition:border-color .3s;}
+.pf-item:hover{border-color:rgba(59,130,246,.25);}
+.pf-header{padding:16px 20px;display:flex;align-items:center;gap:12px;cursor:pointer;}
+.pf-sector{font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:.15em;padding:3px 8px;border-radius:2px;border:1px solid var(--border);color:var(--dim);flex-shrink:0;}
+.pf-name{font-size:13px;font-weight:500;flex:1;}
+.pf-irr{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--green);}
+.pf-del{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--dim);cursor:pointer;padding:4px 8px;border:1px solid var(--border);transition:all .2s;flex-shrink:0;}
+.pf-del:hover{color:var(--red);border-color:var(--red);}
+.pf-alerts{padding:0 20px 16px;}
+.alert-item{display:flex;align-items:flex-start;gap:8px;padding:10px 0;border-top:1px solid rgba(255,255,255,.04);font-size:11px;line-height:1.5;}
+.alert-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;margin-top:4px;}
+.alert-title{font-weight:500;margin-bottom:2px;font-size:12px;}
+.alert-sub{color:var(--dim);font-size:10px;}
+.alert-badge{font-family:'IBM Plex Mono',monospace;font-size:7px;padding:2px 6px;border-radius:2px;margin-left:auto;flex-shrink:0;}
+.b-bull{background:var(--green-dim);color:var(--green);}
+.b-watch{background:var(--amber-dim);color:var(--amber);}
+.b-red{background:var(--red-dim);color:var(--red);}
+.no-alerts{font-family:'IBM Plex Mono',monospace;font-size:9px;color:rgba(232,232,240,.2);padding:10px 0;border-top:1px solid rgba(255,255,255,.04);}
+/* 요약 메트릭 */
+.metrics-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:24px;}
+.metric-sm{background:var(--card);border:1px solid var(--border);padding:14px 16px;}
+.metric-sm-label{font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:.12em;color:var(--dim);text-transform:uppercase;margin-bottom:6px;}
+.metric-sm-val{font-family:'Instrument Serif',serif;font-size:24px;color:var(--blue);line-height:1;}
+.metric-sm-sub{font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--dim);margin-top:3px;}
+@media(max-width:900px){.grid-2{grid-template-columns:1fr;}.metrics-row{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:768px){.wrap{padding:24px 16px;}.nav-r{display:none;}}
+</style>
+</head>
+<body>
+<nav>
+  <a class="logo" href="./index.html">GRID<em>/</em>EDGE</a>
+  <div class="nav-r">
+    <a href="./index.html">Home</a>
+    <a href="./brief_latest.html">Latest Brief</a>
+    <a href="./dashboard.html">Dashboard</a>
+    <a href="./ask.html">Ask</a>
+    <a href="./portfolio.html" class="active">Portfolio</a>
+  </div>
+</nav>
+
+<div class="wrap">
+  <div class="page-tag">Portfolio Intelligence</div>
+  <h1 class="page-title">Monitor your <em>investments</em></h1>
+  <p class="page-sub">Add your portfolio companies. We scan every daily brief and flag signals that directly affect your holdings — policy changes, comparable deals, technology risks.</p>
+
+  <!-- 요약 메트릭 -->
+  <div class="metrics-row">
+    <div class="metric-sm">
+      <div class="metric-sm-label">Holdings</div>
+      <div class="metric-sm-val" id="metricCount">0</div>
+      <div class="metric-sm-sub">tracked companies</div>
+    </div>
+    <div class="metric-sm">
+      <div class="metric-sm-label">Active Alerts</div>
+      <div class="metric-sm-val" id="metricAlerts" style="color:var(--amber);">0</div>
+      <div class="metric-sm-sub">this week</div>
+    </div>
+    <div class="metric-sm">
+      <div class="metric-sm-label">Avg Policy Beta</div>
+      <div class="metric-sm-val" id="metricBeta">—</div>
+      <div class="metric-sm-sub">portfolio avg</div>
+    </div>
+    <div class="metric-sm">
+      <div class="metric-sm-label">Briefs Scanned</div>
+      <div class="metric-sm-val" id="metricBriefs" style="color:var(--green);">0</div>
+      <div class="metric-sm-sub">since tracking</div>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <!-- 추가 폼 -->
+    <div>
+      <div class="card">
+        <div class="card-title">■ Add Holding</div>
+        <div class="field">
+          <div class="field-label">Company / Asset Name *</div>
+          <input id="pfName" type="text" placeholder="e.g. CIP Chile BESS, Scatec Egypt">
+        </div>
+        <div class="field">
+          <div class="field-label">Sector *</div>
+          <select id="pfSector">
+            <option value="">Select sector</option>
+            <option value="BESS">BESS / Battery Storage</option>
+            <option value="GRID">Grid / Transmission</option>
+            <option value="NUCLEAR">Nuclear / SMR</option>
+            <option value="SOLAR">Solar + Storage</option>
+            <option value="AI_DC_POWER">AI Data Center Power</option>
+            <option value="H2">Green Hydrogen</option>
+            <option value="WIND">Wind</option>
+            <option value="POWER_TECH">Power Tech / Software</option>
+          </select>
+        </div>
+        <div class="field">
+          <div class="field-label">Target IRR (%)</div>
+          <input id="pfIrr" type="number" placeholder="e.g. 14" min="0" max="50">
+        </div>
+        <div class="field">
+          <div class="field-label">Geography</div>
+          <input id="pfGeo" type="text" placeholder="e.g. US, Europe, MENA">
+        </div>
+        <div class="field">
+          <div class="field-label">Notes (optional)</div>
+          <textarea id="pfNotes" rows="2" placeholder="Key risks, offtaker, structure..."></textarea>
+        </div>
+        <button class="add-btn" onclick="addHolding()">ADD TO PORTFOLIO →</button>
+      </div>
+
+      <!-- 안내 -->
+      <div style="margin-top:16px;background:var(--card);border:1px solid var(--border);padding:16px 20px;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.15em;color:var(--blue);text-transform:uppercase;margin-bottom:10px;">■ How it works</div>
+        <div style="font-size:12px;color:var(--dim);line-height:1.7;">
+          Each time a new brief is published, GRIDEDGE scans all signals and flags any that match your portfolio sectors, geography, or keywords. Alerts are shown here automatically.
+        </div>
+      </div>
+    </div>
+
+    <!-- 포트폴리오 리스트 -->
+    <div>
+      <div class="card-title" style="margin-bottom:16px;">
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.2em;color:var(--blue);text-transform:uppercase;">■ Your Portfolio</span>
+        <span id="pfCount" style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--dim);">0 holdings</span>
+      </div>
+      <div id="portfolioList">
+        <div class="portfolio-empty">
+          No holdings yet.<br>Add your first investment above<br>to start monitoring.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// localStorage에 포트폴리오 저장
+let portfolio = JSON.parse(localStorage.getItem('gridedge_portfolio') || '[]');
+let briefSignals = [];
+
+// 브리프 로드
+async function loadBrief() {
+  try {
+    const r = await fetch('./brief_latest.json?t=' + Date.now());
+    if (!r.ok) return;
+    const d = await r.json();
+    briefSignals = d.deal_signals || [];
+    document.getElementById('metricBriefs').textContent = '1+';
+  } catch(e) {}
+}
+
+function savePortfolio() {
+  localStorage.setItem('gridedge_portfolio', JSON.stringify(portfolio));
+}
+
+function addHolding() {
+  const name = document.getElementById('pfName').value.trim();
+  const sector = document.getElementById('pfSector').value;
+  const irr = document.getElementById('pfIrr').value;
+  const geo = document.getElementById('pfGeo').value.trim();
+  const notes = document.getElementById('pfNotes').value.trim();
+
+  if (!name || !sector) {
+    alert('Company name and sector are required.');
+    return;
+  }
+
+  portfolio.push({ id: Date.now(), name, sector, irr, geo, notes, addedAt: new Date().toISOString().slice(0,10) });
+  savePortfolio();
+
+  // 폼 초기화
+  ['pfName','pfIrr','pfGeo','pfNotes'].forEach(id => document.getElementById(id).value = '');
+  document.getElementById('pfSector').value = '';
+
+  renderPortfolio();
+}
+
+function deleteHolding(id) {
+  portfolio = portfolio.filter(h => h.id !== id);
+  savePortfolio();
+  renderPortfolio();
+}
+
+function matchAlerts(holding) {
+  // 브리프 시그널에서 이 홀딩과 관련된 것 찾기
+  return briefSignals.filter(s => {
+    const sectorMatch = (s.sector || '').toUpperCase().includes(holding.sector.toUpperCase()) ||
+                        holding.sector === 'BESS' && (s.sector||'').includes('BESS') ||
+                        holding.sector === 'GRID' && (s.sector||'').includes('GRID');
+    const nameMatch = holding.name.split(' ').some(word =>
+      word.length > 3 && (s.title||'').toLowerCase().includes(word.toLowerCase())
+    );
+    const geoMatch = holding.geo && (s.summary||'').toLowerCase().includes(holding.geo.toLowerCase());
+    return sectorMatch || nameMatch || geoMatch;
+  }).slice(0, 4);
+}
+
+function renderPortfolio() {
+  const list = document.getElementById('portfolioList');
+  document.getElementById('pfCount').textContent = portfolio.length + ' holdings';
+  document.getElementById('metricCount').textContent = portfolio.length;
+
+  if (!portfolio.length) {
+    list.innerHTML = '<div class="portfolio-empty">No holdings yet.<br>Add your first investment above<br>to start monitoring.</div>';
+    document.getElementById('metricAlerts').textContent = '0';
+    document.getElementById('metricBeta').textContent = '—';
+    return;
+  }
+
+  // 평균 Policy Beta 계산 (브리프에서 섹터 매칭)
+  let totalAlerts = 0;
+  let betaSum = 0, betaCount = 0;
+
+  list.innerHTML = portfolio.map(h => {
+    const alerts = matchAlerts(h);
+    totalAlerts += alerts.length;
+
+    const alertsHtml = alerts.length ? alerts.map(a => {
+      const dotColor = a.tag === 'BULLISH' ? 'var(--green)' : a.tag === 'RED_FLAG' ? 'var(--red)' : 'var(--amber)';
+      const badgeClass = a.tag === 'BULLISH' ? 'b-bull' : a.tag === 'RED_FLAG' ? 'b-red' : 'b-watch';
+      const beta = a.policy_beta != null ? ` · β${a.policy_beta}` : '';
+      if (a.policy_beta != null) { betaSum += a.policy_beta; betaCount++; }
+      return `<div class="alert-item">
+        <div class="alert-dot" style="background:${dotColor}"></div>
+        <div style="flex:1">
+          <div class="alert-title">${(a.title||'').slice(0,60)}...</div>
+          <div class="alert-sub">${(a.summary||'').slice(0,80)}...${beta}</div>
+        </div>
+        <span class="alert-badge ${badgeClass}">${a.tag}</span>
+      </div>`;
+    }).join('') : '<div class="no-alerts">No matching signals in latest brief</div>';
+
+    return `<div class="pf-item">
+      <div class="pf-header">
+        <span class="pf-sector">${h.sector}</span>
+        <span class="pf-name">${h.name}</span>
+        ${h.irr ? `<span class="pf-irr">Target ${h.irr}% IRR</span>` : ''}
+        ${h.geo ? `<span style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--dim);margin-left:4px;">${h.geo}</span>` : ''}
+        <span class="pf-del" onclick="deleteHolding(${h.id})">✕</span>
+      </div>
+      <div class="pf-alerts">${alertsHtml}</div>
+    </div>`;
+  }).join('');
+
+  document.getElementById('metricAlerts').textContent = totalAlerts;
+  document.getElementById('metricBeta').textContent = betaCount ? (betaSum/betaCount).toFixed(1) : '—';
+}
+
+// 초기화
+loadBrief().then(() => renderPortfolio());
+</script>
+</body>
+</html>
