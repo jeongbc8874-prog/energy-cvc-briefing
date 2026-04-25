@@ -132,7 +132,9 @@ h1{animation:fadeUp .6s .1s ease both;}
   <a class="logo" href="/">GRID<em>/</em>EDGE</a>
   <div class="nav-r">
     <a href="./brief_latest.html">Latest Brief</a>
-    <a href="./archive.html">Archive</a>
+    <a href="./dashboard.html">Dashboard</a>
+    <a href="./ask.html">Ask</a>
+    <a href="./portfolio.html">Portfolio</a>
     <span class="pill">FREE ACCESS</span>
   </div>
 </nav>
@@ -327,6 +329,130 @@ h1{animation:fadeUp .6s .1s ease both;}
   </div>
 </div>
 
+<!-- ON-DEMAND DD SECTION -->
+<div style="position:relative;z-index:1;padding:90px 48px;border-top:1px solid var(--border);">
+  <div style="max-width:1280px;margin:0 auto;">
+    <div class="ey">On-Demand DD</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start;">
+
+      <!-- 왼쪽: 설명 -->
+      <div>
+        <h2 style="font-family:'Instrument Serif',serif;font-size:clamp(28px,3vw,44px);line-height:1.1;margin-bottom:16px;">
+          Submit a deal.<br>Get a <em style="font-style:italic;color:var(--blue);">physics-grounded</em><br>DD in 24 hours.
+        </h2>
+        <p style="font-size:14px;color:var(--dim);line-height:1.75;font-weight:300;margin-bottom:24px;">
+          Our 4-agent AI chain — Tech Validator, Deal Analyst, Risk Screener, Brief Synthesizer — analyzes your deal and delivers a structured DD report. Built on power systems PhD-level judgment.
+        </p>
+        <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:28px;">
+          <div style="display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--dim);">
+            <span style="color:var(--blue);font-family:'IBM Plex Mono',monospace;font-size:10px;flex-shrink:0;margin-top:2px;">01</span>
+            TRL validation — is the technology claim physically possible?
+          </div>
+          <div style="display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--dim);">
+            <span style="color:var(--blue);font-family:'IBM Plex Mono',monospace;font-size:10px;flex-shrink:0;margin-top:2px;">02</span>
+            IRR estimate with grid physics context and comparable transactions
+          </div>
+          <div style="display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--dim);">
+            <span style="color:var(--blue);font-family:'IBM Plex Mono',monospace;font-size:10px;flex-shrink:0;margin-top:2px;">03</span>
+            Policy Beta scoring — subsidy dependency quantified 0–10
+          </div>
+          <div style="display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--dim);">
+            <span style="color:var(--blue);font-family:'IBM Plex Mono',monospace;font-size:10px;flex-shrink:0;margin-top:2px;">04</span>
+            Red flag identification — what the term sheet doesn't say
+          </div>
+        </div>
+        <div style="background:rgba(59,130,246,.06);border:1px solid rgba(59,130,246,.15);padding:16px 20px;">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.15em;color:var(--blue);text-transform:uppercase;margin-bottom:8px;">First 3 reports — Free</div>
+          <div style="font-size:12px;color:var(--dim);line-height:1.6;">
+            Traditional DD firm: $30,000–50,000 · 8–12 weeks<br>
+            GRIDEDGE On-Demand: <span style="color:var(--white);">Free beta</span> · <span style="color:var(--white);">24 hours</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 오른쪽: 폼 -->
+      <div>
+        <div style="background:var(--card);border:1px solid var(--border);padding:32px;">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.2em;color:var(--blue);text-transform:uppercase;margin-bottom:24px;">■ Submit Deal for DD</div>
+
+          <div id="ddForm">
+            <div style="margin-bottom:16px;">
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--dim);letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px;">Company / Deal Name *</div>
+              <input id="ddCompany" type="text" placeholder="e.g. Noon Energy LDES Deal"
+                style="width:100%;background:rgba(255,255,255,.04);border:1px solid var(--border);color:var(--white);font-family:'IBM Plex Mono',monospace;font-size:12px;padding:10px 14px;outline:none;transition:border-color .2s;"
+                onfocus="this.style.borderColor='rgba(59,130,246,.4)'" onblur="this.style.borderColor=''">
+            </div>
+
+            <div style="margin-bottom:16px;">
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--dim);letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px;">Sector *</div>
+              <select id="ddSector"
+                style="width:100%;background:rgba(255,255,255,.04);border:1px solid var(--border);color:var(--white);font-family:'IBM Plex Mono',monospace;font-size:12px;padding:10px 14px;outline:none;appearance:none;cursor:pointer;">
+                <option value="" style="background:#050507;">Select sector</option>
+                <option value="BESS" style="background:#050507;">BESS / Battery Storage</option>
+                <option value="GRID" style="background:#050507;">Grid / Transmission</option>
+                <option value="NUCLEAR" style="background:#050507;">Nuclear / SMR</option>
+                <option value="SOLAR" style="background:#050507;">Solar + Storage</option>
+                <option value="AI_DC" style="background:#050507;">AI Data Center Power</option>
+                <option value="H2" style="background:#050507;">Green Hydrogen</option>
+                <option value="WIND" style="background:#050507;">Wind</option>
+                <option value="OTHER" style="background:#050507;">Other</option>
+              </select>
+            </div>
+
+            <div style="margin-bottom:16px;">
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--dim);letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px;">Deal Size (USD)</div>
+              <select id="ddSize"
+                style="width:100%;background:rgba(255,255,255,.04);border:1px solid var(--border);color:var(--white);font-family:'IBM Plex Mono',monospace;font-size:12px;padding:10px 14px;outline:none;appearance:none;cursor:pointer;">
+                <option value="" style="background:#050507;">Select range</option>
+                <option value="<$10M" style="background:#050507;">&lt; $10M</option>
+                <option value="$10-50M" style="background:#050507;">$10M – $50M</option>
+                <option value="$50-200M" style="background:#050507;">$50M – $200M</option>
+                <option value="$200M+" style="background:#050507;">$200M+</option>
+                <option value="undisclosed" style="background:#050507;">Undisclosed</option>
+              </select>
+            </div>
+
+            <div style="margin-bottom:16px;">
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--dim);letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px;">Deal Description *</div>
+              <textarea id="ddDesc" rows="4" placeholder="Brief description of the deal, technology, geography, and what you want validated..."
+                style="width:100%;background:rgba(255,255,255,.04);border:1px solid var(--border);color:var(--white);font-family:'IBM Plex Mono',monospace;font-size:12px;padding:10px 14px;outline:none;resize:vertical;transition:border-color .2s;line-height:1.6;"
+                onfocus="this.style.borderColor='rgba(59,130,246,.4)'" onblur="this.style.borderColor=''"></textarea>
+            </div>
+
+            <div style="margin-bottom:20px;">
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--dim);letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px;">Your Email *</div>
+              <input id="ddEmail" type="email" placeholder="your@fund.com"
+                style="width:100%;background:rgba(255,255,255,.04);border:1px solid var(--border);color:var(--white);font-family:'IBM Plex Mono',monospace;font-size:12px;padding:10px 14px;outline:none;transition:border-color .2s;"
+                onfocus="this.style.borderColor='rgba(59,130,246,.4)'" onblur="this.style.borderColor=''">
+            </div>
+
+            <button onclick="submitDD()"
+              style="width:100%;background:var(--blue);color:#fff;border:none;font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:500;letter-spacing:.15em;text-transform:uppercase;padding:14px;cursor:pointer;transition:background .2s;">
+              REQUEST DD REPORT →
+            </button>
+
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:rgba(232,232,240,.2);letter-spacing:.06em;margin-top:10px;text-align:center;">
+              24hr turnaround · First 3 reports free · No commitment
+            </div>
+          </div>
+
+          <!-- 제출 완료 메시지 -->
+          <div id="ddSuccess" style="display:none;text-align:center;padding:32px 0;">
+            <div style="font-family:'Instrument Serif',serif;font-size:28px;color:var(--green);margin-bottom:12px;">✓</div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--white);letter-spacing:.1em;margin-bottom:8px;">DD REQUEST RECEIVED</div>
+            <div style="font-size:13px;color:var(--dim);line-height:1.6;">
+              We'll send your report to<br>
+              <span id="ddEmailConfirm" style="color:var(--blue);"></span><br>
+              within 24 hours.
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
 <div class="cta-sec">
   <div class="cta-w">
     <div class="cl">
@@ -511,6 +637,43 @@ async function loadWeekStats() {
 }
 
 loadWeekStats();
+
+// On-Demand DD 제출
+function submitDD() {
+  const company = document.getElementById('ddCompany').value.trim();
+  const sector  = document.getElementById('ddSector').value;
+  const size    = document.getElementById('ddSize').value;
+  const desc    = document.getElementById('ddDesc').value.trim();
+  const email   = document.getElementById('ddEmail').value.trim();
+
+  if (!company || !sector || !desc || !email) {
+    alert('Please fill in all required fields (*)');
+    return;
+  }
+  if (!/^[^@]+@[^@]+\.[^@]+$/.test(email)) {
+    alert('Please enter a valid email address');
+    return;
+  }
+
+  // Mailchimp + mailto 병행
+  const subject = encodeURIComponent('[GRIDEDGE DD] ' + company + ' (' + sector + ')');
+  const body = encodeURIComponent(
+    'Company/Deal: ' + company + '\n' +
+    'Sector: ' + sector + '\n' +
+    'Size: ' + (size || 'Not specified') + '\n' +
+    'Email: ' + email + '\n\n' +
+    'Description:\n' + desc
+  );
+
+  // mailto로 이메일 전송 (철이 이메일로)
+  const mailtoLink = 'mailto:gridedge.intel@gmail.com?subject=' + subject + '&body=' + body;
+  window.location.href = mailtoLink;
+
+  // 성공 메시지
+  document.getElementById('ddEmailConfirm').textContent = email;
+  document.getElementById('ddForm').style.display = 'none';
+  document.getElementById('ddSuccess').style.display = 'block';
+}
 </script>
 
 </body>
