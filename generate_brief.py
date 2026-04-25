@@ -254,36 +254,96 @@ def classify_sector(text: str) -> str:
     return best if scores[best] > 0 else "OTHER"
 
 
+# ── AI DC 임팩트 가중치 ──────────────────────────────────────────────────────
+
+# 하이퍼스케일러 직접 언급 = 최고 가중치
+HYPERSCALER_BOOST = ["microsoft", "google", "amazon", "meta", "apple", "oracle",
+                     "aws", "azure", "gcp", "openai", "anthropic", "nvidia"]
+
+# 딜 규모 임팩트 (MW/GW/$ 규모에 따른 가중치)
+import re as _re
+
+def extract_deal_size(text: str) -> float:
+    """딜 규모 추출 → 정규화 점수 (0~1)"""
+    text = text.lower()
+    # GW급
+    gw = _re.findall(r'(\d+(?:\.\d+)?)\s*gw', text)
+    if gw: return min(float(gw[0]) / 2.0, 1.0)  # 2GW = 만점
+    # MW급
+    mw = _re.findall(r'(\d+(?:\.\d+)?)\s*mw', text)
+    if mw: return min(float(mw[0]) / 1000.0, 1.0)
+    # 달러 규모
+    b = _re.findall(r'\$(\d+(?:\.\d+)?)\s*b', text)
+    if b: return min(float(b[0]) / 5.0, 1.0)  # $5B = 만점
+    m = _re.findall(r'\$(\d+(?:\.\d+)?)\s*m', text)
+    if m: return min(float(m[0]) / 500.0, 1.0)  # $500M = 만점
+    return 0.0
+
+def extract_numbers(text: str) -> dict:
+    """텍스트에서 투자 관련 수치 추출"""
+    nums = {}
+    # IRR
+    irr = _re.findall(r'(\d+(?:\.\d+)?)\s*%\s*(?:irr|return|yield)', text.lower())
+    if irr: nums['irr'] = float(irr[0])
+    # MW/GW
+    gw = _re.findall(r'(\d+(?:\.\d+)?)\s*gw', text.lower())
+    if gw: nums['gw'] = float(gw[0])
+    mw = _re.findall(r'(\d+(?:\.\d+)?)\s*mw', text.lower())
+    if mw: nums['mw'] = float(mw[0])
+    # 달러
+    b = _re.findall(r'\$\s*(\d+(?:\.\d+)?)\s*b', text.lower())
+    if b: nums['usd_b'] = float(b[0])
+    m = _re.findall(r'\$\s*(\d+(?:\.\d+)?)\s*m', text.lower())
+    if m: nums['usd_m'] = float(m[0])
+    return nums
+
 def score_signal(article: dict) -> tuple[float, dict]:
     text = (article["title"] + " " + article["description"]).lower()
 
-    # 세부 점수
+    # 기본 점수
     funding_score = min(sum(1 for k in FUNDING_KEYWORDS if k in text) / 3, 1.0)
     deal_score    = min(sum(1 for k in DEAL_KEYWORDS    if k in text) / 2, 1.0)
     risk_score    = min(sum(1 for k in RISK_KEYWORDS    if k in text) / 2, 1.0)
     tier_bonus    = 0.15 if article["source_tier"] == "A" else 0.0
 
     # 섹터 관련성
-    sector_hit = sum(
-        1 for kws in SECTOR_KEYWORDS.values()
-        for k in kws if k in text
-    )
+    sector_hit = sum(1 for kws in SECTOR_KEYWORDS.values() for k in kws if k in text)
     sector_score = min(sector_hit / 3, 1.0)
 
+    # AI DC 임팩트 가중치 (신규)
+    hyperscaler_boost = 0.2 if any(h in text for h in HYPERSCALER_BOOST) else 0.0
+    size_score = extract_deal_size(text)  # 딜 규모
+
+    # AI DC 핵심 키워드 보너스
+    ai_dc_keywords = ["interconnection", "transformer", "grid-forming", "frequency response",
+                      "24/7 cfe", "power purchase", "offtake", "ferc", "pjm", "ercot",
+                      "inference", "token", "gpu power", "data center power"]
+    ai_dc_boost = min(sum(0.1 for k in ai_dc_keywords if k in text), 0.3)
+
     total = (
-        funding_score * 0.35 +
-        deal_score    * 0.20 +
-        sector_score  * 0.25 +
-        tier_bonus    * 0.15 +
-        (1 - risk_score) * 0.05   # 리스크 기사는 약간 감점 (단, 레드플래그용으로 보존)
+        funding_score      * 0.25 +
+        deal_score         * 0.15 +
+        sector_score       * 0.20 +
+        tier_bonus         * 0.10 +
+        hyperscaler_boost  * 0.15 +
+        size_score         * 0.10 +
+        ai_dc_boost        * 0.05 +
+        (1 - risk_score)   * 0.00   # 리스크 기사 보존 (레드플래그용)
     )
 
+    # 수치 추출
+    nums = extract_numbers(article["title"] + " " + article["description"])
+
     breakdown = {
-        "funding": round(funding_score, 2),
-        "deal":    round(deal_score, 2),
-        "sector":  round(sector_score, 2),
-        "risk":    round(risk_score, 2),
-        "tier":    tier_bonus,
+        "funding":    round(funding_score, 2),
+        "deal":       round(deal_score, 2),
+        "sector":     round(sector_score, 2),
+        "risk":       round(risk_score, 2),
+        "tier":       tier_bonus,
+        "hyperscaler": round(hyperscaler_boost, 2),
+        "size":       round(size_score, 2),
+        "ai_dc":      round(ai_dc_boost, 2),
+        "numbers":    nums,
     }
     return round(total, 4), breakdown
 
@@ -381,6 +441,69 @@ Today: {date} | Week: {week}
 Minimum 5 deal_signals, 4-6 sector_positioning required.
 For LOW confidence items, always state the reason explicitly.
 """
+
+
+def load_archive_trend() -> dict:
+    """지난 4주 브리프 아카이브에서 트렌드 데이터 추출"""
+    from pathlib import Path
+    import json as _json
+    from datetime import datetime as _dt, timedelta as _td
+
+    trend = {
+        "prev_sector_positions": {},
+        "avg_policy_beta_4w": {},
+        "deal_count_4w": 0,
+        "note": ""
+    }
+
+    docs_dir = Path("docs/briefs")
+    if not docs_dir.exists():
+        return trend
+
+    briefs = []
+    now = _dt.utcnow()
+    for i in range(1, 5):  # 최근 4주
+        d = now - _td(weeks=i)
+        iso = d.isocalendar()
+        fname = docs_dir / f"{iso[0]}-W{iso[1]:02d}.json"
+        if fname.exists():
+            try:
+                data = _json.loads(fname.read_text())
+                briefs.append(data)
+            except:
+                pass
+
+    if not briefs:
+        trend["note"] = "No archive data yet"
+        return trend
+
+    # 섹터 포지셔닝 트렌드
+    sector_betas = {}
+    for b in briefs:
+        for p in b.get("sector_positioning", []):
+            sec = p.get("sector", "")
+            beta = p.get("policy_beta")
+            if sec and beta is not None:
+                sector_betas.setdefault(sec, []).append(beta)
+        trend["deal_count_4w"] += len(b.get("deal_signals", []))
+
+    # 섹터별 평균 Policy Beta (4주)
+    trend["avg_policy_beta_4w"] = {
+        sec: round(sum(betas)/len(betas), 1)
+        for sec, betas in sector_betas.items()
+    }
+
+    # 이전 주 섹터 포지셔닝
+    if briefs:
+        last = briefs[0]
+        trend["prev_sector_positions"] = {
+            p.get("sector"): p.get("stance")
+            for p in last.get("sector_positioning", [])
+        }
+
+    trend["note"] = f"Based on {len(briefs)} recent briefs"
+    print(f"  [아카이브 트렌드] {len(briefs)}개 브리프 분석, {trend['deal_count_4w']}개 딜 집계")
+    return trend
 
 
 def generate_brief(signals: list[dict], eia_data: dict, proprietary_text: str = "") -> dict:
@@ -523,6 +646,22 @@ HTML_TEMPLATE = """<!DOCTYPE html>
   {% if brief.agent_chain_summary %}
   <div class="acb-summary">"{{ brief.agent_chain_summary }}"</div>
   {% endif %}
+  {% if brief.agent_chain %}
+  <div style="margin-top:10px;display:flex;gap:16px;flex-wrap:wrap;">
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:rgba(34,197,94,.6);">
+      ▲ LEAD: {{ brief.deal_signals | selectattr('recommendation','equalto','LEAD') | list | length }}
+    </div>
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:rgba(59,130,246,.6);">
+      → FOLLOW: {{ brief.deal_signals | selectattr('recommendation','equalto','FOLLOW') | list | length }}
+    </div>
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:rgba(245,158,11,.6);">
+      ● WATCH: {{ brief.deal_signals | selectattr('recommendation','equalto','WATCH') | list | length }}
+    </div>
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:rgba(239,68,68,.6);">
+      ✕ PASS: {{ brief.deal_signals | selectattr('recommendation','equalto','PASS') | list | length }}
+    </div>
+  </div>
+  {% endif %}
 </div>
 {% endif %}
 
@@ -538,6 +677,23 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     </div>
     <div class="signal-summary">{{ s.summary }}</div>
     <div class="signal-impl">→ {{ s.implication }}</div>
+    {% if s.recommendation %}
+    <div style="margin:8px 0 4px;display:flex;gap:6px;align-items:center;flex-wrap:wrap;">
+      <span style="font-family:'IBM Plex Mono',monospace;font-size:9px;font-weight:600;padding:3px 10px;border-radius:2px;
+        background:{{ rec_color.get(s.recommendation, 'rgba(255,255,255,.05)') }}22;
+        color:{{ rec_color.get(s.recommendation, 'rgba(255,255,255,.4)') }};
+        border:1px solid {{ rec_color.get(s.recommendation, 'rgba(255,255,255,.1)') }}55;
+        letter-spacing:.12em;">
+        {{ s.recommendation }}
+      </span>
+      {% if s.conviction %}
+      <span style="font-family:'IBM Plex Mono',monospace;font-size:8px;padding:3px 8px;
+        border-radius:2px;border:1px solid rgba(255,255,255,.08);color:rgba(245,244,239,.35);">
+        {{ s.conviction }} CONVICTION
+      </span>
+      {% endif %}
+    </div>
+    {% endif %}
     {% if s.trl_verdict or s.policy_beta is not none %}
     <div class="agent-badge-row">
       {% if s.trl_score and s.trl_verdict and s.trl_verdict != 'N/A' %}
