@@ -685,18 +685,17 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     <div class="signal-impl">→ {{ s.implication }}</div>
     {% if s.recommendation %}
     <div style="margin:8px 0 4px;display:flex;gap:6px;align-items:center;flex-wrap:wrap;">
-      <span style="font-family:'IBM Plex Mono',monospace;font-size:9px;font-weight:600;padding:3px 10px;border-radius:2px;
-        background:{{ rec_color.get(s.recommendation, 'rgba(255,255,255,.05)') }}22;
-        color:{{ rec_color.get(s.recommendation, 'rgba(255,255,255,.4)') }};
-        border:1px solid {{ rec_color.get(s.recommendation, 'rgba(255,255,255,.1)') }}55;
-        letter-spacing:.12em;">
-        {{ s.recommendation }}
-      </span>
+      {% if s.recommendation == 'LEAD' %}
+      <span style="font-family:'IBM Plex Mono',monospace;font-size:9px;font-weight:600;padding:3px 10px;border-radius:2px;background:rgba(34,197,94,.1);color:#22c55e;border:1px solid rgba(34,197,94,.25);letter-spacing:.12em;">LEAD</span>
+      {% elif s.recommendation == 'FOLLOW' %}
+      <span style="font-family:'IBM Plex Mono',monospace;font-size:9px;font-weight:600;padding:3px 10px;border-radius:2px;background:rgba(59,130,246,.1);color:#3b82f6;border:1px solid rgba(59,130,246,.25);letter-spacing:.12em;">FOLLOW</span>
+      {% elif s.recommendation == 'WATCH' %}
+      <span style="font-family:'IBM Plex Mono',monospace;font-size:9px;font-weight:600;padding:3px 10px;border-radius:2px;background:rgba(245,158,11,.1);color:#f59e0b;border:1px solid rgba(245,158,11,.25);letter-spacing:.12em;">WATCH</span>
+      {% elif s.recommendation == 'PASS' %}
+      <span style="font-family:'IBM Plex Mono',monospace;font-size:9px;font-weight:600;padding:3px 10px;border-radius:2px;background:rgba(239,68,68,.1);color:#ef4444;border:1px solid rgba(239,68,68,.25);letter-spacing:.12em;">PASS</span>
+      {% endif %}
       {% if s.conviction %}
-      <span style="font-family:'IBM Plex Mono',monospace;font-size:8px;padding:3px 8px;
-        border-radius:2px;border:1px solid rgba(255,255,255,.08);color:rgba(245,244,239,.35);">
-        {{ s.conviction }} CONVICTION
-      </span>
+      <span style="font-family:'IBM Plex Mono',monospace;font-size:8px;padding:3px 8px;border-radius:2px;border:1px solid rgba(255,255,255,.08);color:rgba(245,244,239,.35);">{{ s.conviction }} CONVICTION</span>
       {% endif %}
     </div>
     {% endif %}
