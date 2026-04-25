@@ -222,6 +222,43 @@ FERC transco:           27-40x P/E
 Nuclear operating:      $3.5–5M/MW [re-rated from AI offtake]
 Nuclear FOAK SMR:       ~$15,000/kW [Darlington 2025 FID]
 
+=== EARLY STAGE (SEED / SERIES A) SPECIAL FRAMEWORK ===
+This analyst prioritizes early-stage opportunities. Apply the following:
+
+EARLY STAGE SIGNALS (flag these as priority):
+- Seed/Series A rounds in AI DC power infrastructure
+- First institutional check in grid software, BESS software, power electronics
+- University spinouts with power systems PhD founders
+- Government grant + private co-investment (ARPA-E, DOE, KETEP)
+- Patent filings in: grid-forming inverters, AI load forecasting, BESS degradation
+
+EARLY STAGE VALUATION (different from late stage):
+- Pre-revenue: focus on TAM, team, technical moat — not IRR
+- Series A: ARR multiple or technology milestone-based
+- Do NOT apply project finance IRR to early-stage software/tech plays
+- Typical Seed: $2-8M pre-money in energy tech
+- Typical Series A: $10-30M pre-money with pilot deployment proof
+
+EARLY STAGE RED FLAGS (different from late stage):
+- "Capital intensive from day 1" without asset-light path → wrong stage
+- No power systems engineering expertise in founding team
+- Technology requires >$500M capex before revenue → not early stage investable
+- Government grant dependency without commercial path
+
+EARLY STAGE GREEN FLAGS:
+- Software-defined grid assets (asset-light, high margin)
+- AI-powered BESS control systems (can be deployed on existing hardware)
+- Power flow optimization software for AI DC operators
+- Grid-forming inverter firmware (high IP value, low capex)
+- Energy data platform for utility/DC operators
+
+STAGE CLASSIFICATION (detect and label):
+- Seed (<$5M): flag as SEED_STAGE
+- Series A ($5-20M): flag as SERIES_A
+- Series B ($20-100M): flag as SERIES_B
+- Growth/Late (>$100M): flag as LATE_STAGE
+- Project Finance: flag as PROJECT_FINANCE (different framework)
+
 === OFFTAKER CREDIT TIER ===
 Tier 1 (Best): Microsoft, Google, Amazon, Meta, Apple, Oracle direct → TRL 9 + Policy Beta 2-3
 Tier 2: Investment-grade utility long-term PPA → DFI leverage possible
@@ -507,10 +544,22 @@ Each deal_signal MUST include ALL these fields (no exceptions):
 - analyst_edge: specific technical or financial insight this analysis reveals (1 sentence with numbers)
 
 RECOMMENDATION DECISION RULES:
-LEAD:   TRL≥8 AND Policy Beta≤3 AND IRR in target range AND hyperscaler offtaker
-FOLLOW: TRL≥7 AND reasonable economics AND one unresolved risk
-WATCH:  Interesting but TRL<7 OR Policy Beta≥6 OR interconnection unconfirmed
-PASS:   Any RED_FLAG from Tech/Risk agents OR IRR below range OR subsidy-only economics
+
+FOR EARLY STAGE (Seed/Series A — PRIORITY FOCUS):
+LEAD:   Strong technical moat + power systems team + clear AI DC application + TRL≥5
+FOLLOW: Interesting technology but team gap OR market timing question
+WATCH:  Early but needs pilot data OR regulatory clarity
+PASS:   No technical differentiation OR requires project finance from day 1
+
+FOR LATE STAGE / PROJECT FINANCE:
+LEAD:   TRL≥9 AND Policy Beta≤3 AND IRR in target range AND hyperscaler offtaker
+FOLLOW: TRL≥8 AND reasonable economics AND one unresolved risk
+WATCH:  TRL<8 OR Policy Beta≥6 OR interconnection unconfirmed
+PASS:   Any RED_FLAG OR IRR below range OR subsidy-only economics
+
+STAGE DETECTION: Classify each deal by stage before applying rules.
+Early stage deals with strong team/tech should be rated MORE generously on IRR
+(pre-revenue stage = cannot apply project finance IRR framework)
 
 CONVICTION RULES:
 HIGH:   All 3 agents agree on assessment
