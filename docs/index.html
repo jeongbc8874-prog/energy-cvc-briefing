@@ -132,6 +132,7 @@ h1{animation:fadeUp .6s .1s ease both;}
   <a class="logo" href="/">GRID<em>/</em>EDGE</a>
   <div class="nav-r">
     <a href="./brief_latest.html">Latest Brief</a>
+    <a href="./archive.html">Archive</a>
     <a href="./dashboard.html">Dashboard</a>
     <a href="./ask.html">Ask</a>
     <a href="./portfolio.html">Portfolio</a>
@@ -278,52 +279,29 @@ h1{animation:fadeUp .6s .1s ease both;}
 
 <div class="samp-sec">
   <div class="sw">
-    <div class="ey">Sample Brief</div>
-    <div class="sc">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:24px;">
+      <div class="ey">Latest Brief</div>
+      <a href="./archive.html" style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.15em;color:var(--blue);text-decoration:none;opacity:.7;text-transform:uppercase;">View All Briefs →</a>
+    </div>
+    <div class="sc" id="latestBriefCard">
+      <!-- 로딩 상태 -->
       <div class="sh">
-        <div class="sm">GRIDEDGE INTELLIGENCE · 2026-W16 · AI DC POWER EDITION</div>
-        <div style="font-family:'Instrument Serif',serif;font-size:20px;line-height:1.25;">Scatec 1.1GW Egypt Solar+BESS closes at $479M DFI debt — sets EM project finance template as EU PPA prices collapse to €55/MWh</div>
+        <div class="sm" id="briefMeta" style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.15em;color:var(--blue);text-transform:uppercase;margin-bottom:8px;">Loading latest brief...</div>
+        <div style="font-family:'Instrument Serif',serif;font-size:20px;line-height:1.25;color:rgba(232,232,240,.3);" id="briefHeadline">—</div>
       </div>
       <div class="sg">
         <div>
           <div class="sbl">■ Deal Signals</div>
-          <div class="sigi">
-            <div class="badges"><span class="b bull">BULLISH</span><span class="b sec2">BESS</span><span class="b sec2">HIGH</span></div>
-            <div class="st2">Scatec 1.1GW Egypt Solar+BESS — $479M DFI Close</div>
-            <div class="sb">Fully contracted storage revenue model eliminates merchant exposure. DFI debt reduces blended cost of capital 200-300bps vs. commercial financing in EM markets.</div>
-            <div class="impl">→ IRR 12-14% levered · TRL 9 · Policy Beta 3/10 · Sets MENA benchmark</div>
-          </div>
-          <div class="sigi">
-            <div class="badges"><span class="b red2">RED FLAG</span><span class="b sec2">INFRA</span></div>
-            <div class="st2">Texas AI Cluster — 36-Month Transformer Backlog</div>
-            <div class="sb">Major hyperscaler campus delayed by EHV transformer shortage. Physical constraint, not permitting. Supply chain concentrated in 3 manufacturers globally.</div>
-            <div class="impl">→ Transformer lead time is now an IRR risk factor for all AI DC investments</div>
-          </div>
-          <div class="sigi">
-            <div class="badges"><span class="b bull">BULLISH</span><span class="b sec2">BESS</span></div>
-            <div class="st2">Amazon 430MW Australia Solar+Storage PPAs</div>
-            <div class="sb">8 of 9 PPAs feature co-located BESS — 24/7 CFE mandate driving storage attachment across all hyperscaler offtake.</div>
-            <div class="impl">→ Hybrid PPA now standard. Pure solar developers structurally squeezed.</div>
-          </div>
+          <div id="briefSignals"><div style="color:var(--dim);font-size:11px;padding:8px 0;font-family:'IBM Plex Mono',monospace;">Loading...</div></div>
         </div>
         <div>
           <div class="sbl">■ Sector Positioning</div>
-          <div class="sigi">
-            <div class="badges"><span class="b bull">GRID · OVERWEIGHT</span></div>
-            <div class="st2">AI Load Creating Transmission Supercycle</div>
-            <div class="sb">FERC June decision on DC interconnection reform + 3.4x AI power demand = multi-year structural tailwind. Physics-driven, policy-independent.</div>
-          </div>
-          <div class="sigi">
-            <div class="badges"><span class="b bull">BESS · OVERWEIGHT</span></div>
-            <div class="st2">Storage Attachment Rate >60% on New Solar</div>
-            <div class="sb">Hyperscaler 24/7 CFE mandates making standalone solar unfundable for AI offtake. BESS co-location now table stakes globally.</div>
-          </div>
-          <div class="sigi">
-            <div class="badges"><span class="b wat">H₂ · UNDERWEIGHT</span></div>
-            <div class="st2">LCOH €2.5–13/kg — Too Wide to Underwrite</div>
-            <div class="sb">5x cost variance across projects. AI data centers need dispatchable power, not intermittent hydrogen. Policy Beta 8/10 — subsidy-dependent.</div>
-          </div>
+          <div id="briefPositioning"><div style="color:var(--dim);font-size:11px;padding:8px 0;font-family:'IBM Plex Mono',monospace;">Loading...</div></div>
         </div>
+      </div>
+      <div style="margin-top:20px;display:flex;gap:12px;align-items:center;">
+        <a href="./brief_latest.html" style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.12em;color:var(--blue);text-decoration:none;border:1px solid rgba(59,130,246,.3);padding:8px 16px;transition:all .2s;" onmouseover="this.style.background='rgba(59,130,246,.1)'" onmouseout="this.style.background='transparent'">READ FULL BRIEF →</a>
+        <a href="./archive.html" style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.12em;color:var(--dim);text-decoration:none;">Past Briefs ↗</a>
       </div>
     </div>
   </div>
