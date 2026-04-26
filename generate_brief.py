@@ -1021,24 +1021,70 @@ if __name__ == "__main__":
         brief["signal_count"] = len(filtered)
         brief["sources_used"] = list({s["source"] for s in filtered})
 
-        # deal_stage 자동 보완
-        src_stage = {
-            "arxiv": "PRE_SEED", "arpa-e": "PRE_SEED", "doe": "PRE_SEED",
-            "hacker news": "SEED", "climatebase": "SERIES_A", "sec form d": "SEED",
+        # deal_stage 자동 보완 — 모든 시그널 처리
+        import re as _re
+        src_stage_map = {
+            "arxiv": "PRE_SEED",
+            "arpa-e": "PRE_SEED",
+            "doe": "PRE_SEED",
+            "hacker news": "SEED",
+            "climatebase": "SERIES_A",
+            "sec form d": "SEED",
+            "uspto": "PRE_SEED",
         }
         fmap = {s["title"][:50]: s for s in filtered}
+
         for sig in brief.get("deal_signals", []):
+            stage = sig.get("deal_stage", "")
+            if stage and stage not in ("", "UNKNOWN", None):
+                continue  # 이미 있으면 스킵
+
+            # 1. 소스 기반
+            src = sig.get("source", "").lower()
+            for k, v in src_stage_map.items():
+                if k in src:
+                    sig["deal_stage"] = v
+                    break
+
+            # 2. deal_stage_hint 폴백
             if not sig.get("deal_stage") or sig.get("deal_stage") == "UNKNOWN":
-                src = sig.get("source", "").lower()
-                for k, v in src_stage.items():
-                    if k in src:
-                        sig["deal_stage"] = v
-                        break
-            if not sig.get("deal_stage") or sig.get("deal_stage") == "UNKNOWN":
-                orig = fmap.get(sig.get("title","")[:50], {})
+                orig = fmap.get(sig.get("title", "")[:50], {})
                 hint = orig.get("deal_stage_hint", "")
-                if hint and hint not in ("UNKNOWN", ""):
+                if hint and hint not in ("UNKNOWN", "", None):
                     sig["deal_stage"] = hint
+
+            # 3. 금액 기반 추론
+            if not sig.get("deal_stage") or sig.get("deal_stage") == "UNKNOWN":
+                text = (sig.get("title", "") + " " + sig.get("summary", "")).lower()
+                billions = _re.findall(r"\$(\d+(?:\.\d+)?)\s*b(?:illion)?", text)
+                millions = _re.findall(r"\$(\d+(?:\.\d+)?)\s*m(?:illion)?", text)
+                if billions:
+                    amt = float(billions[0])
+                    sig["deal_stage"] = "PROJECT_FINANCE" if amt >= 0.5 else "LATE_STAGE"
+                elif millions:
+                    amt = float(millions[0])
+                    if amt < 5:
+                        sig["deal_stage"] = "SEED"
+                    elif amt < 30:
+                        sig["deal_stage"] = "SERIES_A"
+                    elif amt < 100:
+                        sig["deal_stage"] = "SERIES_B"
+                    else:
+                        sig["deal_stage"] = "LATE_STAGE"
+                else:
+                    # 기본값 — 대형 인프라 딜
+                    mw = _re.findall(r"(\d+(?:\.\d+)?)\s*(?:gw|gwh)", text)
+                    if mw:
+                        sig["deal_stage"] = "PROJECT_FINANCE"
+                    else:
+                        sig["deal_stage"] = "LATE_STAGE"
+
+        # 통계 출력
+        stage_counts = {}
+        for sig in brief.get("deal_signals", []):
+            st = sig.get("deal_stage", "UNKNOWN")
+            stage_counts[st] = stage_counts.get(st, 0) + 1
+        print(f"[INFO] Stage 분포: {stage_counts}")
     else:
         print("[INFO] 단일 AI 모드")
         brief = generate_brief(filtered, eia_data, proprietary_text)
