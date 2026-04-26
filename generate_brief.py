@@ -959,12 +959,51 @@ if __name__ == "__main__":
     filtered = filter_signals(signals, top_n=20)
     eia_data = fetch_eia_data()
 
-    # 독점 데이터 수집
+    # 독점 데이터 수집 + filtered에 직접 추가
     proprietary_text = ""
     if PROPRIETARY_ENABLED:
         try:
             prop_data = collect_proprietary_data()
             proprietary_text = format_proprietary_for_prompt(prop_data)
+
+            # 독점 시그널을 RSS 시그널과 동일한 형식으로 변환 → filtered에 추가
+            prop_signals = []
+            for key in ["sec_form_d", "arxiv", "doe_grants", "hiring_signals", "hn_launches", "patents"]:
+                for item in prop_data.get(key, []):
+                    signal_text = item.get("signal", "")
+                    if not signal_text:
+                        continue
+                    # 섹터 결정
+                    raw_sector = item.get("sector", "OTHER")
+                    sector_map = {
+                        "EARLY_STAGE": "POWER_TECH",
+                        "POWER_TECH": "POWER_TECH",
+                        "GRID": "GRID",
+                        "BESS": "BESS",
+                    }
+                    mapped_sector = sector_map.get(raw_sector, "POWER_TECH")
+
+                    prop_signals.append({
+                        "title": signal_text[:120],
+                        "description": item.get("summary", signal_text)[:500],
+                        "source": item.get("source", "Proprietary"),
+                        "source_tier": "A",
+                        "sector": mapped_sector,
+                        "url": item.get("url", ""),
+                        "published": item.get("filed_date", item.get("published", "")),
+                        "score": 0.85,
+                        "breakdown": {"funding": 0.8, "deal": 0.8, "sector": 0.9, "tier": 0.15},
+                        "is_early_stage": item.get("is_early_stage", False),
+                        "deal_stage_hint": item.get("deal_stage", ""),
+                        "extracted_numbers": {},
+                    })
+
+            if prop_signals:
+                print(f"[INFO] 독점 시그널 {len(prop_signals)}개 → filtered에 추가")
+                # 중복 제거 후 상위 시그널에 합산
+                filtered = prop_signals + filtered
+                filtered = filtered[:25]  # 최대 25개로 제한
+
         except Exception as e:
             print(f"[WARN] 독점 데이터 수집 실패: {e}")
 
