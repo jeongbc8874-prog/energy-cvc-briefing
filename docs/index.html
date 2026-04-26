@@ -481,28 +481,33 @@ async function loadLatestBrief() {
     if (!r.ok) return;
     const d = await r.json();
 
-    // 주차 태그
-    document.getElementById('briefWeekTag').textContent = d.week || '';
+    // 주차 태그 (요소 없으면 스킵)
+    const weekTag = document.getElementById('briefWeekTag');
+    if (weekTag) weekTag.textContent = d.week || '';
 
-    // Live Signal Feed (상위 4개)
-    const signals = (d.deal_signals || []).slice(0, 4);
-    const dotColor = tag => tag === 'BULLISH' ? 'g' : tag === 'RED_FLAG' ? 'r' : 'a';
+    // Live Signal Feed (요소 없으면 스킵)
     const feed = document.getElementById('liveFeed');
-    if (signals.length) {
-      feed.innerHTML = signals.map(s => `
-        <div class="si">
-          <div class="sd ${dotColor(s.tag)}"></div>
-          <span>${(s.title||'').slice(0,55)}${(s.title||'').length>55?'...':''}</span>
-          <span class="st">${s.sector||''}</span>
-        </div>`).join('');
+    if (feed) {
+      const signals = (d.deal_signals || []).slice(0, 4);
+      const dotColor = tag => tag === 'BULLISH' ? 'g' : tag === 'RED_FLAG' ? 'r' : 'a';
+      if (signals.length) {
+        feed.innerHTML = signals.map(s => `
+          <div class="si">
+            <div class="sd ${dotColor(s.tag)}"></div>
+            <span>${(s.title||'').slice(0,55)}${(s.title||'').length>55?'...':''}</span>
+            <span class="st">${s.sector||''}</span>
+          </div>`).join('');
+      }
     }
 
     // Brief 메타
-    document.getElementById('briefMeta').textContent =
+    const briefMetaEl = document.getElementById('briefMeta');
+    if (briefMetaEl) briefMetaEl.textContent =
       'GRIDEDGE INTELLIGENCE · ' + (d.week||'') + ' · AI DC POWER EDITION';
 
     // 헤드라인
-    document.getElementById('briefHeadline').textContent = d.headline || '';
+    const headlineEl = document.getElementById('briefHeadline');
+    if (headlineEl) headlineEl.textContent = d.headline || '';
 
     // 딜 시그널 (상위 3개)
     const bClass = tag => tag === 'BULLISH' ? 'bull' : tag === 'RED_FLAG' ? 'red2' : 'wat';
