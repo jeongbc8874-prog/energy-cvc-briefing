@@ -128,8 +128,15 @@ def run_tech_validator(signals: list[dict]) -> dict:
     print("  [Agent 1] Tech Validator 실행 중...")
 
     signals_text = "\n\n".join([
-        f"[{i+1}] {s['title']}\n{s['description']}\nSector: {s['sector']}"
-        for i, s in enumerate(signals[:10])
+        (
+            f"[{i+1}] {s['title']}\n"
+            f"{s['description']}\n"
+            f"Sector: {s.get('sector','OTHER')} | "
+            f"Source: {s.get('source','')} | "
+            + (f"EARLY STAGE: {s['deal_stage_hint']} | " if s.get('is_early_stage') else "")
+            + (f"Numbers: {s.get('extracted_numbers', {})}" if s.get('extracted_numbers') else "")
+        )
+        for i, s in enumerate(signals[:12])
     ])
 
     message = client.messages.create(
@@ -461,8 +468,15 @@ def run_risk_screener(signals: list[dict], tech_result: dict, deal_result: dict)
     print("  [Agent 3] Risk Screener 실행 중...")
 
     signals_text = "\n\n".join([
-        f"[{i+1}] {s['title']}\n{s['description']}\nSector: {s['sector']}"
-        for i, s in enumerate(signals[:10])
+        (
+            f"[{i+1}] {s['title']}\n"
+            f"{s['description']}\n"
+            f"Sector: {s.get('sector','OTHER')} | "
+            f"Source: {s.get('source','')} | "
+            + (f"EARLY STAGE: {s['deal_stage_hint']} | " if s.get('is_early_stage') else "")
+            + (f"Numbers: {s.get('extracted_numbers', {})}" if s.get('extracted_numbers') else "")
+        )
+        for i, s in enumerate(signals[:12])
     ])
 
     tech_context  = tech_result.get("tech_summary", "")
