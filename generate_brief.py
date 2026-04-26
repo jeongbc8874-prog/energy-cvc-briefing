@@ -46,40 +46,62 @@ ENTSOE_TOKEN      = os.environ.get("ENTSOE_TOKEN", "")      # 무료 발급: tra
 # ── 무료 RSS 소스 정의 ────────────────────────────────────────────────────────
 
 RSS_SOURCES = [
-    # ── Tier A: AI 데이터센터 전력 전문 ─────────────────────────────
+    # ── Tier A: AI DC 전력망 전문 (핵심) ────────────────────────────
     {"name": "Datacenter Dynamics",  "url": "https://www.datacenterdynamics.com/en/rss/",            "tier": "A"},
-    {"name": "Data Center Knowledge", "url": "https://www.datacenterfrontier.com/feed/",             "tier": "A"},
+    {"name": "Data Center Frontier", "url": "https://www.datacenterfrontier.com/feed/",              "tier": "A"},
     {"name": "Utility Dive",         "url": "https://www.utilitydive.com/feeds/news/",               "tier": "A"},
-    {"name": "Energy Storage News",  "url": "https://www.energy-storage.news/feed/",                 "tier": "A"},
-    {"name": "PV Tech",              "url": "https://www.pv-tech.org/feed/",                         "tier": "A"},
+    {"name": "The Register DC",      "url": "https://www.theregister.com/data_centre/rss",           "tier": "A"},
+    {"name": "IEEE Spectrum Power",  "url": "https://spectrum.ieee.org/feeds/tag/power-energy",      "tier": "A"},
+    # ── Tier A: 그리드/송전 전문 ─────────────────────────────────────
+    {"name": "T&D World",            "url": "https://www.tdworld.com/rss",                           "tier": "A"},
+    {"name": "Power Magazine",       "url": "https://www.powermag.com/feed/",                        "tier": "A"},
     {"name": "Canary Media",         "url": "https://canarymedia.com/feed",                          "tier": "A"},
-    {"name": "CTVC Climatetech",     "url": "https://www.ctvc.co/rss/",                             "tier": "A"},
-    {"name": "Electrek",             "url": "https://electrek.co/feed/",                             "tier": "A"},
     # ── Tier A: 공공기관 / 규제 ─────────────────────────────────────
     {"name": "DOE News",             "url": "https://www.energy.gov/rss.xml",                        "tier": "A"},
-    {"name": "NREL News",            "url": "https://www.nrel.gov/news/rss/newsroom.xml",            "tier": "A"},
+    {"name": "FERC News",            "url": "https://www.ferc.gov/news-events/rss-feeds",            "tier": "A"},
     {"name": "EIA Analysis",         "url": "https://www.eia.gov/rss/press_releases.xml",            "tier": "A"},
-    # ── Tier B: 전력/그리드 인프라 ──────────────────────────────────
-    {"name": "T&D World",            "url": "https://www.tdworld.com/rss",                           "tier": "B"},
-    {"name": "Power Magazine",       "url": "https://www.powermag.com/feed/",                        "tier": "B"},
-    {"name": "Nuclear Engineering",  "url": "https://www.neimagazine.com/rss",                       "tier": "B"},
-    {"name": "Carbon Brief",         "url": "https://www.carbonbrief.org/feed/",                     "tier": "B"},
-    {"name": "Offshore Wind Biz",    "url": "https://www.offshorewind.biz/feed/",                    "tier": "B"},
-    {"name": "Clean Energy Wire",    "url": "https://www.cleanenergywire.org/rss.xml",               "tier": "B"},
-    # ── Tier B: VC/딜 ───────────────────────────────────────────────
-    {"name": "Greentown Labs",       "url": "https://greentownlabs.com/feed/",                       "tier": "B"},
+    {"name": "NREL News",            "url": "https://www.nrel.gov/news/rss/newsroom.xml",            "tier": "A"},
+    # ── Tier A: 원전/SMR ─────────────────────────────────────────────
+    {"name": "World Nuclear News",   "url": "https://www.world-nuclear-news.org/rss",                "tier": "A"},
+    {"name": "Nuclear Engineering",  "url": "https://www.neimagazine.com/rss",                       "tier": "A"},
+    # ── Tier A: Early Stage / VC ────────────────────────────────────
+    {"name": "TechCrunch Climate",   "url": "https://techcrunch.com/category/climate/feed/",         "tier": "A"},
+    {"name": "CTVC Climatetech",     "url": "https://www.ctvc.co/rss/",                             "tier": "A"},
+    {"name": "Greentown Labs",       "url": "https://greentownlabs.com/feed/",                       "tier": "A"},
+    # ── Tier B: BESS/재생에너지 ──────────────────────────────────────
+    {"name": "Energy Storage News",  "url": "https://www.energy-storage.news/feed/",                 "tier": "B"},
+    {"name": "PV Tech",              "url": "https://www.pv-tech.org/feed/",                         "tier": "B"},
     {"name": "Energy Monitor",       "url": "https://www.energymonitor.ai/feed/",                    "tier": "B"},
+    {"name": "Clean Energy Wire",    "url": "https://www.cleanenergywire.org/rss.xml",               "tier": "B"},
     {"name": "CleanTechnica",        "url": "https://cleantechnica.com/feed/",                       "tier": "B"},
+    {"name": "Electrek",             "url": "https://electrek.co/feed/",                             "tier": "B"},
+    {"name": "Carbon Brief",         "url": "https://www.carbonbrief.org/feed/",                     "tier": "B"},
 ]
 
 # 섹터 키워드 매핑 (시그널 분류용)
 SECTOR_KEYWORDS = {
     # AI DC 전력 핵심 5개 버티컬
-    "AI_DC_POWER": ["data center", "datacenter", "hyperscaler", "ai power", "gpu cluster",
-                    "microsoft", "google", "amazon", "meta", "ai campus", "digital infrastructure",
-                    "compute", "inference", "training cluster", "ai load"],
-    "BESS":        ["battery", "energy storage", "bess", "lithium", "flow battery",
-                    "co-located storage", "grid-scale battery", "4-hour", "8-hour", "storage attachment"],
+    "AI_DC_POWER": [
+        # 계통 접속 / 그리드 위기
+        "interconnection queue", "grid access denied", "transmission constraint",
+        "pjm capacity shortage", "grid bottleneck", "power delivery",
+        "transformer backlog", "substation", "grid upgrade",
+        # AI DC 전력 직접
+        "data center power", "datacenter power", "hyperscaler power",
+        "ai campus", "gpu power", "inference workload", "ai load",
+        "data center", "datacenter", "hyperscaler",
+        "microsoft", "google", "amazon", "meta", "oracle",
+        # 기술
+        "grid-forming", "frequency response", "virtual power plant",
+        "demand response", "ai power management",
+    ],
+    "BESS":        [
+        "battery storage", "bess", "energy storage system",
+        "grid-scale battery", "co-located storage", "storage attachment",
+        "4-hour storage", "8-hour storage", "long duration",
+        "lithium iron", "flow battery", "iron-air",
+        # 단순 "battery"나 "energy storage"는 너무 광범위 → 제거
+    ],
     "GRID":        ["grid", "transmission", "substation", "transformer", "interconnection",
                     "ferc", "pjm", "ercot", "miso", "caiso", "queue", "curtailment",
                     "frequency", "ancillary", "capacity market", "power flow"],
@@ -325,11 +347,34 @@ def score_signal(article: dict) -> tuple[float, dict]:
     hyperscaler_boost = 0.2 if any(h in text for h in HYPERSCALER_BOOST) else 0.0
     size_score = extract_deal_size(text)  # 딜 규모
 
-    # AI DC 핵심 키워드 보너스
-    ai_dc_keywords = ["interconnection", "transformer", "grid-forming", "frequency response",
-                      "24/7 cfe", "power purchase", "offtake", "ferc", "pjm", "ercot",
-                      "inference", "token", "gpu power", "data center power"]
-    ai_dc_boost = min(sum(0.1 for k in ai_dc_keywords if k in text), 0.3)
+    # AI DC 전력망 핵심 키워드 — 가중치 대폭 강화
+    ai_dc_tier1 = [
+        # 계통 접속 위기 (최고 우선순위)
+        "interconnection queue", "grid access", "transmission constraint",
+        "pjm capacity", "ercot congestion", "caiso curtailment",
+        # 변압기 / 인프라
+        "transformer shortage", "transformer lead", "substation upgrade",
+        "transmission upgrade", "grid bottleneck",
+        # Grid-forming / 주파수
+        "grid-forming", "grid forming", "frequency response", "inertia",
+        "synthetic inertia", "grid stability", "ancillary service",
+        # AI DC 전력 직접
+        "data center power", "hyperscaler power", "ai campus power",
+        "gpu cluster power", "inference power", "ai load growth",
+        # 에너지 전환 기술
+        "power electronics", "grid software", "demand response platform",
+        "virtual power plant", "vpp", "load forecasting ai",
+    ]
+    ai_dc_tier2 = [
+        "interconnection", "transformer", "ferc", "pjm", "ercot", "caiso",
+        "24/7 cfe", "power purchase", "offtake", "inference", "token",
+        "data center", "hyperscaler", "grid congestion",
+    ]
+    ai_dc_boost = min(
+        sum(0.15 for k in ai_dc_tier1 if k in text) +
+        sum(0.05 for k in ai_dc_tier2 if k in text),
+        0.45  # 최대 부스트 증가
+    )
 
     # Early Stage 부스트 — VC 관점 우선순위
     early_boost = 0.2 if any(k in text for k in EARLY_STAGE_SIGNALS) else 0.0
@@ -339,13 +384,13 @@ def score_signal(article: dict) -> tuple[float, dict]:
     article["is_early_stage"] = is_early
 
     total = (
-        funding_score      * 0.20 +
-        deal_score         * 0.15 +
-        sector_score       * 0.20 +
-        tier_bonus         * 0.08 +
-        hyperscaler_boost  * 0.12 +
-        size_score         * 0.08 +
-        ai_dc_boost        * 0.05 +
+        funding_score      * 0.15 +
+        deal_score         * 0.12 +
+        sector_score       * 0.15 +
+        tier_bonus         * 0.10 +
+        hyperscaler_boost  * 0.15 +
+        size_score         * 0.06 +
+        ai_dc_boost        * 0.15 +   # AI DC 전력망 가중치 대폭 증가
         early_boost        * 0.12 +   # Early Stage 우선순위
         (1 - risk_score)   * 0.00
     )
