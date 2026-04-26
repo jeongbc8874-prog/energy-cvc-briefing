@@ -708,13 +708,15 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     </div>
     <div class="signal-summary">{{ s.summary }}</div>
     <div class="signal-impl">→ {{ s.implication }}</div>
-    {% if s.recommendation or s.deal_stage %}
+    {% if s.recommendation or s.deal_stage or s.deal_stage_hint %}
     <div style="margin:8px 0 4px;display:flex;gap:6px;align-items:center;flex-wrap:wrap;">
-      {% if s.deal_stage == 'SEED' %}<span class="stage-badge stage-seed">SEED</span>
-      {% elif s.deal_stage == 'SERIES_A' %}<span class="stage-badge stage-series-a">SERIES A</span>
-      {% elif s.deal_stage == 'SERIES_B' %}<span class="stage-badge stage-series-b">SERIES B</span>
-      {% elif s.deal_stage == 'LATE_STAGE' %}<span class="stage-badge stage-late">LATE STAGE</span>
-      {% elif s.deal_stage == 'PROJECT_FINANCE' %}<span class="stage-badge stage-pf">PROJECT FINANCE</span>
+      {% set effective_stage = s.deal_stage if s.deal_stage else s.deal_stage_hint %}
+      {% if effective_stage == 'PRE_SEED' %}<span class="stage-badge stage-seed" style="opacity:.7;">PRE-SEED</span>
+      {% elif effective_stage == 'SEED' %}<span class="stage-badge stage-seed">SEED</span>
+      {% elif effective_stage == 'SERIES_A' %}<span class="stage-badge stage-series-a">SERIES A</span>
+      {% elif effective_stage == 'SERIES_B' %}<span class="stage-badge stage-series-b">SERIES B</span>
+      {% elif effective_stage == 'LATE_STAGE' %}<span class="stage-badge stage-late">LATE STAGE</span>
+      {% elif effective_stage == 'PROJECT_FINANCE' %}<span class="stage-badge stage-pf">PROJECT FINANCE</span>
       {% endif %}
       {% if s.recommendation == 'LEAD' %}
       <span style="font-family:'IBM Plex Mono',monospace;font-size:9px;font-weight:600;padding:3px 10px;border-radius:2px;background:rgba(34,197,94,.1);color:#22c55e;border:1px solid rgba(34,197,94,.25);letter-spacing:.12em;">LEAD</span>
