@@ -1020,6 +1020,25 @@ if __name__ == "__main__":
         brief["generated_at"] = _now.isoformat()
         brief["signal_count"] = len(filtered)
         brief["sources_used"] = list({s["source"] for s in filtered})
+
+        # deal_stage 자동 보완
+        src_stage = {
+            "arxiv": "PRE_SEED", "arpa-e": "PRE_SEED", "doe": "PRE_SEED",
+            "hacker news": "SEED", "climatebase": "SERIES_A", "sec form d": "SEED",
+        }
+        fmap = {s["title"][:50]: s for s in filtered}
+        for sig in brief.get("deal_signals", []):
+            if not sig.get("deal_stage") or sig.get("deal_stage") == "UNKNOWN":
+                src = sig.get("source", "").lower()
+                for k, v in src_stage.items():
+                    if k in src:
+                        sig["deal_stage"] = v
+                        break
+            if not sig.get("deal_stage") or sig.get("deal_stage") == "UNKNOWN":
+                orig = fmap.get(sig.get("title","")[:50], {})
+                hint = orig.get("deal_stage_hint", "")
+                if hint and hint not in ("UNKNOWN", ""):
+                    sig["deal_stage"] = hint
     else:
         print("[INFO] 단일 AI 모드")
         brief = generate_brief(filtered, eia_data, proprietary_text)
