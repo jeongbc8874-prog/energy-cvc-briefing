@@ -259,12 +259,21 @@ EARLY STAGE GREEN FLAGS:
 - Grid-forming inverter firmware (high IP value, low capex)
 - Energy data platform for utility/DC operators
 
-STAGE CLASSIFICATION (detect and label):
-- Seed (<$5M): flag as SEED_STAGE
-- Series A ($5-20M): flag as SERIES_A
-- Series B ($20-100M): flag as SERIES_B
-- Growth/Late (>$100M): flag as LATE_STAGE
-- Project Finance: flag as PROJECT_FINANCE (different framework)
+STAGE CLASSIFICATION (detect and label — MANDATORY for every signal):
+Source-based automatic classification:
+- Source = "arXiv": → PRE_SEED (research stage, not yet investable as equity)
+- Source = "ARPA-E" or "DOE": → PRE_SEED (government grant = pre-commercial)
+- Source = "SEC Form D" amount <$2M: → PRE_SEED
+- Source = "SEC Form D" amount $2-10M: → SEED
+- Source = "SEC Form D" amount $10-30M: → SERIES_A
+- Source = "Hacker News": → SEED (early launch)
+- Source = "Climatebase" + senior hire: → SERIES_A
+- Announced raise <$5M: → SEED
+- Announced raise $5-20M: → SERIES_A
+- Announced raise $20-100M: → SERIES_B
+- Announced raise >$100M or infrastructure project: → LATE_STAGE or PROJECT_FINANCE
+
+OUTPUT deal_stage field in EVERY signal. Never leave it null or UNKNOWN.
 
 === OFFTAKER CREDIT TIER ===
 Tier 1 (Best): Microsoft, Google, Amazon, Meta, Apple, Oracle direct → TRL 9 + Policy Beta 2-3
