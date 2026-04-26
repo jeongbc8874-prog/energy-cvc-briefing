@@ -477,7 +477,7 @@ document.querySelectorAll('.wc,.ci,.sigi,.si2,.pc').forEach(el => {
 // 실제 브리프 JSON 로드
 async function loadLatestBrief() {
   try {
-    const r = await fetch('./brief_latest.json?t=' + Date.now());
+    const r = await fetch('/energy-cvc-briefing/brief_latest.json?t=' + Date.now());
     if (!r.ok) return;
     const d = await r.json();
 
@@ -543,7 +543,7 @@ loadLatestBrief();
 // week_stats 카드 업데이트
 async function loadWeekStats() {
   try {
-    const r = await fetch('./brief_latest.json?t=' + Date.now());
+    const r = await fetch('/energy-cvc-briefing/brief_latest.json?t=' + Date.now());
     if (!r.ok) return;
     const d = await r.json();
     const ws = d.week_stats;
