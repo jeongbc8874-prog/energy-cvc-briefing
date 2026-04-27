@@ -2,7 +2,7 @@ name: Daily Energy Brief Generation
 
 on:
   schedule:
-    - cron: '0 1 * * 1-5'   # 월-금 오전 10:00 KST (UTC+1 = KST-9+10)
+    - cron: '0 1 * * *'   # 월-금 오전 10:00 KST (UTC+1 = KST-9+10)
   workflow_dispatch:          # 수동 트리거 가능
 
 jobs:
