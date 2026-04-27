@@ -76,6 +76,15 @@ RSS_SOURCES = [
     {"name": "CleanTechnica",        "url": "https://cleantechnica.com/feed/",                       "tier": "B"},
     {"name": "Electrek",             "url": "https://electrek.co/feed/",                             "tier": "B"},
     {"name": "Carbon Brief",         "url": "https://www.carbonbrief.org/feed/",                     "tier": "B"},
+    # ── Tier A: 글로벌 Early Stage / VC 딜 전문 ─────────────────────
+    {"name": "Heatmap News",         "url": "https://heatmap.news/feed",                             "tier": "A"},
+    {"name": "Latitude Media",       "url": "https://www.latitudemedia.com/feed",                    "tier": "A"},
+    {"name": "Sifted EU",            "url": "https://sifted.eu/feed",                                "tier": "A"},
+    {"name": "TechCrunch Energy",    "url": "https://techcrunch.com/tag/energy/feed/",               "tier": "A"},
+    {"name": "Recharge News",        "url": "https://www.rechargenews.com/rss",                      "tier": "A"},
+    {"name": "PV Magazine Global",   "url": "https://www.pv-magazine.com/feed/",                     "tier": "B"},
+    {"name": "E&E News",             "url": "https://www.eenews.net/rss/",                           "tier": "A"},
+    {"name": "S&P Global Energy",    "url": "https://www.spglobal.com/commodityinsights/en/rss",     "tier": "A"},
 ]
 
 # 섹터 키워드 매핑 (시그널 분류용)
@@ -284,13 +293,28 @@ HYPERSCALER_BOOST = ["microsoft", "google", "amazon", "meta", "apple", "oracle",
 
 # Early Stage 신호 키워드 — VC 관점에서 중요
 EARLY_STAGE_SIGNALS = [
-    "seed round", "series a", "seed funding", "series a funding",
-    "pre-seed", "angel round", "seed investment",
-    "raises $", "secures $", "closes $", "announces $",
+    # 라운드 명시
+    "seed round", "series a", "series b", "seed funding",
+    "pre-seed", "angel round", "seed investment", "series a funding",
+    "pre-series", "bridge round", "convertible note",
+    # 자금 조달 동사
+    "raises $", "raised $", "secures $", "closes $",
+    "announces $", "receives $", "awarded $", "grants",
+    # 스타트업 신호
     "stealth", "emerges from stealth", "launches", "founded",
-    "spinout", "spin-out", "university spinoff",
-    "arpa-e", "doe funding", "sbir", "sttr",
-    "y combinator", "techstars", "cleantech open",
+    "spinout", "spin-out", "university spinoff", "startup",
+    "new company", "early-stage", "early stage",
+    # 정부 지원 (Pre-Seed 신호)
+    "arpa-e", "doe funding", "sbir", "sttr", "doe grant",
+    "nrel grant", "innovate uk", "horizon europe",
+    # 액셀러레이터
+    "y combinator", "techstars", "cleantech open", "third derivative",
+    "elemental excelerator", "greentown labs", "ycombinator",
+    # 아시아
+    "시리즈 a", "시드", "pre-ipo", "series a round",
+    # 글로벌 VC
+    "breakthrough energy", "lowercarbon", "khosla", "eip",
+    "energy impact", "congruent", "s2g ventures",
 ]
 
 # 딜 규모 임팩트 (MW/GW/$ 규모에 따른 가중치)
@@ -1061,7 +1085,7 @@ if __name__ == "__main__":
     print("=" * 60)
 
     signals  = collect_all_signals()
-    filtered = filter_signals(signals, top_n=40)  # 넉넉하게 수집
+    filtered = filter_signals(signals, top_n=50)  # 소스 확대로 넉넉하게
 
     # 지난 브리프에 나온 시그널 제거
     seen_titles = load_seen_titles(days=5)
