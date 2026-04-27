@@ -971,6 +971,64 @@ nav{{position:sticky;top:0;z-index:100;display:flex;justify-content:space-betwee
 </html>"""
 
 
+def load_seen_titles(days: int = 7) -> set:
+    """
+    지난 N일 브리프에 나온 시그널 제목 로드 → 중복 방지
+    """
+    import glob as _glob
+    seen = set()
+    try:
+        json_files = sorted(_glob.glob("docs/briefs/*.json"), reverse=True)
+        for fp in json_files[:days]:
+            try:
+                d = json.loads(open(fp, encoding="utf-8").read())
+                for sig in d.get("deal_signals", []):
+                    title = sig.get("title", "").lower().strip()
+                    if title:
+                        # 핵심 단어 3개로 지문 생성
+                        words = [w for w in title.split() if len(w) > 4][:5]
+                        seen.add(" ".join(words))
+            except:
+                pass
+        if seen:
+            print(f"  [중복방지] 지난 {len(json_files[:days])}개 브리프에서 {len(seen)}개 시그널 블랙리스트 로드")
+    except Exception as e:
+        print(f"  [중복방지] 블랙리스트 로드 실패: {e}")
+    return seen
+
+
+def filter_seen_signals(signals: list[dict], seen_titles: set) -> list[dict]:
+    """
+    이미 브리프에 나온 시그널 제거
+    """
+    new_signals = []
+    skipped = 0
+    for s in signals:
+        title = s.get("title", "").lower().strip()
+        words = [w for w in title.split() if len(w) > 4][:5]
+        fingerprint = " ".join(words)
+
+        # 지문 매칭 — 60% 이상 단어 겹치면 중복
+        is_seen = False
+        for seen in seen_titles:
+            seen_words = set(seen.split())
+            title_words = set(fingerprint.split())
+            if seen_words and title_words:
+                overlap = len(seen_words & title_words) / max(len(seen_words), len(title_words))
+                if overlap >= 0.6:
+                    is_seen = True
+                    break
+
+        if is_seen:
+            skipped += 1
+        else:
+            new_signals.append(s)
+
+    if skipped:
+        print(f"  [중복방지] {skipped}개 기존 시그널 제거 → {len(new_signals)}개 신규 시그널")
+    return new_signals
+
+
 def save_outputs(brief: dict) -> None:
     os.makedirs("docs/briefs", exist_ok=True)
 
@@ -1003,7 +1061,18 @@ if __name__ == "__main__":
     print("=" * 60)
 
     signals  = collect_all_signals()
-    filtered = filter_signals(signals, top_n=20)
+    filtered = filter_signals(signals, top_n=40)  # 넉넉하게 수집
+
+    # 지난 브리프에 나온 시그널 제거
+    seen_titles = load_seen_titles(days=5)
+    if seen_titles:
+        filtered = filter_seen_signals(filtered, seen_titles)
+        # 제거 후 top_n 재적용
+        filtered = filtered[:20]
+    else:
+        filtered = filtered[:20]
+
+    print(f"[INFO] 최종 신규 시그널: {len(filtered)}개")
     eia_data = fetch_eia_data()
 
     # 독점 데이터 수집 + filtered에 직접 추가
