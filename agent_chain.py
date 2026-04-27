@@ -696,7 +696,12 @@ Synthesize into this JSON schema:
   }}
 }}
 
-Minimum 5 deal_signals, 4-6 sector_positioning. Prioritize signals where all 3 agents agree.
+OUTPUT REQUIREMENTS:
+- Minimum 12 deal_signals. NEVER output fewer than 12.
+- 4-6 sector_positioning entries.
+- If fewer than 12 strong signals: include WATCH/LOW CONVICTION signals to reach 12.
+- ORDER: Early Stage signals (PRE_SEED/SEED/SERIES_A) FIRST, then late stage.
+- Every signal needs deal_stage field — use source-based auto-classification.
 
 DEPTH REQUIREMENT:
 For each deal_signal, include the specific technical or financial insight that makes this analysis actionable:
