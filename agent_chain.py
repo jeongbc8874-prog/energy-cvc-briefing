@@ -133,7 +133,7 @@ def run_tech_validator(signals: list[dict]) -> dict:
             f"{s['description']}\n"
             f"Sector: {s.get('sector','OTHER')} | "
             f"Source: {s.get('source','')} | "
-            + (f"EARLY STAGE: {s['deal_stage_hint']} | " if s.get('is_early_stage') else "")
+            + (f"EARLY STAGE: {s.get('deal_stage_hint','')} | " if s.get('is_early_stage') else "")
             + (f"Numbers: {s.get('extracted_numbers', {})}" if s.get('extracted_numbers') else "")
         )
         for i, s in enumerate(signals[:12])
@@ -482,7 +482,7 @@ def run_risk_screener(signals: list[dict], tech_result: dict, deal_result: dict)
             f"{s['description']}\n"
             f"Sector: {s.get('sector','OTHER')} | "
             f"Source: {s.get('source','')} | "
-            + (f"EARLY STAGE: {s['deal_stage_hint']} | " if s.get('is_early_stage') else "")
+            + (f"EARLY STAGE: {s.get('deal_stage_hint','')} | " if s.get('is_early_stage') else "")
             + (f"Numbers: {s.get('extracted_numbers', {})}" if s.get('extracted_numbers') else "")
         )
         for i, s in enumerate(signals[:12])
