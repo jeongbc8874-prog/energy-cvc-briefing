@@ -711,6 +711,11 @@ HTML_TEMPLATE = """<!DOCTYPE html>
   .acb-stat{font-family:'IBM Plex Mono',monospace;font-size:10px;color:rgba(245,244,239,.5);}
   .acb-stat span{color:rgba(59,130,246,.9);font-weight:500;}
   .acb-summary{font-size:12px;color:rgba(245,244,239,.4);line-height:1.6;font-style:italic;}
+  .fact-check-bar{background:rgba(34,197,94,.03);border:1px solid rgba(34,197,94,.08);padding:10px 16px;margin-bottom:16px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;}
+  .fc-label{font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:.18em;color:rgba(34,197,94,.6);text-transform:uppercase;}
+  .fc-stat{font-family:'IBM Plex Mono',monospace;font-size:9px;color:rgba(245,244,239,.4);}
+  .fc-stat span{color:rgba(245,244,239,.7);}
+  .unverified-tag{background:rgba(245,158,11,.1);color:#f59e0b;border:1px solid rgba(245,158,11,.2);font-family:'IBM Plex Mono',monospace;font-size:8px;padding:2px 7px;border-radius:2px;margin-right:4px;}
   .positioning-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin-bottom:48px;}
   .pos-card{border:1px solid var(--border);padding:18px;}
   .OVERWEIGHT{color:#4ade80;} .NEUTRAL{color:var(--amber);} .UNDERWEIGHT{color:#f87171;}
@@ -765,6 +770,22 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 </div>
 {% endif %}
 
+{% if brief.fact_check %}
+<div class="fact-check-bar">
+  <div class="fc-label">✓ Fact Checked</div>
+  <div class="fc-stat">Signals: <span>{{ brief.deal_signals | length }}</span></div>
+  {% if brief.fact_check.removed_count and brief.fact_check.removed_count > 0 %}
+  <div class="fc-stat">Removed: <span style="color:#ef4444;">{{ brief.fact_check.removed_count }}</span></div>
+  {% endif %}
+  {% if brief.fact_check.flagged_count and brief.fact_check.flagged_count > 0 %}
+  <div class="fc-stat">Flagged: <span style="color:#f59e0b;">{{ brief.fact_check.flagged_count }}</span></div>
+  {% endif %}
+  {% if brief.fact_check.summary %}
+  <div class="fc-stat" style="flex:1;font-style:italic;opacity:.7;">{{ brief.fact_check.summary }}</div>
+  {% endif %}
+</div>
+{% endif %}
+
 <section>
   <div class="section-label">■ DEAL SIGNALS</div>
   {% for s in brief.deal_signals %}
@@ -773,7 +794,13 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       <span class="tag tag-{{ s.tag }}">{{ s.tag }}</span>
       <span class="tag tag-sector">{{ s.sector }}</span>
       <span class="tag tag-conf-{{ s.confidence }}">{{ s.confidence }}</span>
-      <span class="signal-title">{{ s.title }}</span>
+      <span class="signal-title">
+        {% if s.title and s.title.startswith('[UNVERIFIED]') %}
+        <span class="unverified-tag">⚠ UNVERIFIED</span>{{ s.title[12:] }}
+        {% else %}
+        {{ s.title }}
+        {% endif %}
+      </span>
     </div>
     <div class="signal-summary">{{ s.summary }}</div>
     <div class="signal-impl">→ {{ s.implication }}</div>
