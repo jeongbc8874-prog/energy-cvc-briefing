@@ -1103,6 +1103,19 @@ def save_outputs(brief: dict) -> None:
         f.write(archive_html)
     print(f"[INFO] 아카이브 재생성 완료 ({len(open('docs/archive.html').readlines())} lines)")
 
+    # hyperscaler.html 자동 재생성
+    try:
+        from proprietary_data import fetch_hyperscaler_news, generate_hyperscaler_html
+        print("[INFO] 하이퍼스케일러 뉴스 수집 중...")
+        hs_news = fetch_hyperscaler_news()
+        hs_html = generate_hyperscaler_html(hs_news)
+        with open("docs/hyperscaler.html", "w", encoding="utf-8") as f:
+            f.write(hs_html)
+        total_hs = sum(len(v) for v in hs_news.values())
+        print(f"[INFO] hyperscaler.html 재생성 완료 ({total_hs}개 최신 뉴스)")
+    except Exception as e:
+        print(f"[WARN] hyperscaler.html 재생성 실패: {e}")
+
 
 # ── 메인 ─────────────────────────────────────────────────────────────────────
 
