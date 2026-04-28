@@ -781,6 +781,180 @@ def run_synthesizer(
 
 # ── 메인 체인 실행 ────────────────────────────────────────────────────────────
 
+# ── Agent 5: Fact Checker ─────────────────────────────────────────────────────
+
+FACT_CHECKER_SYSTEM = """
+You are the GRIDEDGE Fact Checker — the final gate before publication.
+
+MISSION: Catch hallucinations, unsupported claims, and logical inconsistencies.
+You are the last line of defense. Be skeptical. Be precise.
+
+WHAT TO CHECK:
+
+1. NUMBER VERIFICATION
+   - Is every dollar amount, MW/GW figure, IRR% traceable to the source text?
+   - Flag: numbers that appear precise but have no source basis
+   - Flag: IRR claims without supporting deal structure
+
+2. COMPANY/TECHNOLOGY CLAIMS  
+   - Does the company actually exist and do what the brief says?
+   - Is the technology description accurate to the source?
+   - Flag: fabricated company details, wrong sector classification
+
+3. LOGICAL CONSISTENCY
+   - Does LEAD recommendation match TRL score and Policy Beta?
+     (TRL < 7 should rarely be LEAD)
+   - Does HIGH CONVICTION match available evidence?
+   - Flag: LEAD + RED_FLAG TRL combination
+   - Flag: HIGH CONVICTION with no verifiable source
+
+4. SOURCE INTEGRITY
+   - Is the source real and relevant?
+   - Flag: generic sources ("industry reports", "analysts say")
+   - Flag: claims that cannot be verified from public information
+
+VERDICT OPTIONS per signal:
+- VERIFIED: claim is supportable from source text
+- ADJUSTED: minor correction applied, still publishable
+- FLAGGED: significant issue, add [UNVERIFIED] tag
+- REMOVED: hallucination or fabrication, remove from brief
+
+Be surgical. Only flag real problems, not minor imprecisions.
+Output: Pure JSON only.
+"""
+
+FACT_CHECKER_PROMPT = """
+Review these deal signals for factual accuracy.
+
+ORIGINAL SOURCE SIGNALS:
+{source_text}
+
+SYNTHESIZED BRIEF SIGNALS TO VERIFY:
+{brief_signals}
+
+For each brief signal, check:
+1. Are the numbers (IRR, MW, $) supported by source text?
+2. Is the company/technology description accurate?
+3. Is the recommendation (LEAD/FOLLOW/WATCH/PASS) logically consistent with TRL + Policy Beta?
+4. Any hallucinated details not in source?
+
+Output JSON:
+{{
+  "verified_signals": [
+    {{
+      "title": "original signal title",
+      "verdict": "VERIFIED | ADJUSTED | FLAGGED | REMOVED",
+      "issue": "description of problem if FLAGGED/REMOVED, or null",
+      "correction": "corrected text if ADJUSTED, or null",
+      "confidence_adjustment": "if conviction should change: HIGH->MEDIUM etc, or null"
+    }}
+  ],
+  "hallucination_count": 0,
+  "flagged_count": 0,
+  "removed_count": 0,
+  "fact_check_summary": "1 sentence summary of overall brief quality"
+}}
+"""
+
+
+def run_fact_checker(
+    signals: list[dict],
+    brief: dict,
+    client
+) -> dict:
+    """
+    Agent 5: 브리프 출판 전 팩트체크
+    hallucination 탐지 및 수정
+    """
+    import json as _json
+
+    # 원본 소스 텍스트 준비
+    source_text = "\n\n".join([
+        f"[SOURCE {i+1}] {s.get('title','')}\n{s.get('description','')}\nURL: {s.get('url','')}"
+        for i, s in enumerate(signals[:20])
+    ])
+
+    # 브리프 시그널 준비
+    brief_signals_text = _json.dumps(
+        brief.get("deal_signals", []),
+        ensure_ascii=False,
+        indent=2
+    )[:8000]  # 토큰 제한
+
+    try:
+        resp = client.messages.create(
+            model="claude-sonnet-4-20250514",
+            max_tokens=3000,
+            system=FACT_CHECKER_SYSTEM,
+            messages=[{
+                "role": "user",
+                "content": FACT_CHECKER_PROMPT.format(
+                    source_text=source_text[:4000],
+                    brief_signals=brief_signals_text
+                )
+            }]
+        )
+
+        raw = resp.content[0].text.strip()
+        raw = raw.replace("```json", "").replace("```", "").strip()
+
+        try:
+            result = _json.loads(raw)
+        except:
+            import re as _re
+            match = _re.search(r'\{.*\}', raw, _re.DOTALL)
+            result = _json.loads(match.group()) if match else {}
+
+        # 브리프에 팩트체크 결과 반영
+        verified = result.get("verified_signals", [])
+        halluc = result.get("hallucination_count", 0)
+        flagged = result.get("flagged_count", 0)
+        removed = result.get("removed_count", 0)
+
+        print(f"  [Fact Checker] 검증: {len(verified)}개 | 할루시네이션: {halluc}개 | 플래그: {flagged}개 | 제거: {removed}개")
+
+        # 제거/플래그된 시그널 처리
+        verdict_map = {v.get("title", "")[:50]: v for v in verified}
+
+        new_signals = []
+        for sig in brief.get("deal_signals", []):
+            title_key = sig.get("title", "")[:50]
+            v = verdict_map.get(title_key, {})
+            verdict = v.get("verdict", "VERIFIED")
+
+            if verdict == "REMOVED":
+                print(f"  [제거] {sig.get('title','')[:60]}: {v.get('issue','')}")
+                continue  # 제거
+
+            if verdict == "FLAGGED":
+                sig["title"] = "[UNVERIFIED] " + sig.get("title", "")
+                sig["analyst_edge"] = f"⚠️ Fact check flagged: {v.get('issue', 'Unverified claim')}"
+
+            if verdict == "ADJUSTED" and v.get("correction"):
+                sig["fact_check_note"] = v.get("correction")
+
+            if v.get("confidence_adjustment"):
+                sig["conviction"] = v["confidence_adjustment"].split("->")[-1].strip()
+
+            new_signals.append(sig)
+
+        brief["deal_signals"] = new_signals
+        brief["fact_check"] = {
+            "hallucination_count": halluc,
+            "flagged_count": flagged,
+            "removed_count": removed,
+            "summary": result.get("fact_check_summary", ""),
+            "verified_at": __import__("datetime").datetime.utcnow().isoformat()
+        }
+
+        return brief
+
+    except Exception as e:
+        print(f"  [Fact Checker] 실패: {e}")
+        brief["fact_check"] = {"error": str(e), "status": "skipped"}
+        return brief
+
+
 def run_agent_chain(
     signals: list[dict],
     proprietary_text: str,
@@ -788,10 +962,12 @@ def run_agent_chain(
     date_str: str
 ) -> dict:
     """
-    4개 에이전트 순차 실행
+    5개 에이전트 순차 실행 (Agent 5 = Fact Checker)
     각 에이전트 결과가 다음 에이전트의 컨텍스트로 주입됨
     """
     import time
+    import anthropic as _anthropic
+    client = _anthropic.Anthropic()
 
     print("\n[에이전트 체인 시작]")
     print("=" * 50)
@@ -824,10 +1000,23 @@ def run_agent_chain(
         "risk_summary":   risk_result.get("risk_summary", ""),
     }
 
+    # Agent 5 — Fact Checker
+    print("  [Agent 5] Fact Checker 실행 중...")
+    try:
+        brief = run_fact_checker(signals, brief, client)
+        fc = brief.get("fact_check", {})
+        print(f"  [Agent 5] 완료 — 제거: {fc.get('removed_count',0)}개 | 플래그: {fc.get('flagged_count',0)}개")
+    except Exception as e:
+        print(f"  [Agent 5] 스킵: {e}")
+    time.sleep(1)
+
     print(f"\n[에이전트 체인 완료]")
     print(f"  기술 평가: {brief['agent_chain']['tech_assessments_count']}개")
     print(f"  딜 평가:   {brief['agent_chain']['deal_assessments_count']}개")
     print(f"  리스크:    {brief['agent_chain']['risk_assessments_count']}개")
+    fc = brief.get("fact_check", {})
+    if fc:
+        print(f"  팩트체크:  제거 {fc.get('removed_count',0)}개 | 플래그 {fc.get('flagged_count',0)}개")
     print("=" * 50)
 
     return brief
