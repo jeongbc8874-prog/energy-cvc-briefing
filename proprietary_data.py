@@ -657,11 +657,13 @@ HYPERSCALERS = {
         "color": "#76b900", "bg": "rgba(118,185,0,.15)",
     },
     "Samsung": {
-        "aliases": ["samsung", "삼성", "samsung sdi", "samsung c&t"],
+        "aliases": ["samsung", "samsung sdi", "samsung ventures", "samsung next",
+                    "samsung c&t", "gridbeyond", "amperon", "emerald ai"],
         "color": "#1428a0", "bg": "rgba(20,40,160,.15)",
     },
     "SK": {
-        "aliases": ["sk on", "sk hynix", "sk innovation", "sk텔레콤"],
+        "aliases": ["sk on", "sk inc", "sk innovation", "sk e&s",
+                    "bloom energy", "plug power", "terrapower natrium"],
         "color": "#e8001c", "bg": "rgba(232,0,28,.15)",
     },
 }
@@ -767,7 +769,7 @@ def fetch_hyperscaler_news() -> dict:
         )[:5]
 
     total = sum(len(v) for v in results.values())
-    print(f"  [Hyperscaler] {total}개 최신 딜 수집 완료")
+    print(f"  [Hyperscaler] {total}개 latest deals collected")
     return results
 
 
@@ -785,7 +787,7 @@ def generate_hyperscaler_html(news_data: dict) -> str:
             {"title": "Helion Energy 핵융합 투자", "amount": "$1.9B+", "capacity": "", "type": "EQUITY", "date": "2023–2024", "note": "선불 투자"},
         ],
         "Google": [
-            {"title": "Intersect Power 인수 — 태양광+BESS 플랫폼", "amount": "$4.75B", "capacity": "3.6GW + 3.1GWh", "type": "M&A", "date": "Jan 2026", "note": "하이퍼스케일러 최초 자산 직접 인수"},
+            {"title": "Intersect Power 인수 — 태양광+BESS 플랫폼", "amount": "$4.75B", "capacity": "3.6GW + 3.1GWh", "type": "M&A", "date": "Jan 2026", "note": "First hyperscaler direct asset acquisition"},
             {"title": "Kairos Power SMR 마스터 개발계약", "amount": "N/A", "capacity": "500MW", "type": "NUCLEAR", "date": "Oct 2024", "note": "COD 2030+"},
         ],
         "Amazon": [
@@ -800,10 +802,18 @@ def generate_hyperscaler_html(news_data: dict) -> str:
         ],
         "NVIDIA": [],
         "Samsung": [
-            {"title": "RE100 2050 목표 선언", "amount": "N/A", "capacity": "N/A", "type": "RE100", "date": "2022", "note": "해외 사업장 100% 달성"},
+            {"title": "GridBeyond — AI-powered grid optimization & demand response", "amount": "Undisclosed", "capacity": "", "type": "EQUITY", "date": "2022", "note": "Samsung Ventures · Series B · grid SaaS"},
+            {"title": "Amperon — AI energy forecasting for utilities & C&I", "amount": "Undisclosed", "capacity": "", "type": "EQUITY", "date": "2021–2023", "note": "Samsung Next · real-time load forecasting"},
+            {"title": "Emerald AI — energy intelligence & optimization platform", "amount": "Undisclosed", "capacity": "", "type": "EQUITY", "date": "2023", "note": "Samsung Ventures · B2B energy analytics"},
+            {"title": "Samsung SDI — BESS supply to Tesla, BMW, Rivian", "amount": "$2B+ capex", "capacity": "GWh-scale", "type": "BESS", "date": "2024–2026", "note": "Vertical integration: cell → pack → system"},
+            {"title": "RE100 Declaration — 100% renewable by 2050", "amount": "N/A", "capacity": "N/A", "type": "RE100", "date": "2022", "note": "100% achieved at overseas operations"},
         ],
         "SK": [
-            {"title": "SK On 미국 배터리 공장 재생에너지 PPA", "amount": "N/A", "capacity": "N/A", "type": "PPA", "date": "2024–2025", "note": ""},
+            {"title": "Bloom Energy — SOFC fuel cell strategic equity stake", "amount": "$300M+", "capacity": "GW-scale pipeline", "type": "EQUITY", "date": "2021", "note": "SK Inc. · clean power for semiconductor fabs"},
+            {"title": "Plug Power — hydrogen fuel cell & electrolyzer partnership", "amount": "$1.5B", "capacity": "1GW+ electrolyzer", "type": "EQUITY", "date": "2021", "note": "SK Inc. 9.9% stake · green hydrogen JV"},
+            {"title": "TerraPower Natrium SMR — strategic investor", "amount": "Undisclosed", "capacity": "345MW", "type": "EQUITY", "date": "2022", "note": "SK Inc. · Bill Gates-founded SMR · COD 2030"},
+            {"title": "SK On — US gigafactory renewable PPAs", "amount": "N/A", "capacity": "N/A", "type": "PPA", "date": "2024–2025", "note": "BlueOval SK (Ford JV) + Ultium Cells (GM JV)"},
+            {"title": "SK E&S — LNG to hydrogen energy transition", "amount": "$3B+", "capacity": "N/A", "type": "PARTNERSHIP", "date": "2023–2026", "note": "Clean ammonia, CCUS, hydrogen value chain"},
         ],
     }
 
@@ -872,13 +882,13 @@ def generate_hyperscaler_html(news_data: dict) -> str:
             latest_html = '<div style="font-family:IBM Plex Mono,monospace;font-size:9px;color:rgba(232,232,240,.2);margin-top:10px;padding-top:10px;border-top:1px solid rgba(59,130,246,.08);">No new energy deals in last 60 days</div>'
 
         strategy_map = {
-            "Microsoft": "핵 오프테이크 + SMR 직접투자 선도. $110/MWh 벤치마크 설정.",
-            "Google": "하이퍼스케일러 최초 자산 직접 소유 전환. PPA → M&A 패러다임 전환.",
-            "Amazon": "가장 다각화된 에너지 포트폴리오. PPA + 에쿼티 + SMR 병행.",
-            "Meta": "핵 중심 최대 6.6GW 목표. LDES 첫 상업계약.",
-            "NVIDIA": "직접 에너지 투자 없음. 칩 효율로 per-query 에너지 감소.",
-            "Samsung": "RE100 이행 + 배터리 공급망 수직통합.",
-            "SK": "SK On 배터리 공장 재생에너지 직접 조달.",
+            "Microsoft": "Nuclear offtake + SMR direct investment leader. $110/MWh benchmark.",
+            "Google": "First hyperscaler to own assets directly. PPA → M&A paradigm shift.",
+            "Amazon": "Most diversified energy portfolio. PPA + equity + SMR in parallel.",
+            "Meta": "Nuclear-centric, up to 6.6GW target. First commercial LDES contract.",
+            "NVIDIA": "No direct energy investment. Chip efficiency reduces per-query energy.",
+            "Samsung": "RE100 compliance + battery supply chain vertical integration.",
+            "SK": "SK On battery plant direct renewable procurement.",
         }
 
         cards_html += f"""
@@ -937,7 +947,7 @@ nav{{position:sticky;top:0;z-index:100;display:flex;justify-content:space-betwee
   <h1 style="font-family:'Instrument Serif',serif;font-size:clamp(28px,3.5vw,48px);line-height:1.05;margin-bottom:8px;">Hyperscaler Energy Tracker</h1>
   <p style="font-size:13px;color:var(--dim);line-height:1.7;max-width:600px;margin-bottom:4px;">Big Tech의 에너지 M&A/PPA/직접투자 실시간 추적. 이들의 움직임이 다음 딜을 만든다.</p>
   <div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:rgba(232,232,240,.2);margin-bottom:32px;">
-    자동 업데이트: {updated} · 검증 딜 + 최근 60일 뉴스 통합 · {total_new}개 최신 뉴스 수집
+    Auto-updated: {updated} · Verified deals + last 60 days news · {total_new}개 latest news collected
   </div>
 
   <!-- 요약 메트릭 -->
@@ -945,17 +955,17 @@ nav{{position:sticky;top:0;z-index:100;display:flex;justify-content:space-betwee
     <div style="background:var(--card);border:1px solid var(--border);padding:14px 16px;">
       <div style="font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:.12em;color:var(--dim);text-transform:uppercase;margin-bottom:6px;">Total Committed</div>
       <div style="font-family:'Instrument Serif',serif;font-size:22px;color:var(--blue);">$40B+</div>
-      <div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--dim);margin-top:3px;">Big 4 에너지 캐펙스 2024–2026</div>
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--dim);margin-top:3px;">Big 4 energy capex 2024–2026</div>
     </div>
     <div style="background:var(--card);border:1px solid var(--border);padding:14px 16px;">
       <div style="font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:.12em;color:var(--dim);text-transform:uppercase;margin-bottom:6px;">Nuclear Offtake</div>
       <div style="font-family:'Instrument Serif',serif;font-size:22px;color:var(--blue);">5.8 GW</div>
-      <div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--dim);margin-top:3px;">MSFT+Amazon+Meta 서명 PPA</div>
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--dim);margin-top:3px;">MSFT+Amazon+Meta signed PPAs</div>
     </div>
     <div style="background:var(--card);border:1px solid var(--border);padding:14px 16px;">
       <div style="font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:.12em;color:var(--dim);text-transform:uppercase;margin-bottom:6px;">Avg Nuclear Price</div>
       <div style="font-family:'Instrument Serif',serif;font-size:22px;color:var(--blue);">$90/MWh</div>
-      <div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--dim);margin-top:3px;">vs $40 spot · 2× 프리미엄</div>
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--dim);margin-top:3px;">vs $40 spot · 2× premium</div>
     </div>
     <div style="background:var(--card);border:1px solid var(--border);padding:14px 16px;">
       <div style="font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:.12em;color:var(--dim);text-transform:uppercase;margin-bottom:6px;">Largest M&A</div>
@@ -965,11 +975,11 @@ nav{{position:sticky;top:0;z-index:100;display:flex;justify-content:space-betwee
     <div style="background:var(--card);border:1px solid var(--border);padding:14px 16px;">
       <div style="font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:.12em;color:var(--dim);text-transform:uppercase;margin-bottom:6px;">Latest News</div>
       <div style="font-family:'Instrument Serif',serif;font-size:22px;color:var(--blue);">{total_new}</div>
-      <div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--dim);margin-top:3px;">최근 60일 에너지 딜 뉴스</div>
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--dim);margin-top:3px;">Energy deal news, last 60 days</div>
     </div>
   </div>
 
-  <!-- 회사 카드 2열 그리드 -->
+  <!-- Company card 2-column grid -->
   <div class="grid-2">
     {cards_html}
   </div>
