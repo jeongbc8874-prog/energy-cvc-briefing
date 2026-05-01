@@ -1080,6 +1080,166 @@ def filter_seen_signals(signals: list[dict], seen_titles: set) -> list[dict]:
     return new_signals
 
 
+def update_startup_scores(brief: dict) -> int:
+    """Brief signals → startup_db_data.py score updates log"""
+    import re as _re
+    updated = 0
+    signals = brief.get("deal_signals", [])
+    if not signals:
+        return 0
+    db_path = "startup_db_data.py"
+    if not os.path.exists(db_path):
+        return 0
+    try:
+        import importlib.util
+        spec = importlib.util.spec_from_file_location("sdb", db_path)
+        sdb = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(sdb)
+        companies = list(getattr(sdb, 'COMPANIES', [])) + list(getattr(sdb, 'EXTRA', []))
+    except Exception as e:
+        print(f"  [Score Update] DB load failed: {e}")
+        return 0
+    name_map = {c['name'].lower(): c['id'] for c in companies}
+    updates_log = []
+    for sig in signals:
+        text = (sig.get('title','') + ' ' + sig.get('summary', sig.get('desc',''))).lower()
+        for co_name, co_id in name_map.items():
+            if co_name not in text:
+                continue
+            amounts = _re.findall(r'\$[\d,.]+\s*(?:billion|million|[BM])\b', text, _re.IGNORECASE)
+            if amounts:
+                updates_log.append({'id': co_id, 'company': co_name, 'type': 'funding', 'value': amounts[0], 'source': sig.get('source',''), 'date': brief.get('generated_at','')[:10], 'signal_title': sig.get('title','')[:80]})
+                updated += 1
+            trl_m = _re.search(r'trl\s*(\d)', text)
+            if trl_m:
+                updates_log.append({'id': co_id, 'company': co_name, 'type': 'trl', 'value': int(trl_m.group(1)), 'source': sig.get('source',''), 'date': brief.get('generated_at','')[:10], 'signal_title': sig.get('title','')[:80]})
+    if updates_log:
+        os.makedirs("docs/data", exist_ok=True)
+        log_path = "docs/data/db_updates.json"
+        existing = []
+        if os.path.exists(log_path):
+            try:
+                existing = json.loads(open(log_path).read())
+            except:
+                pass
+        existing.extend(updates_log)
+        with open(log_path, "w") as f:
+            f.write(json.dumps(existing[-200:], ensure_ascii=False, indent=2))
+    return updated
+
+
+def generate_dealflow_html(brief: dict) -> str:
+    """Deal Flow Tracker page — Early Stage first, auto-updated daily"""
+    import glob as _glob
+    import re as _re
+
+    deals = []
+    seen = set()
+    for fp in sorted(_glob.glob("docs/briefs/*.json"), reverse=True)[:30]:
+        try:
+            d = json.loads(open(fp, encoding="utf-8").read())
+            week = d.get("week","")
+            date = d.get("generated_at","")[:10]
+            for sig in d.get("deal_signals", []):
+                title = sig.get("title","")
+                if not title or title in seen:
+                    continue
+                seen.add(title)
+                m = _re.findall(r'\$[\d,.]+\s*(?:billion|million|[BM])\b', title+" "+sig.get("summary",""), _re.IGNORECASE)
+                stage = sig.get("deal_stage","")
+                deals.append({
+                    "title": title, "week": week, "date": date,
+                    "sector": sig.get("sector","OTHER"), "stage": stage,
+                    "recommendation": sig.get("recommendation","WATCH"),
+                    "amount": m[0] if m else "",
+                    "trl": sig.get("trl_score"),
+                    "irr_low": sig.get("irr_low"), "irr_high": sig.get("irr_high"),
+                    "thesis": sig.get("analyst_edge") or sig.get("implication",""),
+                    "source": sig.get("source",""), "url": sig.get("source_url",""),
+                    "is_early": stage in ("PRE_SEED","SEED","SERIES_A"),
+                })
+        except:
+            pass
+
+    db_updates = []
+    if os.path.exists("docs/data/db_updates.json"):
+        try:
+            db_updates = json.loads(open("docs/data/db_updates.json").read())[-10:]
+        except:
+            pass
+
+    REC = {"LEAD":"#22c55e","FOLLOW":"#3b82f6","WATCH":"#f59e0b","PASS":"#ef4444"}
+    STAGE = {"PRE_SEED":"#a855f7","SEED":"#a855f7","SERIES_A":"#3b82f6","SERIES_B":"#22c55e","PROJECT_FINANCE":"#f59e0b","LATE_STAGE":"#5a5a7a"}
+    SEC = {"BESS":("#22c55e","rgba(34,197,94,.1)"),"GRID":("#3b82f6","rgba(59,130,246,.1)"),"AI_DC_POWER":("#06b6d4","rgba(6,182,212,.1)"),"POWER_TECH":("#a855f7","rgba(168,85,247,.1)"),"EARLY_STAGE":("#a855f7","rgba(168,85,247,.1)"),"SMR":("#f59e0b","rgba(245,158,11,.1)"),"H2":("#ef4444","rgba(239,68,68,.1)"),"OTHER":("#5a5a7a","rgba(90,90,122,.1)")}
+
+    def dc(d):
+        col,bg = SEC.get(d["sector"],("#5a5a7a","rgba(90,90,122,.1)"))
+        rc = REC.get(d["recommendation"],"#5a5a7a")
+        sc2 = STAGE.get(d["stage"],"#5a5a7a")
+        st_b = f'<span style="font-family:IBM Plex Mono,monospace;font-size:7px;padding:1px 5px;border-radius:2px;background:{sc2}22;color:{sc2};">{d["stage"]}</span>' if d["stage"] else ""
+        eb = '<span style="font-family:IBM Plex Mono,monospace;font-size:7px;padding:1px 5px;border-radius:2px;background:rgba(168,85,247,.1);color:#a855f7;">🌱 EARLY</span>' if d["is_early"] else ""
+        am = f'<span style="font-family:IBM Plex Mono,monospace;font-size:9px;color:#22c55e;">{d["amount"]}</span>' if d["amount"] else ""
+        tl = f'<span style="font-family:IBM Plex Mono,monospace;font-size:8px;color:rgba(232,232,240,.35);">TRL {d["trl"]}</span>' if d["trl"] else ""
+        ir = f'<span style="font-family:IBM Plex Mono,monospace;font-size:8px;color:rgba(34,197,94,.6);">{d["irr_low"]}-{d["irr_high"]}% IRR</span>' if d.get("irr_low") and d.get("irr_high") else ""
+        th = f'<div style="font-family:IBM Plex Mono,monospace;font-size:9px;color:rgba(59,130,246,.6);line-height:1.5;margin-top:5px;">{str(d["thesis"])[:110]}...</div>' if d.get("thesis") else ""
+        src = f'<a href="{d["url"]}" target="_blank" style="font-family:IBM Plex Mono,monospace;font-size:8px;color:rgba(232,232,240,.2);text-decoration:none;">{d["source"]} ↗</a>' if d.get("url") else f'<span style="font-family:IBM Plex Mono,monospace;font-size:8px;color:rgba(232,232,240,.15);">{d["source"]}</span>'
+        return f"""<div style="background:rgba(255,255,255,.02);border:1px solid rgba(59,130,246,.08);padding:14px;margin-bottom:8px;"><div style="display:flex;align-items:center;gap:6px;margin-bottom:7px;flex-wrap:wrap;"><span style="font-family:IBM Plex Mono,monospace;font-size:7px;padding:1px 5px;border-radius:2px;background:{bg};color:{col};">{d["sector"]}</span>{st_b}{eb}<span style="font-family:IBM Plex Mono,monospace;font-size:7px;padding:1px 5px;border-radius:2px;background:{rc}22;color:{rc};">{d["recommendation"]}</span><span style="margin-left:auto;font-family:IBM Plex Mono,monospace;font-size:8px;color:rgba(232,232,240,.2);">{d["week"]}</span></div><div style="font-size:12px;font-weight:500;margin-bottom:5px;line-height:1.4;">{d["title"]}</div><div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:3px;">{am}{tl}{ir}</div>{th}<div style="margin-top:6px;">{src}</div></div>"""
+
+    early = [d for d in deals if d["is_early"]]
+    others = [d for d in deals if not d["is_early"]]
+    all_d = early + others
+    deals_html = "".join(dc(d) for d in all_d[:60])
+
+    db_html = ""
+    for u in reversed(db_updates):
+        db_html += f'<div style="padding:6px 0;border-bottom:1px solid rgba(255,255,255,.04);"><div style="font-size:11px;font-weight:500;">{u.get("company","").title()}</div><div style="font-family:IBM Plex Mono,monospace;font-size:8px;color:rgba(59,130,246,.6);">{u.get("type","").upper()} → {u.get("value","")}</div><div style="font-family:IBM Plex Mono,monospace;font-size:8px;color:rgba(232,232,240,.2);">{u.get("date","")}</div></div>'
+
+    now = __import__("datetime").datetime.utcnow().strftime("%Y-%m-%d %H:%M UTC")
+    lead_c = sum(1 for d in all_d if d["recommendation"]=="LEAD")
+
+    return f"""<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>GRIDEDGE — Deal Flow Tracker</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:wght@300;400;500&family=Geist:wght@300;400;500&display=swap" rel="stylesheet">
+<style>:root{{--bg:#050507;--white:#e8e8f0;--dim:#5a5a7a;--blue:#3b82f6;--border:rgba(59,130,246,0.08);--card:rgba(255,255,255,0.02);}}*{{margin:0;padding:0;box-sizing:border-box;}}body{{background:var(--bg);color:var(--white);font-family:"Geist",sans-serif;min-height:100vh;}}body::before{{content:"";position:fixed;inset:0;background-image:linear-gradient(rgba(59,130,246,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(59,130,246,0.03) 1px,transparent 1px);background-size:48px 48px;pointer-events:none;z-index:0;}}nav{{position:sticky;top:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:14px 32px;background:rgba(5,5,7,0.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);}}nav a.logo{{font-family:"IBM Plex Mono",monospace;font-size:12px;font-weight:500;letter-spacing:0.2em;color:var(--blue);text-decoration:none;}}nav a.logo em{{color:var(--white);opacity:0.3;font-style:normal;}}.nav-r{{display:flex;align-items:center;gap:20px;font-family:"IBM Plex Mono",monospace;font-size:9px;letter-spacing:0.12em;color:var(--dim);text-transform:uppercase;}}.nav-r a{{color:var(--dim);text-decoration:none;}}.nav-r a:hover,.nav-r a.active{{color:var(--blue);}}.wrap{{position:relative;z-index:1;max-width:1400px;margin:0 auto;padding:48px 32px 80px;}}.two-col{{display:grid;grid-template-columns:1fr 340px;gap:20px;}}@media(max-width:1100px){{.two-col{{grid-template-columns:1fr;}}}}@media(max-width:768px){{.wrap{{padding:24px 16px;}}.nav-r{{display:none;}}}}</style>
+</head><body>
+<nav><a class="logo" href="./index.html">GRID<em>/</em>EDGE</a>
+<div class="nav-r"><a href="./index.html">Home</a><a href="./brief_latest.html">Brief</a><a href="./startup_db.html">Startup DB</a><a href="./dealflow.html" class="active">Deal Flow</a><a href="./valuechain.html">Value Chain</a><a href="./hyperscaler.html">Hyperscalers</a></div></nav>
+<div class="wrap">
+<div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.25em;color:var(--blue);text-transform:uppercase;margin-bottom:12px;">VC Intelligence</div>
+<h1 style="font-family:'Instrument Serif',serif;font-size:clamp(28px,3.5vw,48px);line-height:1.05;margin-bottom:8px;">Deal Flow Tracker</h1>
+<p style="font-size:13px;color:var(--dim);line-height:1.7;max-width:540px;margin-bottom:4px;">AI energy deals from daily briefs. Early stage first. Auto-updated daily.</p>
+<div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:rgba(232,232,240,.2);margin-bottom:24px;">Updated: {now} · {len(all_d)} deals · {len(early)} early stage · {lead_c} LEAD</div>
+<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:24px;">
+<div style="background:var(--card);border:1px solid var(--border);padding:12px 14px;"><div style="font-family:'IBM Plex Mono',monospace;font-size:7px;color:var(--dim);text-transform:uppercase;margin-bottom:4px;">Total Deals</div><div style="font-family:'Instrument Serif',serif;font-size:24px;color:var(--blue);">{len(all_d)}</div></div>
+<div style="background:rgba(168,85,247,.04);border:1px solid rgba(168,85,247,.15);padding:12px 14px;"><div style="font-family:'IBM Plex Mono',monospace;font-size:7px;color:rgba(168,85,247,.6);text-transform:uppercase;margin-bottom:4px;">🌱 Early Stage</div><div style="font-family:'Instrument Serif',serif;font-size:24px;color:#a855f7;">{len(early)}</div></div>
+<div style="background:rgba(34,197,94,.04);border:1px solid rgba(34,197,94,.15);padding:12px 14px;"><div style="font-family:'IBM Plex Mono',monospace;font-size:7px;color:rgba(34,197,94,.6);text-transform:uppercase;margin-bottom:4px;">LEAD</div><div style="font-family:'Instrument Serif',serif;font-size:24px;color:#22c55e;">{lead_c}</div></div>
+<div style="background:rgba(59,130,246,.04);border:1px solid rgba(59,130,246,.15);padding:12px 14px;"><div style="font-family:'IBM Plex Mono',monospace;font-size:7px;color:rgba(59,130,246,.6);text-transform:uppercase;margin-bottom:4px;">DB Updates</div><div style="font-family:'Instrument Serif',serif;font-size:24px;color:#3b82f6;">{len(db_updates)}</div></div>
+</div>
+<div class="two-col">
+<div>
+<div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.2em;color:rgba(59,130,246,.5);text-transform:uppercase;margin-bottom:14px;">■ Deal Signal Feed — Early Stage Priority</div>
+{deals_html if deals_html else '<div style="font-family:IBM Plex Mono,monospace;font-size:11px;color:var(--dim);padding:40px 0;text-align:center;">Run daily brief to populate deal flow.</div>'}
+</div>
+<div>
+<div style="background:rgba(59,130,246,.04);border:1px solid rgba(59,130,246,.1);padding:18px;margin-bottom:14px;">
+<div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.2em;color:rgba(59,130,246,.6);text-transform:uppercase;margin-bottom:12px;">■ 🇰🇷 Korea CVC Radar</div>
+<div style="font-size:11px;color:rgba(232,232,240,.6);line-height:1.8;">
+<div style="padding:5px 0;border-bottom:1px solid rgba(255,255,255,.04);"><div style="font-weight:500;color:var(--white);">Samsung Ventures</div><div style="font-family:IBM Plex Mono,monospace;font-size:8px;color:rgba(59,130,246,.6);">GridBeyond ✅ Amperon ✅ Emerald AI ✅</div></div>
+<div style="padding:5px 0;border-bottom:1px solid rgba(255,255,255,.04);"><div style="font-weight:500;color:var(--white);">SK Inc / SK Ventures</div><div style="font-family:IBM Plex Mono,monospace;font-size:8px;color:rgba(59,130,246,.6);">Bloom Energy ✅ Plug Power ✅ TerraPower ✅</div></div>
+<div style="padding:5px 0;border-bottom:1px solid rgba(255,255,255,.04);"><div style="font-weight:500;color:var(--white);">KEPCO / Korea Power</div><div style="font-family:IBM Plex Mono,monospace;font-size:8px;color:rgba(245,158,11,.6);">Grid SW, Nuclear AI — gap exists</div></div>
+<div style="padding:5px 0;border-bottom:1px solid rgba(255,255,255,.04);"><div style="font-weight:500;color:var(--white);">Hanwha / LS / HD Hyundai</div><div style="font-family:IBM Plex Mono,monospace;font-size:8px;color:rgba(245,158,11,.6);">Storage, power equipment M&A targets</div></div>
+<div style="padding:5px 0;"><div style="font-weight:500;color:var(--white);">LG Nova / LG Tech Ventures</div><div style="font-family:IBM Plex Mono,monospace;font-size:8px;color:rgba(59,130,246,.6);">Cooling, power electronics, EV</div></div>
+</div></div>
+<div style="background:var(--card);border:1px solid var(--border);padding:18px;">
+<div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.2em;color:rgba(59,130,246,.5);text-transform:uppercase;margin-bottom:12px;">■ DB Score Updates</div>
+{db_html if db_html else '<div style="font-family:IBM Plex Mono,monospace;font-size:9px;color:var(--dim);">Auto-detected from brief signals.</div>'}
+</div>
+</div>
+</div>
+</div></body></html>"""
+
+
 def save_outputs(brief: dict) -> None:
     os.makedirs("docs/briefs", exist_ok=True)
 
@@ -1106,15 +1266,32 @@ def save_outputs(brief: dict) -> None:
     # hyperscaler.html 자동 재생성
     try:
         from proprietary_data import fetch_hyperscaler_news, generate_hyperscaler_html
-        print("[INFO] 하이퍼스케일러 뉴스 수집 중...")
+        print("[INFO] Fetching hyperscaler news...")
         hs_news = fetch_hyperscaler_news()
         hs_html = generate_hyperscaler_html(hs_news)
         with open("docs/hyperscaler.html", "w", encoding="utf-8") as f:
             f.write(hs_html)
         total_hs = sum(len(v) for v in hs_news.values())
-        print(f"[INFO] hyperscaler.html 재생성 완료 ({total_hs}개 최신 뉴스)")
+        print(f"[INFO] hyperscaler.html regenerated ({total_hs} news items)")
     except Exception as e:
-        print(f"[WARN] hyperscaler.html 재생성 실패: {e}")
+        print(f"[WARN] hyperscaler.html regeneration failed: {e}")
+
+    # ── Deal Flow Tracker 자동 재생성 ──────────────────────────────
+    try:
+        dealflow_html = generate_dealflow_html(brief)
+        with open("docs/dealflow.html", "w", encoding="utf-8") as f:
+            f.write(dealflow_html)
+        print(f"[INFO] dealflow.html regenerated")
+    except Exception as e:
+        print(f"[WARN] dealflow.html failed: {e}")
+
+    # ── Startup DB Score 자동 업데이트 ─────────────────────────────
+    try:
+        updated = update_startup_scores(brief)
+        if updated:
+            print(f"[INFO] Startup DB: {updated} companies updated")
+    except Exception as e:
+        print(f"[WARN] Startup DB update failed: {e}")
 
 
 # ── 메인 ─────────────────────────────────────────────────────────────────────
