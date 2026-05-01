@@ -1,7 +1,6 @@
 """
 GRIDEDGE Proprietary Data Collection v2
-Early Stage 특화 — SIC 코드 기반 SEC Form D + arXiv + ARPA-E RSS + USPTO
-"""
+Early Stage """
 
 import requests
 import json
@@ -11,8 +10,8 @@ from datetime import datetime, timedelta
 
 HEADERS = {"User-Agent": "GRIDEDGE Intelligence gridedge.intel@gmail.com"}
 
-# ── 에너지 관련 SIC 코드 ──────────────────────────────────────────────────────
-# Form D는 키워드 검색 안 됨 → SIC 코드로 필터링해야 함
+# ── energy related SIC code ──────────────────────────────────────────────────────
+# Form D has no keyword search → filter by SIC code
 ENERGY_SIC_CODES = {
     "4911": "Electric Services",
     "4931": "Electric & Other Services Combined",
@@ -40,17 +39,15 @@ ENERGY_KEYWORDS = [
 ]
 
 
-# ── 1. SEC Form D — SIC 코드 기반 ─────────────────────────────────────────────
+# ── 1. SEC Form D — SIC code based ─────────────────────────────────────────────
 
 def fetch_sec_form_d_by_sic() -> list:
     """
-    SIC 코드 기반 SEC Form D 수집
-    에너지 스타트업 비공개 라운드 탐지 — 정확도 높음
-    """
+    SIC """
     results = []
     start_date = (datetime.utcnow() - timedelta(days=30)).strftime("%Y-%m-%d")
 
-    # 주요 SIC 코드만 (API 과부하 방지)
+    # Priority SIC codes only (prevent API overload)
     priority_sics = ["3691", "3692", "3679", "3674", "7372", "8731"]
 
     for sic in priority_sics:
@@ -82,7 +79,7 @@ def fetch_sec_form_d_by_sic() -> list:
                 try:
                     amt_f = float(amount)
                     amt_str = f"${amt_f/1e6:.1f}M" if amt_f >= 1e6 else f"${amt_f/1e3:.0f}K"
-                    # 금액으로 Stage 추정
+                    # Estimate stage from amount
                     if amt_f < 2e6:
                         stage = "PRE_SEED"
                     elif amt_f < 10e6:
@@ -114,7 +111,7 @@ def fetch_sec_form_d_by_sic() -> list:
         except Exception as e:
             print(f"  [SEC Form D/SIC {sic}] {e}")
 
-    # 폴백: 텍스트 검색으로 에너지 특화 키워드
+    # Fallback: text search for energy keywords
     fallback_terms = ["battery storage", "grid software", "clean energy tech", "energy storage"]
     for term in fallback_terms[:2]:
         try:
@@ -159,18 +156,15 @@ def fetch_sec_form_d_by_sic() -> list:
         except Exception as e:
             print(f"  [SEC Form D fallback/{term}] {e}")
 
-    print(f"  [SEC Form D] {len(results)}개 수집")
+    print(f"  [SEC Form D] {len(results)} collected")
     return results
 
 
-# ── 2. arXiv 에너지 논문 → 창업 6-18개월 전 신호 ─────────────────────────────
+# ── 2. arXiv energy papers → startup founding 6-18months 전 signal ─────────────────────────────
 
 def fetch_arxiv_energy() -> list:
     """
-    arXiv 최신 에너지 기술 논문
-    PhD 연구 → 6-18개월 후 스핀아웃/창업 패턴
-    지금 이 논문 저자가 미래의 Seed 라운드 창업자
-    """
+    arXiv """
     results = []
 
     queries = [
@@ -211,12 +205,12 @@ def fetch_arxiv_energy() -> list:
                 pub_text = published.text[:10] if published is not None else ""
                 author_list = [a.find("atom:name", ns).text for a in authors[:3] if a.find("atom:name", ns) is not None]
 
-                # 투자 관련 키워드 체크
+                # Investment keyword check
                 text = (title_text + " " + summary_text).lower()
                 if not any(k in text for k in ENERGY_KEYWORDS):
                     continue
 
-                # 상업화 가능성 신호
+                # Commercialization potential signals
                 commercial_signals = [
                     "cost reduction", "scalable", "commercial", "deployment",
                     "grid-scale", "mw-scale", "gigawatt", "cost-effective",
@@ -242,19 +236,17 @@ def fetch_arxiv_energy() -> list:
         except Exception as e:
             print(f"  [arXiv/{q[:30]}] {e}")
 
-    # 상업화 가능성 높은 순으로 정렬
+    # Sort by commercial potential
     results.sort(key=lambda x: x.get("commercial_score", 0), reverse=True)
-    print(f"  [arXiv] {len(results)}개 논문 수집")
+    print(f"  [arXiv] {len(results)} papers collected")
     return results
 
 
-# ── 3. ARPA-E / DOE RSS — 안정적 버전 ────────────────────────────────────────
+# ── 3. ARPA-E / DOE RSS — stable version ────────────────────────────────────────
 
 def fetch_doe_arpa_rss() -> list:
     """
-    ARPA-E + DOE 뉴스 RSS
-    그랜트 수상 = Pre-Seed, 12-18개월 후 Series A 패턴
-    """
+    ARPA-E + DOE """
     results = []
 
     rss_sources = [
@@ -276,7 +268,7 @@ def fetch_doe_arpa_rss() -> list:
 
                     text = (title + " " + summary).lower()
 
-                    # 에너지 관련 + 펀딩 신호
+                    # Energy-related + funding signals
                     if not any(k in text for k in ENERGY_KEYWORDS):
                         continue
 
@@ -284,7 +276,7 @@ def fetch_doe_arpa_rss() -> list:
                                        "selects", "announces", "$", "prize"]
                     is_funding = any(s in text for s in funding_signals)
 
-                    # 금액 추출
+                    # Extract amount
                     amounts = re.findall(r"\$[\d,.]+\s*(?:million|billion|M|B)", text)
                     amt_str = amounts[0] if amounts else ""
 
@@ -304,18 +296,16 @@ def fetch_doe_arpa_rss() -> list:
                 print(f"  [{source} RSS] {e}")
 
     except ImportError:
-        print("  [DOE/ARPA-E] feedparser 없음")
+        print("  [DOE/ARPA-E] feedparser not found")
 
-    print(f"  [DOE/ARPA-E] {len(results)}개 수집")
+    print(f"  [DOE/ARPA-E] {len(results)} collected")
     return results
 
 
-# ── 4. 채용 신호 — 스타트업 탐지 ─────────────────────────────────────────────
+# ── 4. hiring signal — startup detection ─────────────────────────────────────────────
 
 def fetch_hiring_signals() -> list:
     """
-    에너지 스타트업 채용공고 → Series A 직전 신호
-    시니어 채용 시작 = 6-9개월 후 라운드 예상
     """
     results = []
 
@@ -346,11 +336,11 @@ def fetch_hiring_signals() -> list:
 
                     text = (title + " " + summary + " " + company).lower()
 
-                    # 에너지 관련 확인
+                    # Check energy relevance
                     if not any(k in text for k in ENERGY_KEYWORDS):
                         continue
 
-                    # 중복 회사 제거
+                    # Remove duplicate companies
                     company_key = company.lower().strip()
                     if company_key and company_key in companies_seen:
                         continue
@@ -383,19 +373,17 @@ def fetch_hiring_signals() -> list:
                 print(f"  [{source}] {e}")
 
     except ImportError:
-        print("  [Hiring] feedparser 없음")
+        print("  [Hiring] feedparser not found")
 
-    print(f"  [Hiring Signals] {len(results)}개 수집")
+    print(f"  [Hiring Signals] {len(results)} collected")
     return results
 
 
-# ── 5. Hacker News "Show HN" — 스텔스 런칭 ───────────────────────────────────
+# ── 5. Hacker News "Show HN" — stealth launch ───────────────────────────────────
 
 def fetch_hn_launches() -> list:
     """
-    Hacker News Show HN = 스타트업 공개 런칭 신호
-    에너지 관련 Show HN = Seed 단계 창업자
-    """
+    Hacker News Show HN = """
     results = []
     try:
         import feedparser
@@ -406,7 +394,7 @@ def fetch_hn_launches() -> list:
             link = entry.get("link", "")
             text = title.lower()
 
-            # Show HN 또는 Ask HN: 우리가 만든 것
+            # Show HN or Ask HN: we created 것
             is_show = (
                 text.startswith("show hn") or
                 text.startswith("ask hn") or
@@ -434,18 +422,15 @@ def fetch_hn_launches() -> list:
     except Exception as e:
         print(f"  [HN] {e}")
 
-    print(f"  [HN Launches] {len(results)}개 수집")
+    print(f"  [HN Launches] {len(results)} collected")
     return results
 
 
-# ── 6. USPTO 특허 — 기술 Moat 조기 탐지 ─────────────────────────────────────
+# ── 6. USPTO patent — technology Moat early detection ─────────────────────────────────────
 
 def fetch_energy_patents() -> list:
     """
-    USPTO 최신 에너지 기술 특허
-    특허 출원 → 창업/Series A 6-18개월 선행 신호
-    대학/연구소 출원 = 스핀아웃 가능성
-    """
+    USPTO """
     results = []
     try:
         start = (datetime.utcnow() - timedelta(days=30)).strftime("%Y-%m-%d")
@@ -478,7 +463,7 @@ def fetch_energy_patents() -> list:
                     assignee = assignees[0].get("assignee_organization", "") or \
                                assignees[0].get("assignee_individual_name_last", "Unknown")
 
-                # 대학/연구소 = 스핀아웃 가능성 높음
+                # university/institute = spinout potential high
                 is_academic = any(word in (assignee or "").lower() for word in
                                   ["university", "institute", "laboratory", "college",
                                    "research", "national lab", "MIT", "Stanford", "Caltech"])
@@ -507,11 +492,11 @@ def fetch_energy_patents() -> list:
     except Exception as e:
         print(f"  [USPTO] {e}")
 
-    print(f"  [Patents] {len(results)}개 수집")
+    print(f"  [Patents] {len(results)} collected")
     return results
 
 
-# ── 7. FERC 공시 ──────────────────────────────────────────────────────────────
+# ── 7. FERC filing ──────────────────────────────────────────────────────────────
 
 def fetch_ferc_filings() -> list:
     results = []
@@ -542,14 +527,14 @@ def fetch_ferc_filings() -> list:
     except Exception as e:
         print(f"  [FERC/8-K] {e}")
 
-    print(f"  [FERC/SEC] {len(results)}개 수집")
+    print(f"  [FERC/SEC] {len(results)} collected")
     return results
 
 
-# ── 메인 수집 함수 ────────────────────────────────────────────────────────────
+# ── main collected function ────────────────────────────────────────────────────────────
 
 def collect_proprietary_data() -> dict:
-    print("\n[독점 데이터 수집 시작 v2 — SIC 코드 기반]")
+    print("\n[Proprietary data collection v2 — SIC code based]")
 
     data = {
         "sec_form_d": [],
@@ -576,7 +561,7 @@ def collect_proprietary_data() -> dict:
         try:
             data[key] = fn()
         except Exception as e:
-            print(f"  [{key}] 전체 실패: {e}")
+            print(f"  [{key}] total failure: {e}")
             data[key] = []
 
     total = sum(len(v) for v in data.values() if isinstance(v, list))
@@ -584,7 +569,7 @@ def collect_proprietary_data() -> dict:
         1 for v in data.values() if isinstance(v, list)
         for item in v if item.get("is_early_stage")
     )
-    print(f"[독점 데이터] 총 {total}개 신호 / Early Stage {early}개 수집 완료\n")
+    print(f"[Proprietary data] Total {total} signals / Early Stage {early} collected\n")
     return data
 
 
@@ -633,10 +618,10 @@ if __name__ == "__main__":
     print(format_proprietary_for_prompt(data))
 
 
-# ── 하이퍼스케일러 에너지 전용 수집 ─────────────────────────────────────────
+# ── hyperscaler energy dedicated collected ─────────────────────────────────────────
 
 HYPERSCALERS = {
-    # ── 빅테크 하이퍼스케일러 ────────────────────────────────────────────
+    # ── big tech hyperscaler ────────────────────────────────────────────
     "Microsoft": {
         "aliases": ["microsoft", "msft", "azure", "constellation crane", "three mile island", "helion"],
         "color": "#0078d4", "bg": "rgba(0,120,212,.15)", "group": "hyperscaler",
@@ -665,7 +650,7 @@ HYPERSCALERS = {
         "aliases": ["nvidia", "jensen huang", "blackwell", "h100", "h200", "b200", "nvidia energy"],
         "color": "#76b900", "bg": "rgba(118,185,0,.15)", "group": "hyperscaler",
     },
-    # ── 아시아 빅테크 ────────────────────────────────────────────────────
+    # ── Asia Tech ────────────────────────────────────────────────────
     "Samsung": {
         "aliases": ["samsung", "samsung sdi", "samsung ventures", "samsung next",
                     "samsung c&t", "gridbeyond", "amperon", "emerald ai"],
@@ -680,7 +665,7 @@ HYPERSCALERS = {
         "aliases": ["softbank", "arm energy", "vision fund energy", "softbank energy"],
         "color": "#cc0000", "bg": "rgba(204,0,0,.15)", "group": "asia_tech",
     },
-    # ── 글로벌 에너지 OEM / 인프라 ──────────────────────────────────────
+    # ── Global Energy OEM / Infrastructure ──────────────────────────────────────
     "GE Vernova": {
         "aliases": ["ge vernova", "general electric", "ge grid", "ge renewable",
                     "ge wind", "ge gas power", "vernova"],
@@ -705,7 +690,7 @@ HYPERSCALERS = {
         "aliases": ["eaton", "eaton electrical", "eaton power", "eaton grid"],
         "color": "#ffcc00", "bg": "rgba(255,204,0,.15)", "group": "energy_oem",
     },
-    # ── 유틸리티 / 전력 기업 ────────────────────────────────────────────
+    # ── Utilities / Power Companies ────────────────────────────────────────────
     "Constellation": {
         "aliases": ["constellation energy", "constellation nuclear", "constellation brand"],
         "color": "#0057b8", "bg": "rgba(0,87,184,.15)", "group": "utility",
@@ -734,15 +719,13 @@ ENERGY_DEAL_KEYWORDS = [
 
 def fetch_hyperscaler_news() -> dict:
     """
-    하이퍼스케일러별 최신 에너지 딜/투자 뉴스 수집
-    SEC 8-K + RSS 소스 활용
     """
     import feedparser
     from datetime import datetime, timedelta
 
     results = {company: [] for company in HYPERSCALERS}
 
-    # RSS 소스 — 하이퍼스케일러 에너지 딜 잘 잡는 곳
+    # RSS sources good for hyperscaler energy deals
     rss_sources = [
         "https://www.utilitydive.com/feeds/news/",
         "https://www.datacenterdynamics.com/en/rss/",
@@ -756,7 +739,7 @@ def fetch_hyperscaler_news() -> dict:
         "https://electrek.co/feed/",
     ]
 
-    cutoff = datetime.utcnow() - timedelta(days=60)  # 최근 60일
+    cutoff = datetime.utcnow() - timedelta(days=60)  # Last 60 days
 
     for url in rss_sources:
         try:
@@ -768,18 +751,18 @@ def fetch_hyperscaler_news() -> dict:
                 published = entry.get("published", "")[:10] if entry.get("published") else ""
                 text = (title + " " + summary).lower()
 
-                # 에너지 관련 확인
+                # Check energy relevance
                 if not any(k in text for k in ENERGY_DEAL_KEYWORDS):
                     continue
 
-                # 하이퍼스케일러 매칭
+                # Match hyperscaler
                 for company, info in HYPERSCALERS.items():
                     if any(alias in text for alias in info["aliases"]):
-                        # 중복 제거
+                        # Dedup
                         if any(e.get("title") == title for e in results[company]):
                             continue
 
-                        # 딜 타입 분류
+                        # Classify deal type
                         deal_type = "OTHER"
                         if any(k in text for k in ["acqui", "buy", "purchase", "m&a", "merger"]):
                             deal_type = "M&A"
@@ -790,12 +773,12 @@ def fetch_hyperscaler_news() -> dict:
                         elif any(k in text for k in ["partner", "deal", "sign"]):
                             deal_type = "PARTNERSHIP"
 
-                        # 금액 추출
+                        # Extract amount
                         import re as _re
                         amounts = _re.findall(r"\$[\d,.]+\s*(?:billion|million|[BM])\b", title + " " + summary, _re.IGNORECASE)
                         amount = amounts[0] if amounts else ""
 
-                        # MW/GW 추출
+                        # Extract MW/GW capacity
                         capacity = ""
                         cap_match = _re.findall(r"[\d,.]+\s*(?:GW|MW|GWh|MWh)\b", title + " " + summary, _re.IGNORECASE)
                         if cap_match:
@@ -811,12 +794,12 @@ def fetch_hyperscaler_news() -> dict:
                             "capacity": capacity,
                             "source": feed.feed.get("title", url),
                         })
-                        break  # 하나의 기사는 하나의 회사에만 매핑
+                        break  # single articles single to one company only mapping
 
         except Exception as e:
             print(f"  [Hyperscaler RSS/{url[:40]}] {e}")
 
-    # 각 회사별 최신순 정렬, 상위 5개
+    # Sort by date desc, top 5 per company
     for company in results:
         results[company] = sorted(
             results[company],
@@ -825,36 +808,34 @@ def fetch_hyperscaler_news() -> dict:
         )[:5]
 
     total = sum(len(v) for v in results.values())
-    print(f"  [Hyperscaler] {total}개 latest deals collected")
+    print(f"  [Hyperscaler] {total} latest deals collected")
     return results
 
 
 def generate_hyperscaler_html(news_data: dict) -> str:
     """
-    하이퍼스케일러 트래커 HTML 자동 생성
-    최신 뉴스 + 하드코딩 핵심 딜 통합
     """
     from datetime import datetime
 
-    # 하드코딩 핵심 딜 (검증된 실거래)
+    # Verified core deals (confirmed transactions)
     VERIFIED_DEALS = {
         "Microsoft": [
-            {"title": "Constellation / Three Mile Island 재가동 PPA", "amount": "~$110/MWh", "capacity": "835MW", "type": "NUCLEAR", "date": "Sep 2024", "note": "20yr PPA"},
-            {"title": "Helion Energy 핵융합 투자", "amount": "$1.9B+", "capacity": "", "type": "EQUITY", "date": "2023–2024", "note": "선불 투자"},
+            {"title": "Constellation / Three Mile Island Restart PPA", "amount": "~$110/MWh", "capacity": "835MW", "type": "NUCLEAR", "date": "Sep 2024", "note": "20yr PPA"},
+            {"title": "Helion Energy — Nuclear Fusion Investment", "amount": "$1.9B+", "capacity": "", "type": "EQUITY", "date": "2023–2024", "note": "Prepaid investment"},
         ],
         "Google": [
-            {"title": "Intersect Power 인수 — 태양광+BESS 플랫폼", "amount": "$4.75B", "capacity": "3.6GW + 3.1GWh", "type": "M&A", "date": "Jan 2026", "note": "First hyperscaler direct asset acquisition"},
-            {"title": "Kairos Power SMR 마스터 개발계약", "amount": "N/A", "capacity": "500MW", "type": "NUCLEAR", "date": "Oct 2024", "note": "COD 2030+"},
+            {"title": "Intersect Power Acquisition — Solar+BESS Platform", "amount": "$4.75B", "capacity": "3.6GW + 3.1GWh", "type": "M&A", "date": "Jan 2026", "note": "First hyperscaler direct asset acquisition"},
+            {"title": "Kairos Power SMR Master Development Agreement", "amount": "N/A", "capacity": "500MW", "type": "NUCLEAR", "date": "Oct 2024", "note": "COD 2030+"},
         ],
         "Amazon": [
-            {"title": "Talen Energy Susquehanna 핵 오프테이크", "amount": "$18B", "capacity": "1,920MW", "type": "NUCLEAR", "date": "2025 재협상", "note": "17yr PPA ~$80/MWh"},
-            {"title": "X-energy Cascade SMR 에쿼티 투자", "amount": "$500M", "capacity": "960MW", "type": "EQUITY", "date": "Oct 2025", "note": "Pre-FID"},
-            {"title": "호주 9개 PPA — BESS 포함", "amount": "A$2.8B", "capacity": "430MW", "type": "PPA", "date": "2026", "note": "8/9 BESS 포함"},
+            {"title": "Talen Energy Susquehanna Nuclear Offtake", "amount": "$18B", "capacity": "1,920MW", "type": "NUCLEAR", "date": "2025 renegotiated", "note": "17yr PPA ~$80/MWh"},
+            {"title": "X-energy Cascade SMR Equity Investment", "amount": "$500M", "capacity": "960MW", "type": "EQUITY", "date": "Oct 2025", "note": "Pre-FID"},
+            {"title": "Australia 9 PPAs — BESS Included", "amount": "A$2.8B", "capacity": "430MW", "type": "PPA", "date": "2026", "note": "8/9 with BESS"},
         ],
         "Meta": [
-            {"title": "Constellation Clinton 핵 PPA", "amount": "~$60–70/MWh", "capacity": "1,121MW", "type": "NUCLEAR", "date": "Jun 2025", "note": "20yr"},
-            {"title": "Noon Energy LDES 100시간 배터리 예약", "amount": "N/A", "capacity": "1GW/100GWh", "type": "BESS", "date": "Apr 2026", "note": "TRL 6–7"},
-            {"title": "Vistra / Oklo / TerraPower 핵 포트폴리오", "amount": "N/A", "capacity": "~5.5GW", "type": "NUCLEAR", "date": "2025–2026", "note": "최대 6.6GW 목표"},
+            {"title": "Constellation Clinton Nuclear PPA", "amount": "~$60–70/MWh", "capacity": "1,121MW", "type": "NUCLEAR", "date": "Jun 2025", "note": "20yr"},
+            {"title": "Noon Energy LDES 100-hour Battery Reservation", "amount": "N/A", "capacity": "1GW/100GWh", "type": "BESS", "date": "Apr 2026", "note": "TRL 6–7"},
+            {"title": "Vistra / Oklo / TerraPower Nuclear Portfolio", "amount": "N/A", "capacity": "~5.5GW", "type": "NUCLEAR", "date": "2025–2026", "note": "Up to 6.6GW target"},
         ],
         "NVIDIA": [
             {"title": "NVentures: Commonwealth Fusion Systems — SPARC tokamak fusion reactor", "amount": "$863M Series B2", "capacity": "N/A", "type": "EQUITY", "date": "Aug 2025",
@@ -965,14 +946,14 @@ def generate_hyperscaler_html(news_data: dict) -> str:
 
     updated = datetime.utcnow().strftime("%Y-%m-%d %H:%M UTC")
 
-    # 회사 카드 생성 (group_html로 분류)
+    # company card generation (group_html로 classification)
     total_new = 0
     for company, info in HYPERSCALERS.items():
         verified = VERIFIED_DEALS.get(company, [])
         latest = news_data.get(company, [])
         total_new += len(latest)
 
-        # 검증된 딜 HTML
+        # Verified deals HTML
         verified_html = ""
         for d in verified:
             color, bg = type_colors.get(d["type"], ("#5a5a7a", "rgba(90,90,122,.1)"))
@@ -991,7 +972,7 @@ def generate_hyperscaler_html(news_data: dict) -> str:
               </div>
             </div>"""
 
-        # 최신 뉴스 HTML
+        # Latest news HTML
         latest_html = ""
         if latest:
             latest_html += '<div style="margin-top:12px;padding-top:12px;border-top:1px solid rgba(59,130,246,.1);">'
@@ -1050,13 +1031,13 @@ def generate_hyperscaler_html(news_data: dict) -> str:
           {latest_html}
         </div>"""
 
-    # 그룹별 분류
+    # Group-based classification
     group_html = {"hyperscaler": "", "asia_tech": "", "energy_oem": "", "utility": "", "energy_tech": ""}
     for company, info in HYPERSCALERS.items():
-        # 위에서 만든 카드 찾기
+        # Find cards created above
         group = info.get("group", "utility")
         key = group if group in group_html else "utility"
-        # 카드 재생성
+        # Rebuild card
         verified2 = VERIFIED_DEALS.get(company, [])
         latest2 = news_data.get(company, [])
         vhtml = ""
@@ -1146,12 +1127,12 @@ nav{{position:sticky;top:0;z-index:100;display:flex;justify-content:space-betwee
 <div class="wrap">
   <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.25em;color:var(--blue);text-transform:uppercase;margin-bottom:12px;">Intelligence Layer</div>
   <h1 style="font-family:'Instrument Serif',serif;font-size:clamp(28px,3.5vw,48px);line-height:1.05;margin-bottom:8px;">Hyperscaler Energy Tracker</h1>
-  <p style="font-size:13px;color:var(--dim);line-height:1.7;max-width:600px;margin-bottom:4px;">Big Tech의 에너지 M&A/PPA/직접투자 실시간 추적. 이들의 움직임이 다음 딜을 만든다.</p>
+  <p style="font-size:13px;color:var(--dim);line-height:1.7;max-width:600px;margin-bottom:4px;">Tracking Big Tech energy M&A, PPAs, and direct investments in real time.</p>
   <div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:rgba(232,232,240,.2);margin-bottom:32px;">
     Auto-updated: {updated} · Verified deals + last 60 days news · {total_new}개 latest news collected
   </div>
 
-  <!-- 요약 메트릭 -->
+  <!-- summary metrics -->
   <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:32px;">
     <div style="background:var(--card);border:1px solid var(--border);padding:14px 16px;">
       <div style="font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:.12em;color:var(--dim);text-transform:uppercase;margin-bottom:6px;">Total Committed</div>
