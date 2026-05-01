@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GRIDEDGE — AI Infrastructure Value Chain</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:wght@300;400;500;600&family=Geist:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #050507;
+  --white: #e8e8f0;
+  --dim: #5a5a7a;
+  --blue: #3b82f6;
+  --green: #22c55e;
+  --amber: #f59e0b;
+  --red: #ef4444;
+  --purple: #a855f7;
+  --cyan: #06b6d4;
+  --border: rgba(59,130,246,0.08);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  background: var(--bg);
+  color: var(--white);
+  font-family: 'Geist', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+body::before {
+  content:'';
+  position:fixed;
+  inset:0;
+  background-image:
+    linear-gradient(rgba(59,130,246,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(59,130,246,0.03) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events:none;
+  z-index:0;
+}
+
+/* NAV */
+nav {
+  position:sticky; top:0; z-index:100;
+  display:flex; justify-content:space-between; align-items:center;
+  padding:14px 32px;
+  background:rgba(5,5,7,0.92);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+}
+.logo { font-family:'IBM Plex Mono',monospace; font-size:12px; font-weight:500; letter-spacing:0.2em; color:var(--blue); text-decoration:none; }
+.logo em { color:var(--white); opacity:0.3; font-style:normal; }
+.nav-r { display:flex; align-items:center; gap:20px; font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:0.12em; color:var(--dim); text-transform:uppercase; }
+.nav-r a { color:var(--dim); text-decoration:none; transition:color .2s; }
+.nav-r a:hover, .nav-r a.active { color:var(--blue); }
+
+/* WRAP */
+.wrap { position:relative; z-index:1; max-width:1400px; margin:0 auto; padding:48px 32px 80px; }
+
+/* HEADER */
+.page-tag { font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:.25em; color:var(--blue); text-transform:uppercase; margin-bottom:12px; }
+.page-title { font-family:'Instrument Serif',serif; font-size:clamp(32px,4vw,56px); line-height:1.0; margin-bottom:12px; }
+.page-title em { color:var(--blue); font-style:italic; }
+.page-sub { font-size:14px; color:var(--dim); line-height:1.7; max-width:560px; margin-bottom:48px; }
+
+/* CHAIN FLOW */
+.chain-section { margin-bottom:64px; }
+.chain-label {
+  font-family:'IBM Plex Mono',monospace;
+  font-size:8px; letter-spacing:.25em; text-transform:uppercase;
+  color:rgba(59,130,246,.5); margin-bottom:20px;
+  display:flex; align-items:center; gap:12px;
+}
+.chain-label::after {
+  content:''; flex:1; height:1px; background:rgba(59,130,246,.1);
+}
+
+/* VALUE CHAIN FLOW */
+.flow-row {
+  display:flex; align-items:stretch; gap:0;
+  overflow-x:auto; padding-bottom:8px;
+}
+.flow-node {
+  flex:1; min-width:160px;
+  background:rgba(255,255,255,.02);
+  border:1px solid rgba(59,130,246,.08);
+  padding:20px 16px;
+  position:relative;
+  transition:all .25s;
+  cursor:default;
+}
+.flow-node:hover {
+  background:rgba(59,130,246,.05);
+  border-color:rgba(59,130,246,.25);
+  z-index:2;
+}
+.flow-node::after {
+  content:'→';
+  position:absolute; right:-14px; top:50%; transform:translateY(-50%);
+  font-size:14px; color:rgba(59,130,246,.3);
+  z-index:3; background:var(--bg); padding:0 2px;
+}
+.flow-node:last-child::after { display:none; }
+
+.fn-tag {
+  font-family:'IBM Plex Mono',monospace; font-size:7px;
+  letter-spacing:.12em; text-transform:uppercase;
+  padding:2px 7px; border-radius:2px; display:inline-block;
+  margin-bottom:8px;
+}
+.fn-title { font-size:13px; font-weight:500; margin-bottom:6px; line-height:1.3; }
+.fn-desc { font-size:11px; color:var(--dim); line-height:1.6; margin-bottom:8px; }
+.fn-examples { list-style:none; }
+.fn-examples li {
+  font-family:'IBM Plex Mono',monospace; font-size:9px;
+  color:rgba(232,232,240,.4); padding:2px 0;
+  display:flex; align-items:center; gap:6px;
+}
+.fn-examples li::before { content:'▸'; color:rgba(59,130,246,.4); flex-shrink:0; }
+
+/* BOTTLENECK CALLOUT */
+.bottleneck {
+  background:rgba(239,68,68,.04);
+  border:1px solid rgba(239,68,68,.15);
+  border-left:3px solid var(--red);
+  padding:12px 16px;
+  margin-top:8px;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:9px; color:rgba(239,68,68,.7); line-height:1.6;
+}
+.bottleneck strong { color:var(--red); }
+
+/* WINNER CALLOUT */
+.winner {
+  background:rgba(34,197,94,.04);
+  border:1px solid rgba(34,197,94,.15);
+  border-left:3px solid var(--green);
+  padding:12px 16px;
+  margin-top:8px;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:9px; color:rgba(34,197,94,.7); line-height:1.6;
+}
+
+/* COMPANY DB TABLE */
+.db-table { width:100%; border-collapse:collapse; margin-top:16px; }
+.db-table th {
+  font-family:'IBM Plex Mono',monospace; font-size:8px;
+  letter-spacing:.12em; text-transform:uppercase;
+  color:var(--dim); padding:8px 12px; text-align:left;
+  border-bottom:1px solid rgba(59,130,246,.1);
+}
+.db-table td {
+  padding:10px 12px; font-size:12px;
+  border-bottom:1px solid rgba(255,255,255,.03);
+  vertical-align:top;
+}
+.db-table tr:hover td { background:rgba(59,130,246,.03); }
+.db-table .ticker {
+  font-family:'IBM Plex Mono',monospace; font-size:10px;
+  color:var(--blue); font-weight:500;
+}
+.db-table .rationale {
+  font-size:11px; color:var(--dim); line-height:1.5;
+}
+
+/* POLICY TRACKER */
+.policy-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:16px; }
+.policy-card {
+  background:rgba(255,255,255,.02);
+  border:1px solid rgba(59,130,246,.08);
+  padding:16px;
+}
+.policy-status {
+  font-family:'IBM Plex Mono',monospace; font-size:7px;
+  padding:2px 7px; border-radius:2px; margin-bottom:8px;
+  display:inline-block; text-transform:uppercase; letter-spacing:.1em;
+}
+.status-live { background:rgba(34,197,94,.1); color:var(--green); border:1px solid rgba(34,197,94,.2); }
+.status-risk { background:rgba(239,68,68,.1); color:var(--red); border:1px solid rgba(239,68,68,.2); }
+.status-watch { background:rgba(245,158,11,.1); color:var(--amber); border:1px solid rgba(245,158,11,.2); }
+.policy-title { font-size:13px; font-weight:500; margin-bottom:4px; }
+.policy-impact { font-family:'IBM Plex Mono',monospace; font-size:9px; color:var(--dim); line-height:1.6; }
+.policy-beta { font-family:'IBM Plex Mono',monospace; font-size:8px; margin-top:6px; }
+
+/* STARTUP MAP */
+.startup-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-top:16px; }
+.startup-card {
+  background:rgba(255,255,255,.02);
+  border:1px solid rgba(59,130,246,.08);
+  padding:14px;
+  transition:all .2s;
+}
+.startup-card:hover { border-color:rgba(59,130,246,.2); }
+.sc-stage {
+  font-family:'IBM Plex Mono',monospace; font-size:7px;
+  padding:1px 6px; border-radius:2px; margin-bottom:6px;
+  display:inline-block; text-transform:uppercase;
+}
+.stage-seed { background:rgba(168,85,247,.1); color:#a855f7; border:1px solid rgba(168,85,247,.2); }
+.stage-a { background:rgba(59,130,246,.1); color:#3b82f6; border:1px solid rgba(59,130,246,.2); }
+.stage-b { background:rgba(34,197,94,.1); color:#22c55e; border:1px solid rgba(34,197,94,.2); }
+.stage-late { background:rgba(245,158,11,.1); color:#f59e0b; border:1px solid rgba(245,158,11,.2); }
+.sc-name { font-size:13px; font-weight:500; margin-bottom:3px; }
+.sc-what { font-size:11px; color:var(--dim); margin-bottom:6px; line-height:1.4; }
+.sc-thesis { font-family:'IBM Plex Mono',monospace; font-size:8px; color:rgba(59,130,246,.6); line-height:1.5; }
+.sc-backers { font-family:'IBM Plex Mono',monospace; font-size:8px; color:rgba(232,232,240,.2); margin-top:4px; }
+
+@media(max-width:1100px) {
+  .startup-grid { grid-template-columns:repeat(2,1fr); }
+  .policy-grid { grid-template-columns:1fr 1fr; }
+}
+@media(max-width:768px) {
+  .wrap { padding:24px 16px; }
+  .nav-r { display:none; }
+  .startup-grid { grid-template-columns:1fr; }
+  .policy-grid { grid-template-columns:1fr; }
+  .flow-row { flex-direction:column; }
+  .flow-node::after { display:none; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="logo" href="./index.html">GRID<em>/</em>EDGE</a>
+  <div class="nav-r">
+    <a href="./index.html">Home</a>
+    <a href="./brief_latest.html">Latest Brief</a>
+    <a href="./hyperscaler.html">Hyperscalers</a>
+    <a href="./valuechain.html" class="active">Value Chain</a>
+    <a href="./dashboard.html">Dashboard</a>
+    <a href="./archive.html">Archive</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <div class="page-tag">Investment Intelligence</div>
+  <h1 class="page-title">AI Infrastructure<br><em>Value Chain Map</em></h1>
+  <p class="page-sub">Every AI deal flows through the same physical constraints. Understanding the bottlenecks tells you where value accretes — and where capital gets destroyed.</p>
+
+  <!-- ── 1. AI POWER VALUE CHAIN ─────────────────────────────────── -->
+  <div class="chain-section">
+    <div class="chain-label">■ Layer 1 — AI Data Center Power Value Chain</div>
+
+    <div class="flow-row">
+
+      <div class="flow-node">
+        <span class="fn-tag" style="background:rgba(59,130,246,.1);color:#3b82f6;border:1px solid rgba(59,130,246,.2);">Generation</span>
+        <div class="fn-title">Power Source</div>
+        <div class="fn-desc">Baseload + dispatchable supply for 24/7 AI workloads</div>
+        <ul class="fn-examples">
+          <li>Nuclear (operating)</li>
+          <li>Gas peakers</li>
+          <li>Solar + BESS hybrid</li>
+          <li>SMR (2030+)</li>
+        </ul>
+        <div class="winner">
+          <strong>OVERWEIGHT:</strong> Operating nuclear → structural re-rating to $3.5–5M/MW. Constellation, Vistra.
+        </div>
+      </div>
+
+      <div class="flow-node">
+        <span class="fn-tag" style="background:rgba(239,68,68,.1);color:#ef4444;border:1px solid rgba(239,68,68,.2);">Transmission</span>
+        <div class="fn-title">Grid Interconnection</div>
+        <div class="fn-desc">Moving electrons from source to AI campus. The #1 bottleneck in 2026.</div>
+        <ul class="fn-examples">
+          <li>FERC regulated transco</li>
+          <li>EHV transformers</li>
+          <li>HVDC links</li>
+          <li>Substation upgrades</li>
+        </ul>
+        <div class="bottleneck">
+          <strong>BOTTLENECK:</strong> 2,290GW queue. Avg wait 4+ yrs. EHV transformer: 36-month lead time. 3 manufacturers globally.
+        </div>
+      </div>
+
+      <div class="flow-node">
+        <span class="fn-tag" style="background:rgba(245,158,11,.1);color:#f59e0b;border:1px solid rgba(245,158,11,.2);">Storage</span>
+        <div class="fn-title">Grid-Scale BESS</div>
+        <div class="fn-desc">Frequency response + peak shaving + AI load buffering</div>
+        <ul class="fn-examples">
+          <li>4-hour Li-ion (utility)</li>
+          <li>Grid-forming BESS</li>
+          <li>Long-duration (100hr+)</li>
+          <li>BTM on-site storage</li>
+        </ul>
+        <div class="winner">
+          <strong>KEY INSIGHT:</strong> 4hr BESS sized for utility dispatch ≠ AI DC peaking. Requires 3–5× capacity for DC peak-to-average ratio.
+        </div>
+      </div>
+
+      <div class="flow-node">
+        <span class="fn-tag" style="background:rgba(168,85,247,.1);color:#a855f7;border:1px solid rgba(168,85,247,.2);">Distribution</span>
+        <div class="fn-title">Campus Power Delivery</div>
+        <div class="fn-desc">Last-mile power from substation to server rack</div>
+        <ul class="fn-examples">
+          <li>Medium-voltage switchgear</li>
+          <li>UPS systems</li>
+          <li>Power distribution units</li>
+          <li>Cooling infrastructure</li>
+        </ul>
+        <div class="winner">
+          <strong>BENEFICIARY:</strong> Eaton, Schneider Electric. $1.5B+ DC revenue. 30%+ YoY growth as hyperscaler capex scales.
+        </div>
+      </div>
+
+      <div class="flow-node">
+        <span class="fn-tag" style="background:rgba(34,197,94,.1);color:#22c55e;border:1px solid rgba(34,197,94,.2);">Compute</span>
+        <div class="fn-title">AI Workload</div>
+        <div class="fn-desc">The demand side — GPU clusters, inference engines, training runs</div>
+        <ul class="fn-examples">
+          <li>NVIDIA B200 700W TDP</li>
+          <li>Training vs inference</li>
+          <li>Long-reasoning spikes</li>
+          <li>Request mix volatility</li>
+        </ul>
+        <div class="bottleneck">
+          <strong>KEY INSIGHT:</strong> Standard inference 0.34Wh/req vs long-reasoning 4.32Wh/req. 12.7× swing = grid instability risk.
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── 2. TRANSFORMER BOTTLENECK DEEP DIVE ───────────────────── -->
+  <div class="chain-section">
+    <div class="chain-label">■ Layer 2 — The Transformer Bottleneck: Why It Matters</div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+
+      <div style="background:rgba(255,255,255,.02);border:1px solid rgba(239,68,68,.15);padding:24px;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.15em;color:rgba(239,68,68,.6);text-transform:uppercase;margin-bottom:14px;">■ Why Transformers Are Bottleneck</div>
+        <div style="font-size:13px;color:rgba(232,232,240,.7);line-height:1.8;">
+          EHV (Extra High Voltage) transformers are custom-engineered per project. No two are identical. Manufacturing is dominated by <strong style="color:var(--white);">3 global players</strong> — ABB, Siemens, Hitachi — all operating at capacity.<br><br>
+          Lead time: <strong style="color:var(--red);">36 months</strong>. That means a hyperscaler signing a data center lease today won't have power until 2028 at earliest.<br><br>
+          The interconnection queue lists <strong style="color:var(--red);">2,290GW</strong> of projects waiting. Most will never get power — not because of permitting, but because there are no transformers.
+        </div>
+        <div style="margin-top:16px;padding:12px;background:rgba(239,68,68,.05);border-left:2px solid var(--red);">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:rgba(239,68,68,.7);">IRR IMPLICATION: Every 6-month COD delay = ~150bps IRR reduction on $500M+ data center project</div>
+        </div>
+      </div>
+
+      <div style="background:rgba(255,255,255,.02);border:1px solid rgba(34,197,94,.15);padding:24px;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.15em;color:rgba(34,197,94,.6);text-transform:uppercase;margin-bottom:14px;">■ Who Benefits From Bottleneck</div>
+
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <div style="border-bottom:1px solid rgba(255,255,255,.05);padding-bottom:10px;">
+            <div style="font-size:12px;font-weight:500;margin-bottom:3px;">HVDC Transformer Manufacturers</div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--dim);">ABB · Siemens Energy · Hitachi Energy</div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:rgba(34,197,94,.6);margin-top:3px;">Pricing power → margins expanding</div>
+          </div>
+          <div style="border-bottom:1px solid rgba(255,255,255,.05);padding-bottom:10px;">
+            <div style="font-size:12px;font-weight:500;margin-bottom:3px;">FERC-Regulated Transmission Cos</div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--dim);">Regulated ROE 9–11% · AI demand structural tailwind</div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:rgba(34,197,94,.6);margin-top:3px;">Demand pull regardless of policy → OVERWEIGHT</div>
+          </div>
+          <div style="border-bottom:1px solid rgba(255,255,255,.05);padding-bottom:10px;">
+            <div style="font-size:12px;font-weight:500;margin-bottom:3px;">BTM Power — On-Site Generation</div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--dim);">Hyperscaler demand for BTM = bypass interconnection queue</div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:rgba(245,158,11,.6);margin-top:3px;">⚠ WATCH: BTM is temporary fix, not long-term solution</div>
+          </div>
+          <div>
+            <div style="font-size:12px;font-weight:500;margin-bottom:3px;">Grid-Forming Inverter Makers</div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--dim);">GE Vernova · SMA · Fluence · Sungrow</div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:rgba(34,197,94,.6);margin-top:3px;">Australia mandated 74% grid-forming → global precedent</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── 3. ESS STARTUP MAP ──────────────────────────────────────── -->
+  <div class="chain-section">
+    <div class="chain-label">■ Layer 3 — ESS & Grid Tech Startup Map</div>
+
+    <div class="startup-grid">
+
+      <div class="startup-card">
+        <span class="sc-stage stage-b">Series B</span>
+        <div class="sc-name">Noon Energy</div>
+        <div class="sc-what">100-hour carbon-oxygen battery. Long-duration energy storage for AI DC 24/7 CFE.</div>
+        <div class="sc-thesis">Meta committed 1GW / 100GWh · TRL 6–7 · COD 2028+</div>
+        <div class="sc-backers">Backers: Meta, DCVC, Prelude Ventures</div>
+      </div>
+
+      <div class="startup-card">
+        <span class="sc-stage stage-b">Series B+</span>
+        <div class="sc-name">Emerald AI</div>
+        <div class="sc-what">AI data center load flexibility. Makes AI factories grid-interactive assets.</div>
+        <div class="sc-thesis">$68M raised · NVIDIA 96MW pilot · grid-interactive AI factories</div>
+        <div class="sc-backers">NVentures + Samsung Ventures + EIP + GE Vernova + Siemens + Eaton</div>
+      </div>
+
+      <div class="startup-card">
+        <span class="sc-stage stage-a">Series A</span>
+        <div class="sc-name">Amperon</div>
+        <div class="sc-what">AI-powered energy forecasting for utilities, ISOs, and C&I customers. 27 countries.</div>
+        <div class="sc-thesis">Jan 2026: Samsung Ventures investment · real-time load forecasting</div>
+        <div class="sc-backers">Samsung Ventures · National Grid Partners · Acario (Tokyo Gas CVC)</div>
+      </div>
+
+      <div class="startup-card">
+        <span class="sc-stage stage-b">Series D</span>
+        <div class="sc-name">GridBeyond</div>
+        <div class="sc-what">AI grid optimization, demand response, and DER trading platform. 2.6GW+ managed.</div>
+        <div class="sc-thesis">Mar 2026: €12M · UK/Ireland/US/Japan/Australia markets</div>
+        <div class="sc-backers">Samsung Ventures · ABB · EIP · Constellation Ventures</div>
+      </div>
+
+      <div class="startup-card">
+        <span class="sc-stage stage-b">Series C</span>
+        <div class="sc-name">Form Energy</div>
+        <div class="sc-what">Iron-air battery. 100-hour duration, $20/kWh target. Utility-scale LDES.</div>
+        <div class="sc-thesis">Michigan factory online 2024 · GE Vernova partnership · $1B+ raised</div>
+        <div class="sc-backers">ArcelorMittal · GE Vernova · Breakthrough Energy Ventures</div>
+      </div>
+
+      <div class="startup-card">
+        <span class="sc-stage stage-b">Series B</span>
+        <div class="sc-name">Antora Energy</div>
+        <div class="sc-what">Thermal energy storage using carbon blocks. Industrial heat + power for AI DC.</div>
+        <div class="sc-thesis">TRL 7 · $150M raised · Microsoft pilot · zero-emission industrial heat</div>
+        <div class="sc-backers">Microsoft · Breakthrough Energy Ventures · Prelude Ventures</div>
+      </div>
+
+      <div class="startup-card">
+        <span class="sc-stage stage-a">Series A</span>
+        <div class="sc-name">Rondo Energy</div>
+        <div class="sc-what">Heat battery — stores renewable electricity as high-temperature heat (1500°C).</div>
+        <div class="sc-thesis">$60M raised · industrial decarbonization · AI DC thermal management</div>
+        <div class="sc-backers">Breakthrough Energy Ventures · BHP Ventures · Rio Tinto</div>
+      </div>
+
+      <div class="startup-card">
+        <span class="sc-stage stage-b">Series B</span>
+        <div class="sc-name">Swell Energy</div>
+        <div class="sc-what">Virtual power plant software. Aggregates distributed BESS for grid services.</div>
+        <div class="sc-thesis">Acquired by Opower (Oracle) interest · 50,000+ VPP enrollments</div>
+        <div class="sc-backers">Aligned Climate Capital · Fifth Wall · Energy Impact Partners</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── 4. BENEFICIARY DB TABLE ─────────────────────────────────── -->
+  <div class="chain-section">
+    <div class="chain-label">■ Layer 4 — AI Power Infrastructure Beneficiary Database</div>
+
+    <div style="overflow-x:auto;">
+    <table class="db-table">
+      <thead>
+        <tr>
+          <th>Company</th>
+          <th>Ticker</th>
+          <th>Category</th>
+          <th>AI Power Exposure</th>
+          <th>GRIDEDGE Thesis</th>
+          <th>Risk</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Constellation Energy</strong></td>
+          <td class="ticker">CEG</td>
+          <td><span style="font-family:IBM Plex Mono,monospace;font-size:8px;padding:1px 6px;background:rgba(59,130,246,.1);color:#3b82f6;border-radius:2px;">Nuclear</span></td>
+          <td class="rationale">TMI restart (MSFT $110/MWh) + Clinton (Meta) + Calpine $16.4B. 24.5GW nuclear+gas fleet.</td>
+          <td class="rationale" style="color:rgba(34,197,94,.7);">Operating nuclear re-rating to $3.5–5M/MW. Calpine adds gas dispatchability.</td>
+          <td class="rationale" style="color:rgba(245,158,11,.7);">Regulatory risk · nuclear license extensions</td>
+        </tr>
+        <tr>
+          <td><strong>Vistra Corp</strong></td>
+          <td class="ticker">VST</td>
+          <td><span style="font-family:IBM Plex Mono,monospace;font-size:8px;padding:1px 6px;background:rgba(59,130,246,.1);color:#3b82f6;border-radius:2px;">Nuclear+BESS</span></td>
+          <td class="rationale">6.4GW nuclear (Energy Harbor $3.43B) + 7GW BESS pipeline. ERCOT dominant.</td>
+          <td class="rationale" style="color:rgba(34,197,94,.7);">Nuclear + BESS vertically integrated. AI DC offtake in Texas = natural fit.</td>
+          <td class="rationale" style="color:rgba(245,158,11,.7);">ERCOT exposure · merchant power volatility</td>
+        </tr>
+        <tr>
+          <td><strong>GE Vernova</strong></td>
+          <td class="ticker">GEV</td>
+          <td><span style="font-family:IBM Plex Mono,monospace;font-size:8px;padding:1px 6px;background:rgba(0,180,216,.1);color:#06b6d4;border-radius:2px;">Grid OEM</span></td>
+          <td class="rationale">Grid Solutions: EHV transformers, HVDC, grid-forming inverters. $2B+ backlog.</td>
+          <td class="rationale" style="color:rgba(34,197,94,.7);">Transformer bottleneck = pricing power. Grid-forming inverter: Australia 74% mandate.</td>
+          <td class="rationale" style="color:rgba(245,158,11,.7);">Supply chain constraints · offshore wind losses</td>
+        </tr>
+        <tr>
+          <td><strong>Eaton Corp</strong></td>
+          <td class="ticker">ETN</td>
+          <td><span style="font-family:IBM Plex Mono,monospace;font-size:8px;padding:1px 6px;background:rgba(168,85,247,.1);color:#a855f7;border-radius:2px;">Power Dist.</span></td>
+          <td class="rationale">UPS, PDU, switchgear for AI data centers. $1.5B+ DC revenue growing 30%+ YoY.</td>
+          <td class="rationale" style="color:rgba(34,197,94,.7);">Every MW of AI DC = Eaton equipment. Hyperscaler capex drives revenue directly.</td>
+          <td class="rationale" style="color:rgba(239,68,68,.7);">Valuation premium priced in</td>
+        </tr>
+        <tr>
+          <td><strong>NextEra Energy</strong></td>
+          <td class="ticker">NEE</td>
+          <td><span style="font-family:IBM Plex Mono,monospace;font-size:8px;padding:1px 6px;background:rgba(34,197,94,.1);color:#22c55e;border-radius:2px;">Renewable</span></td>
+          <td class="rationale">35GW+ operating. 20GW+ BESS pipeline. Primary PPA counterparty to hyperscalers.</td>
+          <td class="rationale" style="color:rgba(34,197,94,.7);">Scale advantage: only company that can supply GW-scale to hyperscalers reliably.</td>
+          <td class="rationale" style="color:rgba(245,158,11,.7);">Interest rate sensitivity · regulated utility mix</td>
+        </tr>
+        <tr>
+          <td><strong>Fluence Energy</strong></td>
+          <td class="ticker">FLNC</td>
+          <td><span style="font-family:IBM Plex Mono,monospace;font-size:8px;padding:1px 6px;background:rgba(34,197,94,.1);color:#22c55e;border-radius:2px;">BESS</span></td>
+          <td class="rationale">Fluence IQ AI auto-bidding + 15GW+ BESS pipeline. Siemens+AES joint venture.</td>
+          <td class="rationale" style="color:rgba(34,197,94,.7);">Software-defined BESS: IQ platform creates recurring revenue moat beyond hardware.</td>
+          <td class="rationale" style="color:rgba(239,68,68,.7);">Hardware margin pressure · competition from Samsung SDI</td>
+        </tr>
+        <tr>
+          <td><strong>Bloom Energy</strong></td>
+          <td class="ticker">BE</td>
+          <td><span style="font-family:IBM Plex Mono,monospace;font-size:8px;padding:1px 6px;background:rgba(245,158,11,.1);color:#f59e0b;border-radius:2px;">BTM Power</span></td>
+          <td class="rationale">SOFC fuel cells for on-site AI DC power. Bypasses interconnection queue.</td>
+          <td class="rationale" style="color:rgba(245,158,11,.7);">BTM = bridge solution, not long-term. SK $300M investment validates technology.</td>
+          <td class="rationale" style="color:rgba(239,68,68,.7);">Natural gas dependency · OBBBA subsidy risk</td>
+        </tr>
+        <tr>
+          <td><strong>ABB Ltd</strong></td>
+          <td class="ticker">ABB</td>
+          <td><span style="font-family:IBM Plex Mono,monospace;font-size:8px;padding:1px 6px;background:rgba(0,180,216,.1);color:#06b6d4;border-radius:2px;">Grid OEM</span></td>
+          <td class="rationale">HVDC transformer critical supply. EV charging infrastructure. 36-month lead times.</td>
+          <td class="rationale" style="color:rgba(34,197,94,.7);">Transformer scarcity = pricing power. GridBeyond investment = software adjacency.</td>
+          <td class="rationale" style="color:rgba(245,158,11,.7);">Capex-heavy · cyclical exposure</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+  <!-- ── 5. US POLICY TRACKER ────────────────────────────────────── -->
+  <div class="chain-section">
+    <div class="chain-label">■ Layer 5 — US Policy Impact Tracker</div>
+
+    <div class="policy-grid">
+
+      <div class="policy-card">
+        <span class="policy-status status-risk">HIGH RISK</span>
+        <div class="policy-title">OBBBA — IRA Rollback</div>
+        <div class="policy-impact">Production Tax Credits for wind/solar at risk. Green hydrogen 45V subsidy: 2027 deadline. Offshore wind: effectively frozen.</div>
+        <div class="policy-beta" style="color:var(--red);">Policy Beta: Green H₂ 8–9 / Wind 6–7 / Solar 3–4</div>
+      </div>
+
+      <div class="policy-card">
+        <span class="policy-status status-live">TAILWIND</span>
+        <div class="policy-title">FERC Interconnection Reform</div>
+        <div class="policy-impact">Order 2023: cluster study reforms. 220GW+ new requests in first reformed cycle (PJM Q1 2026). AI DC interconnection fast-tracked in some ISOs.</div>
+        <div class="policy-beta" style="color:var(--green);">Policy Beta: Transmission 1–2 (bipartisan)</div>
+      </div>
+
+      <div class="policy-card">
+        <span class="policy-status status-live">TAILWIND</span>
+        <div class="policy-title">Nuclear — ADVANCE Act</div>
+        <div class="policy-impact">Signed July 2024. NRC licensing reform. Reduces SMR approval timeline. Operating nuclear life extension support. Bipartisan.</div>
+        <div class="policy-beta" style="color:var(--green);">Policy Beta: Nuclear 1–2 (lowest risk)</div>
+      </div>
+
+      <div class="policy-card">
+        <span class="policy-status status-watch">WATCH</span>
+        <div class="policy-title">AI Data Center — Fast Permitting</div>
+        <div class="policy-impact">Executive orders accelerating AI infrastructure permitting. National Interest Electric Transmission Corridors (NIETC) expanding. DOE loan guarantees for grid upgrades.</div>
+        <div class="policy-beta" style="color:var(--amber);">Policy Beta: AI DC Grid 2–3</div>
+      </div>
+
+      <div class="policy-card">
+        <span class="policy-status status-risk">HIGH RISK</span>
+        <div class="policy-title">Green Hydrogen — 45V Credit</div>
+        <div class="policy-impact">OBBBA proposes eliminating 45V hydrogen PTC. Without subsidy: LCOH $4–8/kg vs fossil $1–2/kg. Projects uneconomic. EU market also weakening.</div>
+        <div class="policy-beta" style="color:var(--red);">Policy Beta: Green H₂ 8–9 → PASS</div>
+      </div>
+
+      <div class="policy-card">
+        <span class="policy-status status-watch">WATCH</span>
+        <div class="policy-title">BESS — ITC Safe Harbor</div>
+        <div class="policy-impact">Stand-alone BESS Investment Tax Credit (ITC) remains under OBBBA. 30% ITC + potential 10% domestic content adder. At risk if broader IRA rollback accelerates.</div>
+        <div class="policy-beta" style="color:var(--amber);">Policy Beta: BESS 2–3 (better than wind)</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── 6. INVESTMENT FRAMEWORK ─────────────────────────────────── -->
+  <div class="chain-section">
+    <div class="chain-label">■ Layer 6 — GRIDEDGE Investment Decision Framework</div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;">
+
+      <div style="background:rgba(34,197,94,.04);border:1px solid rgba(34,197,94,.15);padding:20px;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.15em;color:rgba(34,197,94,.7);text-transform:uppercase;margin-bottom:12px;">▲ OVERWEIGHT</div>
+        <div style="display:flex;flex-direction:column;gap:8px;font-size:12px;color:rgba(232,232,240,.7);line-height:1.7;">
+          <div>✓ <strong style="color:var(--white);">Operating nuclear</strong> with AI DC offtake ($3.5–5M/MW)</div>
+          <div>✓ <strong style="color:var(--white);">Grid-forming BESS</strong> near AI DC cluster</div>
+          <div>✓ <strong style="color:var(--white);">FERC-regulated transco</strong> in PJM Data Center Alley</div>
+          <div>✓ <strong style="color:var(--white);">EHV transformer manufacturers</strong> — pricing power</div>
+          <div>✓ <strong style="color:var(--white);">AI grid software</strong> (Amperon, GridBeyond, Emerald AI)</div>
+          <div>✓ <strong style="color:var(--white);">Renewable asset owners</strong> with hyperscaler PPA lock-in</div>
+        </div>
+      </div>
+
+      <div style="background:rgba(245,158,11,.04);border:1px solid rgba(245,158,11,.15);padding:20px;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.15em;color:rgba(245,158,11,.7);text-transform:uppercase;margin-bottom:12px;">● WATCH</div>
+        <div style="display:flex;flex-direction:column;gap:8px;font-size:12px;color:rgba(232,232,240,.7);line-height:1.7;">
+          <div>~ <strong style="color:var(--white);">BTM fuel cells</strong> — bridge solution, not long-term</div>
+          <div>~ <strong style="color:var(--white);">Offshore wind</strong> — policy risk + cost overruns</div>
+          <div>~ <strong style="color:var(--white);">BESS without grid-forming</strong> — stranded asset near AI DC</div>
+          <div>~ <strong style="color:var(--white);">SMR equity</strong> — COD 2032+ at best, $15,000/kW FOAK</div>
+          <div>~ <strong style="color:var(--white);">Merchant EU BESS</strong> — 3–7% IRR in Germany/France</div>
+        </div>
+      </div>
+
+      <div style="background:rgba(239,68,68,.04);border:1px solid rgba(239,68,68,.15);padding:20px;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.15em;color:rgba(239,68,68,.7);text-transform:uppercase;margin-bottom:12px;">✕ PASS</div>
+        <div style="display:flex;flex-direction:column;gap:8px;font-size:12px;color:rgba(232,232,240,.7);line-height:1.7;">
+          <div>✗ <strong style="color:var(--white);">Green hydrogen</strong> — Policy Beta 8–9, OBBBA kills economics</div>
+          <div>✗ <strong style="color:var(--white);">FOAK SMR equity</strong> — TRL 6, $15,000/kW, no NRC cert</div>
+          <div>✗ <strong style="color:var(--white);">Quantum batteries</strong> — physics impossible at useful scale</div>
+          <div>✗ <strong style="color:var(--white);">BESS sized for avg load</strong> — 2–3× undersizing for AI DC</div>
+          <div>✗ <strong style="color:var(--white);">Subsidy-only economics</strong> — no post-subsidy pathway</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
