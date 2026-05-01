@@ -813,281 +813,234 @@ def fetch_hyperscaler_news() -> dict:
 
 
 def generate_hyperscaler_html(news_data: dict) -> str:
-    """
-    """
+    """Auto-generate Hyperscaler Energy Tracker HTML with verified deals + latest news."""
     from datetime import datetime
 
-    # Verified core deals (confirmed transactions)
     VERIFIED_DEALS = {
         "Microsoft": [
-            {"title": "Constellation / Three Mile Island Restart PPA", "amount": "~$110/MWh", "capacity": "835MW", "type": "NUCLEAR", "date": "Sep 2024", "note": "20yr PPA"},
-            {"title": "Helion Energy — Nuclear Fusion Investment", "amount": "$1.9B+", "capacity": "", "type": "EQUITY", "date": "2023–2024", "note": "Prepaid investment"},
+            {"title": "Constellation / Three Mile Island Restart PPA", "amount": "~$110/MWh", "capacity": "835MW", "type": "NUCLEAR", "date": "Sep 2024", "note": "20yr PPA · sets nuclear offtake benchmark", "url": "https://www.constellation.com/"},
+            {"title": "Helion Energy — Nuclear Fusion Investment", "amount": "$1.9B+", "capacity": "", "type": "EQUITY", "date": "2023-2024", "note": "Prepaid fusion energy investment", "url": "https://www.helionenergy.com/"},
         ],
         "Google": [
-            {"title": "Intersect Power Acquisition — Solar+BESS Platform", "amount": "$4.75B", "capacity": "3.6GW + 3.1GWh", "type": "M&A", "date": "Jan 2026", "note": "First hyperscaler direct asset acquisition"},
-            {"title": "Kairos Power SMR Master Development Agreement", "amount": "N/A", "capacity": "500MW", "type": "NUCLEAR", "date": "Oct 2024", "note": "COD 2030+"},
+            {"title": "Intersect Power Acquisition — Solar+BESS Platform", "amount": "$4.75B", "capacity": "3.6GW + 3.1GWh", "type": "M&A", "date": "Jan 2026", "note": "First hyperscaler direct asset acquisition", "url": "https://www.intersectpower.com/"},
+            {"title": "Kairos Power SMR Master Development Agreement", "amount": "N/A", "capacity": "500MW", "type": "NUCLEAR", "date": "Oct 2024", "note": "COD 2030+", "url": "https://kairospower.com/"},
         ],
         "Amazon": [
-            {"title": "Talen Energy Susquehanna Nuclear Offtake", "amount": "$18B", "capacity": "1,920MW", "type": "NUCLEAR", "date": "2025 renegotiated", "note": "17yr PPA ~$80/MWh"},
-            {"title": "X-energy Cascade SMR Equity Investment", "amount": "$500M", "capacity": "960MW", "type": "EQUITY", "date": "Oct 2025", "note": "Pre-FID"},
-            {"title": "Australia 9 PPAs — BESS Included", "amount": "A$2.8B", "capacity": "430MW", "type": "PPA", "date": "2026", "note": "8/9 with BESS"},
+            {"title": "Talen Energy Susquehanna Nuclear Offtake", "amount": "$18B", "capacity": "1,920MW", "type": "NUCLEAR", "date": "2025 renegotiated", "note": "17yr PPA ~$80/MWh", "url": "https://www.talenergy.com/"},
+            {"title": "X-energy Cascade SMR Equity Investment", "amount": "$500M", "capacity": "960MW", "type": "EQUITY", "date": "Oct 2025", "note": "Pre-FID · COD 2030+", "url": "https://x-energy.com/"},
+            {"title": "Australia 9 PPAs — BESS Included", "amount": "A$2.8B", "capacity": "430MW", "type": "PPA", "date": "2026", "note": "8/9 with co-located BESS", "url": ""},
         ],
         "Meta": [
-            {"title": "Constellation Clinton Nuclear PPA", "amount": "~$60–70/MWh", "capacity": "1,121MW", "type": "NUCLEAR", "date": "Jun 2025", "note": "20yr"},
-            {"title": "Noon Energy LDES 100-hour Battery Reservation", "amount": "N/A", "capacity": "1GW/100GWh", "type": "BESS", "date": "Apr 2026", "note": "TRL 6–7"},
-            {"title": "Vistra / Oklo / TerraPower Nuclear Portfolio", "amount": "N/A", "capacity": "~5.5GW", "type": "NUCLEAR", "date": "2025–2026", "note": "Up to 6.6GW target"},
-        ],
-        "NVIDIA": [
-            {"title": "NVentures: Commonwealth Fusion Systems — SPARC tokamak fusion reactor", "amount": "$863M Series B2", "capacity": "N/A", "type": "EQUITY", "date": "Aug 2025",
-             "note": "NVentures (NVIDIA CVC) · commercializing fusion energy · Google agreed to buy 200MW from ARC plant",
-             "url": "https://www.cfs.energy/news-and-media/commonwealth-fusion-systems-raises-863-million-series-b2-round-to-accelerate-the-commercialization-of-fusion-energy"},
-            {"title": "NVentures: Redwood Materials — battery recycling & AI DC energy storage", "amount": "$350M Series E", "capacity": "N/A", "type": "EQUITY", "date": "Oct 2025",
-             "note": "NVentures strategic investment · JB Straubel (ex-Tesla CTO) · $6B valuation · US-built BESS for AI data centers",
-             "url": "https://techcrunch.com/2025/10/23/redwood-materials-raises-another-350-million-to-power-up-its-energy-storage-business/"},
-            {"title": "NVentures: Emerald AI — AI data center load flexibility platform", "amount": "$25M Strategic Round", "capacity": "N/A", "type": "EQUITY", "date": "Mar 2026",
-             "note": "NVentures + Samsung Ventures co-investment · EIP led · grid-interactive AI factories · NVIDIA Vera Rubin 96MW pilot",
-             "url": "https://www.emeraldai.co/blog/sharing-our-strategic-expansion-round-emerald-ai-raises-25-million-to-transform-ai-data-centers-into-flexible-power-grid-assets"},
-            {"title": "NVentures: TerraPower Natrium SMR — strategic co-investor", "amount": "Undisclosed", "capacity": "345MW", "type": "EQUITY", "date": "2022–2024",
-             "note": "NVentures co-invested with SK Inc. · Bill Gates SMR · Wyoming · COD 2030",
-             "url": "https://www.nventures.ai/"},
-        ],
-        "Samsung": [
-            {"title": "Samsung Ventures: GridBeyond — AI grid optimization & DER trading", "amount": "€12M ($13.8M)", "capacity": "2.6GW+ managed", "type": "EQUITY", "date": "Mar 17, 2026",
-             "note": "Samsung Ventures · Series D · alongside ABB, EIP, Constellation Ventures · UK/Ireland/US/Japan/Australia",
-             "url": "https://gridbeyond.com/samsung-ventures-joins-gridbeyonds-shareholder-base-as-part-of-a-e12m-equity-investment/"},
-            {"title": "Samsung Ventures: Amperon — AI energy forecasting (27 countries)", "amount": "Undisclosed", "capacity": "N/A", "type": "EQUITY", "date": "Jan 14, 2026",
-             "note": "Samsung Ventures (NOT Samsung Next) · follows National Grid Partners & Acario (Tokyo Gas CVC) rounds",
-             "url": "https://www.amperon.co/newsroom/amperon-secures-investment-from-samsung-ventures-to-advance-energy-forecasting-technology"},
-            {"title": "Samsung Ventures + NVentures: Emerald AI — grid-flexible AI data centers", "amount": "$25M Strategic Round", "capacity": "N/A", "type": "EQUITY", "date": "Mar 31, 2026",
-             "note": "Co-invested with NVentures (NVIDIA) · EIP led · also Eaton, GE Vernova, Siemens, Lowercarbon · total $68M raised",
-             "url": "https://www.emeraldai.co/blog/sharing-our-strategic-expansion-round-emerald-ai-raises-25-million-to-transform-ai-data-centers-into-flexible-power-grid-assets"},
-            {"title": "Samsung SDI — BESS supply to Tesla, BMW, Ford, Rivian", "amount": "$2B+ capex", "capacity": "GWh-scale", "type": "BESS", "date": "2024–2026",
-             "note": "Vertical integration: cell → pack → system · BlueOval SK JV with Ford",
-             "url": "https://www.samsungsdi.com/"},
-            {"title": "RE100 Declaration — 100% renewable by 2050", "amount": "N/A", "capacity": "N/A", "type": "RE100", "date": "2022",
-             "note": "100% achieved at overseas operations (US, EU factories)",
-             "url": "https://news.samsung.com/global/samsung-electronics-achieves-100-renewable-energy-at-all-its-sites-outside-of-korea"},
-        ],
-        "SK": [
-            {"title": "Bloom Energy — SOFC fuel cell strategic equity stake", "amount": "$300M+", "capacity": "GW-scale pipeline", "type": "EQUITY", "date": "2021", "note": "SK Inc. · clean power for semiconductor fabs"},
-            {"title": "Plug Power — hydrogen fuel cell & electrolyzer partnership", "amount": "$1.5B", "capacity": "1GW+ electrolyzer", "type": "EQUITY", "date": "2021", "note": "SK Inc. 9.9% stake · green hydrogen JV"},
-            {"title": "TerraPower Natrium SMR — strategic investor", "amount": "Undisclosed", "capacity": "345MW", "type": "EQUITY", "date": "2022", "note": "SK Inc. · Bill Gates-founded SMR · COD 2030"},
-            {"title": "SK On — US gigafactory renewable PPAs", "amount": "N/A", "capacity": "N/A", "type": "PPA", "date": "2024–2025", "note": "BlueOval SK (Ford JV) + Ultium Cells (GM JV)"},
-            {"title": "SK E&S — LNG to hydrogen energy transition", "amount": "$3B+", "capacity": "N/A", "type": "PARTNERSHIP", "date": "2023–2026", "note": "Clean ammonia, CCUS, hydrogen value chain"},
+            {"title": "Constellation Clinton Nuclear PPA", "amount": "~$60-70/MWh", "capacity": "1,121MW", "type": "NUCLEAR", "date": "Jun 2025", "note": "20yr", "url": "https://www.constellation.com/"},
+            {"title": "Noon Energy LDES 100-hour Battery Reservation", "amount": "N/A", "capacity": "1GW / 100GWh", "type": "BESS", "date": "Apr 2026", "note": "TRL 6-7 · first hyperscaler commercial LDES contract", "url": "https://www.noon.energy/"},
+            {"title": "Vistra / Oklo / TerraPower Nuclear Portfolio", "amount": "N/A", "capacity": "~5.5GW", "type": "NUCLEAR", "date": "2025-2026", "note": "Up to 6.6GW target", "url": ""},
         ],
         "Apple": [
-            {"title": "100% renewable operations — all global facilities", "amount": "N/A", "capacity": "N/A", "type": "RE100", "date": "2018", "note": "First Fortune 500 to achieve 100% renewable"},
-            {"title": "Clean Energy Charging — grid demand response via iPhone", "amount": "N/A", "capacity": "N/A", "type": "GRID TECH", "date": "2022", "note": "Largest demand response fleet globally"},
-            {"title": "Apple Energy LLC — wholesale power seller license", "amount": "N/A", "capacity": "N/A", "type": "PARTNERSHIP", "date": "2016", "note": "FERC-licensed wholesale power trader"},
+            {"title": "100% Renewable Operations — All Global Facilities", "amount": "N/A", "capacity": "N/A", "type": "RE100", "date": "2018", "note": "First Fortune 500 to achieve 100% renewable", "url": "https://www.apple.com/environment/"},
+            {"title": "Clean Energy Charging — Grid Demand Response via iPhone", "amount": "N/A", "capacity": "N/A", "type": "GRID TECH", "date": "2022", "note": "World's largest demand response fleet", "url": ""},
+            {"title": "Apple Energy LLC — FERC Wholesale Power Seller License", "amount": "N/A", "capacity": "N/A", "type": "PARTNERSHIP", "date": "2016", "note": "FERC-licensed wholesale power trader", "url": ""},
         ],
         "Oracle": [
-            {"title": "1.5GW nuclear PPA — unnamed US utility (multiple sites)", "amount": "Undisclosed", "capacity": "1.5GW", "type": "NUCLEAR", "date": "2024", "note": "Largest single corporate nuclear PPA to date"},
-            {"title": "Data center power — 100+ GW buildout target by 2030", "amount": "$100B+", "capacity": "100GW+", "type": "PARTNERSHIP", "date": "2024–2030", "note": "Larry Ellison AI infrastructure push"},
+            {"title": "1.5GW Nuclear PPA — Multiple US Sites", "amount": "Undisclosed", "capacity": "1.5GW", "type": "NUCLEAR", "date": "2024", "note": "Largest single corporate nuclear PPA to date", "url": ""},
+            {"title": "AI Infrastructure Buildout — 100GW Target by 2030", "amount": "$100B+", "capacity": "100GW+", "type": "PARTNERSHIP", "date": "2024-2030", "note": "Larry Ellison AI infrastructure push", "url": ""},
+        ],
+        "NVIDIA": [
+            {"title": "NVentures: Commonwealth Fusion Systems (SPARC Tokamak)", "amount": "$863M Series B2", "capacity": "N/A", "type": "EQUITY", "date": "Aug 2025", "note": "NVentures (NVIDIA CVC) · fusion energy · Google agreed to buy 200MW from ARC plant", "url": "https://www.cfs.energy/"},
+            {"title": "NVentures: Redwood Materials — Battery Recycling & AI DC Storage", "amount": "$350M Series E", "capacity": "N/A", "type": "EQUITY", "date": "Oct 2025", "note": "NVentures strategic investment · JB Straubel (ex-Tesla CTO) · $6B valuation", "url": "https://www.redwoodmaterials.com/"},
+            {"title": "NVentures: Emerald AI — Grid-Flexible AI Data Centers", "amount": "$25M Strategic Round", "capacity": "N/A", "type": "EQUITY", "date": "Mar 2026", "note": "NVentures + Samsung Ventures co-investment · EIP led · NVIDIA Vera Rubin 96MW pilot", "url": "https://www.emeraldai.co/"},
+            {"title": "NVentures: TerraPower Natrium SMR", "amount": "Undisclosed", "capacity": "345MW", "type": "EQUITY", "date": "2022-2024", "note": "NVentures co-invested with SK Inc. · Wyoming · COD 2030", "url": "https://www.terrapower.com/"},
+        ],
+        "Samsung": [
+            {"title": "Samsung Ventures: GridBeyond — AI Grid Optimization & DER Trading", "amount": "€12M ($13.8M)", "capacity": "2.6GW+ managed", "type": "EQUITY", "date": "Mar 17, 2026", "note": "Samsung Ventures · Series D · alongside ABB, EIP, Constellation Ventures", "url": "https://gridbeyond.com/samsung-ventures-joins-gridbeyonds-shareholder-base-as-part-of-a-e12m-equity-investment/"},
+            {"title": "Samsung Ventures: Amperon — AI Energy Forecasting (27 Countries)", "amount": "Undisclosed", "capacity": "N/A", "type": "EQUITY", "date": "Jan 14, 2026", "note": "Samsung Ventures (NOT Samsung Next) · follows National Grid Partners & Acario rounds", "url": "https://www.amperon.co/newsroom/amperon-secures-investment-from-samsung-ventures-to-advance-energy-forecasting-technology"},
+            {"title": "Samsung Ventures + NVentures: Emerald AI — Grid-Flexible AI DC", "amount": "$25M Strategic Round", "capacity": "N/A", "type": "EQUITY", "date": "Mar 31, 2026", "note": "Co-invested with NVentures (NVIDIA) · EIP led · Eaton, GE Vernova, Siemens, Lowercarbon", "url": "https://www.emeraldai.co/"},
+            {"title": "Samsung SDI — BESS Supply to Tesla, BMW, Ford, Rivian", "amount": "$2B+ capex", "capacity": "GWh-scale", "type": "BESS", "date": "2024-2026", "note": "Vertical integration: cell to pack to system · BlueOval SK JV with Ford", "url": "https://www.samsungsdi.com/"},
+            {"title": "RE100 Declaration — 100% Renewable by 2050", "amount": "N/A", "capacity": "N/A", "type": "RE100", "date": "2022", "note": "100% achieved at overseas operations (US, EU factories)", "url": ""},
+        ],
+        "SK": [
+            {"title": "Bloom Energy — SOFC Fuel Cell Strategic Equity Stake", "amount": "$300M+", "capacity": "GW-scale pipeline", "type": "EQUITY", "date": "2021", "note": "SK Inc. · clean power for semiconductor fabs", "url": "https://www.bloomenergy.com/"},
+            {"title": "Plug Power — Hydrogen Fuel Cell & Electrolyzer Partnership", "amount": "$1.5B", "capacity": "1GW+ electrolyzer", "type": "EQUITY", "date": "2021", "note": "SK Inc. 9.9% stake · green hydrogen JV", "url": "https://www.plugpower.com/"},
+            {"title": "TerraPower Natrium SMR — Strategic Investor", "amount": "Undisclosed", "capacity": "345MW", "type": "EQUITY", "date": "2022", "note": "SK Inc. · Bill Gates SMR · Wyoming · COD 2030", "url": "https://www.terrapower.com/"},
+            {"title": "SK On — US Gigafactory Renewable PPAs", "amount": "N/A", "capacity": "N/A", "type": "PPA", "date": "2024-2025", "note": "BlueOval SK (Ford JV) + Ultium Cells (GM JV)", "url": ""},
+            {"title": "SK E&S — LNG to Hydrogen Energy Transition", "amount": "$3B+", "capacity": "N/A", "type": "PARTNERSHIP", "date": "2023-2026", "note": "Clean ammonia, CCUS, hydrogen value chain", "url": ""},
         ],
         "SoftBank": [
-            {"title": "Arm Holdings energy-efficient chip architecture", "amount": "N/A", "capacity": "N/A", "type": "EQUITY", "date": "2016–present", "note": "Power efficiency as AI DC competitive moat"},
-            {"title": "SB Energy — 7GW US solar+storage development", "amount": "$1B+", "capacity": "7GW pipeline", "type": "BESS", "date": "2021–2024", "note": "US renewable development arm · sold assets to Hexagon"},
+            {"title": "SB Energy — 7GW US Solar+Storage Development", "amount": "$1B+", "capacity": "7GW pipeline", "type": "BESS", "date": "2021-2024", "note": "US renewable development arm", "url": ""},
+            {"title": "Arm Holdings — Energy-Efficient Chip Architecture", "amount": "N/A", "capacity": "N/A", "type": "EQUITY", "date": "2016-present", "note": "Power efficiency as AI DC competitive moat", "url": "https://www.arm.com/"},
         ],
         "GE Vernova": [
-            {"title": "Grid Solutions — HVDC & FACTS for AI DC interconnection", "amount": "$2B+ backlog", "capacity": "N/A", "type": "GRID TECH", "date": "2024–2026", "note": "EHV transformer 36-month backlog · key bottleneck"},
-            {"title": "Haliade-X offshore wind turbine — 18MW", "amount": "N/A", "capacity": "18MW/unit", "type": "PARTNERSHIP", "date": "2024", "note": "Largest offshore turbine · GE Vernova spin-off"},
-            {"title": "GE Vernova IPO — $35B market cap", "amount": "$35B mktcap", "capacity": "N/A", "type": "EQUITY", "date": "Apr 2024", "note": "Spun off from GE · grid + wind + gas power"},
-            {"title": "Grid-forming inverter technology — AI DC stability", "amount": "N/A", "capacity": "N/A", "type": "GRID TECH", "date": "2025", "note": "Critical for AI DC frequency response"},
+            {"title": "GE Vernova IPO — Grid + Wind + Gas Power Platform", "amount": "$35B mktcap", "capacity": "N/A", "type": "EQUITY", "date": "Apr 2024", "note": "Spun off from GE · NYSE: GEV", "url": "https://www.gevernova.com/"},
+            {"title": "Grid Solutions — HVDC & FACTS for AI DC Interconnection", "amount": "$2B+ backlog", "capacity": "N/A", "type": "GRID TECH", "date": "2024-2026", "note": "EHV transformer 36-month backlog · AI DC critical path", "url": "https://www.gevernova.com/grid-solutions"},
+            {"title": "NVentures + GE Vernova: Emerald AI Strategic Investor", "amount": "$25M round", "capacity": "N/A", "type": "EQUITY", "date": "Mar 2026", "note": "GE Vernova invested alongside NVIDIA & Samsung Ventures", "url": "https://www.emeraldai.co/"},
+            {"title": "Grid-Forming Inverter Technology — AI DC Frequency Stability", "amount": "N/A", "capacity": "N/A", "type": "GRID TECH", "date": "2025", "note": "Critical for AI DC ancillary services", "url": ""},
         ],
         "Siemens Energy": [
-            {"title": "Siemens Gamesa offshore wind — 14–15MW turbines", "amount": "€18B backlog", "capacity": "15MW/unit", "type": "PARTNERSHIP", "date": "2024–2026", "note": "Struggling with blade quality issues → delays"},
-            {"title": "HVDC grid technology — NordLink, Viking Link", "amount": "€5B+", "capacity": "1.4GW each", "type": "GRID TECH", "date": "2023–2025", "note": "Intercontinental power transmission"},
-            {"title": "Transformer capacity expansion — 20% ramp", "amount": "€500M capex", "capacity": "N/A", "type": "PARTNERSHIP", "date": "2024–2026", "note": "Response to 36-month backlog crisis"},
+            {"title": "Siemens Gamesa Offshore Wind — 14-15MW Turbines", "amount": "€18B backlog", "capacity": "15MW/unit", "type": "PARTNERSHIP", "date": "2024-2026", "note": "Blade quality issues causing delays", "url": "https://www.siemens-gamesa.com/"},
+            {"title": "HVDC Grid Technology — NordLink, Viking Link", "amount": "€5B+", "capacity": "1.4GW each", "type": "GRID TECH", "date": "2023-2025", "note": "Intercontinental power transmission", "url": "https://www.siemens-energy.com/"},
+            {"title": "Siemens Energy + Emerald AI: Strategic Investor", "amount": "$25M round", "capacity": "N/A", "type": "EQUITY", "date": "Mar 2026", "note": "Co-invested in Emerald AI alongside NVIDIA & Samsung Ventures", "url": "https://www.emeraldai.co/"},
+            {"title": "Transformer Capacity Expansion — 20% Ramp", "amount": "€500M capex", "capacity": "N/A", "type": "PARTNERSHIP", "date": "2024-2026", "note": "Response to 36-month backlog crisis", "url": ""},
         ],
         "ABB": [
-            {"title": "ABB Electrification — EV charging & grid edge", "amount": "$3B revenue", "capacity": "N/A", "type": "GRID TECH", "date": "2024", "note": "Largest EV charger manufacturer globally"},
-            {"title": "HVDC transformer supply — AI DC buildout critical path", "amount": "N/A", "capacity": "N/A", "type": "GRID TECH", "date": "2024–2027", "note": "36-month lead time · IRR risk for hyperscalers"},
-            {"title": "ABB Power Grids sale to Hitachi — strategic exit", "amount": "$11B", "capacity": "N/A", "type": "M&A", "date": "2020", "note": "Divested grid biz to Hitachi Energy"},
+            {"title": "ABB Electrification — EV Charging & Grid Edge", "amount": "$3B revenue", "capacity": "N/A", "type": "GRID TECH", "date": "2024", "note": "Largest EV charger manufacturer globally", "url": "https://www.abb.com/"},
+            {"title": "HVDC Transformer Supply — AI DC Buildout Critical Path", "amount": "N/A", "capacity": "N/A", "type": "GRID TECH", "date": "2024-2027", "note": "36-month lead time · IRR risk for all hyperscalers", "url": ""},
+            {"title": "ABB + GridBeyond: Existing Investor in Series D Round", "amount": "€12M round", "capacity": "N/A", "type": "EQUITY", "date": "Mar 2026", "note": "ABB continued investment alongside Samsung Ventures", "url": "https://gridbeyond.com/"},
         ],
         "Schneider Electric": [
-            {"title": "EcoStruxure microgrid for AI data centers", "amount": "N/A", "capacity": "N/A", "type": "GRID TECH", "date": "2024–2025", "note": "AI-optimized microgrid control software"},
-            {"title": "AVEVA acquisition — industrial energy management", "amount": "$11B", "capacity": "N/A", "type": "M&A", "date": "2023", "note": "Industrial IoT + energy management platform"},
-            {"title": "Green Premium — sustainability product labeling", "amount": "N/A", "capacity": "N/A", "type": "PARTNERSHIP", "date": "2021", "note": "Circular economy + energy efficiency initiative"},
+            {"title": "EcoStruxure Microgrid for AI Data Centers", "amount": "N/A", "capacity": "N/A", "type": "GRID TECH", "date": "2024-2025", "note": "AI-optimized microgrid control software", "url": "https://www.se.com/"},
+            {"title": "AVEVA Acquisition — Industrial Energy Management", "amount": "$11B", "capacity": "N/A", "type": "M&A", "date": "2023", "note": "Industrial IoT + energy management platform", "url": "https://www.aveva.com/"},
         ],
         "Eaton": [
-            {"title": "Power distribution for AI data centers — UPS/PDU", "amount": "$1.5B+ DC revenue", "capacity": "N/A", "type": "GRID TECH", "date": "2024–2026", "note": "Critical path for AI DC power delivery"},
-            {"title": "eMobility — EV charging infrastructure", "amount": "$500M capex", "capacity": "N/A", "type": "PARTNERSHIP", "date": "2023–2026", "note": "Grid-interactive EV charging"},
+            {"title": "Power Distribution for AI Data Centers — UPS/PDU", "amount": "$1.5B+ DC revenue", "capacity": "N/A", "type": "GRID TECH", "date": "2024-2026", "note": "Critical path for AI DC power delivery · 30%+ YoY growth", "url": "https://www.eaton.com/"},
+            {"title": "Eaton + Emerald AI: Strategic Investor", "amount": "$25M round", "capacity": "N/A", "type": "EQUITY", "date": "Mar 2026", "note": "Strategic investment in grid-flexible AI DC platform", "url": "https://www.emeraldai.co/"},
         ],
         "Constellation": [
-            {"title": "Three Mile Island Unit 1 restart — Microsoft PPA", "amount": "$110/MWh est.", "capacity": "835MW", "type": "NUCLEAR", "date": "Sep 2024", "note": "First US nuclear restart for AI DC offtake"},
-            {"title": "Clinton Power Station — Meta 20yr PPA", "amount": "$60–70/MWh est.", "capacity": "1,121MW", "type": "NUCLEAR", "date": "Jun 2025", "note": "20-year contract · Meta AI DC power"},
-            {"title": "Calpine acquisition by Constellation", "amount": "$16.4B", "capacity": "26GW gas fleet", "type": "M&A", "date": "Jan 2025", "note": "Largest US power M&A — gas + nuclear portfolio"},
+            {"title": "Three Mile Island Unit 1 Restart — Microsoft PPA", "amount": "~$110/MWh", "capacity": "835MW", "type": "NUCLEAR", "date": "Sep 2024", "note": "20-year contract · first US nuclear restart for AI DC", "url": "https://www.constellation.com/"},
+            {"title": "Clinton Power Station — Meta 20yr PPA", "amount": "~$60-70/MWh", "capacity": "1,121MW", "type": "NUCLEAR", "date": "Jun 2025", "note": "20-year contract · Meta AI DC power", "url": "https://www.constellation.com/"},
+            {"title": "Calpine Acquisition", "amount": "$16.4B", "capacity": "26GW gas fleet", "type": "M&A", "date": "Jan 2025", "note": "Largest US power M&A · gas + nuclear portfolio", "url": ""},
         ],
         "NextEra": [
-            {"title": "NextEra Energy Resources — largest US renewable operator", "amount": "$10B+ capex/yr", "capacity": "35GW+ operating", "type": "BESS", "date": "2024–2026", "note": "BESS pipeline 20GW+ · #1 US wind+solar"},
-            {"title": "AI DC power PPA portfolio — hyperscaler offtake", "amount": "Undisclosed", "capacity": "5GW+ pipeline", "type": "PPA", "date": "2024–2026", "note": "Primary renewable supplier to US hyperscalers"},
+            {"title": "NextEra Energy Resources — Largest US Renewable Operator", "amount": "$10B+ capex/yr", "capacity": "35GW+ operating", "type": "BESS", "date": "2024-2026", "note": "20GW+ BESS pipeline · #1 US wind+solar", "url": "https://www.nexteraenergy.com/"},
+            {"title": "Hyperscaler AI DC Power PPA Portfolio", "amount": "Undisclosed", "capacity": "5GW+ pipeline", "type": "PPA", "date": "2024-2026", "note": "Primary renewable supplier to US hyperscalers", "url": ""},
         ],
         "Vistra": [
-            {"title": "Vistra Vision — 6.4GW nuclear fleet + battery", "amount": "N/A", "capacity": "6.4GW nuclear", "type": "NUCLEAR", "date": "2024–2026", "note": "Comanche Peak + Illinois nuclear · AI DC offtake"},
-            {"title": "Energy Harbor acquisition", "amount": "$3.43B", "capacity": "4GW nuclear", "type": "M&A", "date": "Mar 2024", "note": "Added 4GW nuclear → now 6.4GW total"},
-            {"title": "Vistra Zero — 7GW+ BESS pipeline", "amount": "$1B+ capex", "capacity": "7GW pipeline", "type": "BESS", "date": "2024–2027", "note": "Largest US utility BESS developer"},
+            {"title": "Energy Harbor Acquisition — 4GW Nuclear Addition", "amount": "$3.43B", "capacity": "4GW nuclear", "type": "M&A", "date": "Mar 2024", "note": "Now 6.4GW total nuclear fleet", "url": "https://www.vistracorp.com/"},
+            {"title": "Vistra Zero — 7GW+ BESS Pipeline", "amount": "$1B+ capex", "capacity": "7GW pipeline", "type": "BESS", "date": "2024-2027", "note": "Largest US utility BESS developer", "url": ""},
         ],
         "Fluence": [
-            {"title": "Fluence IQ — AI-powered BESS bidding platform", "amount": "N/A", "capacity": "N/A", "type": "GRID TECH", "date": "2023–2025", "note": "Auto-bidding AI for BESS revenue optimization"},
-            {"title": "Global BESS deployment — 15GW+ pipeline", "amount": "N/A", "capacity": "15GW+", "type": "BESS", "date": "2024–2026", "note": "Siemens+AES JV · leading BESS integrator"},
+            {"title": "Fluence IQ — AI-Powered BESS Auto-Bidding Platform", "amount": "N/A", "capacity": "N/A", "type": "GRID TECH", "date": "2023-2025", "note": "AI auto-bidding for BESS revenue optimization", "url": "https://fluenceenergy.com/"},
+            {"title": "Global BESS Deployment — 15GW+ Pipeline", "amount": "N/A", "capacity": "15GW+", "type": "BESS", "date": "2024-2026", "note": "Siemens+AES JV · leading global BESS integrator", "url": ""},
         ],
     }
 
     type_colors = {
-        "NUCLEAR": ("#3b82f6", "rgba(59,130,246,.1)"),
-        "M&A":     ("#a855f7", "rgba(168,85,247,.1)"),
-        "PPA":     ("#ef4444", "rgba(239,68,68,.1)"),
-        "EQUITY":  ("#f59e0b", "rgba(245,158,11,.1)"),
-        "BESS":    ("#22c55e", "rgba(34,197,94,.1)"),
-        "RE100":   ("#22c55e", "rgba(34,197,94,.1)"),
+        "NUCLEAR":     ("#3b82f6", "rgba(59,130,246,.1)"),
+        "M&A":         ("#a855f7", "rgba(168,85,247,.1)"),
+        "PPA":         ("#ef4444", "rgba(239,68,68,.1)"),
+        "EQUITY":      ("#f59e0b", "rgba(245,158,11,.1)"),
+        "BESS":        ("#22c55e", "rgba(34,197,94,.1)"),
+        "RE100":       ("#22c55e", "rgba(34,197,94,.1)"),
+        "GRID TECH":   ("#00b4d8", "rgba(0,180,216,.1)"),
         "PARTNERSHIP": ("#5a5a7a", "rgba(90,90,122,.1)"),
-        "OTHER":   ("#5a5a7a", "rgba(90,90,122,.1)"),
+        "OTHER":       ("#5a5a7a", "rgba(90,90,122,.1)"),
+    }
+
+    strategy_map = {
+        "Microsoft":          "Nuclear offtake + SMR direct investment leader. $110/MWh sets market benchmark.",
+        "Google":             "First hyperscaler to own assets directly. $4.75B Intersect Power = PPA to M&A shift.",
+        "Amazon":             "Most diversified portfolio. PPA + equity ($500M X-energy) + $18B nuclear offtake.",
+        "Meta":               "Nuclear-centric. Up to 6.6GW target. First hyperscaler commercial LDES contract.",
+        "Apple":              "100% renewable since 2018. Clean Energy Charging = world largest demand response fleet.",
+        "Oracle":             "1.5GW nuclear PPA + $100B+ AI infrastructure. Late but aggressive.",
+        "NVIDIA":             "NVentures CVC: CFS $863M + Redwood $350M + Emerald AI. B200 chip efficiency strategy.",
+        "Samsung":            "Samsung Ventures: GridBeyond €12M + Amperon + Emerald AI. BESS vertical integration.",
+        "SK":                 "Bloom Energy $300M + Plug Power $1.5B + TerraPower SMR. Diversified clean energy bets.",
+        "SoftBank":           "SB Energy 7GW US solar+storage. Arm architecture as AI DC power efficiency moat.",
+        "GE Vernova":         "$35B IPO Apr 2024. Grid bottleneck owner. Transformer backlog = AI DC critical path.",
+        "Siemens Energy":     "HVDC grid + offshore wind. Transformer capacity expansion 20% for AI DC demand.",
+        "ABB":                "HVDC transformer and EV charging. 36-month lead time = IRR risk for every hyperscaler.",
+        "Schneider Electric": "EcoStruxure AI microgrid + AVEVA $11B. Dominant in AI DC power management software.",
+        "Eaton":              "AI DC UPS/PDU critical infrastructure. $1.5B+ data center revenue growing 30%+ YoY.",
+        "Constellation":      "TMI restart (MSFT) + Clinton (Meta) + Calpine $16.4B. America nuclear AI power hub.",
+        "NextEra":            "35GW+ operating. Primary renewable supplier to US hyperscalers. 20GW+ BESS pipeline.",
+        "Vistra":             "6.4GW nuclear fleet + Energy Harbor $3.43B. Largest US nuclear+BESS platform.",
+        "Fluence":            "Fluence IQ auto-bidding AI + 15GW+ BESS pipeline. Siemens+AES JV BESS market leader.",
     }
 
     updated = datetime.utcnow().strftime("%Y-%m-%d %H:%M UTC")
+    total_new = sum(len(v) for v in news_data.values())
 
-    # company card generation (group_html로 classification)
-    total_new = 0
+    def make_deal_card(d, color, bg):
+        title_html = d["title"]
+        if d.get("url"):
+            title_html = '<a href="' + d["url"] + '" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;">' + d["title"] + ' <span style=\'font-size:10px;opacity:.5;\'>↗</span></a>'
+        amount_html = '<span style="font-family:IBM Plex Mono,monospace;font-size:9px;color:#22c55e;">' + d["amount"] + '</span>' if d.get("amount") and d["amount"] != "N/A" else ""
+        cap_html = '<span style="font-family:IBM Plex Mono,monospace;font-size:8px;color:rgba(232,232,240,.4);">' + d["capacity"] + '</span>' if d.get("capacity") and d["capacity"] not in ("N/A", "") else ""
+        note_html = '<div style="font-family:IBM Plex Mono,monospace;font-size:8px;color:rgba(232,232,240,.3);margin-top:2px;">' + d["note"] + "</div>" if d.get("note") else ""
+        return (
+            '<div style="display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.04);">'
+            '<div style="width:5px;height:5px;border-radius:50%;background:' + color + ';flex-shrink:0;margin-top:5px;"></div>'
+            '<div style="flex:1;">'
+            '<div style="font-size:12px;font-weight:500;margin-bottom:3px;line-height:1.4;">' + title_html + '</div>'
+            '<div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:3px;">'
+            '<span style="font-family:IBM Plex Mono,monospace;font-size:7px;padding:1px 6px;border-radius:2px;background:' + bg + ';color:' + color + ';border:1px solid ' + color + '44;">' + d["type"] + '</span>'
+            + amount_html + cap_html +
+            '<span style="font-family:IBM Plex Mono,monospace;font-size:8px;color:rgba(232,232,240,.25);">' + d.get("date","") + '</span>'
+            '</div>' + note_html +
+            '</div></div>'
+        )
+
+    # Group cards by type
+    groups = {
+        "hyperscaler": ["Microsoft", "Google", "Amazon", "Meta", "Apple", "Oracle", "NVIDIA"],
+        "asia_tech":   ["Samsung", "SK", "SoftBank"],
+        "energy_oem":  ["GE Vernova", "Siemens Energy", "ABB", "Schneider Electric", "Eaton"],
+        "utility":     ["Constellation", "NextEra", "Vistra", "Fluence"],
+    }
+    group_labels = {
+        "hyperscaler": "Hyperscalers",
+        "asia_tech":   "Asia Tech",
+        "energy_oem":  "Energy OEM & Infrastructure",
+        "utility":     "Utilities & Energy Tech",
+    }
+
+    group_html = {k: "" for k in groups}
+
     for company, info in HYPERSCALERS.items():
         verified = VERIFIED_DEALS.get(company, [])
-        latest = news_data.get(company, [])
-        total_new += len(latest)
+        latest_news = news_data.get(company, [])
 
-        # Verified deals HTML
-        verified_html = ""
-        for d in verified:
-            color, bg = type_colors.get(d["type"], ("#5a5a7a", "rgba(90,90,122,.1)"))
-            verified_html += f"""
-            <div style="display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.04);">
-              <div style="width:5px;height:5px;border-radius:50%;background:{color};flex-shrink:0;margin-top:5px;"></div>
-              <div style="flex:1;">
-                <div style="font-size:12px;font-weight:500;margin-bottom:3px;line-height:1.4;">{d['title']}</div>
-                <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:3px;">
-                  <span style="font-family:'IBM Plex Mono',monospace;font-size:7px;padding:1px 6px;border-radius:2px;background:{bg};color:{color};border:1px solid {color}44;">{d['type']}</span>
-                  {f'<span style="font-family:IBM Plex Mono,monospace;font-size:9px;color:#22c55e;">{d["amount"]}</span>' if d.get('amount') and d['amount'] != 'N/A' else ''}
-                  {f'<span style="font-family:IBM Plex Mono,monospace;font-size:8px;color:rgba(232,232,240,.4);">{d["capacity"]}</span>' if d.get('capacity') and d['capacity'] != 'N/A' else ''}
-                  <span style="font-family:IBM Plex Mono,monospace;font-size:8px;color:rgba(232,232,240,.25);">{d.get('date','')}</span>
-                </div>
-                {f'<div style="font-family:IBM Plex Mono,monospace;font-size:8px;color:rgba(232,232,240,.3);margin-top:2px;">{d["note"]}</div>' if d.get('note') else ''}
-              </div>
-            </div>"""
+        v_html = "".join(make_deal_card(d, *type_colors.get(d["type"], ("#5a5a7a","rgba(90,90,122,.1)"))) for d in verified)
 
-        # Latest news HTML
-        latest_html = ""
-        if latest:
-            latest_html += '<div style="margin-top:12px;padding-top:12px;border-top:1px solid rgba(59,130,246,.1);">'
-            latest_html += '<div style="font-family:IBM Plex Mono,monospace;font-size:8px;letter-spacing:.12em;color:rgba(59,130,246,.6);text-transform:uppercase;margin-bottom:8px;">■ Latest News</div>'
-            for n in latest[:3]:
-                color, bg = type_colors.get(n.get("deal_type","OTHER"), ("#5a5a7a","rgba(90,90,122,.1)"))
-                latest_html += f"""
-                <div style="padding:6px 0;border-bottom:1px solid rgba(255,255,255,.03);">
-                  <a href="{n['link']}" target="_blank" rel="noopener" style="text-decoration:none;color:inherit;">
-                    <div style="font-size:11px;color:rgba(232,232,240,.7);line-height:1.4;margin-bottom:3px;">{n['title'][:90]}...</div>
-                    <div style="display:flex;gap:8px;">
-                      <span style="font-family:IBM Plex Mono,monospace;font-size:7px;padding:1px 5px;border-radius:2px;background:{bg};color:{color};">{n['deal_type']}</span>
-                      {f'<span style="font-family:IBM Plex Mono,monospace;font-size:8px;color:#22c55e;">{n["amount"]}</span>' if n.get('amount') else ''}
-                      <span style="font-family:IBM Plex Mono,monospace;font-size:8px;color:rgba(232,232,240,.2);">{n.get('published','')}</span>
-                      <span style="font-family:IBM Plex Mono,monospace;font-size:8px;color:rgba(232,232,240,.2);">{n.get('source','')[:20]}</span>
-                    </div>
-                  </a>
-                </div>"""
-            latest_html += "</div>"
-        elif company not in ["NVIDIA"]:
-            latest_html = '<div style="font-family:IBM Plex Mono,monospace;font-size:9px;color:rgba(232,232,240,.2);margin-top:10px;padding-top:10px;border-top:1px solid rgba(59,130,246,.08);">No new energy deals in last 60 days</div>'
-
-        strategy_map = {
-            "Microsoft":          "Nuclear offtake + SMR direct investment leader. $110/MWh sets market benchmark.",
-            "Google":             "First hyperscaler to own assets directly. $4.75B Intersect Power = PPA → M&A shift.",
-            "Amazon":             "Most diversified portfolio. PPA + equity ($500M X-energy) + $18B nuclear offtake.",
-            "Meta":               "Nuclear-centric. Up to 6.6GW target. First hyperscaler commercial LDES contract.",
-            "Apple":              "100% renewable since 2018. Clean Energy Charging = world's largest demand response fleet.",
-            "Oracle":             "1.5GW nuclear PPA + $100B+ AI infrastructure buildout. Late but aggressive.",
-            "NVIDIA":             "No direct energy M&A. B200 GPU 700W TDP — chip efficiency is the energy strategy.",
-            "Samsung":            "AI grid software investor (GridBeyond, Amperon, Emerald AI) + BESS vertical integration.",
-            "SK":                 "Bloom Energy $300M + Plug Power $1.5B + TerraPower SMR — diversified clean energy bets.",
-            "SoftBank":           "SB Energy 7GW US solar+storage. Arm architecture as AI DC power efficiency moat.",
-            "GE Vernova":         "$35B IPO Apr 2024. Grid bottleneck owner — transformer backlog is AI DC critical path.",
-            "Siemens Energy":     "HVDC grid + offshore wind. Transformer capacity expansion 20% to address AI DC demand.",
-            "ABB":                "HVDC transformer and EV charging. 36-month lead time = IRR risk for every hyperscaler.",
-            "Schneider Electric": "EcoStruxure AI microgrid + AVEVA $11B. Dominant in AI DC power management software.",
-            "Eaton":              "AI DC UPS/PDU critical infrastructure. $1.5B+ data center revenue growing 30%+ YoY.",
-            "Constellation":      "TMI restart (MSFT) + Clinton (Meta) + Calpine $16.4B. America's nuclear AI power hub.",
-            "NextEra":            "35GW+ operating. Primary renewable supplier to US hyperscalers. 20GW+ BESS pipeline.",
-            "Vistra":             "6.4GW nuclear fleet + Energy Harbor $3.43B. Largest US nuclear+BESS platform.",
-            "Fluence":            "Fluence IQ auto-bidding AI + 15GW+ BESS pipeline. Siemens+AES JV — BESS market leader.",
-        }
-
-        cards_html += f"""
-        <div style="background:rgba(255,255,255,.02);border:1px solid rgba(59,130,246,.08);padding:24px;">
-          <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
-            <div style="width:36px;height:36px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:500;background:{info['bg']};color:{info['color']};">{company[:2].upper()}</div>
-            <div>
-              <div style="font-size:15px;font-weight:500;">{company}</div>
-              <div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:rgba(232,232,240,.35);margin-top:2px;">{strategy_map.get(company,'')}</div>
-            </div>
-            {f'<span style="margin-left:auto;font-family:IBM Plex Mono,monospace;font-size:8px;padding:2px 8px;border-radius:2px;background:rgba(59,130,246,.1);color:#3b82f6;">+{len(latest)} new</span>' if latest else ''}
-          </div>
-          <div style="padding-bottom:2px;">{verified_html}</div>
-          {latest_html}
-        </div>"""
-
-    # Group-based classification
-    group_html = {"hyperscaler": "", "asia_tech": "", "energy_oem": "", "utility": "", "energy_tech": ""}
-    for company, info in HYPERSCALERS.items():
-        # Find cards created above
-        group = info.get("group", "utility")
-        key = group if group in group_html else "utility"
-        # Rebuild card
-        verified2 = VERIFIED_DEALS.get(company, [])
-        latest2 = news_data.get(company, [])
-        vhtml = ""
-        for d in verified2:
-            c2, b2 = type_colors.get(d["type"], ("#5a5a7a","rgba(90,90,122,.1)"))
-            vhtml += (
-                f'<div style="display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.04);">' +
-                f'<div style="width:5px;height:5px;border-radius:50%;background:{c2};flex-shrink:0;margin-top:5px;"></div>' +
-                f'<div style="flex:1;">' +
-                f'<div style="font-size:12px;font-weight:500;margin-bottom:3px;line-height:1.4;">{d["title"]}</div>' +
-                f'<div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:3px;">' +
-                f'<span style="font-family:IBM Plex Mono,monospace;font-size:7px;padding:1px 6px;border-radius:2px;background:{b2};color:{c2};border:1px solid {c2}44;">{d["type"]}</span>' +
-                (f'<span style="font-family:IBM Plex Mono,monospace;font-size:9px;color:#22c55e;">{d["amount"]}</span>' if d.get("amount") and d["amount"] != "N/A" else "") +
-                (f'<span style="font-family:IBM Plex Mono,monospace;font-size:8px;color:rgba(232,232,240,.4);">{d["capacity"]}</span>' if d.get("capacity") and d["capacity"] not in ("N/A","") else "") +
-                f'<span style="font-family:IBM Plex Mono,monospace;font-size:8px;color:rgba(232,232,240,.25);">{d.get("date","")}</span>' +
-                '</div>' +
-                (f'<div style="font-family:IBM Plex Mono,monospace;font-size:8px;color:rgba(232,232,240,.3);margin-top:2px;">{d["note"]}</div>' if d.get("note") else "") +
-                '</div></div>'
-            )
-        lhtml = ""
-        if latest2:
-            lhtml = '<div style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(59,130,246,.1);"><div style="font-family:IBM Plex Mono,monospace;font-size:8px;letter-spacing:.12em;color:rgba(59,130,246,.6);text-transform:uppercase;margin-bottom:6px;">■ Latest News</div>'
-            for n2 in latest2[:3]:
-                c2, b2 = type_colors.get(n2.get("deal_type","OTHER"),("#5a5a7a","rgba(90,90,122,.1)"))
-                lhtml += (
-                    f'<div style="padding:5px 0;border-bottom:1px solid rgba(255,255,255,.03);">' +
-                    f'<a href="{n2["link"]}" target="_blank" rel="noopener" style="text-decoration:none;color:inherit;">' +
-                    f'<div style="font-size:11px;color:rgba(232,232,240,.7);line-height:1.4;margin-bottom:2px;">{n2["title"][:85]}...</div>' +
-                    f'<div style="display:flex;gap:6px;"><span style="font-family:IBM Plex Mono,monospace;font-size:7px;padding:1px 5px;border-radius:2px;background:{b2};color:{c2};">{n2["deal_type"]}</span>' +
-                    (f'<span style="font-family:IBM Plex Mono,monospace;font-size:8px;color:#22c55e;">{n2["amount"]}</span>' if n2.get("amount") else "") +
-                    f'<span style="font-family:IBM Plex Mono,monospace;font-size:8px;color:rgba(232,232,240,.2);">{n2.get("published","")}</span></div>' +
-                    '</a></div>'
+        n_html = ""
+        if latest_news:
+            n_html = '<div style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(59,130,246,.1);"><div style="font-family:IBM Plex Mono,monospace;font-size:8px;letter-spacing:.12em;color:rgba(59,130,246,.6);text-transform:uppercase;margin-bottom:6px;">Latest News</div>'
+            for n in latest_news[:3]:
+                nc, nb = type_colors.get(n.get("deal_type","OTHER"), ("#5a5a7a","rgba(90,90,122,.1)"))
+                n_html += (
+                    '<div style="padding:5px 0;border-bottom:1px solid rgba(255,255,255,.03);">'
+                    '<a href="' + n.get("link","#") + '" target="_blank" rel="noopener" style="text-decoration:none;color:inherit;">'
+                    '<div style="font-size:11px;color:rgba(232,232,240,.7);line-height:1.4;margin-bottom:2px;">' + n["title"][:85] + '...</div>'
+                    '<div style="display:flex;gap:6px;">'
+                    '<span style="font-family:IBM Plex Mono,monospace;font-size:7px;padding:1px 5px;border-radius:2px;background:' + nb + ';color:' + nc + ';">' + n.get("deal_type","OTHER") + '</span>'
+                    + ('<span style="font-family:IBM Plex Mono,monospace;font-size:8px;color:#22c55e;">' + n["amount"] + '</span>' if n.get("amount") else "") +
+                    '<span style="font-family:IBM Plex Mono,monospace;font-size:8px;color:rgba(232,232,240,.2);">' + n.get("published","") + '</span>'
+                    '</div></a></div>'
                 )
-            lhtml += '</div>'
-        strat = strategy_map.get(company, "")
-        badge = f'<span style="margin-left:auto;font-family:IBM Plex Mono,monospace;font-size:8px;padding:2px 8px;border-radius:2px;background:rgba(59,130,246,.1);color:#3b82f6;">+{len(latest2)} new</span>' if latest2 else ""
+            n_html += '</div>'
+        elif company not in ("NVIDIA",):
+            n_html = '<div style="font-family:IBM Plex Mono,monospace;font-size:9px;color:rgba(232,232,240,.15);margin-top:10px;padding-top:10px;border-top:1px solid rgba(59,130,246,.08);">No new energy deals in last 60 days</div>'
+
+        badge = '<span style="margin-left:auto;font-family:IBM Plex Mono,monospace;font-size:8px;padding:2px 8px;border-radius:2px;background:rgba(59,130,246,.1);color:#3b82f6;">+' + str(len(latest_news)) + ' new</span>' if latest_news else ""
+
         card = (
-            f'<div style="background:rgba(255,255,255,.02);border:1px solid rgba(59,130,246,.08);padding:20px;">' +
-            f'<div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">' +
-            f'<div style="width:32px;height:32px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-family:IBM Plex Mono,monospace;font-size:10px;font-weight:500;background:{info["bg"]};color:{info["color"]};flex-shrink:0;">{company[:2].upper()}</div>' +
-            f'<div style="flex:1;min-width:0;">' +
-            f'<div style="font-size:14px;font-weight:500;">{company}</div>' +
-            f'<div style="font-family:IBM Plex Mono,monospace;font-size:8px;color:rgba(232,232,240,.3);margin-top:1px;line-height:1.4;">{strat}</div>' +
-            f'</div>{badge}</div>' +
-            vhtml + lhtml +
+            '<div style="background:rgba(255,255,255,.02);border:1px solid rgba(59,130,246,.08);padding:20px;">'
+            '<div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">'
+            '<div style="width:32px;height:32px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-family:IBM Plex Mono,monospace;font-size:10px;font-weight:500;background:' + info["bg"] + ';color:' + info["color"] + ';flex-shrink:0;">' + company[:2].upper() + '</div>'
+            '<div style="flex:1;min-width:0;">'
+            '<div style="font-size:14px;font-weight:500;">' + company + '</div>'
+            '<div style="font-family:IBM Plex Mono,monospace;font-size:8px;color:rgba(232,232,240,.3);margin-top:1px;line-height:1.4;">' + strategy_map.get(company,"") + '</div>'
+            '</div>' + badge + '</div>'
+            + v_html + n_html +
             '</div>'
         )
-        group_html[key] += card
 
-    html = f"""<!DOCTYPE html>
+        for grp, cos in groups.items():
+            if company in cos:
+                group_html[grp] += card
+                break
+
+    # Build sections HTML
+    sections_html = ""
+    for grp, label in group_labels.items():
+        if group_html[grp]:
+            sections_html += (
+                '<div style="margin-bottom:12px;font-family:IBM Plex Mono,monospace;font-size:9px;letter-spacing:.2em;color:rgba(59,130,246,.5);text-transform:uppercase;">■ ' + label + '</div>'
+                '<div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:24px;">'
+                + group_html[grp] +
+                '</div>'
+            )
+
+    return """<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -1095,21 +1048,19 @@ def generate_hyperscaler_html(news_data: dict) -> str:
 <title>GRIDEDGE — Hyperscaler Energy Tracker</title>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:wght@300;400;500&family=Geist:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-:root{{--bg:#050507;--white:#e8e8f0;--dim:#5a5a7a;--blue:#3b82f6;--border:rgba(59,130,246,0.08);--card:rgba(255,255,255,0.02);}}
-*{{margin:0;padding:0;box-sizing:border-box;}}
-body{{background:var(--bg);color:var(--white);font-family:'Geist',sans-serif;min-height:100vh;}}
-body::before{{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(59,130,246,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(59,130,246,0.03) 1px,transparent 1px);background-size:48px 48px;pointer-events:none;z-index:0;}}
-nav{{position:sticky;top:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:14px 32px;background:rgba(5,5,7,0.9);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);}}
-.logo{{font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:500;letter-spacing:0.2em;color:var(--blue);text-decoration:none;}}
-.logo em{{color:var(--white);opacity:0.3;font-style:normal;}}
-.nav-r{{display:flex;align-items:center;gap:20px;font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.12em;color:var(--dim);text-transform:uppercase;}}
-.nav-r a{{color:var(--dim);text-decoration:none;transition:color .2s;}}
-.nav-r a:hover,.nav-r a.active{{color:var(--blue);}}
-.wrap{{position:relative;z-index:1;max-width:1400px;margin:0 auto;padding:48px 32px;}}
-.grid-2{{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px;}}
-.grid-3{{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:20px;}}
-@media(max-width:1100px){{.grid-2,.grid-3{{grid-template-columns:1fr;}}}}
-@media(max-width:768px){{.wrap{{padding:24px 16px;}}.nav-r{{display:none;}}}}
+:root{--bg:#050507;--white:#e8e8f0;--dim:#5a5a7a;--blue:#3b82f6;--border:rgba(59,130,246,0.08);--card:rgba(255,255,255,0.02);}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--white);font-family:'Geist',sans-serif;min-height:100vh;}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(59,130,246,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(59,130,246,0.03) 1px,transparent 1px);background-size:48px 48px;pointer-events:none;z-index:0;}
+nav{position:sticky;top:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:14px 32px;background:rgba(5,5,7,0.9);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);}
+.logo{font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:500;letter-spacing:0.2em;color:var(--blue);text-decoration:none;}
+.logo em{color:var(--white);opacity:0.3;font-style:normal;}
+.nav-r{display:flex;align-items:center;gap:20px;font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.12em;color:var(--dim);text-transform:uppercase;}
+.nav-r a{color:var(--dim);text-decoration:none;transition:color .2s;}
+.nav-r a:hover,.nav-r a.active{color:var(--blue);}
+.wrap{position:relative;z-index:1;max-width:1400px;margin:0 auto;padding:48px 32px;}
+@media(max-width:1100px){.grid-2{grid-template-columns:1fr!important;}}
+@media(max-width:768px){.wrap{padding:24px 16px;}.nav-r{display:none;}}
 </style>
 </head>
 <body>
@@ -1123,21 +1074,17 @@ nav{{position:sticky;top:0;z-index:100;display:flex;justify-content:space-betwee
     <a href="./archive.html">Archive</a>
   </div>
 </nav>
-
 <div class="wrap">
   <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.25em;color:var(--blue);text-transform:uppercase;margin-bottom:12px;">Intelligence Layer</div>
   <h1 style="font-family:'Instrument Serif',serif;font-size:clamp(28px,3.5vw,48px);line-height:1.05;margin-bottom:8px;">Hyperscaler Energy Tracker</h1>
-  <p style="font-size:13px;color:var(--dim);line-height:1.7;max-width:600px;margin-bottom:4px;">Tracking Big Tech energy M&A, PPAs, and direct investments in real time.</p>
-  <div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:rgba(232,232,240,.2);margin-bottom:32px;">
-    Auto-updated: {updated} · Verified deals + last 60 days news · {total_new}개 latest news collected
-  </div>
+  <p style="font-size:13px;color:var(--dim);line-height:1.7;max-width:600px;margin-bottom:4px;">Tracking Big Tech energy M&amp;A, PPAs, CVC investments, and direct infrastructure plays in real time.</p>
+  <div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:rgba(232,232,240,.2);margin-bottom:32px;">Auto-updated: """ + updated + """ &middot; Verified deals + last 60 days news &middot; """ + str(total_new) + """ latest news items collected</div>
 
-  <!-- summary metrics -->
-  <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:32px;">
+  <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:40px;">
     <div style="background:var(--card);border:1px solid var(--border);padding:14px 16px;">
       <div style="font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:.12em;color:var(--dim);text-transform:uppercase;margin-bottom:6px;">Total Committed</div>
       <div style="font-family:'Instrument Serif',serif;font-size:22px;color:var(--blue);">$40B+</div>
-      <div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--dim);margin-top:3px;">Big 4 energy capex 2024–2026</div>
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--dim);margin-top:3px;">Big 4 energy capex 2024-2026</div>
     </div>
     <div style="background:var(--card);border:1px solid var(--border);padding:14px 16px;">
       <div style="font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:.12em;color:var(--dim);text-transform:uppercase;margin-bottom:6px;">Nuclear Offtake</div>
@@ -1147,27 +1094,22 @@ nav{{position:sticky;top:0;z-index:100;display:flex;justify-content:space-betwee
     <div style="background:var(--card);border:1px solid var(--border);padding:14px 16px;">
       <div style="font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:.12em;color:var(--dim);text-transform:uppercase;margin-bottom:6px;">Avg Nuclear Price</div>
       <div style="font-family:'Instrument Serif',serif;font-size:22px;color:var(--blue);">$90/MWh</div>
-      <div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--dim);margin-top:3px;">vs $40 spot · 2× premium</div>
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--dim);margin-top:3px;">vs $40 spot &middot; 2x premium</div>
     </div>
     <div style="background:var(--card);border:1px solid var(--border);padding:14px 16px;">
-      <div style="font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:.12em;color:var(--dim);text-transform:uppercase;margin-bottom:6px;">Largest M&A</div>
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:.12em;color:var(--dim);text-transform:uppercase;margin-bottom:6px;">Largest M&amp;A</div>
       <div style="font-family:'Instrument Serif',serif;font-size:22px;color:var(--blue);">$4.75B</div>
-      <div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--dim);margin-top:3px;">Google → Intersect Power</div>
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--dim);margin-top:3px;">Google &rarr; Intersect Power</div>
     </div>
     <div style="background:var(--card);border:1px solid var(--border);padding:14px 16px;">
       <div style="font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:.12em;color:var(--dim);text-transform:uppercase;margin-bottom:6px;">Latest News</div>
-      <div style="font-family:'Instrument Serif',serif;font-size:22px;color:var(--blue);">{total_new}</div>
+      <div style="font-family:'Instrument Serif',serif;font-size:22px;color:var(--blue);">""" + str(total_new) + """</div>
       <div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--dim);margin-top:3px;">Energy deal news, last 60 days</div>
     </div>
   </div>
 
-  <!-- Company card 2-column grid -->
-  <div class="grid-2">
-    {cards_html}
-  </div>
+  """ + sections_html + """
 
 </div>
 </body>
 </html>"""
-
-    return html
