@@ -1,0 +1,43 @@
+[
+  {
+    "id": "energy-vault",
+    "company": "Energy Vault",
+    "date": "2026-05-02",
+    "source": "Utility Dive",
+    "source_url": "https://www.utilitydive.com/news/dte-energy-data-center-earnings-reliability/819052/",
+    "signal_title": "DTE Energy: 8.4 GW Data Center Pipeline with Oracle/Google Offtake",
+    "current_stage": "Public (NYSE: NRGV)",
+    "current_raised": "Public",
+    "type": "partnership",
+    "value": "Google",
+    "priority": "HIGH"
+  },
+  {
+    "id": "ess-inc",
+    "company": "ESS Inc",
+    "date": "2026-05-02",
+    "source": "TechCrunch",
+    "source_url": "https://techcrunch.com/2026/04/24/nuclear-startup-x-energy-raises-1b-in-data-center-driven-ipo/",
+    "signal_title": "X-energy IPO: $1B Raised at Pre-Revenue Nuclear Valuation",
+    "current_stage": "Public (NYSE: GWH)",
+    "current_raised": "Public",
+    "type": "funding",
+    "value": "$1b",
+    "round": "",
+    "priority": "HIGH"
+  },
+  {
+    "id": "energy-vault",
+    "company": "Energy Vault",
+    "date": "2026-05-02",
+    "source": "TechCrunch",
+    "source_url": "https://techcrunch.com/2026/04/24/nuclear-startup-x-energy-raises-1b-in-data-center-driven-ipo/",
+    "signal_title": "X-energy IPO: $1B Raised at Pre-Revenue Nuclear Valuation",
+    "current_stage": "Public (NYSE: NRGV)",
+    "current_raised": "Public",
+    "type": "funding",
+    "value": "$1b",
+    "round": "",
+    "priority": "HIGH"
+  }
+]
