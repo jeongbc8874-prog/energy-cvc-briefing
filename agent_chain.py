@@ -704,11 +704,13 @@ Synthesize into this JSON schema:
 }}
 
 OUTPUT REQUIREMENTS:
-- Minimum 12 deal_signals. NEVER output fewer than 12.
-- 4-6 sector_positioning entries.
-- If fewer than 12 strong signals: include WATCH/LOW CONVICTION signals to reach 12.
-- ORDER: Early Stage signals (PRE_SEED/SEED/SERIES_A) FIRST, then late stage.
+- Target 8-12 ACTIONABLE deal_signals (LEAD + FOLLOW + WATCH only).
+- PASS signals: include ONLY if they contain a critical warning worth reading (e.g., physics violation, fraud signal). Maximum 2 PASS signals.
+- DO NOT include PASS signals for: archival content, historical timelines, non-investable reference material, space/defense niche with no commercial path.
+- ORDER: LEAD first → FOLLOW → WATCH → PASS (hidden by default in UI).
+- Early Stage signals (PRE_SEED/SEED/SERIES_A) always before late stage within same recommendation tier.
 - Every signal needs deal_stage field — use source-based auto-classification.
+- 4-6 sector_positioning entries.
 
 DEPTH REQUIREMENT:
 For each deal_signal, include the specific technical or financial insight that makes this analysis actionable:
