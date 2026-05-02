@@ -469,7 +469,7 @@ def score_signal(article: dict) -> tuple[float, dict]:
     return round(total, 4), breakdown
 
 
-def filter_signals(signals: list[dict], top_n: int = 15) -> list[dict]:
+def filter_signals(signals: list[dict], top_n: int = 80) -> list[dict]:
     print("[2단계] 시그널 스코어링...")
     for s in signals:
         s["score"], s["score_breakdown"] = score_signal(s)
@@ -1484,7 +1484,7 @@ if __name__ == "__main__":
     print("=" * 60)
 
     signals  = collect_all_signals()
-    filtered = filter_signals(signals, top_n=50)  # 소스 확대로 넉넉하게
+    filtered = filter_signals(signals, top_n=80)  # 최대한 많이 Agent에 전달
 
     # 지난 브리프에 나온 시그널 제거
     seen_titles = load_seen_titles(days=5)
