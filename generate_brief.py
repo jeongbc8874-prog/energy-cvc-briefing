@@ -357,7 +357,31 @@ def extract_numbers(text: str) -> dict:
 def score_signal(article: dict) -> tuple[float, dict]:
     text = (article["title"] + " " + article["description"]).lower()
 
-    # 기본 점수
+    # ── 하드 노이즈 필터 — 에너지 무관 시그널 즉시 제거 ──────────────
+    HARD_NOISE = [
+        # 소비자 소프트웨어
+        "bluetooth", "midi", "audio plugin", "music software", "game engine",
+        "mobile app", "ios app", "android app", "app store", "saas pricing",
+        # 일반 AI/소프트웨어
+        "writing assistant", "chatbot", "llm fine", "image generation",
+        "no-code", "website builder", "crm software", "hr software",
+        # 기타 무관
+        "crypto exchange", "nft", "metaverse", "social media",
+        "food delivery", "e-commerce", "fintech payment",
+    ]
+    if any(k in text for k in HARD_NOISE):
+        return 0.0, {"blocked": True, "reason": "noise_filter"}
+
+    # 에너지 관련성 최소 확인 — 에너지 키워드 하나도 없으면 제거
+    ENERGY_MIN = [
+        "energy", "power", "grid", "battery", "solar", "wind", "nuclear",
+        "hydrogen", "storage", "electric", "renewable", "data center",
+        "transformer", "inverter", "fuel cell", "transmission",
+    ]
+    if not any(k in text for k in ENERGY_MIN):
+        return 0.0, {"blocked": True, "reason": "no_energy_relevance"}
+
+
     funding_score = min(sum(1 for k in FUNDING_KEYWORDS if k in text) / 3, 1.0)
     deal_score    = min(sum(1 for k in DEAL_KEYWORDS    if k in text) / 2, 1.0)
     risk_score    = min(sum(1 for k in RISK_KEYWORDS    if k in text) / 2, 1.0)
