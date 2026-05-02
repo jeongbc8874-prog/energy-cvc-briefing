@@ -1119,15 +1119,28 @@ def filter_seen_signals(signals: list[dict], seen_titles: set) -> list[dict]:
 
 
 def update_startup_scores(brief: dict) -> int:
-    """Brief signals → startup_db_data.py score updates log"""
+    """
+    Enhanced DB monitor — 브리프 시그널에서 자동 감지:
+    - 신규 펀딩 라운드 (금액 + 투자자)
+    - 인수 (acquired by X)
+    - 파산 (bankruptcy / chapter 11)
+    - 파트너십 / 고객 계약 (hyperscaler)
+    - TRL 변경
+    → docs/data/db_updates.json 누적 저장
+    → 중복 방지 (같은 날 같은 회사 같은 타입은 스킵)
+    """
     import re as _re
     updated = 0
-    signals = brief.get("deal_signals", [])
-    if not signals:
+
+    # 모든 소스 텍스트 — 브리프 시그널 + 섹터 포지셔닝
+    all_signals = brief.get("deal_signals", [])
+    if not all_signals:
         return 0
+
     db_path = "startup_db_data.py"
     if not os.path.exists(db_path):
         return 0
+
     try:
         import importlib.util
         spec = importlib.util.spec_from_file_location("sdb", db_path)
@@ -1135,34 +1148,136 @@ def update_startup_scores(brief: dict) -> int:
         spec.loader.exec_module(sdb)
         companies = list(getattr(sdb, 'COMPANIES', [])) + list(getattr(sdb, 'EXTRA', []))
     except Exception as e:
-        print(f"  [Score Update] DB load failed: {e}")
+        print(f"  [DB Monitor] load failed: {e}")
         return 0
-    name_map = {c['name'].lower(): c['id'] for c in companies}
-    updates_log = []
-    for sig in signals:
-        text = (sig.get('title','') + ' ' + sig.get('summary', sig.get('desc',''))).lower()
-        for co_name, co_id in name_map.items():
-            if co_name not in text:
+
+    # 회사명 매핑 (lower → {id, name, stage, raised})
+    name_map = {}
+    for c in companies:
+        name_map[c['name'].lower()] = c
+        # 별칭도 등록 (첫 단어가 2자 이상이면)
+        parts = c['name'].split()
+        if len(parts) > 1 and len(parts[0]) >= 3:
+            name_map[parts[0].lower()] = c
+
+    today = brief.get('generated_at', '')[:10]
+
+    # 기존 로그 로드 (중복 방지용)
+    os.makedirs("docs/data", exist_ok=True)
+    log_path = "docs/data/db_updates.json"
+    existing = []
+    if os.path.exists(log_path):
+        try:
+            existing = json.loads(open(log_path).read())
+        except:
+            pass
+
+    # 중복 체크용 set (date+id+type+value)
+    seen_keys = {f"{e.get('date','')}|{e.get('id','')}|{e.get('type','')}|{str(e.get('value',''))[:30]}" for e in existing}
+
+    new_logs = []
+
+    for sig in all_signals:
+        raw_title = sig.get('title', '')
+        raw_summary = sig.get('summary', sig.get('desc', ''))
+        full_text = (raw_title + ' ' + raw_summary).lower()
+        source = sig.get('source', '')
+        source_url = sig.get('source_url', '')
+
+        for co_key, co in name_map.items():
+            if co_key not in full_text:
                 continue
-            amounts = _re.findall(r'\$[\d,.]+\s*(?:billion|million|[BM])\b', text, _re.IGNORECASE)
-            if amounts:
-                updates_log.append({'id': co_id, 'company': co_name, 'type': 'funding', 'value': amounts[0], 'source': sig.get('source',''), 'date': brief.get('generated_at','')[:10], 'signal_title': sig.get('title','')[:80]})
-                updated += 1
-            trl_m = _re.search(r'trl\s*(\d)', text)
+
+            co_id = co['id']
+            co_name = co['name']
+            entry_base = {
+                'id': co_id,
+                'company': co_name,
+                'date': today,
+                'source': source,
+                'source_url': source_url,
+                'signal_title': raw_title[:100],
+                'current_stage': co.get('stage', ''),
+                'current_raised': co.get('raised', ''),
+            }
+
+            # ── 1. 신규 펀딩 ──────────────────────────────────────
+            funding_m = _re.findall(r'\$[\d,.]+\s*(?:billion|million|[BM])\b', full_text, _re.IGNORECASE)
+            round_m = _re.search(r'series\s+([a-f][\d+]?|seed|pre-seed)', full_text, _re.IGNORECASE)
+            if funding_m:
+                amt = funding_m[0]
+                rnd = round_m.group(0).upper() if round_m else ''
+                key = f"{today}|{co_id}|funding|{amt[:30]}"
+                if key not in seen_keys:
+                    new_logs.append({**entry_base, 'type': 'funding', 'value': amt, 'round': rnd,
+                                     'priority': 'HIGH' if any(h in full_text for h in ['series b','series c','series d','$100','$200','$300','$500','$1b','billion']) else 'MEDIUM'})
+                    seen_keys.add(key)
+                    updated += 1
+
+            # ── 2. 인수 ───────────────────────────────────────────
+            acq_m = _re.search(r'acqui(?:red|res|sition)\s+(?:by\s+)?([A-Z][a-zA-Z\s]+?)(?:\s+for|\s+in|\.|,|$)', raw_title + ' ' + raw_summary, _re.IGNORECASE)
+            if acq_m and co_key in full_text:
+                acquirer = acq_m.group(1).strip()[:40]
+                key = f"{today}|{co_id}|acquired|{acquirer[:30]}"
+                if key not in seen_keys:
+                    new_logs.append({**entry_base, 'type': 'acquired', 'value': acquirer, 'priority': 'HIGH'})
+                    seen_keys.add(key)
+                    updated += 1
+
+            # ── 3. 파산 ───────────────────────────────────────────
+            if any(w in full_text for w in ['bankruptcy', 'chapter 11', 'insolvency', 'liquidat']):
+                key = f"{today}|{co_id}|bankruptcy|"
+                if key not in seen_keys:
+                    new_logs.append({**entry_base, 'type': 'bankruptcy', 'value': 'Chapter 11 / Insolvency', 'priority': 'CRITICAL'})
+                    seen_keys.add(key)
+                    updated += 1
+
+            # ── 4. 하이퍼스케일러 계약 ────────────────────────────
+            HYPERSCALERS = ['microsoft', 'google', 'amazon', 'aws', 'meta', 'apple', 'nvidia', 'oracle',
+                           'samsung', 'sk ', 'softbank', 'dominion', 'nextера', 'constellation']
+            hyper_hit = [h for h in HYPERSCALERS if h in full_text]
+            if hyper_hit and any(w in full_text for w in ['partnership', 'agreement', 'contract', 'offtake', 'ppa', 'deploy', 'pilot']):
+                key = f"{today}|{co_id}|partnership|{hyper_hit[0][:20]}"
+                if key not in seen_keys:
+                    new_logs.append({**entry_base, 'type': 'partnership', 'value': hyper_hit[0].title(),
+                                     'priority': 'HIGH'})
+                    seen_keys.add(key)
+                    updated += 1
+
+            # ── 5. TRL 변경 ───────────────────────────────────────
+            trl_m = _re.search(r'\btrl[\s-]?(\d)\b', full_text)
             if trl_m:
-                updates_log.append({'id': co_id, 'company': co_name, 'type': 'trl', 'value': int(trl_m.group(1)), 'source': sig.get('source',''), 'date': brief.get('generated_at','')[:10], 'signal_title': sig.get('title','')[:80]})
-    if updates_log:
-        os.makedirs("docs/data", exist_ok=True)
-        log_path = "docs/data/db_updates.json"
-        existing = []
-        if os.path.exists(log_path):
-            try:
-                existing = json.loads(open(log_path).read())
-            except:
-                pass
-        existing.extend(updates_log)
-        with open(log_path, "w") as f:
-            f.write(json.dumps(existing[-200:], ensure_ascii=False, indent=2))
+                trl_val = int(trl_m.group(1))
+                key = f"{today}|{co_id}|trl|{trl_val}"
+                if key not in seen_keys:
+                    new_logs.append({**entry_base, 'type': 'trl', 'value': trl_val, 'priority': 'MEDIUM'})
+                    seen_keys.add(key)
+
+    # 저장 — 최신 300개 유지, CRITICAL/HIGH 우선
+    if new_logs:
+        print(f"  [DB Monitor] {len(new_logs)} new signals detected")
+        for log in new_logs:
+            p = log.get('priority','')
+            print(f"    {'🔴' if p=='CRITICAL' else '🟠' if p=='HIGH' else '🟡'} [{p}] {log['company']} → {log['type'].upper()}: {log['value']}")
+
+    all_logs = existing + new_logs
+    # CRITICAL/HIGH 먼저 정렬, 날짜 내림차순
+    all_logs.sort(key=lambda x: (
+        {'CRITICAL':0,'HIGH':1,'MEDIUM':2}.get(x.get('priority','MEDIUM'), 2),
+        x.get('date','')
+    ), reverse=False)
+    all_logs = all_logs[-300:]
+
+    with open(log_path, "w") as f:
+        f.write(json.dumps(all_logs, ensure_ascii=False, indent=2))
+
+    # 별도 요약 파일 — 최근 30일 HIGH/CRITICAL만
+    from datetime import datetime, timedelta
+    cutoff = (datetime.utcnow() - timedelta(days=30)).strftime('%Y-%m-%d')
+    alerts = [l for l in all_logs if l.get('priority') in ('HIGH','CRITICAL') and l.get('date','') >= cutoff]
+    with open("docs/data/db_alerts.json", "w") as f:
+        f.write(json.dumps(alerts[-50:], ensure_ascii=False, indent=2))
+
     return updated
 
 
@@ -1202,7 +1317,12 @@ def generate_dealflow_html(brief: dict) -> str:
     db_updates = []
     if os.path.exists("docs/data/db_updates.json"):
         try:
-            db_updates = json.loads(open("docs/data/db_updates.json").read())[-10:]
+            all_updates = json.loads(open("docs/data/db_updates.json").read())
+            # CRITICAL/HIGH 먼저, 최근 20개
+            db_updates = sorted(all_updates, key=lambda x: (
+                {'CRITICAL':0,'HIGH':1,'MEDIUM':2}.get(x.get('priority','MEDIUM'),2),
+                x.get('date','')
+            ), reverse=False)[-20:]
         except:
             pass
 
@@ -1230,7 +1350,22 @@ def generate_dealflow_html(brief: dict) -> str:
 
     db_html = ""
     for u in reversed(db_updates):
-        db_html += f'<div style="padding:6px 0;border-bottom:1px solid rgba(255,255,255,.04);"><div style="font-size:11px;font-weight:500;">{u.get("company","").title()}</div><div style="font-family:IBM Plex Mono,monospace;font-size:8px;color:rgba(59,130,246,.6);">{u.get("type","").upper()} → {u.get("value","")}</div><div style="font-family:IBM Plex Mono,monospace;font-size:8px;color:rgba(232,232,240,.2);">{u.get("date","")}</div></div>'
+        p = u.get('priority','MEDIUM')
+        p_color = '#ef4444' if p=='CRITICAL' else '#f59e0b' if p=='HIGH' else '#5a5a7a'
+        p_icon = '🔴' if p=='CRITICAL' else '🟠' if p=='HIGH' else '🟡'
+        type_color = {'funding':'#22c55e','acquired':'#f59e0b','bankruptcy':'#ef4444','partnership':'#3b82f6','trl':'#a855f7'}.get(u.get('type',''),'#5a5a7a')
+        src_html = f'<a href="{u["source_url"]}" target="_blank" style="font-family:IBM Plex Mono,monospace;font-size:7px;color:rgba(59,130,246,.4);text-decoration:none;">{u.get("source","")} ↗</a>' if u.get('source_url') else f'<span style="font-family:IBM Plex Mono,monospace;font-size:7px;color:rgba(232,232,240,.15);">{u.get("source","")}</span>'
+        rnd = f' · {u["round"]}' if u.get('round') else ''
+        db_html += f'''<div style="padding:8px 0;border-bottom:1px solid rgba(255,255,255,.04);">
+  <div style="display:flex;align-items:center;gap:6px;margin-bottom:3px;">
+    <span style="font-size:10px;">{p_icon}</span>
+    <span style="font-size:11px;font-weight:500;">{u.get("company","").title()}</span>
+    <span style="font-family:IBM Plex Mono,monospace;font-size:7px;padding:1px 5px;border-radius:2px;background:{type_color}22;color:{type_color};">{u.get("type","").upper()}{rnd}</span>
+  </div>
+  <div style="font-family:IBM Plex Mono,monospace;font-size:9px;color:{type_color};margin-bottom:2px;">{u.get("value","")}</div>
+  <div style="font-family:IBM Plex Mono,monospace;font-size:7px;color:rgba(232,232,240,.25);margin-bottom:2px;">{u.get("signal_title","")[:60]}</div>
+  <div style="display:flex;justify-content:space-between;">{src_html}<span style="font-family:IBM Plex Mono,monospace;font-size:7px;color:rgba(232,232,240,.2);">{u.get("date","")}</span></div>
+</div>'''
 
     now = __import__("datetime").datetime.utcnow().strftime("%Y-%m-%d %H:%M UTC")
     lead_c = sum(1 for d in all_d if d["recommendation"]=="LEAD")
