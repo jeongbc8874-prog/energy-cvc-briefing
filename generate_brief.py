@@ -467,7 +467,7 @@ def filter_signals(signals: list[dict], top_n: int = 15) -> list[dict]:
         s["sector"] = classify_sector(s["title"] + " " + s["description"])
 
     # 레드플래그 후보 별도 보존 (risk 높은 것)
-    red_flag_pool = [s for s in signals if s["score_breakdown"]["risk"] > 0.4]
+    red_flag_pool = [s for s in signals if s.get("score_breakdown", {}).get("risk", 0) > 0.4]
 
     ranked   = sorted(signals, key=lambda x: x["score"], reverse=True)
     selected = ranked[:top_n]
