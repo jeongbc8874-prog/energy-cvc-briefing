@@ -39,5 +39,19 @@
     "value": "$1b",
     "round": "",
     "priority": "HIGH"
+  },
+  {
+    "id": "power-factors",
+    "company": "Power Factors",
+    "date": "2026-05-02",
+    "source": "TechCrunch",
+    "source_url": "https://techcrunch.com/2026/04/24/nuclear-startup-x-energy-raises-1b-in-data-center-driven-ipo/",
+    "signal_title": "X-energy $1B IPO (25% Upsizing from $800M)",
+    "current_stage": "PE-backed",
+    "current_raised": "PE-backed",
+    "type": "funding",
+    "value": "$1b",
+    "round": "",
+    "priority": "HIGH"
   }
 ]
