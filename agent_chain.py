@@ -704,13 +704,20 @@ Synthesize into this JSON schema:
 }}
 
 OUTPUT REQUIREMENTS:
-- Target 8-12 ACTIONABLE deal_signals (LEAD + FOLLOW + WATCH only).
-- PASS signals: include ONLY if they contain a critical warning worth reading (e.g., physics violation, fraud signal). Maximum 2 PASS signals.
-- DO NOT include PASS signals for: archival content, historical timelines, non-investable reference material, space/defense niche with no commercial path.
-- ORDER: LEAD first → FOLLOW → WATCH → PASS (hidden by default in UI).
-- Early Stage signals (PRE_SEED/SEED/SERIES_A) always before late stage within same recommendation tier.
-- Every signal needs deal_stage field — use source-based auto-classification.
+- Output MINIMUM 20 deal_signals, target 25-35. MORE IS BETTER.
+- Include ALL signals where you have source-verifiable data. Do NOT drop signals to be selective.
+- PASS signals: include ONLY for physics violations or fraud. Maximum 2 PASS.
+- ORDER: LEAD → FOLLOW → WATCH → PASS.
+- Early Stage (PRE_SEED/SEED/SERIES_A) always before late stage within same tier.
+- Every signal needs deal_stage field.
 - 4-6 sector_positioning entries.
+
+ANTI-HALLUCINATION RULES (CRITICAL):
+- ONLY output signals for news you actually received in the input data.
+- If you cannot find a specific number, company name, or fact in the provided signals — write [UNVERIFIED] tag.
+- DO NOT invent deals, funding amounts, company names, or partnerships not present in input.
+- If input has 50 signals, output at least 20 of them — do not fabricate extras.
+- "Analyst Insight" must be deduced from provided data, not invented.
 
 DEPTH REQUIREMENT:
 For each deal_signal, include the specific technical or financial insight that makes this analysis actionable:
@@ -793,59 +800,60 @@ def run_synthesizer(
 # ── Agent 5: Fact Checker ─────────────────────────────────────────────────────
 
 FACT_CHECKER_SYSTEM = """
-You are the GRIDEDGE Fact Checker — the final gate before publication.
+You are the GRIDEDGE Fact Checker — a quality gate, NOT a gatekeeper.
 
-MISSION: Catch hallucinations, unsupported claims, and logical inconsistencies.
-You are the last line of defense. Be skeptical. Be precise.
+MISSION: Flag hallucinations and unsupported claims. But PRESERVE content.
+Default bias: KEEP signals, not remove them.
 
 WHAT TO CHECK:
 
 1. NUMBER VERIFICATION
-   - Is every dollar amount, MW/GW figure, IRR% traceable to the source text?
-   - Flag: numbers that appear precise but have no source basis
-   - Flag: IRR claims without supporting deal structure
+   - Flag numbers that appear invented (no source basis) → FLAGGED with [UNVERIFIED]
+   - Do NOT remove signals just because exact numbers can't be confirmed
+   - IRR estimates and analyst interpretations are acceptable as analysis
 
-2. COMPANY/TECHNOLOGY CLAIMS  
-   - Does the company actually exist and do what the brief says?
-   - Is the technology description accurate to the source?
-   - Flag: fabricated company details, wrong sector classification
+2. COMPANY/TECHNOLOGY CLAIMS
+   - REMOVED only if: company name is clearly fabricated or doesn't exist
+   - FLAGGED if: specific claim is unverifiable but company is real
+   - Do NOT remove real news just because you can't confirm every detail
 
 3. LOGICAL CONSISTENCY
-   - Does LEAD recommendation match TRL score and Policy Beta?
-     (TRL < 7 should rarely be LEAD)
-   - Does HIGH CONVICTION match available evidence?
-   - Flag: LEAD + RED_FLAG TRL combination
-   - Flag: HIGH CONVICTION with no verifiable source
+   - Flag LEAD + TRL < 5 combinations
+   - Do NOT remove signals for minor inconsistencies
 
 4. SOURCE INTEGRITY
-   - Is the source real and relevant?
-   - Flag: generic sources ("industry reports", "analysts say")
-   - Flag: claims that cannot be verified from public information
+   - Flag signals with zero connection to provided source text → FLAGGED
+   - REMOVED only for: clearly invented deals, impossible physics claims
 
-VERDICT OPTIONS per signal:
-- VERIFIED: claim is supportable from source text
-- ADJUSTED: minor correction applied, still publishable
-- FLAGGED: significant issue, add [UNVERIFIED] tag
-- REMOVED: hallucination or fabrication, remove from brief
+VERDICT OPTIONS:
+- VERIFIED: claim is supportable from source text or reasonable analysis
+- ADJUSTED: minor correction applied, still publishable  
+- FLAGGED: add [UNVERIFIED] tag, keep in brief
+- REMOVED: ONLY for clear fabrications or impossible claims
 
-Be surgical. Only flag real problems, not minor imprecisions.
+PRESERVATION RULE: If a signal is about a real company doing a real thing,
+keep it as VERIFIED or FLAGGED. Only REMOVE pure inventions.
+Minimum 15 signals must survive fact-checking.
 Output: Pure JSON only.
 """
 
 FACT_CHECKER_PROMPT = """
 Review these deal signals for factual accuracy.
 
-ORIGINAL SOURCE SIGNALS:
+ORIGINAL SOURCE SIGNALS (ground truth):
 {source_text}
 
 SYNTHESIZED BRIEF SIGNALS TO VERIFY:
 {brief_signals}
 
-For each brief signal, check:
-1. Are the numbers (IRR, MW, $) supported by source text?
-2. Is the company/technology description accurate?
-3. Is the recommendation (LEAD/FOLLOW/WATCH/PASS) logically consistent with TRL + Policy Beta?
-4. Any hallucinated details not in source?
+For each brief signal:
+1. If the company and general topic match source material → VERIFIED (even if numbers differ slightly)
+2. If specific numbers/claims are unverifiable → FLAGGED with [UNVERIFIED] tag (DO NOT REMOVE)
+3. If the entire signal has no connection to any source text → FLAGGED  
+4. Only REMOVE if: company name is completely fabricated, or physics are impossible
+
+Be conservative with REMOVED. Prefer FLAGGED over REMOVED.
+Target: remove at most 2-3 signals. Flag the rest if uncertain.
 
 Output JSON:
 {{
