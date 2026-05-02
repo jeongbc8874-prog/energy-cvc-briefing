@@ -811,9 +811,23 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 {% endif %}
 
 <section>
-  <div class="section-label">■ DEAL SIGNALS</div>
+  <div class="section-label" style="display:flex;align-items:center;justify-content:space-between;">
+    <span>■ DEAL SIGNALS</span>
+    <button onclick="togglePass(this)" id="passToggle" style="font-family:'IBM Plex Mono',monospace;font-size:8px;padding:3px 10px;border-radius:2px;border:1px solid rgba(239,68,68,.2);background:rgba(239,68,68,.05);color:rgba(239,68,68,.5);cursor:pointer;letter-spacing:.08em;">
+      SHOW PASS ({{ brief.deal_signals | selectattr('recommendation','defined') | selectattr('recommendation','equalto','PASS') | list | length }})
+    </button>
+  </div>
+  <script>
+  function togglePass(btn) {
+    const cards = document.querySelectorAll('.pass-card');
+    const hidden = cards[0]?.style.display === 'none';
+    cards.forEach(c => c.style.display = hidden ? '' : 'none');
+    btn.textContent = hidden ? 'HIDE PASS' : 'SHOW PASS (' + cards.length + ')';
+    btn.style.opacity = hidden ? '1' : '0.5';
+  }
+  </script>
   {% for s in brief.deal_signals %}
-  <div class="signal-card">
+  <div class="signal-card{% if s.recommendation == 'PASS' %} pass-card{% endif %}"{% if s.recommendation == 'PASS' %} style="display:none;"{% endif %}>
     <div class="signal-header">
       <span class="tag tag-{{ s.tag }}">{{ s.tag }}</span>
       <span class="tag tag-sector">{{ s.sector }}</span>
