@@ -46,45 +46,54 @@ ENTSOE_TOKEN      = os.environ.get("ENTSOE_TOKEN", "")      # 무료 발급: tra
 # ── 무료 RSS 소스 정의 ────────────────────────────────────────────────────────
 
 RSS_SOURCES = [
-    # ── Tier A: AI DC 전력망 전문 (핵심) ────────────────────────────
-    {"name": "Datacenter Dynamics",  "url": "https://www.datacenterdynamics.com/en/rss/",            "tier": "A"},
-    {"name": "Data Center Frontier", "url": "https://www.datacenterfrontier.com/feed/",              "tier": "A"},
-    {"name": "Utility Dive",         "url": "https://www.utilitydive.com/feeds/news/",               "tier": "A"},
-    {"name": "The Register DC",      "url": "https://www.theregister.com/data_centre/rss",           "tier": "A"},
-    {"name": "IEEE Spectrum Power",  "url": "https://spectrum.ieee.org/feeds/tag/power-energy",      "tier": "A"},
-    # ── Tier A: 그리드/송전 전문 ─────────────────────────────────────
-    {"name": "T&D World",            "url": "https://www.tdworld.com/rss",                           "tier": "A"},
-    {"name": "Power Magazine",       "url": "https://www.powermag.com/feed/",                        "tier": "A"},
-    {"name": "Canary Media",         "url": "https://canarymedia.com/feed",                          "tier": "A"},
-    # ── Tier A: 공공기관 / 규제 ─────────────────────────────────────
-    {"name": "DOE News",             "url": "https://www.energy.gov/rss.xml",                        "tier": "A"},
-    {"name": "FERC News",            "url": "https://www.ferc.gov/news-events/rss-feeds",            "tier": "A"},
-    {"name": "EIA Analysis",         "url": "https://www.eia.gov/rss/press_releases.xml",            "tier": "A"},
-    {"name": "NREL News",            "url": "https://www.nrel.gov/news/rss/newsroom.xml",            "tier": "A"},
+    # ── Tier A: AI 데이터센터 전문 ─────────────────────────────────
+    {"name": "Data Center Dynamics",  "url": "https://www.datacenterdynamics.com/en/rss/",            "tier": "A"},
+    {"name": "Data Center Frontier",  "url": "https://www.datacenterfrontier.com/feed/",              "tier": "A"},
+    {"name": "The Register DC",       "url": "https://www.theregister.com/data_centre/rss",           "tier": "A"},
+    {"name": "Next Platform",         "url": "https://www.nextplatform.com/feed/",                    "tier": "A"},
+    {"name": "Blocks & Files",        "url": "https://blocksandfiles.com/feed/",                      "tier": "B"},
+    # ── Tier A: 전력망 / 에너지 전환 ─────────────────────────────────
+    {"name": "Utility Dive",          "url": "https://www.utilitydive.com/feeds/news/",               "tier": "A"},
+    {"name": "T&D World",             "url": "https://www.tdworld.com/rss",                           "tier": "A"},
+    {"name": "Power Magazine",        "url": "https://www.powermag.com/feed/",                        "tier": "A"},
+    {"name": "Power Engineering",     "url": "https://www.power-eng.com/feed/",                       "tier": "A"},
+    {"name": "Greentech Media",       "url": "https://www.greentechmedia.com/feeds/all",               "tier": "A"},
+    # ── Tier A: VC / 딜 플로우 ───────────────────────────────────────
+    {"name": "Canary Media",          "url": "https://canarymedia.com/feed",                          "tier": "A"},
+    {"name": "Heatmap News",          "url": "https://heatmap.news/feed",                             "tier": "A"},
+    {"name": "Latitude Media",        "url": "https://www.latitudemedia.com/feed",                    "tier": "A"},
+    {"name": "TechCrunch Climate",    "url": "https://techcrunch.com/category/climate/feed/",         "tier": "A"},
+    {"name": "TechCrunch Energy",     "url": "https://techcrunch.com/tag/energy/feed/",               "tier": "A"},
+    {"name": "Axios Energy",          "url": "https://www.axios.com/feeds/feed.rss",                  "tier": "A"},
+    {"name": "Reuters Business",      "url": "https://feeds.reuters.com/reuters/businessNews",        "tier": "A"},
+    {"name": "Bloomberg Energy",      "url": "https://feeds.bloomberg.com/energy/news.rss",           "tier": "A"},
+    {"name": "BNEF News",             "url": "https://about.bnef.com/feed/",                          "tier": "A"},
+    {"name": "CTVC Climatetech",      "url": "https://www.ctvc.co/rss/",                              "tier": "A"},
+    {"name": "Sifted EU",             "url": "https://sifted.eu/feed",                                "tier": "A"},
+    # ── Tier A: 공공기관 / 규제 ──────────────────────────────────────
+    {"name": "DOE News",              "url": "https://www.energy.gov/rss.xml",                        "tier": "A"},
+    {"name": "FERC News",             "url": "https://www.ferc.gov/news-events/rss-feeds",            "tier": "A"},
+    {"name": "EIA Analysis",          "url": "https://www.eia.gov/rss/press_releases.xml",            "tier": "A"},
+    {"name": "NREL News",             "url": "https://www.nrel.gov/news/rss/newsroom.xml",            "tier": "A"},
     # ── Tier A: 원전/SMR ─────────────────────────────────────────────
-    {"name": "World Nuclear News",   "url": "https://www.world-nuclear-news.org/rss",                "tier": "A"},
-    {"name": "Nuclear Engineering",  "url": "https://www.neimagazine.com/rss",                       "tier": "A"},
-    # ── Tier A: Early Stage / VC ────────────────────────────────────
-    {"name": "TechCrunch Climate",   "url": "https://techcrunch.com/category/climate/feed/",         "tier": "A"},
-    {"name": "CTVC Climatetech",     "url": "https://www.ctvc.co/rss/",                             "tier": "A"},
-    {"name": "Greentown Labs",       "url": "https://greentownlabs.com/feed/",                       "tier": "A"},
-    # ── Tier B: BESS/재생에너지 ──────────────────────────────────────
-    {"name": "Energy Storage News",  "url": "https://www.energy-storage.news/feed/",                 "tier": "B"},
-    {"name": "PV Tech",              "url": "https://www.pv-tech.org/feed/",                         "tier": "B"},
-    {"name": "Energy Monitor",       "url": "https://www.energymonitor.ai/feed/",                    "tier": "B"},
-    {"name": "Clean Energy Wire",    "url": "https://www.cleanenergywire.org/rss.xml",               "tier": "B"},
-    {"name": "CleanTechnica",        "url": "https://cleantechnica.com/feed/",                       "tier": "B"},
-    {"name": "Electrek",             "url": "https://electrek.co/feed/",                             "tier": "B"},
-    {"name": "Carbon Brief",         "url": "https://www.carbonbrief.org/feed/",                     "tier": "B"},
-    # ── Tier A: 글로벌 Early Stage / VC 딜 전문 ─────────────────────
-    {"name": "Heatmap News",         "url": "https://heatmap.news/feed",                             "tier": "A"},
-    {"name": "Latitude Media",       "url": "https://www.latitudemedia.com/feed",                    "tier": "A"},
-    {"name": "Sifted EU",            "url": "https://sifted.eu/feed",                                "tier": "A"},
-    {"name": "TechCrunch Energy",    "url": "https://techcrunch.com/tag/energy/feed/",               "tier": "A"},
-    {"name": "Recharge News",        "url": "https://www.rechargenews.com/rss",                      "tier": "A"},
-    {"name": "PV Magazine Global",   "url": "https://www.pv-magazine.com/feed/",                     "tier": "B"},
-    {"name": "E&E News",             "url": "https://www.eenews.net/rss/",                           "tier": "A"},
-    {"name": "S&P Global Energy",    "url": "https://www.spglobal.com/commodityinsights/en/rss",     "tier": "A"},
+    {"name": "World Nuclear News",    "url": "https://www.world-nuclear-news.org/rss",                "tier": "A"},
+    {"name": "Nuclear Engineering",   "url": "https://www.neimagazine.com/rss",                       "tier": "A"},
+    # ── Tier B: BESS / 재생에너지 ────────────────────────────────────
+    {"name": "Energy Storage News",   "url": "https://www.energy-storage.news/feed/",                 "tier": "B"},
+    {"name": "PV Tech",               "url": "https://www.pv-tech.org/feed/",                         "tier": "B"},
+    {"name": "PV Magazine",           "url": "https://www.pv-magazine.com/feed/",                     "tier": "B"},
+    {"name": "ESS News",              "url": "https://www.pv-magazine.com/category/storage/feed/",    "tier": "A"},
+    {"name": "Renewable Energy World","url": "https://www.renewableenergyworld.com/feed/",             "tier": "B"},
+    {"name": "Recharge News",         "url": "https://www.rechargenews.com/rss",                      "tier": "A"},
+    {"name": "Energy Monitor",        "url": "https://www.energymonitor.ai/feed/",                    "tier": "B"},
+    {"name": "Clean Energy Wire",     "url": "https://www.cleanenergywire.org/rss.xml",               "tier": "B"},
+    {"name": "CleanTechnica",         "url": "https://cleantechnica.com/feed/",                       "tier": "B"},
+    {"name": "Electrek",              "url": "https://electrek.co/feed/",                             "tier": "B"},
+    {"name": "Carbon Brief",          "url": "https://www.carbonbrief.org/feed/",                     "tier": "B"},
+    {"name": "S&P Global Energy",     "url": "https://www.spglobal.com/commodityinsights/en/rss",     "tier": "A"},
+    {"name": "E&E News",              "url": "https://www.eenews.net/rss/",                           "tier": "A"},
+    {"name": "IEEE Spectrum Energy",  "url": "https://spectrum.ieee.org/feeds/tag/power-energy",      "tier": "B"},
+    {"name": "Greentown Labs",        "url": "https://greentownlabs.com/feed/",                       "tier": "A"},
 ]
 
 # 섹터 키워드 매핑 (시그널 분류용)
@@ -98,7 +107,7 @@ SECTOR_KEYWORDS = {
         # AI DC 전력 직접
         "data center power", "datacenter power", "hyperscaler power",
         "ai campus", "gpu power", "inference workload", "ai load",
-        "data center", "datacenter", "hyperscaler",
+        "data center", "datacenter", "hyperscaler", "colocation", "colo", "ai infrastructure", "ai campus", "ai cluster", "compute campus",
         "microsoft", "google", "amazon", "meta", "oracle",
         # 기술
         "grid-forming", "frequency response", "virtual power plant",
@@ -144,7 +153,7 @@ RISK_KEYWORDS = [
 
 # ── 1단계: RSS 수집 ───────────────────────────────────────────────────────────
 
-def parse_rss(source: dict, days_back: int = 7) -> list[dict]:
+def parse_rss(source: dict, days_back: int = 3) -> list[dict]:
     """RSS 피드 파싱 — 최근 N일 기사만 수집"""
     headers = {"User-Agent": "GRIDEDGE-Bot/2.0 (energy investment intelligence)"}
     try:
@@ -159,7 +168,7 @@ def parse_rss(source: dict, days_back: int = 7) -> list[dict]:
         cutoff = datetime.utcnow() - timedelta(days=days_back)
         articles = []
 
-        for item in items[:20]:  # 소스당 최대 20개
+        for item in items[:50]:  # 소스당 최대 50개
             title = _get_text(item, ["title"])
             desc  = _get_text(item, ["description", "summary", "content"])
             url   = _get_text(item, ["link", "guid"])
