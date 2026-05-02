@@ -760,7 +760,7 @@ def run_synthesizer(
 
     message = client.messages.create(
         model=MODEL,
-        max_tokens=8192,
+        max_tokens=16000,
         system=SYNTHESIZER_SYSTEM,
         messages=[{
             "role": "user",
@@ -784,14 +784,26 @@ def run_synthesizer(
             raw = raw[4:]
     raw = raw.strip()
 
+    def _repair(s):
+        try:
+            return json.loads(s)
+        except Exception:
+            pass
+        last = s.rfind("}")
+        if last > 100:
+            try:
+                return json.loads(s[:last+1])
+            except Exception:
+                pass
+        raise ValueError("JSON repair failed")
+
     try:
-        result = json.loads(raw)
-        print(f"  [Agent 4] 완료 — 브리프 통합 완료")
+        result = _repair(raw)
+        sig_count = len(result.get("deal_signals", []))
+        print(f"  [Agent 4] 완료 — {sig_count}개 시그널")
         return result
-    except json.JSONDecodeError:
-        last = raw.rfind("}")
-        if last > 0:
-            return json.loads(raw[:last+1])
+    except Exception as e:
+        print(f"  [Agent 4] JSON 파싱 실패: {e}")
         raise
 
 
