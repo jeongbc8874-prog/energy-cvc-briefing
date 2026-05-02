@@ -406,7 +406,24 @@ def fetch_hn_launches() -> list:
             if not is_show:
                 continue
 
-            if not any(k in text for k in ENERGY_KEYWORDS):
+            # 엄격한 에너지 전용 키워드 — "power" 같은 모호한 단어 제외
+            STRICT_ENERGY = [
+                "energy storage", "battery", "bess", "grid", "solar", "wind",
+                "nuclear", "hydrogen", "electrolyzer", "fuel cell", "microgrid",
+                "inverter", "data center power", "ai power", "grid software",
+                "demand response", "virtual power plant", "transmission",
+                "interconnection", "clean energy", "renewable",
+            ]
+            if not any(k in text for k in STRICT_ENERGY):
+                continue
+
+            # 명백한 노이즈 제거
+            NOISE_SIGNALS = [
+                "bluetooth", "midi", "game", "gaming", "music", "audio",
+                "app store", "ios", "android", "saas pricing", "chatbot",
+                "llm", "ai assistant", "writing", "productivity", "marketing",
+            ]
+            if any(k in text for k in NOISE_SIGNALS):
                 continue
 
             results.append({
